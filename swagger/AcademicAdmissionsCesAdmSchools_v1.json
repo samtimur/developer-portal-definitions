@@ -1,0 +1,167 @@
+{
+    "basePath": "/domains/legacy/academic/admissions/ces_adm_schools/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{id_type}/{id_value}": {
+            "get": {
+                "summary": "Get list of CES Schools a person is currently applying to",
+                "tags": [
+                    "EnrollmentService",
+                    "DayEligible"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get list of CES Schools a person is currently applying to",
+                "parameters": [
+                    {
+                        "description": "Determines the type of id - personid, byuid, netid",
+                        "name": "id_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Holds the value of the id according to the id_type",
+                        "name": "id_value",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CesAdmSchoolsServiceSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/CesAdmSchoolsServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetCesAdmSchools"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "CesAdmSchoolsServiceSuccess": {
+            "properties": {
+                "CesAdmSchoolsService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/SchoolList"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "errors": {
+            "items": {
+                "$ref": "#/definitions/error_data"
+            },
+            "type": "array"
+        },
+        "SchoolList": {
+            "properties": {
+                "schools": {
+                    "$ref": "#/definitions/SchoolRow"
+                },
+                "current_year_term": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "SchoolRow": {
+            "properties": {
+                "school": {
+                    "type": "string"
+                },
+                "year_term_applied": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CesAdmSchoolsServiceError": {
+            "properties": {
+                "CesAdmSchoolsService": {
+                    "properties": {
+                        "response": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "errors": {
+                            "$ref": "#/definitions/errors"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "AcademicAdmissionsCesAdmSchools",
+        "description": "This service provides information about the number of ces schools an individual is currently applying to.",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/Enrollment_v1.0"
+    }
+}

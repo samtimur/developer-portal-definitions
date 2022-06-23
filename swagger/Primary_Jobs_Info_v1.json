@@ -1,0 +1,146 @@
+{
+    "basePath": "/domains/erp/hr/primary_jobs_info/v1",
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "maxLength": 9,
+                        "minLength": 9,
+                        "description": "Employee ID",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/primary_jobs_info"
+                        },
+                        "description": "The default response type is JSON.  Add an Accept header with value=application/xml to return an XML response.",
+                        "examples": {
+                            "application/json": {
+                                "primary_jobs_info": {
+                                    "employee": {
+                                        "job_title": "Job Title Description",
+                                        "department_id": "4444",
+                                        "byu_id": "999999999",
+                                        "has_direct_deposit": "yes",
+                                        "department_name": "Department Name Description",
+                                        "operating_unit": "88888888"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "options": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "primary_jobs_info": {
+            "properties": {
+                "employee": {
+                    "$ref": "#/definitions/employee"
+                }
+            }
+        },
+        "job_title": {
+            "properties": {
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "department_id": {
+            "properties": {
+                "value": {
+                    "maxLength": 4,
+                    "type": "string"
+                }
+            }
+        },
+        "byu_id": {
+            "properties": {
+                "value": {
+                    "maxLength": 9,
+                    "type": "string"
+                }
+            }
+        },
+        "has_direct_deposit": {
+            "properties": {
+                "value": {
+                    "enum": [
+                        "yes",
+                        "no"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "department_name": {
+            "properties": {
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "employee": {
+            "properties": {
+                "job_title": {
+                    "$ref": "#/definitions/job_title"
+                },
+                "department_id": {
+                    "$ref": "#/definitions/department_id"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "has_direct_deposit": {
+                    "$ref": "#/definitions/has_direct_deposit"
+                },
+                "department_name": {
+                    "$ref": "#/definitions/department_name"
+                },
+                "operating_unit": {
+                    "$ref": "#/definitions/operating_unit"
+                }
+            }
+        },
+        "operating_unit": {
+            "properties": {
+                "value": {
+                    "maxLength": 8,
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "Primary_Jobs_Info",
+        "description": "This service allows you to view employee's primary job information.",
+        "version": "v1"
+    }
+}

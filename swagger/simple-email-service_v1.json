@@ -1,0 +1,194 @@
+{
+    "paths": {
+        "/send/text": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "send a text email",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    ""
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/TextEmailInput"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Email sent"
+                    }
+                }
+            }
+        },
+        "/send/html": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "send HTML email",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/HTMLEmailInput"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Email sent"
+                    }
+                }
+            }
+        },
+        "/status": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "get status of service",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "description": "Status"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "AttachmentsList": {
+            "items": {
+                "properties": {
+                    "content": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "mimeType": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "EmailAddress": {
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "EmailAddressList": {
+            "items": {
+                "$ref": "#/definitions/EmailAddress"
+            },
+            "type": "array"
+        },
+        "TextEmailInput": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "to": {
+                    "$ref": "#/definitions/EmailAddressList"
+                },
+                "replyTo": {
+                    "$ref": "#/definitions/EmailAddressList"
+                },
+                "bounceAddress": {
+                    "type": "string"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "bcc": {
+                    "$ref": "#/definitions/EmailAddressList"
+                },
+                "attachments": {
+                    "$ref": "#/definitions/AttachmentsList"
+                },
+                "from": {
+                    "$ref": "#/definitions/EmailAddress"
+                },
+                "cc": {
+                    "$ref": "#/definitions/EmailAddressList"
+                }
+            },
+            "type": "object"
+        },
+        "HTMLEmailInput": {
+            "properties": {
+                "to": {
+                    "$ref": "#/definitions/EmailAddressList"
+                },
+                "inlineExternalImages": {
+                    "type": "boolean"
+                },
+                "replyTo": {
+                    "$ref": "#/definitions/EmailAddressList"
+                },
+                "inlineImages": {
+                    "$ref": "#/definitions/AttachmentsList"
+                },
+                "bounceAddress": {
+                    "type": "string"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "alternativeMessage": {
+                    "type": "string"
+                },
+                "bcc": {
+                    "$ref": "#/definitions/EmailAddressList"
+                },
+                "attachments": {
+                    "$ref": "#/definitions/AttachmentsList"
+                },
+                "from": {
+                    "$ref": "#/definitions/EmailAddress"
+                },
+                "htmlMessage": {
+                    "type": "string"
+                },
+                "cc": {
+                    "$ref": "#/definitions/EmailAddressList"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "simple-email-service",
+        "description": "Old simple email service to send an Email using BYU's mail servers",
+        "version": "v1"
+    },
+    "basePath": "/domains/email/v1",
+    "host": "api.byu.edu:443"
+}

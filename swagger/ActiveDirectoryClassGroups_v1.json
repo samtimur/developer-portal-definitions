@@ -1,0 +1,118 @@
+{
+    "paths": {
+        "/sync": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Syncs all students in the given class",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/sync"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/group": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Links an Active Directory group to a class group ",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/form"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "form": {
+            "properties": {
+                "group_dn": {
+                    "description": "Active Directory distinguished name of group to link class to",
+                    "type": "string"
+                },
+                "teaching_area": {
+                    "description": "Teaching Area of Class, URI Encoded as Needed (Ex: 'C%20S' or 'DANCE')",
+                    "type": "string"
+                },
+                "persistent": {
+                    "description": "Determines if the link will survive from semester to semester",
+                    "type": "boolean"
+                },
+                "course_number": {
+                    "description": "Catalog Number and Suffix of Class (Ex: '260' or '301R')",
+                    "type": "string"
+                },
+                "year_term": {
+                    "description": "Enrollment Period of Class (Ex: '20205')",
+                    "type": "string"
+                },
+                "net_id": {
+                    "description": "NetID of person managing the active directory group to link class to",
+                    "type": "string"
+                },
+                "section": {
+                    "description": "Specific section to link to group (Ex: '004') (Excluding will link the whole class)",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "sync": {
+            "properties": {
+                "teaching_area": {
+                    "description": "Teaching Area of Class, URI Encoded as Needed (Ex: 'C%20S' or 'DANCE')",
+                    "type": "string"
+                },
+                "course_number": {
+                    "description": "Catalog Number and Suffix of Class (Ex: '260' or '301R')",
+                    "type": "string"
+                },
+                "year_term": {
+                    "description": "Enrollment Period of Class (Ex: '20205')",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "ActiveDirectoryClassGroups",
+        "description": "This service provides endpoints for managing the Active Directory Class Groups application.",
+        "version": "v1.0"
+    },
+    "basePath": "/domains/active-directory/class-groups/v1.0",
+    "host": "api.byu.edu:443"
+}

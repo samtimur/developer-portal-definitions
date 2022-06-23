@@ -1,0 +1,169 @@
+{
+    "basePath": "/domains/legacy/academic/registration/instructor_student_lookup/v1",
+    "paths": {
+        "/{year_term}/{curriculum_id}/{title_code}/{section_number}/{net_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "GetInstructorStudentLookupService"
+                ],
+                "summary": "Gets the name of a student based on the net id entered. section info included to ensure person making request is instructor",
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets the name of a student based on the net id entered. section info included to ensure person making request is instructor",
+                "parameters": [
+                    {
+                        "description": "year_term of section (format is YYYYT)",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "curriculum id of section",
+                        "name": "curriculum_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "title code of section",
+                        "name": "title_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "section number of section",
+                        "name": "section_number",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "net id of the student",
+                        "name": "net_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/InstructorStudentLookupSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/InstructorStudentLookupServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetInstructorStudentLookup"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "errors": {
+            "items": {
+                "$ref": "#/definitions/error_data"
+            },
+            "type": "array"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "InstructorStudentLookupServiceError": {
+            "properties": {
+                "InstructorStudentLookupService": {
+                    "properties": {
+                        "response": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "errors": {
+                            "$ref": "#/definitions/errors"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "InstructorStudentLookupSuccess": {
+            "properties": {
+                "InstructorStudentLookupService": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "student_name": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        }
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/InstructorAddPermissions_v1"
+    },
+    "info": {
+        "title": "AcademicRegistrationInstructorStudentLookup",
+        "description": "Allows an instructor to lookup a student using the net id.",
+        "version": "v1"
+    }
+}

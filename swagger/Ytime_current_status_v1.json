@@ -1,0 +1,172 @@
+{
+    "basePath": "/domains/erp/hr/ytime_current_status/v1",
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/time"
+                        },
+                        "description": "The default response type is JSON.  Add an Accept header with value=application/xml to return an XML response.",
+                        "examples": {
+                            "application/json": {
+                                "time": {
+                                    "job_collection": {
+                                        "job_code_description": "Archaeologist",
+                                        "physical_facilities": "N",
+                                        "phone_access": "Y",
+                                        "punch_status": "O",
+                                        "mobile_access": "Y",
+                                        "portlet_access": "N",
+                                        "employee_record": "0",
+                                        "weekly_subtotal": "00:00",
+                                        "period_subtotal": "00:00"
+                                    },
+                                    "international": "N",
+                                    "byu_id": "999999999",
+                                    "period_total": "00:00",
+                                    "weekly_total": "00:00"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "time": {
+            "properties": {
+                "job_collection": {
+                    "$ref": "#/definitions/job_collection"
+                },
+                "international": {
+                    "$ref": "#/definitions/international"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "period_total": {
+                    "$ref": "#/definitions/period_total"
+                },
+                "weekly_total": {
+                    "$ref": "#/definitions/weekly_total"
+                }
+            }
+        },
+        "job_code_description": {
+            "maxLength": 30,
+            "type": "string"
+        },
+        "physical_facilities": {
+            "enum": [
+                "Y",
+                "N"
+            ],
+            "type": "string"
+        },
+        "phone_access": {
+            "enum": [
+                "Y",
+                "N"
+            ],
+            "type": "string"
+        },
+        "punch_status": {
+            "enum": [
+                "I",
+                "O"
+            ],
+            "type": "string"
+        },
+        "job_collection": {
+            "properties": {
+                "job_code_description": {
+                    "$ref": "#/definitions/job_code_description"
+                },
+                "physical_facilities": {
+                    "$ref": "#/definitions/physical_facilities"
+                },
+                "phone_access": {
+                    "$ref": "#/definitions/phone_access"
+                },
+                "punch_status": {
+                    "$ref": "#/definitions/punch_status"
+                },
+                "mobile_access": {
+                    "$ref": "#/definitions/mobile_access"
+                },
+                "portlet_access": {
+                    "$ref": "#/definitions/portlet_access"
+                },
+                "employee_record": {
+                    "$ref": "#/definitions/employee_record"
+                },
+                "weekly_subtotal": {
+                    "$ref": "#/definitions/weekly_subtotal"
+                },
+                "period_subtotal": {
+                    "$ref": "#/definitions/period_subtotal"
+                }
+            }
+        },
+        "mobile_access": {
+            "enum": [
+                "Y",
+                "N"
+            ],
+            "type": "string"
+        },
+        "international": {
+            "enum": [
+                "N",
+                "Y"
+            ],
+            "type": "string"
+        },
+        "portlet_access": {
+            "enum": [
+                "Y",
+                "N"
+            ],
+            "type": "string"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "type": "string"
+        },
+        "employee_record": {
+            "maxLength": 3,
+            "type": "string"
+        },
+        "period_total": {
+            "type": "string"
+        },
+        "weekly_total": {
+            "type": "string"
+        },
+        "weekly_subtotal": {
+            "type": "string"
+        },
+        "period_subtotal": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "YTIME_CURRENT_STATUS",
+        "description": "Self-service web service that allows the user to see the current status of their timesheet.",
+        "version": "v1"
+    }
+}

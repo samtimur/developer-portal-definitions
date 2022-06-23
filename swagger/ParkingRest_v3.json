@@ -1,0 +1,4215 @@
+{
+    "paths": {
+        "/fines": {
+            "post": {
+                "summary": "Create a new fine.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/fine"
+                        },
+                        "description": "New fine",
+                        "name": "fine",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/fine"
+                        },
+                        "description": "New fine"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a list of fines, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "if set, returns only fines with an associated code",
+                        "name": "codeExists",
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "fine type",
+                        "name": "fineType",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "fine code",
+                        "name": "fineCode",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "fine full amount",
+                        "name": "amount",
+                        "type": "number",
+                        "in": "query"
+                    },
+                    {
+                        "description": "if set, returns only active fines",
+                        "name": "active",
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/fine"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of fines"
+                    }
+                }
+            }
+        },
+        "/parking-zones": {
+            "get": {
+                "summary": "Get a list of all parking zones",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/parkingZone"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of parking zones"
+                    }
+                }
+            }
+        },
+        "/vehicle-logs": {
+            "get": {
+                "summary": "Get a list of vehicle logs, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "unique vehicle id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/vehicleLog"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of vehicle logs"
+                    }
+                }
+            }
+        },
+        "/selfservice/citations/{citationId}/photos": {
+            "get": {
+                "summary": "Get a list of photos for a citation.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "The ID of the citation in question",
+                        "name": "citationId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "BYU Id of citation owner. Used for developers.",
+                        "name": "proxyId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/photo"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Photos"
+                    }
+                }
+            }
+        },
+        "/notes": {
+            "post": {
+                "summary": "Create a new note.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/note"
+                        },
+                        "description": "New note",
+                        "name": "note",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/note"
+                        },
+                        "description": "New note"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a list of notes, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "appeal id",
+                        "name": "appealId",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "note type",
+                        "name": "noteType",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "citation id",
+                        "name": "citationId",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "vehicle id",
+                        "name": "vehicleId",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "privilege override id",
+                        "name": "privilegeOverrideId",
+                        "type": "integer",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/note"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of notes"
+                    }
+                }
+            }
+        },
+        "/historic-vehicles": {
+            "get": {
+                "summary": "Get a list of historic vehicles, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "byu id",
+                        "name": "campusOwnerByuId",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/historicVehicle"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of historic vehicles"
+                    }
+                }
+            }
+        },
+        "/demographics/{byuId}": {
+            "get": {
+                "summary": "Gets the demographics for specific user",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique BYU ID",
+                        "name": "byuId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Comma-delimited list of fieldsets that are to be returned",
+                        "name": "fieldSets",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/demographicsWrapper"
+                        },
+                        "description": "Demographics information"
+                    }
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "summary": "All POSTs",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "description": "all responses"
+                    }
+                }
+            },
+            "put": {
+                "summary": "All GETs",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "description": "all responses"
+                    }
+                }
+            },
+            "get": {
+                "summary": "All GETs",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "description": "all responses"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "All DELETEs",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "description": "all responses"
+                    }
+                }
+            }
+        },
+        "/appeals": {
+            "post": {
+                "summary": "Create a new appeal",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/appeal"
+                        },
+                        "description": "New appeal",
+                        "name": "code",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/appeal"
+                        },
+                        "description": "New appeal"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a list of appeals, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "BYU ID of person who created the Appeal",
+                        "name": "appealPerson",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Earliest date time of the associated Citation",
+                        "name": "appealStart",
+                        "format": "datetime",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Latest date time of the associated Citation",
+                        "name": "appealEnd",
+                        "format": "datetime",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Comma-delimited list of citation ids",
+                        "name": "citationIds",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Earliest issued date time of the associated Citation",
+                        "name": "citeIssuedStart",
+                        "format": "datetime",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Latest issued date time of the associated Citation",
+                        "name": "citeIssuedEnd",
+                        "format": "datetime",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Appeal status code",
+                        "name": "status",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "location code of the associated Citation",
+                        "name": "locationCode",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "violation code of the associated Citation",
+                        "name": "violationCode",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Current page",
+                        "name": "page",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The number of items per page to be returned",
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "id",
+                                "appealDate",
+                                "citationDate",
+                                "citationNumber",
+                                "locationCode",
+                                "violationType",
+                                "violationCode",
+                                "decisionCode"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Columns to sort by, as comma delimited list",
+                        "name": "sortBy",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "boolean"
+                        },
+                        "description": "Sort in desc order, comma seperated list",
+                        "name": "sortDesc",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "basic",
+                                "citation",
+                                "appealPerson"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Comma-delimited list of fieldsets that are to be returned",
+                        "name": "fieldSets",
+                        "type": "array",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/paginatedAppeals"
+                        },
+                        "description": "List of appeals"
+                    }
+                }
+            }
+        },
+        "/selfservice/paid-parking-payments/{paymentId}": {
+            "put": {
+                "summary": "Specify payment that needs to be finished",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "unique id of payment that needs to be finished",
+                        "name": "paymentId",
+                        "type": "number",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/finishPaymentRequest"
+                        },
+                        "description": "object containing payment type and payment type id",
+                        "name": "finishPaymentRequest",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "no body"
+                    }
+                }
+            }
+        },
+        "/selfservice/paid-parking-payments": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "defined byuId",
+                        "name": "proxyId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "choose whether to also start a payment",
+                        "name": "startAsWell",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/selfServicePayment"
+                        },
+                        "description": "Payment"
+                    }
+                }
+            }
+        },
+        "/selfservice/privileges": {
+            "get": {
+                "summary": "Get user's privilege info",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "BYU Id of vehicle owner. Used for developers.",
+                        "name": "proxyId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/selfServicePrivilege"
+                        },
+                        "description": "Privilege info"
+                    }
+                }
+            }
+        },
+        "/tow-flags/{id}": {
+            "put": {
+                "summary": "Update a towFlag by the specified towFlag id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique towFlag id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/towFlag"
+                        },
+                        "description": "Updated towFlag",
+                        "name": "towFlag",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/towFlag"
+                        },
+                        "description": "Updated towFlag"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a towFlag with the specified towFlag id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique towFlag id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "No body"
+                    }
+                }
+            }
+        },
+        "/selfservice/appeals": {
+            "post": {
+                "summary": "Appeal a citation",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/selfServiceAppealRequest"
+                        },
+                        "description": "object containing ID of citation to appeal and an appeal message",
+                        "name": "appealRequest",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/appeal"
+                        },
+                        "description": "New Appeal"
+                    }
+                }
+            }
+        },
+        "/citations/{id}/photos": {
+            "get": {
+                "summary": "Get all photos for a citation by the specified citation id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique citation id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Include ignored photos.",
+                        "name": "includeIgnored",
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/photo"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of photos"
+                    }
+                }
+            }
+        },
+        "/officers": {
+            "post": {
+                "summary": "Create a new officer.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/officer"
+                        },
+                        "description": "New officer",
+                        "name": "officer",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/officer"
+                        },
+                        "description": "New officer"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a list of officers, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "officer status",
+                        "name": "status",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/officer"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of officers"
+                    }
+                }
+            }
+        },
+        "/citations": {
+            "post": {
+                "summary": "Create a new citation.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/citation"
+                        },
+                        "description": "New citation",
+                        "name": "code",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/citation"
+                        },
+                        "description": "New citation"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a list of citations, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "BYU Id of citation owner",
+                        "name": "citationOwnerByuId",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "citation number",
+                        "name": "citationNumber",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "vehicle id",
+                        "name": "vehicleId",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "location code",
+                        "name": "locationCode",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "ID of officer",
+                        "name": "officerId",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "violation type",
+                        "name": "violationType",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "violation code",
+                        "name": "violationCode",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Only include citations that are after (or equal) to this date",
+                        "name": "issuedDateTimeStart",
+                        "format": "datetime",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "True if the the citation's fine needs to be posted",
+                        "name": "needFinPost",
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Current page",
+                        "name": "page",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The number of items per page to be returned",
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "id",
+                                "issuedDateTime",
+                                "citationNumber"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Columns to sort by, as comma delimited list",
+                        "name": "sortBy",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "boolean"
+                        },
+                        "description": "Sort in desc order, comma seperated list",
+                        "name": "sortDesc",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "basic",
+                                "numAppeals",
+                                "owner",
+                                "paidBy",
+                                "updater",
+                                "vehicle"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Comma-delimited list of fieldsets that are to be returned",
+                        "name": "fieldSets",
+                        "type": "array",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/paginatedCitations"
+                        },
+                        "description": "List of citations"
+                    }
+                }
+            }
+        },
+        "/selfservice/vehicle-limits": {
+            "get": {
+                "summary": "Get users eligibility to add a vehicle",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "BYU Id of vehicle owner. Used for developers.",
+                        "name": "proxyId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/addVehicleEligibility"
+                        },
+                        "description": "user add vehicle eligibility"
+                    }
+                }
+            }
+        },
+        "/citations/{id}": {
+            "put": {
+                "summary": "Update a citation with the specified citation id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique citation id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/citation"
+                        },
+                        "description": "Updated citation"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a citation by the specified citation id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique citation id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/citation"
+                        },
+                        "description": "Citation"
+                    }
+                }
+            }
+        },
+        "/selfservice/citation-payments": {
+            "post": {
+                "summary": "pay for one or more citations",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of citation to pay.",
+                        "name": "citationId",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "BYU Id of citation owner. Used for developers.",
+                        "name": "proxyId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/selfServicePayment"
+                        },
+                        "description": "Payment"
+                    }
+                }
+            }
+        },
+        "/codes/{id}": {
+            "put": {
+                "summary": "Update a code with the specified code id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique code id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/code"
+                        },
+                        "description": "Updated code"
+                    }
+                }
+            }
+        },
+        "/vehicles": {
+            "post": {
+                "summary": "Create a new vehicle.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/vehicle"
+                        },
+                        "description": "New vehicle",
+                        "name": "vehicle",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/vehicle"
+                        },
+                        "description": "New vehicle"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a list of vehicles, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "description": "comma separated list of vehicle state codes",
+                        "name": "id",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "comma separated list of vehicle state codes",
+                        "name": "stateCodes",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "description": "vehicle license plate",
+                        "name": "licensePlate",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "vehicle like license plate",
+                        "name": "likeLicensePlate",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "vehicle campus owner's byu id",
+                        "name": "campusOwnerByuId",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "comma separated list of vehicle color codes",
+                        "name": "colorCodes",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "comma separated list of vehicle make codes",
+                        "name": "makeCodes",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "comma separated list of vehicle nicknames",
+                        "name": "nicknames",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Current page",
+                        "name": "page",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The number of items per page to be returned",
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "stateCode",
+                                "licensePlate",
+                                "campusTagCode",
+                                "nickname",
+                                "vehicleYear",
+                                "vin"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Columns to sort by, as comma delimited list",
+                        "name": "sortBy",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "boolean"
+                        },
+                        "description": "Sort in desc order, comma seperated list",
+                        "name": "sortDesc",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "basic",
+                                "owner"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Comma-delimited list of fieldsets that are to be returned",
+                        "name": "fieldSets",
+                        "type": "array",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/paginatedVehicle"
+                        },
+                        "description": "List of vehicles"
+                    }
+                }
+            }
+        },
+        "/citations/{citationId}/photos/{id}": {
+            "put": {
+                "summary": "Update the ignored state of a photo.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique citation id",
+                        "name": "citationId",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Unique photo id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/photo"
+                        },
+                        "description": "New photo",
+                        "name": "citationPhoto",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Photo was successfully updated"
+                    }
+                }
+            }
+        },
+        "/appeals/{id}/letters": {
+            "get": {
+                "summary": "Get a list of letters for an appeal",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "appeal id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "letter type",
+                        "name": "letterType",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/letter"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of letters"
+                    }
+                }
+            }
+        },
+        "/payment-callbacks/citations": {
+            "post": {
+                "summary": "Notify the parking system of a citation payment status update",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Invoice ID of the payment",
+                        "name": "invoice",
+                        "type": "number",
+                        "required": true,
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "No real response"
+                    }
+                }
+            }
+        },
+        "/letters/{id}": {
+            "put": {
+                "summary": "Update a letter by the specified letter id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique letter id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/letter"
+                        },
+                        "description": "Updated letter",
+                        "name": "letter",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/letter"
+                        },
+                        "description": "Updated letter"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a letter with the specified letter id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique letter id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "No body"
+                    }
+                }
+            }
+        },
+        "/letter-templates": {
+            "post": {
+                "summary": "Create a new letterTemplate.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/letterTemplate"
+                        },
+                        "description": "New letterTemplate",
+                        "name": "letterTemplate",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/letterTemplate"
+                        },
+                        "description": "New letterTemplate"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a list of all letterTemplates",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/letterTemplate"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of letterTemplates"
+                    }
+                }
+            }
+        },
+        "/fines/{id}": {
+            "put": {
+                "summary": "Update a fine with the specified fine id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique fine id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "No body"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a fine with the specified fine id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique fine id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "No body"
+                    }
+                }
+            }
+        },
+        "/selfservice/vehicles": {
+            "post": {
+                "summary": "Adds a new vehicle or activates it if it already exists",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/selfServiceVehicle"
+                        },
+                        "description": "new vehicle",
+                        "name": "ssVehicle",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "description": "BYU Id of vehicle owner. Used for developers.",
+                        "name": "proxyId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/selfServiceVehicle"
+                        },
+                        "description": "Vehicle"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a list of user vehicles",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "items": {
+                            "enum": [
+                                "basic",
+                                "codes"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Comma-delimited list of fieldsets that are to be returned",
+                        "name": "fieldSets",
+                        "required": false,
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "description": "BYU Id of vehicle owner. Used for developers.",
+                        "name": "proxyId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/selfServiceVehicleWrapper"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Vehicles"
+                    }
+                }
+            }
+        },
+        "/fine-logs": {
+            "get": {
+                "summary": "Get a list of fine logs, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "fine type",
+                        "name": "fineType",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "fine code",
+                        "name": "fineCode",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "basic",
+                                "owner"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Comma-delimited list of fieldsets that are to be returned",
+                        "name": "fieldSets",
+                        "type": "array",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/paginatedFineLogs"
+                        },
+                        "description": "List of fine logs"
+                    }
+                }
+            }
+        },
+        "/notes/{id}": {
+            "put": {
+                "summary": "Update an note by the specified note id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique note id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/note"
+                        },
+                        "description": "Updated note",
+                        "name": "note",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/note"
+                        },
+                        "description": "Updated note"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete an note with the specified note id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique note id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "No body"
+                    }
+                }
+            }
+        },
+        "/selfservice/citations": {
+            "get": {
+                "summary": "Get a list of citations for current user (or proxy user, if allowed).",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "citation number",
+                        "name": "citationNumber",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "BYU Id of citation owner. Used for developers.",
+                        "name": "proxyId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "basic",
+                                "violation",
+                                "vehicle",
+                                "appeals",
+                                "additionalInfo"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Comma-delimited list of fieldsets that are to be returned",
+                        "name": "fieldSets",
+                        "type": "array",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/selfServiceCitationWrapper"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Citations for authenticated users"
+                    }
+                }
+            }
+        },
+        "/guest-registration": {
+            "post": {
+                "summary": "Create a new Guest Parking Registration",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/guestRegistration"
+                        },
+                        "description": "New guestRegistration",
+                        "name": "guestRegistration",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/privilegeOverride"
+                        },
+                        "description": "The Privilege Override for this Guest Registration"
+                    }
+                }
+            }
+        },
+        "/inactive-vehicles": {
+            "get": {
+                "summary": "Get a list of inactive vehicles for a user",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "byu id",
+                        "name": "byuId",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/vehicle"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of inactive vehicles"
+                    }
+                }
+            }
+        },
+        "/privilege-overrides": {
+            "post": {
+                "summary": "Create a new privilege override.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/privilegeOverride"
+                        },
+                        "description": "New privilege override",
+                        "name": "privilegeOverride",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/privilegeOverride"
+                        },
+                        "description": "New privilege override"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a list of privilege overrides, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique vehicle id",
+                        "name": "vehicleId",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Unique byu id",
+                        "name": "byuId",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Parking zone id",
+                        "name": "zoneId",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Begining date for the search range",
+                        "name": "betweenStartDate",
+                        "format": "dateTime",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The end date for the search range",
+                        "name": "betweenEndDate",
+                        "format": "dateTime",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Current page",
+                        "name": "page",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The number of items per page to be returned",
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "byuId",
+                                "zoneId",
+                                "dateBegins",
+                                "dateEnds",
+                                "updatedById",
+                                "dateTimeUpdated"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Columns to sort by, as comma delimited list",
+                        "name": "sortBy",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "boolean"
+                        },
+                        "description": "Sort in desc order, comma seperated list",
+                        "name": "sortDesc",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "basic",
+                                "ownerPerson",
+                                "updatedByPerson",
+                                "vehicle"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Comma-delimited list of fieldsets that are to be returned",
+                        "name": "fieldSets",
+                        "type": "array",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/paginatedPrivilegeOverride"
+                        },
+                        "description": "List of privilege overrides"
+                    }
+                }
+            }
+        },
+        "/appeals/{id}": {
+            "put": {
+                "summary": "Update an appeal with the specified citation id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique appeal id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/appealWrapper"
+                        },
+                        "description": "Appeal, citation, note, and/or letter to be updated",
+                        "name": "code",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/appeal"
+                        },
+                        "description": "Updated appeal"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get an appeal by the specified id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique appeal id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/appeal"
+                        },
+                        "description": "Appeal"
+                    }
+                }
+            }
+        },
+        "/privilege-overrides/{id}": {
+            "put": {
+                "summary": "Update a privilege override by the specified override id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique override id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/privilegeOverride"
+                        },
+                        "description": "Updated privilege override",
+                        "name": "privilegeOverride",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/privilegeOverride"
+                        },
+                        "description": "Updated privilege Override"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a privilege override by the specified override id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique override id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/privilegeOverride"
+                        },
+                        "description": "Privilege override"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a privilege override with the specified override id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique override id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "No body"
+                    }
+                }
+            }
+        },
+        "/vehicles/{id}": {
+            "post": {
+                "summary": "Copy the specified vehicle and give it a new license plate.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique vehicle id of vehicle to be copied",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/vehicle"
+                        },
+                        "description": "New vehicle with new license plate",
+                        "name": "vehicle",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/vehicle"
+                        },
+                        "description": "New vehicle"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update a vehicle by the specified vehicle id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique vehicle id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/vehicle"
+                        },
+                        "description": "Updated vehicle",
+                        "name": "vehicle",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/vehicle"
+                        },
+                        "description": "Updated vehicle"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a vehicle by the specified vehicle id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique vehicle id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/vehicle"
+                        },
+                        "description": "vehicle"
+                    }
+                }
+            }
+        },
+        "/selfservice/vehicles/{id}": {
+            "put": {
+                "summary": "Update a vehicle by the specified vehicle id",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "unique vehicle id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "BYU Id of vehicle owner. Used for developers.",
+                        "name": "proxyId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/selfServiceVehicle"
+                        },
+                        "description": "updated vehicle",
+                        "name": "ssVehicle",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/selfServiceVehicle"
+                        },
+                        "description": "updated vehicle"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete the association between the authenticated user and the vehicle with the specified vehicle id",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique vehicle id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "BYU Id of vehicle owner. Used for developers.",
+                        "name": "proxyId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "no body"
+                    }
+                }
+            }
+        },
+        "/letters": {
+            "post": {
+                "summary": "Create a new letter.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/letter"
+                        },
+                        "description": "New letter",
+                        "name": "letter",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/letter"
+                        },
+                        "description": "New letter"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a list of letters, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "appeal id",
+                        "name": "appealId",
+                        "type": "integer",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "letter type",
+                        "name": "letterType",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/letter"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of letters"
+                    }
+                }
+            }
+        },
+        "/codes": {
+            "post": {
+                "summary": "Create a new code.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/code"
+                        },
+                        "description": "New code",
+                        "name": "code",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/code"
+                        },
+                        "description": "New code"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a list of trf codes, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "comma-seperated list of code set ids",
+                        "name": "codesetIds",
+                        "type": "array",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/code"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of trf codes"
+                    }
+                }
+            }
+        },
+        "/payment-callbacks/paid-parking": {
+            "post": {
+                "summary": "Notify the parking system of a paid parking payment status update",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Invoice ID of the payment",
+                        "name": "invoice",
+                        "type": "number",
+                        "required": true,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "The client's transaction ID. In the case of paid parking, it will follow the format {BYU_ID}-{YEAR_TERM}-{TRANSACTION_COUNT}",
+                        "name": "sourceTransaction",
+                        "type": "string",
+                        "required": true,
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "No real response"
+                    }
+                }
+            }
+        },
+        "/demographic-search": {
+            "get": {
+                "summary": "Search demographics",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Person's Name",
+                        "name": "name",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "City",
+                        "name": "city",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "address",
+                        "name": "address",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "state",
+                        "name": "state",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "zip code",
+                        "name": "zipcode",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/demographicSearchResult"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Demographic results"
+                    }
+                }
+            }
+        },
+        "/tow-flags": {
+            "post": {
+                "summary": "Create a new towFlag.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/towFlag"
+                        },
+                        "description": "New towFlag",
+                        "name": "towFlag",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/towFlag"
+                        },
+                        "description": "New towFlag"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get a list of towFlags, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "BYU Id of the flagged person",
+                        "name": "byuId",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "towFlag vehicleId",
+                        "name": "vehicleId",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "towFlag flagTypeCode",
+                        "name": "flagTypeCode",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "stateCode of the flagged vehicle",
+                        "name": "stateCode",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "licensePlate of the flagged vehicle",
+                        "name": "licensePlate",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "If set to true, filter out flags with a null vehicleId",
+                        "name": "vehicleOnlyFlags",
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Current page",
+                        "name": "page",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The number of items per page to be returned",
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "flagDate",
+                                "stateCode",
+                                "licensePlate"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Columns to sort by, as comma delimited list",
+                        "name": "sortBy",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "boolean"
+                        },
+                        "description": "Sort in desc order, comma seperated list",
+                        "name": "sortDesc",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "basic",
+                                "vehicle"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Comma-delimited list of fieldsets that are to be returned",
+                        "name": "fieldSets",
+                        "type": "array",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/paginatedTowFlag"
+                        },
+                        "description": "List of towFlags"
+                    }
+                }
+            }
+        },
+        "/letter-templates/{id}": {
+            "put": {
+                "summary": "Update a letterTemplate by the specified letterTemplate id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique letterTemplate id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/letterTemplate"
+                        },
+                        "description": "Updated letterTemplate",
+                        "name": "letterTemplate",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/letterTemplate"
+                        },
+                        "description": "Updated letterTemplate"
+                    }
+                }
+            }
+        },
+        "/paid-parking": {
+            "get": {
+                "summary": "Get a list of paidParking, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "associated byu id",
+                        "name": "byuId",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "paymentAccepted",
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "range starting year term",
+                        "name": "yearTerm",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Current page",
+                        "name": "page",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The number of items per page to be returned",
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "byuId",
+                                "paymentAcceptedDate"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Columns to sort by, as comma delimited list",
+                        "name": "sortBy",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "boolean"
+                        },
+                        "description": "Sort in desc order, comma seperated list",
+                        "name": "sortDesc",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "basic",
+                                "owner"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Comma-delimited list of fieldsets that are to be returned",
+                        "name": "fieldSets",
+                        "type": "array",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/paginatedPaidParking"
+                        },
+                        "description": "List of paid parking"
+                    }
+                }
+            }
+        },
+        "/selfservice/codes": {
+            "get": {
+                "summary": "Get a list of codes by the specified code set id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Code set IDs",
+                        "name": "codesetIds",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/code"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Codes"
+                    }
+                }
+            }
+        },
+        "/officers/{id}": {
+            "put": {
+                "summary": "Update an officer by the specified officer id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique officer id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/officer"
+                        },
+                        "description": "Updated officer",
+                        "name": "officer",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/officer"
+                        },
+                        "description": "Updated officer"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get an officer by the specified officer id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique officer id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/officer"
+                        },
+                        "description": "Officer"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete an officer with the specified officer id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique officer id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "No body"
+                    }
+                }
+            }
+        },
+        "/selfservice/vehicle-registration/{id}": {
+            "delete": {
+                "summary": "Unregisters an active vehicle by the specified vehicle id",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique vehicle id",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "BYU Id of vehicle owner. Used for developers.",
+                        "name": "proxyId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/selfServiceVehicle"
+                        },
+                        "description": "unregistered vehicle"
+                    }
+                }
+            }
+        },
+        "/privileges": {
+            "get": {
+                "summary": "Get the privilege for the specified BYU ID",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique byu id",
+                        "name": "byuId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Unique vehicle id",
+                        "name": "vehicleId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/privilege"
+                        },
+                        "description": "A single privilege"
+                    }
+                }
+            }
+        },
+        "/citation-logs": {
+            "get": {
+                "summary": "Get a list of citation logs, filtering by parameters if passed in.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Unique citation id",
+                        "name": "citationId",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Current page",
+                        "name": "page",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The number of items per page to be returned",
+                        "name": "itemsPerPage",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "dateTimeUpdated"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Columns to sort by, as comma delimited list",
+                        "name": "sortBy",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "boolean"
+                        },
+                        "description": "Sort in desc order, comma seperated list",
+                        "name": "sortDesc",
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "basic",
+                                "owner",
+                                "updater"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Comma-delimited list of fieldsets that are to be returned",
+                        "name": "fieldSets",
+                        "type": "array",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/paginatedCitationLogs"
+                        },
+                        "description": "List of citations"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "citationWrapper": {
+            "properties": {
+                "updater": {
+                    "$ref": "#/definitions/person"
+                },
+                "officer": {
+                    "$ref": "#/definitions/person"
+                },
+                "basic": {
+                    "$ref": "#/definitions/citation"
+                },
+                "vehicle": {
+                    "$ref": "#/definitions/vehicle"
+                },
+                "owner": {
+                    "$ref": "#/definitions/person"
+                },
+                "numAppeals": {
+                    "type": "integer"
+                },
+                "paidBy": {
+                    "$ref": "#/definitions/person"
+                }
+            }
+        },
+        "demographicsAddress": {
+            "properties": {
+                "line4": {
+                    "type": "string"
+                },
+                "addressType": {
+                    "type": "string"
+                },
+                "line1": {
+                    "type": "string"
+                },
+                "line3": {
+                    "type": "string"
+                },
+                "line2": {
+                    "type": "string"
+                },
+                "unlisted": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "person": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "personId": {
+                    "type": "string"
+                },
+                "byuId": {
+                    "type": "string"
+                }
+            }
+        },
+        "fineLog": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "reducedAmount": {
+                    "type": "number"
+                },
+                "fineType": {
+                    "type": "string"
+                },
+                "fullAmount": {
+                    "type": "number"
+                },
+                "reducedDays": {
+                    "type": "integer"
+                },
+                "dateTimeUpdated": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "fineCode": {
+                    "type": "string"
+                },
+                "effectiveDate": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "updatedByByuId": {
+                    "type": "string"
+                },
+                "fineId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "selfServiceVehicleWrapper": {
+            "properties": {
+                "basic": {
+                    "$ref": "#/definitions/selfServiceVehicle"
+                },
+                "color": {
+                    "$ref": "#/definitions/selfServiceCode"
+                },
+                "state": {
+                    "$ref": "#/definitions/selfServiceCode"
+                },
+                "make": {
+                    "$ref": "#/definitions/selfServiceCode"
+                }
+            }
+        },
+        "appealWrapper": {
+            "properties": {
+                "citation": {
+                    "$ref": "#/definitions/citation"
+                },
+                "person": {
+                    "$ref": "#/definitions/person"
+                },
+                "basic": {
+                    "$ref": "#/definitions/appeal"
+                },
+                "letter": {
+                    "$ref": "#/definitions/letter"
+                },
+                "note": {
+                    "$ref": "#/definitions/note"
+                }
+            }
+        },
+        "demographicsJob": {
+            "properties": {
+                "employeeStanding": {
+                    "type": "string"
+                },
+                "terminationDate": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "organization": {
+                    "type": "string"
+                },
+                "area": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "employeeClass": {
+                    "type": "string"
+                },
+                "hireDate": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "employeeStatus": {
+                    "type": "string"
+                },
+                "job": {
+                    "type": "string"
+                }
+            }
+        },
+        "finishPaymentRequest": {
+            "properties": {
+                "paymentType": {
+                    "type": "string"
+                },
+                "paymentTypeId": {
+                    "type": "string"
+                }
+            }
+        },
+        "paginatedCitations": {
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/citationWrapper"
+                    },
+                    "type": "array"
+                },
+                "pageInfo": {
+                    "$ref": "#/definitions/pageInfo"
+                }
+            }
+        },
+        "demographicsStudentTerm": {
+            "properties": {
+                "term": {
+                    "type": "string"
+                },
+                "withdrawalDate": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "independentStudyCredits": {
+                    "type": "number"
+                },
+                "credits": {
+                    "type": "number"
+                },
+                "regStatus": {
+                    "type": "string"
+                },
+                "termDescription": {
+                    "type": "string"
+                }
+            }
+        },
+        "appeal": {
+            "properties": {
+                "decisionNotes": {
+                    "type": "string"
+                },
+                "appealRelToOwner": {
+                    "type": "string"
+                },
+                "decisionCode": {
+                    "type": "string"
+                },
+                "appealStatus": {
+                    "type": "string"
+                },
+                "appealReasonCode": {
+                    "type": "string"
+                },
+                "decisionDate": {
+                    "format": "dateTime",
+                    "type": "string"
+                },
+                "appealFineAmount": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "appealDate": {
+                    "format": "dateTime",
+                    "type": "integer"
+                },
+                "appealText": {
+                    "type": "string"
+                },
+                "dateTimeUpdated": {
+                    "format": "dateTime",
+                    "type": "string"
+                },
+                "citationId": {
+                    "type": "integer"
+                },
+                "updatedByByuId": {
+                    "type": "string"
+                },
+                "appealedByByuId": {
+                    "type": "string"
+                }
+            }
+        },
+        "citationInfoHelper": {
+            "properties": {
+                "payAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "photoCount": {
+                    "type": "integer"
+                },
+                "appealOk": {
+                    "type": "boolean"
+                },
+                "canPay": {
+                    "type": "boolean"
+                },
+                "hasAppeal": {
+                    "type": "boolean"
+                },
+                "inAppealTime": {
+                    "type": "boolean"
+                },
+                "isPaid": {
+                    "type": "boolean"
+                },
+                "appealFinal": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "paginatedAppeals": {
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/appealWrapper"
+                    },
+                    "type": "array"
+                },
+                "pageInfo": {
+                    "$ref": "#/definitions/pageInfo"
+                }
+            }
+        },
+        "selfServiceVehicle": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "makeCode": {
+                    "type": "string"
+                },
+                "stateCode": {
+                    "type": "string"
+                },
+                "typeCode": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "colorCode": {
+                    "type": "string"
+                },
+                "licensePlate": {
+                    "type": "string"
+                }
+            }
+        },
+        "demographicsBasic": {
+            "properties": {
+                "dateOfBirth": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "parkingPrivileges": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "studentStatus": {
+                    "type": "string"
+                },
+                "netId": {
+                    "type": "string"
+                },
+                "fullName": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "manualOverride": {
+                    "type": "boolean"
+                },
+                "byuId": {
+                    "type": "string"
+                },
+                "citationSummary": {
+                    "$ref": "#/definitions/citationSummary"
+                }
+            }
+        },
+        "citation": {
+            "properties": {
+                "vehicleId": {
+                    "type": "integer"
+                },
+                "citationOwnerByuId": {
+                    "type": "string"
+                },
+                "citeTagDate": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "customPermitId": {
+                    "type": "integer"
+                },
+                "reducedFine": {
+                    "type": "number"
+                },
+                "needFinPost": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "citationStatus": {
+                    "type": "string"
+                },
+                "voidDate": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "dateTimeUpdated": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "originalFine": {
+                    "type": "number"
+                },
+                "violationTypeCode": {
+                    "type": "string"
+                },
+                "paidByByuId": {
+                    "type": "string"
+                },
+                "issuedDateTime": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "updatedByByuId": {
+                    "type": "string"
+                },
+                "violationCode": {
+                    "type": "string"
+                },
+                "appealedByByuId": {
+                    "type": "string"
+                },
+                "trfDecalId": {
+                    "type": "integer"
+                },
+                "citeTagCode": {
+                    "type": "string"
+                },
+                "appealedDate": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "paidEarly": {
+                    "type": "boolean"
+                },
+                "officerId": {
+                    "type": "string"
+                },
+                "finPostCode": {
+                    "type": "string"
+                },
+                "locationCode": {
+                    "type": "string"
+                },
+                "citationNumber": {
+                    "type": "string"
+                },
+                "appealFine": {
+                    "type": "number"
+                },
+                "voidCode": {
+                    "type": "string"
+                },
+                "paidDate": {
+                    "format": "datetime",
+                    "type": "string"
+                }
+            }
+        },
+        "paginatedPaidParking": {
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/paidParkingWrapper"
+                    },
+                    "type": "array"
+                },
+                "pageInfo": {
+                    "$ref": "#/definitions/pageInfo"
+                }
+            }
+        },
+        "citationLogWrapper": {
+            "properties": {
+                "updater": {
+                    "$ref": "#/definitions/person"
+                },
+                "basic": {
+                    "$ref": "#/definitions/citationLog"
+                },
+                "owner": {
+                    "$ref": "#/definitions/person"
+                }
+            }
+        },
+        "paginatedVehicle": {
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/vehicleWrapper"
+                    },
+                    "type": "array"
+                },
+                "pageInfo": {
+                    "$ref": "#/definitions/pageInfo"
+                }
+            }
+        },
+        "letter": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "letterContent": {
+                    "type": "string"
+                },
+                "letterType": {
+                    "type": "string"
+                },
+                "appealId": {
+                    "type": "integer"
+                },
+                "byuId": {
+                    "type": "string"
+                }
+            }
+        },
+        "vehicleWrapper": {
+            "properties": {
+                "basic": {
+                    "$ref": "#/definitions/vehicle"
+                },
+                "owner": {
+                    "$ref": "#/definitions/person"
+                }
+            }
+        },
+        "code": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "charData": {
+                    "type": "string"
+                },
+                "codeId": {
+                    "type": "string"
+                },
+                "integerData": {
+                    "type": "integer"
+                },
+                "floatData": {
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "sortOrder": {
+                    "type": "integer"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "codeSetId": {
+                    "type": "string"
+                },
+                "dateTimeData": {
+                    "format": "datetime",
+                    "type": "string"
+                }
+            }
+        },
+        "selfServiceAppealRequest": {
+            "properties": {
+                "appealText": {
+                    "type": "string"
+                },
+                "citationId": {
+                    "type": "number"
+                }
+            }
+        },
+        "termsAndConditions": {
+            "properties": {
+                "agreement": {
+                    "type": "string"
+                },
+                "paragraphs": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "header": {
+                    "type": "string"
+                }
+            }
+        },
+        "paginatedCitationLogs": {
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/citationLogWrapper"
+                    },
+                    "type": "array"
+                },
+                "pageInfo": {
+                    "$ref": "#/definitions/pageInfo"
+                }
+            }
+        },
+        "demographicsRelationship": {
+            "properties": {
+                "relType": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "byuId": {
+                    "type": "string"
+                }
+            }
+        },
+        "selfServiceCitationWrapper": {
+            "properties": {
+                "basic": {
+                    "$ref": "#/definitions/citation"
+                },
+                "violation": {
+                    "$ref": "#/definitions/code"
+                },
+                "vehicle": {
+                    "$ref": "#/definitions/vehicle"
+                },
+                "appeals": {
+                    "items": {
+                        "$ref": "#/definitions/appeal"
+                    },
+                    "type": "array"
+                },
+                "info": {
+                    "$ref": "#/definitions/citationInfoHelper"
+                }
+            }
+        },
+        "privilegeOverrideWrapper": {
+            "properties": {
+                "updatedByPerson": {
+                    "$ref": "#/definitions/person"
+                },
+                "basic": {
+                    "$ref": "#/definitions/privilegeOverride"
+                },
+                "vehicle": {
+                    "$ref": "#/definitions/vehicle"
+                },
+                "ownerPerson": {
+                    "$ref": "#/definitions/person"
+                }
+            }
+        },
+        "paginatedTowFlag": {
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/towFlagWrapper"
+                    },
+                    "type": "array"
+                },
+                "pageInfo": {
+                    "$ref": "#/definitions/pageInfo"
+                }
+            }
+        },
+        "paginatedPrivilegeOverride": {
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/privilegeOverrideWrapper"
+                    },
+                    "type": "array"
+                },
+                "pageInfo": {
+                    "$ref": "#/definitions/pageInfo"
+                }
+            }
+        },
+        "citationSummary": {
+            "properties": {
+                "total": {
+                    "type": "integer"
+                },
+                "enforced": {
+                    "type": "integer"
+                },
+                "warnings": {
+                    "type": "integer"
+                }
+            }
+        },
+        "historicVehicle": {
+            "properties": {
+                "nickname": {
+                    "type": "string"
+                },
+                "makeCode": {
+                    "type": "string"
+                },
+                "stateCode": {
+                    "type": "string"
+                },
+                "colorCode": {
+                    "type": "string"
+                },
+                "campusOwnerByuId": {
+                    "type": "string"
+                },
+                "licensePlate": {
+                    "type": "string"
+                }
+            }
+        },
+        "demographicsWrapper": {
+            "properties": {
+                "affiliations": {
+                    "items": {
+                        "$ref": "#/definitions/demographicsAffiliation"
+                    },
+                    "type": "array"
+                },
+                "jobs": {
+                    "items": {
+                        "$ref": "#/definitions/demographicsJob"
+                    },
+                    "type": "array"
+                },
+                "basic": {
+                    "$ref": "#/definitions/demographicsBasic"
+                },
+                "housing": {
+                    "items": {
+                        "$ref": "#/definitions/demographicsHousing"
+                    },
+                    "type": "array"
+                },
+                "studentInfo": {
+                    "items": {
+                        "$ref": "#/definitions/demographicsStudentTerm"
+                    },
+                    "type": "array"
+                },
+                "addresses": {
+                    "items": {
+                        "$ref": "#/definitions/demographicsAddress"
+                    },
+                    "type": "array"
+                },
+                "relationships": {
+                    "items": {
+                        "$ref": "#/definitions/demographicsRelationship"
+                    },
+                    "type": "array"
+                },
+                "phones": {
+                    "items": {
+                        "$ref": "#/definitions/demographicsPhone"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "paginatedFineLogs": {
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/fineLogWrapper"
+                    },
+                    "type": "array"
+                },
+                "pageInfo": {
+                    "$ref": "#/definitions/pageInfo"
+                }
+            }
+        },
+        "selfServicePayment": {
+            "properties": {
+                "creditTermsAndConditions": {
+                    "$ref": "#/definitions/termsAndConditions"
+                },
+                "paymentId": {
+                    "type": "integer"
+                },
+                "bankTermsAndConditions": {
+                    "$ref": "#/definitions/termsAndConditions"
+                },
+                "paymentTypes": {
+                    "items": {
+                        "$ref": "#/definitions/paymentType"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "towFlagWrapper": {
+            "properties": {
+                "basic": {
+                    "$ref": "#/definitions/towFlag"
+                },
+                "vehicle": {
+                    "$ref": "#/definitions/vehicle"
+                }
+            }
+        },
+        "demographicsHousing": {
+            "properties": {
+                "moveOut": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "bedSpace": {
+                    "type": "string"
+                },
+                "moveIn": {
+                    "format": "datetime",
+                    "type": "string"
+                }
+            }
+        },
+        "vehicle": {
+            "properties": {
+                "stateOwnerByuId": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "stateCode": {
+                    "type": "string"
+                },
+                "typeCode": {
+                    "type": "string"
+                },
+                "campusUseCode": {
+                    "type": "string"
+                },
+                "campusRelationToOwner": {
+                    "type": "string"
+                },
+                "licensePlate": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "vehicleYear": {
+                    "type": "string"
+                },
+                "vin": {
+                    "type": "string"
+                },
+                "makeCode": {
+                    "type": "string"
+                },
+                "stateTagCode": {
+                    "type": "string"
+                },
+                "campusTagCode": {
+                    "type": "string"
+                },
+                "campusOwnerByuId": {
+                    "type": "string"
+                },
+                "colorCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "parkingZone": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "privilegeText": {
+                    "type": "string"
+                },
+                "allowGateFlag": {
+                    "type": "boolean"
+                },
+                "zoneDesc": {
+                    "type": "string"
+                },
+                "paidParkingExemptStatus": {
+                    "enum": [
+                        "NONE",
+                        "PAID",
+                        "ON_CAMPUS_RESIDENT",
+                        "EMPLOYEE",
+                        "EMPLOYEE_DEPENDENT",
+                        "SPRING_SUMMER"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "letterTemplate": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "letterContent": {
+                    "type": "string"
+                },
+                "letterType": {
+                    "type": "string"
+                }
+            }
+        },
+        "paidParkingWrapper": {
+            "properties": {
+                "basic": {
+                    "$ref": "#/definitions/paidParking"
+                },
+                "owner": {
+                    "$ref": "#/definitions/person"
+                }
+            }
+        },
+        "officer": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "dateAssigned": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "callNumber": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "byuId": {
+                    "type": "string"
+                },
+                "dateRelieved": {
+                    "format": "datetime",
+                    "type": "string"
+                }
+            }
+        },
+        "paidParking": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "yearTerm": {
+                    "type": "string"
+                },
+                "transactionCount": {
+                    "type": "integer"
+                },
+                "paymentAccepted": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "payMgrTransNum": {
+                    "type": "integer"
+                },
+                "byuId": {
+                    "type": "string"
+                },
+                "sentToPs": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "pageInfo": {
+            "properties": {
+                "page": {
+                    "type": "integer"
+                },
+                "totalCount": {
+                    "type": "integer"
+                },
+                "itemsPerPage": {
+                    "type": "integer"
+                }
+            }
+        },
+        "demographicsPhone": {
+            "properties": {
+                "workFlag": {
+                    "type": "boolean"
+                },
+                "cellFlag": {
+                    "type": "boolean"
+                },
+                "primaryFlag": {
+                    "type": "boolean"
+                },
+                "tty": {
+                    "type": "boolean"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "unlisted": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "demographicsAffiliation": {
+            "properties": {
+                "roleGroup": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                }
+            }
+        },
+        "demographicSearchResult": {
+            "properties": {
+                "countryCode": {
+                    "type": "string"
+                },
+                "stateCode": {
+                    "type": "string"
+                },
+                "addressLine4": {
+                    "type": "string"
+                },
+                "addressType": {
+                    "type": "string"
+                },
+                "addressLine3": {
+                    "type": "string"
+                },
+                "sortName": {
+                    "type": "string"
+                },
+                "addressLine2": {
+                    "type": "string"
+                },
+                "addressLine1": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "postalCode": {
+                    "type": "string"
+                },
+                "personId": {
+                    "type": "string"
+                },
+                "netId": {
+                    "type": "string"
+                },
+                "byuId": {
+                    "type": "string"
+                }
+            }
+        },
+        "fine": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "reducedAmount": {
+                    "type": "number"
+                },
+                "fineType": {
+                    "type": "string"
+                },
+                "fullAmount": {
+                    "type": "number"
+                },
+                "reducedDays": {
+                    "type": "integer"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "fineCode": {
+                    "type": "string"
+                },
+                "effectiveDate": {
+                    "format": "date",
+                    "type": "string"
+                }
+            }
+        },
+        "note": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "noteContent": {
+                    "type": "string"
+                },
+                "privQueueId": {
+                    "type": "integer"
+                },
+                "trfDecalId": {
+                    "type": "integer"
+                },
+                "vehicleId": {
+                    "type": "integer"
+                },
+                "citationId": {
+                    "type": "integer"
+                },
+                "noteType": {
+                    "type": "string"
+                },
+                "appealId": {
+                    "type": "integer"
+                },
+                "privilegeOverrideId": {
+                    "type": "integer"
+                },
+                "byuId": {
+                    "type": "string"
+                },
+                "bootBanId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "paymentType": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "accountType": {
+                    "type": "string"
+                },
+                "mungedAccountNum": {
+                    "type": "string"
+                },
+                "financialInstitution": {
+                    "type": "string"
+                }
+            }
+        },
+        "addVehicleEligibility": {
+            "properties": {
+                "vehicleCount": {
+                    "type": "integer"
+                },
+                "canRegisterVehicle": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "fineLogWrapper": {
+            "properties": {
+                "basic": {
+                    "$ref": "#/definitions/fineLog"
+                },
+                "owner": {
+                    "$ref": "#/definitions/person"
+                }
+            }
+        },
+        "photo": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "photoData": {
+                    "format": "binary",
+                    "type": "string"
+                },
+                "citationId": {
+                    "type": "integer"
+                },
+                "ignore": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "selfServiceCode": {
+            "properties": {
+                "codeId": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "codesetId": {
+                    "type": "string"
+                }
+            }
+        },
+        "towFlag": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "vehicleId": {
+                    "type": "integer"
+                },
+                "towFlagName": {
+                    "type": "string"
+                },
+                "flagReasonCode": {
+                    "type": "string"
+                },
+                "flagTypeCode": {
+                    "type": "string"
+                },
+                "byuId": {
+                    "type": "string"
+                },
+                "flagDate": {
+                    "format": "datetime",
+                    "type": "string"
+                }
+            }
+        },
+        "selfServicePrivilege": {
+            "properties": {
+                "nextSemesterPrivilegeText": {
+                    "type": "string"
+                },
+                "showPayButton": {
+                    "type": "boolean"
+                },
+                "payButtonText": {
+                    "type": "string"
+                },
+                "regulationsHtml": {
+                    "type": "string"
+                },
+                "nextSemester": {
+                    "type": "string"
+                },
+                "eligibilityText": {
+                    "type": "string"
+                },
+                "currentSemesterPrivilegeId": {
+                    "type": "string"
+                },
+                "currentSemesterPrivilegeText": {
+                    "type": "string"
+                }
+            }
+        },
+        "citationLog": {
+            "properties": {
+                "vehicleId": {
+                    "type": "integer"
+                },
+                "citationOwnerByuId": {
+                    "type": "string"
+                },
+                "citeTagDate": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "customPermitId": {
+                    "type": "integer"
+                },
+                "reducedFine": {
+                    "type": "number"
+                },
+                "needFinPost": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "citationStatus": {
+                    "type": "string"
+                },
+                "voidDate": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "dateTimeUpdated": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "originalFine": {
+                    "type": "number"
+                },
+                "violationTypeCode": {
+                    "type": "string"
+                },
+                "paidByByuId": {
+                    "type": "string"
+                },
+                "issuedDateTime": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "updatedByByuId": {
+                    "type": "string"
+                },
+                "violationCode": {
+                    "type": "string"
+                },
+                "appealedByByuId": {
+                    "type": "string"
+                },
+                "trfDecalId": {
+                    "type": "integer"
+                },
+                "citeTagCode": {
+                    "type": "string"
+                },
+                "appealedDate": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "paidEarly": {
+                    "type": "boolean"
+                },
+                "finPostCode": {
+                    "type": "string"
+                },
+                "officerId": {
+                    "type": "string"
+                },
+                "locationCode": {
+                    "type": "string"
+                },
+                "citationId": {
+                    "type": "integer"
+                },
+                "citationNumber": {
+                    "type": "string"
+                },
+                "appealFine": {
+                    "type": "number"
+                },
+                "voidCode": {
+                    "type": "string"
+                },
+                "paidDate": {
+                    "format": "datetime",
+                    "type": "string"
+                }
+            }
+        },
+        "privilege": {
+            "properties": {
+                "privilegeText": {
+                    "type": "string"
+                },
+                "zoneDesc": {
+                    "type": "string"
+                },
+                "zoneId": {
+                    "type": "string"
+                }
+            }
+        },
+        "vehicleLog": {
+            "properties": {
+                "stateOwnerByuId": {
+                    "type": "string"
+                },
+                "vehicleId": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "stateCode": {
+                    "type": "string"
+                },
+                "typeCode": {
+                    "type": "string"
+                },
+                "campusUseCode": {
+                    "type": "string"
+                },
+                "campusRelationToOwner": {
+                    "type": "string"
+                },
+                "licensePlate": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "dateTimeUpdated": {
+                    "type": "string"
+                },
+                "vehicleYear": {
+                    "type": "string"
+                },
+                "makeCode": {
+                    "type": "string"
+                },
+                "vin": {
+                    "type": "string"
+                },
+                "campusTagCode": {
+                    "type": "string"
+                },
+                "stateTagCode": {
+                    "type": "string"
+                },
+                "campusOwnerByuId": {
+                    "type": "string"
+                },
+                "colorCode": {
+                    "type": "string"
+                },
+                "updatedByByuId": {
+                    "type": "string"
+                }
+            }
+        },
+        "guestRegistration": {
+            "properties": {
+                "startDate": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "noteText": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "integer"
+                },
+                "makeCode": {
+                    "type": "string"
+                },
+                "stateCode": {
+                    "type": "string"
+                },
+                "colorCode": {
+                    "type": "string"
+                },
+                "licensePlate": {
+                    "type": "string"
+                }
+            }
+        },
+        "privilegeOverride": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "vehicleId": {
+                    "type": "integer"
+                },
+                "dateEnds": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "dateBegins": {
+                    "format": "datetime",
+                    "type": "string"
+                },
+                "byuId": {
+                    "type": "string"
+                },
+                "zoneId": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "Parking Rest Service",
+        "version": "v3"
+    },
+    "basePath": "/domains/parking/rest/v3",
+    "host": "api.byu.edu:443"
+}

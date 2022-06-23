@@ -1,0 +1,188 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "IdentityAccessMembersOf",
+        "description": "The membersOf service returns the members of a specified group.",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/OITCoreDeveloperResources/isMember%2C+membersOf"
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/domains/legacy/identity/access/membersof/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/{group_id}": {
+            "get": {
+                "summary": "Returns the person_ids of the individual members of a specified group",
+                "description": "Returns the person_ids of the individual members of a specified group",
+                "operationId": "getMembersOfGroup",
+                "parameters": [
+                    {
+                        "name": "group_id",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "filter_attributes",
+                        "description": "string -> query by filter attributes",
+                        "type": "string",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "tags": [
+                    "MembersOfService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service request is OK and a response has been generated.",
+                        "schema": {
+                            "$ref": "#/definitions/isMemberService"
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Failure to authenticate",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "The target resource can not be found for the provided resource identifiers.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "description": "service definition",
+                "operationId": "getServiceDocumentation",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "isMemberService": {
+            "type": "object",
+            "properties": {
+                "resource": {
+                    "type": "object",
+                    "properties": {
+                        "methods": {
+                            "type": "object",
+                            "properties": {
+                                "options": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "URI": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "identifiers": {
+                            "type": "object",
+                            "properties": {
+                                "group_id": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "required": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "personid": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "required": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "attributes": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "request": {
+                    "type": "object",
+                    "properties": {
+                        "method": {
+                            "type": "string"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "status": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "response": {
+                    "type": "object",
+                    "properties": {
+                        "no_authorization": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

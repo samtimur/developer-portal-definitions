@@ -1,0 +1,2235 @@
+{
+    "basePath": "/domains/legacy/academic/registration/studentlog/v1",
+    "x-mock_json": {
+        "example": {
+            "RegStdClassLogService": {
+                "response": {
+                    "add_drop_records": [
+                        {
+                            "section_number": "002",
+                            "person_id": "123456789",
+                            "section_type": "",
+                            "logId": "987654321",
+                            "add_drop_card": "N",
+                            "date_time_updated": "2018-03-16T21:44:24",
+                            "course_name": "REL C 471",
+                            "clean_note": "",
+                            "block": "S",
+                            "year_term": "20181",
+                            "credit_hours": 2,
+                            "title_code": "006",
+                            "action": "Add Failed",
+                            "curriculum_id": "05074",
+                            "lab_quiz_section": "",
+                            "grade": 3.7,
+                            "failure_reasons": [
+                                {
+                                    "failure_reason_code": "9",
+                                    "reason": "Winter 2018 registration is not available at this time for this class. It is open from 23 Oct 2017 to 16 Jan 2018."
+                                },
+                                {
+                                    "failure_reason_code": "35",
+                                    "reason": "It is past the deadline for REL C 471  Section 002. For questions contact Registration at (801) 422-2631."
+                                }
+                            ],
+                            "success": "N",
+                            "updated_by_name": "",
+                            "event_source": ""
+                        }
+                    ]
+                },
+                "request": {
+                    "status": 200,
+                    "resource": "/123456789/20181",
+                    "method": "GET",
+                    "attributes": "page=1",
+                    "statusMessage": "Service request is OK and a response has been generated."
+                }
+            }
+        }
+    },
+    "paths": {
+        "/documentation": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "service definition",
+                "x-throttling-tier": "Unlimited",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation"
+            }
+        },
+        "/{person_id}/{year_term}": {
+            "get": {
+                "summary": "Get the students class log identified by the given person id and year term.",
+                "tags": [
+                    "StudentLogService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the students class log identified by the given person id and year term.",
+                "parameters": [
+                    {
+                        "description": "string -> nine digit number",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "An integer for the page number",
+                        "name": "page",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Show failures flag",
+                        "name": "show_failed",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "add_drop_records": {
+                                            "items": {
+                                                "properties": {
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "person_id": {
+                                                        "description": "9 digit number",
+                                                        "type": "string"
+                                                    },
+                                                    "section_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "logId": {
+                                                        "type": "string"
+                                                    },
+                                                    "add_drop_card": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_time_updated": {
+                                                        "type": "string"
+                                                    },
+                                                    "course_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "clean_note": {
+                                                        "type": "string"
+                                                    },
+                                                    "block": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "integer"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "action": {
+                                                        "type": "string"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "lab_quiz_section": {
+                                                        "type": "string"
+                                                    },
+                                                    "grade": {
+                                                        "type": "number"
+                                                    },
+                                                    "failure_reasons": {
+                                                        "items": {
+                                                            "properties": {
+                                                                "failure_reason_code": {
+                                                                    "type": "string"
+                                                                },
+                                                                "reason": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "success": {
+                                                        "type": "string"
+                                                    },
+                                                    "updated_by_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "event_source": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "applications/json": {
+                                "response": {
+                                    "add_drop_records": [
+                                        {
+                                            "section_number": "002",
+                                            "person_id": "123456789",
+                                            "section_type": "",
+                                            "logId": "987654321",
+                                            "add_drop_card": "N",
+                                            "date_time_updated": "2018-03-16T21:44:24",
+                                            "course_name": "REL C 471",
+                                            "clean_note": "",
+                                            "block": "S",
+                                            "year_term": "20181",
+                                            "credit_hours": 2,
+                                            "title_code": "006",
+                                            "action": "Add Failed",
+                                            "curriculum_id": "05074",
+                                            "lab_quiz_section": "",
+                                            "grade": 3.7,
+                                            "failure_reasons": [
+                                                {
+                                                    "failure_reason_code": "9",
+                                                    "reason": "Winter 2018 registration is not available at this time for this class. It is open from 23 Oct 2017 to 16 Jan 2018."
+                                                },
+                                                {
+                                                    "failure_reason_code": "35",
+                                                    "reason": "It is past the deadline for REL C 471  Section 002. For questions contact Registration at (801) 422-2631."
+                                                }
+                                            ],
+                                            "success": "N",
+                                            "updated_by_name": "",
+                                            "event_source": ""
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/123456789/20181",
+                                    "method": "GET",
+                                    "attributes": "page=1",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getStdClassLogByIdYearTerm"
+            }
+        },
+        "/LOGID/{std_class_log_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "StudentLogService"
+                ],
+                "summary": "Get the students class log identified by the std class log id.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the students class log identified by the std class log id.",
+                "parameters": [
+                    {
+                        "description": "Identification of the student's class log",
+                        "name": "std_class_log_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "add_drop_records": {
+                                            "items": {
+                                                "properties": {
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "person_id": {
+                                                        "description": "9 digit number",
+                                                        "type": "string"
+                                                    },
+                                                    "section_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "logId": {
+                                                        "type": "string"
+                                                    },
+                                                    "add_drop_card": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_time_updated": {
+                                                        "type": "string"
+                                                    },
+                                                    "course_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "clean_note": {
+                                                        "type": "string"
+                                                    },
+                                                    "block": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "integer"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "action": {
+                                                        "type": "string"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "lab_quiz_section": {
+                                                        "type": "string"
+                                                    },
+                                                    "grade": {
+                                                        "type": "number"
+                                                    },
+                                                    "failure_reasons": {
+                                                        "items": {
+                                                            "properties": {
+                                                                "failure_reason_code": {
+                                                                    "type": "string"
+                                                                },
+                                                                "reason": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "success": {
+                                                        "type": "string"
+                                                    },
+                                                    "updated_by_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "event_source": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "applications/json": {
+                                "response": {
+                                    "add_drop_records": [
+                                        {
+                                            "section_number": "002",
+                                            "person_id": "123456789",
+                                            "section_type": "",
+                                            "logId": "987654321",
+                                            "add_drop_card": "N",
+                                            "date_time_updated": "2018-03-16T21:44:24",
+                                            "course_name": "REL C 471",
+                                            "clean_note": "",
+                                            "block": "S",
+                                            "year_term": "20181",
+                                            "credit_hours": 2,
+                                            "title_code": "006",
+                                            "action": "Add Failed",
+                                            "curriculum_id": "05074",
+                                            "lab_quiz_section": "",
+                                            "grade": 3.7,
+                                            "failure_reasons": [
+                                                {
+                                                    "failure_reason_code": "9",
+                                                    "reason": "Winter 2018 registration is not available at this time for this class. It is open from 23 Oct 2017 to 16 Jan 2018."
+                                                },
+                                                {
+                                                    "failure_reason_code": "35",
+                                                    "reason": "It is past the deadline for REL C 471  Section 002. For questions contact Registration at (801) 422-2631."
+                                                }
+                                            ],
+                                            "success": "N",
+                                            "updated_by_name": "",
+                                            "event_source": ""
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/123456789/20181",
+                                    "method": "GET",
+                                    "attributes": "page=1",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getStdClassLogByLOGIDFlagAndLogId"
+            }
+        },
+        "/LOGID/{std_class_log_id}/{asking_for_person_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "StudentLogService"
+                ],
+                "summary": "Get the students class log identified by the std class log id.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the students class log identified by the std class log id.",
+                "parameters": [
+                    {
+                        "description": "Identification of the student's class log",
+                        "name": "std_class_log_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> nine digit number",
+                        "name": "asking_for_person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "add_drop_records": {
+                                            "items": {
+                                                "properties": {
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "person_id": {
+                                                        "description": "9 digit number",
+                                                        "type": "string"
+                                                    },
+                                                    "section_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "logId": {
+                                                        "type": "string"
+                                                    },
+                                                    "add_drop_card": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_time_updated": {
+                                                        "type": "string"
+                                                    },
+                                                    "course_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "clean_note": {
+                                                        "type": "string"
+                                                    },
+                                                    "block": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "integer"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "action": {
+                                                        "type": "string"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "lab_quiz_section": {
+                                                        "type": "string"
+                                                    },
+                                                    "grade": {
+                                                        "type": "number"
+                                                    },
+                                                    "failure_reasons": {
+                                                        "items": {
+                                                            "properties": {
+                                                                "failure_reason_code": {
+                                                                    "type": "string"
+                                                                },
+                                                                "reason": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "success": {
+                                                        "type": "string"
+                                                    },
+                                                    "updated_by_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "event_source": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "applications/json": {
+                                "response": {
+                                    "add_drop_records": [
+                                        {
+                                            "section_number": "002",
+                                            "person_id": "123456789",
+                                            "section_type": "",
+                                            "logId": "987654321",
+                                            "add_drop_card": "N",
+                                            "date_time_updated": "2018-03-16T21:44:24",
+                                            "course_name": "REL C 471",
+                                            "clean_note": "",
+                                            "block": "S",
+                                            "year_term": "20181",
+                                            "credit_hours": 2,
+                                            "title_code": "006",
+                                            "action": "Add Failed",
+                                            "curriculum_id": "05074",
+                                            "lab_quiz_section": "",
+                                            "grade": 3.7,
+                                            "failure_reasons": [
+                                                {
+                                                    "failure_reason_code": "9",
+                                                    "reason": "Winter 2018 registration is not available at this time for this class. It is open from 23 Oct 2017 to 16 Jan 2018."
+                                                },
+                                                {
+                                                    "failure_reason_code": "35",
+                                                    "reason": "It is past the deadline for REL C 471  Section 002. For questions contact Registration at (801) 422-2631."
+                                                }
+                                            ],
+                                            "success": "N",
+                                            "updated_by_name": "",
+                                            "event_source": ""
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/123456789/20181",
+                                    "method": "GET",
+                                    "attributes": "page=1",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getStdClassLogByLOGIDFlagAndLogId"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "section_type": {
+            "type": "string"
+        },
+        "reason": {
+            "type": "string"
+        },
+        "logId": {
+            "type": "string"
+        },
+        "add_drop_card": {
+            "type": "string"
+        },
+        "date_time_updated": {
+            "type": "string"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "clean_note": {
+            "type": "string"
+        },
+        "block": {
+            "type": "string"
+        },
+        "response": {
+            "properties": {
+                "add_drop_records": {
+                    "items": {
+                        "properties": {
+                            "section_number": {
+                                "type": "string"
+                            },
+                            "person_id": {
+                                "description": "9 digit number",
+                                "type": "string"
+                            },
+                            "section_type": {
+                                "type": "string"
+                            },
+                            "logId": {
+                                "type": "string"
+                            },
+                            "add_drop_card": {
+                                "type": "string"
+                            },
+                            "date_time_updated": {
+                                "type": "string"
+                            },
+                            "course_name": {
+                                "type": "string"
+                            },
+                            "clean_note": {
+                                "type": "string"
+                            },
+                            "block": {
+                                "type": "string"
+                            },
+                            "year_term": {
+                                "type": "string"
+                            },
+                            "credit_hours": {
+                                "type": "integer"
+                            },
+                            "title_code": {
+                                "type": "string"
+                            },
+                            "action": {
+                                "type": "string"
+                            },
+                            "curriculum_id": {
+                                "type": "string"
+                            },
+                            "lab_quiz_section": {
+                                "type": "string"
+                            },
+                            "grade": {
+                                "type": "number"
+                            },
+                            "failure_reasons": {
+                                "items": {
+                                    "properties": {
+                                        "failure_reason_code": {
+                                            "type": "string"
+                                        },
+                                        "reason": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "success": {
+                                "type": "string"
+                            },
+                            "updated_by_name": {
+                                "type": "string"
+                            },
+                            "event_source": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "errors": {
+            "items": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "httpStatusCode": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "failure_reason": {
+            "properties": {
+                "failure_reason_code": {
+                    "type": "string"
+                },
+                "reason": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "title_code": {
+            "type": "string"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "RegStdClassLogService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "add_drop_records": {
+                            "items": {
+                                "properties": {
+                                    "section_number": {
+                                        "type": "string"
+                                    },
+                                    "person_id": {
+                                        "description": "9 digit number",
+                                        "type": "string"
+                                    },
+                                    "section_type": {
+                                        "type": "string"
+                                    },
+                                    "logId": {
+                                        "type": "string"
+                                    },
+                                    "add_drop_card": {
+                                        "type": "string"
+                                    },
+                                    "date_time_updated": {
+                                        "type": "string"
+                                    },
+                                    "course_name": {
+                                        "type": "string"
+                                    },
+                                    "clean_note": {
+                                        "type": "string"
+                                    },
+                                    "block": {
+                                        "type": "string"
+                                    },
+                                    "year_term": {
+                                        "type": "string"
+                                    },
+                                    "credit_hours": {
+                                        "type": "integer"
+                                    },
+                                    "title_code": {
+                                        "type": "string"
+                                    },
+                                    "action": {
+                                        "type": "string"
+                                    },
+                                    "curriculum_id": {
+                                        "type": "string"
+                                    },
+                                    "lab_quiz_section": {
+                                        "type": "string"
+                                    },
+                                    "grade": {
+                                        "type": "number"
+                                    },
+                                    "failure_reasons": {
+                                        "items": {
+                                            "properties": {
+                                                "failure_reason_code": {
+                                                    "type": "string"
+                                                },
+                                                "reason": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "success": {
+                                        "type": "string"
+                                    },
+                                    "updated_by_name": {
+                                        "type": "string"
+                                    },
+                                    "event_source": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "action": {
+            "type": "string"
+        },
+        "curriculum_id": {
+            "type": "string"
+        },
+        "grade": {
+            "type": "number"
+        },
+        "ErrorResponse": {
+            "properties": {
+                "response": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "errors": {
+                    "items": {
+                        "properties": {
+                            "message": {
+                                "type": "string"
+                            },
+                            "httpStatusCode": {
+                                "type": "number"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "code": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "event_source": {
+            "type": "string"
+        },
+        "section_number": {
+            "type": "string"
+        },
+        "person_id": {
+            "description": "9 digit number",
+            "type": "string"
+        },
+        "status": {
+            "type": "number"
+        },
+        "course_name": {
+            "type": "string"
+        },
+        "resource": {
+            "type": "string"
+        },
+        "year_term": {
+            "type": "string"
+        },
+        "statusMessage": {
+            "type": "string"
+        },
+        "credit_hours": {
+            "type": "integer"
+        },
+        "lab_quiz_section": {
+            "type": "string"
+        },
+        "method": {
+            "type": "string"
+        },
+        "failure_reasons": {
+            "items": {
+                "properties": {
+                    "failure_reason_code": {
+                        "type": "string"
+                    },
+                    "reason": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "attributes": {
+            "type": "string"
+        },
+        "records": {
+            "properties": {
+                "section_number": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "description": "9 digit number",
+                    "type": "string"
+                },
+                "section_type": {
+                    "type": "string"
+                },
+                "logId": {
+                    "type": "string"
+                },
+                "add_drop_card": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "course_name": {
+                    "type": "string"
+                },
+                "clean_note": {
+                    "type": "string"
+                },
+                "block": {
+                    "type": "string"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "type": "integer"
+                },
+                "title_code": {
+                    "type": "string"
+                },
+                "action": {
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "type": "string"
+                },
+                "lab_quiz_section": {
+                    "type": "string"
+                },
+                "grade": {
+                    "type": "number"
+                },
+                "failure_reasons": {
+                    "items": {
+                        "properties": {
+                            "failure_reason_code": {
+                                "type": "string"
+                            },
+                            "reason": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "success": {
+                    "type": "string"
+                },
+                "updated_by_name": {
+                    "type": "string"
+                },
+                "event_source": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "success": {
+            "type": "string"
+        },
+        "updated_by_name": {
+            "type": "string"
+        }
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/Student_Reg_Log"
+    },
+    "info": {
+        "title": "AcademicRegistrationStudentLog",
+        "description": "This service returns the registration log (adds and drops) for a student in a particular year_term from the AIM System.",
+        "version": "v1"
+    }
+}

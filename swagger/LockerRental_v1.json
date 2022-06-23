@@ -1,0 +1,574 @@
+{
+    "paths": {
+        "/buildings/{abbr}/lockers/{lockerNumber}/fees": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a list of costs for renting a certain locker for varying amounts of time",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Acronym for the building the locker is in",
+                        "name": "abbr",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Display number of the locker to get fee info for",
+                        "name": "lockerNumber",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/feeListWrapper"
+                        },
+                        "description": "Fees for the given locker"
+                    }
+                }
+            }
+        },
+        "/lockers/person": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a list of locker agreements corresponding to the current user",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/agreementsWrapper"
+                        },
+                        "description": "List of agreements"
+                    }
+                }
+            }
+        },
+        "/locks/locker/{lockerId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get the combination for a locker you own",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Id of the locker",
+                        "name": "lockerId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/lockInfoWrapper"
+                        },
+                        "description": "Locker combo number"
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "(Possibly) You're not allowed to look at this lock"
+                    }
+                }
+            }
+        },
+        "/buildings/{abbr}/floors": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a list of floors with lockers in a building",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The acronym of the building to find lockers in",
+                        "name": "abbr",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/floorsWrapper"
+                        },
+                        "description": "List of floors"
+                    }
+                }
+            }
+        },
+        "/agreementLengths": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get ids for each of the different agreement lengths",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/agreementLengths"
+                        },
+                        "description": "Ids for each agreement length"
+                    }
+                }
+            }
+        },
+        "/buildings/{abbr}/lockers/{lockerNumber}/{feeId}": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Rent a locker",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Acronym for the building the locker is in",
+                        "name": "abbr",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Display number of the locker to rent",
+                        "name": "lockerNumber",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Fee id of the agreement length",
+                        "name": "feeId",
+                        "enum": [
+                            "ONE_SEMESTER",
+                            "TWO_SEMESTERS",
+                            "ONE_YEAR"
+                        ],
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/buildings/{abbr}/floors/{floor}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a list of lockers on a floor",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The acronym of the building",
+                        "name": "abbr",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The floor number to find lockers on",
+                        "name": "floor",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/lockerListWrapper"
+                        },
+                        "description": "List of lockers"
+                    }
+                }
+            }
+        },
+        "/lockers/locations/{lockerId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get information about a specific locker",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Id of the locker",
+                        "name": "lockerId",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/lockerWrapper"
+                        },
+                        "description": "Info about the locker"
+                    }
+                }
+            }
+        },
+        "/locks/{serialNumber}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get the combination for a locker you own",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Serial number of the locker",
+                        "name": "serialNumber",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/lockInfoWrapper"
+                        },
+                        "description": "Locker combo number"
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "(Possibly) You're not allowed to look at this lock"
+                    }
+                }
+            }
+        },
+        "/buildings": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a list of buildings with lockers",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/buildingListWrapper"
+                        },
+                        "description": "List of buildings"
+                    }
+                }
+            }
+        },
+        "/buildings/{abbr}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get information about a specific building, including hours and dimensions of the lockers in that building",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The acronym of the building",
+                        "name": "abbr",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/buildingWrapper"
+                        },
+                        "description": "Info about the building"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "lockInfoWrapper": {
+            "properties": {},
+            "type": "object"
+        },
+        "building": {
+            "properties": {
+                "desc15": {
+                    "maxLength": 15,
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "domainValue": {
+                    "type": "string"
+                },
+                "domainName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "locker": {
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "displayedLockerNumber": {
+                    "type": "string"
+                },
+                "building": {
+                    "type": "string"
+                },
+                "floor": {
+                    "type": "string"
+                },
+                "combinationNumber": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "availabilityDate": {
+                    "type": "string"
+                },
+                "verticalPositionCode": {
+                    "type": "string"
+                },
+                "serialNumber": {
+                    "type": "string"
+                },
+                "lockerSizeCode": {
+                    "type": "string"
+                },
+                "lockerId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "lockerSortKey": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "video": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "agreement": {
+            "properties": {},
+            "type": "object"
+        },
+        "agreementsWrapper": {
+            "properties": {
+                "agreements": {
+                    "items": {
+                        "$ref": "#/definitions/agreement"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "lockerListWrapper": {
+            "properties": {
+                "lockers": {
+                    "items": {
+                        "$ref": "#/definitions/locker"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "floorsWrapper": {
+            "properties": {
+                "buildingFloorWithAvailableCountList": {
+                    "items": {
+                        "$ref": "#/definitions/floor"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "lockerWrapper": {
+            "properties": {
+                "locker": {
+                    "$ref": "#/definitions/locker"
+                }
+            },
+            "type": "object"
+        },
+        "fee": {
+            "properties": {
+                "feeId": {
+                    "type": "string"
+                },
+                "feeAmount": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "agreeLockerLength": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nameLength": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "buildingListWrapper": {
+            "properties": {
+                "buildings": {
+                    "items": {
+                        "$ref": "#/definitions/building"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "floor": {
+            "properties": {
+                "countOfAvailableLockers": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "buildingFloor": {
+                    "properties": {
+                        "updatedById": {
+                            "type": "string"
+                        },
+                        "building": {
+                            "type": "string"
+                        },
+                        "floor": {
+                            "type": "string"
+                        },
+                        "dateTimeUpdated": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "entranceLevelF": {
+                            "enum": [
+                                "Y",
+                                "N"
+                            ],
+                            "type": "string"
+                        },
+                        "buildingFloorId": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "mapUrl": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "buildingFloorId": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "agreementLengths": {
+            "properties": {
+                "agreementLengths": {
+                    "properties": {
+                        "One Year": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "One Semester": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "Two Semesters": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "feeListWrapper": {
+            "properties": {
+                "fees": {
+                    "items": {
+                        "$ref": "#/definitions/fee"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "buildingWrapper": {
+            "properties": {
+                "building": {
+                    "properties": {
+                        "building": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "hours": {
+                            "items": {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            "type": "array"
+                        },
+                        "dimensions": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "LockerRental",
+        "description": "Api to get info about and to rent lockers on campus",
+        "version": "v1"
+    },
+    "basePath": "/domains/locker-rental/v1",
+    "host": "api.byu.edu:443"
+}

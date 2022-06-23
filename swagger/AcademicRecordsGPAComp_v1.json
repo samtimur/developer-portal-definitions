@@ -1,0 +1,1598 @@
+{
+    "basePath": "/domains/legacy/academic/records/gpacomp/v1",
+    "x-mock_json": {
+        "RecGpaCompService": {
+            "response": {
+                "new_total_grades_after_repeat(s)": {
+                    "grade_points": "316.40",
+                    "credit_hours": "86.00"
+                },
+                "BYU_credit_information": {
+                    "GPA": "2.63",
+                    "grade_points": "340.80",
+                    "credit_hours": "129.50"
+                },
+                "new_BYU_grades_after_repeats(s)": {
+                    "grade_points": "268.40",
+                    "credit_hours": "74.00"
+                },
+                "Note": "The effect of an individual course on your GPA diminishes as your total hours increase",
+                "total_credit_information": {
+                    "GPA": "2.63",
+                    "grade_points": "340.80",
+                    "credit_hours": "129.50"
+                },
+                "warnings": ""
+            },
+            "request": {
+                "status": 200,
+                "resource": "/123456789",
+                "method": "GET",
+                "attributes": "projected_set=3.0%2CA%2C2.0%2CB&repeated_set=3.0%2CA%2C3.0%2CC%2C4.0%2CB%2B%2C4.0%2CD",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/*": {
+            "get": {
+                "summary": "Returns the current GPA status of the authenticated user OR Returns a the projected gpa with the projected or repeated grades included of the authenticated user.",
+                "tags": [
+                    "GPACompService"
+                ],
+                "description": "Returns the current GPA status of the authenticated user OR Returns a the projected gpa with the projected or repeated grades included of the authenticated user.",
+                "parameters": [
+                    {
+                        "description": "comma separated value pairs of credits and grades (i.e. 2.0,A). Valid Grades: A,A-,B+,B,B-,C+,C,C-,D+,D,D-,E,UW,W",
+                        "name": "projected_set",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "comma separated doubled value pairs of credits and grades (i.e. 2.0,C-,2.0,B+).  Valid Grades: A,A-,B+,B,B-,C+,C,C-,D+,D,D-,E,UW,W",
+                        "name": "repeated_set",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "project_bresults": {
+                                            "properties": {
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "project_byu_results": {
+                                            "properties": {
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "BYU_credit_information": {
+                                            "properties": {
+                                                "GPA": {
+                                                    "type": "string"
+                                                },
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "new_total_grades_after_repeat": {
+                                            "properties": {
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "new_BYU_grades_after_repeat": {
+                                            "properties": {
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "Note": {
+                                            "type": "string"
+                                        },
+                                        "total_credit_information": {
+                                            "properties": {
+                                                "GPA": {
+                                                    "type": "string"
+                                                },
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "warnings": {
+                                            "type": "string"
+                                        },
+                                        "projected_semester_results": {
+                                            "properties": {
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "new_total_grades_after_repeat(s)": {
+                                        "grade_points": "316.40",
+                                        "credit_hours": "86.00"
+                                    },
+                                    "BYU_credit_information": {
+                                        "GPA": "2.63",
+                                        "grade_points": "340.80",
+                                        "credit_hours": "129.50"
+                                    },
+                                    "new_BYU_grades_after_repeats(s)": {
+                                        "grade_points": "268.40",
+                                        "credit_hours": "74.00"
+                                    },
+                                    "Note": "The effect of an individual course on your GPA diminishes as your total hours increase",
+                                    "total_credit_information": {
+                                        "GPA": "2.63",
+                                        "grade_points": "340.80",
+                                        "credit_hours": "129.50"
+                                    },
+                                    "warnings": ""
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/123456789",
+                                    "method": "GET",
+                                    "attributes": "projected_set=3.0%2CA%2C2.0%2CB&repeated_set=3.0%2CA%2C3.0%2CC%2C4.0%2CB%2B%2C4.0%2CD",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "CurrentORprojectNewGpa",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{person_id}": {
+            "get": {
+                "summary": "Returns the current GPA status of student with the specified person id OR Returns a the projected gpa with the projected or repeated grades included of the student with the specified person id.",
+                "tags": [
+                    "GPACompService"
+                ],
+                "description": "Returns the current GPA status of student with the specified person id OR Returns a the projected gpa with the projected or repeated grades included of the student with the specified person id.",
+                "parameters": [
+                    {
+                        "description": "string -> ",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "comma separated value pairs of credits and grades (i.e. 2.0,A). Valid Grades: A,A-,B+,B,B-,C+,C,C-,D+,D,D-,E,UW,W",
+                        "name": "projected_set",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "comma separated doubled value pairs of credits and grades (i.e. 2.0,C-,2.0,B+).  Valid Grades: A,A-,B+,B,B-,C+,C,C-,D+,D,D-,E,UW,W",
+                        "name": "repeated_set",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "project_bresults": {
+                                            "properties": {
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "project_byu_results": {
+                                            "properties": {
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "BYU_credit_information": {
+                                            "properties": {
+                                                "GPA": {
+                                                    "type": "string"
+                                                },
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "new_total_grades_after_repeat": {
+                                            "properties": {
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "new_BYU_grades_after_repeat": {
+                                            "properties": {
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "Note": {
+                                            "type": "string"
+                                        },
+                                        "total_credit_information": {
+                                            "properties": {
+                                                "GPA": {
+                                                    "type": "string"
+                                                },
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "warnings": {
+                                            "type": "string"
+                                        },
+                                        "projected_semester_results": {
+                                            "properties": {
+                                                "grade_points": {
+                                                    "type": "string"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "new_total_grades_after_repeat(s)": {
+                                        "grade_points": "316.40",
+                                        "credit_hours": "86.00"
+                                    },
+                                    "BYU_credit_information": {
+                                        "GPA": "2.63",
+                                        "grade_points": "340.80",
+                                        "credit_hours": "129.50"
+                                    },
+                                    "new_BYU_grades_after_repeats(s)": {
+                                        "grade_points": "268.40",
+                                        "credit_hours": "74.00"
+                                    },
+                                    "Note": "The effect of an individual course on your GPA diminishes as your total hours increase",
+                                    "total_credit_information": {
+                                        "GPA": "2.63",
+                                        "grade_points": "340.80",
+                                        "credit_hours": "129.50"
+                                    },
+                                    "warnings": ""
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/123456789",
+                                    "method": "GET",
+                                    "attributes": "projected_set=3.0%2CA%2C2.0%2CB&repeated_set=3.0%2CA%2C3.0%2CC%2C4.0%2CB%2B%2C4.0%2CD",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "CurrentGPAStatusORProjectNewGpaByPersonId",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "project_byu_results": {
+            "properties": {
+                "grade_points": {
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "RecGpaCompService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "project_bresults": {
+                            "properties": {
+                                "grade_points": {
+                                    "type": "string"
+                                },
+                                "credit_hours": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "project_byu_results": {
+                            "properties": {
+                                "grade_points": {
+                                    "type": "string"
+                                },
+                                "credit_hours": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "BYU_credit_information": {
+                            "properties": {
+                                "GPA": {
+                                    "type": "string"
+                                },
+                                "grade_points": {
+                                    "type": "string"
+                                },
+                                "credit_hours": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "new_total_grades_after_repeat": {
+                            "properties": {
+                                "grade_points": {
+                                    "type": "string"
+                                },
+                                "credit_hours": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "new_BYU_grades_after_repeat": {
+                            "properties": {
+                                "grade_points": {
+                                    "type": "string"
+                                },
+                                "credit_hours": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "Note": {
+                            "type": "string"
+                        },
+                        "total_credit_information": {
+                            "properties": {
+                                "GPA": {
+                                    "type": "string"
+                                },
+                                "grade_points": {
+                                    "type": "string"
+                                },
+                                "credit_hours": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "warnings": {
+                            "type": "string"
+                        },
+                        "projected_semester_results": {
+                            "properties": {
+                                "grade_points": {
+                                    "type": "string"
+                                },
+                                "credit_hours": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "BYU_credit_information": {
+            "properties": {
+                "GPA": {
+                    "type": "string"
+                },
+                "grade_points": {
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "GPA": {
+            "type": "string"
+        },
+        "new_total_grades_after_repeat": {
+            "properties": {
+                "grade_points": {
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "new_BYU_grades_after_repeat": {
+            "properties": {
+                "grade_points": {
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Note": {
+            "type": "string"
+        },
+        "credit_hours": {
+            "type": "string"
+        },
+        "response": {
+            "properties": {
+                "project_bresults": {
+                    "properties": {
+                        "grade_points": {
+                            "type": "string"
+                        },
+                        "credit_hours": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "project_byu_results": {
+                    "properties": {
+                        "grade_points": {
+                            "type": "string"
+                        },
+                        "credit_hours": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "BYU_credit_information": {
+                    "properties": {
+                        "GPA": {
+                            "type": "string"
+                        },
+                        "grade_points": {
+                            "type": "string"
+                        },
+                        "credit_hours": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "new_total_grades_after_repeat": {
+                    "properties": {
+                        "grade_points": {
+                            "type": "string"
+                        },
+                        "credit_hours": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "new_BYU_grades_after_repeat": {
+                    "properties": {
+                        "grade_points": {
+                            "type": "string"
+                        },
+                        "credit_hours": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "Note": {
+                    "type": "string"
+                },
+                "total_credit_information": {
+                    "properties": {
+                        "GPA": {
+                            "type": "string"
+                        },
+                        "grade_points": {
+                            "type": "string"
+                        },
+                        "credit_hours": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "warnings": {
+                    "type": "string"
+                },
+                "projected_semester_results": {
+                    "properties": {
+                        "grade_points": {
+                            "type": "string"
+                        },
+                        "credit_hours": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "errors": {
+            "items": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "httpStatusCode": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "project_bresults": {
+            "properties": {
+                "grade_points": {
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ErrorResponse": {
+            "properties": {
+                "response": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "errors": {
+                    "items": {
+                        "properties": {
+                            "message": {
+                                "type": "string"
+                            },
+                            "httpStatusCode": {
+                                "type": "number"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "code": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "total_credit_information": {
+            "properties": {
+                "GPA": {
+                    "type": "string"
+                },
+                "grade_points": {
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "warnings": {
+            "type": "string"
+        },
+        "grade_points": {
+            "type": "string"
+        },
+        "projected_semester_results": {
+            "properties": {
+                "grade_points": {
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "AcademicRecordsGPAComp",
+        "description": "This service computes a possible GPA based on future projected performance.",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

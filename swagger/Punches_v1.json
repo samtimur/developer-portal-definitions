@@ -1,0 +1,907 @@
+{
+    "basePath": "/domains/erp/hr/punches/v1",
+    "paths": {
+        "/{byu_id},{employee_record}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get punches for a job",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get punches for a job from TL_RPTD_TIME",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/employee_record"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200get"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/{byu_id},{employee_record},{punch_date},{sequence_number}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Deletes the specified punch",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes the specified punch",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/employee_record"
+                    },
+                    {
+                        "$ref": "#/parameters/punch_date"
+                    },
+                    {
+                        "$ref": "#/parameters/sequence_number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200delete"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/{byu_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Correct an exception",
+                "x-throttling-tier": "Unlimited",
+                "description": "Correct an exception",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/punch_information"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200put"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            },
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Creates a punch record",
+                "x-throttling-tier": "Unlimited",
+                "description": "Creates a punch record in TL_RPTD_TIME and in Y_PF_RPTD_TIME if user has work order id/trc",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/punch_information"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200post"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "jobs": {
+            "items": {
+                "$ref": "#/definitions/job"
+            },
+            "description": "collection of jobs",
+            "type": "array"
+        },
+        "person_name": {
+            "description": "The complete name of a person derived from the Last Name, First Name and Middle Name",
+            "example": "Doe, John Smith",
+            "type": "string"
+        },
+        "valid_account": {
+            "description": "Indicates if the account associated with the job is active (true) or not (false).  If false, a corresponding message property will be available to display to end users.",
+            "example": true,
+            "type": "boolean"
+        },
+        "location_description": {
+            "maxLength": 30,
+            "description": "The device name of the time clock submitting the punch.",
+            "example": "ASB-100-CPI",
+            "type": "string"
+        },
+        "time_collection_source": {
+            "description": "Punch Source",
+            "enum": [
+                "MBL",
+                "WEB",
+                "CPI"
+            ],
+            "example": "CPI",
+            "type": "string"
+        },
+        "punch_time": {
+            "pattern": "^(?:2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$",
+            "description": "Time of Punch in format HH:MM:SS",
+            "example": "05:15:00",
+            "type": "string"
+        },
+        "seconds_Duration": {
+            "description": "The amount of seconds between the previous in punch for an out punch",
+            "example": "ABC123",
+            "type": "string"
+        },
+        "request": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/post_punch"
+                },
+                {
+                    "$ref": "#/definitions/put_punch"
+                }
+            ]
+        },
+        "trc_description": {
+            "maxLength": 30,
+            "description": "description of a TRC",
+            "example": "Regular Hours",
+            "type": "string"
+        },
+        "employee_record": {
+            "maxLength": 3,
+            "description": "The number that corresponds to a particular job for an employee when they work multiple jobs concurrently on campus.",
+            "example": 0,
+            "type": "integer"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "example": "123456789",
+            "type": "string"
+        },
+        "longitude": {
+            "pattern": "^-?((([1]?[0-7][0-9]|[1-9]?[0-9])\\.{1}\\d{1,7}$)|[1]?[1-8][0]\\.{1}0{1,7})$",
+            "description": "Longitude",
+            "example": "-111.601847",
+            "type": "string"
+        },
+        "period_total": {
+            "description": "Aggregate of time worked across all jobs for the period. If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        },
+        "punches": {
+            "items": {
+                "$ref": "#/definitions/punch"
+            },
+            "description": "collection of punches",
+            "type": "array"
+        },
+        "period_subtotal": {
+            "description": "Aggregate of time worked for the period. If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        },
+        "trc": {
+            "description": "code used to define overtime pay",
+            "properties": {
+                "trc_id": {
+                    "$ref": "#/definitions/trc_id"
+                },
+                "trc_description": {
+                    "$ref": "#/definitions/trc_description"
+                }
+            },
+            "type": "object"
+        },
+        "punch": {
+            "description": "The information required to create a punch",
+            "properties": {
+                "sequence_number": {
+                    "$ref": "#/definitions/sequence_number"
+                },
+                "punch_time": {
+                    "$ref": "#/definitions/punch_time"
+                },
+                "status": {
+                    "$ref": "#/definitions/status"
+                },
+                "deletable_pair": {
+                    "$ref": "#/definitions/deletable_pair"
+                },
+                "punch_type": {
+                    "$ref": "#/definitions/punch_type"
+                },
+                "hours_worked": {
+                    "$ref": "#/definitions/hours_worked"
+                },
+                "clock_in": {
+                    "$ref": "#/definitions/clock_in"
+                }
+            },
+            "required": [
+                "punch_time",
+                "clock_in"
+            ],
+            "type": "object"
+        },
+        "status": {
+            "properties": {
+                "message": {
+                    "$ref": "#/definitions/message"
+                },
+                "punch_time": {
+                    "$ref": "#/definitions/punch_time"
+                },
+                "punch_type": {
+                    "$ref": "#/definitions/punch_type"
+                },
+                "employee_record": {
+                    "$ref": "#/definitions/employee_record"
+                },
+                "clock_in": {
+                    "$ref": "#/definitions/clock_in"
+                },
+                "punch_date": {
+                    "$ref": "#/definitions/date"
+                }
+            }
+        },
+        "physical_facilities": {
+            "description": "Indicates if the job is in the physical facilities department (true) or not (false).",
+            "example": true,
+            "type": "boolean"
+        },
+        "international": {
+            "description": "Indicates that the employee is a non-resident alien (true) or not (false).",
+            "example": false,
+            "type": "boolean"
+        },
+        "job": {
+            "description": "information required for a job",
+            "properties": {
+                "job_code_description": {
+                    "$ref": "#/definitions/job_code_description"
+                },
+                "physical_facilities": {
+                    "$ref": "#/definitions/physical_facilities"
+                },
+                "valid_account": {
+                    "$ref": "#/definitions/valid_account"
+                },
+                "punch_type": {
+                    "$ref": "#/definitions/punch_type"
+                },
+                "trcs": {
+                    "$ref": "#/definitions/trcs"
+                },
+                "has_work_order_exception": {
+                    "$ref": "#/definitions/has_work_order_exception"
+                },
+                "full_part_time": {
+                    "$ref": "#/definitions/full_part_time"
+                },
+                "message": {
+                    "$ref": "#/definitions/message"
+                },
+                "work_order_id": {
+                    "$ref": "#/definitions/work_order_id"
+                },
+                "employee_record": {
+                    "$ref": "#/definitions/employee_record"
+                },
+                "clock_in": {
+                    "$ref": "#/definitions/clock_in"
+                },
+                "weekly_subtotal": {
+                    "$ref": "#/definitions/weekly_subtotal"
+                },
+                "operating_unit": {
+                    "$ref": "#/definitions/operating_unit"
+                },
+                "period_subtotal": {
+                    "$ref": "#/definitions/period_subtotal"
+                }
+            },
+            "required": [
+                "weekly_subtotal",
+                "period_subtotal",
+                "employee_record",
+                "job_code_description",
+                "valid_account",
+                "clock_in",
+                "physical_facilities",
+                "full_part_time",
+                "operating_unit"
+            ],
+            "type": "object"
+        },
+        "put_punch": {
+            "properties": {
+                "trc_id": {
+                    "$ref": "#/definitions/trc_id"
+                },
+                "punch_time": {
+                    "$ref": "#/definitions/punch_time"
+                },
+                "internet_address": {
+                    "$ref": "#/definitions/internet_address"
+                },
+                "punch_type": {
+                    "$ref": "#/definitions/punch_type"
+                },
+                "punch_zone": {
+                    "$ref": "#/definitions/punch_zone"
+                },
+                "work_order_id": {
+                    "$ref": "#/definitions/work_order_id"
+                },
+                "employee_record": {
+                    "$ref": "#/definitions/employee_record"
+                },
+                "longitude": {
+                    "$ref": "#/definitions/longitude"
+                },
+                "location_description": {
+                    "$ref": "#/definitions/location_description"
+                },
+                "clock_in": {
+                    "$ref": "#/definitions/clock_in"
+                },
+                "latitude": {
+                    "$ref": "#/definitions/latitude"
+                },
+                "punch_date": {
+                    "$ref": "#/definitions/date"
+                },
+                "time_collection_source": {
+                    "$ref": "#/definitions/time_collection_source"
+                }
+            },
+            "required": [
+                "clock_in",
+                "employee_record",
+                "internet_address",
+                "punch_date",
+                "punch_time",
+                "time_collection_source"
+            ]
+        },
+        "error_response": {
+            "properties": {
+                "punch": {
+                    "$ref": "#/definitions/status"
+                }
+            }
+        },
+        "full_part_time": {
+            "description": "Specifies if the employee is part-time (P) or full-time (F).",
+            "enum": [
+                "P",
+                "F"
+            ],
+            "example": "P",
+            "type": "string"
+        },
+        "punch_receipt": {
+            "description": "A string up to 15 characters that represents an individual work order",
+            "properties": {
+                "jobs": {
+                    "$ref": "#/definitions/jobs"
+                },
+                "seconds_Duration": {
+                    "$ref": "#/definitions/seconds_Duration"
+                },
+                "person_name": {
+                    "$ref": "#/definitions/person_name"
+                },
+                "international": {
+                    "$ref": "#/definitions/international"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "period_total": {
+                    "$ref": "#/definitions/period_total"
+                },
+                "weekly_total": {
+                    "$ref": "#/definitions/weekly_total"
+                }
+            },
+            "type": "object"
+        },
+        "punched_hours": {
+            "description": "Aggregate of time worked for the day based on In and Out punches. If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        },
+        "other_hours": {
+            "description": "Aggregate of other time recorded for the day (sick, vacation, on-call, etc.). If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        },
+        "hours_worked": {
+            "description": "The number of hours worked.",
+            "example": 15,
+            "format": "double",
+            "type": "number"
+        },
+        "latitude": {
+            "pattern": "^-?(\\d\\.\\d{1,7}|[1-8]\\d\\.\\d{1,7}|90\\.0{1,7})$",
+            "description": "Latitude",
+            "example": "40.404425",
+            "type": "string"
+        },
+        "weekly_total": {
+            "description": "Aggregate of time worked across all jobs for the week. If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        },
+        "timesheet": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/timesheet_status"
+                },
+                {
+                    "$ref": "#/definitions/timesheet_dates"
+                }
+            ]
+        },
+        "operating_unit": {
+            "maxLength": 8,
+            "description": "An eight digit alphanumeric field that defines a financial reporting entity.",
+            "example": "15422011",
+            "type": "string"
+        },
+        "put_return": {
+            "properties": {
+                "punched_hours": {
+                    "$ref": "#/definitions/punched_hours"
+                },
+                "has_punch_exception": {
+                    "$ref": "#/definitions/has_punch_exception"
+                },
+                "other_hours": {
+                    "$ref": "#/definitions/other_hours"
+                },
+                "has_exception": {
+                    "$ref": "#/definitions/has_exception"
+                },
+                "date": {
+                    "$ref": "#/definitions/date"
+                },
+                "has_work_order_exception": {
+                    "$ref": "#/definitions/has_work_order_exception"
+                },
+                "punches": {
+                    "$ref": "#/definitions/punches"
+                }
+            },
+            "type": "object"
+        },
+        "trc_id": {
+            "description": "A string of up to 5 characters to identify the time reporting code",
+            "enum": [
+                "4REG",
+                "4RPP",
+                "4OCP"
+            ],
+            "example": "4REG",
+            "type": "string"
+        },
+        "job_code_description": {
+            "maxLength": 30,
+            "description": "Department specified description of a specific job.",
+            "example": "Project Assistant",
+            "type": "string"
+        },
+        "timesheet_dates": {
+            "items": {
+                "$ref": "#/definitions/dates"
+            },
+            "type": "array"
+        },
+        "punch_type": {
+            "description": "Character defining whether an employee is clocking in or out",
+            "enum": [
+                "I",
+                "O",
+                "W"
+            ],
+            "example": "I",
+            "type": "string"
+        },
+        "has_exception": {
+            "description": "Indicates that the employee has exception(s) on the indicated date (true) or not (false)",
+            "example": false,
+            "type": "boolean"
+        },
+        "date": {
+            "description": "Date of Punch in format YYYY-MM-DD",
+            "example": "2018-02-18",
+            "format": "date",
+            "type": "string"
+        },
+        "dates": {
+            "properties": {
+                "punched_hours": {
+                    "$ref": "#/definitions/punched_hours"
+                },
+                "has_punch_exception": {
+                    "$ref": "#/definitions/has_punch_exception"
+                },
+                "other_hours": {
+                    "$ref": "#/definitions/other_hours"
+                },
+                "has_exception": {
+                    "$ref": "#/definitions/has_exception"
+                },
+                "date": {
+                    "$ref": "#/definitions/date"
+                },
+                "has_work_order_exception": {
+                    "$ref": "#/definitions/has_work_order_exception"
+                },
+                "punches": {
+                    "$ref": "#/definitions/punches"
+                }
+            }
+        },
+        "internet_address": {
+            "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+            "description": "IP Address",
+            "example": "255.255.255.0",
+            "type": "string"
+        },
+        "punch_zone": {
+            "pattern": "^(([+]((([0][0-9]|[1][0-3])[:][0-5][0-9])|(14[:]00)))|([-]((([0][0-9]|[1][01])[:][0-5][0-9])|(12[:]00))))$",
+            "description": "The time zone offset where the device is physically located when making a punch.",
+            "type": "string"
+        },
+        "trcs": {
+            "items": {
+                "$ref": "#/definitions/trc"
+            },
+            "description": "collection of trcs",
+            "type": "array"
+        },
+        "has_work_order_exception": {
+            "description": "Indicates that the employee has work order exception(s) on the indicated date (true) or not (false)",
+            "example": false,
+            "type": "boolean"
+        },
+        "deletion": {
+            "properties": {
+                "punched_hours": {
+                    "$ref": "#/definitions/punched_hours"
+                },
+                "has_punch_exception": {
+                    "$ref": "#/definitions/has_punch_exception"
+                },
+                "other_hours": {
+                    "$ref": "#/definitions/other_hours"
+                },
+                "has_exception": {
+                    "$ref": "#/definitions/has_exception"
+                },
+                "date": {
+                    "$ref": "#/definitions/date"
+                },
+                "has_work_order_exception": {
+                    "$ref": "#/definitions/has_work_order_exception"
+                },
+                "punches": {
+                    "$ref": "#/definitions/punches"
+                }
+            },
+            "type": "object"
+        },
+        "message": {
+            "maxLength": 100,
+            "description": "A user-friendly message indicating a response from the system.",
+            "example": "Unable to access job",
+            "type": "string"
+        },
+        "sequence_number": {
+            "maxLength": 15,
+            "description": "The unique number id of a punch in the system",
+            "example": 5,
+            "type": "integer"
+        },
+        "post_punch": {
+            "properties": {
+                "trc_id": {
+                    "$ref": "#/definitions/trc_id"
+                },
+                "punch_time": {
+                    "$ref": "#/definitions/punch_time"
+                },
+                "internet_address": {
+                    "$ref": "#/definitions/internet_address"
+                },
+                "punch_type": {
+                    "$ref": "#/definitions/punch_type"
+                },
+                "punch_zone": {
+                    "$ref": "#/definitions/punch_zone"
+                },
+                "work_order_id": {
+                    "$ref": "#/definitions/work_order_id"
+                },
+                "employee_record": {
+                    "$ref": "#/definitions/employee_record"
+                },
+                "longitude": {
+                    "$ref": "#/definitions/longitude"
+                },
+                "location_description": {
+                    "$ref": "#/definitions/location_description"
+                },
+                "clock_in": {
+                    "$ref": "#/definitions/clock_in"
+                },
+                "latitude": {
+                    "$ref": "#/definitions/latitude"
+                },
+                "punch_date": {
+                    "$ref": "#/definitions/date"
+                },
+                "time_collection_source": {
+                    "$ref": "#/definitions/time_collection_source"
+                }
+            },
+            "required": [
+                "employee_record",
+                "internet_address",
+                "latitude",
+                "longitude",
+                "time_collection_source"
+            ]
+        },
+        "timesheet_status": {
+            "properties": {
+                "jobs": {
+                    "$ref": "#/definitions/jobs"
+                },
+                "person_name": {
+                    "$ref": "#/definitions/person_name"
+                },
+                "status": {
+                    "$ref": "#/definitions/status"
+                },
+                "international": {
+                    "$ref": "#/definitions/international"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "period_total": {
+                    "$ref": "#/definitions/period_total"
+                },
+                "weekly_total": {
+                    "$ref": "#/definitions/weekly_total"
+                }
+            },
+            "type": "object"
+        },
+        "has_punch_exception": {
+            "description": "Indicates that the employee has punch exception(s) on the indicated date (true) or not (false)",
+            "example": false,
+            "type": "boolean"
+        },
+        "deletable_pair": {
+            "description": "One of the punches in each set of punches with matching numbers can be deleted.",
+            "example": 2,
+            "type": "integer"
+        },
+        "work_order_id": {
+            "description": "A string up to 15 characters that represents an individual work order",
+            "example": "ABC123",
+            "type": "string"
+        },
+        "clock_in": {
+            "description": "True for an in punch, False for an out punch.",
+            "example": false,
+            "type": "boolean"
+        },
+        "weekly_subtotal": {
+            "description": "Aggregate of time worked for the week. If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        }
+    },
+    "parameters": {
+        "sequence_number": {
+            "maxLength": 15,
+            "description": "Sequence Number",
+            "name": "sequence_number",
+            "type": "integer",
+            "required": true,
+            "in": "path"
+        },
+        "punch_information": {
+            "schema": {
+                "$ref": "#/definitions/request"
+            },
+            "description": "Punch Information",
+            "name": "punch_information",
+            "required": true,
+            "in": "body"
+        },
+        "employee_record": {
+            "maxLength": 3,
+            "description": "Employee Record Number",
+            "name": "employee_record",
+            "required": true,
+            "type": "integer",
+            "in": "path"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "name": "byu_id",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        },
+        "punch_date": {
+            "description": "Date of Punch in format YYYY-MM-DD",
+            "name": "punch_date",
+            "format": "date",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "responses": {
+        "400": {
+            "schema": {
+                "$ref": "#/definitions/timesheet"
+            },
+            "description": "Bad Request - please see message for reason."
+        },
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "403": {
+            "description": "Access denied to protected data"
+        },
+        "500": {
+            "description": "Internal Server Error - Error occurred that wasn't the user's fault"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        },
+        "200delete": {
+            "schema": {
+                "$ref": "#/definitions/deletion"
+            },
+            "description": "Submitted request was accepted and appropriate timesheet response is returned."
+        },
+        "200put": {
+            "schema": {
+                "$ref": "#/definitions/put_return"
+            },
+            "description": "Submitted request was accepted and appropriate timesheet response is returned."
+        },
+        "200post": {
+            "schema": {
+                "$ref": "#/definitions/punch_receipt"
+            },
+            "description": "Submitted request was accepted and appropriate timesheet response is returned."
+        },
+        "200get": {
+            "schema": {
+                "$ref": "#/definitions/timesheet"
+            },
+            "description": "Submitted request was accepted and appropriate timesheet response is returned."
+        }
+    },
+    "info": {
+        "title": "Punches",
+        "description": "Web services for Y-Time applications",
+        "version": "v1"
+    }
+}

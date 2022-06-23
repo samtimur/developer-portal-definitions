@@ -1,0 +1,76 @@
+{
+    "paths": {
+        "/vending.ashx": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "As far as I can tell (and by scrutinizing the mobile app), these are all the valid combinations of query parameters that will give you data:\n\n#1) Get All Microwaves - ?format=json&service=machines&action=listAllMicrowaves\nReturns all microwaves\n\n#2) Get All Vending Machines - ?format=json&service=machines&action=listAllMachines\nReturns all machines\n\n#3) Get All Items in a Machine - ?format=json&service=inventory&action=getAllLocation&loc={machineId}\nReturns all items in the specified machine\n\n#4) Get All Categories - ?format=json&service=merchandise&action=listCategories\nReturns all categories\n\n#5) Get All Products in a Category - ?format=json&service=merchandise&action=getProducts&cat={categoryId}\nReturns all items in a specified category\n\n#6) Get All Machines with a Product - ?format=json&service=inventory&action=findMachinesWithStock&product={productId}\nReturns all machines that regularly hold a certain product",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Always pass in \"json\"",
+                        "name": "format",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What service you are trying to access (merchandise, inventory, machines)",
+                        "name": "service",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What action would you like to perform on the service (merchandise: [listCategories, getProducts], inventory: [getAllLocation, findMachinesWithStock], machines: [listAllMicrowaves, listAllMachines])",
+                        "name": "action",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The ID of the location to search in. Must be used to get a specific location when accessing service \"inventory\" with action \"getAllLocation\"",
+                        "name": "loc",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Specifies the ID of the category to search in. Must be used when accessing service \"merchandise\" with action \"getProducts\"",
+                        "name": "cat",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The ID of the product to search for. Must be used when accessing service \"inventory\" with action \"findMachinesWithStock\"",
+                        "name": "product",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The url encoded description of the product to search for. May be used in place of product when accessing service \"inventory\" with action \"findMachinesWithStock\"",
+                        "name": "q",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "Vending",
+        "description": "Get locations of vending machines, inventory, and microwave locations",
+        "version": "v1"
+    },
+    "basePath": "/domains/vending/v1",
+    "host": "api.byu.edu:443"
+}

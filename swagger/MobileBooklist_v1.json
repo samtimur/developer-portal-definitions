@@ -1,0 +1,207 @@
+{
+    "paths": {
+        "/items/{item_id}/vendors": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the item you are calling for",
+                        "name": "item_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Vendor"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of vendors for an item"
+                    }
+                }
+            }
+        },
+        "/purchasing-url": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of item ids in My Cart",
+                        "name": "item_ids",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Url to checkout items in My Cart"
+                    }
+                }
+            }
+        },
+        "/booklist/{byu_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the person you are calling for",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Course"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of courses that the user is enrolled in"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "Course": {
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "adoptions": {
+                    "items": {
+                        "$ref": "#/definitions/Adoption"
+                    },
+                    "type": "array"
+                },
+                "instructor_names": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "no_adoption_text": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Item": {
+            "properties": {
+                "author": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "photo_url": {
+                    "x-nullable": true,
+                    "type": "string"
+                },
+                "isbn": {
+                    "type": "string"
+                },
+                "comment": {
+                    "x-nullable": true,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Vendor": {
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "purchasing_options": {
+                    "items": {
+                        "$ref": "#/definitions/PurchasingOption"
+                    },
+                    "type": "array"
+                },
+                "icon_url": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Option": {
+            "properties": {
+                "items": {
+                    "items": {
+                        "$ref": "#/definitions/Item"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Adoption": {
+            "properties": {
+                "choose_n_options_text": {
+                    "x-nullable": true,
+                    "type": "string"
+                },
+                "options": {
+                    "items": {
+                        "$ref": "#/definitions/Option"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "PurchasingOption": {
+            "properties": {
+                "price": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "MobileBooklist",
+        "version": "v1"
+    },
+    "basePath": "/domains/mobile/booklist/v1",
+    "host": "api.byu.edu:443"
+}

@@ -1,0 +1,273 @@
+{
+    "basePath": "/domains/legacy/identity/access/ismember/v1",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "service definition",
+                "x-throttling-tier": "Unlimited",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation"
+            }
+        },
+        "/{group_id}/{person_id_net_id}?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "InfoAreaService"
+                ],
+                "summary": "Check simple group",
+                "x-throttling-tier": "Unlimited",
+                "description": "Check simple group",
+                "parameters": [
+                    {
+                        "description": "Group identification",
+                        "name": "group_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Individual person identifier",
+                        "name": "person_id_net_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Attribute to manipulate the response",
+                        "name": "attribute",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/isMemberService"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "CheckSimpleGroup"
+            }
+        },
+        "/{group_id}/{person_id_net_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "InfoAreaService"
+                ],
+                "summary": "Check simple group",
+                "x-throttling-tier": "Unlimited",
+                "description": "Check simple group",
+                "parameters": [
+                    {
+                        "description": "Group identification",
+                        "name": "group_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Individual person identifier",
+                        "name": "person_id_net_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Attribute to manipulate the response",
+                        "name": "attribute",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/isMemberService"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "CheckSimpleGroup"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "isMemberService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "no_authorization": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "string"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "resource": {
+                    "properties": {
+                        "methods": {
+                            "properties": {
+                                "options": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "identifiers": {
+                            "properties": {
+                                "personid": {
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "required": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "group_id": {
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "required": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "URI": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/OITCoreDeveloperResources/isMember%2C+membersOf"
+    },
+    "info": {
+        "title": "IdentityAccessIsMember",
+        "description": "The isMember service determines whether a person is a member of a specified group.",
+        "version": "v1"
+    }
+}

@@ -1,0 +1,3448 @@
+{
+    "basePath": "/domains/NIT/beta1.0",
+    "paths": {
+        "/switches/{device_identifier}/interfaces/{interface_identifier}/vlans/tagged": {
+            "put": {
+                "summary": "Set tagged vlans on an interface",
+                "tags": [
+                    "Switches"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/vlans_list"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/tagged_vlans"
+                        },
+                        "description": "No change"
+                    },
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/tagged_vlans"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Retrieve the list of tagged vlans configured on an interface",
+                "tags": [
+                    "Switches"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_identifier"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/tagged_vlans"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/tools/jack_lookup/buildings": {
+            "get": {
+                "tags": [
+                    "Tools"
+                ],
+                "summary": "Return a list of buildings that contain a jack of the given number",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "Return a list of buildings that contain a jack of the given number",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/jack_number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/building_list"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getBuildingList"
+            }
+        },
+        "/ipam/role_details": {
+            "get": {
+                "tags": [
+                    "IP Address Management"
+                ],
+                "summary": "Retrieve details of given role",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/role_name"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/role_details"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/ipam/role_members": {
+            "get": {
+                "tags": [
+                    "IP Address Management"
+                ],
+                "summary": "Retrieve details of given role",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/role_name"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/role_members"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/ipam/admin_roles": {
+            "get": {
+                "tags": [
+                    "IP Address Management"
+                ],
+                "summary": "Retrieve all roles for given username",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/username"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/admin_roles"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/availability/firewall": {
+            "get": {
+                "tags": [
+                    "Availability"
+                ],
+                "summary": "Firewall availability information",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/start_time"
+                    },
+                    {
+                        "$ref": "#/parameters/end_time"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/availability"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "firewall_availability"
+            }
+        },
+        "/switches/{device_identifier}/interfaces/{interface_identifier}/poe/status": {
+            "put": {
+                "summary": "Enable or disable POE of an interface",
+                "tags": [
+                    "Switches"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/enabled"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/poe_status"
+                        },
+                        "description": "No change"
+                    },
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/poe_status"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Retrieve the current status of POE of an interface",
+                "tags": [
+                    "Switches"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_identifier"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/poe_status"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/tools/jack_lookup": {
+            "get": {
+                "tags": [
+                    "Tools"
+                ],
+                "summary": "Perform a lookup on a given wall jack",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "Search for jack by building abbreviation and jack number",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/building_abbr_required"
+                    },
+                    {
+                        "$ref": "#/parameters/jack_number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/jack_lookup"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getJack"
+            }
+        },
+        "/top10/interfaces_by_discards": {
+            "get": {
+                "tags": [
+                    "Top 10"
+                ],
+                "summary": "Retrieve the 10 interfaces with the highest number of discards",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/interfaces_by_discards"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "top10InterfacesByDiscards"
+            }
+        },
+        "/top10/interfaces_by_errors": {
+            "get": {
+                "tags": [
+                    "Top 10"
+                ],
+                "summary": "Retrieve the 10 interfaces with the highest number of errors",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/interfaces_by_errors"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "top10InterfacesByErrors"
+            }
+        },
+        "/top10/nodes_by_memory_usage": {
+            "get": {
+                "tags": [
+                    "Top 10"
+                ],
+                "summary": "Retrieve the 10 nodes with the highest memory usage",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/nodes_by_memory_usage"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "top10NodesByMemoryUsage"
+            }
+        },
+        "/buildings": {
+            "get": {
+                "tags": [
+                    "Buildings"
+                ],
+                "summary": "Retrieve a list of buildings on campus",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/building_list"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "buildings"
+            }
+        },
+        "/tools/jack_lookup/jacks": {
+            "get": {
+                "tags": [
+                    "Tools"
+                ],
+                "summary": "Return a list of jacks in a given room",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "Return a list of jacks in a given room",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/building_abbr_required"
+                    },
+                    {
+                        "$ref": "#/parameters/room_number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/jack_list"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getJackList"
+            }
+        },
+        "/subnets/{ip_address}": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "Return information on and IP's subnet",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "Finds the subnet to which an IP address belongs",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ip_address"
+                    },
+                    {
+                        "$ref": "#/parameters/use_cache"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subnet"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getSubnet"
+            }
+        },
+        "/eduroam_login_failures": {
+            "get": {
+                "tags": [
+                    "WiFi"
+                ],
+                "summary": "Return information on failed attempts to log in to Eduroam",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/client_identifier"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/eduroam"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "eduroam"
+            }
+        },
+        "/switches/{device_identifier}/interfaces": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "Retrieve collection of interfaces for a specific item in switches collection",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "Retrieve collection of interfaces for a specific item in switches collection",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/use_cache"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/interfaces"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getSwitchInterfaces"
+            }
+        },
+        "/switches/{device_identifier}/interfaces/{interface_identifier}/admin_status": {
+            "put": {
+                "summary": "Set the admin status of an interface",
+                "tags": [
+                    "Switches"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/enabled"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/admin_status"
+                        },
+                        "description": "No change"
+                    },
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/admin_status"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "setInterfaceAdminStatus"
+            },
+            "get": {
+                "summary": "Retrieve the current admin status of an interface",
+                "tags": [
+                    "Switches"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_identifier"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/admin_status"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getInterfaceAdminStatus"
+            }
+        },
+        "/tools/jack_lookup/reverse": {
+            "get": {
+                "tags": [
+                    "Tools"
+                ],
+                "summary": "Perform a lookup on a given wall jack",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "Search for jack by switch interface",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/switch_name"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_name_query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/jack_lookup"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "reverseJackLookup"
+            }
+        },
+        "/buildings/{building}/closets": {
+            "get": {
+                "tags": [
+                    "Buildings"
+                ],
+                "summary": "Retrieve full name for a given building abbreviation",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/building_abbr_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/closet_list"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "closets"
+            }
+        },
+        "/switches/{device_identifier}/interfaces/{interface_identifier}/vlans": {
+            "get": {
+                "summary": "Retrieve the set of vlans configured on an interface",
+                "tags": [
+                    "Switches"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_identifier"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/vlans_interface"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/switches/{device_identifier}/interfaces/{interface_identifier}": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "Retrieve collection of interfaces for a specific item in switches collection",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "Retrieve collection of interfaces for a specific item in switches collection",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/use_cache"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/interface_detail"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getSwitchInterface"
+            }
+        },
+        "/top10/interfaces_by_percent_util": {
+            "get": {
+                "tags": [
+                    "Top 10"
+                ],
+                "summary": "Retrieve the 10 interfaces with the highest utilization percentage",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/interfaces_by_percent_util"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "top10InterfacesByPercentUtil"
+            }
+        },
+        "/buildings/{building}": {
+            "get": {
+                "tags": [
+                    "Buildings"
+                ],
+                "summary": "Retrieve full name for a given building abbreviation",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/building_abbr_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/building_detail"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "building_detail"
+            }
+        },
+        "/reports/bandwidth": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Fetch bandwidth data for the full BYU Network",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "Returns a list of objects that give bandwidth data in and out as kbits/sec for a given time",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/bandwidth"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "bandwidthReport"
+            }
+        },
+        "/ipam/role_changes": {
+            "get": {
+                "tags": [
+                    "IP Address Management"
+                ],
+                "summary": "Retrieve all ipam changes for the past day",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ipam_date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ipam_objects"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/top10/nodes_by_response_time": {
+            "get": {
+                "tags": [
+                    "Top 10"
+                ],
+                "summary": "Retrieve the 10 nodes with the slowest response time",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/nodes_by_response_time"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "top10NodesByResponseTime"
+            }
+        },
+        "/top10/aps_by_client_count": {
+            "get": {
+                "tags": [
+                    "Top 10"
+                ],
+                "summary": "Retrieve the 10 access points with the highest number of clients",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/aps_by_client_count"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "top10APsByClientCount"
+            }
+        },
+        "/ipam/resource_records_audit": {
+            "get": {
+                "tags": [
+                    "IP Address Management"
+                ],
+                "summary": "Retrieve audit resource records",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resource_record_data"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/resource_records_audit"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/top10/nodes_by_cpu_load": {
+            "get": {
+                "tags": [
+                    "Top 10"
+                ],
+                "summary": "Retrieve the 10 nodes with the highest CPU load",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/nodes_by_cpu_load"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "top10NodesByCPULoad"
+            }
+        },
+        "/switches/{device_identifier}/vlans": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "Retrieve the available vlans for the given device",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silve",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/vlans_available"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getSwitchVlans"
+            }
+        },
+        "/tools/findhost": {
+            "get": {
+                "tags": [
+                    "Tools"
+                ],
+                "summary": "Find host of given hostname or ip address",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/host"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/findhost_result"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/switches/{device_identifier}/interfaces/{interface_identifier}/description": {
+            "put": {
+                "summary": "Set the description on an interface",
+                "tags": [
+                    "Switches"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_description"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/interface_description_object"
+                        },
+                        "description": "No change"
+                    },
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/interface_description_object"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "setInterfaceDescription"
+            },
+            "get": {
+                "summary": "Retrieve the description for an interface",
+                "tags": [
+                    "Switches"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/use_cache"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/interface_description_object"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getInterfaceDescription"
+            }
+        },
+        "/top10/volumes_by_disk_usage": {
+            "get": {
+                "tags": [
+                    "Top 10"
+                ],
+                "summary": "Retrieve the 10 volumes with the highest disk usage",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/volumes_by_disk_usage"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "top10VolumesByDiskUsage"
+            }
+        },
+        "/tools/jack_lookup/rooms": {
+            "get": {
+                "tags": [
+                    "Tools"
+                ],
+                "summary": "Return a list of rooms in a given building",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "Return a list of rooms in a given building",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/building_abbr_required"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/room_list"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getRoomList"
+            }
+        },
+        "/top10/interfaces_by_traffic": {
+            "get": {
+                "tags": [
+                    "Top 10"
+                ],
+                "summary": "Retrieve the 10 interfaces with the highest total traffic",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/interfaces_by_traffic"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "top10InterfacesByTraffic"
+            }
+        },
+        "/top10/nodes_by_packet_loss": {
+            "get": {
+                "tags": [
+                    "Top 10"
+                ],
+                "summary": "Retrieve the 10 nodes with the highest packet loss",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/nodes_by_packet_loss"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "top10NodesByPacketLoss"
+            }
+        },
+        "/switches/{device_identifier}/connections": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "Retrieve a collection of connections for a certain switch",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "The connections to other devices from the given device",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/switch_connections"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getSwitchConnections"
+            }
+        },
+        "/ipam/get_roles": {
+            "get": {
+                "tags": [
+                    "IP Address Management"
+                ],
+                "summary": "Retrieve all available roles in IPAM",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ipam_roles_object"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/switches": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "Retrieve collection of switches",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "A standard switch will show a stack_member_number of 0. If the stack_member_number is nonzero, the switch is stacked.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/router_query"
+                    },
+                    {
+                        "$ref": "#/parameters/source_query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/switches"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getSwitches"
+            }
+        },
+        "/subnets": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "List information for all subnets in the network",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/use_cache"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subnets"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getSubnets"
+            }
+        },
+        "/audit_log": {
+            "get": {
+                "tags": [
+                    "Configuration Monitoring"
+                ],
+                "summary": "List changes made on network devices",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/audit_log"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "audit_log"
+            }
+        },
+        "/ipam/ip_details": {
+            "get": {
+                "tags": [
+                    "IP Address Management"
+                ],
+                "summary": "Retrieve roles associated with a given IP address",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ip_address_required"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ip_roles"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/switches/{device_identifier}/interfaces/{interface_identifier}/vlans/untagged": {
+            "put": {
+                "summary": "Set untagged vlan on an interface",
+                "tags": [
+                    "Switches"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/untagged_vlan"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/untagged_vlan"
+                        },
+                        "description": "No change"
+                    },
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/untagged_vlan"
+                        },
+                        "description": "Successful"
+                    },
+                    "204": {
+                        "description": "Scheduled"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Retrieve the untagged vlan configured on an interface",
+                "tags": [
+                    "Switches"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/interface_identifier"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/untagged_vlan"
+                        },
+                        "description": "The untagged vlan on an interface"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/availability/routers": {
+            "get": {
+                "tags": [
+                    "Availability"
+                ],
+                "summary": "Router availability information",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/start_time"
+                    },
+                    {
+                        "$ref": "#/parameters/end_time"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/availability"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "routers_availability"
+            }
+        },
+        "/wireless_access_points": {
+            "get": {
+                "tags": [
+                    "WiFi"
+                ],
+                "summary": "Retrieve collection of wireless access points",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "Retrieve collection of wirelessaccess points",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/use_cache"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/wirelessaccesspoints"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getWirelessAccessPoints"
+            }
+        },
+        "/freezes/{id}": {
+            "get": {
+                "tags": [
+                    "Configuration Monitoring"
+                ],
+                "summary": "Retrieve information on a single soft freeze",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "When a building is on soft freeze, all configuration changes made using the /switches API will trigger a notification to the #network-softfreeze Slack channel",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/freeze_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/soft_freeze"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "soft_freeze"
+            },
+            "delete": {
+                "tags": [
+                    "Configuration Monitoring"
+                ],
+                "summary": "Remove a soft freeze",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/freeze_id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "delete_soft_freeze"
+            }
+        },
+        "/top10/wireless_clients_by_traffic": {
+            "get": {
+                "tags": [
+                    "Top 10"
+                ],
+                "summary": "Retrieve the 10 wireless clients with the highest traffic",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/wireless_clients_by_traffic"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "top10WirelessClientsByTraffic"
+            }
+        },
+        "/availability/switches": {
+            "get": {
+                "tags": [
+                    "Availability"
+                ],
+                "summary": "Switch availability information",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/start_time"
+                    },
+                    {
+                        "$ref": "#/parameters/end_time"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/availability"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "switches_availability"
+            }
+        },
+        "/ipam/resource_records": {
+            "get": {
+                "tags": [
+                    "IP Address Management"
+                ],
+                "summary": "Retrieve resource records",
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resource_record_data"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/resource_records"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/switches/{device_identifier}": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "Retrieve a single switch object",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "A standard switch will show a stack_member_number of 0. If the stack_member_number is nonzero, the switch is stacked.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/device_identifier"
+                    },
+                    {
+                        "$ref": "#/parameters/use_cache"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/switch_detail"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getSwitch"
+            }
+        },
+        "/freezes": {
+            "post": {
+                "tags": [
+                    "Configuration Monitoring"
+                ],
+                "summary": "Create new soft-freeze rule for a building",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "When a building is on soft freeze, all configuration changes made using the /switches API will trigger a notification to the #network-softfreeze Slack channel",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/freeze_post"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/soft_freeze"
+                        },
+                        "description": "Created"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "create_soft_freeze"
+            },
+            "get": {
+                "tags": [
+                    "Configuration Monitoring"
+                ],
+                "summary": "Retrieve list of current soft freezes",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Silver",
+                "description": "When a building is on soft freeze, all configuration changes made using the /switches API will trigger a notification to the #network-softfreeze Slack channel",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/building_abbr"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/soft_freezes"
+                        },
+                        "description": "Successful"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "soft_freeze_list"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "read_only": {
+            "example": 0,
+            "type": "integer"
+        },
+        "unavailable_device": {
+            "properties": {
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "availability": {
+                    "example": 0,
+                    "type": "number"
+                }
+            }
+        },
+        "subnet_name": {
+            "example": "JFSB-B035 B080 EMP V501",
+            "type": "string"
+        },
+        "switch_connections": {
+            "properties": {
+                "hostname": {
+                    "type": "string"
+                },
+                "connections": {
+                    "items": {
+                        "$ref": "#/definitions/switch_connection"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "admin_status": {
+            "properties": {
+                "enabled": {
+                    "example": true,
+                    "type": "boolean"
+                }
+            }
+        },
+        "audit_log": {
+            "properties": {
+                "history": {
+                    "items": {
+                        "$ref": "#/definitions/audit_log_entry"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Object containing a list of interfaces for a router or switch",
+            "properties": {
+                "interfaces": {
+                    "items": {
+                        "$ref": "#/definitions/interface_basic"
+                    },
+                    "type": "array"
+                },
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                }
+            },
+            "type": "object"
+        },
+        "total_availability": {
+            "properties": {
+                "total": {
+                    "example": 98.7654321,
+                    "type": "number"
+                }
+            }
+        },
+        "date_time": {
+            "example": "2016-08-11 12:04:23",
+            "type": "object"
+        },
+        "volumes_by_disk_usage": {
+            "properties": {
+                "nodes": {
+                    "items": {
+                        "$ref": "#/definitions/volume_disk_usage"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "platform": {
+            "description": "platform",
+            "example": "CAT3K_CAA-UNIVERSALK9-M",
+            "type": "string"
+        },
+        "jack_list": {
+            "properties": {
+                "jacks": {
+                    "items": {
+                        "$ref": "#/definitions/jack"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "nodes_by_packet_loss": {
+            "properties": {
+                "nodes": {
+                    "items": {
+                        "$ref": "#/definitions/node_percent_loss"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "tagged_vlans": {
+            "properties": {
+                "vlans": {
+                    "$ref": "#/definitions/vlan_list"
+                }
+            }
+        },
+        "poe_status": {
+            "description": "Status of POE on an interface",
+            "properties": {
+                "enabled": {
+                    "example": true,
+                    "type": "boolean"
+                }
+            }
+        },
+        "named_vlan": {
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/vlan"
+                },
+                "name": {
+                    "$ref": "#/definitions/vlan_name"
+                }
+            },
+            "type": "object"
+        },
+        "resource_records_audit": {
+            "properties": {
+                "resource_records_audit": {
+                    "items": {
+                        "$ref": "#/definitions/resource_record_audit"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "room_list": {
+            "properties": {
+                "rooms": {
+                    "items": {
+                        "$ref": "#/definitions/room"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "switch_connection": {
+            "properties": {
+                "snmp_id": {
+                    "example": 45,
+                    "type": "integer"
+                },
+                "description": {
+                    "example": "feed port",
+                    "type": "string"
+                },
+                "short_name": {
+                    "example": "Te4/2",
+                    "type": "string"
+                },
+                "device_host_name": {
+                    "example": "conf-loc2-a",
+                    "type": "string"
+                }
+            }
+        },
+        "aps_by_client_count": {
+            "properties": {
+                "access_points": {
+                    "items": {
+                        "properties": {
+                            "hostname": {
+                                "example": "HC-B23-130-AN1",
+                                "type": "string"
+                            },
+                            "client_count": {
+                                "example": 88,
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "nodes_by_cpu_load": {
+            "properties": {
+                "nodes": {
+                    "items": {
+                        "$ref": "#/definitions/node_cpu"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "soft_freezes": {
+            "properties": {
+                "freezes": {
+                    "items": {
+                        "$ref": "#/definitions/soft_freeze"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "resource_record_data": {
+            "example": "nonhosted.imodules.com.",
+            "type": "string"
+        },
+        "role_members": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/netid"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "unavailable_devices": {
+            "properties": {
+                "unavailable_nodes": {
+                    "items": {
+                        "$ref": "#/definitions/unavailable_device"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "audit_log_entry": {
+            "properties": {
+                "field": {
+                    "example": "Untagged VLAN",
+                    "type": "string"
+                },
+                "first_name": {
+                    "example": "John",
+                    "type": "string"
+                },
+                "new_value": {
+                    "type": "string"
+                },
+                "host": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "old_value": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "example": "Doe",
+                    "type": "string"
+                },
+                "change_date": {
+                    "$ref": "#/definitions/date_time"
+                },
+                "netid": {
+                    "example": "jdoe",
+                    "type": "string"
+                },
+                "interface": {
+                    "$ref": "#/definitions/interface_name"
+                }
+            }
+        },
+        "ipam_roles": {
+            "items": {
+                "example": "ASB CSR",
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "ip_role": {
+            "properties": {
+                "support_group": {
+                    "$ref": "#/definitions/support_group"
+                },
+                "role_scope": {
+                    "example": "single ip object/subnet",
+                    "type": "string"
+                },
+                "role_name": {
+                    "$ref": "#/definitions/role_name"
+                },
+                "readonly": {
+                    "$ref": "#/definitions/read_only"
+                }
+            }
+        },
+        "ipam_objects": {
+            "properties": {
+                "ip_addresses": {
+                    "items": {
+                        "$ref": "#/definitions/ipam_ip_object"
+                    },
+                    "type": "array"
+                },
+                "subnets": {
+                    "items": {
+                        "$ref": "#/definitions/ipam_subnet_object"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "interface_description": {
+            "example": "ITB-NETENG-B-NOMON 1/48",
+            "type": "string"
+        },
+        "switch_detail": {
+            "description": "Basic information on a switch",
+            "properties": {
+                "mac_address": {
+                    "$ref": "#/definitions/mac_address"
+                },
+                "platform": {
+                    "$ref": "#/definitions/platform"
+                },
+                "ip_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "powered": {
+                    "$ref": "#/definitions/powered"
+                },
+                "gateway": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "vendor": {
+                    "$ref": "#/definitions/vendor"
+                },
+                "physical_model": {
+                    "$ref": "#/definitions/physical_model"
+                },
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "stack_members": {
+                    "$ref": "#/definitions/stack_members"
+                },
+                "modules": {
+                    "$ref": "#/definitions/modules"
+                },
+                "serial": {
+                    "$ref": "#/definitions/serial"
+                },
+                "version": {
+                    "$ref": "#/definitions/version"
+                }
+            },
+            "type": "object"
+        },
+        "interface_name": {
+            "example": "GigabitEthernet1/1",
+            "type": "string"
+        },
+        "closet": {
+            "example": "102",
+            "type": "string"
+        },
+        "stack_member": {
+            "properties": {
+                "mac_address": {
+                    "$ref": "#/definitions/mac_address"
+                },
+                "index": {
+                    "example": 1,
+                    "type": "integer"
+                },
+                "powered": {
+                    "$ref": "#/definitions/powered"
+                },
+                "physical_model": {
+                    "$ref": "#/definitions/physical_model"
+                },
+                "serial": {
+                    "$ref": "#/definitions/serial"
+                },
+                "version": {
+                    "$ref": "#/definitions/version"
+                }
+            }
+        },
+        "date": {
+            "example": "01-JAN-96",
+            "type": "string"
+        },
+        "role_ipaddress": {
+            "properties": {
+                "ip_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "subnet_name": {
+                    "$ref": "#/definitions/subnet_name"
+                },
+                "readonly": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "version": {
+            "description": "version",
+            "example": "03.07.01E",
+            "type": "string"
+        },
+        "interfaces_by_errors": {
+            "properties": {
+                "interfaces": {
+                    "items": {
+                        "$ref": "#/definitions/interface_errors"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "vlan_name": {
+            "example": "default",
+            "type": "string"
+        },
+        "switches": {
+            "description": "A collection of switches",
+            "properties": {
+                "switches": {
+                    "items": {
+                        "$ref": "#/definitions/switch_basic"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object",
+            "required": [
+                "switches"
+            ]
+        },
+        "interface_description_object": {
+            "properties": {
+                "description": {
+                    "$ref": "#/definitions/interface_description"
+                }
+            }
+        },
+        "resource_record": {
+            "properties": {
+                "owner": {
+                    "$ref": "#/definitions/resource_record_owner"
+                },
+                "type": {
+                    "$ref": "#/definitions/resource_record_type"
+                },
+                "record_data": {
+                    "$ref": "#/definitions/resource_record_data"
+                }
+            }
+        },
+        "vlan_list": {
+            "items": {
+                "$ref": "#/definitions/named_vlan"
+            },
+            "description": "Generic list of vlans",
+            "type": "array"
+        },
+        "switch_basic": {
+            "description": "Basic information on a switch",
+            "properties": {
+                "platform": {
+                    "$ref": "#/definitions/platform"
+                },
+                "ip_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "stack_member_number": {
+                    "example": 0,
+                    "type": "integer"
+                },
+                "physical_model": {
+                    "$ref": "#/definitions/physical_model"
+                },
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "serial": {
+                    "$ref": "#/definitions/serial"
+                },
+                "version": {
+                    "$ref": "#/definitions/version"
+                }
+            },
+            "type": "object"
+        },
+        "resource_records": {
+            "properties": {
+                "resource_records": {
+                    "items": {
+                        "$ref": "#/definitions/resource_record"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "findhost_result": {
+            "properties": {
+                "mac_address": {
+                    "$ref": "#/definitions/mac_address"
+                },
+                "ip_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "router": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "vlan": {
+                    "$ref": "#/definitions/vlan"
+                },
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "switch": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "interface": {
+                    "$ref": "#/definitions/findhost_interface"
+                }
+            }
+        },
+        "module": {
+            "description": "Information on a router/switch module",
+            "properties": {
+                "powered": {
+                    "$ref": "#/definitions/powered"
+                },
+                "physical_model": {
+                    "$ref": "#/definitions/physical_model"
+                },
+                "slot": {
+                    "$ref": "#/definitions/slot"
+                },
+                "serial": {
+                    "$ref": "#/definitions/serial"
+                },
+                "version": {
+                    "$ref": "#/definitions/version"
+                }
+            },
+            "type": "object"
+        },
+        "vendor": {
+            "example": "Aruba",
+            "type": "string"
+        },
+        "interface_errors": {
+            "properties": {
+                "errors_out": {
+                    "example": 858532,
+                    "type": "integer"
+                },
+                "errors_in": {
+                    "example": 0,
+                    "type": "integer"
+                },
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "interface": {
+                    "$ref": "#/definitions/interface_name"
+                }
+            }
+        },
+        "admin_roles": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/admin_role"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "soft_freeze": {
+            "properties": {
+                "id": {
+                    "example": 47,
+                    "type": "integer"
+                },
+                "building": {
+                    "$ref": "#/definitions/building_abbr"
+                },
+                "start_time": {
+                    "$ref": "#/definitions/date_time"
+                },
+                "user": {
+                    "$ref": "#/definitions/netid"
+                }
+            }
+        },
+        "resource_record_type": {
+            "example": "CNAME",
+            "type": "string"
+        },
+        "findhost_interface": {
+            "properties": {
+                "description": {
+                    "$ref": "#/definitions/interface_description"
+                },
+                "name": {
+                    "$ref": "#/definitions/interface_name"
+                }
+            }
+        },
+        "subnet_mask": {
+            "example": "255.255.255.128",
+            "type": "string"
+        },
+        "untagged_vlan": {
+            "properties": {
+                "vlan": {
+                    "$ref": "#/definitions/vlan"
+                }
+            }
+        },
+        "interface_traffic": {
+            "properties": {
+                "in": {
+                    "$ref": "#/definitions/interface_traffic_oneway"
+                },
+                "out": {
+                    "$ref": "#/definitions/interface_traffic_oneway"
+                }
+            }
+        },
+        "physical_model": {
+            "description": "physical model",
+            "example": "WS-C3850-48P-L",
+            "type": "string"
+        },
+        "subnet_address": {
+            "example": "10.2.48.0",
+            "type": "string"
+        },
+        "jack_lookup": {
+            "description": "Details on a jack",
+            "properties": {
+                "building": {
+                    "$ref": "#/definitions/building_abbr"
+                },
+                "jack": {
+                    "$ref": "#/definitions/jack"
+                },
+                "status": {
+                    "example": "Data",
+                    "type": "string"
+                },
+                "switch": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "interface": {
+                    "$ref": "#/definitions/interface_name"
+                },
+                "room": {
+                    "$ref": "#/definitions/room"
+                }
+            }
+        },
+        "node_response_time": {
+            "properties": {
+                "response_time": {
+                    "example": -1,
+                    "type": "integer"
+                },
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                }
+            }
+        },
+        "vlans_available": {
+            "description": "list of vlans available on a device",
+            "properties": {
+                "vlans": {
+                    "$ref": "#/definitions/vlan_list"
+                }
+            }
+        },
+        "building_list": {
+            "properties": {
+                "buildings": {
+                    "items": {
+                        "$ref": "#/definitions/building_abbr"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "interfaces_by_discards": {
+            "properties": {
+                "interfaces": {
+                    "items": {
+                        "$ref": "#/definitions/interface_discards"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "kbitsPerSec": {
+            "example": 1234567,
+            "type": "integer"
+        },
+        "nodes_by_response_time": {
+            "properties": {
+                "nodes": {
+                    "items": {
+                        "$ref": "#/definitions/node_response_time"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "interface_basic": {
+            "description": "Basic switch/router interface details",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "vlans": {
+                    "$ref": "#/definitions/vlans"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "$ref": "#/definitions/interface_name"
+                },
+                "connected": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "netid": {
+            "example": "netid",
+            "type": "string"
+        },
+        "volume_disk_usage": {
+            "properties": {
+                "disk_usage": {
+                    "example": 99.9,
+                    "type": "number"
+                },
+                "disk": {
+                    "example": "Shared memory",
+                    "type": "string"
+                },
+                "hostname": {
+                    "example": "DNS1",
+                    "type": "string"
+                }
+            }
+        },
+        "nodes_by_memory_usage": {
+            "properties": {
+                "nodes": {
+                    "items": {
+                        "$ref": "#/definitions/node_percent_mem"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "node_percent_mem": {
+            "properties": {
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "percent_memory_used": {
+                    "example": 63,
+                    "type": "integer"
+                }
+            }
+        },
+        "subnets": {
+            "properties": {
+                "subnets": {
+                    "items": {
+                        "$ref": "#/definitions/subnet"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "node_percent_loss": {
+            "properties": {
+                "percent_loss": {
+                    "example": 99.9,
+                    "type": "number"
+                },
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                }
+            }
+        },
+        "closet_list": {
+            "properties": {
+                "closets": {
+                    "items": {
+                        "$ref": "#/definitions/closet"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "interfaces_by_percent_util": {
+            "properties": {
+                "interfaces": {
+                    "items": {
+                        "$ref": "#/definitions/interface_percent_util"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "hostname": {
+            "description": "hostname",
+            "example": "itb-neteng-a-nomon",
+            "type": "string"
+        },
+        "wireless_access_point": {
+            "description": "A particular wireless access point",
+            "properties": {
+                "mac_address": {
+                    "$ref": "#/definitions/mac_address"
+                },
+                "platform": {
+                    "$ref": "#/definitions/platform"
+                },
+                "ip_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "ssids": {
+                    "items": {
+                        "example": "BYU-Wifi",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "manufacturer": {
+                    "$ref": "#/definitions/vendor"
+                },
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "controller": {
+                    "example": "dc-3n1036e-aruba-lctrlr1",
+                    "type": "string"
+                },
+                "serial": {
+                    "$ref": "#/definitions/serial"
+                },
+                "version": {
+                    "$ref": "#/definitions/version"
+                }
+            },
+            "type": "object"
+        },
+        "wireless_clients_by_traffic": {
+            "properties": {
+                "clients": {
+                    "items": {
+                        "properties": {
+                            "last_update": {
+                                "$ref": "#/definitions/date_time"
+                            },
+                            "ip_address": {
+                                "example": "10.1.2.3",
+                                "type": "string"
+                            },
+                            "bps_out": {
+                                "example": 987654.321,
+                                "type": "number"
+                            },
+                            "connected": {
+                                "$ref": "#/definitions/date_time"
+                            },
+                            "ssid": {
+                                "example": "eduroam",
+                                "type": "string"
+                            },
+                            "bps_in": {
+                                "example": 123456.789,
+                                "type": "number"
+                            },
+                            "user": {
+                                "example": "johndoe",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "ipam_ip_object": {
+            "properties": {
+                "update_user": {
+                    "$ref": "#/definitions/netid"
+                },
+                "last_update": {
+                    "$ref": "#/definitions/date"
+                },
+                "ip_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "address_id": {
+                    "example": 123456,
+                    "type": "string"
+                },
+                "subnet_name": {
+                    "$ref": "#/definitions/subnet_name"
+                },
+                "role_name": {
+                    "$ref": "#/definitions/role_name"
+                }
+            }
+        },
+        "ip_address": {
+            "description": "ip address",
+            "example": "10.3.72.13",
+            "type": "string"
+        },
+        "building_detail": {
+            "properties": {
+                "building": {
+                    "$ref": "#/definitions/building_abbr"
+                },
+                "name": {
+                    "example": "MTC Ben E. Rich Bldg",
+                    "type": "string"
+                }
+            }
+        },
+        "eduroam": {
+            "properties": {
+                "matches": {
+                    "items": {
+                        "$ref": "#/definitions/eduroam_match"
+                    },
+                    "type": "array"
+                },
+                "last_message": {
+                    "properties": {
+                        "timestamp": {
+                            "$ref": "#/definitions/date_time"
+                        },
+                        "text": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "powered": {
+            "example": true,
+            "type": "boolean"
+        },
+        "node_cpu": {
+            "properties": {
+                "cpu_load": {
+                    "example": 57,
+                    "type": "integer"
+                },
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                }
+            }
+        },
+        "stack_members": {
+            "items": {
+                "$ref": "#/definitions/stack_member"
+            },
+            "type": "array"
+        },
+        "interface_traffic_oneway": {
+            "properties": {
+                "errors": {
+                    "example": 0,
+                    "type": "integer"
+                },
+                "bytes": {
+                    "example": 154009061,
+                    "type": "integer"
+                },
+                "discards": {
+                    "example": 769252451,
+                    "type": "integer"
+                }
+            }
+        },
+        "room": {
+            "example": "223M",
+            "type": "string"
+        },
+        "jack": {
+            "example": "1234",
+            "type": "string"
+        },
+        "interfaces_by_traffic": {
+            "properties": {
+                "interfaces": {
+                    "items": {
+                        "$ref": "#/definitions/interface_with_traffic"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "role_details": {
+            "description": "Collection of role details",
+            "properties": {
+                "ip_addresses": {
+                    "items": {
+                        "$ref": "#/definitions/role_ipaddress"
+                    },
+                    "type": "array"
+                },
+                "subnets": {
+                    "items": {
+                        "$ref": "#/definitions/role_subnet"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "support_group": {
+            "example": "OIT Network Technology",
+            "type": "string"
+        },
+        "wirelessaccesspoints": {
+            "description": "A collection of wireless access points",
+            "properties": {
+                "access_points": {
+                    "items": {
+                        "$ref": "#/definitions/wireless_access_point"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "interface_with_traffic": {
+            "properties": {
+                "bps_out": {
+                    "example": 757589440.9,
+                    "type": "number"
+                },
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "bps_in": {
+                    "example": 637198144.2,
+                    "type": "number"
+                },
+                "interface": {
+                    "$ref": "#/definitions/interface_name"
+                }
+            }
+        },
+        "bandwidth": {
+            "properties": {
+                "timestamp": {
+                    "$ref": "#/definitions/date_time"
+                },
+                "in": {
+                    "$ref": "#/definitions/kbitsPerSec"
+                },
+                "out": {
+                    "$ref": "#/definitions/kbitsPerSec"
+                }
+            }
+        },
+        "subnet": {
+            "properties": {
+                "router": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "vlan": {
+                    "$ref": "#/definitions/vlan"
+                },
+                "mask": {
+                    "$ref": "#/definitions/subnet_mask"
+                },
+                "network": {
+                    "$ref": "#/definitions/subnet_address"
+                }
+            }
+        },
+        "vlans": {
+            "description": "list of vlans on an interface",
+            "properties": {
+                "untagged": {
+                    "$ref": "#/definitions/vlan"
+                },
+                "tagged": {
+                    "$ref": "#/definitions/vlan_list"
+                }
+            }
+        },
+        "interface_detail": {
+            "description": "Detailed information about a switch interface",
+            "properties": {
+                "mtu": {
+                    "type": "integer"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "traffic": {
+                    "$ref": "#/definitions/interface_traffic"
+                },
+                "powered": {
+                    "$ref": "#/definitions/powered"
+                },
+                "vlans": {
+                    "$ref": "#/definitions/vlans"
+                },
+                "speed": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "$ref": "#/definitions/interface_name"
+                },
+                "connected": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "slot": {
+            "example": "A",
+            "type": "string"
+        },
+        "role_subnet": {
+            "properties": {
+                "subnet_mask": {
+                    "$ref": "#/definitions/subnet_mask"
+                },
+                "subnet_address": {
+                    "$ref": "#/definitions/subnet_address"
+                },
+                "subnet_name": {
+                    "$ref": "#/definitions/subnet_name"
+                },
+                "readonly": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "vlans_interface": {
+            "description": "Lists of tagged and untagged vlans",
+            "properties": {
+                "untagged": {
+                    "$ref": "#/definitions/vlan"
+                },
+                "tagged": {
+                    "$ref": "#/definitions/vlan_list"
+                }
+            }
+        },
+        "availability": {
+            "properties": {
+                "total": {
+                    "example": 98.7654321,
+                    "type": "number"
+                },
+                "unavailable_nodes": {
+                    "items": {
+                        "$ref": "#/definitions/unavailable_device"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "building_abbr": {
+            "example": "10M",
+            "type": "string"
+        },
+        "error": {
+            "properties": {
+                "explanation": {
+                    "type": "string"
+                },
+                "return_code": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "interface_discards": {
+            "properties": {
+                "discards_out": {
+                    "example": 1020215,
+                    "type": "integer"
+                },
+                "discards_in": {
+                    "example": 1077921,
+                    "type": "integer"
+                },
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "interface": {
+                    "$ref": "#/definitions/interface_name"
+                }
+            }
+        },
+        "ip_roles": {
+            "description": "IPAM roles",
+            "properties": {
+                "results": {
+                    "properties": {
+                        "object_desc": {
+                            "type": "string"
+                        },
+                        "mac_address": {
+                            "$ref": "#/definitions/mac_address"
+                        },
+                        "ip_address_type": {
+                            "example": "Static",
+                            "type": "string"
+                        },
+                        "subnet_mask": {
+                            "$ref": "#/definitions/ip_address"
+                        },
+                        "device_type": {
+                            "example": "Workstation",
+                            "type": "string"
+                        },
+                        "roles": {
+                            "items": {
+                                "$ref": "#/definitions/ip_role"
+                            },
+                            "type": "array"
+                        },
+                        "subnet_address": {
+                            "$ref": "#/definitions/ip_address"
+                        },
+                        "object_name": {
+                            "example": "osa",
+                            "type": "string"
+                        },
+                        "subnet_name": {
+                            "$ref": "#/definitions/subnet_name"
+                        },
+                        "domain_name": {
+                            "example": "ctrls.byu.edu",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "ipam_subnet_object": {
+            "properties": {
+                "subnet_mask": {
+                    "$ref": "#/definitions/subnet_mask"
+                },
+                "update_user": {
+                    "$ref": "#/definitions/netid"
+                },
+                "subnet_id": {
+                    "example": 123456,
+                    "type": "string"
+                },
+                "last_update": {
+                    "$ref": "#/definitions/date"
+                },
+                "subnet_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "subnet_name": {
+                    "$ref": "#/definitions/subnet_name"
+                },
+                "role_name": {
+                    "$ref": "#/definitions/role_name"
+                }
+            }
+        },
+        "resource_record_owner": {
+            "example": "cpms-alumni.byu.edu",
+            "type": "string"
+        },
+        "ipam_roles_object": {
+            "properties": {
+                "roles": {
+                    "$ref": "#/definitions/ipam_roles"
+                }
+            }
+        },
+        "interface_percent_util": {
+            "properties": {
+                "percent_util_out": {
+                    "example": 9.1,
+                    "type": "number"
+                },
+                "hostname": {
+                    "$ref": "#/definitions/hostname"
+                },
+                "percent_util_in": {
+                    "example": 14.3,
+                    "type": "number"
+                },
+                "interface": {
+                    "$ref": "#/definitions/interface_name"
+                }
+            }
+        },
+        "eduroam_message": {
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "count": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "mac_address": {
+            "description": "a mac address",
+            "example": "aa:aa:aa:aa:aa:aa",
+            "type": "string"
+        },
+        "vlan": {
+            "example": 100,
+            "type": "integer"
+        },
+        "modules": {
+            "items": {
+                "$ref": "#/definitions/module"
+            },
+            "description": "A list of modules for a router/switch",
+            "type": "array"
+        },
+        "role_name": {
+            "example": "FHSS Family Home Social Sciences",
+            "type": "string"
+        },
+        "eduroam_match": {
+            "properties": {
+                "username": {
+                    "$ref": "#/definitions/netid"
+                },
+                "total_count": {
+                    "type": "integer"
+                },
+                "messages": {
+                    "items": {
+                        "$ref": "#/definitions/eduroam_message"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "serial": {
+            "description": "serial",
+            "example": "FOC1810X01J",
+            "type": "string"
+        },
+        "admin_role": {
+            "example": "vCenter MSE CSR",
+            "type": "string"
+        },
+        "resource_record_audit": {
+            "properties": {
+                "audit_date": {
+                    "$ref": "#/definitions/date"
+                },
+                "owner": {
+                    "$ref": "#/definitions/resource_record_owner"
+                },
+                "action": {
+                    "example": "Update",
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/resource_record_type"
+                },
+                "record_data": {
+                    "$ref": "#/definitions/resource_record_data"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "vlans_list": {
+            "schema": {
+                "properties": {
+                    "vlans": {
+                        "items": {
+                            "example": 100,
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "List of vlans",
+            "name": "request body",
+            "required": true,
+            "in": "body"
+        },
+        "interface_description": {
+            "schema": {
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "Interface Description",
+            "name": "request body",
+            "required": true,
+            "in": "body"
+        },
+        "ip_address_required": {
+            "description": "IP address",
+            "name": "ip_address",
+            "required": true,
+            "type": "string",
+            "in": "query"
+        },
+        "username": {
+            "description": "username",
+            "name": "username",
+            "required": true,
+            "type": "string",
+            "in": "query"
+        },
+        "interface_name_query": {
+            "description": "Interface name",
+            "name": "interface",
+            "type": "string",
+            "required": true,
+            "in": "query"
+        },
+        "jack_number": {
+            "description": "Jack number",
+            "name": "jack",
+            "type": "string",
+            "required": true,
+            "in": "query"
+        },
+        "freeze_id": {
+            "description": "Soft freeze ID number",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "in": "path"
+        },
+        "room_number": {
+            "description": "Room number",
+            "name": "room",
+            "required": true,
+            "type": "string",
+            "in": "query"
+        },
+        "enabled": {
+            "schema": {
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "Boolean indicating whether or not a resource is enabled",
+            "name": "request body",
+            "required": true,
+            "in": "body"
+        },
+        "building_abbr": {
+            "description": "Building abbreviation",
+            "name": "building",
+            "type": "string",
+            "in": "query"
+        },
+        "host": {
+            "description": "a hostname or IPv4 address",
+            "name": "host",
+            "required": true,
+            "type": "string",
+            "in": "query"
+        },
+        "client_identifier": {
+            "description": "NetID or MAC Address",
+            "name": "identifier",
+            "required": true,
+            "type": "string",
+            "in": "query"
+        },
+        "switch_name": {
+            "description": "Switch name",
+            "name": "switch",
+            "type": "string",
+            "required": true,
+            "in": "query"
+        },
+        "use_cache": {
+            "description": "Option to poll devices live",
+            "name": "use_cache",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+        },
+        "building_abbr_path": {
+            "description": "Building abbreviation",
+            "name": "building",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "freeze_post": {
+            "schema": {
+                "properties": {
+                    "building": {
+                        "example": "10M",
+                        "type": "string"
+                    },
+                    "end_time": {
+                        "example": "2016-08-01 00:00:00",
+                        "type": "object"
+                    },
+                    "start_time": {
+                        "example": "2016-08-31 00:00:00",
+                        "type": "object"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "building"
+                ]
+            },
+            "description": "POST body for a new Soft freeze rule. 'building' is the only required field (see /buildings for a list of valid building abbreviations). If 'start_time' is omitted or is null, the rule will take effect immediately. If 'end_time' is ommitted or is null, it will remain in effect until a DELETE request is received on /freezes/{id}",
+            "name": "request body",
+            "required": true,
+            "in": "body"
+        },
+        "router_query": {
+            "description": "Include routers or not",
+            "name": "router",
+            "required": false,
+            "type": "boolean",
+            "in": "query"
+        },
+        "ipam_date": {
+            "description": "start date",
+            "name": "date",
+            "type": "string",
+            "in": "query"
+        },
+        "building_abbr_required": {
+            "description": "Building abbreviation",
+            "name": "building",
+            "type": "string",
+            "required": true,
+            "in": "query"
+        },
+        "untagged_vlan": {
+            "schema": {
+                "properties": {
+                    "end_time": {
+                        "example": "2016-08-01 00:00:00",
+                        "type": "object"
+                    },
+                    "vlan": {
+                        "example": 100,
+                        "type": "integer"
+                    },
+                    "start_time": {
+                        "example": "2016-08-31 00:00:00",
+                        "type": "object"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "vlan"
+                ]
+            },
+            "description": "Request body to set untagged vlan. 'vlan' is the only required field. If 'start_time' is defined, the change will be made at that time. If 'end_time' is defined, the untagged vlan at the time of the change will be restored at the specified time",
+            "name": "request body",
+            "required": true,
+            "in": "body"
+        },
+        "ip_address": {
+            "description": "IP Address",
+            "name": "ip_address",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        },
+        "device_identifier": {
+            "description": "Hostname or ip address",
+            "name": "device_identifier",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "end_time": {
+            "description": "Query end time relative to now. Should be an integer followed by 'd', 'h', 'm', or 's' (days, hours, minutes, or seconds). For example, if start_time is '1d' and end_time is '3h', the query will range from 1 day ago to 3 hours ago.",
+            "name": "end_time",
+            "type": "string",
+            "in": "query"
+        },
+        "resource_record_data": {
+            "description": "IP address or hostname that is pointed to by another hostname",
+            "name": "data",
+            "required": true,
+            "type": "string",
+            "in": "query"
+        },
+        "start_time": {
+            "description": "Query start time relative to now. Should be an integer followed by 'd', 'h', 'm', or 's' (days, hours, minutes, or seconds). For example, if start_time is '1d' and end_time is '3h', the query will range from 1 day ago to 3 hours ago.",
+            "name": "start_time",
+            "type": "string",
+            "in": "query"
+        },
+        "source_query": {
+            "description": "The source of information",
+            "name": "source",
+            "enum": [
+                "NIT",
+                "SW"
+            ],
+            "required": false,
+            "type": "string",
+            "in": "query"
+        },
+        "role_name": {
+            "description": "IPAM role name",
+            "name": "role",
+            "required": true,
+            "type": "string",
+            "in": "query"
+        },
+        "interface_identifier": {
+            "description": "interface_name",
+            "name": "interface_identifier",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        }
+    },
+    "info": {
+        "title": "NIT",
+        "description": "Network Information Tool (beta)",
+        "version": "beta1.0"
+    }
+}

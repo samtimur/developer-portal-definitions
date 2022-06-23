@@ -1,0 +1,79 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "IdentityPersonPersonPhoto",
+        "description": "PersonPhotoService",
+        "version": "v1",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/domains/legacy/identity/person/personphoto/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/*": {
+            "get": {
+                "summary": "Shows the photo by the ID specified (via attributes: p, b, or n) or defaults to the current user(if no attribute p, b, or n is specified.) The service will allow an instructor to view a photo if the user is the instructor of a class that the requested person is in (checked via the attributes yt, ci, tc, and sn.)",
+                "description": "Shows the photo by the ID specified (via attributes: p, b, or n) or defaults to the current user(if no attribute p, b, or n is specified.) The service will allow an instructor to view a photo if the user is the instructor of a class that the requested person is in (checked via the attributes yt, ci, tc, and sn.)",
+                "operationId": "getPersonPhoto",
+                "parameters": [],
+                "tags": [
+                    "PersonPhotoService"
+                ],
+                "produces": [
+                    "image/jpeg"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "The target resource can not be found for the provided resource identifiers.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "The service method is not supported by the service.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "409": {
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}

@@ -1,0 +1,121 @@
+{
+    "paths": {
+        "/getEnrollments/person_id/{person_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns current Independent Study enrollments for a given student.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns current Independent Study enrollments for a given student.",
+                "parameters": [
+                    {
+                        "description": "Orion person id of the student to get current enrollments for.",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/createIncident": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "creates a new case in the IS CRM",
+                "x-throttling-tier": "Unlimited",
+                "description": "Any values provided that are not explicitly accepted will be placed in the case description",
+                "parameters": [
+                    {
+                        "description": "defaults to 'Online Inquery'",
+                        "name": "title",
+                        "required": false,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Tier 1 category, created if does not exist",
+                        "name": "category",
+                        "required": false,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "description": "HTTP redirect unpon completion",
+                        "name": "redirect",
+                        "required": false,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "description": "if different than userName, creates an 'on behalf of' relation in the case",
+                        "name": "enrollmentUserName",
+                        "required": false,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "description": "alternate method of identifying the 'on behalf of' if enrollmentUserName is not present and different than userReference",
+                        "name": "enrollmentUserReference",
+                        "required": false,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "description": "CRM customer",
+                        "name": "userName",
+                        "required": false,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "description": "alternate method of identifying the CRM customer if userName is not present",
+                        "name": "userReference",
+                        "required": false,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "courseReference",
+                        "required": false,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "description": "LMS course ID, alternate method of identifying the course if courseReference is not present - requires LMS",
+                        "name": "courseID",
+                        "required": false,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "description": "must be present to consider courseID value - retained in case description",
+                        "name": "LMS",
+                        "required": false,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "description": "browser user agent used if not present - retained in case description",
+                        "name": "browser",
+                        "required": false,
+                        "type": "string",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "DCE-CRM",
+        "description": "Service functions for the IS CRM",
+        "version": "v1.0"
+    },
+    "basePath": "/domains/DCE/CRM/v1.0",
+    "host": "api.byu.edu:443"
+}

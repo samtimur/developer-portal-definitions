@@ -1,0 +1,135 @@
+{
+    "basePath": "/domains/erp/hr/background_check/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/*": {
+            "post": {
+                "description": "",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/request"
+                        },
+                        "description": "Background Check Information",
+                        "name": "bi_acknowledgement",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/bi_response_acknowledgement"
+                        },
+                        "description": "The default response type is JSON.  Add an Accept header with value=application/xml to return an XML response.",
+                        "examples": {
+                            "application/json": {
+                                "status": {
+                                    "bi_response_acknowledgement": {
+                                        "success": {}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "error": {
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "request": {
+            "properties": {
+                "bi_acknowledgement": {
+                    "$ref": "#/definitions/bi_acknowledgement"
+                }
+            },
+            "required": [
+                "bi_acknowledgement"
+            ]
+        },
+        "bi_acknowledgement": {
+            "properties": {
+                "status_code": {
+                    "description": "Status Code",
+                    "enum": [
+                        "FAIL",
+                        "PASS",
+                        "PEND",
+                        "REVW",
+                        "SBMT",
+                        "SKIP"
+                    ],
+                    "type": "string"
+                },
+                "redirect_link": {
+                    "maxLength": 254,
+                    "description": "URL to the background check report",
+                    "type": "string"
+                },
+                "request_id": {
+                    "maxLength": 15,
+                    "description": "Background check request ID number",
+                    "type": "string"
+                },
+                "description": {
+                    "maxLength": 30,
+                    "description": "Description",
+                    "type": "string"
+                },
+                "report_id": {
+                    "maxLength": 15,
+                    "description": "ID number of the background check report",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "request_id",
+                "status_code",
+                "description",
+                "redirect_link",
+                "report_id"
+            ]
+        },
+        "success": {
+            "properties": {
+                "success": {
+                    "type": "string"
+                }
+            }
+        },
+        "bi_response_acknowledgement": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/error"
+                },
+                {
+                    "$ref": "#/definitions/success"
+                }
+            ]
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "BACKGROUND_CHECK",
+        "description": "Updates the Human Resources system with the status of the background check and provides a link to the report.",
+        "version": "v1"
+    }
+}

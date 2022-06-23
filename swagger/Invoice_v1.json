@@ -1,0 +1,1072 @@
+{
+    "basePath": "/domains/erp/fs/invoice/v1",
+    "paths": {
+        "/{batch_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "This batch_id is what is returned in the POST response body",
+                        "name": "batch_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "Processing is now complete",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "unresolvable_invoices": {
+                                    "items": {
+                                        "example": null,
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "non_processed_invoices": {
+                                    "items": {
+                                        "example": null,
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "processed_invoices": {
+                                    "items": {
+                                        "example": "invoice_id - 00364698_5, voucher_id - 01408712",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "resolvable_invoices": {
+                                    "items": {
+                                        "example": null,
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/voucher": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "format follows this pattern (year-month-day) here is an example (2018-01-01)",
+                        "name": "start_date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "format follows this pattern (year-month-day) here is an example (2018-01-01)",
+                        "name": "end_date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "vouchers": {
+                                    "items": {
+                                        "properties": {
+                                            "voucher_id": {
+                                                "example": "01385036",
+                                                "type": "string"
+                                            },
+                                            "supplier_id": {
+                                                "type": "string"
+                                            },
+                                            "po_id": {
+                                                "type": "string"
+                                            },
+                                            "bank_account_code": {
+                                                "example": "AP",
+                                                "type": "string"
+                                            },
+                                            "supplier_name": {
+                                                "example": "aws",
+                                                "type": "string"
+                                            },
+                                            "account_field": {
+                                                "example": "2132",
+                                                "type": "string"
+                                            },
+                                            "class_field": {
+                                                "example": "S8002",
+                                                "type": "string"
+                                            },
+                                            "payment_system_id": {
+                                                "example": "9998323705",
+                                                "type": "string"
+                                            },
+                                            "journal_line_reference": {
+                                                "example": 313,
+                                                "type": "number"
+                                            },
+                                            "journal_date": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "example": "distribution",
+                                                "type": "string"
+                                            },
+                                            "journal_id": {
+                                                "example": "APACR30719",
+                                                "type": "string"
+                                            },
+                                            "payment_amount": {
+                                                "example": 2600.5,
+                                                "type": "number"
+                                            },
+                                            "operating_unit": {
+                                                "example": "C7721823",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/simple": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "invoice"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Insert invoices into peoplesoft",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "total_invoice_amt": {
+                                    "type": "number"
+                                },
+                                "origin": {
+                                    "type": "string"
+                                },
+                                "invoice_count": {
+                                    "type": "number"
+                                },
+                                "invoices": {
+                                    "items": {
+                                        "properties": {
+                                            "addr_num": {
+                                                "type": "number"
+                                            },
+                                            "invoice_amt": {
+                                                "type": "number"
+                                            },
+                                            "sales_tax": {
+                                                "type": "number"
+                                            },
+                                            "pymnt_terms_cd": {
+                                                "type": "string"
+                                            },
+                                            "account_field": {
+                                                "type": "string"
+                                            },
+                                            "invoice_date": {
+                                                "example": "2018-07-06",
+                                                "type": "string"
+                                            },
+                                            "class_field": {
+                                                "type": "string"
+                                            },
+                                            "vendor_id": {
+                                                "type": "string"
+                                            },
+                                            "remit_location": {
+                                                "type": "string"
+                                            },
+                                            "reference": {
+                                                "type": "string"
+                                            },
+                                            "pymnt_comments": {
+                                                "type": "string"
+                                            },
+                                            "due_date": {
+                                                "example": "2018-07-06",
+                                                "type": "string"
+                                            },
+                                            "invoice_id": {
+                                                "type": "string"
+                                            },
+                                            "operating_unit": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array",
+                                    "required": [
+                                        "vendor_id",
+                                        "invoice_id",
+                                        "invoice_date",
+                                        "invoice_amt",
+                                        "account_field",
+                                        "class_field",
+                                        "operating_unit"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "origin",
+                                "invoice_count",
+                                "total_invoice_amt"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "The user to create",
+                        "name": "user",
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "All invoices passed the first inspection.",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "successful_invoices": {
+                                    "items": {
+                                        "example": "invoice_id",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "unsuccessful_invoices": {
+                                    "items": {
+                                        "example": "invoice_id and reason why it failed",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "success"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "User is not authorized for this origin",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "successful_invoices": {
+                                    "items": {
+                                        "example": null,
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "unsuccessful_invoices": {
+                                    "items": {
+                                        "example": null,
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "no authorization"
+                    }
+                }
+            }
+        },
+        "/vitg": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "invoice"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Insert invoices into peoplesoft",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "total_invoice_amt": {
+                                    "example": 0,
+                                    "type": "number"
+                                },
+                                "origin": {
+                                    "example": "",
+                                    "type": "string"
+                                },
+                                "invoice_count": {
+                                    "example": 0,
+                                    "type": "number"
+                                },
+                                "invoices": {
+                                    "items": {
+                                        "properties": {
+                                            "sua_id": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "pymnt_comments": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "location": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "trans_date": {
+                                                "example": "2018-07-12",
+                                                "type": "string"
+                                            },
+                                            "trans_id": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "invoice_amt": {
+                                                "example": 0,
+                                                "type": "number"
+                                            },
+                                            "req_id": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "lines": {
+                                                "items": {
+                                                    "properties": {
+                                                        "uom_po": {
+                                                            "example": "",
+                                                            "type": "string"
+                                                        },
+                                                        "quantity": {
+                                                            "example": 0,
+                                                            "type": "number"
+                                                        },
+                                                        "line_amt": {
+                                                            "example": 0,
+                                                            "type": "number"
+                                                        },
+                                                        "distributions": {
+                                                            "items": {
+                                                                "properties": {
+                                                                    "account_field": {
+                                                                        "example": "",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "class_field": {
+                                                                        "example": "",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "distribution_amt": {
+                                                                        "example": 0,
+                                                                        "type": "number"
+                                                                    },
+                                                                    "operating_unit": {
+                                                                        "example": "",
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array",
+                                                            "required": [
+                                                                "account_field",
+                                                                "class_field",
+                                                                "operating_unit",
+                                                                "distribution_amt"
+                                                            ]
+                                                        },
+                                                        "unit_price": {
+                                                            "example": 0,
+                                                            "type": "number"
+                                                        },
+                                                        "1099_code": {
+                                                            "example": "",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "freight_amt": {
+                                                "example": 0,
+                                                "type": "number"
+                                            },
+                                            "invoice_date": {
+                                                "example": "2018-07-12",
+                                                "type": "string"
+                                            },
+                                            "invoice_id": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "vendor_id": {
+                                                "example": "",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array",
+                                    "required": [
+                                        "vendor_id",
+                                        "invoice_id",
+                                        "invoice_date",
+                                        "invoice_amt"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "origin",
+                                "invoice_count",
+                                "total_invoice_amt"
+                            ]
+                        },
+                        "description": "The user to create",
+                        "name": "user",
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "All invoices passed the first inspection.",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "successful_invoices": {
+                                    "items": {
+                                        "example": "invoice_id",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "unsuccessful_invoices": {
+                                    "items": {
+                                        "example": "invoice_id and reason why it failed",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "success"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "User is not authorized for this origin",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "successful_invoices": {
+                                    "items": {
+                                        "example": null,
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "unsuccessful_invoices": {
+                                    "items": {
+                                        "example": null,
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "no authorization"
+                    }
+                }
+            }
+        },
+        "/multi": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "invoice"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Insert invoices into peoplesoft",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "total_invoice_amt": {
+                                    "example": 0,
+                                    "type": "number"
+                                },
+                                "origin": {
+                                    "example": "",
+                                    "type": "string"
+                                },
+                                "invoice_count": {
+                                    "example": 0,
+                                    "type": "number"
+                                },
+                                "invoices": {
+                                    "items": {
+                                        "properties": {
+                                            "pmnt_terms_cd": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "po_id": {
+                                                "example": "0000000000",
+                                                "type": "string"
+                                            },
+                                            "pymnt_comments": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "location": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "invoice_amt": {
+                                                "example": 0,
+                                                "type": "number"
+                                            },
+                                            "sales_tax": {
+                                                "example": 0,
+                                                "type": "number"
+                                            },
+                                            "due_date": {
+                                                "example": "2018-07-06",
+                                                "type": "string"
+                                            },
+                                            "lines": {
+                                                "items": {
+                                                    "properties": {
+                                                        "1099_state_code": {
+                                                            "example": "",
+                                                            "type": "string"
+                                                        },
+                                                        "line_amt": {
+                                                            "example": 0,
+                                                            "type": "number"
+                                                        },
+                                                        "distributions": {
+                                                            "items": {
+                                                                "properties": {
+                                                                    "account_field": {
+                                                                        "example": "",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "class_field": {
+                                                                        "example": "",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "distribution_amt": {
+                                                                        "example": 0,
+                                                                        "type": "number"
+                                                                    },
+                                                                    "operating_unit": {
+                                                                        "example": "",
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array",
+                                                            "required": [
+                                                                "account_field",
+                                                                "class_field",
+                                                                "operating_unit",
+                                                                "distribution_amt"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "type": "array",
+                                                "required": [
+                                                    "line_amt"
+                                                ]
+                                            },
+                                            "pymnt_addr_num": {
+                                                "example": 0,
+                                                "type": "number"
+                                            },
+                                            "invoice_date": {
+                                                "example": "2018-07-06",
+                                                "type": "string"
+                                            },
+                                            "invoice_id": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "vendor_id": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "reference": {
+                                                "example": "",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array",
+                                    "required": [
+                                        "vendor_id",
+                                        "invoice_id",
+                                        "invoice_date"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "origin",
+                                "invoice_count",
+                                "total_invoice_amt"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "The user to create",
+                        "name": "user",
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "All invoices passed the first inspection.",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "successful_invoices": {
+                                    "items": {
+                                        "example": "invoice_id",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "unsuccessful_invoices": {
+                                    "items": {
+                                        "example": "invoice_id and reason why it failed",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "success"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "User is not authorized for this origin",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "successful_invoices": {
+                                    "items": {
+                                        "example": null,
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "unsuccessful_invoices": {
+                                    "items": {
+                                        "example": null,
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "no authorization"
+                    }
+                }
+            }
+        },
+        "/voucher_payment_info": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "The date that the voucher submit date begins on",
+                        "name": "start_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The date that the voucher submit date ends on",
+                        "name": "end_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "vouchers": {
+                                    "items": {
+                                        "properties": {
+                                            "scheduled_pay_date": {
+                                                "example": "21-MAR-21",
+                                                "type": "string"
+                                            },
+                                            "voucher_id": {
+                                                "example": "01385036",
+                                                "type": "string"
+                                            },
+                                            "po_id": {
+                                                "example": 1234567890,
+                                                "type": "string"
+                                            },
+                                            "postal": {
+                                                "example": 84602,
+                                                "type": "string"
+                                            },
+                                            "state": {
+                                                "example": "UT",
+                                                "type": "string"
+                                            },
+                                            "address1": {
+                                                "example": "123 CHERRY WAY",
+                                                "type": "string"
+                                            },
+                                            "address2": {
+                                                "example": "PO BOX 1234",
+                                                "type": "string"
+                                            },
+                                            "address3": {
+                                                "example": "ATTN: JOHN DOE",
+                                                "type": "string"
+                                            },
+                                            "voucher_date": {
+                                                "example": "03-MAR-21",
+                                                "type": "string"
+                                            },
+                                            "city": {
+                                                "example": "PROVO",
+                                                "type": "string"
+                                            },
+                                            "amount": {
+                                                "example": 1116.8,
+                                                "type": "number"
+                                            },
+                                            "address4": {
+                                                "example": "ACCT",
+                                                "type": "string"
+                                            },
+                                            "invoice_id": {
+                                                "example": 1234567,
+                                                "type": "string"
+                                            },
+                                            "payment_method": {
+                                                "example": "CHK",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/blanket": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "invoice"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Insert invoices into peoplesoft",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "total_invoice_amt": {
+                                    "example": 0,
+                                    "type": "number"
+                                },
+                                "origin": {
+                                    "example": "",
+                                    "type": "string"
+                                },
+                                "invoice_count": {
+                                    "example": 0,
+                                    "type": "number"
+                                },
+                                "invoices": {
+                                    "items": {
+                                        "properties": {
+                                            "po_id": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "invoice_date": {
+                                                "example": "2018-07-06",
+                                                "type": "string"
+                                            },
+                                            "invoice_id": {
+                                                "example": "",
+                                                "type": "string"
+                                            },
+                                            "distributions": {
+                                                "items": {
+                                                    "properties": {
+                                                        "account_field": {
+                                                            "example": "",
+                                                            "type": "string"
+                                                        },
+                                                        "class_field": {
+                                                            "example": "",
+                                                            "type": "string"
+                                                        },
+                                                        "distribution_amt": {
+                                                            "example": 0,
+                                                            "type": "number"
+                                                        },
+                                                        "operating_unit": {
+                                                            "example": "",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "type": "array",
+                                                "required": [
+                                                    "account_field",
+                                                    "class_field",
+                                                    "operating_unit",
+                                                    "distribution_amt"
+                                                ]
+                                            },
+                                            "pymnt_message": {
+                                                "example": "",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array",
+                                    "required": [
+                                        "po_id",
+                                        "invoice_id",
+                                        "invoice_date"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "origin",
+                                "invoice_count",
+                                "total_invoice_amt"
+                            ]
+                        },
+                        "description": "The user to create",
+                        "name": "user",
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "batch_id": {
+                                            "type": "string"
+                                        },
+                                        "successful_invoices": {
+                                            "items": {
+                                                "properties": {
+                                                    "invoice_id": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "unsuccessful_invoices": {
+                                            "items": {
+                                                "properties": {
+                                                    "unresolvable_errors": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "invoice_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "resolvable_errors": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "success"
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "batch_id": {
+                                            "type": "string"
+                                        },
+                                        "unsuccessful_invoices": {
+                                            "items": {
+                                                "properties": {
+                                                    "unresolvable_errors": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "invoice_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "resolvable_errors": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "bad request"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "User is not authorized for this origin",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "successful_invoices": {
+                                    "items": {
+                                        "example": null,
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "unsuccessful_invoices": {
+                                    "items": {
+                                        "example": null,
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "no authorization"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "swagger": "2.0",
+    "info": {
+        "title": "Invoices",
+        "description": "Request and Post invoices",
+        "version": "v1"
+    }
+}

@@ -1,0 +1,1550 @@
+{
+    "basePath": "/domains/regapi/carts/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{person_id},{year_term}/prioritizeClassEnvelope": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "sets the class and envelope priorities",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The cart year_term",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/class_envelope_priority"
+                        },
+                        "description": "set the class and envelope priority using an array of class objects containing priorityIndex, curriculum_id, title_code and section_number  and envelope objects containing a priorityIndex and envelope_id",
+                        "name": "priority",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "default": {
+                                "schema": {
+                                    "$ref": "#/definitions/ErrorResponse"
+                                },
+                                "description": "Error"
+                            },
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empty\""
+                    }
+                },
+                "operationId": "setPriority"
+            }
+        },
+        "/{person_id},{year_term}/checkout_status": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "sets the checkout status of the cart",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term of the cart",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/checkout_status_item"
+                        },
+                        "description": "The class structure to be added to the cart",
+                        "name": "checkout_status",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/checkout_status"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "default": {
+                                "schema": {
+                                    "$ref": "#/definitions/ErrorResponse"
+                                },
+                                "description": "Error"
+                            },
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empty\""
+                    }
+                },
+                "operationId": "setCartCheckoutStatus"
+            }
+        },
+        "/{person_id},{year_term}/class_requests/{curriculum_id},{title_code},{section_number},{credit_hours}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "adds class request to the cart",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term of the cart",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The curriculum_id of the class to be added to the cart",
+                        "name": "curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The title-code of the class to be added to the cart",
+                        "name": "title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The section_number of the class to be added to the cart",
+                        "name": "section_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The credit_hours of a variable credit hour class",
+                        "name": "credit_hours",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/class_hrs_body_parameters"
+                        },
+                        "description": "The class structure to be added to the cart",
+                        "name": "class_hrs_body_parameters",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/class_request"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empty\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "addClassToCart"
+            }
+        },
+        "/{person_id}/yearTerms": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "list cart year terms with history or availability",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "description": "Error"
+                    }
+                },
+                "operationId": "listCartYearTerms"
+            }
+        },
+        "/{person_id},{year_term}/waitlist_status": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "sets the waitlist property of the cart",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term of the cart",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/waitlist_status_item"
+                        },
+                        "description": "The waitliat status to be added to the cart",
+                        "name": "waitlist_status",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/waitlist_status"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empty\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "setCartWaitlistStatus"
+            }
+        },
+        "/nolog": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Retrieve a collection of carts",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The year-term of the cart being selected",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The year-term list of the carts being selected",
+                        "name": "year_term_list",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/carts"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No carts satisfy the query paramters - the collection is empty\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getCartsNoLog"
+            }
+        },
+        "/{person_id},{year_term}": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Process Cart",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term of the cart",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/processed_cart"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empty\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "processCart"
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Retrieve cart",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term of the cart",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/cart"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empty\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getCart"
+            }
+        },
+        "/{person_id},{year_term}/class_requests/{curriculum_id},{title_code},{section_number}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "adds class request to the cart",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term of the cart",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The curriculum_id of the class to be added to the cart",
+                        "name": "curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The title-code of the class to be added to the cart",
+                        "name": "title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The section_number of the class to be added to the cart",
+                        "name": "section_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/class_body_parameters"
+                        },
+                        "description": "The class structure to be added to the cart",
+                        "name": "class_body_parameters",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/class_request"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empty\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "addClassToCart"
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Removes a class from the cart",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term of the cart",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The curriculum_id of the class request to be removed from the cart",
+                        "name": "curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The title-code of the class request to be removed from the cart",
+                        "name": "title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The section_number of the class request to be removed from the cart",
+                        "name": "section_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empty\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "removeClassFromCart"
+            }
+        },
+        "/check": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Check",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "description": "Error"
+                    }
+                },
+                "operationId": "check"
+            }
+        },
+        "/{person_id},{year_term}/nolog": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Retrieve cart",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term of the cart",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/cart"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empty\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getCartNoLog"
+            }
+        },
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Retrieve a collection of carts",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The year-term of the cart being selected",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The year-term of the carts being selected",
+                        "name": "year_term_list",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/carts"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No carts satisfy the query paramters - the collection is empty\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getCarts"
+            }
+        },
+        "/{person_id},{year_term}/status": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "retrieve the cart status",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The cart year_term",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    }
+                },
+                "operationId": "processWait"
+            }
+        },
+        "/{person_id},{year_term}/envelope_requests/{envelope_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Adds an envelope request to the cart",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term for which the cart pertains",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The envelope_id of the envelope request to be added to the class",
+                        "name": "envelope_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/envelope_request"
+                        },
+                        "description": "The envelope structure to be added to the cart",
+                        "name": "envelope",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/envelope_request"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empty\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "addEnvelopeToCart"
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Removes an envelope request from the cart",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term for which the cart pertains",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The envelope_id for the envelope request to be removed from the cart",
+                        "name": "envelope_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empty\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "removeEnvelopeFromCart"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "methods": {
+            "items": {
+                "enum": [
+                    "DELETE",
+                    "GET",
+                    "OPTIONS",
+                    "POST",
+                    "PUT"
+                ],
+                "type": "string"
+            },
+            "description": "Supported HTTP Methods",
+            "uniqueItems": true,
+            "type": "array"
+        },
+        "processed_class": {
+            "properties": {
+                "class_log_id": {
+                    "type": "string"
+                },
+                "section_number": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "course_title": {
+                    "type": "string"
+                },
+                "title_code": {
+                    "type": "string"
+                },
+                "catalog_number": {
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "type": "string"
+                },
+                "dept_name": {
+                    "type": "string"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "catalog_suffix": {
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "link": {
+            "description": "Hypermedia link format",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "method": {
+                    "enum": [
+                        "DELETE",
+                        "GET",
+                        "OPTIONS",
+                        "POST",
+                        "PUT"
+                    ],
+                    "type": "string"
+                },
+                "rel": {
+                    "type": "string"
+                },
+                "href": {
+                    "format": "uri",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "rel",
+                "href",
+                "method",
+                "title"
+            ],
+            "type": "object"
+        },
+        "checkout_status": {
+            "properties": {
+                "next_state": {
+                    "type": "string"
+                },
+                "updated": {
+                    "$ref": "#/definitions/updated"
+                },
+                "links": {
+                    "description": "Hypermedia links that impacr the entire collection of  class_requests",
+                    "properties": {
+                        "class_request.info": {
+                            "$ref": "#/definitions/link"
+                        }
+                    },
+                    "type": "object"
+                },
+                "current_state": {
+                    "type": "string"
+                },
+                "checkout": {
+                    "type": "boolean"
+                },
+                "postPriority": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "class_hrs_body_parameters": {
+            "properties": {
+                "section_number": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "title_code": {
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "type": "string"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "cart": {
+            "description": "a cart representing student class and encelope requests for a semester",
+            "type": "object"
+        },
+        "class_body_parameters": {
+            "properties": {
+                "section_number": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "title_code": {
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "type": "string"
+                },
+                "year_term": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "validation_response": {
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "return_code": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "return_code",
+                "response"
+            ],
+            "type": "object"
+        },
+        "carts": {
+            "description": "A collection of carts",
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/cart"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "description": "Hypermedia links that impact the entire collection of Carts",
+                    "properties": {
+                        "carts.prev": {
+                            "$ref": "#/definitions/link"
+                        },
+                        "carts.info": {
+                            "$ref": "#/definitions/link"
+                        },
+                        "carts.next": {
+                            "$ref": "#/definitions/link"
+                        }
+                    },
+                    "type": "object"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "waitlist_status_item": {
+            "properties": {
+                "waitlist": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "envelope_request": {
+            "type": "object"
+        },
+        "class_envelope_priority": {
+            "items": {
+                "description": "This is either a class object containing priorityIndex, curriculum_id, title_code and section_number or an envelope object containing a priorityIndex and envelope_id. Since swagger doesn't have an expression for \"objectA or objectB\" i've left it as just an object.",
+                "type": "object"
+            },
+            "description": "An array containing the ordering of classes and envelopes",
+            "type": "array"
+        },
+        "waitlist_status": {
+            "properties": {
+                "next_state": {
+                    "type": "string"
+                },
+                "updated": {
+                    "$ref": "#/definitions/updated"
+                },
+                "waitlist": {
+                    "type": "boolean"
+                },
+                "links": {
+                    "description": "Hypermedia links that impacr the entire collection of  class_requests",
+                    "properties": {
+                        "class_request.info": {
+                            "$ref": "#/definitions/link"
+                        }
+                    },
+                    "type": "object"
+                },
+                "current_state": {
+                    "type": "string"
+                }
+            }
+        },
+        "updated": {
+            "properties": {
+                "person_id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "date_time": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "class_request": {
+            "properties": {
+                "section_number": {
+                    "type": "string"
+                },
+                "instructor": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "catalog_number": {
+                    "type": "string"
+                },
+                "links": {
+                    "description": "Hypermedia links that impact this Class_Request",
+                    "properties": {
+                        "classes.remove_class": {
+                            "$ref": "#/definitions/link"
+                        }
+                    },
+                    "type": "object"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "dept_name": {
+                    "type": "string"
+                },
+                "catalog_suffix": {
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "type": "string"
+                },
+                "course": {
+                    "type": "string"
+                },
+                "days_taught": {
+                    "type": "string"
+                },
+                "audit_type": {
+                    "type": "string"
+                },
+                "updated": {
+                    "$ref": "#/definitions/updated"
+                },
+                "time_taught": {
+                    "type": "string"
+                },
+                "course_title": {
+                    "type": "string"
+                },
+                "title_code": {
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "checkout_status_item": {
+            "properties": {
+                "checkout": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "contexts": {
+            "description": "Contexts",
+            "properties": {
+                "all": {
+                    "items": [
+                        {
+                            "default": "basic",
+                            "type": "string"
+                        },
+                        {
+                            "default": "parent_academic_unit",
+                            "type": "string"
+                        },
+                        {
+                            "default": "sub_academic_units",
+                            "type": "string"
+                        },
+                        {
+                            "default": "assigned_programs",
+                            "type": "string"
+                        },
+                        {
+                            "default": "assigned_teaching_areas",
+                            "type": "string"
+                        },
+                        {
+                            "default": "contacts",
+                            "type": "string"
+                        }
+                    ],
+                    "uniqueItems": true,
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "field_set_strings": {
+            "description": "List of available field sets",
+            "enum": [
+                "basic"
+            ],
+            "type": "string"
+        },
+        "processed_cart": {
+            "properties": {
+                "processed_envelopes": {
+                    "items": {
+                        "$ref": "#/definitions/processed_envelope"
+                    },
+                    "type": "array"
+                },
+                "processed_date_time": {
+                    "type": "number"
+                },
+                "processed": {
+                    "type": "boolean"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "processed_success": {
+                    "type": "boolean"
+                },
+                "waitlist": {
+                    "type": "boolean"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "checkout": {
+                    "type": "boolean"
+                },
+                "processed_classes": {
+                    "items": {
+                        "$ref": "#/definitions/processed_class"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "person_id",
+                "year_term"
+            ]
+        },
+        "processed_envelope": {
+            "properties": {
+                "envelope_id": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "processed_classes": {
+                    "items": {
+                        "$ref": "#/definitions/processed_class"
+                    },
+                    "type": "array"
+                },
+                "envelope_log_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ErrorResponse": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "metadata": {
+            "properties": {
+                "validation_response": {
+                    "$ref": "#/definitions/validation_response"
+                },
+                "page_start": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "page_size": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "field_sets_returned": {
+                    "items": {
+                        "$ref": "#/definitions/field_set_strings"
+                    },
+                    "uniqueItems": true,
+                    "type": "array"
+                },
+                "page_end": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "default_field_sets": {
+                    "items": {
+                        "$ref": "#/definitions/field_set_strings"
+                    },
+                    "uniqueItems": true,
+                    "type": "array"
+                },
+                "maximum_page_size": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "collection_size": {
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "default_page_size": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "field_sets_available": {
+                    "items": {
+                        "$ref": "#/definitions/field_set_strings"
+                    },
+                    "uniqueItems": true,
+                    "type": "array"
+                },
+                "contexts": {
+                    "$ref": "#/definitions/contexts"
+                }
+            },
+            "required": [
+                "validation_response"
+            ],
+            "type": "object"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "AutoRegCarts",
+        "version": "v1"
+    }
+}

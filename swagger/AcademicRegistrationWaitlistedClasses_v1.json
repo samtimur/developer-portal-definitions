@@ -1,0 +1,469 @@
+{
+    "basePath": "/domains/legacy/academic/registration/waitlisted_classes/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{id_type}/{id_value}/{year_term}": {
+            "get": {
+                "summary": "Get waitlisted classes for a student for a given year term",
+                "tags": [
+                    "WaitlistedClasses"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get waitlisted classes for a student for a given year term",
+                "parameters": [
+                    {
+                        "description": "Determines the type of id - personid, byuid, netid",
+                        "name": "id_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Holds the value of the id according to the id_type",
+                        "name": "id_value",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Determines a specific year and term",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/WaitlistedDataSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/WaitlistedDataError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetWaitlistedClasses"
+            }
+        },
+        "/{id_type}/{id_value}": {
+            "get": {
+                "summary": "Get all waitlisted classes for a student",
+                "tags": [
+                    "WaitlistedClasses"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get all waitlisted classes for a student",
+                "parameters": [
+                    {
+                        "description": "Determines the type of id - personid, byuid, netid",
+                        "name": "id_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Holds the value of the id according to the id_type",
+                        "name": "id_value",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/WaitlistedDataSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/WaitlistedDataError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetWaitlistedClasses"
+            }
+        },
+        "/{id_type}/{id_value}/{year_term}/{curriculum_id}/{title_code}/{section_number}": {
+            "delete": {
+                "summary": "Delete a waitlisted class for a student for a given year term",
+                "tags": [
+                    "WaitlistedClasses"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get waitlisted classes for a student for a given year term",
+                "parameters": [
+                    {
+                        "description": "Determines the type of id - personid, byuid, netid",
+                        "name": "id_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Holds the value of the id according to the id_type",
+                        "name": "id_value",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "year term of the class",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "curriculum id of the class",
+                        "name": "curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "title code of the class",
+                        "name": "title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "section number of the class",
+                        "name": "section_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/WaitlistedDataDeleteSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/WaitlistedDataError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "DeleteWaitlistedClass"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "add_error_date": {
+            "type": "string"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "WaitlistedDataDeleteSuccess": {
+            "properties": {
+                "WaitlistedClassesService": {
+                    "properties": {
+                        "response": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "year_term_desc": {
+            "type": "string"
+        },
+        "add_error_message": {
+            "type": "string"
+        },
+        "class_list_row": {
+            "properties": {
+                "section_number": {
+                    "$ref": "#/definitions/section_number"
+                },
+                "add_error_date": {
+                    "$ref": "#/definitions/add_error_date"
+                },
+                "course_number": {
+                    "$ref": "#/definitions/course_number"
+                },
+                "course_suffix": {
+                    "$ref": "#/definitions/course_suffix"
+                },
+                "year_term_desc": {
+                    "$ref": "#/definitions/year_term_desc"
+                },
+                "added_by_name": {
+                    "$ref": "#/definitions/added_by_name"
+                },
+                "size_mix_category": {
+                    "$ref": "#/definitions/size_mix_category"
+                },
+                "add_error_message": {
+                    "$ref": "#/definitions/add_error_message"
+                },
+                "year_term": {
+                    "$ref": "#/definitions/year_term"
+                },
+                "date_requested": {
+                    "$ref": "#/definitions/date_requested"
+                },
+                "enrolled_section": {
+                    "$ref": "#/definitions/enrolled_section"
+                },
+                "credit_hours": {
+                    "$ref": "#/definitions/credit_hours"
+                },
+                "added_by_id": {
+                    "$ref": "#/definitions/added_by_id"
+                },
+                "teaching_area": {
+                    "$ref": "#/definitions/teaching_area"
+                },
+                "schedule": {
+                    "$ref": "#/definitions/schedule"
+                },
+                "title_code": {
+                    "$ref": "#/definitions/title_code"
+                },
+                "curriculum_id": {
+                    "$ref": "#/definitions/curriculum_id"
+                },
+                "position_in_queue": {
+                    "$ref": "#/definitions/position_in_queue"
+                },
+                "year_term_desc_ext": {
+                    "$ref": "#/definitions/year_term_desc_ext"
+                },
+                "can_delete": {
+                    "$ref": "#/definitions/can_delete"
+                },
+                "instructors": {
+                    "$ref": "#/definitions/instructors"
+                }
+            },
+            "type": "object"
+        },
+        "teaching_area": {
+            "type": "string"
+        },
+        "errors": {
+            "items": {
+                "$ref": "#/definitions/error_data"
+            },
+            "type": "array"
+        },
+        "title_code": {
+            "type": "string"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "instructor_row": {
+            "properties": {
+                "person_id": {
+                    "$ref": "#/definitions/person_id"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "instructor_type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "curriculum_id": {
+            "type": "string"
+        },
+        "byu_id": {
+            "description": "9 digit number",
+            "type": "string"
+        },
+        "year_term_desc_ext": {
+            "type": "string"
+        },
+        "can_delete": {
+            "type": "string"
+        },
+        "instructors": {
+            "items": {
+                "$ref": "#/definitions/instructor_row"
+            },
+            "type": "array"
+        },
+        "section_number": {
+            "type": "string"
+        },
+        "person_id": {
+            "type": "string"
+        },
+        "course_suffix": {
+            "type": "string"
+        },
+        "course_number": {
+            "type": "string"
+        },
+        "WaitlistedDataSuccess": {
+            "properties": {
+                "WaitlistedClassesService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/WaitlistData"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "added_by_name": {
+            "type": "string"
+        },
+        "size_mix_category": {
+            "type": "string"
+        },
+        "year_term": {
+            "type": "string"
+        },
+        "date_requested": {
+            "type": "string"
+        },
+        "enrolled_section": {
+            "type": "string"
+        },
+        "WaitlistData": {
+            "properties": {
+                "school": {
+                    "$ref": "#/definitions/school"
+                },
+                "person_id": {
+                    "$ref": "#/definitions/person_id"
+                },
+                "student_name": {
+                    "$ref": "#/definitions/student_name"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "class_list": {
+                    "$ref": "#/definitions/class_list"
+                }
+            },
+            "type": "object"
+        },
+        "class_list": {
+            "items": {
+                "$ref": "#/definitions/class_list_row"
+            },
+            "type": "array"
+        },
+        "credit_hours": {
+            "type": "string"
+        },
+        "added_by_id": {
+            "type": "string"
+        },
+        "WaitlistedDataError": {
+            "properties": {
+                "WaitlistedClassesService": {
+                    "properties": {
+                        "response": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "errors": {
+                            "$ref": "#/definitions/errors"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "schedule": {
+            "items": {},
+            "type": "array"
+        },
+        "school": {
+            "type": "string"
+        },
+        "student_name": {
+            "type": "string"
+        },
+        "position_in_queue": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicRegistrationWaitlistedClasses",
+        "description": "This service provides information about waitlisted sections for a given semester for a student. This includes the student's meeting times, places and instructors for each section.",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/Enrollment_v1.0"
+    }
+}

@@ -1,0 +1,87 @@
+{
+    "basePath": "/domains/erp/sa/has_direct_deposit/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{BYU_ID}/{direct_deposit_type}/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "BYU-ID",
+                        "name": "BYU_ID",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Direct Deposit Type",
+                        "name": "direct_deposit_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "exists": true
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/exception_info"
+                        },
+                        "description": "This service requires a BYU-ID that can be no longer than 9 characters, followed by a Direct Deposit Type that can be only 1 character.  Valid types are R-Student Refund, P-Payroll, and Y-YExpense",
+                        "examples": {
+                            "application/json": {
+                                "error_message": "EMPLID 999999999 does not exist."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "response": {
+            "items": {
+                "$ref": "#/definitions/exists"
+            },
+            "type": "array"
+        },
+        "exists": {
+            "enum": [
+                true,
+                false
+            ],
+            "type": "boolean"
+        },
+        "exception_info": {
+            "properties": {
+                "error_message": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "HAS_DIRECT_DEPOSIT",
+        "description": "Returns a value of 'Y' if the BYU-ID in the request has a Direct Deposit Account that matches the Direct Deposit Type.",
+        "version": "v1"
+    }
+}

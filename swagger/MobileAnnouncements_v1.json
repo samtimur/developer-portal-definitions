@@ -1,0 +1,222 @@
+{
+    "basePath": "/domains/mobile/announcements/v1",
+    "paths": {
+        "/announcements": {
+            "post": {
+                "summary": "Add an announcement",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/announcement_input"
+                        },
+                        "name": "announcement_input",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/announcement"
+                        },
+                        "description": "Announcement created"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/readable_error"
+                        },
+                        "description": "Invalid request body"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/readable_error"
+                        },
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get all announcements sorted by decreasing priority",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Include true to only return currently active announcements",
+                        "name": "active",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/announcement"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of announcements sorted by priority"
+                    }
+                }
+            }
+        },
+        "/announcements/{id}": {
+            "put": {
+                "summary": "Update the announcement with the given ID",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Announcement ID",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/announcement_input"
+                        },
+                        "name": "announcement_input",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/announcement"
+                        },
+                        "description": "Announcement updated"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/readable_error"
+                        },
+                        "description": "Invalid request body"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/readable_error"
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/readable_error"
+                        },
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete the announcement with the given ID",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Announcement ID",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/readable_error"
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/readable_error"
+                        },
+                        "description": "Not found"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "announcement": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "dismissible": {
+                    "type": "boolean"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "integer"
+                },
+                "feature_id": {
+                    "type": "string"
+                },
+                "external_url": {
+                    "type": "string"
+                },
+                "start_date": {
+                    "type": "string"
+                }
+            }
+        },
+        "readable_error": {
+            "properties": {
+                "error_message": {
+                    "type": "string"
+                }
+            }
+        },
+        "announcement_input": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "dismissible": {
+                    "type": "boolean"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "integer"
+                },
+                "feature_id": {
+                    "type": "string"
+                },
+                "external_url": {
+                    "type": "string"
+                },
+                "start_date": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "MobileAnnouncements",
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443"
+}

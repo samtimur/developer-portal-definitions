@@ -1,0 +1,99 @@
+{
+    "paths": {
+        "/{name}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "HelloName"
+                ],
+                "summary": "Says hello to name from path",
+                "x-throttling-tier": "Unlimited",
+                "description": "Says hello to name from path",
+                "parameters": [
+                    {
+                        "description": "your name",
+                        "name": "name",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    }
+                },
+                "operationId": "GetHelloBack"
+            }
+        },
+        "/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "HelloName"
+                ],
+                "summary": "Says hello to name from body",
+                "x-throttling-tier": "Unlimited",
+                "description": "Says hello to name from body",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/name"
+                        },
+                        "description": "request body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    }
+                },
+                "operationId": "GetHelloNameBack"
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Hello"
+                ],
+                "summary": "Says hello",
+                "x-throttling-tier": "Unlimited",
+                "description": "Says hello",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    }
+                },
+                "operationId": "GetHelloBack"
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "name": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "toAPIGateway",
+        "version": "1.0.0"
+    },
+    "basePath": "/hello/1.0.0",
+    "host": "api.byu.edu:443"
+}

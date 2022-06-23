@@ -1,0 +1,367 @@
+{
+    "basePath": "/domains/aim-classroom-tech/v1",
+    "x-mock_json": {
+        "endorsements": {
+            "values": [
+                {
+                    "message": {
+                        "description": "Health message",
+                        "api_type": "read-only"
+                    },
+                    "metadata": {
+                        "validation_response": {
+                            "message": "Success",
+                            "code": 200
+                        }
+                    }
+                }
+            ],
+            "links": {
+                "byu_exams__info": {
+                    "method": "GET",
+                    "rel": "self",
+                    "href": "https://api.byu.edu/domains/aim-classroom-tech/v1/health"
+                }
+            },
+            "metadata": {
+                "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                },
+                "collection_size": 1,
+                "update_type": {
+                    "value": "U",
+                    "api_type": "read-only"
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/health": {
+            "x-controller": "classroomTech",
+            "get": {
+                "summary": "Health check",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "A simple path health check",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/healthParm"
+                        },
+                        "description": "Optional unused body",
+                        "name": "healthParm",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/health"
+                        },
+                        "description": "Service is healthy"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "health",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/classroomTech": {
+            "x-controller": "classroomTech",
+            "post": {
+                "summary": "Classroom tech change",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "A complete classroom tech",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/eventDetail"
+                        },
+                        "description": "Event detail",
+                        "name": "event",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/rslt_post"
+                        },
+                        "description": "Event posted"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "eventWeb",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/event": {
+            "x-controller": "classroomTech",
+            "post": {
+                "summary": "Classroom tech change",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "A complete classroom tech",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/eventPackage"
+                        },
+                        "description": "Event detail",
+                        "name": "event",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/rslt_post"
+                        },
+                        "description": "Event posted"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "eventHub",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "rslt_post": {
+            "properties": {
+                "message": {
+                    "description": "Event post message",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "error": {
+            "description": "Error response",
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "type": "object",
+            "required": [
+                "metadata"
+            ]
+        },
+        "eventPackage": {
+            "description": "Entire event pushed to us",
+            "properties": {
+                "events": {
+                    "description": "The event object",
+                    "properties": {
+                        "event": {
+                            "items": {
+                                "description": "Getting closer. The event header and body",
+                                "properties": {
+                                    "event_header": {
+                                        "description": "metadata for the event",
+                                        "properties": {
+                                            "entity": {
+                                                "description": "event entity",
+                                                "type": "string"
+                                            },
+                                            "event_type": {
+                                                "description": "event type",
+                                                "type": "string"
+                                            },
+                                            "domain": {
+                                                "description": "event domain",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "event_body": {
+                                        "description": "Finally the event",
+                                        "properties": {
+                                            "building": {
+                                                "description": "Building abbreviation",
+                                                "type": "string"
+                                            },
+                                            "devices": {
+                                                "items": {
+                                                    "description": "room resource",
+                                                    "properties": {
+                                                        "device_count": {
+                                                            "description": "Number of this particular AV resource in the room",
+                                                            "type": "number"
+                                                        },
+                                                        "device_type": {
+                                                            "description": "AV resource name",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "description": "List of room resources",
+                                                "type": "array"
+                                            },
+                                            "room": {
+                                                "description": "Room number",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "description": "Array of single event. Not sure why this is an array.",
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "simple_metadata": {
+            "properties": {
+                "validation_response": {
+                    "properties": {
+                        "message": {
+                            "default": "Success",
+                            "x-variable": "validation_response_message",
+                            "type": "string"
+                        },
+                        "code": {
+                            "default": 200,
+                            "x-variable": "validation_response_code",
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "code",
+                        "message"
+                    ]
+                },
+                "update_type": {
+                    "description": "Update permissions of caller",
+                    "properties": {
+                        "value": {
+                            "x-variable": "update_type",
+                            "type": "string"
+                        },
+                        "api_type": {
+                            "x-variable": "api_type",
+                            "enum": [
+                                "read-only"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "api_type",
+                        "value"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "validation_response"
+            ]
+        },
+        "healthParm": {
+            "description": "Optional details of a health request",
+            "type": "object"
+        },
+        "health": {
+            "properties": {
+                "message": {
+                    "description": "Health message",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "eventDetail": {
+            "description": "Details of the tech pushed to us",
+            "properties": {
+                "building": {
+                    "description": "Building abbreviation",
+                    "type": "string"
+                },
+                "devices": {
+                    "items": {
+                        "description": "room resource",
+                        "properties": {
+                            "device_count": {
+                                "description": "Number of this particular AV resource in the room",
+                                "type": "number"
+                            },
+                            "device_type": {
+                                "description": "AV resource name",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "description": "List of room resources",
+                    "type": "array"
+                },
+                "room": {
+                    "description": "Room number",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "AimClassroomTech",
+        "description": "Synchronize aim data store with classroom tech configuration changes.",
+        "license": {
+            "name": "Apache-2.0"
+        },
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

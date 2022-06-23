@@ -1,0 +1,3021 @@
+{
+    "basePath": "/domains/legacy/academic/registration/AIMregistration/v1",
+    "x-mock_json": {
+        "RegMainService": {
+            "response": {
+                "MISSION_DEFERMENT_FLAG": "N",
+                "can_discontinue": false,
+                "year_term_list": [
+                    {
+                        "na": "20181",
+                        "description": "Winter Semester 2018",
+                        "year_term": "20181"
+                    }
+                ],
+                "total_credit_hours": 6.5,
+                "discontinuance_date": "",
+                "graduate_full_time_status": "",
+                "holds_table": [
+                    {
+                        "date_removed": "",
+                        "date_time_updated": "03 Jan 2018",
+                        "date_set": "28 Dec 2011",
+                        "num_hold_types": "0",
+                        "flag_owner": "OWNER-ACDSUPPORT",
+                        "flag_value": "GOOD",
+                        "contact_information": "Contact Academic Support Office, 2500 WSC, (801) 422-2723",
+                        "description": "Academic Support Flag/Hold",
+                        "hold_transcript": "N",
+                        "flag_name": "ACDSTD",
+                        "old_expired_date": "",
+                        "old_year_term": "",
+                        "is_hold": "0",
+                        "set_by_id": "ACDSTDCLC",
+                        "expired_date": "31 Dec 2999",
+                        "set_by_name": "ACDSTDCLC",
+                        "hold": "Academic Support Flag/Hold",
+                        "hold_day_reg": "N",
+                        "year_term": "",
+                        "old_effective_date": "",
+                        "std_comment": "",
+                        "updated_by_id": "ACDSTDCLU",
+                        "hold_type": "N/A",
+                        "removed_by_id": "",
+                        "removed_by_name": "",
+                        "effective_date": "08 Jan 2018",
+                        "updated_by_name": "ACDSTDCLU"
+                    }
+                ],
+                "date_today": "",
+                "programs": [
+                    {
+                        "degree": "BS",
+                        "name": "Computer Science",
+                        "type": "Major",
+                        "program_id": "33428",
+                        "major_program_id": ""
+                    }
+                ],
+                "class_table": [
+                    {
+                        "envelope_id": "",
+                        "honors": "",
+                        "instructor": "Professor, Name",
+                        "section_type": "",
+                        "block": "2",
+                        "class_period": "10:00a - 10:50a",
+                        "course": "STAC 131",
+                        "end_date": "",
+                        "date_added": "2017-11-20",
+                        "added_by": "",
+                        "course_title": "Golf, Beginning",
+                        "title_code": "019",
+                        "curriculum_id": "04299",
+                        "grade": "",
+                        "na1": "001",
+                        "drop_action": "D",
+                        "date_posted": "",
+                        "building": "SFH",
+                        "service_learning": "",
+                        "begin_date": "2018-03-01",
+                        "posted_by": "",
+                        "class_fee": "",
+                        "class_repeated": "",
+                        "section": "001",
+                        "credit_hours": 0.5,
+                        "days": "MTWTh",
+                        "sequence": "parent",
+                        "lab_quiz_section": "",
+                        "room": "36"
+                    }
+                ],
+                "reg_eligibility": "DC - Day Continuing",
+                "reg_priority_date": "2017-10-24T00:00:00",
+                "credit_list_table": [
+                    {
+                        "earned_hours": 128,
+                        "description": "Total thru Winter 2018",
+                        "gpa": 2.65,
+                        "graded_hours": 126.5,
+                        "total_hours": 334.8
+                    }
+                ],
+                "term_acad_standing": "GOOD",
+                "number_of_classes": 3,
+                "reg_status": "9 - Continuing Student",
+                "year_term": "20181",
+                "before_school": false,
+                "year_term_first": "Fall Semester 2011",
+                "class_table_with_permission": [],
+                "distance_education_status": "",
+                "year_term_last": "Fall Semester 2018",
+                "display_year_term": "Winter Semester 2018",
+                "curr_acad_standing": "GOOD",
+                "YEAR_TERM_DEFERMENT_MISSION_RETURN": "",
+                "class_standing": "Senior",
+                "email_address": "email"
+            },
+            "request": {
+                "status": 200,
+                "resource": "/json/123456789/20181/",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation"
+            }
+        },
+        "/{person_id}/{year_term}": {
+            "post": {
+                "tags": [
+                    "AIMRegistrationService"
+                ],
+                "summary": "Add registration information",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Add Registration Information",
+                "parameters": [
+                    {
+                        "description": "individual person identifier",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year and term",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "3 digit number. If not provided on DELETE, all classes will be dropped",
+                        "name": "section",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "5 digit number",
+                        "name": "curriculum_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "3 digit number",
+                        "name": "title_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Ignored if not applicable for the class",
+                        "name": "permission_code",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Ignored if not applicable for the class",
+                        "name": "variable_credit_hours",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "string"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "AddRegistrationInformation"
+            },
+            "get": {
+                "tags": [
+                    "AIMRegistrationService"
+                ],
+                "summary": "Get Registration Information",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get Registration Information",
+                "parameters": [
+                    {
+                        "description": "individual person identifier",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year and term",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "MISSION_DEFERMENT_FLAG": {
+                                            "type": "string"
+                                        },
+                                        "can_discontinue": {
+                                            "type": "boolean"
+                                        },
+                                        "year_term_list": {
+                                            "items": {
+                                                "properties": {
+                                                    "na": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "description": "YYYYT",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "total_credit_hours": {
+                                            "type": "number"
+                                        },
+                                        "discontinuance_date": {
+                                            "type": "string"
+                                        },
+                                        "graduate_full_time_status": {
+                                            "type": "string"
+                                        },
+                                        "holds_table": {
+                                            "items": {
+                                                "properties": {
+                                                    "date_removed": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_time_updated": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_set": {
+                                                        "type": "string"
+                                                    },
+                                                    "num_hold_types": {
+                                                        "type": "string"
+                                                    },
+                                                    "flag_owner": {
+                                                        "type": "string"
+                                                    },
+                                                    "flag_value": {
+                                                        "type": "string"
+                                                    },
+                                                    "contact_information": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "hold_transcript": {
+                                                        "type": "string"
+                                                    },
+                                                    "flag_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "old_expired_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "old_year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "is_hold": {
+                                                        "type": "string"
+                                                    },
+                                                    "set_by_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "expired_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "set_by_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "hold": {
+                                                        "type": "string"
+                                                    },
+                                                    "hold_day_reg": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "description": "YYYYT",
+                                                        "type": "string"
+                                                    },
+                                                    "old_effective_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "std_comment": {
+                                                        "type": "string"
+                                                    },
+                                                    "updated_by_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "hold_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "removed_by_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "removed_by_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "effective_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "updated_by_name": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "date_today": {
+                                            "type": "string"
+                                        },
+                                        "programs": {
+                                            "items": {
+                                                "properties": {
+                                                    "degree": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "type": "string"
+                                                    },
+                                                    "program_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "major_program_id": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "class_table": {
+                                            "items": {
+                                                "properties": {
+                                                    "envelope_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "honors": {
+                                                        "type": "string"
+                                                    },
+                                                    "instructor": {
+                                                        "type": "string"
+                                                    },
+                                                    "section_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "block": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_period": {
+                                                        "type": "string"
+                                                    },
+                                                    "course": {
+                                                        "type": "string"
+                                                    },
+                                                    "end_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_added": {
+                                                        "type": "string"
+                                                    },
+                                                    "added_by": {
+                                                        "type": "string"
+                                                    },
+                                                    "course_title": {
+                                                        "type": "string"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "grade": {
+                                                        "type": "string"
+                                                    },
+                                                    "na1": {
+                                                        "type": "string"
+                                                    },
+                                                    "drop_action": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_posted": {
+                                                        "type": "string"
+                                                    },
+                                                    "building": {
+                                                        "type": "string"
+                                                    },
+                                                    "service_learning": {
+                                                        "type": "string"
+                                                    },
+                                                    "begin_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "posted_by": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_fee": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_repeated": {
+                                                        "type": "string"
+                                                    },
+                                                    "section": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "number"
+                                                    },
+                                                    "days": {
+                                                        "type": "string"
+                                                    },
+                                                    "sequence": {
+                                                        "type": "string"
+                                                    },
+                                                    "lab_quiz_section": {
+                                                        "type": "string"
+                                                    },
+                                                    "room": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "reg_eligibility": {
+                                            "type": "string"
+                                        },
+                                        "reg_priority_date": {
+                                            "type": "string"
+                                        },
+                                        "credit_list_table": {
+                                            "items": {
+                                                "properties": {
+                                                    "earned_hours": {
+                                                        "type": "number"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "gpa": {
+                                                        "type": "number"
+                                                    },
+                                                    "graded_hours": {
+                                                        "type": "number"
+                                                    },
+                                                    "total_hours": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "term_acad_standing": {
+                                            "type": "string"
+                                        },
+                                        "number_of_classes": {
+                                            "type": "number"
+                                        },
+                                        "reg_status": {
+                                            "type": "string"
+                                        },
+                                        "year_term": {
+                                            "description": "YYYYT",
+                                            "type": "string"
+                                        },
+                                        "before_school": {
+                                            "type": "boolean"
+                                        },
+                                        "year_term_first": {
+                                            "type": "string"
+                                        },
+                                        "class_table_with_permission": {
+                                            "items": {},
+                                            "type": "array"
+                                        },
+                                        "distance_education_status": {
+                                            "type": "string"
+                                        },
+                                        "year_term_last": {
+                                            "type": "string"
+                                        },
+                                        "display_year_term": {
+                                            "type": "string"
+                                        },
+                                        "curr_acad_standing": {
+                                            "type": "string"
+                                        },
+                                        "YEAR_TERM_DEFERMENT_MISSION_RETURN": {
+                                            "type": "string"
+                                        },
+                                        "class_standing": {
+                                            "type": "string"
+                                        },
+                                        "email_address": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "MISSION_DEFERMENT_FLAG": "N",
+                                    "can_discontinue": false,
+                                    "year_term_list": [
+                                        {
+                                            "na": "20181",
+                                            "description": "Winter Semester 2018",
+                                            "year_term": "20181"
+                                        }
+                                    ],
+                                    "total_credit_hours": 6.5,
+                                    "discontinuance_date": "",
+                                    "graduate_full_time_status": "",
+                                    "holds_table": [
+                                        {
+                                            "date_removed": "",
+                                            "date_time_updated": "03 Jan 2018",
+                                            "date_set": "28 Dec 2011",
+                                            "num_hold_types": "0",
+                                            "flag_owner": "OWNER-ACDSUPPORT",
+                                            "flag_value": "GOOD",
+                                            "contact_information": "Contact Academic Support Office, 2500 WSC, (801) 422-2723",
+                                            "description": "Academic Support Flag/Hold",
+                                            "hold_transcript": "N",
+                                            "flag_name": "ACDSTD",
+                                            "old_expired_date": "",
+                                            "old_year_term": "",
+                                            "is_hold": "0",
+                                            "set_by_id": "ACDSTDCLC",
+                                            "expired_date": "31 Dec 2999",
+                                            "set_by_name": "ACDSTDCLC",
+                                            "hold": "Academic Support Flag/Hold",
+                                            "hold_day_reg": "N",
+                                            "year_term": "",
+                                            "old_effective_date": "",
+                                            "std_comment": "",
+                                            "updated_by_id": "ACDSTDCLU",
+                                            "hold_type": "N/A",
+                                            "removed_by_id": "",
+                                            "removed_by_name": "",
+                                            "effective_date": "08 Jan 2018",
+                                            "updated_by_name": "ACDSTDCLU"
+                                        }
+                                    ],
+                                    "date_today": "",
+                                    "programs": [
+                                        {
+                                            "degree": "BS",
+                                            "name": "Computer Science",
+                                            "type": "Major",
+                                            "program_id": "33428",
+                                            "major_program_id": ""
+                                        }
+                                    ],
+                                    "class_table": [
+                                        {
+                                            "envelope_id": "",
+                                            "honors": "",
+                                            "instructor": "Professor, Name",
+                                            "section_type": "",
+                                            "block": "2",
+                                            "class_period": "10:00a - 10:50a",
+                                            "course": "STAC 131",
+                                            "end_date": "",
+                                            "date_added": "2017-11-20",
+                                            "added_by": "",
+                                            "course_title": "Golf, Beginning",
+                                            "title_code": "019",
+                                            "curriculum_id": "04299",
+                                            "grade": "",
+                                            "na1": "001",
+                                            "drop_action": "D",
+                                            "date_posted": "",
+                                            "building": "SFH",
+                                            "service_learning": "",
+                                            "begin_date": "2018-03-01",
+                                            "posted_by": "",
+                                            "class_fee": "",
+                                            "class_repeated": "",
+                                            "section": "001",
+                                            "credit_hours": 0.5,
+                                            "days": "MTWTh",
+                                            "sequence": "parent",
+                                            "lab_quiz_section": "",
+                                            "room": "36"
+                                        }
+                                    ],
+                                    "reg_eligibility": "DC - Day Continuing",
+                                    "reg_priority_date": "2017-10-24T00:00:00",
+                                    "credit_list_table": [
+                                        {
+                                            "earned_hours": 128,
+                                            "description": "Total thru Winter 2018",
+                                            "gpa": 2.65,
+                                            "graded_hours": 126.5,
+                                            "total_hours": 334.8
+                                        }
+                                    ],
+                                    "term_acad_standing": "GOOD",
+                                    "number_of_classes": 3,
+                                    "reg_status": "9 - Continuing Student",
+                                    "year_term": "20181",
+                                    "before_school": false,
+                                    "year_term_first": "Fall Semester 2011",
+                                    "class_table_with_permission": [],
+                                    "distance_education_status": "",
+                                    "year_term_last": "Fall Semester 2018",
+                                    "display_year_term": "Winter Semester 2018",
+                                    "curr_acad_standing": "GOOD",
+                                    "YEAR_TERM_DEFERMENT_MISSION_RETURN": "",
+                                    "class_standing": "Senior",
+                                    "email_address": "email"
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/json/123456789/20181/",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "string"
+                                        },
+                                        "successful": {
+                                            "type": "boolean"
+                                        },
+                                        "warning": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetRegistrationInformation"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "instructor": {
+            "type": "string"
+        },
+        "honors": {
+            "type": "string"
+        },
+        "can_discontinue": {
+            "type": "boolean"
+        },
+        "year_term_list": {
+            "items": {
+                "properties": {
+                    "na": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "year_term": {
+                        "description": "YYYYT",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "course": {
+            "type": "string"
+        },
+        "errors": {
+            "items": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "httpStatusCode": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "title_code": {
+            "type": "string"
+        },
+        "old_expired_date": {
+            "type": "string"
+        },
+        "na1": {
+            "type": "string"
+        },
+        "discontinuance_date": {
+            "type": "string"
+        },
+        "graduate_full_time_status": {
+            "type": "string"
+        },
+        "program_id": {
+            "type": "string"
+        },
+        "RegistrationService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "MISSION_DEFERMENT_FLAG": {
+                            "type": "string"
+                        },
+                        "can_discontinue": {
+                            "type": "boolean"
+                        },
+                        "year_term_list": {
+                            "items": {
+                                "properties": {
+                                    "na": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "year_term": {
+                                        "description": "YYYYT",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "total_credit_hours": {
+                            "type": "number"
+                        },
+                        "discontinuance_date": {
+                            "type": "string"
+                        },
+                        "graduate_full_time_status": {
+                            "type": "string"
+                        },
+                        "holds_table": {
+                            "items": {
+                                "properties": {
+                                    "date_removed": {
+                                        "type": "string"
+                                    },
+                                    "date_time_updated": {
+                                        "type": "string"
+                                    },
+                                    "date_set": {
+                                        "type": "string"
+                                    },
+                                    "num_hold_types": {
+                                        "type": "string"
+                                    },
+                                    "flag_owner": {
+                                        "type": "string"
+                                    },
+                                    "flag_value": {
+                                        "type": "string"
+                                    },
+                                    "contact_information": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "hold_transcript": {
+                                        "type": "string"
+                                    },
+                                    "flag_name": {
+                                        "type": "string"
+                                    },
+                                    "old_expired_date": {
+                                        "type": "string"
+                                    },
+                                    "old_year_term": {
+                                        "type": "string"
+                                    },
+                                    "is_hold": {
+                                        "type": "string"
+                                    },
+                                    "set_by_id": {
+                                        "type": "string"
+                                    },
+                                    "expired_date": {
+                                        "type": "string"
+                                    },
+                                    "set_by_name": {
+                                        "type": "string"
+                                    },
+                                    "hold": {
+                                        "type": "string"
+                                    },
+                                    "hold_day_reg": {
+                                        "type": "string"
+                                    },
+                                    "year_term": {
+                                        "description": "YYYYT",
+                                        "type": "string"
+                                    },
+                                    "old_effective_date": {
+                                        "type": "string"
+                                    },
+                                    "std_comment": {
+                                        "type": "string"
+                                    },
+                                    "updated_by_id": {
+                                        "type": "string"
+                                    },
+                                    "hold_type": {
+                                        "type": "string"
+                                    },
+                                    "removed_by_id": {
+                                        "type": "string"
+                                    },
+                                    "removed_by_name": {
+                                        "type": "string"
+                                    },
+                                    "effective_date": {
+                                        "type": "string"
+                                    },
+                                    "updated_by_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "date_today": {
+                            "type": "string"
+                        },
+                        "programs": {
+                            "items": {
+                                "properties": {
+                                    "degree": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "program_id": {
+                                        "type": "string"
+                                    },
+                                    "major_program_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "class_table": {
+                            "items": {
+                                "properties": {
+                                    "envelope_id": {
+                                        "type": "string"
+                                    },
+                                    "honors": {
+                                        "type": "string"
+                                    },
+                                    "instructor": {
+                                        "type": "string"
+                                    },
+                                    "section_type": {
+                                        "type": "string"
+                                    },
+                                    "block": {
+                                        "type": "string"
+                                    },
+                                    "class_period": {
+                                        "type": "string"
+                                    },
+                                    "course": {
+                                        "type": "string"
+                                    },
+                                    "end_date": {
+                                        "type": "string"
+                                    },
+                                    "date_added": {
+                                        "type": "string"
+                                    },
+                                    "added_by": {
+                                        "type": "string"
+                                    },
+                                    "course_title": {
+                                        "type": "string"
+                                    },
+                                    "title_code": {
+                                        "type": "string"
+                                    },
+                                    "curriculum_id": {
+                                        "type": "string"
+                                    },
+                                    "grade": {
+                                        "type": "string"
+                                    },
+                                    "na1": {
+                                        "type": "string"
+                                    },
+                                    "drop_action": {
+                                        "type": "string"
+                                    },
+                                    "date_posted": {
+                                        "type": "string"
+                                    },
+                                    "building": {
+                                        "type": "string"
+                                    },
+                                    "service_learning": {
+                                        "type": "string"
+                                    },
+                                    "begin_date": {
+                                        "type": "string"
+                                    },
+                                    "posted_by": {
+                                        "type": "string"
+                                    },
+                                    "class_fee": {
+                                        "type": "string"
+                                    },
+                                    "class_repeated": {
+                                        "type": "string"
+                                    },
+                                    "section": {
+                                        "type": "string"
+                                    },
+                                    "credit_hours": {
+                                        "type": "number"
+                                    },
+                                    "days": {
+                                        "type": "string"
+                                    },
+                                    "sequence": {
+                                        "type": "string"
+                                    },
+                                    "lab_quiz_section": {
+                                        "type": "string"
+                                    },
+                                    "room": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "reg_eligibility": {
+                            "type": "string"
+                        },
+                        "reg_priority_date": {
+                            "type": "string"
+                        },
+                        "credit_list_table": {
+                            "items": {
+                                "properties": {
+                                    "earned_hours": {
+                                        "type": "number"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "gpa": {
+                                        "type": "number"
+                                    },
+                                    "graded_hours": {
+                                        "type": "number"
+                                    },
+                                    "total_hours": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "term_acad_standing": {
+                            "type": "string"
+                        },
+                        "number_of_classes": {
+                            "type": "number"
+                        },
+                        "reg_status": {
+                            "type": "string"
+                        },
+                        "year_term": {
+                            "description": "YYYYT",
+                            "type": "string"
+                        },
+                        "before_school": {
+                            "type": "boolean"
+                        },
+                        "year_term_first": {
+                            "type": "string"
+                        },
+                        "class_table_with_permission": {
+                            "items": {},
+                            "type": "array"
+                        },
+                        "distance_education_status": {
+                            "type": "string"
+                        },
+                        "year_term_last": {
+                            "type": "string"
+                        },
+                        "display_year_term": {
+                            "type": "string"
+                        },
+                        "curr_acad_standing": {
+                            "type": "string"
+                        },
+                        "YEAR_TERM_DEFERMENT_MISSION_RETURN": {
+                            "type": "string"
+                        },
+                        "class_standing": {
+                            "type": "string"
+                        },
+                        "email_address": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "drop_action": {
+            "type": "string"
+        },
+        "programs": {
+            "items": {
+                "properties": {
+                    "degree": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "program_id": {
+                        "type": "string"
+                    },
+                    "major_program_id": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "reg_eligibility": {
+            "type": "string"
+        },
+        "hold": {
+            "type": "string"
+        },
+        "number_of_classes": {
+            "type": "number"
+        },
+        "class_table_with_permission": {
+            "items": {},
+            "type": "array"
+        },
+        "class_repeated": {
+            "type": "string"
+        },
+        "year_term_last": {
+            "type": "string"
+        },
+        "old_effective_date": {
+            "type": "string"
+        },
+        "updated_by_id": {
+            "type": "string"
+        },
+        "removed_by_id": {
+            "type": "string"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "block": {
+            "type": "string"
+        },
+        "class_period": {
+            "type": "string"
+        },
+        "contact_information": {
+            "type": "string"
+        },
+        "end_date": {
+            "type": "string"
+        },
+        "course_title": {
+            "type": "string"
+        },
+        "added_by": {
+            "type": "string"
+        },
+        "date_added": {
+            "type": "string"
+        },
+        "postResponseData": {
+            "properties": {
+                "result": {
+                    "type": "string"
+                },
+                "successful": {
+                    "type": "string"
+                },
+                "warning": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "flag_name": {
+            "type": "string"
+        },
+        "delete": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "drop_result": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "grade": {
+            "type": "string"
+        },
+        "graded_hours": {
+            "type": "number"
+        },
+        "set_by_id": {
+            "type": "string"
+        },
+        "class_table": {
+            "items": {
+                "properties": {
+                    "envelope_id": {
+                        "type": "string"
+                    },
+                    "honors": {
+                        "type": "string"
+                    },
+                    "instructor": {
+                        "type": "string"
+                    },
+                    "section_type": {
+                        "type": "string"
+                    },
+                    "block": {
+                        "type": "string"
+                    },
+                    "class_period": {
+                        "type": "string"
+                    },
+                    "course": {
+                        "type": "string"
+                    },
+                    "end_date": {
+                        "type": "string"
+                    },
+                    "date_added": {
+                        "type": "string"
+                    },
+                    "added_by": {
+                        "type": "string"
+                    },
+                    "course_title": {
+                        "type": "string"
+                    },
+                    "title_code": {
+                        "type": "string"
+                    },
+                    "curriculum_id": {
+                        "type": "string"
+                    },
+                    "grade": {
+                        "type": "string"
+                    },
+                    "na1": {
+                        "type": "string"
+                    },
+                    "drop_action": {
+                        "type": "string"
+                    },
+                    "date_posted": {
+                        "type": "string"
+                    },
+                    "building": {
+                        "type": "string"
+                    },
+                    "service_learning": {
+                        "type": "string"
+                    },
+                    "begin_date": {
+                        "type": "string"
+                    },
+                    "posted_by": {
+                        "type": "string"
+                    },
+                    "class_fee": {
+                        "type": "string"
+                    },
+                    "class_repeated": {
+                        "type": "string"
+                    },
+                    "section": {
+                        "type": "string"
+                    },
+                    "credit_hours": {
+                        "type": "number"
+                    },
+                    "days": {
+                        "type": "string"
+                    },
+                    "sequence": {
+                        "type": "string"
+                    },
+                    "lab_quiz_section": {
+                        "type": "string"
+                    },
+                    "room": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "date_posted": {
+            "type": "string"
+        },
+        "reg_priority_date": {
+            "type": "string"
+        },
+        "credit_list_table": {
+            "items": {
+                "properties": {
+                    "earned_hours": {
+                        "type": "number"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "gpa": {
+                        "type": "number"
+                    },
+                    "graded_hours": {
+                        "type": "number"
+                    },
+                    "total_hours": {
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "posted_by": {
+            "type": "string"
+        },
+        "degree": {
+            "type": "string"
+        },
+        "na": {
+            "type": "string"
+        },
+        "days": {
+            "type": "string"
+        },
+        "hold_type": {
+            "type": "string"
+        },
+        "sequence": {
+            "type": "string"
+        },
+        "curr_acad_standing": {
+            "type": "string"
+        },
+        "effective_date": {
+            "type": "string"
+        },
+        "total_hours": {
+            "type": "number"
+        },
+        "total_credit_hours": {
+            "type": "number"
+        },
+        "type": {
+            "type": "string"
+        },
+        "flag_value": {
+            "type": "string"
+        },
+        "flag_owner": {
+            "type": "string"
+        },
+        "num_hold_types": {
+            "type": "string"
+        },
+        "earned_hours": {
+            "type": "number"
+        },
+        "hold_transcript": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ErrorResponse": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "result": {
+                            "type": "string"
+                        },
+                        "successful": {
+                            "type": "boolean"
+                        },
+                        "warning": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "errors": {
+                    "items": {
+                        "properties": {
+                            "message": {
+                                "type": "string"
+                            },
+                            "httpStatusCode": {
+                                "type": "number"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "code": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "set_by_name": {
+            "type": "string"
+        },
+        "expired_date": {
+            "type": "string"
+        },
+        "holds_table": {
+            "items": {
+                "properties": {
+                    "date_removed": {
+                        "type": "string"
+                    },
+                    "date_time_updated": {
+                        "type": "string"
+                    },
+                    "date_set": {
+                        "type": "string"
+                    },
+                    "num_hold_types": {
+                        "type": "string"
+                    },
+                    "flag_owner": {
+                        "type": "string"
+                    },
+                    "flag_value": {
+                        "type": "string"
+                    },
+                    "contact_information": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "hold_transcript": {
+                        "type": "string"
+                    },
+                    "flag_name": {
+                        "type": "string"
+                    },
+                    "old_expired_date": {
+                        "type": "string"
+                    },
+                    "old_year_term": {
+                        "type": "string"
+                    },
+                    "is_hold": {
+                        "type": "string"
+                    },
+                    "set_by_id": {
+                        "type": "string"
+                    },
+                    "expired_date": {
+                        "type": "string"
+                    },
+                    "set_by_name": {
+                        "type": "string"
+                    },
+                    "hold": {
+                        "type": "string"
+                    },
+                    "hold_day_reg": {
+                        "type": "string"
+                    },
+                    "year_term": {
+                        "description": "YYYYT",
+                        "type": "string"
+                    },
+                    "old_effective_date": {
+                        "type": "string"
+                    },
+                    "std_comment": {
+                        "type": "string"
+                    },
+                    "updated_by_id": {
+                        "type": "string"
+                    },
+                    "hold_type": {
+                        "type": "string"
+                    },
+                    "removed_by_id": {
+                        "type": "string"
+                    },
+                    "removed_by_name": {
+                        "type": "string"
+                    },
+                    "effective_date": {
+                        "type": "string"
+                    },
+                    "updated_by_name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "service_learning": {
+            "type": "string"
+        },
+        "term_acad_standing": {
+            "type": "string"
+        },
+        "gpa": {
+            "type": "number"
+        },
+        "begin_date": {
+            "type": "string"
+        },
+        "year_term": {
+            "description": "YYYYT",
+            "type": "string"
+        },
+        "major_program_id": {
+            "type": "string"
+        },
+        "credit_hours": {
+            "type": "number"
+        },
+        "DeleteResponse": {
+            "properties": {
+                "drop_result": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "YEAR_TERM_DEFERMENT_MISSION_RETURN": {
+            "type": "string"
+        },
+        "class_standing": {
+            "type": "string"
+        },
+        "email_address": {
+            "type": "string"
+        },
+        "room": {
+            "type": "string"
+        },
+        "envelope_id": {
+            "type": "string"
+        },
+        "date_removed": {
+            "type": "string"
+        },
+        "MISSION_DEFERMENT_FLAG": {
+            "type": "string"
+        },
+        "section_type": {
+            "type": "string"
+        },
+        "date_time_updated": {
+            "type": "string"
+        },
+        "date_set": {
+            "type": "string"
+        },
+        "response": {
+            "properties": {
+                "MISSION_DEFERMENT_FLAG": {
+                    "type": "string"
+                },
+                "can_discontinue": {
+                    "type": "boolean"
+                },
+                "year_term_list": {
+                    "items": {
+                        "properties": {
+                            "na": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "year_term": {
+                                "description": "YYYYT",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "total_credit_hours": {
+                    "type": "number"
+                },
+                "discontinuance_date": {
+                    "type": "string"
+                },
+                "graduate_full_time_status": {
+                    "type": "string"
+                },
+                "holds_table": {
+                    "items": {
+                        "properties": {
+                            "date_removed": {
+                                "type": "string"
+                            },
+                            "date_time_updated": {
+                                "type": "string"
+                            },
+                            "date_set": {
+                                "type": "string"
+                            },
+                            "num_hold_types": {
+                                "type": "string"
+                            },
+                            "flag_owner": {
+                                "type": "string"
+                            },
+                            "flag_value": {
+                                "type": "string"
+                            },
+                            "contact_information": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "hold_transcript": {
+                                "type": "string"
+                            },
+                            "flag_name": {
+                                "type": "string"
+                            },
+                            "old_expired_date": {
+                                "type": "string"
+                            },
+                            "old_year_term": {
+                                "type": "string"
+                            },
+                            "is_hold": {
+                                "type": "string"
+                            },
+                            "set_by_id": {
+                                "type": "string"
+                            },
+                            "expired_date": {
+                                "type": "string"
+                            },
+                            "set_by_name": {
+                                "type": "string"
+                            },
+                            "hold": {
+                                "type": "string"
+                            },
+                            "hold_day_reg": {
+                                "type": "string"
+                            },
+                            "year_term": {
+                                "description": "YYYYT",
+                                "type": "string"
+                            },
+                            "old_effective_date": {
+                                "type": "string"
+                            },
+                            "std_comment": {
+                                "type": "string"
+                            },
+                            "updated_by_id": {
+                                "type": "string"
+                            },
+                            "hold_type": {
+                                "type": "string"
+                            },
+                            "removed_by_id": {
+                                "type": "string"
+                            },
+                            "removed_by_name": {
+                                "type": "string"
+                            },
+                            "effective_date": {
+                                "type": "string"
+                            },
+                            "updated_by_name": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "date_today": {
+                    "type": "string"
+                },
+                "programs": {
+                    "items": {
+                        "properties": {
+                            "degree": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string"
+                            },
+                            "program_id": {
+                                "type": "string"
+                            },
+                            "major_program_id": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "class_table": {
+                    "items": {
+                        "properties": {
+                            "envelope_id": {
+                                "type": "string"
+                            },
+                            "honors": {
+                                "type": "string"
+                            },
+                            "instructor": {
+                                "type": "string"
+                            },
+                            "section_type": {
+                                "type": "string"
+                            },
+                            "block": {
+                                "type": "string"
+                            },
+                            "class_period": {
+                                "type": "string"
+                            },
+                            "course": {
+                                "type": "string"
+                            },
+                            "end_date": {
+                                "type": "string"
+                            },
+                            "date_added": {
+                                "type": "string"
+                            },
+                            "added_by": {
+                                "type": "string"
+                            },
+                            "course_title": {
+                                "type": "string"
+                            },
+                            "title_code": {
+                                "type": "string"
+                            },
+                            "curriculum_id": {
+                                "type": "string"
+                            },
+                            "grade": {
+                                "type": "string"
+                            },
+                            "na1": {
+                                "type": "string"
+                            },
+                            "drop_action": {
+                                "type": "string"
+                            },
+                            "date_posted": {
+                                "type": "string"
+                            },
+                            "building": {
+                                "type": "string"
+                            },
+                            "service_learning": {
+                                "type": "string"
+                            },
+                            "begin_date": {
+                                "type": "string"
+                            },
+                            "posted_by": {
+                                "type": "string"
+                            },
+                            "class_fee": {
+                                "type": "string"
+                            },
+                            "class_repeated": {
+                                "type": "string"
+                            },
+                            "section": {
+                                "type": "string"
+                            },
+                            "credit_hours": {
+                                "type": "number"
+                            },
+                            "days": {
+                                "type": "string"
+                            },
+                            "sequence": {
+                                "type": "string"
+                            },
+                            "lab_quiz_section": {
+                                "type": "string"
+                            },
+                            "room": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "reg_eligibility": {
+                    "type": "string"
+                },
+                "reg_priority_date": {
+                    "type": "string"
+                },
+                "credit_list_table": {
+                    "items": {
+                        "properties": {
+                            "earned_hours": {
+                                "type": "number"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "gpa": {
+                                "type": "number"
+                            },
+                            "graded_hours": {
+                                "type": "number"
+                            },
+                            "total_hours": {
+                                "type": "number"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "term_acad_standing": {
+                    "type": "string"
+                },
+                "number_of_classes": {
+                    "type": "number"
+                },
+                "reg_status": {
+                    "type": "string"
+                },
+                "year_term": {
+                    "description": "YYYYT",
+                    "type": "string"
+                },
+                "before_school": {
+                    "type": "boolean"
+                },
+                "year_term_first": {
+                    "type": "string"
+                },
+                "class_table_with_permission": {
+                    "items": {},
+                    "type": "array"
+                },
+                "distance_education_status": {
+                    "type": "string"
+                },
+                "year_term_last": {
+                    "type": "string"
+                },
+                "display_year_term": {
+                    "type": "string"
+                },
+                "curr_acad_standing": {
+                    "type": "string"
+                },
+                "YEAR_TERM_DEFERMENT_MISSION_RETURN": {
+                    "type": "string"
+                },
+                "class_standing": {
+                    "type": "string"
+                },
+                "email_address": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "name": {
+            "type": "string"
+        },
+        "curriculum_id": {
+            "type": "string"
+        },
+        "is_hold": {
+            "type": "string"
+        },
+        "old_year_term": {
+            "type": "string"
+        },
+        "date_today": {
+            "type": "string"
+        },
+        "building": {
+            "type": "string"
+        },
+        "hold_day_reg": {
+            "type": "string"
+        },
+        "before_school": {
+            "type": "boolean"
+        },
+        "reg_status": {
+            "type": "string"
+        },
+        "class_fee": {
+            "type": "string"
+        },
+        "year_term_first": {
+            "type": "string"
+        },
+        "distance_education_status": {
+            "type": "string"
+        },
+        "section": {
+            "type": "string"
+        },
+        "postResponse": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "result": {
+                            "type": "string"
+                        },
+                        "successful": {
+                            "type": "string"
+                        },
+                        "warning": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "display_year_term": {
+            "type": "string"
+        },
+        "std_comment": {
+            "type": "string"
+        },
+        "lab_quiz_section": {
+            "type": "string"
+        },
+        "removed_by_name": {
+            "type": "string"
+        },
+        "updated_by_name": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicRegistrationAIMRegistration",
+        "description": "This service accesses registration information (including the current student schedule), adds classes, and drops classes in in the AIM System.",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

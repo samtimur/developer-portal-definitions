@@ -1,0 +1,237 @@
+{
+    "paths": {
+        "/{byu_id}/clearances": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all clearances for a user",
+                "tags": [
+                    "Clearances"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-ccure-session-id": "ccure-session-id",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            }
+        },
+        "/{byu_id}/clearances/{clearance_name}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Add user to clearance",
+                "tags": [
+                    "Clearances"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-ccure-session-id": "ccure-session-id",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "clearance_name",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/clearance_data"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Remove user from clearance",
+                "tags": [
+                    "Clearances"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-ccure-session-id": "ccure-session-id",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "clearance_name",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "CCURE API Login",
+                "tags": [
+                    "Authorization"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Login to the CCure system.\n\nThis call needs to be made before the other web services can be used. When calling subsequent web services include the ccure-session-id in. the header as\n\n\"x-ccure-session-id: ccure-session-id\"",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/login_data"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "CCURE API Logout",
+                "tags": [
+                    "Authorization"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-ccure-session-id": "ccure-session-id",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "clearance_data": {
+            "properties": {
+                "clearance": {
+                    "properties": {
+                        "activation_date": {
+                            "type": "string"
+                        },
+                        "expiration_date": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            }
+        },
+        "login_data": {
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "client_id": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "CCURE API",
+        "description": "Create Access to CCure API",
+        "version": "1.0.0"
+    },
+    "basePath": "/byuapi/ccure/v2",
+    "host": "api.byu.edu:443"
+}

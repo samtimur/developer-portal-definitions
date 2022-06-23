@@ -1,0 +1,831 @@
+{
+    "basePath": "/domain/admissions/tools/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/application/port": {
+            "x-controller": "application",
+            "post": {
+                "summary": "Port Application",
+                "description": "Port Application",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "application_service_id": {
+                                    "type": "string"
+                                },
+                                "application_id": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "institution": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "institution",
+                                "application_id",
+                                "application_service_id"
+                            ]
+                        },
+                        "description": "Request body",
+                        "name": "request",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "description": "Components to be ported (comma separated list)",
+                        "name": "component",
+                        "type": "string",
+                        "required": false,
+                        "in": "query",
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Application port successful"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Invalid Request - unable to interpret request",
+                                        "code": 400
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required to access data",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Authentication required to access data",
+                                        "code": 401
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access denied to protected data",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Access denied to protected data",
+                                        "code": 403
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource does not exist",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "The resource does not exist",
+                                        "code": 404
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Query parameters conflict or are malformed",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Query parameters conflict or are malformed",
+                                        "code": 409
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "portApplication",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/processing/byu/{byuId}": {
+            "x-controller": "centralProcessing",
+            "get": {
+                "summary": "Returns central processing data for a given BYU ID",
+                "description": "Returns central processing data for a given BYU ID",
+                "parameters": [
+                    {
+                        "description": "BYU ID",
+                        "name": "byuId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Include Component Scores",
+                        "name": "include_component_scores",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query",
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data from central processing"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Invalid Request - unable to interpret request",
+                                        "code": 400
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required to access data",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Authentication required to access data",
+                                        "code": 401
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access denied to protected data",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Access denied to protected data",
+                                        "code": 403
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource does not exist",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "The resource does not exist",
+                                        "code": 404
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Query parameters conflict or are malformed",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Query parameters conflict or are malformed",
+                                        "code": 409
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "getByuId",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/application/port?": {
+            "post": {
+                "summary": "Port Application",
+                "tags": [
+                    " "
+                ],
+                "description": "Port Application",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "application_service_id": {
+                                    "type": "string"
+                                },
+                                "application_id": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "institution": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "institution",
+                                "application_id",
+                                "application_service_id"
+                            ]
+                        },
+                        "description": "Request body",
+                        "name": "request",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "description": "Components to be ported (comma separated list)",
+                        "name": "component",
+                        "type": "string",
+                        "required": false,
+                        "in": "query",
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/processing/byu/{byuId}?": {
+            "get": {
+                "summary": "Returns central processing data for a given BYU ID",
+                "tags": [
+                    " "
+                ],
+                "description": "Returns central processing data for a given BYU ID",
+                "parameters": [
+                    {
+                        "description": "BYU ID",
+                        "name": "byuId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Include Component Scores",
+                        "name": "include_component_scores",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query",
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/authorized": {
+            "x-controller": "authorization",
+            "get": {
+                "summary": "Checks if client is authorized to access API",
+                "description": "Checks if client is authorized to access API",
+                "responses": {
+                    "200": {
+                        "description": "Authorized"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Invalid Request - unable to interpret request",
+                                        "code": 400
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required to access data",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Authentication required to access data",
+                                        "code": 401
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access denied to protected data",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Access denied to protected data",
+                                        "code": 403
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource does not exist",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "The resource does not exist",
+                                        "code": 404
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Query parameters conflict or are malformed",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Query parameters conflict or are malformed",
+                                        "code": 409
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "authorized",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/processing/application/{applicationId}": {
+            "x-controller": "centralProcessing",
+            "get": {
+                "summary": "Returns central processing data for a given Application ID",
+                "description": "Returns central processing data for a given Application ID",
+                "parameters": [
+                    {
+                        "description": "Application ID",
+                        "name": "applicationId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data from central processing"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Invalid Request - unable to interpret request",
+                                        "code": 400
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required to access data",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Authentication required to access data",
+                                        "code": 401
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access denied to protected data",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Access denied to protected data",
+                                        "code": 403
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource does not exist",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "The resource does not exist",
+                                        "code": 404
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Query parameters conflict or are malformed",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Query parameters conflict or are malformed",
+                                        "code": 409
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "getApplicationId",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/application/port/?": {
+            "post": {
+                "summary": "Port Application",
+                "tags": [
+                    " "
+                ],
+                "description": "Port Application",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "application_service_id": {
+                                    "type": "string"
+                                },
+                                "application_id": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "institution": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "institution",
+                                "application_id",
+                                "application_service_id"
+                            ]
+                        },
+                        "description": "Request body",
+                        "name": "request",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "description": "Components to be ported (comma separated list)",
+                        "name": "component",
+                        "type": "string",
+                        "required": false,
+                        "in": "query",
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/application/action/{applicationId}": {
+            "x-controller": "application",
+            "put": {
+                "summary": "Application Action",
+                "description": "Application Action",
+                "parameters": [
+                    {
+                        "description": "Application ID",
+                        "name": "applicationId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "properties": {
+                                "component_id": {
+                                    "type": "string"
+                                },
+                                "application_service_id": {
+                                    "type": "string"
+                                },
+                                "action": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object"
+                                },
+                                "action_message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "action",
+                                "action_message",
+                                "component_id",
+                                "data"
+                            ]
+                        },
+                        "description": "Request body",
+                        "name": "request",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Application port successful"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Invalid Request - unable to interpret request",
+                                        "code": 400
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required to access data",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Authentication required to access data",
+                                        "code": 401
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access denied to protected data",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Access denied to protected data",
+                                        "code": 403
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource does not exist",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "The resource does not exist",
+                                        "code": 404
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Query parameters conflict or are malformed",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Query parameters conflict or are malformed",
+                                        "code": 409
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "doAction",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/processing/byu/{byuId}/?": {
+            "get": {
+                "summary": "Returns central processing data for a given BYU ID",
+                "tags": [
+                    " "
+                ],
+                "description": "Returns central processing data for a given BYU ID",
+                "parameters": [
+                    {
+                        "description": "BYU ID",
+                        "name": "byuId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Include Component Scores",
+                        "name": "include_component_scores",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query",
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "title": "ces-adm-tools-api",
+        "description": "BFF for client ces-adm-tools-nuxt",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "v1"
+    }
+}

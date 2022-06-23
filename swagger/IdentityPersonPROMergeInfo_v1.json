@@ -1,0 +1,884 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "IdentityPersonPROMergeInfo",
+        "description": "MergeInfoService",
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/domains/legacy/identity/person/PRO/mergeinfo/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/MERGE/{personId}": {
+            "get": {
+                "summary": "Provide information on merges involving a specified person (personId provided), or all pending merges (personId not provided).",
+                "description": "Provide information on merges involving a specified person (personId provided), or all pending merges (personId not provided).",
+                "operationId": "mergeSpecifiedPersonInformation",
+                "parameters": [
+                    {
+                        "name": "personId",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "MergeInfoService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service request is OK and a response has been generated.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "MergeInfoService": {
+                                    "type": "object",
+                                    "properties": {
+                                        "request": {
+                                            "type": "object",
+                                            "properties": {
+                                                "method": {
+                                                    "type": "string"
+                                                },
+                                                "resource": {
+                                                    "type": "string"
+                                                },
+                                                "attributes": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "integer"
+                                                },
+                                                "statusMessage": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "response": {
+                                            "type": "object",
+                                            "properties": {
+                                                "mergeList": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "from_person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "to_person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "updated_by_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "date_time_initiated": {
+                                                                "type": "string"
+                                                            },
+                                                            "date_time_processed": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "activeMergeList": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "from_person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "to_person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "updated_by_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "date_time_initiated": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "MergeInfoService": {
+                                    "request": {
+                                        "method": "GET",
+                                        "resource": "/json/MERGE/123456789",
+                                        "attributes": "",
+                                        "status": 200,
+                                        "statusMessage": "Service request is OK and a response has been generated."
+                                    },
+                                    "response": {
+                                        "mergeList": [
+                                            {
+                                                "from_person_id": "123456789",
+                                                "to_person_id": "987654321",
+                                                "updated_by_id": "111222333",
+                                                "date_time_initiated": "2017-12-31 12:00:00",
+                                                "date_time_processed": "2017-12-31 12:00:00"
+                                            }
+                                        ],
+                                        "activeMergeList": [
+                                            {
+                                                "from_person_id": "123456789",
+                                                "to_person_id": "987654321",
+                                                "updated_by_id": "111222333",
+                                                "date_time_initiated": "2017-12-31 12:00:00"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "The target resource can not be found for the provided resource identifiers.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "The service method is not supported by the service.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "409": {
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/MERGE": {
+            "get": {
+                "summary": "Provide information on merges involving a specified person (personId provided), or all pending merges (personId not provided).",
+                "description": "Provide information on merges involving a specified person (personId provided), or all pending merges (personId not provided).",
+                "operationId": "mergeInformationForAll",
+                "parameters": [],
+                "tags": [
+                    "MergeInfoService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service request is OK and a response has been generated.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "MergeInfoService": {
+                                    "type": "object",
+                                    "properties": {
+                                        "request": {
+                                            "type": "object",
+                                            "properties": {
+                                                "method": {
+                                                    "type": "string"
+                                                },
+                                                "resource": {
+                                                    "type": "string"
+                                                },
+                                                "attributes": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "integer"
+                                                },
+                                                "statusMessage": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "response": {
+                                            "type": "object",
+                                            "properties": {
+                                                "mergeList": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "from_person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "to_person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "updated_by_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "date_time_initiated": {
+                                                                "type": "string"
+                                                            },
+                                                            "date_time_processed": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "activeMergeList": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "from_person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "to_person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "updated_by_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "date_time_initiated": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "MergeInfoService": {
+                                    "request": {
+                                        "method": "GET",
+                                        "resource": "/json/MERGE/123456789",
+                                        "attributes": "",
+                                        "status": 200,
+                                        "statusMessage": "Service request is OK and a response has been generated."
+                                    },
+                                    "response": {
+                                        "mergeList": [
+                                            {
+                                                "from_person_id": "123456789",
+                                                "to_person_id": "987654321",
+                                                "updated_by_id": "111222333",
+                                                "date_time_initiated": "2017-12-31 12:00:00",
+                                                "date_time_processed": "2017-12-31 12:00:00"
+                                            }
+                                        ],
+                                        "activeMergeList": [
+                                            {
+                                                "from_person_id": "123456789",
+                                                "to_person_id": "987654321",
+                                                "updated_by_id": "111222333",
+                                                "date_time_initiated": "2017-12-31 12:00:00"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "The target resource can not be found for the provided resource identifiers.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "The service method is not supported by the service.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "409": {
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "description": "service definition",
+                "operationId": "getServiceDocumentation",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "WebService": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "operations": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "method": {
+                                                        "type": "string"
+                                                    },
+                                                    "path": {
+                                                        "type": "string"
+                                                    },
+                                                    "path_identifiers": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "type": {
+                                                                    "type": "string"
+                                                                },
+                                                                "format": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "query_attributes": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "type": {
+                                                                    "type": "string"
+                                                                },
+                                                                "format": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "message": {
+                                                        "type": "string"
+                                                    },
+                                                    "httpStatusCode": {
+                                                        "type": "integer"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "httpStatusCodes": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer"
+                                                    },
+                                                    "message": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "infoService": {
+            "type": "object",
+            "properties": {
+                "MergeInfoService": {
+                    "type": "object",
+                    "properties": {
+                        "request": {
+                            "type": "object",
+                            "properties": {
+                                "method": {
+                                    "type": "string"
+                                },
+                                "resource": {
+                                    "type": "string"
+                                },
+                                "attributes": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "integer"
+                                },
+                                "statusMessage": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "response": {
+                            "type": "object",
+                            "properties": {
+                                "mergeList": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "from_person_id": {
+                                                "type": "string"
+                                            },
+                                            "to_person_id": {
+                                                "type": "string"
+                                            },
+                                            "updated_by_id": {
+                                                "type": "string"
+                                            },
+                                            "date_time_initiated": {
+                                                "type": "string"
+                                            },
+                                            "date_time_processed": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "activeMergeList": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "from_person_id": {
+                                                "type": "string"
+                                            },
+                                            "to_person_id": {
+                                                "type": "string"
+                                            },
+                                            "updated_by_id": {
+                                                "type": "string"
+                                            },
+                                            "date_time_initiated": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "request": {
+            "type": "object",
+            "properties": {
+                "method": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            }
+        },
+        "response": {
+            "type": "object",
+            "properties": {
+                "mergeList": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "from_person_id": {
+                                "type": "string"
+                            },
+                            "to_person_id": {
+                                "type": "string"
+                            },
+                            "updated_by_id": {
+                                "type": "string"
+                            },
+                            "date_time_initiated": {
+                                "type": "string"
+                            },
+                            "date_time_processed": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "activeMergeList": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "from_person_id": {
+                                "type": "string"
+                            },
+                            "to_person_id": {
+                                "type": "string"
+                            },
+                            "updated_by_id": {
+                                "type": "string"
+                            },
+                            "date_time_initiated": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "mergeList": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "from_person_id": {
+                        "type": "string"
+                    },
+                    "to_person_id": {
+                        "type": "string"
+                    },
+                    "updated_by_id": {
+                        "type": "string"
+                    },
+                    "date_time_initiated": {
+                        "type": "string"
+                    },
+                    "date_time_processed": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "activeMergeList": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "from_person_id": {
+                        "type": "string"
+                    },
+                    "to_person_id": {
+                        "type": "string"
+                    },
+                    "updated_by_id": {
+                        "type": "string"
+                    },
+                    "date_time_initiated": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "documentation": {
+            "type": "object",
+            "properties": {
+                "WebService": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "operations": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "method": {
+                                        "type": "string"
+                                    },
+                                    "path": {
+                                        "type": "string"
+                                    },
+                                    "path_identifiers": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "type": "string"
+                                                },
+                                                "format": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "query_attributes": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "type": "string"
+                                                },
+                                                "format": {
+                                                    "type": "string"
+                                                },
+                                                "required": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "errors": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                    "httpStatusCode": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        },
+                        "httpStatusCodes": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "integer"
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "operations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "type": "string"
+                    },
+                    "path": {
+                        "type": "string"
+                    },
+                    "path_identifiers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "format": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "query_attributes": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "format": {
+                                    "type": "string"
+                                },
+                                "required": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "errors": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "httpStatusCode": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "httpStatusCodes": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "x-mock_json": {
+        "infoService": {
+            "MergeInfoService": {
+                "request": {
+                    "method": "GET",
+                    "resource": "/json/MERGE/123456789",
+                    "attributes": "",
+                    "status": 200,
+                    "statusMessage": "Service request is OK and a response has been generated."
+                },
+                "response": {
+                    "mergeList": [
+                        {
+                            "from_person_id": "123456789",
+                            "to_person_id": "987654321",
+                            "updated_by_id": "111222333",
+                            "date_time_initiated": "2017-12-31 12:00:00",
+                            "date_time_processed": "2017-12-31 12:00:00"
+                        }
+                    ],
+                    "activeMergeList": [
+                        {
+                            "from_person_id": "123456789",
+                            "to_person_id": "987654321",
+                            "updated_by_id": "111222333",
+                            "date_time_initiated": "2017-12-31 12:00:00"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

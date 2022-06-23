@@ -1,0 +1,196 @@
+{
+    "basePath": "/domains/erp/hr/paid_hours/v1",
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "The paid hours for an employee given an operating unit and date",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the collection of paid hours for an employee for the specified date range and/or operating unit",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/start_date"
+                    },
+                    {
+                        "$ref": "#/parameters/stop_date"
+                    },
+                    {
+                        "$ref": "#/parameters/operating_unit"
+                    },
+                    {
+                        "$ref": "#/parameters/department_id"
+                    },
+                    {
+                        "$ref": "#/parameters/time_punch_date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/employee_paid_hours"
+                        },
+                        "description": "List of all employees and the paid hours associated with a given day"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "time_punch_date": {
+            "description": "The date when a time punch is recorded. Also known as the Date Under Report (DUR). Formatted as YYYY-MM-DD",
+            "example": "2020-01-05",
+            "type": "string"
+        },
+        "employee_paid_hours": {
+            "items": {
+                "$ref": "#/definitions/paid_hours_record"
+            },
+            "description": "Collection of employees and their paid hour information",
+            "type": "array"
+        },
+        "paid_hours": {
+            "description": "The total paid hours for a given day",
+            "example": "4.1",
+            "type": "string"
+        },
+        "byu_id": {
+            "description": "The nine-digit computer-generated ID assigned to each identity in BYU-IAM, which is printed on the BYU ID Card in the format xx-xxx-xxxx and serves as a unique identifier.",
+            "example": "123456789",
+            "type": "string"
+        },
+        "operating_unit": {
+            "description": "An eight digit alphanumeric field that defines a financial reporting entity. They begin with either a two-digit Fund number or an eight character alphanumeric Project number.",
+            "example": "12345678-XXX-12345",
+            "type": "string"
+        },
+        "paid_hours_record": {
+            "description": "Information pertaining to an employee and their paid hours on a given date for a given operating unit",
+            "properties": {
+                "time_punch_date": {
+                    "$ref": "#/definitions/time_punch_date"
+                },
+                "paid_hours": {
+                    "$ref": "#/definitions/paid_hours"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "operating_unit": {
+                    "$ref": "#/definitions/operating_unit"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "parameters": {
+        "time_punch_date": {
+            "description": "The given date. Format YYYY-MM-DD",
+            "name": "time_punch_date",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "department_id": {
+            "description": "A four digit alphanumeric identifier that uniquely specifies a campus Department.",
+            "name": "department_id",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "stop_date": {
+            "description": "The date that a defined period of time ends on. Format YYYY-MM-DD",
+            "name": "stop_date",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "name": "byu_id",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "start_date": {
+            "description": "The date that a defined period of time begins on. Format YYYY-MM-DD",
+            "name": "start_date",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "operating_unit": {
+            "pattern": "^[a-zA-Z0-9]{8}-[a-zA-Z0-9]{3}-[a-zA-Z0-9]{5}",
+            "description": "An eight digit alphanumeric field that defines a financial reporting entity. They begin with either a two-digit Fund number or an eight character alphanumeric Project number.",
+            "name": "operating_unit",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        }
+    },
+    "responses": {
+        "400": {
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "403": {
+            "description": "Access denied to protected data"
+        },
+        "404": {
+            "description": "The requested resource does not exist"
+        },
+        "500": {
+            "description": "Internal Server Error"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "externalDocs": {
+        "description": "Nuances about PeopleSoft APIs.",
+        "url": "https://github.com/byu-oit/erp-hr/blob/master/paid_hours.md"
+    },
+    "info": {
+        "title": "PAID_HOURS",
+        "description": "Provides paid hours information for an OIT employee",
+        "version": "v1"
+    }
+}

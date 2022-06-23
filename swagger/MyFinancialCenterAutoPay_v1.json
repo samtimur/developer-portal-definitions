@@ -1,0 +1,106 @@
+{
+    "basePath": "/domains/erp/sa/MyFinancialCenterAutoPay/v1",
+    "paths": {
+        "/{byu_id}/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/SeriesGeneral"
+                        },
+                        "description": "A list of series"
+                    }
+                }
+            }
+        },
+        "/{byu_id}/auto_pay_series/{auto_pay_series_type}/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "auto_pay_series_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/SeriesSpecific"
+                        },
+                        "description": "Information about a specific Auto Pay series type"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "SeriesSpecific": {
+            "properties": {
+                "has_auto_pay": {
+                    "type": "boolean"
+                },
+                "auto_pay_series_type": {
+                    "type": "string"
+                },
+                "has_mfc_account": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "SeriesGeneral": {
+            "properties": {
+                "auto_pay_series": {
+                    "items": {
+                        "$ref": "#/definitions/SeriesBasic"
+                    },
+                    "type": "array"
+                },
+                "has_mfc_account": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "SeriesBasic": {
+            "properties": {
+                "has_auto_pay": {
+                    "type": "boolean"
+                },
+                "auto_pay_series_type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "My Financial Center AutoPay Series Info",
+        "description": "Information about Auto Pay series for users in My Financial Center.",
+        "contact": {
+            "email": "sft_ft@byu.edu",
+            "name": "OIT Student Financial Applications"
+        },
+        "version": "1.0"
+    },
+    "host": "api.byu.edu:443"
+}

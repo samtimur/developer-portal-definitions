@@ -1,0 +1,163 @@
+{
+    "basePath": "/domains/erp/sa/scholarshipAwardsByStudent/v1",
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_ids"
+                    },
+                    {
+                        "$ref": "#/parameters/year_terms"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "awards": [
+                                        {
+                                            "scholarship_academic_career": "GRAD,",
+                                            "scholarship_code": "12806,",
+                                            "byu_id": "111111111,",
+                                            "scholarship_award_percent\"": "0,",
+                                            "scholarship_award_amount": "2790,",
+                                            "department_name": "LifeSci-Physiology,",
+                                            "scholarship_description": "Grad Student Funding- PDBIO",
+                                            "datetime_updated": "2016-08-04T10:03:54.000000-06:00,",
+                                            "year_term\"": "20105,",
+                                            "scholarship_award_status": "Accept,",
+                                            "sort_name": "John C Smith,"
+                                        },
+                                        {
+                                            "scholarship_award_percent": "0,",
+                                            "scholarship_academic_career": "UGRD,",
+                                            "scholarship_code": "13970,",
+                                            "byu_id": "010394449,",
+                                            "scholarship_award_amount": "550,",
+                                            "year_term": "20105,",
+                                            "department_name": "Off-Campus Scholarships,",
+                                            "scholarship_description": "Foundation Scholarship",
+                                            "datetime_updated": "2016-08-04T10:03:55.000000-06:00,",
+                                            "scholarship_award_status": "Accept,",
+                                            "sort_name": "Jacqueline Eileen Clark,"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/exception_info"
+                        },
+                        "description": "This service requires a Year-Term that must be 5 characters, followed by a comma-separated list of BYU-IDs.",
+                        "examples": {
+                            "application/json": {
+                                "error_message": "EMPLID 999999999 does not exist."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "response": {
+            "items": {
+                "$ref": "#/definitions/awards"
+            },
+            "type": "array"
+        },
+        "awards": {
+            "properties": {
+                "awards": {
+                    "items": {
+                        "properties": {
+                            "scholarship_award_percent": {
+                                "type": "integer"
+                            },
+                            "scholarship_academic_career": {
+                                "type": "string"
+                            },
+                            "scholarship_code": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "byu_id": {
+                                "type": "string"
+                            },
+                            "year_term": {
+                                "type": "string"
+                            },
+                            "scholarship_award_amount": {
+                                "type": "integer"
+                            },
+                            "department_name": {
+                                "type": "string"
+                            },
+                            "scholarship_description": {
+                                "type": "string"
+                            },
+                            "datetime_updated": {
+                                "type": "string"
+                            },
+                            "scholarship_award_status": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "exception_info": {
+            "properties": {
+                "error_message": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "byu_ids": {
+            "default": "111111111,222222222,333333333",
+            "description": "A list of comma-separated BYU-IDs",
+            "name": "byu_ids",
+            "type": "string",
+            "in": "query"
+        },
+        "year_terms": {
+            "default": "20195,20201",
+            "description": "A list of comma-separated Year-Terms",
+            "name": "year_terms",
+            "type": "string",
+            "in": "query"
+        }
+    },
+    "info": {
+        "title": "ScholarshipAwardsByStudent",
+        "description": "Returns a list of awards for a list of comma-separated BYU-IDs, and for a list of comma-separated Year-Term.",
+        "version": "v1"
+    }
+}

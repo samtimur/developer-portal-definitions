@@ -1,0 +1,128 @@
+{
+    "basePath": "/academics/programs/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{program_id}": {
+            "get": {
+                "summary": "Program Requirements",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the detailed requirements for a program.\n",
+                "parameters": [
+                    {
+                        "description": "Retrieve program requirements for the academic program identified by `program_id`",
+                        "name": "program_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Program Requirements"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getProgram"
+            }
+        },
+        "/codeIdMap/{id_or_code}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Retrieve Program ID for a given Program Code or vice versa",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the Program Code -> Program ID map, along with the year term range the map is valid for\n",
+                "parameters": [
+                    {
+                        "description": "Program ID or Program Code to search for",
+                        "name": "id_or_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "(Optional) Return the mapping that was valid for this Year/Term",
+                        "name": "yearTerm",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getProgramIdCodeMap"
+            }
+        },
+        "/*": {
+            "get": {
+                "summary": "Programs (Majors and Minors + GE and Religion)",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "The Programs endpoint returns information about the Majors and Minors, as well as GE and Religion (university) programs at BYU.\n",
+                "parameters": [
+                    {
+                        "description": "Filter programs by academic unit (college, department, etc.)",
+                        "name": "filter",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of programs"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "listPrograms"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "Error": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "code": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "AcademicProgramRequirements",
+        "description": "Requirements for completing majors and minors",
+        "version": "v1"
+    }
+}

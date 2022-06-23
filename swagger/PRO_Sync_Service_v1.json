@@ -1,0 +1,3915 @@
+{
+    "basePath": "/byuapi/pro-sync-service/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{person_id}/language/{language_code}": {
+            "x-controller": "language",
+            "put": {
+                "summary": "Languages",
+                "tags": [
+                    "language"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies a person's abilities for a specific language",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "One of the language codes available through the meta/language service",
+                        "name": "language_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/language"
+                        },
+                        "description": "The language parameters to be created",
+                        "name": "language_put",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Language information successfully updated for the person/language"
+                    },
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Language information successfully created for the person/language"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putLanguage"
+            },
+            "get": {
+                "summary": "Languages",
+                "tags": [
+                    "language"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a person's abilities for a specific language",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "One of the language codes available through the meta/language service",
+                        "name": "language_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/language"
+                        },
+                        "description": "The persons language ability successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getLanguage"
+            },
+            "delete": {
+                "summary": "Languages",
+                "tags": [
+                    "language"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes a person's language abilities for a specific language",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "One of the language codes available through the meta/language service",
+                        "name": "language_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Address successfully deleted"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "deleteLanguage"
+            }
+        },
+        "/{person_id}/address/{address_type}": {
+            "x-controller": "address",
+            "put": {
+                "summary": "Addresses",
+                "tags": [
+                    "addresses"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies or creates an address for the specified PERSON ID and address_type",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The type of address",
+                        "name": "address_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/address"
+                        },
+                        "description": "The address values to be set",
+                        "name": "address_put",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Address successfully updated"
+                    },
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Address successfully created"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putAddress"
+            },
+            "get": {
+                "summary": "Addresses",
+                "tags": [
+                    "addresses"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the address for the specified PERSON ID and address type",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The type of address",
+                        "name": "address_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/address"
+                        },
+                        "description": "Address successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getAddress"
+            },
+            "delete": {
+                "summary": "Addresses",
+                "tags": [
+                    "addresses"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes the address for the PERSON ID/address_type",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The type of address",
+                        "name": "address_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Address successfully deleted"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "deleteAddress"
+            }
+        },
+        "/service_operation/{operation}/{display_order}": {
+            "x-controller": "service_operation",
+            "put": {
+                "summary": "Service Operation",
+                "tags": [
+                    "service_operation"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies guest access information for the person/guest",
+                "parameters": [
+                    {
+                        "description": "The operation",
+                        "name": "operation",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The access delegation sequence number",
+                        "name": "display_order",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/service_operation"
+                        },
+                        "description": "The guest access information to be set",
+                        "name": "service_operation_put",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Service Operation successfully updated"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putServiceOperation"
+            },
+            "get": {
+                "summary": "Service Operation",
+                "tags": [
+                    "service_operation"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a specific access delegation and information about to whom it was granted. NOTE: Guest ID is not used because the same person could have been granted access then had access revoked and then granted access again",
+                "parameters": [
+                    {
+                        "description": "The operation",
+                        "name": "operation",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The access delegation sequence number",
+                        "name": "display_order",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/service_operation"
+                        },
+                        "description": "The guest access information for the person/guest successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getServiceOperation"
+            }
+        },
+        "/{person_id}/relationship": {
+            "x-controller": "relationship",
+            "get": {
+                "summary": "Relationships",
+                "tags": [
+                    "relationship"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a person's relationships",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/relationships"
+                        },
+                        "description": "Successfully returned the person's relationships"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getRelationships"
+            }
+        },
+        "/{person_id}/access_delegation/{access_delegation_id}": {
+            "x-controller": "access_delegation",
+            "put": {
+                "summary": "Access Delegation",
+                "tags": [
+                    "access_delegation"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies guest access information for the person/guest",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The access delegation sequence number",
+                        "name": "access_delegation_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/access_delegation"
+                        },
+                        "description": "The guest access information to be set",
+                        "name": "access_delegation",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Guest access information for successfully updated"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putAccessDelegation"
+            },
+            "get": {
+                "summary": "Access Delegations",
+                "tags": [
+                    "access_delegation"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a specific access delegation and information about to whom it was granted. NOTE: Guest ID is not used because the same person could have been granted access then had access revoked and then granted access again",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The access delegation sequence number",
+                        "name": "access_delegation_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/access_delegation"
+                        },
+                        "description": "The guest access information for the person/guest successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getAccessDelegation"
+            }
+        },
+        "/delegated_access/{delegated_access_id}": {
+            "x-controller": "delegated_access",
+            "put": {
+                "summary": "Delegated Access",
+                "tags": [
+                    "delegated_access"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies guest access information for the person/guest",
+                "parameters": [
+                    {
+                        "description": "The access delegation sequence number",
+                        "name": "delegated_access_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/delegated_access"
+                        },
+                        "description": "The guest access information to be set",
+                        "name": "delegated_access",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Guest access information for successfully updated"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putDelegatedAccess"
+            },
+            "get": {
+                "summary": "Access Delegations",
+                "tags": [
+                    "delegated_access"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a specific access delegation and information about to whom it was granted. NOTE: Guest ID is not used because the same person could have been granted access then had access revoked and then granted access again",
+                "parameters": [
+                    {
+                        "description": "The delegated access sequence number",
+                        "name": "delegated_access_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/delegated_access"
+                        },
+                        "description": "The guest access information for the person/guest successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getDelegatedAccess"
+            }
+        },
+        "/{ssn}/ssn": {
+            "x-controller": "person",
+            "get": {
+                "summary": "Person",
+                "tags": [
+                    "person"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-operation": "getPersonBySSN",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the person with the specified SSN",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's SSN",
+                        "name": "ssn",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/person"
+                        },
+                        "description": "Person successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getPersonBySSN"
+            }
+        },
+        "/{person_id}/relationship/{rel_person_id}": {
+            "x-controller": "relationship",
+            "put": {
+                "summary": "Relationships",
+                "tags": [
+                    "relationship"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies or creates a relationship between two persons",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The related person's PERSON ID",
+                        "name": "rel_person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/relationship"
+                        },
+                        "description": "The relationship information to be set",
+                        "name": "relationship_put",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Relationship information successfully updated"
+                    },
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Relationship successfully created"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putRelationship"
+            },
+            "get": {
+                "summary": "Relationships",
+                "tags": [
+                    "relationship"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns information on a specific relationship between two identities",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The related person's PERSON ID",
+                        "name": "rel_person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/relationship"
+                        },
+                        "description": "Relationship information successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getRelationship"
+            },
+            "delete": {
+                "summary": "Relationships",
+                "tags": [
+                    "relationship"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes a relationship",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The related person's PERSON ID",
+                        "name": "rel_person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Relationship successfully deleted"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "deleteRelationship"
+            }
+        },
+        "/{person_id}/ethnicity": {
+            "x-controller": "ethnicity",
+            "get": {
+                "summary": "Ethnicities",
+                "tags": [
+                    "ethnicity"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all ethnicities for the PERSON ID",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ethnicities"
+                        },
+                        "description": "Ethnicities successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getEthnicities"
+            }
+        },
+        "/{person_id}/ethnicity/{ethnicity_code}": {
+            "x-controller": "ethnicity",
+            "put": {
+                "summary": "Ethnicities",
+                "tags": [
+                    "ethnicity"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies or creates an address for the specified PERSON ID and address_type",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The type of ethnicity",
+                        "name": "ethnicity_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/ethnicity"
+                        },
+                        "description": "The address values to be set",
+                        "name": "ethnicity_put",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Ethnicity successfully updated"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putEthnicity"
+            },
+            "get": {
+                "summary": "Ethnicities",
+                "tags": [
+                    "ethnicity"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the address for the specified PERSON ID and ethnicity code",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The type of ethnicity",
+                        "name": "ethnicity_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ethnicity"
+                        },
+                        "description": "Ethnicity successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getEthnicity"
+            },
+            "delete": {
+                "summary": "Ethnicities",
+                "tags": [
+                    "ethnicity"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes the address for the PERSON ID/address_type",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The type of ethnicity",
+                        "name": "ethnicity_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Address successfully deleted"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "deleteEthnicity"
+            }
+        },
+        "/{person_id}/delegate": {
+            "x-controller": "delegate",
+            "put": {
+                "summary": "Delegate",
+                "tags": [
+                    "delegate"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies guest access information for the person/guest",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/delegate"
+                        },
+                        "description": "The guest access information to be set",
+                        "name": "delegate_put",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Guest access information for successfully updated"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putDelegate"
+            },
+            "get": {
+                "summary": "Delegate",
+                "tags": [
+                    "delegate"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a collection of guests who have or had access rights to this BYU_ID",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/delegate"
+                        },
+                        "description": "Guest Access rights granted by a PERSON ID successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getDelegate"
+            }
+        },
+        "/{person_id}/id_card": {
+            "x-controller": "id_card",
+            "put": {
+                "summary": "ID cards",
+                "tags": [
+                    "id_card"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies a person's ID card information",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/id_card"
+                        },
+                        "description": "The ID card info being changed",
+                        "name": "id_cards_put",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Person's ID card information successfully updated"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putIdCard"
+            },
+            "get": {
+                "summary": "ID card",
+                "tags": [
+                    "id_card"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a person's ID card information",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/id_card"
+                        },
+                        "description": "Person's ID card information successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getIdCard"
+            },
+            "delete": {
+                "summary": "ID cards",
+                "tags": [
+                    "id_card"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes a person's ID card",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Person's ID card information successfully deleted"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "deleteIdCard"
+            }
+        },
+        "/{person_id}/person": {
+            "x-controller": "person",
+            "put": {
+                "summary": "Person",
+                "tags": [
+                    "person"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies the Person with specified PERSON ID",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/person"
+                        },
+                        "description": "The person data to be updated",
+                        "name": "person",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Person successfully updated"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putPerson"
+            },
+            "get": {
+                "summary": "Person",
+                "tags": [
+                    "person"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-operation": "getPerson",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the person with the specified PERSON ID",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/person"
+                        },
+                        "description": "Person successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getPerson"
+            },
+            "delete": {
+                "summary": "Person",
+                "tags": [
+                    "person"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes a Person",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Address successfully deleted"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "deletePerson"
+            }
+        },
+        "/{person_id}/language": {
+            "x-controller": "language",
+            "get": {
+                "summary": "Languages",
+                "tags": [
+                    "language"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the languages for a person",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/languages"
+                        },
+                        "description": "Person's language information successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getLanguages"
+            }
+        },
+        "/{person_id}/address": {
+            "x-controller": "address",
+            "get": {
+                "summary": "Addresses",
+                "tags": [
+                    "addresses"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all addresses for the PERSON ID",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/addresses"
+                        },
+                        "description": "Addresses successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getAddresses"
+            }
+        },
+        "/{person_id}/access_delegation": {
+            "x-controller": "access_delegation",
+            "get": {
+                "summary": "Access Delegations",
+                "tags": [
+                    "access_delegation"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a collection of guests who have or had access rights to this BYU_ID",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The guest's PERSON ID",
+                        "name": "delegated_person_id",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/access_delegations"
+                        },
+                        "description": "Guest Access rights granted by a PERSON ID successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getAccessDelegations"
+            }
+        },
+        "/{person_id}/phone/{phone_type}/{lookup_number}/{type_of_device}": {
+            "x-controller": "phone",
+            "put": {
+                "summary": "Phones",
+                "tags": [
+                    "phone"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Sets phone information for a specific person/phone number",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The person's phone type",
+                        "name": "phone_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The phone lookup number",
+                        "name": "lookup_number",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The type of device",
+                        "name": "type_of_device",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/phone"
+                        },
+                        "description": "The phone information to be updated or created",
+                        "name": "phone_put",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Phone successfully updated"
+                    },
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Phone successfully created"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putPhone"
+            },
+            "get": {
+                "summary": "Phones",
+                "tags": [
+                    "phone"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns phone information for a specific person/phone type",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The person's phone type",
+                        "name": "phone_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The phone lookup number",
+                        "name": "lookup_number",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The type of device",
+                        "name": "type_of_device",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/phone"
+                        },
+                        "description": "Phone information successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getPhone"
+            },
+            "delete": {
+                "summary": "Phones",
+                "tags": [
+                    "phone"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes one of a person's phones",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The person's phone type",
+                        "name": "phone_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The phone lookup number",
+                        "name": "lookup_number",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The type of device",
+                        "name": "type_of_device",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Address successfully deleted"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "deletePhone"
+            }
+        },
+        "/delegated_operation_performed/{operation_performed_id}": {
+            "x-controller": "delegated_operation_performed",
+            "put": {
+                "summary": "Delegated Operation Performed",
+                "tags": [
+                    "delegated_operation_performed"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies guest access information for the person/guest",
+                "parameters": [
+                    {
+                        "description": "The delegated operation sequence number",
+                        "name": "operation_performed_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/delegated_operation_performed"
+                        },
+                        "description": "The guest access information to be set",
+                        "name": "operation_performed_body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Guest access information for successfully updated"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putDelegatedOperationPerformed"
+            },
+            "get": {
+                "summary": "Delegated Operation Performed",
+                "tags": [
+                    "delegated_operation_performed"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a specific access delegation and information about to whom it was granted. NOTE: Guest ID is not used because the same person could have been granted access then had access revoked and then granted access again",
+                "parameters": [
+                    {
+                        "description": "The delegated operation sequence number",
+                        "name": "operation_performed_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/delegated_operation_performed"
+                        },
+                        "description": "The guest access information for the person/guest successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getDelegatedOperationPerformed"
+            }
+        },
+        "/{person_id}/organization": {
+            "x-controller": "organization",
+            "put": {
+                "summary": "Organization",
+                "tags": [
+                    "organization"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies the Organization with specified PERSON ID",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The organization's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/organization"
+                        },
+                        "description": "The organization data to be updated",
+                        "name": "organization_put",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Person successfully updated"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putOrganization"
+            },
+            "get": {
+                "summary": "Organization",
+                "tags": [
+                    "organization"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns an organizations information",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The organization's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/organization"
+                        },
+                        "description": "Organization's information successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getOrganization"
+            },
+            "delete": {
+                "summary": "Organization",
+                "tags": [
+                    "organization"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes an organization",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The organization's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Address successfully deleted"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "deleteOrganization"
+            }
+        },
+        "/{person_id}/email_address": {
+            "x-controller": "email_address",
+            "put": {
+                "summary": "Email addresses",
+                "tags": [
+                    "email_address"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies or creates an email address for the PERSON ID",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/email_address"
+                        },
+                        "description": "The email address values to be set",
+                        "name": "email_put",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Email address successfully updated"
+                    },
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/put_success"
+                        },
+                        "description": "Email address successfully created"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putEmailAddress"
+            },
+            "get": {
+                "summary": "Email address",
+                "tags": [
+                    "email_address"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all email addresses for the PERSON ID",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/email_address"
+                        },
+                        "description": "Email addresses successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getEmailAddress"
+            },
+            "delete": {
+                "summary": "Email addresses",
+                "tags": [
+                    "email_address"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes the email address for the PERSON ID",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Email address successfully deleted"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "deleteEmailAddress"
+            }
+        },
+        "/{person_id}/phone": {
+            "x-controller": "phone",
+            "get": {
+                "summary": "Phones",
+                "tags": [
+                    "phone"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a person's phones",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "The person's PERSON ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/phones"
+                        },
+                        "description": "The person's phone information successfully returned"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getPhones"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "phone": {
+            "properties": {
+                "contact_status": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "type_of_device": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "phone_type": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "contact_person": {
+                    "type": "string"
+                },
+                "source_institution": {
+                    "type": "string"
+                },
+                "country_code": {
+                    "type": "string"
+                },
+                "lookup_number": {
+                    "type": "string"
+                },
+                "source_application": {
+                    "type": "string"
+                },
+                "iam_primary_f": {
+                    "type": "string"
+                },
+                "primary_f": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "tty": {
+                    "type": "string"
+                },
+                "source_function": {
+                    "type": "string"
+                },
+                "unlisted": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "person": {
+            "properties": {
+                "visa_type_source": {
+                    "type": "string"
+                },
+                "use_preferred_name_on_id_card": {
+                    "type": "string"
+                },
+                "home_country_code": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "ssn": {
+                    "type": "string"
+                },
+                "surname": {
+                    "type": "string"
+                },
+                "preferred_first_name": {
+                    "type": "string"
+                },
+                "secret_question": {
+                    "type": "string"
+                },
+                "secondary_password": {
+                    "type": "string"
+                },
+                "source_institution": {
+                    "type": "string"
+                },
+                "security_answer_1": {
+                    "type": "string"
+                },
+                "source_application": {
+                    "type": "string"
+                },
+                "security_answer_2": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "visa_type": {
+                    "type": "string"
+                },
+                "restricted_expiration_date": {
+                    "type": "string"
+                },
+                "source_function": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "deceased": {
+                    "type": "string"
+                },
+                "marital_status": {
+                    "type": "string"
+                },
+                "citizenship_country_code": {
+                    "type": "string"
+                },
+                "ssn_optout_date": {
+                    "type": "string"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata",
+                    "type": "object"
+                },
+                "secret_answer": {
+                    "type": "string"
+                },
+                "security_question_1": {
+                    "type": "string"
+                },
+                "home_town": {
+                    "type": "string"
+                },
+                "date_of_death": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "middle_name": {
+                    "type": "string"
+                },
+                "date_of_birth": {
+                    "type": "string"
+                },
+                "restricted": {
+                    "type": "string"
+                },
+                "religion_code": {
+                    "type": "string"
+                },
+                "home_state_code": {
+                    "type": "string"
+                },
+                "rest_of_name": {
+                    "type": "string"
+                },
+                "net_id": {
+                    "type": "string"
+                },
+                "suffix": {
+                    "type": "string"
+                },
+                "security_question_2": {
+                    "type": "string"
+                },
+                "i20_expiration_date": {
+                    "type": "string"
+                },
+                "sort_name": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "primary_password_expiration": {
+                    "type": "string"
+                },
+                "high_school_code": {
+                    "type": "string"
+                },
+                "prefix": {
+                    "type": "string"
+                },
+                "surname_position": {
+                    "type": "string"
+                },
+                "ward_lds_unit_code": {
+                    "type": "string"
+                },
+                "organization_f": {
+                    "type": "string"
+                },
+                "ssn_verification_date": {
+                    "type": "string"
+                },
+                "birth_country_code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "service_operation": {
+            "properties": {
+                "operation": {
+                    "type": "string"
+                },
+                "web_resource_id": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "string"
+                },
+                "date_time_created": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "display_order": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "delegated_operation_performed": {
+            "properties": {
+                "operation": {
+                    "type": "string"
+                },
+                "web_resource_id": {
+                    "type": "string"
+                },
+                "session_id": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "date_time_finished": {
+                    "type": "string"
+                },
+                "operation_performed_id": {
+                    "type": "string"
+                },
+                "date_time_started": {
+                    "type": "string"
+                },
+                "delegated_person_id": {
+                    "type": "string"
+                },
+                "completion_status": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "error": {
+            "description": "Error Information",
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/metadata",
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "required": [
+                "metadata"
+            ]
+        },
+        "ethnicities": {
+            "description": "A collection of Ethnicities",
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/ethnicity"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object",
+            "required": [
+                "values"
+            ]
+        },
+        "access_delegation": {
+            "properties": {
+                "access_delegation_id": {
+                    "type": "string"
+                },
+                "date_time_accepted": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "created_by_id": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "access_type": {
+                    "type": "string"
+                },
+                "revoked_by_id": {
+                    "type": "string"
+                },
+                "expiration_date": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "categories": {
+                    "type": "string"
+                },
+                "date_time_created": {
+                    "type": "string"
+                },
+                "delegated_person_id": {
+                    "type": "string"
+                },
+                "date_time_revoked": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "id_card": {
+            "description": "ID Card information belonging to a person",
+            "properties": {
+                "hold_flag": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "card_definition": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "beard_flag": {
+                    "type": "string"
+                },
+                "prox_id": {
+                    "type": "string"
+                },
+                "site_id": {
+                    "type": "string"
+                },
+                "source_institution": {
+                    "type": "string"
+                },
+                "card_id": {
+                    "type": "string"
+                },
+                "dtf_flag": {
+                    "type": "string"
+                },
+                "primary_role": {
+                    "type": "string"
+                },
+                "source_application": {
+                    "type": "string"
+                },
+                "seos_id": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "card_id_type": {
+                    "type": "string"
+                },
+                "date_time_issued": {
+                    "type": "string"
+                },
+                "expiration_date": {
+                    "type": "string"
+                },
+                "source_function": {
+                    "type": "string"
+                },
+                "path_of_picture": {
+                    "type": "string"
+                },
+                "issue_number": {
+                    "type": "string"
+                },
+                "printed_name": {
+                    "type": "string"
+                },
+                "secondary_role": {
+                    "type": "string"
+                },
+                "unlisted": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "delegated_access": {
+            "properties": {
+                "access_delegation_id": {
+                    "type": "string"
+                },
+                "delegated_access_id": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "phones": {
+            "description": "A collection of phones",
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/phone"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object",
+            "required": [
+                "values"
+            ]
+        },
+        "delegate": {
+            "properties": {
+                "person_id": {
+                    "type": "string"
+                },
+                "validation_phrase": {
+                    "type": "string"
+                },
+                "date_time_ferpa_last_displayed": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "relationship": {
+            "properties": {
+                "date_time_verified": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "verified_by_id": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "rel_type": {
+                    "type": "string"
+                },
+                "source_function": {
+                    "type": "string"
+                },
+                "rel_person_id": {
+                    "type": "string"
+                },
+                "source_institution": {
+                    "type": "string"
+                },
+                "source_application": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "validation_response": {
+            "description": "Validation Information",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "code": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ]
+        },
+        "languages": {
+            "description": "A collection of languages that a person uses",
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/language"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object",
+            "required": [
+                "values"
+            ]
+        },
+        "organization": {
+            "properties": {
+                "responsible_person_id": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "responsible_department": {
+                    "type": "string"
+                },
+                "organization_type": {
+                    "type": "string"
+                },
+                "contact_person_id": {
+                    "type": "string"
+                },
+                "operating_unit": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "address": {
+            "properties": {
+                "contact_status": {
+                    "type": "string"
+                },
+                "state_code": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "campus_address_f": {
+                    "type": "string"
+                },
+                "source_institution": {
+                    "type": "string"
+                },
+                "country_code": {
+                    "type": "string"
+                },
+                "source_application": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "address_line_4": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "address_line_1": {
+                    "type": "string"
+                },
+                "address_line_3": {
+                    "type": "string"
+                },
+                "postal_code": {
+                    "type": "string"
+                },
+                "address_line_2": {
+                    "type": "string"
+                },
+                "source_function": {
+                    "type": "string"
+                },
+                "address_type": {
+                    "type": "string"
+                },
+                "unlisted": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "put_success": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "access_delegations": {
+            "description": "Collection of persons who have been delegator access to another person's records",
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/access_delegation"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object",
+            "required": [
+                "values"
+            ]
+        },
+        "language": {
+            "properties": {
+                "language_code": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "native": {
+                    "type": "string"
+                },
+                "write_proficiency": {
+                    "type": "string"
+                },
+                "translator": {
+                    "type": "string"
+                },
+                "speak_proficiency": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "source_function": {
+                    "type": "string"
+                },
+                "read_proficiency": {
+                    "type": "string"
+                },
+                "source_institution": {
+                    "type": "string"
+                },
+                "source_application": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "addresses": {
+            "description": "A collection of Addresses",
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/address"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object",
+            "required": [
+                "values"
+            ]
+        },
+        "ethnicity": {
+            "properties": {
+                "primary_f": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "source_function": {
+                    "type": "string"
+                },
+                "ethnicity_code": {
+                    "type": "string"
+                },
+                "source_institution": {
+                    "type": "string"
+                },
+                "source_application": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "relationships": {
+            "description": "Collection of relationships between persons",
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/relationship"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object",
+            "required": [
+                "values"
+            ]
+        },
+        "email_address": {
+            "properties": {
+                "contact_status": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "source_function": {
+                    "type": "string"
+                },
+                "work_email_address": {
+                    "type": "string"
+                },
+                "use_for_emergency_alert": {
+                    "type": "string"
+                },
+                "source_institution": {
+                    "type": "string"
+                },
+                "email_address": {
+                    "type": "string"
+                },
+                "unlisted": {
+                    "type": "string"
+                },
+                "source_application": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "metadata": {
+            "description": "Metadata",
+            "properties": {
+                "validation_response": {
+                    "$ref": "#/definitions/validation_response",
+                    "type": "object"
+                },
+                "collection_size": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "validation_response"
+            ]
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "PRO_Sync_Service",
+        "description": "Access to PRO data for sync purposes only",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

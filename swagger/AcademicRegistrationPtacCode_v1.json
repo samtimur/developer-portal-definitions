@@ -1,0 +1,380 @@
+{
+    "basePath": "/domains/legacy/academic/registration/ptac-code/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{ptac_code}/{person_id}": {
+            "post": {
+                "summary": "Add person to class using a PTAC code.",
+                "tags": [
+                    "PtacCodeService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Add person to class using a PTAC code.",
+                "parameters": [
+                    {
+                        "description": "PTAC code to use to add the class. Can be entered in lower case. PTAC Code will be converted to upper case by the service. Format is XXXXX-XXXXX-XXXXX",
+                        "name": "ptac_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Person Id of the individual adding the class.",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Specify credit hours for variable credit class",
+                        "name": "credit_hours",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/PtacCodeAddSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/PtacCodeServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "PtacCode"
+            },
+            "get": {
+                "summary": "Allows entry of a PTAC code and returns the class associated with it.",
+                "tags": [
+                    "PtacCodeService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Allows entry of a PTAC code and returns the class associated with it.",
+                "parameters": [
+                    {
+                        "description": "PTAC code to lookup. Can be entered in lower case. PTAC Code will be converted to upper case by the service. Format is XXXXX-XXXXX-XXXXX",
+                        "name": "ptac_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Person Id of the individual entering the PTAC Code.",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/PtacCodeSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/PtacCodeServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "PtacCode"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "PtacCodeAddSuccess": {
+            "properties": {
+                "PtacCodeService": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "result": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "ptacCodeWhenTaughtRow": {
+            "properties": {
+                "building_name": {
+                    "type": "string"
+                },
+                "days_taught": {
+                    "type": "string"
+                },
+                "building": {
+                    "type": "string"
+                },
+                "begin_time": {
+                    "type": "string"
+                },
+                "end_time": {
+                    "type": "string"
+                },
+                "room": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "errors": {
+            "items": {
+                "$ref": "#/definitions/error_data"
+            },
+            "type": "array"
+        },
+        "ptacCodeTermsAndConditionsRow": {
+            "properties": {
+                "condition": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PtacCodeServiceError": {
+            "properties": {
+                "PtacCodeService": {
+                    "properties": {
+                        "response": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "errors": {
+                            "$ref": "#/definitions/errors"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "PtacCodeSuccess": {
+            "properties": {
+                "PtacCodeService": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "section_size": {
+                                    "type": "number"
+                                },
+                                "instructor_name": {
+                                    "type": "string"
+                                },
+                                "instruction_mode_percent_taught": {
+                                    "type": "string"
+                                },
+                                "section_type": {
+                                    "type": "string"
+                                },
+                                "token_value": {
+                                    "type": "string"
+                                },
+                                "add_class_confirmation_message": {
+                                    "type": "string"
+                                },
+                                "waitlist_email_message": {
+                                    "type": "string"
+                                },
+                                "lms_name": {
+                                    "type": "string"
+                                },
+                                "waitlist_token": {
+                                    "type": "string"
+                                },
+                                "honors_section": {
+                                    "type": "string"
+                                },
+                                "term_code": {
+                                    "type": "string"
+                                },
+                                "variable_credit_section": {
+                                    "type": "string"
+                                },
+                                "teaching_area": {
+                                    "type": "string"
+                                },
+                                "redeemed_by_byu_id": {
+                                    "type": "string"
+                                },
+                                "course_title": {
+                                    "type": "string"
+                                },
+                                "redeemed_by_person_id": {
+                                    "type": "string"
+                                },
+                                "title_code": {
+                                    "type": "string"
+                                },
+                                "waitlist_terms_and_conditions_title": {
+                                    "type": "string"
+                                },
+                                "waitlist_request_message": {
+                                    "type": "string"
+                                },
+                                "curriculum_id": {
+                                    "type": "string"
+                                },
+                                "instruction_mode_description": {
+                                    "type": "string"
+                                },
+                                "variable_credit_message": {
+                                    "type": "string"
+                                },
+                                "total_enrolled": {
+                                    "type": "number"
+                                },
+                                "reedeemed_by_name": {
+                                    "type": "string"
+                                },
+                                "section_number": {
+                                    "type": "string"
+                                },
+                                "when_taught": {
+                                    "items": {
+                                        "$ref": "#/definitions/ptacCodeWhenTaughtRow"
+                                    },
+                                    "type": "array"
+                                },
+                                "instruction_mode": {
+                                    "type": "string"
+                                },
+                                "audit_token": {
+                                    "type": "string"
+                                },
+                                "waitlist_add_confirmation_message": {
+                                    "type": "string"
+                                },
+                                "course_number": {
+                                    "type": "string"
+                                },
+                                "year_term_description": {
+                                    "type": "string"
+                                },
+                                "year_term": {
+                                    "type": "string"
+                                },
+                                "teaching_area_description": {
+                                    "type": "string"
+                                },
+                                "class_fee": {
+                                    "type": "string"
+                                },
+                                "credit_hours": {
+                                    "type": "number"
+                                },
+                                "quiz_section": {
+                                    "type": "string"
+                                },
+                                "class_start_date": {
+                                    "type": "string"
+                                },
+                                "lab_section": {
+                                    "type": "string"
+                                },
+                                "class_end_date": {
+                                    "type": "string"
+                                },
+                                "waitlist_terms_and_conditions": {
+                                    "items": {
+                                        "$ref": "#/definitions/ptacCodeTermsAndConditionsRow"
+                                    },
+                                    "type": "array"
+                                },
+                                "waitlist_expire_message": {
+                                    "type": "string"
+                                },
+                                "help_section": {
+                                    "type": "string"
+                                },
+                                "term_code_description": {
+                                    "type": "string"
+                                },
+                                "min_credit_hours": {
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "AcademicRegistrationPtacCode",
+        "description": "Allows the display and adding of a class associated with a PTAC Code.",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/PtacCode_v1"
+    }
+}

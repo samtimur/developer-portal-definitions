@@ -1,0 +1,445 @@
+{
+    "basePath": "/domains/aim-classroom-img/v1",
+    "x-mock_json": {
+        "blockDetail": {
+            "values": [
+                {
+                    "message": {
+                        "description": "Health message",
+                        "api_type": "read-only"
+                    },
+                    "metadata": {
+                        "validation_response": {
+                            "message": "Success",
+                            "code": 200
+                        }
+                    }
+                }
+            ],
+            "links": {
+                "aim_classroom_img__health": {
+                    "method": "GET",
+                    "rel": "self",
+                    "href": "https://api.byu.edu/domains/aim-classroom-img/v1/health"
+                }
+            },
+            "metadata": {
+                "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                },
+                "collection_size": 1,
+                "update_type": {
+                    "value": "U",
+                    "api_type": "read-only"
+                }
+            }
+        }
+    },
+    "paths": {
+        "/health": {
+            "x-controller": "worker",
+            "get": {
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Health check",
+                "description": "A simple path health check",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/healthParm"
+                        },
+                        "description": "Optional unused body",
+                        "name": "healthParm",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/health"
+                        },
+                        "description": "Service is healthy"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "health",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/uuid/{building}/{room}/{id}": {
+            "x-controller": "worker",
+            "get": {
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "UUID upload id",
+                "description": "Get upload uuid",
+                "parameters": [
+                    {
+                        "description": "Building the image is from",
+                        "name": "building",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Building room the image is from",
+                        "name": "room",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "BYU id of the image uploader",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/rslt_uuid"
+                        },
+                        "description": "Block recorded"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unauthorized error"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getImgUUID",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/img": {
+            "x-controller": "worker",
+            "get": {
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Get Public Image",
+                "description": "Get a classroom image.",
+                "parameters": [
+                    {
+                        "description": "The id of the image",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "format": "binary",
+                            "type": "string"
+                        },
+                        "description": "Image returned"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unauthorized error"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Image not found"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getImg",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/postImgBlock": {
+            "post": {
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Image Block Upload",
+                "description": "Upload a classroom image.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/blockDetail"
+                        },
+                        "description": "Image Block",
+                        "name": "blockDetail",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/rslt_post"
+                        },
+                        "description": "Block recorded"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unauthorized error"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "postImgBlock",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "x-controller": "worker"
+        },
+        "/upload": {
+            "post": {
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Image File Upload",
+                "description": "Upload a classroom image.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/blockDetail"
+                        },
+                        "description": "Image Data",
+                        "name": "img",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/rslt_post"
+                        },
+                        "description": "Block recorded"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unauthorized error"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "postImgUpload",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "x-controller": "worker"
+        },
+        "/*": {
+            "x-controller": "worker",
+            "get": {
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Get Image",
+                "description": "Get a classroom image.",
+                "parameters": [
+                    {
+                        "description": "The id of the image",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/rslt_post"
+                        },
+                        "description": "Image returned"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unauthorized error"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Image not found"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getData",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "rslt_post": {
+            "properties": {
+                "message": {
+                    "description": "Image post message",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Overall id of the file.",
+                    "type": "string"
+                },
+                "hash": {
+                    "description": "Data base64 sha256 hashes",
+                    "properties": {
+                        "file": {
+                            "description": "Hash of the uploaded file after block changes have been applied",
+                            "type": "string"
+                        },
+                        "block": {
+                            "description": "Hash of the uploaded block",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "code": {
+                    "description": "Numeric result indicator",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "error": {
+            "description": "Error response",
+            "properties": {
+                "message": {
+                    "default": "Success",
+                    "x-variable": "validation_response_message",
+                    "type": "string"
+                },
+                "code": {
+                    "default": 200,
+                    "x-variable": "validation_response_code",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object"
+        },
+        "imgUpload": {
+            "description": "Details of the uploaded image",
+            "type": "object"
+        },
+        "blockDetail": {
+            "description": "Details of the image block",
+            "properties": {
+                "id": {
+                    "description": "Id of image",
+                    "type": "string"
+                },
+                "blockData": {
+                    "description": "Block data",
+                    "type": "string"
+                },
+                "blockLength": {
+                    "description": "Block length",
+                    "type": "number"
+                },
+                "blockStart": {
+                    "description": "Byte of block start",
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "healthParm": {
+            "description": "Optional details of a health request",
+            "type": "object"
+        },
+        "health": {
+            "properties": {
+                "message": {
+                    "description": "Health message",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "rslt_uuid": {
+            "properties": {
+                "uuid": {
+                    "description": "uuid of the image.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "AimClassroomImage",
+        "description": "Store classroom images for AIM.",
+        "license": {
+            "name": "Apache-2.0"
+        },
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

@@ -1,0 +1,85 @@
+{
+    "basePath": "/domains/mobile/bite/v1",
+    "paths": {
+        "/locations": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all Bite locations",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Location"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Locations"
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Failed to load locations"
+                    }
+                }
+            }
+        },
+        "/sessions": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a new Bite session",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Session"
+                        },
+                        "description": "Session Created"
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Failed to generate session token"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "Session": {
+            "properties": {
+                "bite_session_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "Location": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "logo_url": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "Error": {
+            "properties": {
+                "readable_message": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "MobileBiteShim",
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443"
+}

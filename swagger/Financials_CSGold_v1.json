@@ -1,0 +1,866 @@
+{
+    "basePath": "/domains/financials/csgold/v1",
+    "tags": [
+        {
+            "description": "CS Gold operations",
+            "name": "Gold"
+        }
+    ],
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/cards/{byuId}/transactions": {
+            "post": {
+                "summary": "Create a new transaction",
+                "tags": [
+                    "Gold"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byuId"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/NewTransaction"
+                        },
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        },
+                        "headers": {
+                            "Location": {
+                                "description": "The URL of the newly-created transaction",
+                                "type": "string"
+                            }
+                        },
+                        "description": "Okay"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Transaction failed to process."
+                    },
+                    "404": {
+                        "$ref": "#/responses/not-found"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Transaction Already Exists"
+                    },
+                    "504": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "CS Gold timed out before the transaction was processed.\nThis does NOT mean that the transaction will not be successfully processed\nin the future.\n"
+                    }
+                },
+                "operationId": "createTransaction"
+            },
+            "get": {
+                "summary": "List transactions",
+                "tags": [
+                    "Gold"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byuId"
+                    },
+                    {
+                        "$ref": "#/parameters/locationParam"
+                    },
+                    {
+                        "$ref": "#/parameters/allPlansForLocation"
+                    },
+                    {
+                        "default": 100,
+                        "name": "page_size",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 0,
+                        "name": "page_start",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TransactionList"
+                        },
+                        "description": "Okay"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not-found"
+                    }
+                },
+                "operationId": "listTransactions"
+            }
+        },
+        "/cards/{byuId}?": {
+            "get": {
+                "summary": "Get user summary",
+                "tags": [
+                    "Gold"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/cards/{byuId}",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byuId"
+                    },
+                    {
+                        "$ref": "#/parameters/locationParam"
+                    },
+                    {
+                        "$ref": "#/parameters/allPlansForLocation"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/UserSummaryResponse"
+                        },
+                        "description": "Okay"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not-found"
+                    }
+                },
+                "operationId": "getUser"
+            }
+        },
+        "/cards/{byuId}/transactions/{referenceId}": {
+            "get": {
+                "summary": "Get transaction",
+                "tags": [
+                    "Gold"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byuId"
+                    },
+                    {
+                        "name": "referenceId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TransactionResponse"
+                        },
+                        "description": "Okay"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not-found"
+                    }
+                },
+                "operationId": "getTransaction"
+            }
+        },
+        "/status": {
+            "get": {
+                "summary": "Get system status",
+                "tags": [
+                    "Gold"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Checks that the application and all of its dependencies are working. Does NOT require authentication.\nIf the system is working properly, a 200 response is returned. If a problem is detected, a 500 response is\nsent, along with details about the problem.  In both cases, information about the application version is returned.\n",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/SystemStatus"
+                        },
+                        "description": "Okay"
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/SystemStatus"
+                        },
+                        "description": "System is having issues"
+                    }
+                },
+                "operationId": "statusCheck"
+            }
+        },
+        "/cards/{byuId}/transactions?": {
+            "get": {
+                "summary": "List transactions",
+                "tags": [
+                    "Gold"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/cards/{byuId}/transactions",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byuId"
+                    },
+                    {
+                        "$ref": "#/parameters/locationParam"
+                    },
+                    {
+                        "$ref": "#/parameters/allPlansForLocation"
+                    },
+                    {
+                        "default": 100,
+                        "name": "page_size",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 0,
+                        "name": "page_start",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TransactionList"
+                        },
+                        "description": "Okay"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not-found"
+                    }
+                },
+                "operationId": "listTransactions"
+            }
+        },
+        "/cards/{byuId}/card-info": {
+            "get": {
+                "summary": "Get user card info",
+                "tags": [
+                    "Gold"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byuId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CardInfoResponse"
+                        },
+                        "description": "Okay"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not-found"
+                    }
+                },
+                "operationId": "getCardInfo"
+            }
+        },
+        "/cards/{byuId}": {
+            "get": {
+                "summary": "Get user summary",
+                "tags": [
+                    "Gold"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byuId"
+                    },
+                    {
+                        "$ref": "#/parameters/locationParam"
+                    },
+                    {
+                        "$ref": "#/parameters/allPlansForLocation"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/UserSummaryResponse"
+                        },
+                        "description": "Okay"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not-found"
+                    }
+                },
+                "operationId": "getUser"
+            }
+        },
+        "/cards/{byuId}/photo": {
+            "get": {
+                "summary": "Get user photo",
+                "tags": [
+                    "Gold"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "image/*"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byuId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "headers": {
+                            "Content-Type": {
+                                "description": "The MIME type of the image",
+                                "type": "string"
+                            }
+                        },
+                        "description": "Okay"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not-found"
+                    }
+                },
+                "operationId": "getUserPhoto"
+            }
+        },
+        "/locations/{locationId}": {
+            "get": {
+                "summary": "Get information for a location",
+                "tags": [
+                    "Gold",
+                    "Location"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/LocationResponse"
+                        },
+                        "description": "Okay"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not-found"
+                    }
+                },
+                "operationId": "getLocation"
+            },
+            "parameters": [
+                {
+                    "name": "locationId",
+                    "required": true,
+                    "type": "string",
+                    "in": "path"
+                }
+            ]
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "SystemStatus": {
+            "properties": {
+                "happy": {
+                    "type": "boolean"
+                },
+                "stage": {
+                    "type": "string"
+                },
+                "messages": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "version": {
+                    "properties": {
+                        "timestamp": {
+                            "format": "date-time",
+                            "type": "string"
+                        },
+                        "commit": {
+                            "type": "string"
+                        },
+                        "api": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "Transaction": {
+            "properties": {
+                "timestamp": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "amount": {
+                    "$ref": "#/definitions/PlanAmount"
+                },
+                "error_message": {
+                    "type": "string"
+                },
+                "reference_id": {
+                    "type": "string"
+                },
+                "error_code": {
+                    "type": "integer"
+                },
+                "success": {
+                    "type": "boolean"
+                },
+                "location_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "SvcPlan": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "pays_sales_tax": {
+                    "type": "boolean"
+                },
+                "balance_dollars": {
+                    "format": "number",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "NewTransaction": {
+            "properties": {
+                "amount": {
+                    "$ref": "#/definitions/PlanAmount"
+                },
+                "timestamp": {
+                    "description": "The timestamp of when this transaction was submitted (for offline transactions).",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "reference_id": {
+                    "description": "Client-supplied unique identifier for this transaction. Must be unique across all of a specific client's transactions.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Transaction Type",
+                    "enum": [
+                        "debit",
+                        "deposit",
+                        "refund"
+                    ],
+                    "type": "string"
+                },
+                "location_id": {
+                    "description": "The location from which the transaction originates",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "type",
+                "location_id",
+                "amount",
+                "reference_id"
+            ]
+        },
+        "Location": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "physical_location": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "CardInfoResponse": {
+            "properties": {
+                "links": {
+                    "properties": {
+                        "self": {
+                            "$ref": "#/definitions/ApiLink"
+                        },
+                        "user_summary": {
+                            "$ref": "#/definitions/ApiLink"
+                        }
+                    },
+                    "type": "object"
+                },
+                "properties": {
+                    "$ref": "#/definitions/CardInfo"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionResponse": {
+            "properties": {
+                "links": {
+                    "$ref": "#/definitions/SelfOnlyLinks",
+                    "type": "object"
+                },
+                "properties": {
+                    "$ref": "#/definitions/Transaction"
+                }
+            },
+            "type": "object"
+        },
+        "UserPhotoResponse": {
+            "properties": {
+                "links": {
+                    "properties": {
+                        "self": {
+                            "$ref": "#/definitions/ApiLink"
+                        },
+                        "user_summary": {
+                            "$ref": "#/definitions/ApiLink"
+                        }
+                    },
+                    "type": "object"
+                },
+                "properties": {
+                    "$ref": "#/definitions/UserPhoto"
+                }
+            },
+            "type": "object"
+        },
+        "Error": {
+            "properties": {
+                "message": {
+                    "description": "The error message",
+                    "type": "string"
+                },
+                "code": {
+                    "description": "The error code. May or may not correspond to an HTTP status code.",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "log_id": {
+                    "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[1-5][a-fA-F0-9]{3}-[89aAbB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$",
+                    "description": "An unique ID that gets sent to the application logs. Send this to the developers to help diagnose the issue.",
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "fields": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "For errors related to program inputs, this lists the field(s) that were rejected.",
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "CardInfo": {
+            "properties": {
+                "lost": {
+                    "type": "boolean"
+                },
+                "issue_number": {
+                    "pattern": "[0-9]+",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Name": {
+            "properties": {
+                "surname": {
+                    "type": "string"
+                },
+                "given_name": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "surname",
+                "given_name"
+            ]
+        },
+        "SelfOnlyLinks": {
+            "properties": {
+                "self": {
+                    "$ref": "#/definitions/ApiLink"
+                }
+            },
+            "type": "object"
+        },
+        "LocationResponse": {
+            "properties": {
+                "links": {
+                    "$ref": "#/definitions/SelfOnlyLinks"
+                },
+                "properties": {
+                    "$ref": "#/definitions/Location"
+                }
+            },
+            "type": "object"
+        },
+        "UserSummaryResponse": {
+            "properties": {
+                "links": {
+                    "properties": {
+                        "transactions": {
+                            "$ref": "#/definitions/ApiLink"
+                        },
+                        "card_photo": {
+                            "$ref": "#/definitions/ApiLink"
+                        },
+                        "create_transaction": {
+                            "$ref": "#/definitions/ApiLink"
+                        },
+                        "card_info": {
+                            "$ref": "#/definitions/ApiLink"
+                        },
+                        "self": {
+                            "$ref": "#/definitions/ApiLink"
+                        }
+                    },
+                    "type": "object"
+                },
+                "properties": {
+                    "$ref": "#/definitions/UserSummary"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionList": {
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/TransactionResponse"
+                    },
+                    "type": "array"
+                },
+                "metadata": {
+                    "properties": {
+                        "page_start": {
+                            "type": "integer"
+                        },
+                        "page_size": {
+                            "type": "integer"
+                        },
+                        "page_end": {
+                            "type": "integer"
+                        },
+                        "max_page_size": {
+                            "type": "integer"
+                        },
+                        "collection_size": {
+                            "type": "integer"
+                        },
+                        "default_page_size": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "PlanAmount": {
+            "properties": {
+                "dollars": {
+                    "format": "number",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "UserSummary": {
+            "properties": {
+                "card_info": {
+                    "$ref": "#/definitions/CardInfo"
+                },
+                "name": {
+                    "$ref": "#/definitions/Name"
+                },
+                "byu_id": {
+                    "pattern": "[0-9]{9}",
+                    "type": "string"
+                },
+                "svc_plans": {
+                    "items": {
+                        "$ref": "#/definitions/SvcPlan"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "ApiLink": {
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "method": {
+                    "enum": [
+                        "GET",
+                        "POST"
+                    ],
+                    "type": "string"
+                },
+                "rel": {
+                    "type": "string"
+                },
+                "href": {
+                    "format": "uri",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "rel",
+                "href",
+                "method",
+                "title"
+            ]
+        },
+        "UserPhoto": {
+            "properties": {
+                "height": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "mime_type": {
+                    "type": "string"
+                },
+                "width": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "image_base64": {
+                    "format": "binary",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "height",
+                "width",
+                "image_base64",
+                "mime_type"
+            ]
+        }
+    },
+    "parameters": {
+        "allPlansForLocation": {
+            "default": false,
+            "description": " Optional parameter that works together with location_id. Normally, if `location_id` is passed, only one plan will be looked at for all queries.  If this parameter is also passed with a value of `true`, all plans that can be used at the given location will be returned. In most cases, there will only be one plan, but this exists for those cases where the user has multiple valid plans.",
+            "name": "all_plans_for_location",
+            "type": "boolean",
+            "required": false,
+            "in": "query"
+        },
+        "byuId": {
+            "pattern": "[0-9]{9}",
+            "description": "Cardholder's BYU ID",
+            "name": "byuId",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "locationParam": {
+            "description": "Optional Location ID for the location being used. Limits plans to the main plan for the given location, as determined by examining the CS Gold Search Path",
+            "name": "location_id",
+            "required": false,
+            "type": "string",
+            "in": "query"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "responses": {
+        "not-found": {
+            "schema": {
+                "$ref": "#/definitions/Error"
+            },
+            "description": "Not Found"
+        }
+    },
+    "info": {
+        "title": "CSGold API",
+        "description": "A Golden API",
+        "version": "1.0.0"
+    }
+}

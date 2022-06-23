@@ -1,0 +1,1253 @@
+{
+    "basePath": "/domains/legacy/academic/registration/meta-registration/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/block_codes": {
+            "get": {
+                "summary": "Get the block codes for a given semester",
+                "tags": [
+                    "BlockCodes"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the block codes for a given semester",
+                "parameters": [
+                    {
+                        "description": "the desired semester",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BlockCodesSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetBlockCodes"
+            }
+        },
+        "/course_numbers": {
+            "get": {
+                "summary": "Get the valid list of course numbers for a given teaching area",
+                "tags": [
+                    "CourseNumbers"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the valid list of course numbers for a given teaching area",
+                "parameters": [
+                    {
+                        "description": "active (available for scheduling), active_base, reg (scheduled sections), reg_base",
+                        "name": "mode",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "the desired teaching area",
+                        "name": "teaching_area",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "the desired semester for credit hours list",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CourseNumbersSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetCourseNumbers"
+            }
+        },
+        "/section_types": {
+            "get": {
+                "summary": "Get the list of all, active or scheduled section types",
+                "tags": [
+                    "SectionTypes"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the list of all, active or scheduled section types",
+                "parameters": [
+                    {
+                        "description": "all, active, reg",
+                        "name": "mode",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "the desired semester for scheduled teaching areas",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/SectionTypesSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetSectionTypes"
+            }
+        },
+        "/year_terms": {
+            "get": {
+                "summary": "Get the current or registration year terms",
+                "tags": [
+                    "YearTerms"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the current or registration year terms",
+                "parameters": [
+                    {
+                        "description": "current, reg",
+                        "name": "mode",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/YearTermsSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetYearTerms"
+            }
+        },
+        "/credit_hours": {
+            "get": {
+                "summary": "Get the list of valid credit hours",
+                "tags": [
+                    "CreditHours"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the list of valid credit hours",
+                "parameters": [
+                    {
+                        "description": "active, reg",
+                        "name": "mode",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "the desired semester for credit hours list",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CreditHoursSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetCreditHours"
+            }
+        },
+        "/discon_reasons": {
+            "get": {
+                "summary": "Get the list of all the discontinuance reasons",
+                "tags": [
+                    "DisconReasons"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the list of all the discontinuance reasons",
+                "parameters": [
+                    {
+                        "description": "active, all",
+                        "name": "mode",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/DisconReasonsSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetDisconReasons"
+            }
+        },
+        "/teaching_areas": {
+            "get": {
+                "summary": "Get the list of active or scheduled teaching areas",
+                "tags": [
+                    "TeachingAreas"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the list of active or scheduled teaching areas",
+                "parameters": [
+                    {
+                        "description": "active (available for scheduling), reg (scheduled sections)",
+                        "name": "mode",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "the desired semester for scheduled teaching areas",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TeachingAreasSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetSectionTypes"
+            }
+        },
+        "/begin_times": {
+            "get": {
+                "summary": "Get the valid list of beginning class times for a given semester",
+                "tags": [
+                    "BeginTimes"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the valid list of beginning class times for a given semester",
+                "parameters": [
+                    {
+                        "description": "the desired semester",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BeginTimesSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetBeginTimes"
+            }
+        },
+        "/class_instructors": {
+            "get": {
+                "summary": "Get the list of Instructors for a given semester",
+                "tags": [
+                    "ClassInstructors"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the valid list of Instructors for a given semester",
+                "parameters": [
+                    {
+                        "description": "the desired semester",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ClassInstructorsSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetClassInstructors"
+            }
+        },
+        "/sections": {
+            "get": {
+                "summary": "Get the valid list of sections for a given year term, teaching area and course number",
+                "tags": [
+                    "Sections"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the valid list of sections for a given year term, teaching area and course number",
+                "parameters": [
+                    {
+                        "description": "the desired course number",
+                        "name": "course_number",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "the desired curriculum id",
+                        "name": "curriculum_id",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "the desired teaching area",
+                        "name": "teaching_area",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "the desired title code",
+                        "name": "title_code",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "the desired semester",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/SectionsSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetCourseNumbers"
+            }
+        },
+        "/course_levels": {
+            "get": {
+                "summary": "Get the list of course levels",
+                "tags": [
+                    "CourseLevels"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the list of course levels",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CourseLevelsSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetCourseLevels"
+            }
+        },
+        "/end_times": {
+            "get": {
+                "summary": "Get the valid list of ending class times for a given semester",
+                "tags": [
+                    "EndTimes"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the valid list of ending class times for a given semester",
+                "parameters": [
+                    {
+                        "description": "the desired semester",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/EndTimesSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetEndTimes"
+            }
+        },
+        "/courses_taught/{year_term}": {
+            "get": {
+                "summary": "Get the list of courses scheduled to be taught for a given semester (year term). R courses will appear multiple times. For example, MUSIC 160R can offer several courses each semester/term some for Piano, some for Flute, etc. These are distinct courses (as compared with just another section of the same course).",
+                "tags": [
+                    "CoursesTaught"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the list of courses scheduled to be taught for a given semester (year term). R courses will appear multiple times. For example, MUSIC 160R can offer several courses each semester/term some for Piano, some for Flute, etc. These are distinct courses (as compared with just another section of the same course).",
+                "parameters": [
+                    {
+                        "description": "the desired semester that the scheduled courses are being taught",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CoursesTaughtSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetCoursesTaught"
+            }
+        },
+        "/buildings": {
+            "get": {
+                "summary": "Get the active or scheduled buildings",
+                "tags": [
+                    "Buildings"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the active or scheduled buildings",
+                "parameters": [
+                    {
+                        "description": "active, reg",
+                        "name": "mode",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "the desired semester",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BuildingsSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/MetaRegistrationError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetBuildings"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "BlockCodes": {
+            "properties": {
+                "block_codes": {
+                    "items": {
+                        "$ref": "#/definitions/BlockCodesRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "ErrorDataRow": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ClassInstructors": {
+            "properties": {
+                "discon_reasons": {
+                    "items": {
+                        "$ref": "#/definitions/ClassInstructorsRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "BlockCodesSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/BlockCodes"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "CreditHoursSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/CreditHours"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "Request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CoursesTaughtRow": {
+            "properties": {
+                "teaching_area": {
+                    "type": "string"
+                },
+                "course_number": {
+                    "type": "string"
+                },
+                "course_title": {
+                    "type": "string"
+                },
+                "title_code": {
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "DisconReasonsSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/DisconReasons"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "CoursesTaughtSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/CoursesTaught"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "EndTimesRow": {
+            "properties": {
+                "end_time_formatted": {
+                    "type": "string"
+                },
+                "end_time": {
+                    "type": "string"
+                }
+            }
+        },
+        "TeachingAreas": {
+            "properties": {
+                "teaching_areas": {
+                    "items": {
+                        "$ref": "#/definitions/TeachingAreasRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "CourseNumbersRow": {
+            "properties": {
+                "course_number": {
+                    "type": "string"
+                },
+                "course_suffix": {
+                    "type": "string"
+                },
+                "course_title": {
+                    "type": "string"
+                },
+                "title_code": {
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "studentScheduleClassRow": {
+            "properties": {
+                "section_size": {
+                    "type": "number"
+                },
+                "when_taught": {
+                    "items": {
+                        "$ref": "#/definitions/when_taught_data"
+                    },
+                    "type": "array"
+                },
+                "section_number": {
+                    "type": "string"
+                },
+                "section_type": {
+                    "type": "string"
+                },
+                "minimum_credit_hours": {
+                    "type": "number"
+                },
+                "course_number": {
+                    "type": "string"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "honors_section": {
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "type": "number"
+                },
+                "fee": {
+                    "type": "string"
+                },
+                "variable_credit_hours": {
+                    "type": "string"
+                },
+                "lab_section": {
+                    "type": "string"
+                },
+                "teaching_area": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "course_title": {
+                    "type": "string"
+                },
+                "block_code": {
+                    "type": "string"
+                },
+                "title_code": {
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "type": "string"
+                },
+                "total_enrolled": {
+                    "type": "number"
+                },
+                "start_date": {
+                    "type": "string"
+                },
+                "instructors": {
+                    "items": {
+                        "$ref": "#/definitions/instructor_data"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "CourseLevelsRow": {
+            "properties": {
+                "course_level": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "TeachingAreasSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/TeachingAreas"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "TeachingAreasRow": {
+            "properties": {
+                "teaching_area": {
+                    "type": "string"
+                },
+                "long_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "BeginTimes": {
+            "properties": {
+                "discon_reasons": {
+                    "items": {
+                        "$ref": "#/definitions/BeginTimesRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "BuildingsSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/Buildings"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "instructor_data": {
+            "properties": {
+                "person_id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "instructor_type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "SectionTypesRow": {
+            "properties": {
+                "section_type": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "CoursesTaught": {
+            "properties": {
+                "courses_taught": {
+                    "items": {
+                        "$ref": "#/definitions/CoursesTaughtRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "YearTerms": {
+            "properties": {
+                "year_terms": {
+                    "items": {
+                        "$ref": "#/definitions/YearTermsRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "CourseLevels": {
+            "properties": {
+                "discon_reasons": {
+                    "items": {
+                        "$ref": "#/definitions/CourseLevelsRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "ClassInstructorsRow": {
+            "properties": {
+                "person_id": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "SectionsSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/SectionsList"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "BuildingsRow": {
+            "properties": {
+                "building_name": {
+                    "type": "string"
+                },
+                "building": {
+                    "type": "string"
+                }
+            }
+        },
+        "DisconReasons": {
+            "properties": {
+                "discon_reasons": {
+                    "items": {
+                        "$ref": "#/definitions/DisconReasonsRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "EndTimesSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/EndTimes"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "MetaRegistrationError": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "errors": {
+                            "$ref": "#/definitions/Errors"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "CourseNumbers": {
+            "properties": {
+                "discon_reasons": {
+                    "items": {
+                        "$ref": "#/definitions/CourseNumbersRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "CreditHours": {
+            "properties": {
+                "discon_reasons": {
+                    "items": {
+                        "$ref": "#/definitions/CreditHoursRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "SectionTypes": {
+            "properties": {
+                "section_types": {
+                    "items": {
+                        "$ref": "#/definitions/SectionTypesRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "Errors": {
+            "items": {
+                "$ref": "#/definitions/ErrorDataRow"
+            },
+            "type": "array"
+        },
+        "BlockCodesRow": {
+            "properties": {
+                "block_code": {
+                    "type": "string"
+                },
+                "block_code_desc": {
+                    "type": "string"
+                }
+            }
+        },
+        "DisconReasonsRow": {
+            "properties": {
+                "reason": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "ClassInstructorsSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/ClassInstructors"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "Buildings": {
+            "properties": {
+                "discon_reasons": {
+                    "items": {
+                        "$ref": "#/definitions/BuildingsRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "EndTimes": {
+            "properties": {
+                "discon_reasons": {
+                    "items": {
+                        "$ref": "#/definitions/EndTimesRow"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "when_taught_data": {
+            "properties": {
+                "sequence_number": {
+                    "type": "number"
+                },
+                "days_taught": {
+                    "type": "string"
+                },
+                "building": {
+                    "type": "string"
+                },
+                "begin_time": {
+                    "type": "string"
+                },
+                "end_time": {
+                    "type": "string"
+                },
+                "room": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CreditHoursRow": {
+            "type": "string"
+        },
+        "SectionTypesSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/SectionTypes"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "CourseNumbersSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/CourseNumbers"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "SectionsList": {
+            "properties": {
+                "sections": {
+                    "items": {
+                        "$ref": "#/definitions/studentScheduleClassRow"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "YearTermsSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/YearTerms"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "CourseLevelsSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/CourseLevels"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "BeginTimesRow": {
+            "properties": {
+                "begin_time": {
+                    "type": "string"
+                },
+                "begin_time_formatted": {
+                    "type": "string"
+                }
+            }
+        },
+        "YearTermsRow": {
+            "properties": {
+                "year_term_desc": {
+                    "type": "string"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "year_term_desc_ext": {
+                    "type": "string"
+                }
+            }
+        },
+        "BeginTimesSuccess": {
+            "properties": {
+                "MetaRegistrationService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/BeginTimes"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "AcademicRegistrationMetaRegistation",
+        "description": "This service provides the meta information for registration.",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/TBA"
+    }
+}

@@ -1,0 +1,256 @@
+{
+    "basePath": "/academics/maps/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{program_code}": {
+            "put": {
+                "summary": "Major Academic Plan (MAP)",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Save a MAP document\n",
+                "parameters": [
+                    {
+                        "description": "Update MAP information identified by `program_code`",
+                        "name": "program_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/map_data"
+                        },
+                        "name": "map_data",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "MAP data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putMap"
+            },
+            "get": {
+                "summary": "Major Academic Plan (MAP)",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "blah blah blah\n",
+                "parameters": [
+                    {
+                        "description": "Retrieve MAP information identified by `program_code`",
+                        "name": "program_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "MAP data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getMap"
+            }
+        },
+        "/authorizations": {
+            "get": {
+                "summary": "Authorization details for the authenticated user",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Lists the academic units / organizations the authenticated user is permitted to edit MAPs for.\n",
+                "parameters": [
+                    {
+                        "description": "Instead queries if the authenticated user can edit the MAP for the specified program",
+                        "name": "programCode",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of authorization details"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getAuth"
+            }
+        },
+        "/*": {
+            "get": {
+                "summary": "Major Academic Plan list",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "The MAPs endpoint retuns a list of available Major Academic Plans\n",
+                "parameters": [
+                    {
+                        "description": "Filter MAPs by Program Code or name",
+                        "name": "filter",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of MAPs"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "listMaps"
+            }
+        },
+        "/year/{year}/{program_code}": {
+            "put": {
+                "summary": "Major Academic Plan (MAP)",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Save archived MAP data for a prior year\n",
+                "parameters": [
+                    {
+                        "description": "Get archived information from a prior year",
+                        "name": "year",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Update MAP information identified by `program_code`",
+                        "name": "program_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/map_data"
+                        },
+                        "name": "map_data",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "MAP data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putArchivedMap"
+            },
+            "get": {
+                "summary": "Major Academic Plan (MAP)",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get archived MAP data for a prior year\n",
+                "parameters": [
+                    {
+                        "description": "Get archived information from a prior year",
+                        "name": "year",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Retrieve MAP information identified by `program_code`",
+                        "name": "program_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "MAP data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getArchivedMap"
+            }
+        },
+        "/publish": {
+            "post": {
+                "summary": "Major Academic Plan list",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Publish the MAPs for the current year.\n",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "publish"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "map_data": {
+            "type": "string"
+        },
+        "Error": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "code": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "MAPEditingAPI",
+        "description": "Data for editing Major Academic Plans (MAPs)",
+        "version": "1.0.0"
+    }
+}

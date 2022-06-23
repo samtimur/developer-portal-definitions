@@ -1,0 +1,2522 @@
+{
+    "tags": [
+        {
+            "description": "Alumni directory information",
+            "name": "Directory"
+        }
+    ],
+    "basePath": "/domains/alumniservices/v1",
+    "x-components": {
+        "parameters": {
+            "alumni_id": {
+                "name": "alumni_id",
+                "required": true,
+                "type": "string",
+                "in": "path"
+            },
+            "subset_size": {
+                "description": "For large collections, the returns set only return this number of records.",
+                "name": "subset_size",
+                "required": false,
+                "type": "integer",
+                "in": "query"
+            },
+            "state": {
+                "maxLength": 100,
+                "name": "state",
+                "required": false,
+                "type": "string",
+                "in": "query"
+            },
+            "employer": {
+                "maxLength": 100,
+                "name": "employer",
+                "required": false,
+                "type": "string",
+                "in": "query"
+            },
+            "college": {
+                "maxLength": 100,
+                "name": "college",
+                "required": false,
+                "type": "string",
+                "in": "query"
+            },
+            "maiden_name": {
+                "maxLength": 100,
+                "name": "maiden_name",
+                "required": false,
+                "type": "string",
+                "in": "query"
+            },
+            "city": {
+                "maxLength": 100,
+                "name": "city",
+                "required": false,
+                "type": "string",
+                "in": "query"
+            },
+            "country": {
+                "maxLength": 100,
+                "name": "country",
+                "required": false,
+                "type": "string",
+                "in": "query"
+            },
+            "first_name": {
+                "maxLength": 100,
+                "name": "first_name",
+                "required": false,
+                "type": "string",
+                "in": "query"
+            },
+            "last_name": {
+                "maxLength": 100,
+                "name": "last_name",
+                "required": false,
+                "type": "string",
+                "in": "query"
+            },
+            "offset": {
+                "name": "offset",
+                "required": false,
+                "type": "integer",
+                "in": "query"
+            },
+            "degree_year": {
+                "maxLength": 20,
+                "name": "degree_year",
+                "required": false,
+                "type": "string",
+                "in": "query"
+            },
+            "major": {
+                "maxLength": 100,
+                "name": "major",
+                "required": false,
+                "type": "string",
+                "in": "query"
+            }
+        },
+        "examples": {
+            "alumni": {
+                "summary": "An example of the alumni response",
+                "value": {
+                    "values": [
+                        {
+                            "first_name": "Philip",
+                            "email": "psherman@gmail.com",
+                            "middle_name": null,
+                            "last_name": "Sherman",
+                            "state": "Sydney",
+                            "maiden_name": null,
+                            "links": {},
+                            "degrees": {
+                                "values": [
+                                    {
+                                        "preferred_date": "2021-01-01",
+                                        "university": "Brigham Young University",
+                                        "preferred_date_year": "2021",
+                                        "degree_type": "Bachelor of Science",
+                                        "major_code": "1234",
+                                        "department": "Information Technology",
+                                        "college": "School of Technology",
+                                        "degree_status": "Completed",
+                                        "links": {},
+                                        "major_name": "Information Technology",
+                                        "metadata": {
+                                            "validation_response": {
+                                                "message": "Success",
+                                                "code": 200
+                                            },
+                                            "restricted": false
+                                        }
+                                    }
+                                ],
+                                "links": {},
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Success",
+                                        "code": 200
+                                    },
+                                    "collection_size": 1,
+                                    "restricted": false
+                                }
+                            },
+                            "city": "Sydney",
+                            "country": "AU",
+                            "metadata": {
+                                "validation_response": {
+                                    "message": "Success",
+                                    "code": 200
+                                },
+                                "restricted": false
+                            }
+                        }
+                    ],
+                    "links": {},
+                    "metadata": {
+                        "validation_response": {
+                            "message": "Success",
+                            "code": 200
+                        },
+                        "collection_size": 1,
+                        "restricted": false
+                    }
+                }
+            },
+            "alumnus_detailed": {
+                "summary": "An example of the alumnus detailed response",
+                "value": {
+                    "middle_name": null,
+                    "state": "Sydney",
+                    "links": {},
+                    "maiden_name": null,
+                    "degrees": {
+                        "values": [
+                            {
+                                "preferred_date": "2021-01-01",
+                                "university": "Brigham Young University",
+                                "preferred_date_year": "2021",
+                                "degree_type": "Bachelor of Science",
+                                "major_code": "1234",
+                                "department": "Information Technology",
+                                "college": "School of Technology",
+                                "degree_status": "Completed",
+                                "links": {},
+                                "major_name": "Information Technology",
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Success",
+                                        "code": 200
+                                    },
+                                    "restricted": false
+                                }
+                            }
+                        ],
+                        "links": {},
+                        "metadata": {
+                            "validation_response": {
+                                "message": "Success",
+                                "code": 200
+                            },
+                            "collection_size": 1,
+                            "restricted": false
+                        }
+                    },
+                    "city": "Sydney",
+                    "country": "AU",
+                    "first_name": "Philip",
+                    "address_line_1": "42 Wallaby Way",
+                    "email": "psherman@gmail.com",
+                    "address_line_3": null,
+                    "address_line_2": null,
+                    "last_name": "Sherman",
+                    "metadata": {
+                        "validation_response": {
+                            "message": "Success",
+                            "code": 200
+                        },
+                        "restricted": false
+                    }
+                }
+            }
+        },
+        "responses": {
+            "NoContentDelete": {
+                "description": "No content because the item could not be found to delete or was successfully deleted."
+            },
+            "alumni": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "title": "Alumni",
+                            "description": "List of basic alumni information",
+                            "properties": {
+                                "values": {
+                                    "items": {
+                                        "title": "Alumnus",
+                                        "description": "Basic alumnus information",
+                                        "properties": {
+                                            "middle_name": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "state": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "maiden_name": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "links": {
+                                                "title": "Links",
+                                                "readOnly": true,
+                                                "description": "HATEOS links related to the returned resources.",
+                                                "type": "object"
+                                            },
+                                            "degrees": {
+                                                "title": "Degrees",
+                                                "description": "List of college degrees",
+                                                "properties": {
+                                                    "values": {
+                                                        "items": {
+                                                            "title": "Degree",
+                                                            "description": "College degree",
+                                                            "properties": {
+                                                                "preferred_date": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 20,
+                                                                    "type": "string"
+                                                                },
+                                                                "university": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 100,
+                                                                    "type": "string"
+                                                                },
+                                                                "preferred_date_year": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 20,
+                                                                    "type": "string"
+                                                                },
+                                                                "degree_type": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 100,
+                                                                    "type": "string"
+                                                                },
+                                                                "major_code": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 50,
+                                                                    "type": "string"
+                                                                },
+                                                                "department": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 100,
+                                                                    "type": "string"
+                                                                },
+                                                                "college": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 100,
+                                                                    "type": "string"
+                                                                },
+                                                                "degree_status": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 100,
+                                                                    "type": "string"
+                                                                },
+                                                                "links": {
+                                                                    "title": "Links",
+                                                                    "readOnly": true,
+                                                                    "description": "HATEOS links related to the returned resources.",
+                                                                    "type": "object"
+                                                                },
+                                                                "major_name": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 100,
+                                                                    "type": "string"
+                                                                },
+                                                                "metadata": {
+                                                                    "title": "Metadata",
+                                                                    "readOnly": true,
+                                                                    "description": "Additional information about the response.",
+                                                                    "properties": {
+                                                                        "validation_response": {
+                                                                            "title": "Validation Response",
+                                                                            "readOnly": true,
+                                                                            "description": "Information about the response code.",
+                                                                            "properties": {
+                                                                                "message": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "code": {
+                                                                                    "type": "integer"
+                                                                                }
+                                                                            },
+                                                                            "example": {
+                                                                                "message": "Success",
+                                                                                "code": 200
+                                                                            },
+                                                                            "type": "object",
+                                                                            "required": [
+                                                                                "code",
+                                                                                "message"
+                                                                            ]
+                                                                        },
+                                                                        "validation_information": {
+                                                                            "readOnly": true,
+                                                                            "items": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "description": "Additional information about errors in `validation_response.code`.",
+                                                                            "type": "array"
+                                                                        },
+                                                                        "collection_size": {
+                                                                            "readOnly": true,
+                                                                            "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                                                            "format": "int32",
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "restricted": {
+                                                                            "readOnly": true,
+                                                                            "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                                                            "type": "boolean"
+                                                                        }
+                                                                    },
+                                                                    "example": {
+                                                                        "validation_response": {
+                                                                            "message": "Success",
+                                                                            "code": 200
+                                                                        },
+                                                                        "restricted": false
+                                                                    },
+                                                                    "type": "object",
+                                                                    "required": [
+                                                                        "validation_response"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "type": "object",
+                                                            "required": [
+                                                                "links",
+                                                                "metadata"
+                                                            ]
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "links": {
+                                                        "title": "Links",
+                                                        "readOnly": true,
+                                                        "description": "HATEOS links related to the returned resources.",
+                                                        "type": "object"
+                                                    },
+                                                    "metadata": {
+                                                        "title": "Metadata",
+                                                        "readOnly": true,
+                                                        "description": "Additional information about the response.",
+                                                        "properties": {
+                                                            "validation_response": {
+                                                                "title": "Validation Response",
+                                                                "readOnly": true,
+                                                                "description": "Information about the response code.",
+                                                                "properties": {
+                                                                    "message": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "code": {
+                                                                        "type": "integer"
+                                                                    }
+                                                                },
+                                                                "example": {
+                                                                    "message": "Success",
+                                                                    "code": 200
+                                                                },
+                                                                "type": "object",
+                                                                "required": [
+                                                                    "code",
+                                                                    "message"
+                                                                ]
+                                                            },
+                                                            "validation_information": {
+                                                                "readOnly": true,
+                                                                "items": {
+                                                                    "type": "string"
+                                                                },
+                                                                "description": "Additional information about errors in `validation_response.code`.",
+                                                                "type": "array"
+                                                            },
+                                                            "collection_size": {
+                                                                "readOnly": true,
+                                                                "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                                                "format": "int32",
+                                                                "type": "integer"
+                                                            },
+                                                            "restricted": {
+                                                                "readOnly": true,
+                                                                "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                                                "type": "boolean"
+                                                            }
+                                                        },
+                                                        "example": {
+                                                            "validation_response": {
+                                                                "message": "Success",
+                                                                "code": 200
+                                                            },
+                                                            "restricted": false
+                                                        },
+                                                        "type": "object",
+                                                        "required": [
+                                                            "validation_response"
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "links",
+                                                    "metadata",
+                                                    "values"
+                                                ]
+                                            },
+                                            "city": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "country": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "first_name": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "address_line_1": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "address_line_3": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "address_line_2": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "last_name": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "metadata": {
+                                                "title": "Metadata",
+                                                "readOnly": true,
+                                                "description": "Additional information about the response.",
+                                                "properties": {
+                                                    "validation_response": {
+                                                        "title": "Validation Response",
+                                                        "readOnly": true,
+                                                        "description": "Information about the response code.",
+                                                        "properties": {
+                                                            "message": {
+                                                                "type": "string"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer"
+                                                            }
+                                                        },
+                                                        "example": {
+                                                            "message": "Success",
+                                                            "code": 200
+                                                        },
+                                                        "type": "object",
+                                                        "required": [
+                                                            "code",
+                                                            "message"
+                                                        ]
+                                                    },
+                                                    "validation_information": {
+                                                        "readOnly": true,
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "description": "Additional information about errors in `validation_response.code`.",
+                                                        "type": "array"
+                                                    },
+                                                    "collection_size": {
+                                                        "readOnly": true,
+                                                        "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                                        "format": "int32",
+                                                        "type": "integer"
+                                                    },
+                                                    "restricted": {
+                                                        "readOnly": true,
+                                                        "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "example": {
+                                                    "validation_response": {
+                                                        "message": "Success",
+                                                        "code": 200
+                                                    },
+                                                    "restricted": false
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "validation_response"
+                                                ]
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "links",
+                                            "metadata"
+                                        ]
+                                    },
+                                    "type": "array"
+                                },
+                                "links": {
+                                    "title": "Links",
+                                    "readOnly": true,
+                                    "description": "HATEOS links related to the returned resources.",
+                                    "type": "object"
+                                },
+                                "metadata": {
+                                    "title": "Metadata",
+                                    "readOnly": true,
+                                    "description": "Additional information about the response.",
+                                    "properties": {
+                                        "validation_response": {
+                                            "title": "Validation Response",
+                                            "readOnly": true,
+                                            "description": "Information about the response code.",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "example": {
+                                                "message": "Success",
+                                                "code": 200
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ]
+                                        },
+                                        "validation_information": {
+                                            "readOnly": true,
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "description": "Additional information about errors in `validation_response.code`.",
+                                            "type": "array"
+                                        },
+                                        "collection_size": {
+                                            "readOnly": true,
+                                            "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "restricted": {
+                                            "readOnly": true,
+                                            "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "example": {
+                                        "validation_response": {
+                                            "message": "Success",
+                                            "code": 200
+                                        },
+                                        "restricted": false
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "validation_response"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "links",
+                                "metadata",
+                                "values"
+                            ]
+                        },
+                        "examples": {
+                            "alumni": {
+                                "summary": "An example of the alumni response",
+                                "value": {
+                                    "values": [
+                                        {
+                                            "first_name": "Philip",
+                                            "email": "psherman@gmail.com",
+                                            "middle_name": null,
+                                            "last_name": "Sherman",
+                                            "state": "Sydney",
+                                            "maiden_name": null,
+                                            "links": {},
+                                            "degrees": {
+                                                "values": [
+                                                    {
+                                                        "preferred_date": "2021-01-01",
+                                                        "university": "Brigham Young University",
+                                                        "preferred_date_year": "2021",
+                                                        "degree_type": "Bachelor of Science",
+                                                        "major_code": "1234",
+                                                        "department": "Information Technology",
+                                                        "college": "School of Technology",
+                                                        "degree_status": "Completed",
+                                                        "links": {},
+                                                        "major_name": "Information Technology",
+                                                        "metadata": {
+                                                            "validation_response": {
+                                                                "message": "Success",
+                                                                "code": 200
+                                                            },
+                                                            "restricted": false
+                                                        }
+                                                    }
+                                                ],
+                                                "links": {},
+                                                "metadata": {
+                                                    "validation_response": {
+                                                        "message": "Success",
+                                                        "code": 200
+                                                    },
+                                                    "collection_size": 1,
+                                                    "restricted": false
+                                                }
+                                            },
+                                            "city": "Sydney",
+                                            "country": "AU",
+                                            "metadata": {
+                                                "validation_response": {
+                                                    "message": "Success",
+                                                    "code": 200
+                                                },
+                                                "restricted": false
+                                            }
+                                        }
+                                    ],
+                                    "links": {},
+                                    "metadata": {
+                                        "validation_response": {
+                                            "message": "Success",
+                                            "code": 200
+                                        },
+                                        "collection_size": 1,
+                                        "restricted": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "A collection of basic alumni information"
+            },
+            "alumnus_detailed": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "title": "AlumnusDetailed",
+                            "description": "Detailed alumnus information",
+                            "properties": {
+                                "middle_name": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "state": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "links": {
+                                    "title": "Links",
+                                    "readOnly": true,
+                                    "description": "HATEOS links related to the returned resources.",
+                                    "type": "object"
+                                },
+                                "maiden_name": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "degrees": {
+                                    "title": "Degrees",
+                                    "description": "List of college degrees",
+                                    "properties": {
+                                        "values": {
+                                            "items": {
+                                                "title": "Degree",
+                                                "description": "College degree",
+                                                "properties": {
+                                                    "preferred_date": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 20,
+                                                        "type": "string"
+                                                    },
+                                                    "university": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 100,
+                                                        "type": "string"
+                                                    },
+                                                    "preferred_date_year": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 20,
+                                                        "type": "string"
+                                                    },
+                                                    "degree_type": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 100,
+                                                        "type": "string"
+                                                    },
+                                                    "major_code": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 50,
+                                                        "type": "string"
+                                                    },
+                                                    "department": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 100,
+                                                        "type": "string"
+                                                    },
+                                                    "college": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 100,
+                                                        "type": "string"
+                                                    },
+                                                    "degree_status": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 100,
+                                                        "type": "string"
+                                                    },
+                                                    "links": {
+                                                        "title": "Links",
+                                                        "readOnly": true,
+                                                        "description": "HATEOS links related to the returned resources.",
+                                                        "type": "object"
+                                                    },
+                                                    "major_name": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 100,
+                                                        "type": "string"
+                                                    },
+                                                    "metadata": {
+                                                        "title": "Metadata",
+                                                        "readOnly": true,
+                                                        "description": "Additional information about the response.",
+                                                        "properties": {
+                                                            "validation_response": {
+                                                                "title": "Validation Response",
+                                                                "readOnly": true,
+                                                                "description": "Information about the response code.",
+                                                                "properties": {
+                                                                    "message": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "code": {
+                                                                        "type": "integer"
+                                                                    }
+                                                                },
+                                                                "example": {
+                                                                    "message": "Success",
+                                                                    "code": 200
+                                                                },
+                                                                "type": "object",
+                                                                "required": [
+                                                                    "code",
+                                                                    "message"
+                                                                ]
+                                                            },
+                                                            "validation_information": {
+                                                                "readOnly": true,
+                                                                "items": {
+                                                                    "type": "string"
+                                                                },
+                                                                "description": "Additional information about errors in `validation_response.code`.",
+                                                                "type": "array"
+                                                            },
+                                                            "collection_size": {
+                                                                "readOnly": true,
+                                                                "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                                                "format": "int32",
+                                                                "type": "integer"
+                                                            },
+                                                            "restricted": {
+                                                                "readOnly": true,
+                                                                "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                                                "type": "boolean"
+                                                            }
+                                                        },
+                                                        "example": {
+                                                            "validation_response": {
+                                                                "message": "Success",
+                                                                "code": 200
+                                                            },
+                                                            "restricted": false
+                                                        },
+                                                        "type": "object",
+                                                        "required": [
+                                                            "validation_response"
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "links",
+                                                    "metadata"
+                                                ]
+                                            },
+                                            "type": "array"
+                                        },
+                                        "links": {
+                                            "title": "Links",
+                                            "readOnly": true,
+                                            "description": "HATEOS links related to the returned resources.",
+                                            "type": "object"
+                                        },
+                                        "metadata": {
+                                            "title": "Metadata",
+                                            "readOnly": true,
+                                            "description": "Additional information about the response.",
+                                            "properties": {
+                                                "validation_response": {
+                                                    "title": "Validation Response",
+                                                    "readOnly": true,
+                                                    "description": "Information about the response code.",
+                                                    "properties": {
+                                                        "message": {
+                                                            "type": "string"
+                                                        },
+                                                        "code": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "example": {
+                                                        "message": "Success",
+                                                        "code": 200
+                                                    },
+                                                    "type": "object",
+                                                    "required": [
+                                                        "code",
+                                                        "message"
+                                                    ]
+                                                },
+                                                "validation_information": {
+                                                    "readOnly": true,
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": "Additional information about errors in `validation_response.code`.",
+                                                    "type": "array"
+                                                },
+                                                "collection_size": {
+                                                    "readOnly": true,
+                                                    "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                                    "format": "int32",
+                                                    "type": "integer"
+                                                },
+                                                "restricted": {
+                                                    "readOnly": true,
+                                                    "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "example": {
+                                                "validation_response": {
+                                                    "message": "Success",
+                                                    "code": 200
+                                                },
+                                                "restricted": false
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "validation_response"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "links",
+                                        "metadata",
+                                        "values"
+                                    ]
+                                },
+                                "city": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "first_name": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "address_line_1": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "x-nullable": true,
+                                    "maxLength": 200,
+                                    "type": "string"
+                                },
+                                "address_line_3": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "address_line_2": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "last_name": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "metadata": {
+                                    "title": "Metadata",
+                                    "readOnly": true,
+                                    "description": "Additional information about the response.",
+                                    "properties": {
+                                        "validation_response": {
+                                            "title": "Validation Response",
+                                            "readOnly": true,
+                                            "description": "Information about the response code.",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "example": {
+                                                "message": "Success",
+                                                "code": 200
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ]
+                                        },
+                                        "validation_information": {
+                                            "readOnly": true,
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "description": "Additional information about errors in `validation_response.code`.",
+                                            "type": "array"
+                                        },
+                                        "collection_size": {
+                                            "readOnly": true,
+                                            "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "restricted": {
+                                            "readOnly": true,
+                                            "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "example": {
+                                        "validation_response": {
+                                            "message": "Success",
+                                            "code": 200
+                                        },
+                                        "restricted": false
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "validation_response"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "links",
+                                "metadata"
+                            ]
+                        },
+                        "examples": {
+                            "alumnus_detailed": {
+                                "summary": "An example of the alumnus detailed response",
+                                "value": {
+                                    "middle_name": null,
+                                    "state": "Sydney",
+                                    "links": {},
+                                    "maiden_name": null,
+                                    "degrees": {
+                                        "values": [
+                                            {
+                                                "preferred_date": "2021-01-01",
+                                                "university": "Brigham Young University",
+                                                "preferred_date_year": "2021",
+                                                "degree_type": "Bachelor of Science",
+                                                "major_code": "1234",
+                                                "department": "Information Technology",
+                                                "college": "School of Technology",
+                                                "degree_status": "Completed",
+                                                "links": {},
+                                                "major_name": "Information Technology",
+                                                "metadata": {
+                                                    "validation_response": {
+                                                        "message": "Success",
+                                                        "code": 200
+                                                    },
+                                                    "restricted": false
+                                                }
+                                            }
+                                        ],
+                                        "links": {},
+                                        "metadata": {
+                                            "validation_response": {
+                                                "message": "Success",
+                                                "code": 200
+                                            },
+                                            "collection_size": 1,
+                                            "restricted": false
+                                        }
+                                    },
+                                    "city": "Sydney",
+                                    "country": "AU",
+                                    "first_name": "Philip",
+                                    "address_line_1": "42 Wallaby Way",
+                                    "email": "psherman@gmail.com",
+                                    "address_line_3": null,
+                                    "address_line_2": null,
+                                    "last_name": "Sherman",
+                                    "metadata": {
+                                        "validation_response": {
+                                            "message": "Success",
+                                            "code": 200
+                                        },
+                                        "restricted": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "Detailed alumnus information object"
+            },
+            "Error": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "title": "Error Response",
+                            "description": "A response from the server when an error has occurred.",
+                            "properties": {
+                                "metadata": {
+                                    "title": "Metadata",
+                                    "readOnly": true,
+                                    "description": "Additional information about the response.",
+                                    "properties": {
+                                        "validation_response": {
+                                            "title": "Validation Response",
+                                            "readOnly": true,
+                                            "description": "Information about the response code.",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "example": {
+                                                "message": "Success",
+                                                "code": 200
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ]
+                                        },
+                                        "validation_information": {
+                                            "readOnly": true,
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "description": "Additional information about errors in `validation_response.code`.",
+                                            "type": "array"
+                                        },
+                                        "collection_size": {
+                                            "readOnly": true,
+                                            "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "restricted": {
+                                            "readOnly": true,
+                                            "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "example": {
+                                        "validation_response": {
+                                            "message": "Success",
+                                            "code": 200
+                                        },
+                                        "restricted": false
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "validation_response"
+                                    ]
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "examples": {
+                            "notAuthorized": {
+                                "summary": "Not Authorized",
+                                "value": {
+                                    "metadata": {
+                                        "validation_response": {
+                                            "message": "Not authorized.",
+                                            "code": 403
+                                        },
+                                        "retricted": false
+                                    }
+                                }
+                            },
+                            "notAuthenticated": {
+                                "summary": "Not Authenticated",
+                                "value": {
+                                    "metadata": {
+                                        "validation_response": {
+                                            "message": "Not authenticated.",
+                                            "code": 401
+                                        },
+                                        "retricted": false
+                                    }
+                                }
+                            },
+                            "internalServerError": {
+                                "summary": "Not Found",
+                                "value": {
+                                    "metadata": {
+                                        "validation_response": {
+                                            "message": "Internal server error.",
+                                            "code": 500
+                                        },
+                                        "retricted": false
+                                    }
+                                }
+                            },
+                            "conflict": {
+                                "summary": "Conflict",
+                                "value": {
+                                    "metadata": {
+                                        "validation_response": {
+                                            "message": "Conflict.",
+                                            "code": 409
+                                        },
+                                        "retricted": false
+                                    }
+                                }
+                            },
+                            "badRequest": {
+                                "summary": "Bad Request",
+                                "value": {
+                                    "metadata": {
+                                        "validation_response": {
+                                            "message": "Bad request.",
+                                            "code": 400
+                                        },
+                                        "retricted": false
+                                    }
+                                }
+                            },
+                            "notFound": {
+                                "summary": "Not Found",
+                                "value": {
+                                    "metadata": {
+                                        "validation_response": {
+                                            "message": "Not found.",
+                                            "code": 404
+                                        },
+                                        "retricted": false
+                                    }
+                                }
+                            },
+                            "badGateway": {
+                                "summary": "Bad Gateway",
+                                "value": {
+                                    "metadata": {
+                                        "validation_response": {
+                                            "message": "Bad gateway.",
+                                            "code": 502
+                                        },
+                                        "retricted": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "There was an error processing the request."
+            }
+        }
+    },
+    "paths": {
+        "/alumni/directory/?": {
+            "get": {
+                "tags": [
+                    " "
+                ],
+                "description": "Get a list of alumni",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "maxLength": 100,
+                        "name": "city",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "college",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "country",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 20,
+                        "name": "degree_year",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "employer",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "first_name",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "last_name",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "maiden_name",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "major",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "state",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "For large collections, the returns set only return this number of records.",
+                        "name": "subset_size",
+                        "required": false,
+                        "type": "integer",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/alumni/directory": {
+            "x-controller": "directory",
+            "get": {
+                "tags": [
+                    "Directory"
+                ],
+                "description": "Get a list of alumni",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "maxLength": 100,
+                        "name": "city",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "college",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "country",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 20,
+                        "name": "degree_year",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "employer",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "first_name",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "last_name",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "maiden_name",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "major",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "state",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "For large collections, the returns set only return this number of records.",
+                        "name": "subset_size",
+                        "required": false,
+                        "type": "integer",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "title": "Alumni",
+                            "description": "List of basic alumni information",
+                            "properties": {
+                                "values": {
+                                    "items": {
+                                        "title": "Alumnus",
+                                        "description": "Basic alumnus information",
+                                        "properties": {
+                                            "middle_name": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "state": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "maiden_name": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "links": {
+                                                "title": "Links",
+                                                "readOnly": true,
+                                                "description": "HATEOS links related to the returned resources.",
+                                                "type": "object"
+                                            },
+                                            "degrees": {
+                                                "title": "Degrees",
+                                                "description": "List of college degrees",
+                                                "properties": {
+                                                    "values": {
+                                                        "items": {
+                                                            "title": "Degree",
+                                                            "description": "College degree",
+                                                            "properties": {
+                                                                "preferred_date": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 20,
+                                                                    "type": "string"
+                                                                },
+                                                                "university": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 100,
+                                                                    "type": "string"
+                                                                },
+                                                                "preferred_date_year": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 20,
+                                                                    "type": "string"
+                                                                },
+                                                                "degree_type": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 100,
+                                                                    "type": "string"
+                                                                },
+                                                                "major_code": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 50,
+                                                                    "type": "string"
+                                                                },
+                                                                "department": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 100,
+                                                                    "type": "string"
+                                                                },
+                                                                "college": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 100,
+                                                                    "type": "string"
+                                                                },
+                                                                "degree_status": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 100,
+                                                                    "type": "string"
+                                                                },
+                                                                "links": {
+                                                                    "title": "Links",
+                                                                    "readOnly": true,
+                                                                    "description": "HATEOS links related to the returned resources.",
+                                                                    "type": "object"
+                                                                },
+                                                                "major_name": {
+                                                                    "x-nullable": true,
+                                                                    "maxLength": 100,
+                                                                    "type": "string"
+                                                                },
+                                                                "metadata": {
+                                                                    "title": "Metadata",
+                                                                    "readOnly": true,
+                                                                    "description": "Additional information about the response.",
+                                                                    "properties": {
+                                                                        "validation_response": {
+                                                                            "title": "Validation Response",
+                                                                            "readOnly": true,
+                                                                            "description": "Information about the response code.",
+                                                                            "properties": {
+                                                                                "message": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "code": {
+                                                                                    "type": "integer"
+                                                                                }
+                                                                            },
+                                                                            "example": {
+                                                                                "message": "Success",
+                                                                                "code": 200
+                                                                            },
+                                                                            "type": "object",
+                                                                            "required": [
+                                                                                "code",
+                                                                                "message"
+                                                                            ]
+                                                                        },
+                                                                        "validation_information": {
+                                                                            "readOnly": true,
+                                                                            "items": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "description": "Additional information about errors in `validation_response.code`.",
+                                                                            "type": "array"
+                                                                        },
+                                                                        "collection_size": {
+                                                                            "readOnly": true,
+                                                                            "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                                                            "format": "int32",
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "restricted": {
+                                                                            "readOnly": true,
+                                                                            "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                                                            "type": "boolean"
+                                                                        }
+                                                                    },
+                                                                    "example": {
+                                                                        "validation_response": {
+                                                                            "message": "Success",
+                                                                            "code": 200
+                                                                        },
+                                                                        "restricted": false
+                                                                    },
+                                                                    "type": "object",
+                                                                    "required": [
+                                                                        "validation_response"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "type": "object",
+                                                            "required": [
+                                                                "links",
+                                                                "metadata"
+                                                            ]
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "links": {
+                                                        "title": "Links",
+                                                        "readOnly": true,
+                                                        "description": "HATEOS links related to the returned resources.",
+                                                        "type": "object"
+                                                    },
+                                                    "metadata": {
+                                                        "title": "Metadata",
+                                                        "readOnly": true,
+                                                        "description": "Additional information about the response.",
+                                                        "properties": {
+                                                            "validation_response": {
+                                                                "title": "Validation Response",
+                                                                "readOnly": true,
+                                                                "description": "Information about the response code.",
+                                                                "properties": {
+                                                                    "message": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "code": {
+                                                                        "type": "integer"
+                                                                    }
+                                                                },
+                                                                "example": {
+                                                                    "message": "Success",
+                                                                    "code": 200
+                                                                },
+                                                                "type": "object",
+                                                                "required": [
+                                                                    "code",
+                                                                    "message"
+                                                                ]
+                                                            },
+                                                            "validation_information": {
+                                                                "readOnly": true,
+                                                                "items": {
+                                                                    "type": "string"
+                                                                },
+                                                                "description": "Additional information about errors in `validation_response.code`.",
+                                                                "type": "array"
+                                                            },
+                                                            "collection_size": {
+                                                                "readOnly": true,
+                                                                "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                                                "format": "int32",
+                                                                "type": "integer"
+                                                            },
+                                                            "restricted": {
+                                                                "readOnly": true,
+                                                                "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                                                "type": "boolean"
+                                                            }
+                                                        },
+                                                        "example": {
+                                                            "validation_response": {
+                                                                "message": "Success",
+                                                                "code": 200
+                                                            },
+                                                            "restricted": false
+                                                        },
+                                                        "type": "object",
+                                                        "required": [
+                                                            "validation_response"
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "links",
+                                                    "metadata",
+                                                    "values"
+                                                ]
+                                            },
+                                            "city": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "country": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "first_name": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "address_line_1": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "address_line_3": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "address_line_2": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "last_name": {
+                                                "x-nullable": true,
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "metadata": {
+                                                "title": "Metadata",
+                                                "readOnly": true,
+                                                "description": "Additional information about the response.",
+                                                "properties": {
+                                                    "validation_response": {
+                                                        "title": "Validation Response",
+                                                        "readOnly": true,
+                                                        "description": "Information about the response code.",
+                                                        "properties": {
+                                                            "message": {
+                                                                "type": "string"
+                                                            },
+                                                            "code": {
+                                                                "type": "integer"
+                                                            }
+                                                        },
+                                                        "example": {
+                                                            "message": "Success",
+                                                            "code": 200
+                                                        },
+                                                        "type": "object",
+                                                        "required": [
+                                                            "code",
+                                                            "message"
+                                                        ]
+                                                    },
+                                                    "validation_information": {
+                                                        "readOnly": true,
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "description": "Additional information about errors in `validation_response.code`.",
+                                                        "type": "array"
+                                                    },
+                                                    "collection_size": {
+                                                        "readOnly": true,
+                                                        "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                                        "format": "int32",
+                                                        "type": "integer"
+                                                    },
+                                                    "restricted": {
+                                                        "readOnly": true,
+                                                        "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "example": {
+                                                    "validation_response": {
+                                                        "message": "Success",
+                                                        "code": 200
+                                                    },
+                                                    "restricted": false
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "validation_response"
+                                                ]
+                                            }
+                                        },
+                                        "type": "object",
+                                        "required": [
+                                            "links",
+                                            "metadata"
+                                        ]
+                                    },
+                                    "type": "array"
+                                },
+                                "links": {
+                                    "title": "Links",
+                                    "readOnly": true,
+                                    "description": "HATEOS links related to the returned resources.",
+                                    "type": "object"
+                                },
+                                "metadata": {
+                                    "title": "Metadata",
+                                    "readOnly": true,
+                                    "description": "Additional information about the response.",
+                                    "properties": {
+                                        "validation_response": {
+                                            "title": "Validation Response",
+                                            "readOnly": true,
+                                            "description": "Information about the response code.",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "example": {
+                                                "message": "Success",
+                                                "code": 200
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ]
+                                        },
+                                        "validation_information": {
+                                            "readOnly": true,
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "description": "Additional information about errors in `validation_response.code`.",
+                                            "type": "array"
+                                        },
+                                        "collection_size": {
+                                            "readOnly": true,
+                                            "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "restricted": {
+                                            "readOnly": true,
+                                            "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "example": {
+                                        "validation_response": {
+                                            "message": "Success",
+                                            "code": 200
+                                        },
+                                        "restricted": false
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "validation_response"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "links",
+                                "metadata",
+                                "values"
+                            ]
+                        },
+                        "description": "A collection of basic alumni information"
+                    },
+                    "default": {
+                        "schema": {
+                            "title": "Error Response",
+                            "description": "A response from the server when an error has occurred.",
+                            "properties": {
+                                "metadata": {
+                                    "title": "Metadata",
+                                    "readOnly": true,
+                                    "description": "Additional information about the response.",
+                                    "properties": {
+                                        "validation_response": {
+                                            "title": "Validation Response",
+                                            "readOnly": true,
+                                            "description": "Information about the response code.",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "example": {
+                                                "message": "Success",
+                                                "code": 200
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ]
+                                        },
+                                        "validation_information": {
+                                            "readOnly": true,
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "description": "Additional information about errors in `validation_response.code`.",
+                                            "type": "array"
+                                        },
+                                        "collection_size": {
+                                            "readOnly": true,
+                                            "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "restricted": {
+                                            "readOnly": true,
+                                            "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "example": {
+                                        "validation_response": {
+                                            "message": "Success",
+                                            "code": 200
+                                        },
+                                        "restricted": false
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "validation_response"
+                                    ]
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There was an error processing the request."
+                    }
+                },
+                "operationId": "getAlumni",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/alumni/directory/{alumni_id}": {
+            "x-controller": "directory",
+            "get": {
+                "tags": [
+                    "Directory"
+                ],
+                "description": "Get details about alumnus",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "alumni_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "title": "AlumnusDetailed",
+                            "description": "Detailed alumnus information",
+                            "properties": {
+                                "middle_name": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "state": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "links": {
+                                    "title": "Links",
+                                    "readOnly": true,
+                                    "description": "HATEOS links related to the returned resources.",
+                                    "type": "object"
+                                },
+                                "maiden_name": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "degrees": {
+                                    "title": "Degrees",
+                                    "description": "List of college degrees",
+                                    "properties": {
+                                        "values": {
+                                            "items": {
+                                                "title": "Degree",
+                                                "description": "College degree",
+                                                "properties": {
+                                                    "preferred_date": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 20,
+                                                        "type": "string"
+                                                    },
+                                                    "university": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 100,
+                                                        "type": "string"
+                                                    },
+                                                    "preferred_date_year": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 20,
+                                                        "type": "string"
+                                                    },
+                                                    "degree_type": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 100,
+                                                        "type": "string"
+                                                    },
+                                                    "major_code": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 50,
+                                                        "type": "string"
+                                                    },
+                                                    "department": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 100,
+                                                        "type": "string"
+                                                    },
+                                                    "college": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 100,
+                                                        "type": "string"
+                                                    },
+                                                    "degree_status": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 100,
+                                                        "type": "string"
+                                                    },
+                                                    "links": {
+                                                        "title": "Links",
+                                                        "readOnly": true,
+                                                        "description": "HATEOS links related to the returned resources.",
+                                                        "type": "object"
+                                                    },
+                                                    "major_name": {
+                                                        "x-nullable": true,
+                                                        "maxLength": 100,
+                                                        "type": "string"
+                                                    },
+                                                    "metadata": {
+                                                        "title": "Metadata",
+                                                        "readOnly": true,
+                                                        "description": "Additional information about the response.",
+                                                        "properties": {
+                                                            "validation_response": {
+                                                                "title": "Validation Response",
+                                                                "readOnly": true,
+                                                                "description": "Information about the response code.",
+                                                                "properties": {
+                                                                    "message": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "code": {
+                                                                        "type": "integer"
+                                                                    }
+                                                                },
+                                                                "example": {
+                                                                    "message": "Success",
+                                                                    "code": 200
+                                                                },
+                                                                "type": "object",
+                                                                "required": [
+                                                                    "code",
+                                                                    "message"
+                                                                ]
+                                                            },
+                                                            "validation_information": {
+                                                                "readOnly": true,
+                                                                "items": {
+                                                                    "type": "string"
+                                                                },
+                                                                "description": "Additional information about errors in `validation_response.code`.",
+                                                                "type": "array"
+                                                            },
+                                                            "collection_size": {
+                                                                "readOnly": true,
+                                                                "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                                                "format": "int32",
+                                                                "type": "integer"
+                                                            },
+                                                            "restricted": {
+                                                                "readOnly": true,
+                                                                "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                                                "type": "boolean"
+                                                            }
+                                                        },
+                                                        "example": {
+                                                            "validation_response": {
+                                                                "message": "Success",
+                                                                "code": 200
+                                                            },
+                                                            "restricted": false
+                                                        },
+                                                        "type": "object",
+                                                        "required": [
+                                                            "validation_response"
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "links",
+                                                    "metadata"
+                                                ]
+                                            },
+                                            "type": "array"
+                                        },
+                                        "links": {
+                                            "title": "Links",
+                                            "readOnly": true,
+                                            "description": "HATEOS links related to the returned resources.",
+                                            "type": "object"
+                                        },
+                                        "metadata": {
+                                            "title": "Metadata",
+                                            "readOnly": true,
+                                            "description": "Additional information about the response.",
+                                            "properties": {
+                                                "validation_response": {
+                                                    "title": "Validation Response",
+                                                    "readOnly": true,
+                                                    "description": "Information about the response code.",
+                                                    "properties": {
+                                                        "message": {
+                                                            "type": "string"
+                                                        },
+                                                        "code": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "example": {
+                                                        "message": "Success",
+                                                        "code": 200
+                                                    },
+                                                    "type": "object",
+                                                    "required": [
+                                                        "code",
+                                                        "message"
+                                                    ]
+                                                },
+                                                "validation_information": {
+                                                    "readOnly": true,
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": "Additional information about errors in `validation_response.code`.",
+                                                    "type": "array"
+                                                },
+                                                "collection_size": {
+                                                    "readOnly": true,
+                                                    "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                                    "format": "int32",
+                                                    "type": "integer"
+                                                },
+                                                "restricted": {
+                                                    "readOnly": true,
+                                                    "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "example": {
+                                                "validation_response": {
+                                                    "message": "Success",
+                                                    "code": 200
+                                                },
+                                                "restricted": false
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "validation_response"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "links",
+                                        "metadata",
+                                        "values"
+                                    ]
+                                },
+                                "city": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "first_name": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "address_line_1": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "x-nullable": true,
+                                    "maxLength": 200,
+                                    "type": "string"
+                                },
+                                "address_line_3": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "address_line_2": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "last_name": {
+                                    "x-nullable": true,
+                                    "maxLength": 100,
+                                    "type": "string"
+                                },
+                                "metadata": {
+                                    "title": "Metadata",
+                                    "readOnly": true,
+                                    "description": "Additional information about the response.",
+                                    "properties": {
+                                        "validation_response": {
+                                            "title": "Validation Response",
+                                            "readOnly": true,
+                                            "description": "Information about the response code.",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "example": {
+                                                "message": "Success",
+                                                "code": 200
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ]
+                                        },
+                                        "validation_information": {
+                                            "readOnly": true,
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "description": "Additional information about errors in `validation_response.code`.",
+                                            "type": "array"
+                                        },
+                                        "collection_size": {
+                                            "readOnly": true,
+                                            "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "restricted": {
+                                            "readOnly": true,
+                                            "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "example": {
+                                        "validation_response": {
+                                            "message": "Success",
+                                            "code": 200
+                                        },
+                                        "restricted": false
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "validation_response"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "links",
+                                "metadata"
+                            ]
+                        },
+                        "description": "Detailed alumnus information object"
+                    },
+                    "default": {
+                        "schema": {
+                            "title": "Error Response",
+                            "description": "A response from the server when an error has occurred.",
+                            "properties": {
+                                "metadata": {
+                                    "title": "Metadata",
+                                    "readOnly": true,
+                                    "description": "Additional information about the response.",
+                                    "properties": {
+                                        "validation_response": {
+                                            "title": "Validation Response",
+                                            "readOnly": true,
+                                            "description": "Information about the response code.",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "example": {
+                                                "message": "Success",
+                                                "code": 200
+                                            },
+                                            "type": "object",
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ]
+                                        },
+                                        "validation_information": {
+                                            "readOnly": true,
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "description": "Additional information about errors in `validation_response.code`.",
+                                            "type": "array"
+                                        },
+                                        "collection_size": {
+                                            "readOnly": true,
+                                            "description": "The number of individual items in a response. Returned only for the metadata of a collection.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "restricted": {
+                                            "readOnly": true,
+                                            "description": "Flag indicating if the resource is owned by a Restricted Person. Will always be `false` for collections.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "example": {
+                                        "validation_response": {
+                                            "message": "Success",
+                                            "code": 200
+                                        },
+                                        "restricted": false
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "validation_response"
+                                    ]
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There was an error processing the request."
+                    }
+                },
+                "operationId": "getAlumnusDetails",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/alumni/directory?": {
+            "get": {
+                "tags": [
+                    " "
+                ],
+                "description": "Get a list of alumni",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "maxLength": 100,
+                        "name": "city",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "college",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "country",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 20,
+                        "name": "degree_year",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "employer",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "first_name",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "last_name",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "maiden_name",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "major",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 100,
+                        "name": "state",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "For large collections, the returns set only return this number of records.",
+                        "name": "subset_size",
+                        "required": false,
+                        "type": "integer",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "securityDefinitions": {
+        "bearerAuth": {
+            "name": "Authorization",
+            "type": "apiKey",
+            "in": "header"
+        }
+    },
+    "info": {
+        "title": "AlumniServices",
+        "description": "Web Service for Alumni Services\n\n# Environments\n| API Version | Key Type | WSO2 URL | Environment |\n| ----------- | -------- | -------- | ----------- |\n| v1 | Sandbox |  | Development |\n\n# Provisioning System Access\n\nThis API is controlled by the authorization measures defined in the PeopleSoft HR environment.\n\n# Authentication\n\nApplications must be subscribed to the API in WSO2 and use the application bearer token in all requests.\n\n<SecurityDefinitions />\n",
+        "x-logo": {
+            "backgroundColor": "#002E5D",
+            "altText": "Brigham Young Univesrity Logo",
+            "url": "https://cdn.byu.edu/shared-icons/latest/logos/monogram-white.svg"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "contact": {
+            "email": "drew_cheng@byu.edu",
+            "name": "Drew Cheng"
+        },
+        "version": "v1"
+    }
+}

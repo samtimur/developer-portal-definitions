@@ -1,0 +1,172 @@
+{
+    "paths": {
+        "/locations": {
+            "get": {
+                "summary": "Get all available dining locations",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Location"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of locations"
+                    }
+                }
+            }
+        },
+        "/{dining_location}/{dining_date}": {
+            "get": {
+                "summary": "Get meals from specific dining location on a certain date",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The dining date to filter by",
+                        "name": "dining_date",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The dining location to filter by",
+                        "name": "dining_location",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Meal"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of meals"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "Category": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "menu_item": {
+                    "items": {
+                        "$ref": "#/definitions/Menu_item"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object",
+            "required": [
+                "menu_item"
+            ]
+        },
+        "Meal": {
+            "properties": {
+                "meal_name": {
+                    "type": "string"
+                },
+                "categories": {
+                    "items": {
+                        "$ref": "#/definitions/Category"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object",
+            "required": [
+                "meal_name"
+            ]
+        },
+        "Menu_item": {
+            "properties": {
+                "nutrients": {
+                    "items": {
+                        "$ref": "#/definitions/Nutrient"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "servingSize": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "nutrients"
+            ]
+        },
+        "Location": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "longitude": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "latitude": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "external_url": {
+                    "type": "string"
+                },
+                "location_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "location_id",
+                "name",
+                "type",
+                "external_url"
+            ]
+        },
+        "Nutrient": {
+            "properties": {
+                "amount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "measurement": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "MobileDiningServices",
+        "description": "Api to get available dining locations and see what they are serving on specific dates.",
+        "version": "v1"
+    },
+    "basePath": "/domains/mobile/dining-services/v1",
+    "host": "api.byu.edu:443"
+}

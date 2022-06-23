@@ -1,0 +1,166 @@
+{
+    "basePath": "/domains/erp/fs/encumbrance/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/encumbrance": {
+            "get": {
+                "tags": [
+                    "emcumbrance"
+                ],
+                "summary": "Returns Encumbrance using fiscal_year and accounting_period",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Encumbrance with the specified year, and accounting period will be returned. Operating unit will begin with \"C77\".",
+                "parameters": [
+                    {
+                        "description": "Returns encumbrances with that fiscal_year (yyyy)",
+                        "name": "fiscal_year",
+                        "type": "integer",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Returns encumbrances with that accounting_period values 1-12.",
+                        "name": "accounting_period",
+                        "type": "integer",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "count": {
+                                    "description": "Number of encumbrances",
+                                    "type": "integer"
+                                },
+                                "encumbrance": {
+                                    "items": {
+                                        "properties": {
+                                            "supplier_id": {
+                                                "description": "add description",
+                                                "type": "string"
+                                            },
+                                            "ledger_fiscal_year": {
+                                                "description": "add description",
+                                                "type": "integer"
+                                            },
+                                            "supplier_name": {
+                                                "description": "add description",
+                                                "type": "string"
+                                            },
+                                            "account_field": {
+                                                "description": "add description",
+                                                "type": "string"
+                                            },
+                                            "enc_last_update_date": {
+                                                "description": "add description",
+                                                "type": "string"
+                                            },
+                                            "class_field": {
+                                                "description": "add description",
+                                                "type": "string"
+                                            },
+                                            "enc_balance": {
+                                                "description": "add description",
+                                                "type": "number"
+                                            },
+                                            "purchase_order_distribution_total_line_amount": {
+                                                "description": "add description",
+                                                "type": "number"
+                                            },
+                                            "enc_source_system": {
+                                                "description": "add description",
+                                                "type": "string"
+                                            },
+                                            "enc_creation_date": {
+                                                "description": "add description",
+                                                "type": "string"
+                                            },
+                                            "ledger_accounting_period": {
+                                                "description": "add description",
+                                                "type": "integer"
+                                            },
+                                            "enc_source_id": {
+                                                "description": "add description",
+                                                "type": "string"
+                                            },
+                                            "enc_voucher_amount": {
+                                                "description": "add description",
+                                                "type": "number"
+                                            },
+                                            "operating_unit": {
+                                                "description": "add description",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "enc_voucher_amount",
+                                "supplier_name",
+                                "class_field",
+                                "enc_balance",
+                                "enc_source_system",
+                                "purchase_order_distribution_total_line_amount",
+                                "enc_creation_date",
+                                "ledger_fiscal_year",
+                                "supplier_id",
+                                "enc_source_id",
+                                "operating_unit",
+                                "ledger_accounting_period",
+                                "account_field",
+                                "enc_last_update_date"
+                            ]
+                        },
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "count": 1,
+                                "encumbrance": {
+                                    "supplier_id": "string",
+                                    "ledger_fiscal_year": 2019,
+                                    "supplier_name": "string",
+                                    "account_field": "string",
+                                    "enc_last_update_date": "yyyy-mm-dd",
+                                    "class_field": "string",
+                                    "enc_balance": 0,
+                                    "purchase_order_distribution_total_line_amount": 0,
+                                    "enc_source_system": "string",
+                                    "enc_creation_date": "yyyy-mm-dd",
+                                    "ledger_accounting_period": 7,
+                                    "enc_source_id": "string",
+                                    "enc_voucher_amount": 0,
+                                    "operating_unit": "C77-----"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "description": "Bad Request",
+                            "type": "string"
+                        },
+                        "description": "Bad Request",
+                        "examples": {
+                            "application/json": [
+                                "There are no encumbrances for the fiscal year (year parameter) and accounting period (period parameter). Please enter a different fiscal year and/or accounting period."
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "Encumbrance",
+        "description": "Returns Encumbrances",
+        "version": "v1"
+    }
+}

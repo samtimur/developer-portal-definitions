@@ -1,0 +1,191 @@
+{
+    "basePath": "/domains/erp/fs/inventory_items/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/*": {
+            "get": {
+                "description": "",
+                "parameters": [
+                    {
+                        "maxLength": 200,
+                        "description": "Description",
+                        "minLength": 1,
+                        "name": "description",
+                        "required": false,
+                        "type": "string",
+                        "in": "query",
+                        "allowEmptyValue": true
+                    },
+                    {
+                        "maxLength": 60,
+                        "description": "CAS Registry Number",
+                        "minLength": 1,
+                        "name": "cas_id",
+                        "required": false,
+                        "type": "string",
+                        "in": "query",
+                        "allowEmptyValue": true
+                    },
+                    {
+                        "maxLength": 30,
+                        "description": "Item ID",
+                        "minLength": 1,
+                        "name": "item_id",
+                        "required": false,
+                        "type": "string",
+                        "in": "query",
+                        "allowEmptyValue": true
+                    },
+                    {
+                        "maxLength": 30,
+                        "description": "Category",
+                        "minLength": 1,
+                        "name": "category_code",
+                        "required": false,
+                        "type": "string",
+                        "in": "query",
+                        "allowEmptyValue": true
+                    },
+                    {
+                        "maxLength": 30,
+                        "description": "Item Group",
+                        "minLength": 1,
+                        "name": "item_group",
+                        "required": false,
+                        "type": "string",
+                        "in": "query",
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/inventory_items"
+                        },
+                        "description": "The default response type is JSON. Add an Accept header with value=application/xml to return an XML response.",
+                        "examples": {
+                            "application/json": {
+                                "inventory_items": {
+                                    "inventory_information": [
+                                        {
+                                            "item_current_price": "17.62",
+                                            "item_id": "000000000000005724",
+                                            "cas_registry_number": "100-66-3",
+                                            "item_quantity_available": "1",
+                                            "item_unit_of_measure": "ML",
+                                            "item_group": "CHEMS CH",
+                                            "item_description": "ANISOLE (250 ML)",
+                                            "category_code": "CH01"
+                                        },
+                                        {
+                                            "item_current_price": "53.12",
+                                            "item_id": "000000000000005751",
+                                            "cas_registry_number": "100-52-7",
+                                            "item_quantity_available": "1",
+                                            "item_unit_of_measure": "GM",
+                                            "item_group": "CHEMS CH",
+                                            "item_description": "BENZALDEHYDE (100 GM)",
+                                            "category_code": "CH01"
+                                        },
+                                        {
+                                            "item_current_price": "48.65",
+                                            "item_id": "000000000000005752",
+                                            "cas_registry_number": "100-52-7",
+                                            "item_quantity_available": "1",
+                                            "item_unit_of_measure": "KG",
+                                            "item_group": "CHEMS CH",
+                                            "item_description": "BENZALDEHYDE (1 KG)",
+                                            "category_code": "CH01"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "item_current_price": {
+            "format": "double",
+            "type": "number"
+        },
+        "inventory_items": {
+            "items": {
+                "$ref": "#/definitions/inventory_information"
+            },
+            "type": "array"
+        },
+        "item_id": {
+            "maxLength": 18,
+            "type": "string"
+        },
+        "cas_registry_number": {
+            "maxLength": 20,
+            "type": "string"
+        },
+        "item_quantity_available": {
+            "format": "double",
+            "type": "number"
+        },
+        "item_unit_of_measure": {
+            "maxLength": 3,
+            "type": "string"
+        },
+        "item_group": {
+            "maxLength": 15,
+            "type": "string"
+        },
+        "item_description": {
+            "maxLength": 60,
+            "type": "string"
+        },
+        "inventory_information": {
+            "properties": {
+                "item_current_price": {
+                    "$ref": "#/definitions/item_current_price"
+                },
+                "item_id": {
+                    "$ref": "#/definitions/item_id"
+                },
+                "cas_registry_number": {
+                    "$ref": "#/definitions/cas_registry_number"
+                },
+                "item_quantity_available": {
+                    "$ref": "#/definitions/item_quantity_available"
+                },
+                "item_unit_of_measure": {
+                    "$ref": "#/definitions/item_unit_of_measure"
+                },
+                "item_group": {
+                    "$ref": "#/definitions/item_group"
+                },
+                "item_description": {
+                    "$ref": "#/definitions/item_description"
+                },
+                "category_code": {
+                    "$ref": "#/definitions/category_code"
+                }
+            }
+        },
+        "category_code": {
+            "maxLength": 18,
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "INVENTORY_ITEMS",
+        "description": "This API returns CAS Inventory Item information based on request.",
+        "version": "v1"
+    }
+}

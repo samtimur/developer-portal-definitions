@@ -1,0 +1,205 @@
+{
+    "paths": {
+        "/restrooms": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets a list of all the restrooms on campus",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/restroom"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Info about Restroom"
+                    }
+                }
+            }
+        },
+        "/buildings": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets a list of all the buildings on campus",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/building"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Info about Building"
+                    }
+                }
+            }
+        },
+        "/mothers-rooms": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets a list of all the Mother's Rooms on campus",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/restroom"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Info about Mother's Room"
+                    }
+                }
+            }
+        },
+        "/buildings/{building_acronym}/rooms": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets a list of all the rooms in the specified building",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Acronym of the building that you'd like to select the rooms from",
+                        "name": "building_acronym",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/room"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Info about Room"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "building": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "acronym": {
+                    "type": "string"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "longitude": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "latitude": {
+                    "format": "double",
+                    "type": "number"
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "restroom": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "room_number": {
+                    "type": "string"
+                },
+                "room_description": {
+                    "type": "string"
+                },
+                "building": {
+                    "type": "string"
+                },
+                "room_use_code": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "id",
+                "room_use_code"
+            ]
+        },
+        "room": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "room_number": {
+                    "type": "string"
+                },
+                "department_description": {
+                    "type": "string"
+                },
+                "room_description": {
+                    "type": "string"
+                },
+                "building": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "college": {
+                    "type": "string"
+                },
+                "capacity": {
+                    "type": "integer"
+                },
+                "occupy_year": {
+                    "type": "string"
+                },
+                "square_feet": {
+                    "type": "integer"
+                },
+                "college_description": {
+                    "type": "string"
+                },
+                "room_use_code": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "id",
+                "building",
+                "room_number"
+            ]
+        }
+    },
+    "info": {
+        "title": "LocationService",
+        "description": "This API is meant to give the locations of campus entities, specifically, buildings.",
+        "version": "v2"
+    },
+    "basePath": "/domains/mobile/location/v2",
+    "host": "api.byu.edu:443"
+}

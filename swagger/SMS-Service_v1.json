@@ -1,0 +1,70 @@
+{
+    "tags": [
+        {
+            "description": "",
+            "name": "inbound"
+        }
+    ],
+    "basePath": "/rest/sms/v1",
+    "paths": {
+        "/inbound/webhook": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "inbound"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        },
+                        "name": "SMSMessage",
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "Message": {
+            "title": "MessageBirdInbound",
+            "xml": {
+                "name": "MessageBirdInbound"
+            },
+            "properties": {
+                "Body": {
+                    "type": "string"
+                },
+                "Originator": {
+                    "type": "string"
+                },
+                "CreatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "Recipient": {
+                    "type": "string"
+                },
+                "MessageBirdId": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "SMS-Service",
+        "version": "v1"
+    }
+}

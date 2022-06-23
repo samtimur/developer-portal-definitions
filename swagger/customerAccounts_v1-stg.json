@@ -1,0 +1,398 @@
+{
+    "basePath": "/domains/erp/sa/customerAccounts/v1-stg",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/transaction/student/{byu_id}": {
+            "post": {
+                "tags": [
+                    "Charge Payment Refund"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Post one charge, payment, or refund to one student's BYU-ID",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/transactionBody"
+                        },
+                        "description": "Student Financials Parameters",
+                        "name": "parameters",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "default": "123456789",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/transactionResponse"
+                        },
+                        "description": "Transaction was posted successfully."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/exception_info"
+                        },
+                        "description": "Malformed request. Please see the customerAccounts API at api.byu.edu/store for a description of how to use this API."
+                    },
+                    "404": {
+                        "description": "The resource you requested is not found. Please see the customerAccounts API at api.byu.edu/store for a description of how to use this API."
+                    }
+                },
+                "operationId": "postTransaction"
+            }
+        },
+        "/items/{byu_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a List of Transaction Items for a Customer. Currently all parameters below are required to be present as query parameters in the order listed below. However, if you do not want to filter the results using one of the query parameters below, simply provide the query parameter with a blank value (ie ?strm=&account_type_sf=...).",
+                "parameters": [
+                    {
+                        "default": "000221991",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "default": "2105",
+                        "name": "strm",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": "TUT",
+                        "name": "account_type_sf",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": "100100010000",
+                        "description": "Zero or more item types, separated by commas",
+                        "name": "item_type",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": "TUITION001",
+                        "name": "account_nbr",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": "Something",
+                        "name": "ref1_descr",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": "T123456",
+                        "name": "tracer_nbr",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/chargesResponse"
+                        },
+                        "description": "A list of 0 or more charges has been returned for customer"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/exception_info"
+                        },
+                        "description": "Malformed request. Please see the customerAccounts API at api.byu.edu/store for a description of how to use this API."
+                    },
+                    "404": {
+                        "description": "The resource you requested is not found. Please see the customerAccounts API at api.byu.edu/store for a description of how to use this API."
+                    }
+                },
+                "operationId": "getTransactions"
+            }
+        },
+        "/transactions/group": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Post a group of charges",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/transactionGroupBody"
+                        },
+                        "description": "Student Financials Parameters",
+                        "name": "parameters",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/transactionGroupSuccess"
+                        },
+                        "description": "Transaction was posted successfully."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/transactionGroupErrors"
+                        },
+                        "description": "Malformed request. Please see the customerAccounts API at api.byu.edu/store for a description of how to use this API."
+                    },
+                    "404": {
+                        "description": "The resource you requested is not found. Please see the customerAccounts API at api.byu.edu/store for a description of how to use this API."
+                    }
+                },
+                "operationId": "postGroupTransaction"
+            }
+        }
+    },
+    "swagger": "2.0",
+    "parameters": {},
+    "definitions": {
+        "transactionGroupSuccess": {
+            "properties": {
+                "stu_acct_batch_refrnc": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "transactionGroupBody": {
+            "properties": {
+                "batch_id": {
+                    "title": "The Batch_id Schema",
+                    "default": "MYTEST",
+                    "type": "string"
+                },
+                "business_unit": {
+                    "title": "The Business_unit Schema",
+                    "default": "BYU",
+                    "type": "string"
+                },
+                "charges": {
+                    "title": "The Charges Schema",
+                    "items": {
+                        "title": "The Items Schema",
+                        "properties": {
+                            "tracer_nbr": {
+                                "title": "The Tracer_nbr Schema",
+                                "default": "ABC12345",
+                                "type": "string"
+                            },
+                            "item_amt": {
+                                "title": "The Item_amt Schema",
+                                "default": 50,
+                                "type": "integer"
+                            },
+                            "transaction_date": {
+                                "title": "The Transaction_date Schema",
+                                "format": "date",
+                                "type": "string"
+                            },
+                            "account_type_sf": {
+                                "title": "The Account_type_sf Schema",
+                                "default": "TUT",
+                                "type": "string"
+                            },
+                            "descr": {
+                                "title": "The Descr Schema",
+                                "default": "",
+                                "type": "string"
+                            },
+                            "ref1_descr": {
+                                "title": "The Ref1_descr Schema",
+                                "default": "Refund Traffic Ticket",
+                                "type": "string"
+                            },
+                            "emplid": {
+                                "title": "The Emplid Schema",
+                                "default": "111111111",
+                                "type": "string"
+                            },
+                            "item_type": {
+                                "title": "The Item_type Schema",
+                                "default": "999970001000",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "emplid",
+                            "descr",
+                            "account_type_sf",
+                            "transaction_date",
+                            "item_type",
+                            "ref1_descr",
+                            "tracer_nbr",
+                            "item_amt"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "origin_id": {
+                    "title": "The Origin_id Schema",
+                    "default": "X",
+                    "type": "string"
+                },
+                "batch_date": {
+                    "title": "The Batch_date Schema",
+                    "format": "date",
+                    "type": "string"
+                },
+                "net_id": {
+                    "title": "The Net_id Schema",
+                    "default": "abc",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "transactionGroupErrors": {
+            "properties": {
+                "group_data_entry_errors": {
+                    "items": {
+                        "properties": {
+                            "error": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "transactionResponse": {
+            "properties": {
+                "student_account_update_status": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "chargesResponse": {
+            "properties": {
+                "student_account_transactions": {
+                    "items": {
+                        "properties": {
+                            "student_account_item_status": {
+                                "type": "string"
+                            },
+                            "stu_acct_transaction_amt": {
+                                "type": "number"
+                            },
+                            "student_account_item_type": {
+                                "type": "string"
+                            },
+                            "student_account_account_number": {
+                                "type": "string"
+                            },
+                            "student_account_invoice_number": {
+                                "type": "string"
+                            },
+                            "student_account_item_type_code": {
+                                "type": "string"
+                            },
+                            "student_account_effective_date": {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            "student_account_due_date": {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            "student_account_item_term": {
+                                "type": "string"
+                            },
+                            "student_account_applied_amount": {
+                                "type": "number"
+                            },
+                            "student_account_tracer_number": {
+                                "type": "string"
+                            },
+                            "byu_id": {
+                                "type": "string"
+                            },
+                            "student_account_item_balance": {
+                                "type": "number"
+                            },
+                            "student_account_account_type": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "exception_info": {
+            "properties": {
+                "error_message": {
+                    "type": "string"
+                }
+            }
+        },
+        "transactionBody": {
+            "properties": {
+                "tracer_nbr": {
+                    "default": "Description: ABC0123456789",
+                    "description": "Tracer Number",
+                    "type": "string"
+                },
+                "transaction_amount": {
+                    "description": "Transaction Amount",
+                    "type": "number"
+                },
+                "account_type_sf": {
+                    "default": "MIS",
+                    "description": "Account Type",
+                    "type": "string"
+                },
+                "descr": {
+                    "default": "Place Description Here",
+                    "description": "Transaction Description",
+                    "type": "string"
+                },
+                "ref1_descr": {
+                    "default": "Place Ref1 Descr Here",
+                    "description": "Reference Description",
+                    "type": "string"
+                },
+                "item_type": {
+                    "default": "100000000001",
+                    "description": "Item Type",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "Customer Account API",
+        "description": "Get or Post charges, payments, or refunds to or from customer accounts.",
+        "contact": {
+            "email": "sfa_ft@byu.edu",
+            "name": "OIT Student Financial Applications",
+            "url": "http://www.example.com/support"
+        },
+        "version": "v1"
+    }
+}

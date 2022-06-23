@@ -1,0 +1,57 @@
+{
+    "paths": {
+        "/{location_id}/controlHours/Floor": {
+            "get": {
+                "summary": "Returns the availability hours for the given location.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns normal Mon-Sat Testing Center hours, as well as a array of exceptions to the norm.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Use the default endpoint (/domains/testingcenter/location/v1/) to view the list of all available locations w/ their location_id's.",
+                        "name": "location_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/*": {
+            "get": {
+                "summary": "Get all available locations. ",
+                "description": "Returns an array of location objects.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Call w/o a location_id to view the list of locations w/ their locations_id's.",
+                        "name": "location_id",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "TestingCenter_Location",
+        "version": "v1"
+    },
+    "basePath": "/domains/testingcenter/location/v1",
+    "host": "api.byu.edu:443"
+}

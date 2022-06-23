@@ -1,0 +1,205 @@
+{
+    "paths": {
+        "/?": {
+            "post": {
+                "description": "Add a template",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "templateSubject": {
+                                    "type": "string"
+                                },
+                                "templateBody": {
+                                    "type": "string"
+                                },
+                                "templateName": {
+                                    "pattern": "^[A-Za-z0-9 ]+$",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Include the template body in the response",
+                        "name": "requestBody",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "The template that was added"
+                    }
+                }
+            },
+            "get": {
+                "description": "Get a list of template names (WSO2 is finicky -- If you want to use query parameters, you need to explicitly use /? instead of just ? on this endpoint)",
+                "parameters": [
+                    {
+                        "description": "Include the template body in the response",
+                        "name": "includeBody",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of template names/objects (depending on includeBody parameter)"
+                    }
+                }
+            }
+        },
+        "/health": {
+            "get": {
+                "description": "Health check",
+                "responses": {
+                    "200": {
+                        "description": "Server is healthy"
+                    }
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "description": "Add a template",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "templateSubject": {
+                                    "type": "string"
+                                },
+                                "templateBody": {
+                                    "type": "string"
+                                },
+                                "templateName": {
+                                    "pattern": "^[A-Za-z0-9 ]+$",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Include the template body in the response",
+                        "name": "requestBody",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "The template that was added"
+                    }
+                }
+            },
+            "get": {
+                "description": "Get a list of template names",
+                "parameters": [
+                    {
+                        "description": "Include the template body in the response",
+                        "name": "includeBody",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of template names/objects (depending on includeBody parameter)"
+                    }
+                }
+            }
+        },
+        "/{templateName}": {
+            "put": {
+                "description": "Update a template",
+                "parameters": [
+                    {
+                        "pattern": "^[A-Za-z0-9 ]+$",
+                        "description": "The template name",
+                        "name": "templateName",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "properties": {
+                                "templateSubject": {
+                                    "type": "string"
+                                },
+                                "templateBody": {
+                                    "type": "string"
+                                },
+                                "templateName": {
+                                    "pattern": "^[A-Za-z0-9 ]+$",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The template with updated properties",
+                        "name": "newTemplate",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The template that was updated"
+                    },
+                    "404": {
+                        "description": "Template not found"
+                    }
+                }
+            },
+            "get": {
+                "description": "Get a template body",
+                "parameters": [
+                    {
+                        "pattern": "^[A-Za-z0-9 ]+$",
+                        "description": "The template name",
+                        "name": "templateName",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The requested template"
+                    },
+                    "404": {
+                        "description": "The requested template was not found"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a template",
+                "parameters": [
+                    {
+                        "pattern": "^[A-Za-z0-9 ]+$",
+                        "description": "The template name",
+                        "name": "templateName",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The template was deleted"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "EmailTemplateApi",
+        "description": "An email template manager (repository found at https://github.com/byu-oit/email-template)",
+        "version": "v1.0"
+    },
+    "basePath": "/emailTemplate/v1.0",
+    "host": "api.byu.edu:443"
+}

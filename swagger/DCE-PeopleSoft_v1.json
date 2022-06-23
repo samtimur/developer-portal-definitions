@@ -1,0 +1,371 @@
+{
+    "paths": {
+        "/talk/talk_id/{talk_id}": {
+            "get": {
+                "summary": "Indicates if a talk has been associated with an agenda.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns 'true' of the talks is associated with a conference agenda in the Orion system (and cannot be removed)",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Talk Identifier, provided by PeopleSoft.",
+                        "name": "talk_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "delete": {
+                "summary": "Deletes an existing talk record from Orion",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Talk Identifier, provided by PeopleSoft.",
+                        "name": "talk_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/getAssessmentAttemptsForPayment": {
+            "get": {
+                "summary": "Get assessment attempts that have not been marked as sent to PeopleSoft",
+                "responses": {
+                    "200": {}
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/employeeHire": {
+            "post": {
+                "summary": "Manages employee relationships for DCE programs",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Contact information need not be provided as it can be retrieved from other university systems based on byu_id, however; the call will fail if no contact info is provided and the university systems to retrieve it are unavailable.",
+                "parameters": [
+                    {
+                        "description": "ID of the DCE Program in the 'Orion' system.",
+                        "name": "orion_program_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Nine digit BYU Account identifier.",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "The position the employee is hired into.",
+                        "name": "position",
+                        "type": "string",
+                        "required": true,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Status of employment (Hired|Pending), any other value will cause the hire to be canceled.",
+                        "name": "hired",
+                        "type": "string",
+                        "required": true,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "BYU Account Net ID.",
+                        "name": "net_id",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "PRO person_id.",
+                        "name": "pro_id",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Employee's last name.",
+                        "name": "last_name",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Employee's first name.",
+                        "name": "first_name",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Employee's middle name.",
+                        "name": "middle_name",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Employee's preferred first name.",
+                        "name": "preferred_name",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "First address line.",
+                        "name": "address_1",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Second address line.",
+                        "name": "address_2",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Third address line.",
+                        "name": "address_3",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Fourth address line.",
+                        "name": "address_4",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Address city.",
+                        "name": "city",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "US address state.",
+                        "name": "state",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "US address zip code.",
+                        "name": "zip",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Address country.",
+                        "name": "country",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Foreign address postal code.",
+                        "name": "postal_code",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Foreign address postal region.",
+                        "name": "postal_region",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Employee's primary phone number.",
+                        "name": "phone",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Employee's personal email.",
+                        "name": "email",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Employee's sex.",
+                        "name": "gender",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Employee's date of birth.",
+                        "name": "birthdate",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/talk": {
+            "post": {
+                "summary": "Adds/Updates a talk record in Orion",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Talk Identifier, provided by PeopleSoft.",
+                        "name": "talk_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Official title of the talk.",
+                        "name": "title",
+                        "required": true,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "description": "BYU ID of the speaker authorized to give this talk.  Required unless global_talk=Y",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Abstract or description of the contents of the talk. Removed if not provided",
+                        "name": "description",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Full text of the talk outline. Removed if not provided",
+                        "name": "outline",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Date/time flag indicating whether and when the department submitted the talk. (YYYY/MM/DD HH:NN:SS) Removed if not provided",
+                        "name": "dept_submitted",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Date/time flag indicating whether and when the talk received clearance. (YYYY/MM/DD HH:NN:SS) Removed if not provided",
+                        "name": "clearance",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "FK to the TALK record representing the 'series title' for this 'subtitle' talk. Removed if not provided",
+                        "name": "series",
+                        "type": "integer",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Date and time after which the talk must be resubmitted for clearance or else abandoned. (YYYY/MM/DD HH:NN:SS) Removed if not provided",
+                        "name": "expiration",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Text describing any special audiovisual needs for the talk. Removed if not provided",
+                        "name": "av_needs",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Date/time flag that the faculty member (presenter) submitted the talk. (YYYY/MM/DD HH:NN:SS) Removed if not provided",
+                        "name": "faculty_submitted",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Y/N Flag indicating if this talk can be given by any presenter. Default=N",
+                        "name": "global_talk",
+                        "type": "string",
+                        "required": false,
+                        "in": "formData"
+                    },
+                    {
+                        "description": "Order in which the talk is to be given. Default=99",
+                        "name": "talk_order",
+                        "type": "integer",
+                        "required": false,
+                        "in": "formData"
+                    }
+                ],
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/markAssessmentAttemptsAsSent": {
+            "post": {
+                "summary": "Update assessment attempts as having been sent to PeopleSoft",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Comma delimited list of assessment attempt IDs to mark as posted.",
+                        "name": "assessment_attempt_ids",
+                        "required": true,
+                        "type": "string",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "DCE-PeopleSoft",
+        "description": "Services for PeopleSoft Personnel Manager",
+        "version": "v1.0"
+    },
+    "basePath": "/domains/DCE/peopleSoft/v1.0",
+    "host": "api.byu.edu:443"
+}

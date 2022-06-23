@@ -1,0 +1,100 @@
+{
+    "basePath": "/domains/erp/hr/work_orders_by_operating_unit/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{operating_unit}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns work orders associated with the specified operating unit.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/operating_unit"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/work_orders"
+                        },
+                        "description": "Service request is OK and the data is in the response body."
+                    },
+                    "204": {
+                        "description": "Service request is OK and no data is available."
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "parameters": {
+        "operating_unit": {
+            "pattern": "^[0-9]{8}$",
+            "description": "BYU Operating Unit",
+            "name": "operating_unit",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        }
+    },
+    "definitions": {
+        "work_order_description": {
+            "maxLength": 60,
+            "example": "ELECTRICAL ENG WAREHOUSE MATERIALS",
+            "type": "string"
+        },
+        "work_orders": {
+            "items": {
+                "$ref": "#/definitions/work_order"
+            },
+            "type": "array"
+        },
+        "work_order_id": {
+            "maxLength": 15,
+            "example": "132",
+            "type": "string"
+        },
+        "work_order": {
+            "properties": {
+                "work_order_description": {
+                    "$ref": "#/definitions/work_order_description"
+                },
+                "work_order_id": {
+                    "$ref": "#/definitions/work_order_id"
+                }
+            }
+        }
+    },
+    "responses": {
+        "400": {
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "404": {
+            "description": "The requested resource does not exist"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "Work_Orders_By_Operating_Unit",
+        "description": "A list of work orders for the specified operating unit.",
+        "version": "v1"
+    }
+}

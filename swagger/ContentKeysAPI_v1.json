@@ -1,0 +1,188 @@
+{
+    "paths": {
+        "/config/{webResourceId}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Saves the requester's configurations for the provided web resource. ",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "The web resource ID corresponding to the desired configurations.",
+                        "name": "webResourceId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "properties": {
+                                "variableName1": {
+                                    "description": "VariableValue",
+                                    "type": "string"
+                                },
+                                "variableName2": {
+                                    "description": "VariableValue",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Json Request Body containing desired key-value pair configurations.",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Retrieves the requester's configurations for the provided web resource. ",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The web resource ID corresponding to the desired configurations.",
+                        "name": "webResourceId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Deletes the requester's configurations for the provided web resource. ",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "The web resource ID corresponding to the desired configurations.",
+                        "name": "webResourceId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/{key}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Replaces the body of the database element corresponding to the requester and supplied key.",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "type": "json",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "description": "unique key corresponding to content.",
+                        "name": "key",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Retrieves the database element corresponding to the requester and supplied key.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "unique key corresponding to content.",
+                        "name": "key",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "put": {
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "responses": {
+                    "200": {}
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "responses": {
+                    "200": {}
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "ContentKeysAPI",
+        "description": "Associates a requester with a unique key corresponding to a content key.",
+        "version": "v1.0"
+    },
+    "basePath": "/contentKeys/v1.0",
+    "host": "api.byu.edu:443"
+}

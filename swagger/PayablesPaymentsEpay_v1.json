@@ -1,0 +1,179 @@
+{
+    "basePath": "/domains/legacy/payables/payments/epay/v1",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation"
+            }
+        },
+        "/payment_url": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "load epay page to get checkout URL",
+                "x-throttling-tier": "Unlimited",
+                "description": "load epay page to get checkout URL",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Individual person identifier",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Seller identification",
+                        "name": "seller_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Seller trans identification",
+                        "name": "seller_trans_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Total value of payment",
+                        "name": "total_value",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Url used to return to previous",
+                        "name": "return_url",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "tags": [
+                    "EpayService"
+                ],
+                "summary": "load epay page to get checkout URL",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "load epay page to get checkout URL",
+                "parameters": [
+                    {
+                        "description": "Individual person identifier",
+                        "name": "person_id",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Seller identification",
+                        "name": "seller_id",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Seller trans identification",
+                        "name": "seller_trans_id",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Total value of payment",
+                        "name": "total_value",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Url used to return to previous",
+                        "name": "return_url",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "loadEpayPage"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {},
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/Transcript_Admissions_Epay_v1.0"
+    },
+    "info": {
+        "title": "PayablesPaymentsEpay",
+        "description": "This service allows you to make a payment online for a transcript fee and an admissions fee in the CES Admission System.",
+        "version": "v1"
+    }
+}

@@ -1,0 +1,2130 @@
+{
+    "basePath": "/domains/aim-test-score-loader/v1",
+    "paths": {
+        "/getBatchStatus/{pid},{dt}": {
+            "x-controller": "testLoader",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Test loader status",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the status of the batch nearst to dt",
+                "parameters": [
+                    {
+                        "maxLength": 9,
+                        "minLength": 9,
+                        "description": "batch process id number",
+                        "name": "pid",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "milliseconds since epoch",
+                        "name": "dt",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "description": "results of query",
+                            "properties": {
+                                "metadata": {
+                                    "description": "std_tests       definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE,               SEQ_NUM",
+                                    "properties": {
+                                        "test_date": {
+                                            "description": "pk 5.6 no default, test date",
+                                            "type": "string"
+                                        },
+                                        "credit_institution": {
+                                            "description": "pk 2.6 no default, credit institution",
+                                            "type": "string"
+                                        },
+                                        "seq_num": {
+                                            "description": "pk 6.6 default to 1 if not specified, sequence number",
+                                            "type": "number"
+                                        },
+                                        "updated_by_id": {
+                                            "description": "updated by person id",
+                                            "type": "string"
+                                        },
+                                        "person_id": {
+                                            "description": "pk 1.6 no default, aim person id",
+                                            "type": "string"
+                                        },
+                                        "scores": {
+                                            "items": {
+                                                "description": "std_test_scores definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE, SEQUENCE_NUM, TEST_TYPE_SEQ_NUM",
+                                                "properties": {
+                                                    "score_type": {
+                                                        "description": "score type",
+                                                        "type": "string"
+                                                    },
+                                                    "percentile": {
+                                                        "description": "percentile",
+                                                        "type": "number"
+                                                    },
+                                                    "test_score": {
+                                                        "description": "test score",
+                                                        "type": "number"
+                                                    },
+                                                    "sequence_num": {
+                                                        "description": "pk 7.7 1-6 same as parent, derived from score_type, sequence number",
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "score_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "description": "List of std_test_scores",
+                                            "type": "array"
+                                        },
+                                        "test_taker_id": {
+                                            "description": "test taker id",
+                                            "type": "string"
+                                        },
+                                        "institution_type": {
+                                            "description": "institution type",
+                                            "type": "string"
+                                        },
+                                        "date_verified": {
+                                            "description": "date verified",
+                                            "type": "string"
+                                        },
+                                        "date_time_updated": {
+                                            "description": "date time updated",
+                                            "type": "string"
+                                        },
+                                        "test_source": {
+                                            "description": "test source",
+                                            "type": "string"
+                                        },
+                                        "test_version": {
+                                            "description": "pk 4.6 no default, test version",
+                                            "type": "string"
+                                        },
+                                        "test_type": {
+                                            "description": "pk 3.6 no default, test type",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "person_id",
+                                        "credit_institution",
+                                        "test_type",
+                                        "test_version",
+                                        "test_date"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Event posted"
+                    },
+                    "401": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Not authorized"
+                    },
+                    "default": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getBatchStatus"
+            }
+        },
+        "/health": {
+            "x-controller": "testLoader",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Health check",
+                "x-throttling-tier": "Unlimited",
+                "description": "A simple path health check",
+                "parameters": [
+                    {
+                        "schema": {
+                            "description": "Optional details of a health request",
+                            "type": "object"
+                        },
+                        "description": "Optional unused body",
+                        "name": "healthParm",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "description": "Health message",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service is healthy"
+                    },
+                    "default": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "health"
+            }
+        },
+        "/setTests": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Test score loader",
+                "x-throttling-tier": "Unlimited",
+                "description": "List of test structures",
+                "parameters": [
+                    {
+                        "schema": {
+                            "items": {
+                                "description": "std_tests       definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE,               SEQ_NUM",
+                                "properties": {
+                                    "metadata": {
+                                        "description": "std_tests       definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE,               SEQ_NUM",
+                                        "properties": {
+                                            "test_date": {
+                                                "description": "pk 5.6 no default, test date",
+                                                "type": "string"
+                                            },
+                                            "credit_institution": {
+                                                "description": "pk 2.6 no default, credit institution",
+                                                "type": "string"
+                                            },
+                                            "seq_num": {
+                                                "description": "pk 6.6 default to 1 if not specified, sequence number",
+                                                "type": "number"
+                                            },
+                                            "updated_by_id": {
+                                                "description": "updated by person id",
+                                                "type": "string"
+                                            },
+                                            "person_id": {
+                                                "description": "pk 1.6 no default, aim person id",
+                                                "type": "string"
+                                            },
+                                            "scores": {
+                                                "items": {
+                                                    "description": "std_test_scores definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE, SEQUENCE_NUM, TEST_TYPE_SEQ_NUM",
+                                                    "properties": {
+                                                        "score_type": {
+                                                            "description": "score type",
+                                                            "type": "string"
+                                                        },
+                                                        "percentile": {
+                                                            "description": "percentile",
+                                                            "type": "number"
+                                                        },
+                                                        "test_score": {
+                                                            "description": "test score",
+                                                            "type": "number"
+                                                        },
+                                                        "sequence_num": {
+                                                            "description": "pk 7.7 1-6 same as parent, derived from score_type, sequence number",
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "score_type"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "description": "List of std_test_scores",
+                                                "type": "array"
+                                            },
+                                            "test_taker_id": {
+                                                "description": "test taker id",
+                                                "type": "string"
+                                            },
+                                            "institution_type": {
+                                                "description": "institution type",
+                                                "type": "string"
+                                            },
+                                            "date_verified": {
+                                                "description": "date verified",
+                                                "type": "string"
+                                            },
+                                            "date_time_updated": {
+                                                "description": "date time updated",
+                                                "type": "string"
+                                            },
+                                            "test_source": {
+                                                "description": "test source",
+                                                "type": "string"
+                                            },
+                                            "test_version": {
+                                                "description": "pk 4.6 no default, test version",
+                                                "type": "string"
+                                            },
+                                            "test_type": {
+                                                "description": "pk 3.6 no default, test type",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "person_id",
+                                            "credit_institution",
+                                            "test_type",
+                                            "test_version",
+                                            "test_date"
+                                        ],
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "description": "List of std_tests",
+                            "type": "array"
+                        },
+                        "description": "Test list",
+                        "name": "list",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "description": "Test post result",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Tests posted"
+                    },
+                    "401": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Not authorized"
+                    },
+                    "default": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "setTests"
+            },
+            "x-controller": "testLoader"
+        },
+        "/getByTestDate/{test_date}": {
+            "x-controller": "testLoader",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Test score loader",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a list of tests by test_date",
+                "parameters": [
+                    {
+                        "maxLength": 6,
+                        "minLength": 6,
+                        "description": "Test date",
+                        "name": "test_date",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "description": "results of query",
+                            "properties": {
+                                "metadata": {
+                                    "description": "std_tests       definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE,               SEQ_NUM",
+                                    "properties": {
+                                        "test_date": {
+                                            "description": "pk 5.6 no default, test date",
+                                            "type": "string"
+                                        },
+                                        "credit_institution": {
+                                            "description": "pk 2.6 no default, credit institution",
+                                            "type": "string"
+                                        },
+                                        "seq_num": {
+                                            "description": "pk 6.6 default to 1 if not specified, sequence number",
+                                            "type": "number"
+                                        },
+                                        "updated_by_id": {
+                                            "description": "updated by person id",
+                                            "type": "string"
+                                        },
+                                        "person_id": {
+                                            "description": "pk 1.6 no default, aim person id",
+                                            "type": "string"
+                                        },
+                                        "scores": {
+                                            "items": {
+                                                "description": "std_test_scores definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE, SEQUENCE_NUM, TEST_TYPE_SEQ_NUM",
+                                                "properties": {
+                                                    "score_type": {
+                                                        "description": "score type",
+                                                        "type": "string"
+                                                    },
+                                                    "percentile": {
+                                                        "description": "percentile",
+                                                        "type": "number"
+                                                    },
+                                                    "test_score": {
+                                                        "description": "test score",
+                                                        "type": "number"
+                                                    },
+                                                    "sequence_num": {
+                                                        "description": "pk 7.7 1-6 same as parent, derived from score_type, sequence number",
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "score_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "description": "List of std_test_scores",
+                                            "type": "array"
+                                        },
+                                        "test_taker_id": {
+                                            "description": "test taker id",
+                                            "type": "string"
+                                        },
+                                        "institution_type": {
+                                            "description": "institution type",
+                                            "type": "string"
+                                        },
+                                        "date_verified": {
+                                            "description": "date verified",
+                                            "type": "string"
+                                        },
+                                        "date_time_updated": {
+                                            "description": "date time updated",
+                                            "type": "string"
+                                        },
+                                        "test_source": {
+                                            "description": "test source",
+                                            "type": "string"
+                                        },
+                                        "test_version": {
+                                            "description": "pk 4.6 no default, test version",
+                                            "type": "string"
+                                        },
+                                        "test_type": {
+                                            "description": "pk 3.6 no default, test type",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "person_id",
+                                        "credit_institution",
+                                        "test_type",
+                                        "test_version",
+                                        "test_date"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Event posted"
+                    },
+                    "401": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Not authorized"
+                    },
+                    "default": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getByTestDate"
+            }
+        },
+        "/{person_id},{+test_type},{test_date},{+test_version},{+credit_institution},{sequence_number}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    " "
+                ],
+                "summary": "Remove test",
+                "x-throttling-tier": "Unlimited",
+                "description": "Remove a particular test",
+                "parameters": [
+                    {
+                        "maxLength": 9,
+                        "minLength": 9,
+                        "description": "person id of test taker",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "x-contains-special-characters": true,
+                        "description": "credit instituion of test record",
+                        "name": "+test_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "credit instituion of test record",
+                        "name": "test_date",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "x-contains-special-characters": true,
+                        "description": "credit instituion of test record",
+                        "name": "+test_version",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "x-contains-special-characters": true,
+                        "description": "credit instituion of test record",
+                        "name": "+credit_institution",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "test version",
+                        "name": "sequence_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/getBatchStatus/{pid}": {
+            "x-controller": "testLoader",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Test loader status",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the status of the batch nearst to dt",
+                "parameters": [
+                    {
+                        "maxLength": 9,
+                        "minLength": 9,
+                        "description": "batch process id number",
+                        "name": "pid",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "description": "results of query",
+                            "properties": {
+                                "metadata": {
+                                    "description": "std_tests       definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE,               SEQ_NUM",
+                                    "properties": {
+                                        "test_date": {
+                                            "description": "pk 5.6 no default, test date",
+                                            "type": "string"
+                                        },
+                                        "credit_institution": {
+                                            "description": "pk 2.6 no default, credit institution",
+                                            "type": "string"
+                                        },
+                                        "seq_num": {
+                                            "description": "pk 6.6 default to 1 if not specified, sequence number",
+                                            "type": "number"
+                                        },
+                                        "updated_by_id": {
+                                            "description": "updated by person id",
+                                            "type": "string"
+                                        },
+                                        "person_id": {
+                                            "description": "pk 1.6 no default, aim person id",
+                                            "type": "string"
+                                        },
+                                        "scores": {
+                                            "items": {
+                                                "description": "std_test_scores definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE, SEQUENCE_NUM, TEST_TYPE_SEQ_NUM",
+                                                "properties": {
+                                                    "score_type": {
+                                                        "description": "score type",
+                                                        "type": "string"
+                                                    },
+                                                    "percentile": {
+                                                        "description": "percentile",
+                                                        "type": "number"
+                                                    },
+                                                    "test_score": {
+                                                        "description": "test score",
+                                                        "type": "number"
+                                                    },
+                                                    "sequence_num": {
+                                                        "description": "pk 7.7 1-6 same as parent, derived from score_type, sequence number",
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "score_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "description": "List of std_test_scores",
+                                            "type": "array"
+                                        },
+                                        "test_taker_id": {
+                                            "description": "test taker id",
+                                            "type": "string"
+                                        },
+                                        "institution_type": {
+                                            "description": "institution type",
+                                            "type": "string"
+                                        },
+                                        "date_verified": {
+                                            "description": "date verified",
+                                            "type": "string"
+                                        },
+                                        "date_time_updated": {
+                                            "description": "date time updated",
+                                            "type": "string"
+                                        },
+                                        "test_source": {
+                                            "description": "test source",
+                                            "type": "string"
+                                        },
+                                        "test_version": {
+                                            "description": "pk 4.6 no default, test version",
+                                            "type": "string"
+                                        },
+                                        "test_type": {
+                                            "description": "pk 3.6 no default, test type",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "person_id",
+                                        "credit_institution",
+                                        "test_type",
+                                        "test_version",
+                                        "test_date"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Event posted"
+                    },
+                    "401": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Not authorized"
+                    },
+                    "default": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getBatchStatusList"
+            }
+        },
+        "/getBatchCache/{pid},{dt}": {
+            "x-controller": "testLoader",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Test loader status",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the status of the batch nearst to dt",
+                "parameters": [
+                    {
+                        "maxLength": 9,
+                        "minLength": 9,
+                        "description": "batch process id number",
+                        "name": "pid",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "batch process dt number",
+                        "name": "dt",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "description": "results of query",
+                            "properties": {
+                                "metadata": {
+                                    "description": "std_tests       definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE,               SEQ_NUM",
+                                    "properties": {
+                                        "test_date": {
+                                            "description": "pk 5.6 no default, test date",
+                                            "type": "string"
+                                        },
+                                        "credit_institution": {
+                                            "description": "pk 2.6 no default, credit institution",
+                                            "type": "string"
+                                        },
+                                        "seq_num": {
+                                            "description": "pk 6.6 default to 1 if not specified, sequence number",
+                                            "type": "number"
+                                        },
+                                        "updated_by_id": {
+                                            "description": "updated by person id",
+                                            "type": "string"
+                                        },
+                                        "person_id": {
+                                            "description": "pk 1.6 no default, aim person id",
+                                            "type": "string"
+                                        },
+                                        "scores": {
+                                            "items": {
+                                                "description": "std_test_scores definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE, SEQUENCE_NUM, TEST_TYPE_SEQ_NUM",
+                                                "properties": {
+                                                    "score_type": {
+                                                        "description": "score type",
+                                                        "type": "string"
+                                                    },
+                                                    "percentile": {
+                                                        "description": "percentile",
+                                                        "type": "number"
+                                                    },
+                                                    "test_score": {
+                                                        "description": "test score",
+                                                        "type": "number"
+                                                    },
+                                                    "sequence_num": {
+                                                        "description": "pk 7.7 1-6 same as parent, derived from score_type, sequence number",
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "score_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "description": "List of std_test_scores",
+                                            "type": "array"
+                                        },
+                                        "test_taker_id": {
+                                            "description": "test taker id",
+                                            "type": "string"
+                                        },
+                                        "institution_type": {
+                                            "description": "institution type",
+                                            "type": "string"
+                                        },
+                                        "date_verified": {
+                                            "description": "date verified",
+                                            "type": "string"
+                                        },
+                                        "date_time_updated": {
+                                            "description": "date time updated",
+                                            "type": "string"
+                                        },
+                                        "test_source": {
+                                            "description": "test source",
+                                            "type": "string"
+                                        },
+                                        "test_version": {
+                                            "description": "pk 4.6 no default, test version",
+                                            "type": "string"
+                                        },
+                                        "test_type": {
+                                            "description": "pk 3.6 no default, test type",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "person_id",
+                                        "credit_institution",
+                                        "test_type",
+                                        "test_version",
+                                        "test_date"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Event posted"
+                    },
+                    "401": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Not authorized"
+                    },
+                    "default": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getBatchData"
+            }
+        },
+        "/{person_id},{+test_type},{test_date},{+test_version},{+credit_institution}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    " "
+                ],
+                "summary": "Remove test",
+                "x-throttling-tier": "Unlimited",
+                "description": "Remove a test without a sequence number (Defaults to 1)",
+                "parameters": [
+                    {
+                        "maxLength": 9,
+                        "minLength": 9,
+                        "description": "person id of test taker",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "x-contains-special-characters": true,
+                        "description": "credit instituion of test record",
+                        "name": "+test_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "credit instituion of test record",
+                        "name": "test_date",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "x-contains-special-characters": true,
+                        "description": "credit instituion of test record",
+                        "name": "+test_version",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "x-contains-special-characters": true,
+                        "description": "credit instituion of test record",
+                        "name": "+credit_institution",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/setTest": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Test score loader",
+                "x-throttling-tier": "Unlimited",
+                "description": "List of test scores",
+                "parameters": [
+                    {
+                        "schema": {
+                            "description": "std_tests       definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE,               SEQ_NUM",
+                            "properties": {
+                                "test_date": {
+                                    "description": "pk 5.6 no default, test date",
+                                    "type": "string"
+                                },
+                                "credit_institution": {
+                                    "description": "pk 2.6 no default, credit institution",
+                                    "type": "string"
+                                },
+                                "seq_num": {
+                                    "description": "pk 6.6 default to 1 if not specified, sequence number",
+                                    "type": "number"
+                                },
+                                "updated_by_id": {
+                                    "description": "updated by person id",
+                                    "type": "string"
+                                },
+                                "person_id": {
+                                    "description": "pk 1.6 no default, aim person id",
+                                    "type": "string"
+                                },
+                                "scores": {
+                                    "items": {
+                                        "description": "std_test_scores definition indexed by: PERSON_ID, CREDIT_INSTITUTION, TEST_TYPE, TEST_VERSION, TEST_DATE, SEQUENCE_NUM, TEST_TYPE_SEQ_NUM",
+                                        "properties": {
+                                            "score_type": {
+                                                "description": "score type",
+                                                "type": "string"
+                                            },
+                                            "percentile": {
+                                                "description": "percentile",
+                                                "type": "number"
+                                            },
+                                            "test_score": {
+                                                "description": "test score",
+                                                "type": "number"
+                                            },
+                                            "sequence_num": {
+                                                "description": "pk 7.7 1-6 same as parent, derived from score_type, sequence number",
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "score_type"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "description": "List of std_test_scores",
+                                    "type": "array"
+                                },
+                                "test_taker_id": {
+                                    "description": "test taker id",
+                                    "type": "string"
+                                },
+                                "institution_type": {
+                                    "description": "institution type",
+                                    "type": "string"
+                                },
+                                "date_verified": {
+                                    "description": "date verified",
+                                    "type": "string"
+                                },
+                                "date_time_updated": {
+                                    "description": "date time updated",
+                                    "type": "string"
+                                },
+                                "test_source": {
+                                    "description": "test source",
+                                    "type": "string"
+                                },
+                                "test_version": {
+                                    "description": "pk 4.6 no default, test version",
+                                    "type": "string"
+                                },
+                                "test_type": {
+                                    "description": "pk 3.6 no default, test type",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "person_id",
+                                "credit_institution",
+                                "test_type",
+                                "test_version",
+                                "test_date"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Test score list",
+                        "name": "testScores",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "description": "Test post result",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Test posted"
+                    },
+                    "401": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Not authorized"
+                    },
+                    "default": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "setTest"
+            },
+            "x-controller": "testLoader"
+        },
+        "/{person_id},{test_type},{test_date},{test_version},{credit_institution},{sequence_number}": {
+            "x-controller": "testLoader",
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "remove"
+                ],
+                "summary": "Remove test",
+                "x-throttling-tier": "Unlimited",
+                "description": "Remove a particular test",
+                "parameters": [
+                    {
+                        "maxLength": 9,
+                        "minLength": 9,
+                        "description": "person id of test taker",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "x-contains-special-characters": true,
+                        "description": "credit instituion of test record",
+                        "name": "test_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "credit instituion of test record",
+                        "name": "test_date",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "x-contains-special-characters": true,
+                        "description": "credit instituion of test record",
+                        "name": "test_version",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "x-contains-special-characters": true,
+                        "description": "credit instituion of test record",
+                        "name": "credit_institution",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "test version",
+                        "name": "sequence_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "description": "Test post result",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Test removed"
+                    },
+                    "401": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Not authorized"
+                    },
+                    "default": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "removeTestSeq"
+            }
+        },
+        "/{person_id},{test_type},{test_date},{test_version},{credit_institution}": {
+            "x-controller": "testLoader",
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "remove"
+                ],
+                "summary": "Remove test",
+                "x-throttling-tier": "Unlimited",
+                "description": "Remove a test without a sequence number (Defaults to 1)",
+                "parameters": [
+                    {
+                        "maxLength": 9,
+                        "minLength": 9,
+                        "description": "person id of test taker",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "x-contains-special-characters": true,
+                        "description": "credit instituion of test record",
+                        "name": "test_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "credit instituion of test record",
+                        "name": "test_date",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "x-contains-special-characters": true,
+                        "description": "credit instituion of test record",
+                        "name": "test_version",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "x-contains-special-characters": true,
+                        "description": "credit instituion of test record",
+                        "name": "credit_institution",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "description": "Test post result",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Test removed"
+                    },
+                    "401": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Not authorized"
+                    },
+                    "default": {
+                        "schema": {
+                            "description": "Error response",
+                            "properties": {
+                                "metadata": {
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "Success",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "update_type": {
+                                            "description": "Update permissions of caller",
+                                            "properties": {
+                                                "value": {
+                                                    "x-variable": "update_type",
+                                                    "type": "string"
+                                                },
+                                                "api_type": {
+                                                    "x-variable": "api_type",
+                                                    "enum": [
+                                                        "read-only"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "api_type",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "metadata"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "removeTest"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "AIMtestScoreLoader",
+        "description": "Add test socres to legacy sis (aim).",
+        "license": {
+            "name": "Apache-2.0"
+        },
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

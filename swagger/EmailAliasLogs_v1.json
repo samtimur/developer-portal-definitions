@@ -1,0 +1,4736 @@
+{
+  "basePath": "/domains/email_alias_logs/v1",
+  "tags": [
+    {
+      "description": "Everything about Email Alias Logs",
+      "name": "email_alias_logs",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://developer.byu.edu"
+      }
+    }
+  ],
+  "host": "api.byu.edu:443",
+  "paths": {
+    "/?": {
+      "get": {
+        "summary": "Email Aliases",
+        "tags": [
+          "email_alias_logs"
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited",
+        "description": "Returns a collection of Email Aliases",
+        "parameters": [
+          {
+            "pattern": "^[0-9]{9}$",
+            "description": "The identity's BYU ID",
+            "name": "byu_id",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "pattern": "^[a-z][a-z0-9]{0,8}$",
+            "description": "The identity's Net ID",
+            "name": "net_id",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "pattern": "^([A-Za-z-'*]+ )*?[A-Za-z-'*]+$",
+            "maxLength": 100,
+            "description": "The identity's name.  A case-insensitive search is performed.  You may insert '*' wildcards anywhere in the string, and a wildcard character is automatically appended.",
+            "name": "identity_name",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "description": "The identity's email alias. A case-insensitive search is performed.  A wildcard character is automatically appended.",
+            "name": "email_alias",
+            "format": "email",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "pattern": "^[0-9]{9}$",
+            "description": "The identity's BYU ID",
+            "name": "updated_by_byu_id",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "pattern": "^[a-z][a-z0-9]{0,8}$",
+            "description": "The identity's Net ID",
+            "name": "updated_by_net_id",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "description": "The identity's forwarding email logs. A case-insensitive search is performed.  A wildcard character is automatically appended.",
+            "name": "forwards_to",
+            "format": "email",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "description": "Filters results to exclude results which were updated before this date-time",
+            "name": "begin_date",
+            "format": "date-time",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "description": "Filters results to exclude results which were updated after this date-time",
+            "name": "end_date",
+            "format": "date-time",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "default": 1,
+            "description": "Which page to start on, Must be greater than 0",
+            "name": "page_start",
+            "format": "int32",
+            "required": false,
+            "type": "integer",
+            "in": "query"
+          },
+          {
+            "default": 100,
+            "description": "Size of the collection returned, Must be greater than 0",
+            "name": "page_size",
+            "format": "int32",
+            "required": false,
+            "type": "integer",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "description": "A collection of email aliases",
+              "properties": {
+                "values": {
+                  "default": [],
+                  "items": {
+                    "properties": {
+                      "updated_by_net_id": {
+                        "description": "The user name to used for authentication to BYU web applications",
+                        "properties": {
+                          "value": {
+                            "default": "",
+                            "x-variable": "updated_by_net_id",
+                            "type": "string"
+                          },
+                          "related_resource": {
+                            "x-variable": "updated_by_net_id_related",
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "related",
+                            "x-variable": "unauthorized_api_type",
+                            "enum": [
+                              "related",
+                              "unauthorized"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "value": "cosmo5",
+                          "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                          "api_type": "related"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type",
+                          "related_resource"
+                        ]
+                      },
+                      "forwards_to": {
+                        "description": "Comma separated forwarding email logs",
+                        "properties": {
+                          "value": {
+                            "maxLength": 4000,
+                            "x-variable": "forwards_to",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "updated_datetime": {
+                        "description": "The most recent date/time updated, given in GMT (Greenwich Mean Time)",
+                        "properties": {
+                          "value": {
+                            "x-variable": "updated_datetime",
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "x-variable": "unauthorized_api_type",
+                            "enum": [
+                              "system",
+                              "unauthorized"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "value": "2017-09-09T19:15:22.123Z",
+                          "api_type": "system"
+                        },
+                        "type": "object",
+                        "required": [
+                          "api_type"
+                        ]
+                      },
+                      "email_alias": {
+                        "description": "The email alias",
+                        "properties": {
+                          "value": {
+                            "maxLength": 70,
+                            "minLength": 7,
+                            "x-variable": "email_alias",
+                            "format": "email",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "date_expired": {
+                        "description": "The date the email alias was expired. Remains null until expired.",
+                        "properties": {
+                          "value": {
+                            "x-nullable": true,
+                            "x-variable": "date_expired",
+                            "format": "date",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "links": {
+                        "description": "Hypermedia links for an email address",
+                        "properties": {
+                          "email_alias_logs__info": {
+                            "description": "Hypermedia link for the default email_aliases collection",
+                            "properties": {
+                              "method": {
+                                "enum": [
+                                  "GET"
+                                ],
+                                "type": "string"
+                              },
+                              "rel": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "format": "uri",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object",
+                            "required": [
+                              "rel",
+                              "href",
+                              "method"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "created_by_byu_id": {
+                        "description": "The BYU ID of the identity who performed the creation",
+                        "properties": {
+                          "description": {
+                            "maxLength": 50,
+                            "x-variable": "created_by_name",
+                            "type": "string"
+                          },
+                          "value": {
+                            "default": " ",
+                            "x-variable": "created_by_byu_id",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "description": "John Bench",
+                          "value": "023296921",
+                          "api_type": "system"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "change_type": {
+                        "properties": {
+                          "value": {
+                            "x-variable": "change_type",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "net_id": {
+                        "description": "The user name to used for authentication to BYU web applications",
+                        "properties": {
+                          "value": {
+                            "x-nullable": true,
+                            "default": null,
+                            "x-variable": "net_id",
+                            "type": "string"
+                          },
+                          "related_resource": {
+                            "x-variable": "net_id_related",
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "related",
+                            "x-variable": "unauthorized_api_type",
+                            "enum": [
+                              "related",
+                              "unauthorized"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "value": "cosmo5",
+                          "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                          "api_type": "related"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type",
+                          "related_resource"
+                        ]
+                      },
+                      "from_comments": {
+                        "properties": {
+                          "value": {
+                            "maxLength": 500,
+                            "x-variable": "from_comments",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "from_forwards_to": {
+                        "description": "Comma separated forwarding email logs",
+                        "properties": {
+                          "value": {
+                            "maxLength": 4000,
+                            "x-variable": "from_forwards_to",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "change_id": {
+                        "properties": {
+                          "value": {
+                            "description": "A system generated database sequence number",
+                            "x-variable": "change_id",
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          },
+                          "key": {
+                            "default": true,
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "created_by_net_id": {
+                        "description": "The user name to used for authentication to BYU web applications",
+                        "properties": {
+                          "value": {
+                            "default": "",
+                            "x-variable": "created_by_net_id",
+                            "type": "string"
+                          },
+                          "related_resource": {
+                            "x-variable": "created_by_net_id_related",
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "related",
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "value": "cosmo5",
+                          "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                          "api_type": "related"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type",
+                          "related_resource"
+                        ]
+                      },
+                      "updated_by_byu_id": {
+                        "description": "The BYU ID of the last identity who performed the last update",
+                        "properties": {
+                          "description": {
+                            "maxLength": 100,
+                            "x-variable": "updated_by_name",
+                            "type": "string"
+                          },
+                          "value": {
+                            "default": " ",
+                            "x-variable": "updated_by_byu_id",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "x-variable": "unauthorized_api_type",
+                            "enum": [
+                              "system",
+                              "unauthorized"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "description": "John Bench",
+                          "value": "023296921",
+                          "api_type": "system"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "created_datetime": {
+                        "description": "The date/time when the entity was created, given in GMT (Greenwich Mean Time)",
+                        "properties": {
+                          "value": {
+                            "x-variable": "created_datetime",
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "value": "2017-09-09T19:15:22.123Z",
+                          "api_type": "system"
+                        },
+                        "type": "object",
+                        "required": [
+                          "api_type"
+                        ]
+                      },
+                      "from_date_expired": {
+                        "description": "The date the email alias was expired. Remains null until expired.",
+                        "properties": {
+                          "value": {
+                            "x-nullable": true,
+                            "x-variable": "from_date_expired",
+                            "format": "date",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "byu_id": {
+                        "properties": {
+                          "description": {
+                            "maxLength": 50,
+                            "x-variable": "name",
+                            "type": "string"
+                          },
+                          "value": {
+                            "x-variable": "byu_id",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "read-only",
+                            "enum": [
+                              "system",
+                              "read-only"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "description": "Cosmo Cougar",
+                          "value": "123456789",
+                          "api_type": "system"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "comments": {
+                        "properties": {
+                          "value": {
+                            "maxLength": 500,
+                            "x-variable": "comments",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "metadata": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "validation_response": {
+                            "properties": {
+                              "message": {
+                                "default": "Success",
+                                "x-variable": "validation_response_message",
+                                "type": "string"
+                              },
+                              "code": {
+                                "default": 200,
+                                "minimum": 100,
+                                "maximum": 600,
+                                "x-variable": "validation_response_code",
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            },
+                            "example": {
+                              "message": "Success",
+                              "code": 200
+                            },
+                            "type": "object",
+                            "required": [
+                              "code",
+                              "message"
+                            ]
+                          },
+                          "validation_information": {
+                            "items": {
+                              "type": "string"
+                            },
+                            "x-variable": "validation_information",
+                            "example": [
+                              "Sample Message about response",
+                              "Could be whatever you want"
+                            ],
+                            "type": "array"
+                          },
+                          "cache": {
+                            "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                            "properties": {
+                              "date_time": {
+                                "x-variable": "cache_date_time",
+                                "format": "date-time",
+                                "type": "string"
+                              }
+                            },
+                            "example": {
+                              "date_time": "2018-10-29T15:34:00.000Z"
+                            },
+                            "type": "object"
+                          },
+                          "restricted": {
+                            "x-variable": "restricted",
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object",
+                        "required": [
+                          "validation_response"
+                        ]
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "x-variable": "email_aliases_values",
+                  "type": "array"
+                },
+                "links": {
+                  "description": "Hypermedia links for a collection of email_aliases",
+                  "properties": {
+                    "email_alias_logs__info": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    },
+                    "email_alias_logs__first": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    },
+                    "email_alias_logs__next": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    },
+                    "email_alias_logs__current": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    },
+                    "email_alias_logs__prev": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    },
+                    "email_alias_logs__last": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "metadata": {
+                  "allOf": [
+                    {
+                      "additionalProperties": true,
+                      "properties": {
+                        "page_start": {
+                          "minimum": 0,
+                          "x-variable": "page_start",
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "minimum": 0,
+                          "x-variable": "page_size",
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "page_end": {
+                          "minimum": 0,
+                          "x-variable": "page_end",
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "maximum_page_size": {
+                          "minimum": 1,
+                          "x-variable": "maximum_page_size",
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "collection_size": {
+                          "minimum": 0,
+                          "x-variable": "collection_size",
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "default_page_size": {
+                          "minimum": 1,
+                          "x-variable": "default_page_size",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": true,
+                      "properties": {
+                        "validation_response": {
+                          "properties": {
+                            "message": {
+                              "default": "Success",
+                              "x-variable": "validation_response_message",
+                              "type": "string"
+                            },
+                            "code": {
+                              "default": 200,
+                              "minimum": 100,
+                              "maximum": 600,
+                              "x-variable": "validation_response_code",
+                              "format": "int32",
+                              "type": "integer"
+                            }
+                          },
+                          "example": {
+                            "message": "Success",
+                            "code": 200
+                          },
+                          "type": "object",
+                          "required": [
+                            "code",
+                            "message"
+                          ]
+                        },
+                        "validation_information": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "x-variable": "validation_information",
+                          "example": [
+                            "Sample Message about response",
+                            "Could be whatever you want"
+                          ],
+                          "type": "array"
+                        },
+                        "cache": {
+                          "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                          "properties": {
+                            "date_time": {
+                              "x-variable": "cache_date_time",
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "example": {
+                            "date_time": "2018-10-29T15:34:00.000Z"
+                          },
+                          "type": "object"
+                        },
+                        "restricted": {
+                          "x-variable": "restricted",
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "validation_response"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "values"
+              ]
+            },
+            "description": "A collection of Email Aliases successfully returned",
+            "examples": {
+              "application/json": {
+                "values": [
+                  {
+                    "updated_by_net_id": {
+                      "value": "cosmo5",
+                      "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                      "api_type": "related"
+                    },
+                    "forwards_to": {
+                      "value": "cosmo5@gmail.com,cosmo55@yahoo.com",
+                      "api_type": "read-only"
+                    },
+                    "updated_datetime": {
+                      "value": "2017-09-09T19:15:22.123Z",
+                      "api_type": "system"
+                    },
+                    "email_alias": {
+                      "value": "cosmo_cougar@byu.edu",
+                      "api_type": "read-only"
+                    },
+                    "date_expired": {
+                      "value": "2018-05-30",
+                      "api_type": "read-only"
+                    },
+                    "links": {
+                      "email_alias_logs__info": {
+                        "method": "GET",
+                        "rel": "self",
+                        "href": "https://api.byu.edu/domains/email_alias_logs/v1/231"
+                      }
+                    },
+                    "created_by_byu_id": {
+                      "description": "John Bench",
+                      "value": "023296921",
+                      "api_type": "system"
+                    },
+                    "change_type": {
+                      "value": "A",
+                      "api_type": "system"
+                    },
+                    "net_id": {
+                      "value": "cosmo5",
+                      "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                      "api_type": "related"
+                    },
+                    "from_comments": {
+                      "value": "",
+                      "api_type": "system"
+                    },
+                    "from_forwards_to": {
+                      "value": "",
+                      "api_type": "system"
+                    },
+                    "change_id": {
+                      "value": 231,
+                      "api_type": "system",
+                      "key": true
+                    },
+                    "created_by_net_id": {
+                      "value": "cosmo5",
+                      "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                      "api_type": "related"
+                    },
+                    "updated_by_byu_id": {
+                      "description": "John Bench",
+                      "value": "023296921",
+                      "api_type": "system"
+                    },
+                    "created_datetime": {
+                      "value": "2017-09-09T19:15:22.123Z",
+                      "api_type": "system"
+                    },
+                    "from_date_expired": {
+                      "api_type": "system"
+                    },
+                    "byu_id": {
+                      "description": "Cosmo Cougar",
+                      "value": "123456789",
+                      "api_type": "system"
+                    },
+                    "comments": {
+                      "value": "Init create",
+                      "api_type": "read-only"
+                    },
+                    "metadata": {
+                      "validation_response": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "validation_information": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "cache": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "collection_size": 1,
+                      "restricted": false
+                    }
+                  }
+                ],
+                "links": {
+                  "email_alias_logs__info": {
+                    "method": "GET",
+                    "rel": "self",
+                    "href": "https://api.byu.edu/domains/email_alias_logs/v1/"
+                  },
+                  "email_alias_logs__next": {
+                    "method": "GET",
+                    "rel": "email_alias_logs__next",
+                    "href": "https://api.byu.edu/domains/email_alias_logs/v1/?page_start=101,page_size=50"
+                  },
+                  "email_alias_logs__current": {
+                    "method": "GET",
+                    "rel": "email_alias_logs__current",
+                    "href": "https://api.byu.edu/domains/email_alias_logs/v1/?page_start=1,page_size=50"
+                  },
+                  "email_alias_logs__prev": {
+                    "method": "GET",
+                    "rel": "email_alias_logs__prev",
+                    "href": "https://api.byu.edu/domains/email_alias_logs/v1/?page_start=1,page_size=50"
+                  }
+                },
+                "metadata": {
+                  "page_start": 1,
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  },
+                  "page_size": 50,
+                  "field_sets_returned": [
+                    "basic"
+                  ],
+                  "page_end": 1,
+                  "default_field_sets": [
+                    "basic"
+                  ],
+                  "max_page_size": 200,
+                  "collection_size": 1,
+                  "default_page_size": 50,
+                  "restricted": false,
+                  "field_sets_available": [
+                    "basic"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Invalid Request - unable to interpret request"
+          },
+          "401": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Authentication required to access data"
+          },
+          "403": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Access denied to protected data"
+          },
+          "404": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "The resource does not exist"
+          },
+          "409": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Query parameters conflict or are malformed"
+          },
+          "500": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Internal Server Error - Error occurred that wasn't the user's fault"
+          },
+          "503": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Service Unavailable - Under construction"
+          },
+          "504": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Gateway Timeout"
+          },
+          "default": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "operationId": "queryEmailAliasLogs"
+      }
+    },
+    "/*": {
+      "get": {
+        "summary": "Email Aliases",
+        "tags": [
+          "email_alias_logs"
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited",
+        "description": "Returns a collection of Email Aliases",
+        "parameters": [
+          {
+            "pattern": "^[0-9]{9}$",
+            "description": "The identity's BYU ID",
+            "name": "byu_id",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "pattern": "^[a-z][a-z0-9]{0,8}$",
+            "description": "The identity's Net ID",
+            "name": "net_id",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "pattern": "^([A-Za-z-'*]+ )*?[A-Za-z-'*]+$",
+            "maxLength": 100,
+            "description": "The identity's name.  A case-insensitive search is performed.  You may insert '*' wildcards anywhere in the string, and a wildcard character is automatically appended.",
+            "name": "identity_name",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "description": "The identity's email alias. A case-insensitive search is performed.  A wildcard character is automatically appended.",
+            "name": "email_alias",
+            "format": "email",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "pattern": "^[0-9]{9}$",
+            "description": "The identity's BYU ID",
+            "name": "updated_by_byu_id",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "pattern": "^[a-z][a-z0-9]{0,8}$",
+            "description": "The identity's Net ID",
+            "name": "updated_by_net_id",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "description": "The identity's forwarding email logs. A case-insensitive search is performed.  A wildcard character is automatically appended.",
+            "name": "forwards_to",
+            "format": "email",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "description": "Filters results to exclude results which were updated before this date-time",
+            "name": "begin_date",
+            "format": "date-time",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "description": "Filters results to exclude results which were updated after this date-time",
+            "name": "end_date",
+            "format": "date-time",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "default": 1,
+            "description": "Which page to start on, Must be greater than 0",
+            "name": "page_start",
+            "format": "int32",
+            "required": false,
+            "type": "integer",
+            "in": "query"
+          },
+          {
+            "default": 100,
+            "description": "Size of the collection returned, Must be greater than 0",
+            "name": "page_size",
+            "format": "int32",
+            "required": false,
+            "type": "integer",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "description": "A collection of email aliases",
+              "properties": {
+                "values": {
+                  "default": [],
+                  "items": {
+                    "properties": {
+                      "updated_by_net_id": {
+                        "description": "The user name to used for authentication to BYU web applications",
+                        "properties": {
+                          "value": {
+                            "default": "",
+                            "x-variable": "updated_by_net_id",
+                            "type": "string"
+                          },
+                          "related_resource": {
+                            "x-variable": "updated_by_net_id_related",
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "related",
+                            "x-variable": "unauthorized_api_type",
+                            "enum": [
+                              "related",
+                              "unauthorized"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "value": "cosmo5",
+                          "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                          "api_type": "related"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type",
+                          "related_resource"
+                        ]
+                      },
+                      "forwards_to": {
+                        "description": "Comma separated forwarding email logs",
+                        "properties": {
+                          "value": {
+                            "maxLength": 4000,
+                            "x-variable": "forwards_to",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "updated_datetime": {
+                        "description": "The most recent date/time updated, given in GMT (Greenwich Mean Time)",
+                        "properties": {
+                          "value": {
+                            "x-variable": "updated_datetime",
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "x-variable": "unauthorized_api_type",
+                            "enum": [
+                              "system",
+                              "unauthorized"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "value": "2017-09-09T19:15:22.123Z",
+                          "api_type": "system"
+                        },
+                        "type": "object",
+                        "required": [
+                          "api_type"
+                        ]
+                      },
+                      "email_alias": {
+                        "description": "The email alias",
+                        "properties": {
+                          "value": {
+                            "maxLength": 70,
+                            "minLength": 7,
+                            "x-variable": "email_alias",
+                            "format": "email",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "date_expired": {
+                        "description": "The date the email alias was expired. Remains null until expired.",
+                        "properties": {
+                          "value": {
+                            "x-nullable": true,
+                            "x-variable": "date_expired",
+                            "format": "date",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "links": {
+                        "description": "Hypermedia links for an email address",
+                        "properties": {
+                          "email_alias_logs__info": {
+                            "description": "Hypermedia link for the default email_aliases collection",
+                            "properties": {
+                              "method": {
+                                "enum": [
+                                  "GET"
+                                ],
+                                "type": "string"
+                              },
+                              "rel": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "format": "uri",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object",
+                            "required": [
+                              "rel",
+                              "href",
+                              "method"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "created_by_byu_id": {
+                        "description": "The BYU ID of the identity who performed the creation",
+                        "properties": {
+                          "description": {
+                            "maxLength": 50,
+                            "x-variable": "created_by_name",
+                            "type": "string"
+                          },
+                          "value": {
+                            "default": " ",
+                            "x-variable": "created_by_byu_id",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "description": "John Bench",
+                          "value": "023296921",
+                          "api_type": "system"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "change_type": {
+                        "properties": {
+                          "value": {
+                            "x-variable": "change_type",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "net_id": {
+                        "description": "The user name to used for authentication to BYU web applications",
+                        "properties": {
+                          "value": {
+                            "x-nullable": true,
+                            "default": null,
+                            "x-variable": "net_id",
+                            "type": "string"
+                          },
+                          "related_resource": {
+                            "x-variable": "net_id_related",
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "related",
+                            "x-variable": "unauthorized_api_type",
+                            "enum": [
+                              "related",
+                              "unauthorized"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "value": "cosmo5",
+                          "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                          "api_type": "related"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type",
+                          "related_resource"
+                        ]
+                      },
+                      "from_comments": {
+                        "properties": {
+                          "value": {
+                            "maxLength": 500,
+                            "x-variable": "from_comments",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "from_forwards_to": {
+                        "description": "Comma separated forwarding email logs",
+                        "properties": {
+                          "value": {
+                            "maxLength": 4000,
+                            "x-variable": "from_forwards_to",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "change_id": {
+                        "properties": {
+                          "value": {
+                            "description": "A system generated database sequence number",
+                            "x-variable": "change_id",
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          },
+                          "key": {
+                            "default": true,
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "created_by_net_id": {
+                        "description": "The user name to used for authentication to BYU web applications",
+                        "properties": {
+                          "value": {
+                            "default": "",
+                            "x-variable": "created_by_net_id",
+                            "type": "string"
+                          },
+                          "related_resource": {
+                            "x-variable": "created_by_net_id_related",
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "related",
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "value": "cosmo5",
+                          "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                          "api_type": "related"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type",
+                          "related_resource"
+                        ]
+                      },
+                      "updated_by_byu_id": {
+                        "description": "The BYU ID of the last identity who performed the last update",
+                        "properties": {
+                          "description": {
+                            "maxLength": 100,
+                            "x-variable": "updated_by_name",
+                            "type": "string"
+                          },
+                          "value": {
+                            "default": " ",
+                            "x-variable": "updated_by_byu_id",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "x-variable": "unauthorized_api_type",
+                            "enum": [
+                              "system",
+                              "unauthorized"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "description": "John Bench",
+                          "value": "023296921",
+                          "api_type": "system"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "created_datetime": {
+                        "description": "The date/time when the entity was created, given in GMT (Greenwich Mean Time)",
+                        "properties": {
+                          "value": {
+                            "x-variable": "created_datetime",
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "value": "2017-09-09T19:15:22.123Z",
+                          "api_type": "system"
+                        },
+                        "type": "object",
+                        "required": [
+                          "api_type"
+                        ]
+                      },
+                      "from_date_expired": {
+                        "description": "The date the email alias was expired. Remains null until expired.",
+                        "properties": {
+                          "value": {
+                            "x-nullable": true,
+                            "x-variable": "from_date_expired",
+                            "format": "date",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "byu_id": {
+                        "properties": {
+                          "description": {
+                            "maxLength": 50,
+                            "x-variable": "name",
+                            "type": "string"
+                          },
+                          "value": {
+                            "x-variable": "byu_id",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "read-only",
+                            "enum": [
+                              "system",
+                              "read-only"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "description": "Cosmo Cougar",
+                          "value": "123456789",
+                          "api_type": "system"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "comments": {
+                        "properties": {
+                          "value": {
+                            "maxLength": 500,
+                            "x-variable": "comments",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "system",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "metadata": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "validation_response": {
+                            "properties": {
+                              "message": {
+                                "default": "Success",
+                                "x-variable": "validation_response_message",
+                                "type": "string"
+                              },
+                              "code": {
+                                "default": 200,
+                                "minimum": 100,
+                                "maximum": 600,
+                                "x-variable": "validation_response_code",
+                                "format": "int32",
+                                "type": "integer"
+                              }
+                            },
+                            "example": {
+                              "message": "Success",
+                              "code": 200
+                            },
+                            "type": "object",
+                            "required": [
+                              "code",
+                              "message"
+                            ]
+                          },
+                          "validation_information": {
+                            "items": {
+                              "type": "string"
+                            },
+                            "x-variable": "validation_information",
+                            "example": [
+                              "Sample Message about response",
+                              "Could be whatever you want"
+                            ],
+                            "type": "array"
+                          },
+                          "cache": {
+                            "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                            "properties": {
+                              "date_time": {
+                                "x-variable": "cache_date_time",
+                                "format": "date-time",
+                                "type": "string"
+                              }
+                            },
+                            "example": {
+                              "date_time": "2018-10-29T15:34:00.000Z"
+                            },
+                            "type": "object"
+                          },
+                          "restricted": {
+                            "x-variable": "restricted",
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object",
+                        "required": [
+                          "validation_response"
+                        ]
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "x-variable": "email_aliases_values",
+                  "type": "array"
+                },
+                "links": {
+                  "description": "Hypermedia links for a collection of email_aliases",
+                  "properties": {
+                    "email_alias_logs__info": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    },
+                    "email_alias_logs__first": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    },
+                    "email_alias_logs__next": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    },
+                    "email_alias_logs__current": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    },
+                    "email_alias_logs__prev": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    },
+                    "email_alias_logs__last": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "metadata": {
+                  "allOf": [
+                    {
+                      "additionalProperties": true,
+                      "properties": {
+                        "page_start": {
+                          "minimum": 0,
+                          "x-variable": "page_start",
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "minimum": 0,
+                          "x-variable": "page_size",
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "page_end": {
+                          "minimum": 0,
+                          "x-variable": "page_end",
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "maximum_page_size": {
+                          "minimum": 1,
+                          "x-variable": "maximum_page_size",
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "collection_size": {
+                          "minimum": 0,
+                          "x-variable": "collection_size",
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "default_page_size": {
+                          "minimum": 1,
+                          "x-variable": "default_page_size",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": true,
+                      "properties": {
+                        "validation_response": {
+                          "properties": {
+                            "message": {
+                              "default": "Success",
+                              "x-variable": "validation_response_message",
+                              "type": "string"
+                            },
+                            "code": {
+                              "default": 200,
+                              "minimum": 100,
+                              "maximum": 600,
+                              "x-variable": "validation_response_code",
+                              "format": "int32",
+                              "type": "integer"
+                            }
+                          },
+                          "example": {
+                            "message": "Success",
+                            "code": 200
+                          },
+                          "type": "object",
+                          "required": [
+                            "code",
+                            "message"
+                          ]
+                        },
+                        "validation_information": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "x-variable": "validation_information",
+                          "example": [
+                            "Sample Message about response",
+                            "Could be whatever you want"
+                          ],
+                          "type": "array"
+                        },
+                        "cache": {
+                          "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                          "properties": {
+                            "date_time": {
+                              "x-variable": "cache_date_time",
+                              "format": "date-time",
+                              "type": "string"
+                            }
+                          },
+                          "example": {
+                            "date_time": "2018-10-29T15:34:00.000Z"
+                          },
+                          "type": "object"
+                        },
+                        "restricted": {
+                          "x-variable": "restricted",
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "validation_response"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "values"
+              ]
+            },
+            "description": "A collection of Email Aliases successfully returned",
+            "examples": {
+              "application/json": {
+                "values": [
+                  {
+                    "updated_by_net_id": {
+                      "value": "cosmo5",
+                      "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                      "api_type": "related"
+                    },
+                    "forwards_to": {
+                      "value": "cosmo5@gmail.com,cosmo55@yahoo.com",
+                      "api_type": "read-only"
+                    },
+                    "updated_datetime": {
+                      "value": "2017-09-09T19:15:22.123Z",
+                      "api_type": "system"
+                    },
+                    "email_alias": {
+                      "value": "cosmo_cougar@byu.edu",
+                      "api_type": "read-only"
+                    },
+                    "date_expired": {
+                      "value": "2018-05-30",
+                      "api_type": "read-only"
+                    },
+                    "links": {
+                      "email_alias_logs__info": {
+                        "method": "GET",
+                        "rel": "self",
+                        "href": "https://api.byu.edu/domains/email_alias_logs/v1/231"
+                      }
+                    },
+                    "created_by_byu_id": {
+                      "description": "John Bench",
+                      "value": "023296921",
+                      "api_type": "system"
+                    },
+                    "change_type": {
+                      "value": "A",
+                      "api_type": "system"
+                    },
+                    "net_id": {
+                      "value": "cosmo5",
+                      "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                      "api_type": "related"
+                    },
+                    "from_comments": {
+                      "value": "",
+                      "api_type": "system"
+                    },
+                    "from_forwards_to": {
+                      "value": "",
+                      "api_type": "system"
+                    },
+                    "change_id": {
+                      "value": 231,
+                      "api_type": "system",
+                      "key": true
+                    },
+                    "created_by_net_id": {
+                      "value": "cosmo5",
+                      "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                      "api_type": "related"
+                    },
+                    "updated_by_byu_id": {
+                      "description": "John Bench",
+                      "value": "023296921",
+                      "api_type": "system"
+                    },
+                    "created_datetime": {
+                      "value": "2017-09-09T19:15:22.123Z",
+                      "api_type": "system"
+                    },
+                    "from_date_expired": {
+                      "api_type": "system"
+                    },
+                    "byu_id": {
+                      "description": "Cosmo Cougar",
+                      "value": "123456789",
+                      "api_type": "system"
+                    },
+                    "comments": {
+                      "value": "Init create",
+                      "api_type": "read-only"
+                    },
+                    "metadata": {
+                      "validation_response": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "validation_information": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "cache": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "collection_size": 1,
+                      "restricted": false
+                    }
+                  }
+                ],
+                "links": {
+                  "email_alias_logs__info": {
+                    "method": "GET",
+                    "rel": "self",
+                    "href": "https://api.byu.edu/domains/email_alias_logs/v1/"
+                  },
+                  "email_alias_logs__next": {
+                    "method": "GET",
+                    "rel": "email_alias_logs__next",
+                    "href": "https://api.byu.edu/domains/email_alias_logs/v1/?page_start=101,page_size=50"
+                  },
+                  "email_alias_logs__current": {
+                    "method": "GET",
+                    "rel": "email_alias_logs__current",
+                    "href": "https://api.byu.edu/domains/email_alias_logs/v1/?page_start=1,page_size=50"
+                  },
+                  "email_alias_logs__prev": {
+                    "method": "GET",
+                    "rel": "email_alias_logs__prev",
+                    "href": "https://api.byu.edu/domains/email_alias_logs/v1/?page_start=1,page_size=50"
+                  }
+                },
+                "metadata": {
+                  "page_start": 1,
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  },
+                  "page_size": 50,
+                  "field_sets_returned": [
+                    "basic"
+                  ],
+                  "page_end": 1,
+                  "default_field_sets": [
+                    "basic"
+                  ],
+                  "max_page_size": 200,
+                  "collection_size": 1,
+                  "default_page_size": 50,
+                  "restricted": false,
+                  "field_sets_available": [
+                    "basic"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Invalid Request - unable to interpret request"
+          },
+          "401": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Authentication required to access data"
+          },
+          "403": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Access denied to protected data"
+          },
+          "404": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "The resource does not exist"
+          },
+          "409": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Query parameters conflict or are malformed"
+          },
+          "500": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Internal Server Error - Error occurred that wasn't the user's fault"
+          },
+          "503": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Service Unavailable - Under construction"
+          },
+          "504": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Gateway Timeout"
+          },
+          "default": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "operationId": "getEmailAliasLogs"
+      }
+    },
+    "/{change_id}": {
+      "get": {
+        "summary": "Email Aliases",
+        "tags": [
+          "email_alias_logs"
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited",
+        "description": "Returns information about the specified email_alias",
+        "parameters": [
+          {
+            "description": "The identity's BYU ID",
+            "name": "change_id",
+            "format": "int32",
+            "required": true,
+            "type": "integer",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "updated_by_net_id": {
+                  "description": "The user name to used for authentication to BYU web applications",
+                  "properties": {
+                    "value": {
+                      "default": "",
+                      "x-variable": "updated_by_net_id",
+                      "type": "string"
+                    },
+                    "related_resource": {
+                      "x-variable": "updated_by_net_id_related",
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "related",
+                      "x-variable": "unauthorized_api_type",
+                      "enum": [
+                        "related",
+                        "unauthorized"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "value": "cosmo5",
+                    "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                    "api_type": "related"
+                  },
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "api_type",
+                    "related_resource"
+                  ]
+                },
+                "forwards_to": {
+                  "description": "Comma separated forwarding email logs",
+                  "properties": {
+                    "value": {
+                      "maxLength": 4000,
+                      "x-variable": "forwards_to",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "api_type"
+                  ]
+                },
+                "updated_datetime": {
+                  "description": "The most recent date/time updated, given in GMT (Greenwich Mean Time)",
+                  "properties": {
+                    "value": {
+                      "x-variable": "updated_datetime",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "x-variable": "unauthorized_api_type",
+                      "enum": [
+                        "system",
+                        "unauthorized"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "value": "2017-09-09T19:15:22.123Z",
+                    "api_type": "system"
+                  },
+                  "type": "object",
+                  "required": [
+                    "api_type"
+                  ]
+                },
+                "email_alias": {
+                  "description": "The email alias",
+                  "properties": {
+                    "value": {
+                      "maxLength": 70,
+                      "minLength": 7,
+                      "x-variable": "email_alias",
+                      "format": "email",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "api_type"
+                  ]
+                },
+                "date_expired": {
+                  "description": "The date the email alias was expired. Remains null until expired.",
+                  "properties": {
+                    "value": {
+                      "x-nullable": true,
+                      "x-variable": "date_expired",
+                      "format": "date",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "links": {
+                  "description": "Hypermedia links for an email address",
+                  "properties": {
+                    "email_alias_logs__info": {
+                      "description": "Hypermedia link for the default email_aliases collection",
+                      "properties": {
+                        "method": {
+                          "enum": [
+                            "GET"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "created_by_byu_id": {
+                  "description": "The BYU ID of the identity who performed the creation",
+                  "properties": {
+                    "description": {
+                      "maxLength": 50,
+                      "x-variable": "created_by_name",
+                      "type": "string"
+                    },
+                    "value": {
+                      "default": " ",
+                      "x-variable": "created_by_byu_id",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "description": "John Bench",
+                    "value": "023296921",
+                    "api_type": "system"
+                  },
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "api_type"
+                  ]
+                },
+                "change_type": {
+                  "properties": {
+                    "value": {
+                      "x-variable": "change_type",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "net_id": {
+                  "description": "The user name to used for authentication to BYU web applications",
+                  "properties": {
+                    "value": {
+                      "x-nullable": true,
+                      "default": null,
+                      "x-variable": "net_id",
+                      "type": "string"
+                    },
+                    "related_resource": {
+                      "x-variable": "net_id_related",
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "related",
+                      "x-variable": "unauthorized_api_type",
+                      "enum": [
+                        "related",
+                        "unauthorized"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "value": "cosmo5",
+                    "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                    "api_type": "related"
+                  },
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "api_type",
+                    "related_resource"
+                  ]
+                },
+                "from_comments": {
+                  "properties": {
+                    "value": {
+                      "maxLength": 500,
+                      "x-variable": "from_comments",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "from_forwards_to": {
+                  "description": "Comma separated forwarding email logs",
+                  "properties": {
+                    "value": {
+                      "maxLength": 4000,
+                      "x-variable": "from_forwards_to",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "api_type"
+                  ]
+                },
+                "change_id": {
+                  "properties": {
+                    "value": {
+                      "description": "A system generated database sequence number",
+                      "x-variable": "change_id",
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "type": "string"
+                    },
+                    "key": {
+                      "default": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "created_by_net_id": {
+                  "description": "The user name to used for authentication to BYU web applications",
+                  "properties": {
+                    "value": {
+                      "default": "",
+                      "x-variable": "created_by_net_id",
+                      "type": "string"
+                    },
+                    "related_resource": {
+                      "x-variable": "created_by_net_id_related",
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "related",
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "value": "cosmo5",
+                    "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                    "api_type": "related"
+                  },
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "api_type",
+                    "related_resource"
+                  ]
+                },
+                "updated_by_byu_id": {
+                  "description": "The BYU ID of the last identity who performed the last update",
+                  "properties": {
+                    "description": {
+                      "maxLength": 100,
+                      "x-variable": "updated_by_name",
+                      "type": "string"
+                    },
+                    "value": {
+                      "default": " ",
+                      "x-variable": "updated_by_byu_id",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "x-variable": "unauthorized_api_type",
+                      "enum": [
+                        "system",
+                        "unauthorized"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "description": "John Bench",
+                    "value": "023296921",
+                    "api_type": "system"
+                  },
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "api_type"
+                  ]
+                },
+                "created_datetime": {
+                  "description": "The date/time when the entity was created, given in GMT (Greenwich Mean Time)",
+                  "properties": {
+                    "value": {
+                      "x-variable": "created_datetime",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "value": "2017-09-09T19:15:22.123Z",
+                    "api_type": "system"
+                  },
+                  "type": "object",
+                  "required": [
+                    "api_type"
+                  ]
+                },
+                "from_date_expired": {
+                  "description": "The date the email alias was expired. Remains null until expired.",
+                  "properties": {
+                    "value": {
+                      "x-nullable": true,
+                      "x-variable": "from_date_expired",
+                      "format": "date",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "byu_id": {
+                  "properties": {
+                    "description": {
+                      "maxLength": 50,
+                      "x-variable": "name",
+                      "type": "string"
+                    },
+                    "value": {
+                      "x-variable": "byu_id",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "read-only",
+                      "enum": [
+                        "system",
+                        "read-only"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "description": "Cosmo Cougar",
+                    "value": "123456789",
+                    "api_type": "system"
+                  },
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "api_type"
+                  ]
+                },
+                "comments": {
+                  "properties": {
+                    "value": {
+                      "maxLength": 500,
+                      "x-variable": "comments",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "system",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "description": "Identity successfully returned",
+            "examples": {
+              "application/json": {
+                "updated_by_net_id": {
+                  "value": "cosmo5",
+                  "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                  "api_type": "related"
+                },
+                "forwards_to": {
+                  "value": "cosmo5@gmail.com,cosmo55@yahoo.com",
+                  "api_type": "read-only"
+                },
+                "updated_datetime": {
+                  "value": "2017-09-09T19:15:22.123Z",
+                  "api_type": "system"
+                },
+                "email_alias": {
+                  "value": "cosmo_cougar@byu.edu",
+                  "api_type": "read-only"
+                },
+                "date_expired": {
+                  "value": "2018-05-30",
+                  "api_type": "read-only"
+                },
+                "links": {
+                  "email_alias_logs__info": {
+                    "method": "GET",
+                    "rel": "self",
+                    "href": "https://api.byu.edu/domains/email_alias_logs/v1/231"
+                  }
+                },
+                "created_by_byu_id": {
+                  "description": "John Bench",
+                  "value": "023296921",
+                  "api_type": "system"
+                },
+                "change_type": {
+                  "value": "A",
+                  "api_type": "system"
+                },
+                "net_id": {
+                  "value": "cosmo5",
+                  "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                  "api_type": "related"
+                },
+                "from_comments": {
+                  "value": "",
+                  "api_type": "system"
+                },
+                "from_forwards_to": {
+                  "value": "",
+                  "api_type": "system"
+                },
+                "change_id": {
+                  "value": 231,
+                  "api_type": "system",
+                  "key": true
+                },
+                "created_by_net_id": {
+                  "value": "cosmo5",
+                  "related_resource": "https://api.byu.edu/byuapi/identities/v2/123456789/credentials/NET_ID,cosmo5",
+                  "api_type": "related"
+                },
+                "updated_by_byu_id": {
+                  "description": "John Bench",
+                  "value": "023296921",
+                  "api_type": "system"
+                },
+                "created_datetime": {
+                  "value": "2017-09-09T19:15:22.123Z",
+                  "api_type": "system"
+                },
+                "from_date_expired": {
+                  "api_type": "system"
+                },
+                "byu_id": {
+                  "description": "Cosmo Cougar",
+                  "value": "123456789",
+                  "api_type": "system"
+                },
+                "comments": {
+                  "value": "Init create",
+                  "api_type": "read-only"
+                },
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  },
+                  "validation_information": [
+                    "Sample Message about response",
+                    "Could be whatever you want"
+                  ],
+                  "cache": {
+                    "date_time": "2018-10-29T15:34:00.000Z"
+                  },
+                  "collection_size": 1,
+                  "restricted": false
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Invalid Request - unable to interpret request"
+          },
+          "401": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Authentication required to access data"
+          },
+          "403": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Access denied to protected data"
+          },
+          "404": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "The resource does not exist"
+          },
+          "409": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Query parameters conflict or are malformed"
+          },
+          "500": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Internal Server Error - Error occurred that wasn't the user's fault"
+          },
+          "503": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Service Unavailable - Under construction"
+          },
+          "504": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Gateway Timeout"
+          },
+          "default": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "x-variable": "validation_response_message",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "minimum": 100,
+                          "maximum": 600,
+                          "x-variable": "validation_response_code",
+                          "format": "int32",
+                          "type": "integer"
+                        }
+                      },
+                      "example": {
+                        "message": "Success",
+                        "code": 200
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "x-variable": "validation_information",
+                      "example": [
+                        "Sample Message about response",
+                        "Could be whatever you want"
+                      ],
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                      "properties": {
+                        "date_time": {
+                          "x-variable": "cache_date_time",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "date_time": "2018-10-29T15:34:00.000Z"
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "x-variable": "restricted",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "operationId": "getEmailAliasLog"
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "EmailAliasLogs",
+    "description": "Email Aliases Resource of the University API",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "contact": {
+      "email": "it@byu.edu",
+      "name": "OIT Service Desk Support",
+      "url": "https://it.byu.edu"
+    },
+    "version": "v1"
+  },
+  "externalDocs": {
+    "description": "Find out more about University API",
+    "url": "https://github.com/byu-oit/UAPI-Specification/blob/master/University%20API%20Specification.md"
+  }
+}

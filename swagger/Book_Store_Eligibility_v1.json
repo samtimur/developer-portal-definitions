@@ -1,0 +1,64 @@
+{
+    "paths": {
+        "/IS_BOOKSTORE_ELIGIBLE/byu_id={byu_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "error_wrapper": {
+            "properties": {
+                "error": {
+                    "properties": {
+                        "error_message": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "eligibility_wrapper": {
+            "properties": {
+                "eligibility": {
+                    "properties": {
+                        "byu_id": {
+                            "type": "string"
+                        },
+                        "eligible": {
+                            "enum": [
+                                "True",
+                                "False"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "Book_Store_Eligibility",
+        "description": "Check to see if an BYU ID is eligible for Book Store in house credit.",
+        "version": "v1"
+    },
+    "basePath": "/domains/erp/sa/bookstore/v1",
+    "host": "api.byu.edu:443"
+}

@@ -1,0 +1,365 @@
+{
+    "basePath": "/byuoitav-pjlink-microservice/0.1",
+    "paths": {
+        "/health": {
+            "get": {
+                "tags": [
+                    "Health"
+                ],
+                "summary": "Check Service Health",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns information about the microservice's health.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Response"
+                            },
+                            "type": "array"
+                        },
+                        "description": "A health response"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "503": {
+                        "$ref": "#/responses/503"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/command": {
+            "post": {
+                "tags": [
+                    "Command"
+                ],
+                "summary": "Send a human-readable PJLink command",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Send a human-readable PJLink class 1 command",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CommandRequest"
+                        },
+                        "description": "Contains address of device, password and command in JSON",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CommandResponse"
+                        },
+                        "description": "Device response received"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/responses/503"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "FTP"
+                ],
+                "summary": "Use Microservice",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns information about the /command endpoint.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Response"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Endpoint information"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "503": {
+                        "$ref": "#/responses/503"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/raw": {
+            "post": {
+                "tags": [
+                    "Raw"
+                ],
+                "summary": "Send a raw PJLink command",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Send a raw PJLink class 1 command, including status queries",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/RawRequest"
+                        },
+                        "description": "Contains address of device, password, and command",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/RawResponse"
+                        },
+                        "description": "Device response received"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/responses/503"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "FTP"
+                ],
+                "summary": "Use Microservice",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns information about the /raw endpoint.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Response"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Endpoint information"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "503": {
+                        "$ref": "#/responses/503"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "RawRequest": {
+            "properties": {
+                "port": {
+                    "description": "PJLink service port; typically 4352",
+                    "type": "string"
+                },
+                "parameter": {
+                    "description": "PJLink command parameter (e.g. '?' to query status)",
+                    "type": "string"
+                },
+                "address": {
+                    "description": "Hostname or IP address of device",
+                    "type": "string"
+                },
+                "command": {
+                    "description": "PJLink command (e.g. 'POWR')",
+                    "type": "string"
+                },
+                "class": {
+                    "description": "PJLink class",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "PJLink password as set on device",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CommandRequest": {
+            "properties": {
+                "port": {
+                    "description": "PJLink service port; typically 4352",
+                    "type": "string"
+                },
+                "parameter": {
+                    "description": "PJLink command parameter (e.g. 'query' to query status)",
+                    "type": "string"
+                },
+                "address": {
+                    "description": "Hostname or IP address of device",
+                    "type": "string"
+                },
+                "command": {
+                    "description": "human readable PJLink command (e.g. 'power')",
+                    "type": "string"
+                },
+                "class": {
+                    "description": "PJLink class",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "PJLink password as set on device",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Response": {
+            "properties": {
+                "message": {
+                    "description": "A human-readable message about what just happened",
+                    "type": "string"
+                },
+                "links": {
+                    "items": {
+                        "$ref": "#/definitions/HATEOAS"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "RawResponse": {
+            "properties": {
+                "response": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "one or more response values per command",
+                    "type": "array"
+                },
+                "command": {
+                    "description": "PJLink command",
+                    "type": "string"
+                },
+                "class": {
+                    "description": "PJLink class response of device",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "HATEOAS": {
+            "properties": {
+                "rel": {
+                    "description": "A human-readable name for what the link represents",
+                    "type": "string"
+                },
+                "href": {
+                    "description": "The link to the endpoint",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Error": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CommandResponse": {
+            "properties": {
+                "response": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "one or more response values per command",
+                    "type": "array"
+                },
+                "command": {
+                    "description": "human readable PJLink command (e.g. 'power')",
+                    "type": "string"
+                },
+                "class": {
+                    "description": "PJLink class response of device",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "responses": {
+        "401": {
+            "schema": {
+                "$ref": "#/definitions/Error"
+            },
+            "description": "You are not authorized to make that request"
+        },
+        "500": {
+            "schema": {
+                "$ref": "#/definitions/Error"
+            },
+            "description": "There was a problem with the server on our end"
+        },
+        "503": {
+            "schema": {
+                "$ref": "#/definitions/Error"
+            },
+            "description": "The server is overloaded, is under maintenance, or is otherwise unavailable"
+        },
+        "default": {
+            "schema": {
+                "$ref": "#/definitions/Error"
+            },
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "PJLink Microservice",
+        "description": "A RESTful API to interact with PJLink-enabled devices",
+        "license": {
+            "name": "Apache 2.0"
+        },
+        "version": "0.1"
+    }
+}

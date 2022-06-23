@@ -1,0 +1,84 @@
+{
+    "basePath": "/domains/erp/sa/StudentFinancials/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/financialDeclaration/{byu_id}": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Financial Declaration"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Create a Financial Declaration record for a student.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/declarationBody"
+                        },
+                        "description": "Student Financials Parameters",
+                        "name": "parameters",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "default": "123456789",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/declarationBody"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Financial Declaration was posted successfully."
+                    },
+                    "400": {
+                        "description": "Malformed request. Please see the StudentFinancials API at api.byu.edu/store for a description of how to use this API."
+                    },
+                    "404": {
+                        "description": "The resource you requested is not found. Please see the StudentFinancials API at api.byu.edu/store for a description of how to use this API."
+                    }
+                },
+                "operationId": "postFinDeclaration"
+            }
+        }
+    },
+    "swagger": "2.0",
+    "parameters": {},
+    "definitions": {
+        "declarationBody": {
+            "properties": {
+                "contract_dttm": {
+                    "description": "Contract Signed datetime",
+                    "type": "string"
+                },
+                "contract_status": {
+                    "default": "Active",
+                    "description": "Contract Status (Active, Inactive)",
+                    "type": "string"
+                },
+                "contract_type": {
+                    "default": "HOUSING",
+                    "description": "Contract Type",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "StudentFinancials",
+        "description": "BYU Student Financials web service APIs.",
+        "contact": {
+            "email": "sfa_ft@byu.edu",
+            "name": "OIT Student Financial Applications",
+            "url": "http://www.example.com/support"
+        },
+        "version": "v1"
+    }
+}

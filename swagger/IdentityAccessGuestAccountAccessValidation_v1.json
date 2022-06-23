@@ -1,0 +1,122 @@
+{
+    "basePath": "/domains/legacy/identity/access/guestaccountaccessvalidation/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/validateOperation": {
+            "get": {
+                "summary": "Validates that a guest access operation ID is valid given the web resource and person id OR operation and person id of the delegate. The Service returns the person ID of the delegatee if valid and a 404 is returned if invalid",
+                "tags": [
+                    "GuestAccessValidationService"
+                ],
+                "description": "This particular service needs a key that is numerically generated making it near impossible to get a 200, it is currently deprecated until the code can be updated.",
+                "parameters": [
+                    {
+                        "description": "Delegated person identification",
+                        "name": "delegatedPersonId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Name of the requested operation",
+                        "name": "operationName",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Web resource identification",
+                        "name": "webResourceId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Operation identifier",
+                        "name": "opid",
+                        "type": "integer",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "validateOperationByOperationName",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {},
+    "info": {
+        "title": "IdentityAccessGuestAccountAccessValidation",
+        "description": "This particular service needs a key that is numerically generated making it near impossible to get a 200, it is currently deprecated until the code can be updated.",
+        "version": "v1"
+    }
+}

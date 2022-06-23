@@ -1,0 +1,66 @@
+{
+    "paths": {
+        "/status": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get the status of the service",
+                "x-throttling-tier": "Unlimited",
+                "description": "This endpoint simply returns a message about the service being up. There is no more detailed information about the health of the service other than the fact that it is up.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "For testing purposes only",
+                        "name": "test",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/echo/{+echo_string}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Echo back the requested string and all headers",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The string to echo back",
+                        "name": "+echo_string",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "Echo",
+        "description": "This is a simple service which will echo back your request along with all of the request headers that were sent",
+        "x-wso2-information": {
+            "provider": "BYU/bcwinter"
+        },
+        "version": "v1"
+    },
+    "basePath": "/echo/v1",
+    "host": "api.byu.edu:443"
+}

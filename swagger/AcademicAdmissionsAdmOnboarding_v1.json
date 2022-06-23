@@ -1,0 +1,329 @@
+{
+    "basePath": "/domains/legacy/academic/admissions/adm_onboarding/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/person/{person_id}/{year_term}?": {
+            "post": {
+                "summary": "Onboard an admitted applicant",
+                "tags": [
+                    "AdmOnboardingService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Onboard an admitted applicant",
+                "parameters": [
+                    {
+                        "description": "person id of admitted applicant",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "year_term of admission",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Applicant type of the person",
+                        "name": "applicant_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Registration status to be creasted for the person",
+                        "name": "reg_status",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Registration eligibility to be creasted for the person",
+                        "name": "reg_eligibility",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "program code to be created for the person",
+                        "name": "program_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/AdmOnboardingPersonSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/AdmOnboardingServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "OnboardApplicant"
+            }
+        },
+        "/batch/{year_term}?": {
+            "post": {
+                "summary": "Onboard a batch of admitted applicants",
+                "tags": [
+                    "AdmOnboardingService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Onboard a batch of admitted applicants",
+                "parameters": [
+                    {
+                        "description": "year_term of batch admission",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Specify number of decision records provided in the request",
+                        "name": "num_rows",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "string with onboarding data",
+                        "name": "data",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/AdmOnboardingBatchSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/AdmOnboardingServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "OnboardApplicant"
+            }
+        },
+        "/results/{batch_id}": {
+            "get": {
+                "summary": "Get list of errors from batch upload",
+                "tags": [
+                    "AdmOnboardingService",
+                    "Results"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get list of errors from batch upload",
+                "parameters": [
+                    {
+                        "description": "id of the uploaded batch",
+                        "name": "batch_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/AdmOnboardingResultsSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/AdmOnboardingServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetAdmOnboardingResults"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "AdmOnboardingPersonSuccess": {
+            "properties": {
+                "AdmOnboardingService": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "result": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "AdmOnboardingResults": {
+            "properties": {
+                "batch_id": {
+                    "type": "number"
+                },
+                "errors_list": {
+                    "items": {
+                        "$ref": "#/definitions/AdmOnboardingResultsRow"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "errors": {
+            "items": {
+                "$ref": "#/definitions/error_data"
+            },
+            "type": "array"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "AdmOnboardingBatchSuccess": {
+            "properties": {
+                "AdmOnboardingService": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "batch_id": {
+                                    "type": "string"
+                                },
+                                "number_in_batch": {
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "AdmOnboardingServiceError": {
+            "properties": {
+                "AdmOnboardingService": {
+                    "properties": {
+                        "response": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "errors": {
+                            "$ref": "#/definitions/errors"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "AdmOnboardingResultsSuccess": {
+            "properties": {
+                "AdmOnboardingService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/AdmOnboardingResults"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "AdmOnboardingResultsRow": {
+            "properties": {
+                "error_number": {
+                    "type": "number"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "error_text": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "AcademicAdmissionsAdmOnboarding",
+        "description": "This service allows for eligibility, programs and flags to be built for an applicant.",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/AdmOnboarding_v1"
+    }
+}

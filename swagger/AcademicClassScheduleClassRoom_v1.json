@@ -1,0 +1,1206 @@
+{
+    "basePath": "/domains/legacy/academic/classschedule/classroom/v1",
+    "x-mock_json": {
+        "BuildingService": {
+            "response": {
+                "buildings": [
+                    {
+                        "building_name": "BNSN"
+                    }
+                ]
+            },
+            "request": {
+                "status": 200,
+                "resource": "/20121",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        },
+        "listClassRoomService": {
+            "response": {
+                "roomList": [
+                    {
+                        "room_number": "C130",
+                        "room_desc": "INTRO. CHEMISTRY/CANNON"
+                    }
+                ]
+            },
+            "request": {
+                "status": 200,
+                "resource": "/20121/BNSN",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        },
+        "classRoomService": {
+            "response": {
+                "roomList": [
+                    {
+                        "room_number": "C130",
+                        "building": "BNSN",
+                        "effective_year_term": "Fall 2011",
+                        "scheduling_type": "Q",
+                        "capacity": 36,
+                        "room_desc": "INTRO. CHEMISTRY/CANNON",
+                        "expired_year_term": "Summer 2012",
+                        "space_mgt_characteristics": [
+                            {
+                                "attribute_value": "12W",
+                                "attribute_type": "Chalkboard"
+                            }
+                        ],
+                        "scheduling_characteristics": [
+                            {
+                                "section_size": 120,
+                                "honors": "",
+                                "instructor_name": "Brown, Philip Ross",
+                                "section_type": "",
+                                "catalog_number": "107",
+                                "class_time": "9:00a - 10:50a",
+                                "assign_to": "",
+                                "dept_name": "CHEM",
+                                "serv_learning": "",
+                                "catalog_suffix": "",
+                                "total_enr": 115,
+                                "credit_hours": 1,
+                                "sched_type": "C",
+                                "end_date": "",
+                                "days": "T",
+                                "lab_quiz_section": "",
+                                "start_date": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            "request": {
+                "status": 200,
+                "resource": "/20121/BNSN/C130/Exams",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        }
+    },
+    "paths": {
+        "/{year_term}/{building_code}/{room_number}/{class_room_view}": {
+            "get": {
+                "tags": [
+                    "ClassRoomService"
+                ],
+                "summary": "Returns the specified class room with information according to the tab option: Schedule, Characteristics, Assignments, Exams, Images",
+                "description": "Returns the specified class room with information according to the tab option: Schedule, Characteristics, Assignments, Exams, Images",
+                "parameters": [
+                    {
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> ",
+                        "name": "building_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> ",
+                        "name": "room_number",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> values: 'Schedule', 'Characteristics', 'Assignments', 'Exams', 'Images'",
+                        "name": "class_room_view",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "roomList": {
+                                            "items": {
+                                                "properties": {
+                                                    "room_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "building": {
+                                                        "type": "string"
+                                                    },
+                                                    "effective_year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "scheduling_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "capacity": {
+                                                        "type": "number"
+                                                    },
+                                                    "room_desc": {
+                                                        "type": "string"
+                                                    },
+                                                    "expired_year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "space_mgt_characteristics": {
+                                                        "items": {
+                                                            "properties": {
+                                                                "attribute_value": {
+                                                                    "type": "string"
+                                                                },
+                                                                "attribute_type": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "scheduling_characteristics": {
+                                                        "items": {
+                                                            "properties": {
+                                                                "section_size": {
+                                                                    "type": "number"
+                                                                },
+                                                                "honors": {
+                                                                    "type": "string"
+                                                                },
+                                                                "instructor_name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "section_type": {
+                                                                    "type": "string"
+                                                                },
+                                                                "catalog_number": {
+                                                                    "type": "string"
+                                                                },
+                                                                "class_time": {
+                                                                    "type": "string"
+                                                                },
+                                                                "assign_to": {
+                                                                    "type": "string"
+                                                                },
+                                                                "dept_name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "serv_learning": {
+                                                                    "type": "string"
+                                                                },
+                                                                "catalog_suffix": {
+                                                                    "type": "string"
+                                                                },
+                                                                "total_enr": {
+                                                                    "type": "number"
+                                                                },
+                                                                "credit_hours": {
+                                                                    "type": "number"
+                                                                },
+                                                                "sched_type": {
+                                                                    "type": "string"
+                                                                },
+                                                                "end_date": {
+                                                                    "type": "string"
+                                                                },
+                                                                "days": {
+                                                                    "type": "string"
+                                                                },
+                                                                "lab_quiz_section": {
+                                                                    "type": "string"
+                                                                },
+                                                                "start_date": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "roomList": [
+                                        {
+                                            "room_number": "C130",
+                                            "building": "BNSN",
+                                            "effective_year_term": "Fall 2011",
+                                            "scheduling_type": "Q",
+                                            "capacity": 36,
+                                            "room_desc": "INTRO. CHEMISTRY/CANNON",
+                                            "expired_year_term": "Summer 2012",
+                                            "space_mgt_characteristics": [
+                                                {
+                                                    "attribute_value": "12W",
+                                                    "attribute_type": "Chalkboard"
+                                                }
+                                            ],
+                                            "scheduling_characteristics": [
+                                                {
+                                                    "section_size": 120,
+                                                    "honors": "",
+                                                    "instructor_name": "Brown, Philip Ross",
+                                                    "section_type": "",
+                                                    "catalog_number": "107",
+                                                    "class_time": "9:00a - 10:50a",
+                                                    "assign_to": "",
+                                                    "dept_name": "CHEM",
+                                                    "serv_learning": "",
+                                                    "catalog_suffix": "",
+                                                    "total_enr": 115,
+                                                    "credit_hours": 1,
+                                                    "sched_type": "C",
+                                                    "end_date": "",
+                                                    "days": "T",
+                                                    "lab_quiz_section": "",
+                                                    "start_date": ""
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/20121/BNSN/C130/Exams",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getClassRoomInfo",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{year_term}": {
+            "get": {
+                "tags": [
+                    "ClassRoomService"
+                ],
+                "summary": "Shows all buildings able to be searched",
+                "description": "Shows all buildings able to be searched",
+                "parameters": [
+                    {
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "buildings": {
+                                            "items": {
+                                                "properties": {
+                                                    "building_name": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Returns a list of building names",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "buildings": [
+                                        {
+                                            "building_name": "BNSN"
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/20121",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getBuildings",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{year_term}/{building_code}": {
+            "get": {
+                "tags": [
+                    "ClassRoomService"
+                ],
+                "summary": "Returns class rooms for a given building which are available for scheduling",
+                "description": "Returns class rooms for a given building which are available for scheduling",
+                "parameters": [
+                    {
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> ",
+                        "name": "building_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "roomList": {
+                                            "items": {
+                                                "properties": {
+                                                    "room_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "room_desc": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Returns the list of class rooms available in a particular building for a particular year_term.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "roomList": [
+                                        {
+                                            "room_number": "C130",
+                                            "room_desc": "INTRO. CHEMISTRY/CANNON"
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/20121/BNSN",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getClassRooms",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "building_name": {
+            "type": "string"
+        },
+        "room_number": {
+            "type": "string"
+        },
+        "BuildingService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "buildings": {
+                            "items": {
+                                "properties": {
+                                    "building_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "building": {
+            "type": "string"
+        },
+        "listClassRoomService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "roomList": {
+                            "items": {
+                                "properties": {
+                                    "room_number": {
+                                        "type": "string"
+                                    },
+                                    "room_desc": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "listClassRoomResponse": {
+            "properties": {
+                "roomList": {
+                    "items": {
+                        "properties": {
+                            "room_number": {
+                                "type": "string"
+                            },
+                            "room_desc": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "classRoomResponse": {
+            "properties": {
+                "roomList": {
+                    "items": {
+                        "properties": {
+                            "room_number": {
+                                "type": "string"
+                            },
+                            "building": {
+                                "type": "string"
+                            },
+                            "effective_year_term": {
+                                "type": "string"
+                            },
+                            "scheduling_type": {
+                                "type": "string"
+                            },
+                            "capacity": {
+                                "type": "number"
+                            },
+                            "room_desc": {
+                                "type": "string"
+                            },
+                            "expired_year_term": {
+                                "type": "string"
+                            },
+                            "space_mgt_characteristics": {
+                                "items": {
+                                    "properties": {
+                                        "attribute_value": {
+                                            "type": "string"
+                                        },
+                                        "attribute_type": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "scheduling_characteristics": {
+                                "items": {
+                                    "properties": {
+                                        "section_size": {
+                                            "type": "number"
+                                        },
+                                        "honors": {
+                                            "type": "string"
+                                        },
+                                        "instructor_name": {
+                                            "type": "string"
+                                        },
+                                        "section_type": {
+                                            "type": "string"
+                                        },
+                                        "catalog_number": {
+                                            "type": "string"
+                                        },
+                                        "class_time": {
+                                            "type": "string"
+                                        },
+                                        "assign_to": {
+                                            "type": "string"
+                                        },
+                                        "dept_name": {
+                                            "type": "string"
+                                        },
+                                        "serv_learning": {
+                                            "type": "string"
+                                        },
+                                        "catalog_suffix": {
+                                            "type": "string"
+                                        },
+                                        "total_enr": {
+                                            "type": "number"
+                                        },
+                                        "credit_hours": {
+                                            "type": "number"
+                                        },
+                                        "sched_type": {
+                                            "type": "string"
+                                        },
+                                        "end_date": {
+                                            "type": "string"
+                                        },
+                                        "days": {
+                                            "type": "string"
+                                        },
+                                        "lab_quiz_section": {
+                                            "type": "string"
+                                        },
+                                        "start_date": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "roomList": {
+            "items": {
+                "properties": {
+                    "room_number": {
+                        "type": "string"
+                    },
+                    "room_desc": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "effective_year_term": {
+            "type": "string"
+        },
+        "classRoomService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "roomList": {
+                            "items": {
+                                "properties": {
+                                    "room_number": {
+                                        "type": "string"
+                                    },
+                                    "building": {
+                                        "type": "string"
+                                    },
+                                    "effective_year_term": {
+                                        "type": "string"
+                                    },
+                                    "scheduling_type": {
+                                        "type": "string"
+                                    },
+                                    "capacity": {
+                                        "type": "number"
+                                    },
+                                    "room_desc": {
+                                        "type": "string"
+                                    },
+                                    "expired_year_term": {
+                                        "type": "string"
+                                    },
+                                    "space_mgt_characteristics": {
+                                        "items": {
+                                            "properties": {
+                                                "attribute_value": {
+                                                    "type": "string"
+                                                },
+                                                "attribute_type": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "scheduling_characteristics": {
+                                        "items": {
+                                            "properties": {
+                                                "section_size": {
+                                                    "type": "number"
+                                                },
+                                                "honors": {
+                                                    "type": "string"
+                                                },
+                                                "instructor_name": {
+                                                    "type": "string"
+                                                },
+                                                "section_type": {
+                                                    "type": "string"
+                                                },
+                                                "catalog_number": {
+                                                    "type": "string"
+                                                },
+                                                "class_time": {
+                                                    "type": "string"
+                                                },
+                                                "assign_to": {
+                                                    "type": "string"
+                                                },
+                                                "dept_name": {
+                                                    "type": "string"
+                                                },
+                                                "serv_learning": {
+                                                    "type": "string"
+                                                },
+                                                "catalog_suffix": {
+                                                    "type": "string"
+                                                },
+                                                "total_enr": {
+                                                    "type": "number"
+                                                },
+                                                "credit_hours": {
+                                                    "type": "number"
+                                                },
+                                                "sched_type": {
+                                                    "type": "string"
+                                                },
+                                                "end_date": {
+                                                    "type": "string"
+                                                },
+                                                "days": {
+                                                    "type": "string"
+                                                },
+                                                "lab_quiz_section": {
+                                                    "type": "string"
+                                                },
+                                                "start_date": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "attribute_type": {
+            "type": "string"
+        },
+        "classRoomA": {
+            "items": {
+                "properties": {
+                    "room_number": {
+                        "type": "string"
+                    },
+                    "building": {
+                        "type": "string"
+                    },
+                    "effective_year_term": {
+                        "type": "string"
+                    },
+                    "scheduling_type": {
+                        "type": "string"
+                    },
+                    "capacity": {
+                        "type": "number"
+                    },
+                    "room_desc": {
+                        "type": "string"
+                    },
+                    "expired_year_term": {
+                        "type": "string"
+                    },
+                    "space_mgt_characteristics": {
+                        "items": {
+                            "properties": {
+                                "attribute_value": {
+                                    "type": "string"
+                                },
+                                "attribute_type": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "scheduling_characteristics": {
+                        "items": {
+                            "properties": {
+                                "section_size": {
+                                    "type": "number"
+                                },
+                                "honors": {
+                                    "type": "string"
+                                },
+                                "instructor_name": {
+                                    "type": "string"
+                                },
+                                "section_type": {
+                                    "type": "string"
+                                },
+                                "catalog_number": {
+                                    "type": "string"
+                                },
+                                "class_time": {
+                                    "type": "string"
+                                },
+                                "assign_to": {
+                                    "type": "string"
+                                },
+                                "dept_name": {
+                                    "type": "string"
+                                },
+                                "serv_learning": {
+                                    "type": "string"
+                                },
+                                "catalog_suffix": {
+                                    "type": "string"
+                                },
+                                "total_enr": {
+                                    "type": "number"
+                                },
+                                "credit_hours": {
+                                    "type": "number"
+                                },
+                                "sched_type": {
+                                    "type": "string"
+                                },
+                                "end_date": {
+                                    "type": "string"
+                                },
+                                "days": {
+                                    "type": "string"
+                                },
+                                "lab_quiz_section": {
+                                    "type": "string"
+                                },
+                                "start_date": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "attribute_value": {
+            "type": "string"
+        },
+        "response": {
+            "properties": {
+                "buildings": {
+                    "items": {
+                        "properties": {
+                            "building_name": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "scheduling_type": {
+            "type": "string"
+        },
+        "buildings": {
+            "items": {
+                "properties": {
+                    "building_name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "capacity": {
+            "type": "number"
+        },
+        "room_desc": {
+            "type": "string"
+        },
+        "expired_year_term": {
+            "type": "string"
+        },
+        "scheduling_characteristics": {
+            "items": {
+                "properties": {
+                    "section_size": {
+                        "type": "number"
+                    },
+                    "honors": {
+                        "type": "string"
+                    },
+                    "instructor_name": {
+                        "type": "string"
+                    },
+                    "section_type": {
+                        "type": "string"
+                    },
+                    "catalog_number": {
+                        "type": "string"
+                    },
+                    "class_time": {
+                        "type": "string"
+                    },
+                    "assign_to": {
+                        "type": "string"
+                    },
+                    "dept_name": {
+                        "type": "string"
+                    },
+                    "serv_learning": {
+                        "type": "string"
+                    },
+                    "catalog_suffix": {
+                        "type": "string"
+                    },
+                    "total_enr": {
+                        "type": "number"
+                    },
+                    "credit_hours": {
+                        "type": "number"
+                    },
+                    "sched_type": {
+                        "type": "string"
+                    },
+                    "end_date": {
+                        "type": "string"
+                    },
+                    "days": {
+                        "type": "string"
+                    },
+                    "lab_quiz_section": {
+                        "type": "string"
+                    },
+                    "start_date": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        }
+    },
+    "info": {
+        "title": "AcademicClassScheduleClassRoom",
+        "description": "This service accesses class room information in the AIM System.",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

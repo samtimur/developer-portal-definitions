@@ -1,0 +1,93 @@
+{
+    "basePath": "/domains/erp/sa/MyFinancialCenterHolds/v1",
+    "paths": {
+        "/holds/{byu_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a list of holds on a user's account, as well as a URL that can be used to interact with the holds within My Financial Center.",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/HoldsArray"
+                        },
+                        "description": "An array of holds for a user."
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Not authorized to make this call."
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "HoldsArray": {
+            "properties": {
+                "holds": {
+                    "items": {
+                        "$ref": "#/definitions/HoldModel"
+                    },
+                    "type": "array"
+                },
+                "holds_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "ErrorModel": {
+            "properties": {
+                "error_message": {
+                    "type": "string"
+                }
+            }
+        },
+        "HoldModel": {
+            "properties": {
+                "hold_name": {
+                    "type": "string"
+                },
+                "hold_department": {
+                    "type": "string"
+                },
+                "hold_instructions": {
+                    "type": "string"
+                },
+                "hold_description": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "hold_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "hold_contact": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "MyFinancialCenterHolds",
+        "description": "Returns information about student holds that show in My Financial Center.",
+        "contact": {
+            "email": "sft_ft@byu.edu",
+            "name": "OIT Student Financial Applications"
+        },
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443"
+}

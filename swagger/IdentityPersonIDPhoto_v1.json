@@ -1,0 +1,160 @@
+{
+    "basePath": "/domains/legacy/identity/person/idphoto/v1",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "service definition",
+                "x-throttling-tier": "Unlimited",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation"
+            }
+        },
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "IDPhotoService"
+                ],
+                "summary": "Shows the photo by the ID",
+                "x-throttling-tier": "Unlimited",
+                "description": "Shows the photo by the ID specified (via attributes: p, b, or n) or defaults to the current user(if no attribute p, b, or n is specified.) The service will allow an instructor to view a photo if the user is the instructor of a class that the requested person is in (checked via the attributes yt, ci, tc, and sn.)",
+                "produces": [
+                    "image/jpeg"
+                ],
+                "parameters": [
+                    {
+                        "maximum": 9,
+                        "description": "string -> PERSON_ID: 9 digit number",
+                        "name": "p",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maximum": 9,
+                        "description": "string -> BYU_ID: 9 digit number",
+                        "name": "b",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "string -> NET_ID: string",
+                        "name": "N",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "string -> [0-9]{4}[1|3|4|5]",
+                        "name": "yt",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maximum": 5,
+                        "description": "string -> CURRICULUM_ID: 5 digit number",
+                        "name": "ci",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maximum": 3,
+                        "description": "string -> TITLE_CODE: 3 digit number",
+                        "name": "tc",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "maximum": 3,
+                        "description": "string -> SECTION_NUMBER: 3 digit number",
+                        "name": "sn",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The ID given matches a photo in the database"
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getPersonPhoto"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {},
+    "info": {
+        "title": "IdentityPersonIDPhoto",
+        "description": "This service accesses the ID Photo in the Person (PRO) System.  It is the web service version of the web page PERPIC in the PRO System.",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

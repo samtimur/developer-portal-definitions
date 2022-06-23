@@ -1,0 +1,219 @@
+{
+    "basePath": "/byuoitav-wait-for-restart-microservice/0.1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/submit": {
+            "post": {
+                "summary": "Submit for Wait",
+                "tags": [
+                    "Wait"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Submit a machine to the listen microservice.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/file-request"
+                        },
+                        "description": "Information about the machine to be monitored",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        },
+                        "description": "All went well"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "503": {
+                        "$ref": "#/responses/503"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get Submit Information",
+                "tags": [
+                    "Wait"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns information about the /submit endpoint.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/response"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Endpoint information"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "503": {
+                        "$ref": "#/responses/503"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/health": {
+            "get": {
+                "summary": "Check Service Health",
+                "tags": [
+                    "Health"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns information about the microservice's health.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/response"
+                            },
+                            "type": "array"
+                        },
+                        "description": "A health message"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "503": {
+                        "$ref": "#/responses/503"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "response": {
+            "properties": {
+                "message": {
+                    "description": "A human-readable message about what just happened",
+                    "type": "string"
+                },
+                "links": {
+                    "items": {
+                        "$ref": "#/definitions/HATEOAS"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "file-request": {
+            "properties": {
+                "Port": {
+                    "description": "The port of the machine to be used for connection",
+                    "type": "integer"
+                },
+                "Timeout": {
+                    "description": "How long to attempt a connection in seconds",
+                    "type": "integer"
+                },
+                "Address": {
+                    "description": "The address of the machine to be monitored for ",
+                    "type": "string"
+                },
+                "CallbackAddress": {
+                    "description": "The address to POST to upon restart",
+                    "type": "string"
+                },
+                "Identifier": {
+                    "description": "A value passed to the callback address to identify the machine that has restarted",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "Address",
+                "CallbackAddress"
+            ]
+        },
+        "error": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "HATEOAS": {
+            "properties": {
+                "rel": {
+                    "description": "A human-readable name for what the link represents",
+                    "type": "string"
+                },
+                "href": {
+                    "description": "The link to the endpoint",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "responses": {
+        "401": {
+            "schema": {
+                "$ref": "#/definitions/error"
+            },
+            "description": "You are not authorized to make that request"
+        },
+        "500": {
+            "schema": {
+                "$ref": "#/definitions/error"
+            },
+            "description": "There was a problem with the server on our end"
+        },
+        "503": {
+            "schema": {
+                "$ref": "#/definitions/error"
+            },
+            "description": "The server is overloaded, is under maintenance, or is otherwise unavailable"
+        },
+        "default": {
+            "schema": {
+                "$ref": "#/definitions/error"
+            },
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "Wait-for-Restart-Microservice",
+        "description": "Waits for Crestron machines to restart and reports back when they do",
+        "version": "0.1"
+    }
+}

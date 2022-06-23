@@ -1,0 +1,262 @@
+{
+    "basePath": "/domains/erp/hr/transfer/v1",
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "Employee ID",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/employee_data"
+                        },
+                        "description": "The default response type is JSON.  Add an Accept header with value=application/xml to return an XML response.",
+                        "examples": {
+                            "application/json": {
+                                "employee_data": {
+                                    "transfers": [
+                                        {
+                                            "last_hire_date": "2016-10-27",
+                                            "employee_class_description": "SE Student Hourly",
+                                            "department_id": "7890",
+                                            "workgroup": "STHREG",
+                                            "account_code": "11112222-3333-00000",
+                                            "employee_class": "S",
+                                            "pay_rate_type": "Hourly",
+                                            "pay_status": "A",
+                                            "supervisor_name": "Newton,Sir Isaac",
+                                            "department_description": "Biological Science",
+                                            "record": "80",
+                                            "pay_rate": "10",
+                                            "job_title": "Landscape Architect",
+                                            "action": "XFR",
+                                            "effective_date": "2016-10-27",
+                                            "supervisor_id": "456789123",
+                                            "alternate_job_description": {},
+                                            "email_address": "johnny_appleseed@byu.edu"
+                                        }
+                                    ],
+                                    "name": "Seed,Johnny Apple",
+                                    "birthdate": "2005-02-17",
+                                    "byu_id": "123456789"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "employee_data": {
+            "properties": {
+                "transfers": {
+                    "$ref": "#/definitions/transfers"
+                },
+                "name": {
+                    "$ref": "#/definitions/name"
+                },
+                "birthdate": {
+                    "$ref": "#/definitions/birthdate"
+                },
+                "no_security": {
+                    "$ref": "#/definitions/no_security"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                }
+            }
+        },
+        "department_id": {
+            "pattern": "^[0-9]{9}$",
+            "type": "string"
+        },
+        "account_code": {
+            "maxLength": 25,
+            "type": "string"
+        },
+        "employee_class": {
+            "maxLength": 3,
+            "type": "string"
+        },
+        "pay_rate_type": {
+            "enum": [
+                "Annual",
+                "Hourly"
+            ],
+            "type": "string"
+        },
+        "no_data": {
+            "description": "This response means that you have security to view the information for the requested employee, but no hire information exists in the database for the employee.",
+            "type": "string"
+        },
+        "pay_status": {
+            "description": "A=Active, I=Inactive",
+            "enum": [
+                "A",
+                "I"
+            ],
+            "type": "string"
+        },
+        "name": {
+            "maxLength": 50,
+            "type": "string"
+        },
+        "action": {
+            "maxLength": 3,
+            "type": "string"
+        },
+        "birthdate": {
+            "format": "date",
+            "type": "string"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "type": "string"
+        },
+        "supervisor_id": {
+            "pattern": "^[0-9]{9}$",
+            "type": "string"
+        },
+        "transfer": {
+            "properties": {
+                "last_hire_date": {
+                    "$ref": "#/definitions/last_hire_date"
+                },
+                "employee_class_description": {
+                    "$ref": "#/definitions/employee_class_description"
+                },
+                "department_id": {
+                    "$ref": "#/definitions/department_id"
+                },
+                "workgroup": {
+                    "$ref": "#/definitions/workgroup"
+                },
+                "account_code": {
+                    "$ref": "#/definitions/account_code"
+                },
+                "employee_class": {
+                    "$ref": "#/definitions/employee_class"
+                },
+                "pay_rate_type": {
+                    "$ref": "#/definitions/pay_rate_type"
+                },
+                "no_data": {
+                    "$ref": "#/definitions/no_data"
+                },
+                "pay_status": {
+                    "$ref": "#/definitions/pay_status"
+                },
+                "supervisor_name": {
+                    "$ref": "#/definitions/supervisor_name"
+                },
+                "department_description": {
+                    "$ref": "#/definitions/department_description"
+                },
+                "record": {
+                    "$ref": "#/definitions/record"
+                },
+                "pay_rate": {
+                    "$ref": "#/definitions/pay_rate"
+                },
+                "job_title": {
+                    "$ref": "#/definitions/job_title"
+                },
+                "action": {
+                    "$ref": "#/definitions/action"
+                },
+                "effective_date": {
+                    "$ref": "#/definitions/effective_date"
+                },
+                "supervisor_id": {
+                    "$ref": "#/definitions/supervisor_id"
+                },
+                "alternate_job_description": {
+                    "$ref": "#/definitions/alternate_job_description"
+                },
+                "email_address": {
+                    "$ref": "#/definitions/email_address"
+                }
+            }
+        },
+        "transfers": {
+            "items": {
+                "$ref": "#/definitions/transfer"
+            },
+            "type": "array"
+        },
+        "last_hire_date": {
+            "format": "date",
+            "type": "string"
+        },
+        "employee_class_description": {
+            "maxLength": 30,
+            "type": "string"
+        },
+        "workgroup": {
+            "maxLength": 10,
+            "type": "string"
+        },
+        "department_description": {
+            "maxLength": 10,
+            "type": "string"
+        },
+        "supervisor_name": {
+            "maxLength": 50,
+            "type": "string"
+        },
+        "record": {
+            "maxLength": 3,
+            "type": "integer"
+        },
+        "pay_rate": {
+            "format": "double",
+            "type": "number"
+        },
+        "job_title": {
+            "maxLength": 30,
+            "type": "string"
+        },
+        "no_security": {
+            "description": "This message will be returned if the calling user does not have security to see the hire information for the requested employee.",
+            "type": "string"
+        },
+        "effective_date": {
+            "format": "date",
+            "type": "string"
+        },
+        "email_address": {
+            "maxLength": 70,
+            "type": "string"
+        },
+        "alternate_job_description": {
+            "maxLength": 20,
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "Transfer",
+        "description": "This API is used to get job transfer information for an employee.  The service will return a no_security element if the calling user does not have security to the data.",
+        "version": "v1"
+    }
+}

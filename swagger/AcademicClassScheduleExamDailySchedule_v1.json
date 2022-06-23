@@ -1,0 +1,723 @@
+{
+    "basePath": "/domains/legacy/academic/classschedule/examdailyschedule/v1",
+    "x-mock_json": {
+        "ExamDailyScheduleService": {
+            "response": {
+                "end_date": "21 Dec 2017",
+                "DAY_TEMP": "",
+                "ROOM_NUMBER_TEMP": "",
+                "date_time_begin_temp": "",
+                "Season": "Fall",
+                "BUILDING_TEMP": "",
+                "examDateInfo": [
+                    {
+                        "examDate": "05 Sep - 14 Dec",
+                        "examInfo": [
+                            {
+                                "building": "JKB",
+                                "time": "7:00 - 10:00",
+                                "instructor": "Person, Name",
+                                "secNumber": "001",
+                                "secType": "",
+                                "totalEnrolled": "31",
+                                "daysTaught": "S",
+                                "transcriptTitle": "DESPH 379  001",
+                                "scheduleCode": "123456789",
+                                "room": "2113"
+                            }
+                        ]
+                    },
+                    {
+                        "examDate": "16 Dec",
+                        "examInfo": [
+                            {
+                                "building": "B66",
+                                "time": "5:45 - 7:45 p",
+                                "instructor": "Person, Name",
+                                "secNumber": "002",
+                                "secType": "Evening",
+                                "totalEnrolled": "14",
+                                "daysTaught": "S",
+                                "transcriptTitle": "CFM 311  002",
+                                "scheduleCode": "123456789",
+                                "room": "120"
+                            }
+                        ]
+                    },
+                    {
+                        "examDate": "18 Dec",
+                        "examInfo": [
+                            {
+                                "building": "B66",
+                                "time": "7:00 - 10:00",
+                                "instructor": "Person, Name",
+                                "secNumber": "001",
+                                "secType": "",
+                                "totalEnrolled": "21",
+                                "daysTaught": "M",
+                                "transcriptTitle": "CFM 311  001",
+                                "scheduleCode": "123456789",
+                                "room": "120"
+                            }
+                        ]
+                    }
+                ],
+                "start_date": "05 Sep 2017",
+                "DISPLAYYEARTERM_temp": ""
+            },
+            "request": {
+                "status": 200,
+                "resource": "/json/20175/",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation"
+            }
+        },
+        "/{year_term}/*": {
+            "get": {
+                "summary": "Returns exam schedule for given yearterm and selected query attributes",
+                "tags": [
+                    "ExamDailyScheduleService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns exam schedule for given yearterm and selected query attributes",
+                "parameters": [
+                    {
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Exam Building",
+                        "name": "exam_building",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Exam Begin Time formatted as HH:MM[a] for AM or [p] for pm",
+                        "name": "exam_begin_time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Exam Room",
+                        "name": "exam_room",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Exam date formatted as DD MMM YYYY",
+                        "name": "exam_date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "end_date": {
+                                            "type": "string"
+                                        },
+                                        "DAY_TEMP": {
+                                            "type": "string"
+                                        },
+                                        "ROOM_NUMBER_TEMP": {
+                                            "type": "string"
+                                        },
+                                        "date_time_begin_temp": {
+                                            "type": "string"
+                                        },
+                                        "Season": {
+                                            "type": "string"
+                                        },
+                                        "BUILDING_TEMP": {
+                                            "type": "string"
+                                        },
+                                        "examDateInfo": {
+                                            "items": {
+                                                "properties": {
+                                                    "examDate": {
+                                                        "type": "string"
+                                                    },
+                                                    "examInfo": {
+                                                        "items": {
+                                                            "properties": {
+                                                                "building": {
+                                                                    "type": "string"
+                                                                },
+                                                                "time": {
+                                                                    "type": "string"
+                                                                },
+                                                                "instructor": {
+                                                                    "type": "string"
+                                                                },
+                                                                "secNumber": {
+                                                                    "type": "string"
+                                                                },
+                                                                "secType": {
+                                                                    "type": "string"
+                                                                },
+                                                                "totalEnrolled": {
+                                                                    "type": "string"
+                                                                },
+                                                                "daysTaught": {
+                                                                    "type": "string"
+                                                                },
+                                                                "transcriptTitle": {
+                                                                    "type": "string"
+                                                                },
+                                                                "scheduleCode": {
+                                                                    "type": "string"
+                                                                },
+                                                                "room": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "start_date": {
+                                            "type": "string"
+                                        },
+                                        "DISPLAYYEARTERM_temp": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": " return the exam schedule by day for a selected year term.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "end_date": "21 Dec 2017",
+                                    "DAY_TEMP": "",
+                                    "ROOM_NUMBER_TEMP": "",
+                                    "date_time_begin_temp": "",
+                                    "Season": "Fall",
+                                    "BUILDING_TEMP": "",
+                                    "examDateInfo": [
+                                        {
+                                            "examDate": "05 Sep - 14 Dec",
+                                            "examInfo": [
+                                                {
+                                                    "building": "JKB",
+                                                    "time": "7:00 - 10:00",
+                                                    "instructor": "Person, Name",
+                                                    "secNumber": "001",
+                                                    "secType": "",
+                                                    "totalEnrolled": "31",
+                                                    "daysTaught": "S",
+                                                    "transcriptTitle": "DESPH 379  001",
+                                                    "scheduleCode": "123456789",
+                                                    "room": "2113"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "examDate": "16 Dec",
+                                            "examInfo": [
+                                                {
+                                                    "building": "B66",
+                                                    "time": "5:45 - 7:45 p",
+                                                    "instructor": "Person, Name",
+                                                    "secNumber": "002",
+                                                    "secType": "Evening",
+                                                    "totalEnrolled": "14",
+                                                    "daysTaught": "S",
+                                                    "transcriptTitle": "CFM 311  002",
+                                                    "scheduleCode": "123456789",
+                                                    "room": "120"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "examDate": "18 Dec",
+                                            "examInfo": [
+                                                {
+                                                    "building": "B66",
+                                                    "time": "7:00 - 10:00",
+                                                    "instructor": "Person, Name",
+                                                    "secNumber": "001",
+                                                    "secType": "",
+                                                    "totalEnrolled": "21",
+                                                    "daysTaught": "M",
+                                                    "transcriptTitle": "CFM 311  001",
+                                                    "scheduleCode": "123456789",
+                                                    "room": "120"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "start_date": "05 Sep 2017",
+                                    "DISPLAYYEARTERM_temp": ""
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/json/20175/",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getExamDailySchedule"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "building": {
+            "type": "string"
+        },
+        "examDate": {
+            "type": "string"
+        },
+        "instructor": {
+            "type": "string"
+        },
+        "secNumber": {
+            "type": "string"
+        },
+        "ExamDailyScheduleService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "end_date": {
+                            "type": "string"
+                        },
+                        "DAY_TEMP": {
+                            "type": "string"
+                        },
+                        "ROOM_NUMBER_TEMP": {
+                            "type": "string"
+                        },
+                        "date_time_begin_temp": {
+                            "type": "string"
+                        },
+                        "Season": {
+                            "type": "string"
+                        },
+                        "BUILDING_TEMP": {
+                            "type": "string"
+                        },
+                        "examDateInfo": {
+                            "items": {
+                                "properties": {
+                                    "examDate": {
+                                        "type": "string"
+                                    },
+                                    "examInfo": {
+                                        "items": {
+                                            "properties": {
+                                                "building": {
+                                                    "type": "string"
+                                                },
+                                                "time": {
+                                                    "type": "string"
+                                                },
+                                                "instructor": {
+                                                    "type": "string"
+                                                },
+                                                "secNumber": {
+                                                    "type": "string"
+                                                },
+                                                "secType": {
+                                                    "type": "string"
+                                                },
+                                                "totalEnrolled": {
+                                                    "type": "string"
+                                                },
+                                                "daysTaught": {
+                                                    "type": "string"
+                                                },
+                                                "transcriptTitle": {
+                                                    "type": "string"
+                                                },
+                                                "scheduleCode": {
+                                                    "type": "string"
+                                                },
+                                                "room": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "start_date": {
+                            "type": "string"
+                        },
+                        "DISPLAYYEARTERM_temp": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "ROOM_NUMBER_TEMP": {
+            "type": "string"
+        },
+        "totalEnrolled": {
+            "type": "string"
+        },
+        "Season": {
+            "type": "string"
+        },
+        "scheduleCode": {
+            "type": "string"
+        },
+        "examDateInfo": {
+            "items": {
+                "properties": {
+                    "examDate": {
+                        "type": "string"
+                    },
+                    "examInfo": {
+                        "items": {
+                            "properties": {
+                                "building": {
+                                    "type": "string"
+                                },
+                                "time": {
+                                    "type": "string"
+                                },
+                                "instructor": {
+                                    "type": "string"
+                                },
+                                "secNumber": {
+                                    "type": "string"
+                                },
+                                "secType": {
+                                    "type": "string"
+                                },
+                                "totalEnrolled": {
+                                    "type": "string"
+                                },
+                                "daysTaught": {
+                                    "type": "string"
+                                },
+                                "transcriptTitle": {
+                                    "type": "string"
+                                },
+                                "scheduleCode": {
+                                    "type": "string"
+                                },
+                                "room": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "DISPLAYYEARTERM_temp": {
+            "type": "string"
+        },
+        "response": {
+            "properties": {
+                "end_date": {
+                    "type": "string"
+                },
+                "DAY_TEMP": {
+                    "type": "string"
+                },
+                "ROOM_NUMBER_TEMP": {
+                    "type": "string"
+                },
+                "date_time_begin_temp": {
+                    "type": "string"
+                },
+                "Season": {
+                    "type": "string"
+                },
+                "BUILDING_TEMP": {
+                    "type": "string"
+                },
+                "examDateInfo": {
+                    "items": {
+                        "properties": {
+                            "examDate": {
+                                "type": "string"
+                            },
+                            "examInfo": {
+                                "items": {
+                                    "properties": {
+                                        "building": {
+                                            "type": "string"
+                                        },
+                                        "time": {
+                                            "type": "string"
+                                        },
+                                        "instructor": {
+                                            "type": "string"
+                                        },
+                                        "secNumber": {
+                                            "type": "string"
+                                        },
+                                        "secType": {
+                                            "type": "string"
+                                        },
+                                        "totalEnrolled": {
+                                            "type": "string"
+                                        },
+                                        "daysTaught": {
+                                            "type": "string"
+                                        },
+                                        "transcriptTitle": {
+                                            "type": "string"
+                                        },
+                                        "scheduleCode": {
+                                            "type": "string"
+                                        },
+                                        "room": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "start_date": {
+                    "type": "string"
+                },
+                "DISPLAYYEARTERM_temp": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "end_date": {
+            "type": "string"
+        },
+        "examInfo": {
+            "items": {
+                "properties": {
+                    "building": {
+                        "type": "string"
+                    },
+                    "time": {
+                        "type": "string"
+                    },
+                    "instructor": {
+                        "type": "string"
+                    },
+                    "secNumber": {
+                        "type": "string"
+                    },
+                    "secType": {
+                        "type": "string"
+                    },
+                    "totalEnrolled": {
+                        "type": "string"
+                    },
+                    "daysTaught": {
+                        "type": "string"
+                    },
+                    "transcriptTitle": {
+                        "type": "string"
+                    },
+                    "scheduleCode": {
+                        "type": "string"
+                    },
+                    "room": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "time": {
+            "type": "string"
+        },
+        "DAY_TEMP": {
+            "type": "string"
+        },
+        "secType": {
+            "type": "string"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "date_time_begin_temp": {
+            "type": "string"
+        },
+        "daysTaught": {
+            "type": "string"
+        },
+        "transcriptTitle": {
+            "type": "string"
+        },
+        "BUILDING_TEMP": {
+            "type": "string"
+        },
+        "start_date": {
+            "type": "string"
+        },
+        "room": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicClassScheduleExamDailySchedule",
+        "description": "This service gives the exam schedule for a selected year term including the options: exam building, exam begin time, exam room, and exam date.",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

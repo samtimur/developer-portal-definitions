@@ -1,0 +1,88 @@
+{
+    "paths": {
+        "/meeting/{meeting_id}/participants": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "List Meeting Particioants",
+                "tags": [
+                    "Meetings"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Zoom Meeting ID",
+                        "name": "meeting_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "zoom_prtcpnt_max_count": {
+                                    "example": 5,
+                                    "type": "integer"
+                                },
+                                "participants": {
+                                    "items": {
+                                        "example": {
+                                            "zoom_prtcpnt_leave_mtg_dtm": "2020-08-01T00:00:00",
+                                            "zoom_prtcpnt_join_mtg_dtm": "2020-08-01T00:00:00",
+                                            "net_id": "cosmo"
+                                        },
+                                        "properties": {
+                                            "zoom_prtcpnt_leave_mtg_dtm": {
+                                                "type": "string"
+                                            },
+                                            "zoom_prtcpnt_join_mtg_dtm": {
+                                                "type": "string"
+                                            },
+                                            "net_id": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "zoom_meeting_id": {
+                                    "example": "12345678910",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Meeting does not exist"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "ZoomAPI",
+        "version": "v1.0"
+    },
+    "basePath": "/domains/zoom/zoom-api/v1.0",
+    "host": "api.byu.edu:443"
+}

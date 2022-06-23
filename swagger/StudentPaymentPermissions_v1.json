@@ -1,0 +1,94 @@
+{
+    "basePath": "/domains/erp/sa/StudentPaymentPermissions/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/studentPaymentPermissions": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes student payment permissions in PeopleSoft student financials database.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "put": {
+                                    "items": {
+                                        "$ref": "#/definitions/studentPermissionModel"
+                                    },
+                                    "type": "array"
+                                },
+                                "delete": {
+                                    "items": {
+                                        "$ref": "#/definitions/studentPermissionModel"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Contains student payment permissions to add, update or delete in Peoplesoft student financials database.",
+                        "name": "studentPermissionsReqBody",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/responseModel"
+                        },
+                        "description": "Successfully deleted student payment permission(s) in PeopleSoft student financials database."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/responseModel"
+                        },
+                        "description": "Error occured.  Either payment permission(s) or byuid(s) do(es) not exist in PeopleSoft database."
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "responseObjModel": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "responseModel": {
+            "properties": {
+                "put": {
+                    "$ref": "#/definitions/responseObjModel"
+                },
+                "delete": {
+                    "$ref": "#/definitions/responseObjModel"
+                }
+            }
+        },
+        "studentPermissionModel": {
+            "properties": {
+                "payment_permission": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "StudentPaymentPermissions",
+        "description": "Creates/updates or deletes student payment permissions in PeopleSoft student financials database.",
+        "contact": {
+            "email": "sft_ft@byu.edu",
+            "name": "OIT StudentFinancial Applications"
+        },
+        "version": "v1"
+    }
+}

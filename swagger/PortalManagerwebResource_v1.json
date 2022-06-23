@@ -1,0 +1,180 @@
+{
+    "basePath": "/webResource/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Refresh the cached meta data for a web resource",
+                "x-throttling-tier": "Unlimited",
+                "description": "Refresh the web resource information from oracle system of record saving wso2 properties if present in the body of the request",
+                "parameters": [
+                    {
+                        "description": "Web resource id.",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/wso2"
+                        },
+                        "description": "Optional wso2 properties.",
+                        "name": "wso2",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "refreshWebResource"
+            },
+            "get": {
+                "x-auth-type": "Application",
+                "summary": "Get the cached meta data for a web resource",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get webResource by web resource id",
+                "parameters": [
+                    {
+                        "description": "Web resource id.",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getWebResource"
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete the cached meta data for a web resource",
+                "x-throttling-tier": "Unlimited",
+                "description": "Delete the web resource information - Oracle system of record information will not be deleted.",
+                "parameters": [
+                    {
+                        "description": "Web resource id.",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "deleteWebResource"
+            }
+        },
+        "/{id}/wso2": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Set the wso2 consumer key and secret for a given web resource",
+                "x-throttling-tier": "Unlimited",
+                "description": "Set the wso2 properites in the dynamo db for the web resource",
+                "parameters": [
+                    {
+                        "description": "Web resource id.",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/wso2"
+                        },
+                        "description": "Optional wso2 properties.",
+                        "name": "wso2",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "setWSO2"
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get just the wso2 consumer key and secret  for a given web resource",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the wso2 properties for the given web resource",
+                "parameters": [
+                    {
+                        "description": "Web resource id.",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getWSO2"
+            }
+        }
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "wso2": {
+            "properties": {
+                "consumerKey": {
+                    "type": "string"
+                },
+                "consumerSecret": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "consumerKey",
+                "consumerSecret"
+            ]
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "PortalManagerwebResource",
+        "description": "Meta data about managed web resources",
+        "version": "v1"
+    }
+}

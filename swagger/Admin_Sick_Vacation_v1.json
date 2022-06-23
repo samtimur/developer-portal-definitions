@@ -1,0 +1,648 @@
+{
+    "basePath": "/domains/erp/hr/Admin_Sick_Vacation/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/employees/{byu_id}": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Admin Sick/Vacation Entry",
+                "x-throttling-tier": "Unlimited",
+                "description": "Update sick/vacation hours taken for an administrative employee.",
+                "parameters": [
+                    {
+                        "pattern": "[0-9]{9}",
+                        "description": "The nine-digit computer-generated ID assigned to each identity in BYU-IAM, which is printed on the BYU ID Card in the format xx-xxx-xxxx and serves as a unique identifier",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/parameters"
+                        },
+                        "description": "Sick and Vacation Parameters",
+                        "name": "parameters",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/employee_leave_data"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "sick_balance": 4,
+                                "vacation_balance": 21.666674,
+                                "name": "employee, third",
+                                "byu_id": "333333333"
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error.",
+                        "examples": {
+                            "application/json": {
+                                "oneOf": [
+                                    {
+                                        "unreported_months": [
+                                            9,
+                                            10
+                                        ],
+                                        "error_message": "Employee has unreported months"
+                                    },
+                                    {
+                                        "error_message": "In order to have 0 hours taken, you must also indicate that you did not take any hours for that month in the no_sick_hours or no_vac_hours value."
+                                    },
+                                    {
+                                        "error_message": "byu_id is invalid"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "The person calling the web service does not have access to call it for the person specified in the path",
+                        "examples": {
+                            "application/json": {
+                                "error_message": "You cannot call this web service for this person"
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/employees/staff/{byu_id}": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Staff Sick/Vacation Entry",
+                "x-throttling-tier": "Unlimited",
+                "description": "Update sick/vacation hours taken for a staff employee.",
+                "parameters": [
+                    {
+                        "pattern": "[0-9]{9}",
+                        "description": "The nine-digit computer-generated ID assigned to each identity in BYU-IAM, which is printed on the BYU ID Card in the format xx-xxx-xxxx and serves as a unique identifier",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/unreported_dates"
+                        },
+                        "description": "Sick and Vacation Parameters",
+                        "name": "parameters",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/employee_leave_data"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "sick_balance": 4,
+                                "vacation_balance": 21.666674,
+                                "name": "employee, third",
+                                "byu_id": "333333333"
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error.",
+                        "examples": {
+                            "application/json": {
+                                "oneOf": [
+                                    {
+                                        "unreported_months": [
+                                            9,
+                                            10
+                                        ],
+                                        "error_message": "Employee has unreported months"
+                                    },
+                                    {
+                                        "error_message": "In order to have 0 hours taken, you must also indicate that you did not take any hours for that month in the no_sick_hours or no_vac_hours value."
+                                    },
+                                    {
+                                        "error_message": "byu_id is invalid"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "The person calling the web service does not have access to call it for the person specified in the path",
+                        "examples": {
+                            "application/json": {
+                                "error_message": "You cannot call this web service for this person"
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/employees": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Admin Sick/Vacation Summaries for a Department User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get sick/vacation unreported months or leave balances summaries",
+                "parameters": [
+                    {
+                        "pattern": "[0-9]{9}",
+                        "description": "Mutually exclusive with department_id. The nine-digit computer-generated ID assigned to each identity in BYU-IAM, which is printed on the BYU ID Card in the format xx-xxx-xxxx and serves as a unique identifier",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "pattern": "([a-zA-z] | [0-9]){4}",
+                        "description": "Mutually exclusive with byu_id. A four digit alphanumeric identifier that uniquely specifies a campus Department",
+                        "name": "department_id",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "If true, the historical and detailed leave balances of the employee will be returned; otherwise, a summary of the employee's current leave balances will be returned",
+                        "name": "include_historical",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "'Admin' will return only leave data for Administrative employees, while 'Staff' will return only leave data for Staff employees; not including this will return both Staff and Administrative employees",
+                        "name": "filter",
+                        "enum": [
+                            "Admin",
+                            "Staff"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/department_leave_data"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "oneOf": [
+                                    {
+                                        "employees": [
+                                            {
+                                                "unreported_months": [
+                                                    9,
+                                                    10
+                                                ],
+                                                "sick_balance": 154,
+                                                "vacation_balance": 22.66669,
+                                                "name": "employee, first",
+                                                "byu_id": "111111111"
+                                            },
+                                            {
+                                                "unreported_months": [
+                                                    10
+                                                ],
+                                                "sick_balance": 24,
+                                                "vacation_balance": 14.333334,
+                                                "name": "employee, second",
+                                                "byu_id": "222222222"
+                                            },
+                                            {
+                                                "sick_balance": 4,
+                                                "vacation_balance": 21.666674,
+                                                "name": "employee, third",
+                                                "byu_id": "333333333"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "unreported_months": [
+                                            9,
+                                            10
+                                        ],
+                                        "sick_balance": 4,
+                                        "vacation_balance": 21.666674,
+                                        "name": "employee, third",
+                                        "byu_id": "333333333"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "An error is shown if the query parameters are wrong, which could either be having both department_id and byu_id at the same time or not having either one of them that is valid.",
+                        "examples": {
+                            "application/json": {
+                                "oneOf": [
+                                    {
+                                        "error_message": "byu_id and deptid query parameters are mutually exclusive"
+                                    },
+                                    {
+                                        "error_message": "You must include a valid department_id or byu_id"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "An error will come up if the person calling the web service does not have access to see information for their department or for the person specified.",
+                        "examples": {
+                            "application/json": {
+                                "oneOf": [
+                                    {
+                                        "error_message": "You do not have permission to access information from this department"
+                                    },
+                                    {
+                                        "error_message": "You cannot call this web service for this person"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "covid_sick_amount": {
+            "description": "Amount of sick hours taken for the last month that are COVID-19 related.",
+            "type": "integer"
+        },
+        "department_leave_data": {
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/employee_leave_data"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "leave_data": {
+            "items": {
+                "$ref": "#/definitions/leave_entry"
+            },
+            "type": "array"
+        },
+        "sick_balance": {
+            "description": "The current balance of sick hours that an employee has available.",
+            "type": "number"
+        },
+        "vacation_balance": {
+            "description": "The current balance of vacation hours that an employee has available.",
+            "type": "number"
+        },
+        "covid_vacation_amount": {
+            "description": "Amount of vacation hours taken for the last month that are COVID-19 related.",
+            "type": "integer"
+        },
+        "name": {
+            "maxLength": 50,
+            "description": "The employee's name",
+            "type": "string"
+        },
+        "unreported_month": {
+            "properties": {
+                "no_sick_hours": {
+                    "$ref": "#/definitions/no_sick_hours"
+                },
+                "covid_sick_amount": {
+                    "$ref": "#/definitions/covid_sick_amount"
+                },
+                "covid_vacation_amount": {
+                    "$ref": "#/definitions/covid_vacation_amount"
+                },
+                "month": {
+                    "$ref": "#/definitions/month"
+                },
+                "vacation_amount": {
+                    "$ref": "#/definitions/vacation_amount"
+                },
+                "sick_amount": {
+                    "$ref": "#/definitions/sick_amount"
+                },
+                "no_vac_hours": {
+                    "$ref": "#/definitions/no_vac_hours"
+                }
+            }
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "type": "string"
+        },
+        "leave_entry": {
+            "properties": {
+                "covid_sick_amount": {
+                    "$ref": "#/definitions/covid_sick_amount"
+                },
+                "covid_vacation_amount": {
+                    "$ref": "#/definitions/covid_vacation_amount"
+                },
+                "date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "vacation_amount": {
+                    "$ref": "#/definitions/vacation_amount"
+                },
+                "sick_amount": {
+                    "$ref": "#/definitions/sick_amount"
+                }
+            },
+            "type": "object"
+        },
+        "parameters": {
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/unreported_month"
+                    },
+                    "type": "array"
+                },
+                "no_sick_hours": {
+                    "$ref": "#/definitions/no_sick_hours"
+                },
+                "covid_sick_amount": {
+                    "$ref": "#/definitions/covid_sick_amount"
+                },
+                "covid_vacation_amount": {
+                    "$ref": "#/definitions/covid_vacation_amount"
+                },
+                "vacation_amount": {
+                    "$ref": "#/definitions/vacation_amount"
+                },
+                "no_vac_hours": {
+                    "$ref": "#/definitions/no_vac_hours"
+                },
+                "sick_amount": {
+                    "$ref": "#/definitions/sick_amount"
+                }
+            },
+            "required": [
+                "sick_amount",
+                "no_sick_hours",
+                "vacation_amount",
+                "no_vac_hours",
+                "covid_sick_amount",
+                "covid_vacation_amount"
+            ]
+        },
+        "sick_amount": {
+            "description": "Amount of sick hours taken for the last month in whole numbers.",
+            "type": "integer"
+        },
+        "employee_leave_data": {
+            "properties": {
+                "sick_balance": {
+                    "$ref": "#/definitions/sick_balance"
+                },
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/unreported_months"
+                    },
+                    "type": "array"
+                },
+                "vacation_balance": {
+                    "$ref": "#/definitions/vacation_balance"
+                },
+                "name": {
+                    "$ref": "#/definitions/name"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                }
+            },
+            "required": [
+                "name",
+                "byu_id",
+                "sick_balance",
+                "vacation_balance"
+            ]
+        },
+        "unreported_months": {
+            "description": "The number corresponding to the month of the year for which the sick/vacation time will be entered",
+            "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12
+            ],
+            "type": "integer"
+        },
+        "error": {
+            "description": "error message",
+            "type": "string"
+        },
+        "no_sick_hours": {
+            "description": "A boolean value stating if the employee took zero sick hours for the month.",
+            "type": "boolean"
+        },
+        "unreported_dates": {
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/unreported_date"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "vacation_amount": {
+            "description": "Amount of vacation hours taken for the last month in whole numbers.",
+            "type": "integer"
+        },
+        "unreported_months_error": {
+            "items": {
+                "type": "number"
+            },
+            "description": "A summary of the unreported months that are preventing the employee from submitting time",
+            "type": "array"
+        },
+        "unreported_date": {
+            "properties": {
+                "no_sick_hours": {
+                    "$ref": "#/definitions/no_sick_hours"
+                },
+                "covid_sick_amount": {
+                    "$ref": "#/definitions/covid_sick_amount"
+                },
+                "covid_vacation_amount": {
+                    "$ref": "#/definitions/covid_vacation_amount"
+                },
+                "effective_date": {
+                    "$ref": "#/definitions/effective_date"
+                },
+                "vacation_amount": {
+                    "$ref": "#/definitions/vacation_amount"
+                },
+                "sick_amount": {
+                    "$ref": "#/definitions/sick_amount"
+                },
+                "no_vac_hours": {
+                    "$ref": "#/definitions/no_vac_hours"
+                }
+            }
+        },
+        "error_response": {
+            "properties": {
+                "unreported_months": {
+                    "$ref": "#/definitions/unreported_months_error"
+                },
+                "error_message": {
+                    "$ref": "#/definitions/error"
+                }
+            },
+            "required": [
+                "error_message"
+            ]
+        },
+        "historical_leave_data": {
+            "properties": {
+                "name": {
+                    "$ref": "#/definitions/name"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "leave_data": {
+                    "$ref": "#/definitions/leave_data"
+                }
+            },
+            "type": "object"
+        },
+        "month": {
+            "description": "The number corresponding to the month of the year for which the sick/vacation time will be entered",
+            "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12
+            ],
+            "type": "integer"
+        },
+        "effective_date": {
+            "description": "The date that the associated data is available and active.",
+            "format": "date",
+            "type": "string"
+        },
+        "no_vac_hours": {
+            "description": "A boolean value stating if the employee took zero vacation hours for the month.",
+            "type": "boolean"
+        }
+    },
+    "responses": {
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "500": {
+            "description": "Internal Server Error - Error occurred that wasn't the user's fault"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "Admin_Sick_Vacation",
+        "description": "Self-service web service to update sick and vacation time and returns balances for the calling user.",
+        "version": "v1"
+    }
+}

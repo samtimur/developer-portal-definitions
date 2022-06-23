@@ -1,0 +1,1236 @@
+{
+    "paths": {
+        "/admin/lockers": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Edit Multiple Lockers",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/MultipleLockerEditBody"
+                            },
+                            "type": "array"
+                        },
+                        "description": "All of the Locker information for a list of lockers",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/LockerInfo"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Info about the locker"
+                    }
+                }
+            },
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a Locker",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/LockerCreateBody"
+                        },
+                        "description": "All of the Locker information",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/LockerInfo"
+                        },
+                        "description": "Info about the locker"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a list of lockers",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Building ID",
+                        "name": "building_id",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Building Floor ID",
+                        "name": "building_floor_id",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Person ID of person currently assigned to",
+                        "name": "assigned_to",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Serial Number (or start of range)",
+                        "name": "serial_number",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "End of Range of Serial Numbers",
+                        "name": "serial_number_end",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Expiration Semester (YYYYT - eg 20181, 20184, 20185) or 'permament' to indicate it has no expiration",
+                        "name": "expiration_semester",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Displayed Locker Number (or start of range)",
+                        "name": "locker_number",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "End of Range of Displayed Locker Numbers",
+                        "name": "locker_number_end",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Locker Status",
+                        "name": "status",
+                        "enum": [
+                            "AVAILABLE",
+                            "MANAGED_BY_DEPT",
+                            "RENTED",
+                            "UNKNOWN",
+                            "FIXABLE",
+                            "NON_FIXABLE",
+                            "EXPIRED"
+                        ],
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Locker Tier",
+                        "name": "locker_tier",
+                        "enum": [
+                            "DEPT",
+                            "LOWER",
+                            "MIDDLE",
+                            "TALL",
+                            "UPPER"
+                        ],
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Locker Type ID",
+                        "name": "lock_type_id",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "GRO Group Restriction",
+                        "name": "gro_restriction",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Gender Restriction",
+                        "name": "gender_restriction",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Handle Type",
+                        "name": "handle_type_id",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/LockerInfo"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Info about the lockers"
+                    }
+                }
+            }
+        },
+        "/admin/lock_models/{serial_number}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Update Lock Model",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "SerialNumber",
+                        "name": "serial_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/LockModelCreateBody"
+                        },
+                        "description": "Which Lockers to Rotate",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/LockModelCreateBody"
+                        },
+                        "description": "Locker Combinations rotated"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get Lock Model",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Serial Number",
+                        "name": "serial_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/LockModel"
+                        },
+                        "description": "Info about Lock Model"
+                    }
+                }
+            }
+        },
+        "/admin/batch/expire": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Expire Lockers",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lockers Expired"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/admin/communications": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Send communications",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CommunicationRequest"
+                        },
+                        "description": "Information to make a communications request",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successfully sent communications"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get Past Communications",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Person ID",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CommunicationResponse"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Retrieved communications"
+                    }
+                }
+            }
+        },
+        "/admin/lock_models": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get Lock Models",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Serial Number Prefix",
+                        "name": "prefix",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/LockModel"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Info about Lock Model"
+                    }
+                }
+            }
+        },
+        "/admin/batch/rotate": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Rotate Lockers",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/RotationRequestBody"
+                        },
+                        "description": "Which Lockers to Rotate",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/RotationResponse"
+                        },
+                        "description": "Locker Combinations rotated"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/admin/locker_agreements": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get Locker Agreements",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Locker ID",
+                        "name": "locker_id",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Number Of Years of History",
+                        "name": "number_of_years",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Person ID of Agreement",
+                        "name": "assigned_to",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/LockerAgreement"
+                        },
+                        "description": "Locker Agreements"
+                    }
+                }
+            }
+        },
+        "/admin/semesters": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get Rental Semesters",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Semester Search Filter",
+                        "name": "search_filter",
+                        "enum": [
+                            "ASSIGNABLE",
+                            "SEARCHABLE"
+                        ],
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/RentalSemester"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Rental Semesters"
+                    }
+                }
+            }
+        },
+        "/admin/expiration_summary": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get Number of Expired Lockers by Building",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/LockerExpiration"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Number of Expired Lockers by Building"
+                    }
+                }
+            }
+        },
+        "/admin/buildings": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a list of all buildings",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Building"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Building Info"
+                    }
+                }
+            }
+        },
+        "/admin/communication_recipients": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get Communication Recipients",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Building ID",
+                        "name": "building_id",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Building Floor ID",
+                        "name": "building_floor_id",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Expiration Semester (YYYYT - eg 20181, 20184, 20185) or 'permament' to indicate it has no expiration",
+                        "name": "expiration_semester",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Displayed Locker Number (or start of range)",
+                        "name": "locker_number",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "End of Range of Displayed Locker Numbers",
+                        "name": "locker_number_end",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Person ID of person assigned to",
+                        "name": "assigned_to",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CommunicationRecipient"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Retrieved communication recipients"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "User Error"
+                    }
+                }
+            }
+        },
+        "/admin/lockers/{locker_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Update a Locker",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Locker ID",
+                        "name": "locker_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/LockerEditBody"
+                        },
+                        "description": "All of the Locker information",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/LockerInfo"
+                        },
+                        "description": "Info about the locker"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a locker by its id",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Locker ID",
+                        "name": "locker_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/LockerInfo"
+                        },
+                        "description": "Info about the locker"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/admin/communication_templates": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get Communication templates",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CommunicationTemplate"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Retrieved communication templates"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "HandleType": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "instructions": {
+                    "type": "string"
+                },
+                "video_url": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "RentalSemester": {
+            "properties": {
+                "expiration_date": {
+                    "type": "string"
+                },
+                "expiration_semester_description": {
+                    "type": "string"
+                },
+                "expiration_semester": {
+                    "type": "string"
+                }
+            }
+        },
+        "LockerAgreement": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "agreement_date_time": {
+                    "type": "string"
+                },
+                "date_time_changed": {
+                    "type": "string"
+                },
+                "locker_id": {
+                    "type": "integer"
+                },
+                "expiration_date_time": {
+                    "type": "string"
+                },
+                "expiration_semester": {
+                    "type": "string"
+                }
+            }
+        },
+        "CommunicationRequest": {
+            "properties": {
+                "body": {
+                    "type": "string"
+                },
+                "recipients": {
+                    "items": {
+                        "$ref": "#/definitions/CommunicationRecipient"
+                    },
+                    "type": "array"
+                },
+                "test_email": {
+                    "type": "string"
+                },
+                "subject": {
+                    "type": "string"
+                }
+            }
+        },
+        "LockerInfo": {
+            "properties": {
+                "gender_restriction": {
+                    "type": "string"
+                },
+                "lock_model": {
+                    "$ref": "#/definitions/LockModel"
+                },
+                "building_id": {
+                    "type": "integer"
+                },
+                "date_time_combination_set": {
+                    "type": "string"
+                },
+                "locker_size_code": {
+                    "type": "string"
+                },
+                "building_floor_id": {
+                    "type": "integer"
+                },
+                "building_floor": {
+                    "$ref": "#/definitions/BuildingFloor"
+                },
+                "handle_type": {
+                    "$ref": "#/definitions/HandleType"
+                },
+                "gro_restriction": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "combination_set_by": {
+                    "type": "string"
+                },
+                "expiration_date_time": {
+                    "type": "string"
+                },
+                "damage_notes": {
+                    "type": "string"
+                },
+                "displayed_locker_number": {
+                    "type": "string"
+                },
+                "expiration_semester": {
+                    "type": "string"
+                },
+                "lock_type": {
+                    "$ref": "#/definitions/LockType"
+                },
+                "building": {
+                    "$ref": "#/definitions/Building"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "serial_number": {
+                    "type": "string"
+                },
+                "assigned_to": {
+                    "type": "string"
+                },
+                "agreement_date_time": {
+                    "type": "string"
+                },
+                "locker_tier": {
+                    "type": "string"
+                },
+                "combination_index": {
+                    "type": "integer"
+                },
+                "sort_key": {
+                    "type": "integer"
+                },
+                "notes": {
+                    "type": "string"
+                }
+            }
+        },
+        "LockerEditBody": {
+            "properties": {
+                "gender_restriction": {
+                    "type": "string"
+                },
+                "building_id": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "locker_size_code": {
+                    "type": "string"
+                },
+                "date_time_combination_set": {
+                    "type": "string"
+                },
+                "building_floor_id": {
+                    "type": "integer"
+                },
+                "gro_restriction": {
+                    "type": "string"
+                },
+                "serial_number": {
+                    "type": "string"
+                },
+                "assigned_to": {
+                    "type": "string"
+                },
+                "locker_tier": {
+                    "type": "string"
+                },
+                "combination_index": {
+                    "type": "integer"
+                },
+                "combination_set_by": {
+                    "type": "string"
+                },
+                "sort_key": {
+                    "type": "integer"
+                },
+                "handle_type_id": {
+                    "type": "integer"
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "damage_notes": {
+                    "type": "string"
+                },
+                "lock_type_id": {
+                    "type": "integer"
+                },
+                "displayed_locker_number": {
+                    "type": "string"
+                },
+                "expiration_semester": {
+                    "type": "string"
+                }
+            }
+        },
+        "Building": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "entrance_description": {
+                    "type": "string"
+                },
+                "acronym": {
+                    "type": "string"
+                },
+                "floors": {
+                    "items": {
+                        "$ref": "#/definitions/BuildingFloor"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "locker_sizes": {
+                    "items": {
+                        "$ref": "#/definitions/BuildingLockerSize"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "LockModelCreateBody": {
+            "properties": {
+                "master_key": {
+                    "type": "string"
+                },
+                "dial_code": {
+                    "type": "string"
+                },
+                "combination2": {
+                    "type": "string"
+                },
+                "combination1": {
+                    "type": "string"
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "combination5": {
+                    "type": "string"
+                },
+                "combination4": {
+                    "type": "string"
+                },
+                "combination3": {
+                    "type": "string"
+                }
+            }
+        },
+        "MultipleLockerEditBody": {
+            "properties": {
+                "gender_restriction": {
+                    "type": "string"
+                },
+                "building_id": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "locker_size_code": {
+                    "type": "string"
+                },
+                "date_time_combination_set": {
+                    "type": "string"
+                },
+                "building_floor_id": {
+                    "type": "integer"
+                },
+                "gro_restriction": {
+                    "type": "string"
+                },
+                "serial_number": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "locker_tier": {
+                    "type": "string"
+                },
+                "combination_index": {
+                    "type": "integer"
+                },
+                "sort_key": {
+                    "type": "integer"
+                },
+                "combination_set_by": {
+                    "type": "string"
+                },
+                "handle_type_id": {
+                    "type": "integer"
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "damage_notes": {
+                    "type": "string"
+                },
+                "lock_type_id": {
+                    "type": "integer"
+                },
+                "displayed_locker_number": {
+                    "type": "string"
+                }
+            }
+        },
+        "BuildingLockerSize": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "building_id": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "integer"
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "depth": {
+                    "type": "integer"
+                },
+                "locker_size": {
+                    "type": "string"
+                }
+            }
+        },
+        "CommunicationResponse": {
+            "properties": {
+                "body": {
+                    "type": "string"
+                },
+                "date_time_sent": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "communication_id": {
+                    "type": "integer"
+                },
+                "email_address": {
+                    "type": "string"
+                }
+            }
+        },
+        "Error": {
+            "properties": {
+                "debug_message": {
+                    "type": "string"
+                },
+                "readable_message": {
+                    "type": "string"
+                }
+            }
+        },
+        "RotationResponse": {
+            "properties": {
+                "number_rotated": {
+                    "type": "integer"
+                }
+            }
+        },
+        "RotationRequestBody": {
+            "properties": {
+                "building_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "CommunicationRecipient": {
+            "properties": {
+                "locker_number": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "building_acronym": {
+                    "type": "string"
+                },
+                "locker_owner_byu_id": {
+                    "type": "string"
+                },
+                "email_address": {
+                    "type": "string"
+                },
+                "locker_owner_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "LockModel": {
+            "properties": {
+                "master_key": {
+                    "type": "string"
+                },
+                "dial_code": {
+                    "type": "string"
+                },
+                "combination2": {
+                    "type": "string"
+                },
+                "combination1": {
+                    "type": "string"
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "combination5": {
+                    "type": "string"
+                },
+                "combination4": {
+                    "type": "string"
+                },
+                "serial_number": {
+                    "type": "string"
+                },
+                "combination3": {
+                    "type": "string"
+                }
+            }
+        },
+        "LockerCreateBody": {
+            "properties": {
+                "gender_restriction": {
+                    "type": "string"
+                },
+                "building_id": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "locker_size_code": {
+                    "type": "string"
+                },
+                "date_time_combination_set": {
+                    "type": "string"
+                },
+                "building_floor_id": {
+                    "type": "integer"
+                },
+                "gro_restriction": {
+                    "type": "string"
+                },
+                "serial_number": {
+                    "type": "string"
+                },
+                "locker_tier": {
+                    "type": "string"
+                },
+                "combination_index": {
+                    "type": "integer"
+                },
+                "combination_set_by": {
+                    "type": "string"
+                },
+                "sort_key": {
+                    "type": "integer"
+                },
+                "handle_type_id": {
+                    "type": "integer"
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "damage_notes": {
+                    "type": "string"
+                },
+                "lock_type_id": {
+                    "type": "integer"
+                },
+                "displayed_locker_number": {
+                    "type": "string"
+                }
+            }
+        },
+        "LockerExpiration": {
+            "properties": {
+                "building_id": {
+                    "type": "integer"
+                },
+                "number_expired": {
+                    "type": "integer"
+                }
+            }
+        },
+        "BuildingFloor": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "entrance_level_floor": {
+                    "type": "boolean"
+                },
+                "building_id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "map_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "CommunicationTemplate": {
+            "properties": {
+                "body": {
+                    "type": "string"
+                },
+                "template_name": {
+                    "type": "string"
+                },
+                "template_description": {
+                    "type": "string"
+                },
+                "subject": {
+                    "type": "string"
+                }
+            }
+        },
+        "LockType": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "LockerRental",
+        "description": "Api to get info about and to rent lockers on campus",
+        "version": "v2"
+    },
+    "basePath": "/domains/locker-rental/v2",
+    "host": "api.byu.edu:443"
+}

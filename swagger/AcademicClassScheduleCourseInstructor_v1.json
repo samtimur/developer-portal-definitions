@@ -1,0 +1,361 @@
+{
+    "basePath": "/domains/legacy/academic/classschedule/courseinstructor/v1",
+    "x-mock_json": {
+        "CourseInstructorService": {
+            "response": {
+                "instructor_list": [
+                    {
+                        "person_id": "123456789",
+                        "preferred_first_name": "Curtis",
+                        "instructor_type": "PRIMARY",
+                        "sort_name": "Child, Curtis D"
+                    }
+                ],
+                "title_code": "006",
+                "curriculum_id": "05144"
+            },
+            "request": {
+                "status": 200,
+                "resource": "/20171/05144/006",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        }
+    },
+    "paths": {
+        "/{year_term}/{curriculum_id}/{title_code}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "instructorlist"
+                ],
+                "summary": "Instructor list for a specific course",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "The year term of the course, up to 4 year terms may be entered",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The curriculum_id of the course",
+                        "name": "curriculum_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The title code of the course",
+                        "name": "title_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "instructor_list": {
+                                            "items": {
+                                                "properties": {
+                                                    "person_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "preferred_first_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "instructor_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "sort_name": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "title_code": {
+                                            "type": "string"
+                                        },
+                                        "curriculum_id": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Expected response to a valid request",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "instructor_list": [
+                                        {
+                                            "person_id": "123456789",
+                                            "preferred_first_name": "Curtis",
+                                            "instructor_type": "PRIMARY",
+                                            "sort_name": "Child, Curtis D"
+                                        }
+                                    ],
+                                    "title_code": "006",
+                                    "curriculum_id": "05144"
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/20171/05144/006",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getCourseInstructorList"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "response": {
+            "properties": {
+                "instructor_list": {
+                    "items": {
+                        "properties": {
+                            "person_id": {
+                                "type": "string"
+                            },
+                            "preferred_first_name": {
+                                "type": "string"
+                            },
+                            "instructor_type": {
+                                "type": "string"
+                            },
+                            "sort_name": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "title_code": {
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "instructor_list": {
+            "items": {
+                "properties": {
+                    "person_id": {
+                        "type": "string"
+                    },
+                    "preferred_first_name": {
+                        "type": "string"
+                    },
+                    "instructor_type": {
+                        "type": "string"
+                    },
+                    "sort_name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "person_id": {
+            "type": "string"
+        },
+        "title_code": {
+            "type": "string"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "integer"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "curriculum_id": {
+            "type": "string"
+        },
+        "preferred_first_name": {
+            "type": "string"
+        },
+        "instructor_type": {
+            "type": "string"
+        },
+        "instructor_data": {
+            "properties": {
+                "person_id": {
+                    "type": "string"
+                },
+                "preferred_first_name": {
+                    "type": "string"
+                },
+                "instructor_type": {
+                    "type": "string"
+                },
+                "sort_name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CourseInstructorService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "instructor_list": {
+                            "items": {
+                                "properties": {
+                                    "person_id": {
+                                        "type": "string"
+                                    },
+                                    "preferred_first_name": {
+                                        "type": "string"
+                                    },
+                                    "instructor_type": {
+                                        "type": "string"
+                                    },
+                                    "sort_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "title_code": {
+                            "type": "string"
+                        },
+                        "curriculum_id": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "integer"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "sort_name": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicClassScheduleCourseInstructor",
+        "description": "List of Instructors for a Course",
+        "license": {
+            "name": "Apache-2.0"
+        },
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

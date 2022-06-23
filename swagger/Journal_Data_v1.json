@@ -1,0 +1,165 @@
+{
+    "basePath": "/domains/erp/fs/journal_data/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/jrnls": {
+            "get": {
+                "tags": [
+                    "journal"
+                ],
+                "summary": "Returns all posted journals in specified month/year",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all cleared journals in specified month",
+                "parameters": [
+                    {
+                        "description": "Date with month and year of desired journals, day does not matter",
+                        "name": "root_deptid",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "pattern": "yyyy-MM-dd",
+                        "description": "Start date of desired date range for journals (yyyy-MM-dd)",
+                        "name": "start_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "pattern": "yyyy-MM-dd",
+                        "description": "End date of desired date range for journals (yyyy-MM-dd)",
+                        "name": "end_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Can be budgets or actuals",
+                        "name": "ledger_group",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "journals": {
+                                    "items": {
+                                        "properties": {
+                                            "lines": {
+                                                "items": {
+                                                    "properties": {
+                                                        "journal_line": {
+                                                            "type": "string"
+                                                        },
+                                                        "journal_line_date": {
+                                                            "type": "string"
+                                                        },
+                                                        "journal_line_reference": {
+                                                            "type": "string"
+                                                        },
+                                                        "account_field": {
+                                                            "type": "string"
+                                                        },
+                                                        "class_field": {
+                                                            "type": "string"
+                                                        },
+                                                        "payment_amount": {
+                                                            "type": "string"
+                                                        },
+                                                        "journal_line_description": {
+                                                            "type": "string"
+                                                        },
+                                                        "operating_unit": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "header": {
+                                                "properties": {
+                                                    "peoplesoft_business_unit": {
+                                                        "type": "string"
+                                                    },
+                                                    "header_description": {
+                                                        "type": "string"
+                                                    },
+                                                    "journal_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "journal_ledger": {
+                                                        "type": "string"
+                                                    },
+                                                    "journal_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "journal_source": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "journal_id",
+                                                    "journal_date",
+                                                    "ledger_group",
+                                                    "description",
+                                                    "journal_source",
+                                                    "peoplesoft_business_unit"
+                                                ]
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "Invalid date. Please format date as yyyy-mm-dd",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Incorrect date format"
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "A journal with that ID (0123456789) and date(01011990) not found.",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Journals not found"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "Journal_Data",
+        "description": "Retrieves Journal Header and line information",
+        "version": "v1"
+    }
+}

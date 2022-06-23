@@ -1,0 +1,1014 @@
+{
+    "basePath": "/domains/legacy/academic/registration/classavailable/v1",
+    "x-mock_json": {
+        "ClassAvailableService": {
+            "response": {
+                "class_count": "1",
+                "class_list": [
+                    {
+                        "seats_available": "24",
+                        "section_number": "001",
+                        "waitlist_available": "Yes",
+                        "course_title": "Quantitative Reasoning",
+                        "title_code": "000",
+                        "catalog_number": "102",
+                        "class_size": "30",
+                        "curriculum_id": "10975",
+                        "waitlist_size": "0",
+                        "dept_name": "MATH",
+                        "credit_hours": "3.0"
+                    }
+                ]
+            },
+            "request": {
+                "status": 200,
+                "resource": "/20183/10975000001",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation"
+            }
+        },
+        "/availability": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get class availability",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get class availability",
+                "parameters": [
+                    {
+                        "description": "5 digit year/term",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "comma delimited list of classes where a class is defined by XXXXXYYYZZZ where XXXXX is a 5 digit curriculum_id, YYY is a 3 digit title code and ZZZ is a 3 digit section number",
+                        "name": "class_list",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Server Error"
+                    },
+                    "502": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Unable to contact server"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get class availability",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get class availability",
+                "parameters": [
+                    {
+                        "description": "5 digit year/term",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "comma delimited list of classes where a class is defined by XXXXXYYYZZZ where XXXXX is a 5 digit curriculum_id, YYY is a 3 digit title code and ZZZ is a 3 digit section number",
+                        "name": "class_list",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "class_count": {
+                                            "type": "string"
+                                        },
+                                        "class_list": {
+                                            "items": {
+                                                "properties": {
+                                                    "seats_available": {
+                                                        "type": "string"
+                                                    },
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "waitlist_available": {
+                                                        "type": "string"
+                                                    },
+                                                    "course_title": {
+                                                        "type": "string"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_size": {
+                                                        "type": "string"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "waitlist_size": {
+                                                        "type": "string"
+                                                    },
+                                                    "dept_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "class_count": "1",
+                                    "class_list": [
+                                        {
+                                            "seats_available": "24",
+                                            "section_number": "001",
+                                            "waitlist_available": "Yes",
+                                            "course_title": "Quantitative Reasoning",
+                                            "title_code": "000",
+                                            "catalog_number": "102",
+                                            "class_size": "30",
+                                            "curriculum_id": "10975",
+                                            "waitlist_size": "0",
+                                            "dept_name": "MATH",
+                                            "credit_hours": "3.0"
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/20183/10975000001",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Server Error"
+                    },
+                    "502": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Unable to contact server"
+                    }
+                }
+            }
+        },
+        "/avail/{year_term}/{class_list}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get class availability",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get class availability",
+                "parameters": [
+                    {
+                        "description": "5 digit year/term",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "comma delimited list of classes where a class is defined by XXXXXYYYZZZ where XXXXX is a 5 digit curriculum_id, YYY is a 3 digit title code and ZZZ is a 3 digit section number",
+                        "name": "class_list",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "class_count": {
+                                            "type": "string"
+                                        },
+                                        "class_list": {
+                                            "items": {
+                                                "properties": {
+                                                    "seats_available": {
+                                                        "type": "string"
+                                                    },
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "waitlist_available": {
+                                                        "type": "string"
+                                                    },
+                                                    "course_title": {
+                                                        "type": "string"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_size": {
+                                                        "type": "string"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "waitlist_size": {
+                                                        "type": "string"
+                                                    },
+                                                    "dept_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "class_count": "1",
+                                    "class_list": [
+                                        {
+                                            "seats_available": "24",
+                                            "section_number": "001",
+                                            "waitlist_available": "Yes",
+                                            "course_title": "Quantitative Reasoning",
+                                            "title_code": "000",
+                                            "catalog_number": "102",
+                                            "class_size": "30",
+                                            "curriculum_id": "10975",
+                                            "waitlist_size": "0",
+                                            "dept_name": "MATH",
+                                            "credit_hours": "3.0"
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/20183/10975000001",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Server Error"
+                    },
+                    "502": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Unable to contact server"
+                    }
+                }
+            }
+        },
+        "/availability/{year_term}/{class_list}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get class availability",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get class availability",
+                "parameters": [
+                    {
+                        "description": "5 digit year/term",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "comma delimited list of classes where a class is defined by XXXXXYYYZZZ where XXXXX is a 5 digit curriculum_id, YYY is a 3 digit title code and ZZZ is a 3 digit section number",
+                        "name": "class_list",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "class_count": {
+                                            "type": "string"
+                                        },
+                                        "class_list": {
+                                            "items": {
+                                                "properties": {
+                                                    "seats_available": {
+                                                        "type": "string"
+                                                    },
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "waitlist_available": {
+                                                        "type": "string"
+                                                    },
+                                                    "course_title": {
+                                                        "type": "string"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_size": {
+                                                        "type": "string"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "waitlist_size": {
+                                                        "type": "string"
+                                                    },
+                                                    "dept_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "class_count": "1",
+                                    "class_list": [
+                                        {
+                                            "seats_available": "24",
+                                            "section_number": "001",
+                                            "waitlist_available": "Yes",
+                                            "course_title": "Quantitative Reasoning",
+                                            "title_code": "000",
+                                            "catalog_number": "102",
+                                            "class_size": "30",
+                                            "curriculum_id": "10975",
+                                            "waitlist_size": "0",
+                                            "dept_name": "MATH",
+                                            "credit_hours": "3.0"
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/20183/10975000001",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Server Error"
+                    },
+                    "502": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Unable to contact server"
+                    }
+                }
+            }
+        },
+        "/{year_term}/{class_list}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get class availability",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get class availability",
+                "parameters": [
+                    {
+                        "description": "5 digit year/term",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "comma delimited list of classes where a class is defined by XXXXXYYYZZZ where XXXXX is a 5 digit curriculum_id, YYY is a 3 digit title code and ZZZ is a 3 digit section number",
+                        "name": "class_list",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "class_count": {
+                                            "type": "string"
+                                        },
+                                        "class_list": {
+                                            "items": {
+                                                "properties": {
+                                                    "seats_available": {
+                                                        "type": "string"
+                                                    },
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "waitlist_available": {
+                                                        "type": "string"
+                                                    },
+                                                    "course_title": {
+                                                        "type": "string"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_size": {
+                                                        "type": "string"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "waitlist_size": {
+                                                        "type": "string"
+                                                    },
+                                                    "dept_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "class_count": "1",
+                                    "class_list": [
+                                        {
+                                            "seats_available": "24",
+                                            "section_number": "001",
+                                            "waitlist_available": "Yes",
+                                            "course_title": "Quantitative Reasoning",
+                                            "title_code": "000",
+                                            "catalog_number": "102",
+                                            "class_size": "30",
+                                            "curriculum_id": "10975",
+                                            "waitlist_size": "0",
+                                            "dept_name": "MATH",
+                                            "credit_hours": "3.0"
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/20183/10975000001",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Server Error"
+                    },
+                    "502": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Unable to contact server"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "section_number": {
+            "type": "string"
+        },
+        "class_count": {
+            "type": "string"
+        },
+        "ClassAvailableService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "class_count": {
+                            "type": "string"
+                        },
+                        "class_list": {
+                            "items": {
+                                "properties": {
+                                    "seats_available": {
+                                        "type": "string"
+                                    },
+                                    "section_number": {
+                                        "type": "string"
+                                    },
+                                    "waitlist_available": {
+                                        "type": "string"
+                                    },
+                                    "course_title": {
+                                        "type": "string"
+                                    },
+                                    "title_code": {
+                                        "type": "string"
+                                    },
+                                    "catalog_number": {
+                                        "type": "string"
+                                    },
+                                    "class_size": {
+                                        "type": "string"
+                                    },
+                                    "curriculum_id": {
+                                        "type": "string"
+                                    },
+                                    "waitlist_size": {
+                                        "type": "string"
+                                    },
+                                    "dept_name": {
+                                        "type": "string"
+                                    },
+                                    "credit_hours": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "class_size": {
+            "type": "string"
+        },
+        "catalog_number": {
+            "type": "string"
+        },
+        "dept_name": {
+            "type": "string"
+        },
+        "class_list": {
+            "items": {
+                "properties": {
+                    "seats_available": {
+                        "type": "string"
+                    },
+                    "section_number": {
+                        "type": "string"
+                    },
+                    "waitlist_available": {
+                        "type": "string"
+                    },
+                    "course_title": {
+                        "type": "string"
+                    },
+                    "title_code": {
+                        "type": "string"
+                    },
+                    "catalog_number": {
+                        "type": "string"
+                    },
+                    "class_size": {
+                        "type": "string"
+                    },
+                    "curriculum_id": {
+                        "type": "string"
+                    },
+                    "waitlist_size": {
+                        "type": "string"
+                    },
+                    "dept_name": {
+                        "type": "string"
+                    },
+                    "credit_hours": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "credit_hours": {
+            "type": "string"
+        },
+        "seats_available": {
+            "type": "string"
+        },
+        "response": {
+            "properties": {
+                "class_count": {
+                    "type": "string"
+                },
+                "class_list": {
+                    "items": {
+                        "properties": {
+                            "seats_available": {
+                                "type": "string"
+                            },
+                            "section_number": {
+                                "type": "string"
+                            },
+                            "waitlist_available": {
+                                "type": "string"
+                            },
+                            "course_title": {
+                                "type": "string"
+                            },
+                            "title_code": {
+                                "type": "string"
+                            },
+                            "catalog_number": {
+                                "type": "string"
+                            },
+                            "class_size": {
+                                "type": "string"
+                            },
+                            "curriculum_id": {
+                                "type": "string"
+                            },
+                            "waitlist_size": {
+                                "type": "string"
+                            },
+                            "dept_name": {
+                                "type": "string"
+                            },
+                            "credit_hours": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "waitlist_available": {
+            "type": "string"
+        },
+        "course_title": {
+            "type": "string"
+        },
+        "title_code": {
+            "type": "string"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "curriculum_id": {
+            "type": "string"
+        },
+        "waitlist_size": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicRegistrationClassAvailable",
+        "description": "This service returns registration information about each class such as the number of students registered, the maximum number of students for the class, if a wait list is available, and the size of the wait list.",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/Class_Available_v1.0"
+    }
+}

@@ -1,0 +1,127 @@
+{
+    "basePath": "/domains/erp/fs/class_field/v1",
+    "tags": [
+        {
+            "description": "Retrieve classes from PeopleSoft",
+            "name": "class_field"
+        }
+    ],
+    "paths": {
+        "/non_active_classes": {
+            "get": {
+                "tags": [
+                    "classes"
+                ],
+                "summary": "Returns all NON active classes from specified date to present",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all NON active classes from specified date to present",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The desired date as yyyy-MM-dd",
+                        "name": "non_active_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/classes"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid date. Please format as yyyy-MM-dd"
+                    },
+                    "404": {
+                        "description": "Operating unit not found or is not active"
+                    }
+                }
+            }
+        },
+        "/classes": {
+            "get": {
+                "tags": [
+                    "Get all classes"
+                ],
+                "summary": "Returns all active classes",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all active classes",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/classes"
+                        },
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "No classes found"
+                    }
+                },
+                "operationId": "getClasses"
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "classes": {
+            "xml": {
+                "name": "Classes"
+            },
+            "properties": {
+                "classes": {
+                    "items": {
+                        "properties": {
+                            "chart_field_effective_date": {
+                                "type": "string"
+                            },
+                            "chart_field_effective_status": {
+                                "type": "string"
+                            },
+                            "class_field": {
+                                "type": "string"
+                            },
+                            "class_field_description": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "ValidationResponse": {
+            "properties": {
+                "validation_response": {
+                    "items": {
+                        "properties": {
+                            "message": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "class_field",
+        "description": "Retrive classes from PeopleSoft",
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443"
+}

@@ -1,0 +1,219 @@
+{
+    "paths": {
+        "/mfc_payments": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Start a payment invoice for the authenticated user",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/chargesWrapper"
+                        },
+                        "description": "The list of charges to pay for as well as a flag designating if the payment is going to be made with a credit card",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/invoiceInfo"
+                        },
+                        "description": "Invoice Information"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/exceptionInfo"
+                        },
+                        "description": "Exception Info"
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/exceptionInfo"
+                        },
+                        "description": "Exception Info"
+                    },
+                    "503": {
+                        "schema": {
+                            "$ref": "#/definitions/exceptionInfo"
+                        },
+                        "description": "Exception Info"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all historic payments for the authenticated user",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/payment"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of historic payments"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/exceptionInfo"
+                        },
+                        "description": "Exception Info"
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/exceptionInfo"
+                        },
+                        "description": "Exception Info"
+                    }
+                }
+            }
+        },
+        "/mfc_unpaid_charges": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all unpaid charges for the authenticated user",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/charge"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of unpaid charges"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/exceptionInfo"
+                        },
+                        "description": "Exception Info"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/exceptionInfo"
+                        },
+                        "description": "Exception Info - Realtime Calculation Started/Running"
+                    },
+                    "418": {
+                        "schema": {
+                            "$ref": "#/definitions/exceptionInfo"
+                        },
+                        "description": "Exception Info - Realtime Calculation Error"
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/exceptionInfo"
+                        },
+                        "description": "Exception Info"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "exceptionInfo": {
+            "properties": {
+                "user_message": {
+                    "type": "string"
+                },
+                "technical_error": {
+                    "type": "string"
+                }
+            }
+        },
+        "charge": {
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "due_date": {
+                    "type": "string"
+                },
+                "line_item_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "payment": {
+            "properties": {
+                "total_amount": {
+                    "type": "number"
+                },
+                "payment_date": {
+                    "type": "string"
+                },
+                "paid_charges": {
+                    "items": {
+                        "$ref": "#/definitions/charge"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "payment_date",
+                "total_amount",
+                "paid_charges"
+            ]
+        },
+        "chargesWrapper": {
+            "properties": {
+                "charges": {
+                    "items": {
+                        "$ref": "#/definitions/charge"
+                    },
+                    "type": "array"
+                },
+                "is_credit_card": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "is_credit_card",
+                "charges"
+            ]
+        },
+        "invoiceInfo": {
+            "properties": {
+                "credit_card_fee": {
+                    "type": "number"
+                },
+                "invoice_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "MfcServices",
+        "description": "Self Service Web Services for My Financial Center No chunking",
+        "version": "v1"
+    },
+    "basePath": "/domains/erp/sa/mfc_services/v1",
+    "host": "api.byu.edu:443"
+}

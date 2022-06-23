@@ -1,0 +1,632 @@
+{
+    "basePath": "/domains/cougar-cash/v1.1",
+    "tags": [
+        {
+            "name": "Cardholder"
+        },
+        {
+            "name": "Deposits"
+        },
+        {
+            "name": "TransactionEvents"
+        }
+    ],
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/balance": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Cardholder"
+                ],
+                "summary": "Get a user's account balance",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deprecated. All functionality has been replaced by the /balance/${byuId} endpoint.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "default": false,
+                        "name": "testing",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Balance"
+                        },
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "No Cougar Cash account found"
+                    }
+                },
+                "operationId": "getBalanceDeprecated"
+            }
+        },
+        "/balance/{byuId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Cardholder"
+                ],
+                "summary": "Get a user's account balance",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The BYU ID.",
+                        "name": "byuId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Balance"
+                        },
+                        "description": "successful operation"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "No Cougar Cash account found"
+                    }
+                },
+                "operationId": "getBalance"
+            }
+        },
+        "/card/found": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Cardholder"
+                ],
+                "summary": "Report a card as found",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "default": false,
+                        "name": "testing",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "No card found for BYU ID"
+                    }
+                },
+                "operationId": "reportCardFound"
+            }
+        },
+        "/payment": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Deposits"
+                ],
+                "summary": "Start a deposit process",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/StartPaymentInput"
+                        },
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "default": false,
+                        "name": "testing",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/StartPaymentOutput"
+                        },
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "No Cougar Cash account found for BYU ID"
+                    }
+                },
+                "operationId": "startPayment"
+            }
+        },
+        "/system/transaction-events": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "TransactionEvents"
+                ],
+                "summary": "Get a user's account balance",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/TransactionEvent"
+                            },
+                            "type": "array"
+                        },
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Balance"
+                        },
+                        "description": "successful operation"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "operationId": "addEvents"
+            }
+        },
+        "/payment-types": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Deposits"
+                ],
+                "summary": "List the user's payment options",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "default": false,
+                        "name": "testing",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/PaymentTypesWrapper"
+                        },
+                        "description": "successful operation"
+                    },
+                    "500": {
+                        "description": "Unable to get payment types from Payment Manager"
+                    }
+                },
+                "operationId": "getPaymentTypes"
+            }
+        },
+        "/card": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Cardholder"
+                ],
+                "summary": "Report a card as lost",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "default": true,
+                        "name": "testing",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "No card found for BYU ID"
+                    }
+                },
+                "operationId": "reportCardLost"
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Cardholder"
+                ],
+                "summary": "Check if the card has been marked as lost",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "default": false,
+                        "name": "testing",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CardLost"
+                        },
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "No card found for byuId"
+                    }
+                },
+                "operationId": "isCardLost"
+            }
+        },
+        "/payment/{invoiceid}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Deposits"
+                ],
+                "summary": "Finish a deposit process",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "invoiceid",
+                        "format": "int64",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/PayInput"
+                        },
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "default": false,
+                        "name": "testing",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Balance"
+                        },
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "No Cougar Cash account found for BYU ID"
+                    }
+                },
+                "operationId": "pay"
+            }
+        },
+        "/transactions": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Cardholder"
+                ],
+                "summary": "List the user's transactions",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "begin_date_time",
+                        "format": "date",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "end_date_time",
+                        "format": "date",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "name": "testing",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TransactionList"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "begin_date_time is after end_date_time"
+                    }
+                },
+                "operationId": "viewTransactions"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "TransactionEvent": {
+            "properties": {
+                "amount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "account_id": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CardLost": {
+            "properties": {
+                "card_lost": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "PayInput": {
+            "properties": {
+                "payment_type_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PaymentType": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "munged_account_num": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "minimum": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "maximum": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "financial_institution": {
+                    "type": "string"
+                },
+                "min_fee": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "fee_percent": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "account_type": {
+                    "$ref": "#/definitions/PaymentAccountType"
+                }
+            },
+            "type": "object"
+        },
+        "PaymentAccountType": {
+            "enum": [
+                "CREDIT_CARD",
+                "BANK_ACCOUNT"
+            ],
+            "type": "string"
+        },
+        "PaymentTypesWrapper": {
+            "properties": {
+                "payment_types": {
+                    "items": {
+                        "$ref": "#/definitions/PaymentType"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionList": {
+            "properties": {
+                "last_page": {
+                    "type": "boolean"
+                },
+                "transactions": {
+                    "items": {
+                        "$ref": "#/definitions/TransactionItem"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "LegalAgreement": {
+            "properties": {
+                "body": {
+                    "type": "string"
+                },
+                "agreement": {
+                    "type": "string"
+                },
+                "fees": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "header": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TransactionItem": {
+            "properties": {
+                "transaction_amount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "transaction_date": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "transaction_description": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Balance": {
+            "properties": {
+                "balance": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "can_add_funds": {
+                    "type": "boolean"
+                },
+                "can_add_cougar_cash_direct": {
+                    "type": "boolean"
+                },
+                "can_manage_account": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "StartPaymentOutput": {
+            "properties": {
+                "legal_agreement": {
+                    "$ref": "#/definitions/LegalAgreement"
+                },
+                "legalees": {
+                    "x-deprecated": true,
+                    "$ref": "#/definitions/LegalAgreement"
+                },
+                "invoice_id": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "StartPaymentInput": {
+            "properties": {
+                "amount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "payment_type_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "Cougar Cash",
+        "description": "Cougar Cash Mobile App WS",
+        "version": "v1"
+    }
+}

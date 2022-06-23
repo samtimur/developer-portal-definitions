@@ -1,0 +1,378 @@
+{
+    "basePath": "/domains/erp/hr/payroll_deductions/v2",
+    "paths": {
+        "/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Provides ability to update employee deductions.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/employee_body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service request is OK."
+                    },
+                    "204": {
+                        "description": "Service request is OK and no data is available."
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get Payroll Deductions from PAY_DEDUCTION",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_idget"
+                    },
+                    {
+                        "$ref": "#/parameters/from_date"
+                    },
+                    {
+                        "$ref": "#/parameters/thru_date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "properties": {
+                                    "byu_id": {
+                                        "$ref": "#/definitions/byu_id"
+                                    },
+                                    "period": {
+                                        "items": {
+                                            "properties": {
+                                                "pay_period_end_date": {
+                                                    "$ref": "#/definitions/pay_period_end_date"
+                                                },
+                                                "check_data": {
+                                                    "items": {
+                                                        "properties": {
+                                                            "deduction_amount": {
+                                                                "$ref": "#/definitions/deduction_amount"
+                                                            },
+                                                            "paycheck_number": {
+                                                                "$ref": "#/definitions/paycheck_number"
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "array"
+                                                }
+                                            }
+                                        },
+                                        "type": "array"
+                                    }
+                                }
+                            },
+                            "xml": {
+                                "name": "employees"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Response Message"
+                    },
+                    "204": {
+                        "$ref": "#/responses/204"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/response_error_get"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/response_error_get"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "response_error": {
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/status"
+                }
+            }
+        },
+        "number_of_months": {
+            "maxLength": 3,
+            "format": "float",
+            "type": "number"
+        },
+        "thru_date": {
+            "format": "date",
+            "type": "string"
+        },
+        "status": {
+            "properties": {
+                "number_of_months": {
+                    "$ref": "#/definitions/number_of_months"
+                },
+                "deduction_amount": {
+                    "$ref": "#/definitions/deduction_amount"
+                },
+                "error_message": {
+                    "$ref": "#/definitions/error_message"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "effective_date": {
+                    "description": "Effective date shows only when inputed.",
+                    "$ref": "#/definitions/effective_date"
+                }
+            }
+        },
+        "paycheck_number": {
+            "maxLength": 15,
+            "type": "string"
+        },
+        "pay_period_end_date": {
+            "format": "date",
+            "type": "string"
+        },
+        "from_date": {
+            "format": "date",
+            "type": "string"
+        },
+        "response": {
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/status"
+                }
+            }
+        },
+        "deduction_amount": {
+            "maxLength": 11,
+            "format": "float",
+            "type": "number"
+        },
+        "error_message": {
+            "type": "string"
+        },
+        "byu_id": {
+            "maxLength": 9,
+            "type": "string"
+        },
+        "effective_date": {
+            "format": "date",
+            "type": "string"
+        },
+        "status_get": {
+            "properties": {
+                "thru_date": {
+                    "$ref": "#/definitions/thru_date"
+                },
+                "error_message": {
+                    "$ref": "#/definitions/error_message"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "from_date": {
+                    "$ref": "#/definitions/from_date"
+                }
+            }
+        },
+        "response_error_get": {
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/status_get"
+                }
+            }
+        },
+        "employee": {
+            "description": "The information about an employee and their deductions.",
+            "xml": {
+                "name": "employee"
+            },
+            "properties": {
+                "byu_id": {
+                    "$ref": "#/parameters/byu_id"
+                },
+                "effective_date": {
+                    "$ref": "#/parameters/effective_date"
+                },
+                "deduction_amount": {
+                    "$ref": "#/parameters/deduction_amount"
+                },
+                "number_of_months": {
+                    "$ref": "#/parameters/number_of_months"
+                }
+            },
+            "required": [
+                "byu_id",
+                "deduction_amount",
+                "number_of_months"
+            ],
+            "type": "object"
+        }
+    },
+    "parameters": {
+        "employee_body": {
+            "schema": {
+                "items": {
+                    "$ref": "#/definitions/employee"
+                },
+                "description": "The information to submit a single or collection of employee's deductions.",
+                "type": "array"
+            },
+            "description": "employee body",
+            "name": "employee_body",
+            "required": true,
+            "in": "body"
+        },
+        "number_of_months": {
+            "minimum": 0,
+            "description": "Number of months deductions to be taken",
+            "maximum": 12,
+            "name": "number_of_months",
+            "type": "integer",
+            "required": true,
+            "in": "query"
+        },
+        "thru_date": {
+            "description": "End Date of Selection in format YYYY-MM-DD",
+            "name": "thru_date",
+            "format": "date",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "byu_idget": {
+            "pattern": "[0-9]{9}",
+            "description": "A nine digit numeric identifier that is unique to each individual",
+            "name": "byu_id",
+            "required": false,
+            "type": "string",
+            "in": "query"
+        },
+        "deduction_amount": {
+            "description": "Deduction amount. If cancelling an existing deduction, enter 0",
+            "name": "deduction_amount",
+            "required": true,
+            "type": "number",
+            "in": "query"
+        },
+        "byu_id": {
+            "pattern": "[0-9]{9}",
+            "description": "A nine digit numeric identifier that is unique to each individual",
+            "name": "byu_id",
+            "required": true,
+            "type": "string",
+            "in": "query"
+        },
+        "effective_date": {
+            "description": "Effective Date of Selection in format YYYY-MM-DD",
+            "name": "effective_date",
+            "format": "date",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "from_date": {
+            "description": "Start Date of Selection in format YYYY-MM-DD",
+            "name": "from_date",
+            "format": "date",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        }
+    },
+    "responses": {
+        "204": {
+            "description": "Service request is OK and no data is available."
+        },
+        "400": {
+            "schema": {
+                "$ref": "#/definitions/response_error"
+            },
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "403": {
+            "schema": {
+                "$ref": "#/definitions/response_error"
+            },
+            "description": "Access denied to protected data"
+        },
+        "404": {
+            "schema": {
+                "$ref": "#/definitions/response_error"
+            },
+            "description": "The requested resource does not exist"
+        },
+        "500": {
+            "description": "Internal Server Error"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        },
+        "200get": {
+            "schema": {
+                "$ref": "#/definitions/response"
+            },
+            "description": "Service request is OK and the data is in the response body."
+        }
+    },
+    "info": {
+        "title": "Payroll_Deductions",
+        "description": "Provides ability to view/update employee deductions.",
+        "version": "v2"
+    }
+}

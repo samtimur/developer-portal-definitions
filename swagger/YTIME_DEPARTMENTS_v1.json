@@ -1,0 +1,374 @@
+{
+    "basePath": "/domains/erp/hr/departments/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{department_id}": {
+            "get": {
+                "summary": "Returns department information.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/department_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/department"
+                        },
+                        "description": "Returns information on department based on query parameters"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a single department.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/department_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "description": "The response from the server, indicating whether deleting the department worked or not.",
+                            "properties": {
+                                "status": {
+                                    "$ref": "#/definitions/status"
+                                },
+                                "department_id": {
+                                    "$ref": "#/definitions/department_id"
+                                }
+                            }
+                        },
+                        "description": "Deletes a single department based on the id submitted"
+                    },
+                    "400": {
+                        "schema": {
+                            "description": "The response from the server, indicating why it failed.",
+                            "properties": {
+                                "status": {
+                                    "$ref": "#/definitions/status"
+                                }
+                            }
+                        },
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "schema": {
+                            "description": "The response from the server, indicating why it failed.",
+                            "properties": {
+                                "status": {
+                                    "$ref": "#/definitions/status"
+                                },
+                                "department_id": {
+                                    "$ref": "#/definitions/department_id"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "summary": "Add or update information for one or more departments.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Add or update information for one or more departments.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/department_body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/departments"
+                        },
+                        "description": "Adds or updates a single or multiple departments"
+                    },
+                    "207": {
+                        "schema": {
+                            "$ref": "#/definitions/departments"
+                        },
+                        "description": "Partial Success. Errors with some submitted information."
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Returns all department information.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/departments"
+                        },
+                        "description": "Returns all department information"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "parameters": {
+        "department_body": {
+            "schema": {
+                "items": {
+                    "$ref": "#/definitions/department"
+                },
+                "description": "The information to submit a single or collection of departments.",
+                "type": "array"
+            },
+            "description": "department body",
+            "name": "department_body",
+            "required": true,
+            "in": "body"
+        },
+        "department_id": {
+            "description": "A string up to 10 characters that represents an individual department",
+            "name": "department_id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        }
+    },
+    "definitions": {
+        "department_description": {
+            "description": "The description of a department",
+            "example": "LANDSCAPE SPECIALTY",
+            "type": "string"
+        },
+        "message": {
+            "description": "The response message from the system",
+            "example": "success",
+            "type": "string"
+        },
+        "malformed": {
+            "description": "Description of problem with request.",
+            "properties": {
+                "error_string": {
+                    "$ref": "#/definitions/code"
+                }
+            }
+        },
+        "status": {
+            "description": "The response given from the system",
+            "properties": {
+                "message": {
+                    "$ref": "#/definitions/message"
+                },
+                "code": {
+                    "$ref": "#/definitions/code"
+                }
+            }
+        },
+        "department": {
+            "description": "The information about a department.",
+            "xml": {
+                "name": "department"
+            },
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/status"
+                },
+                "description": {
+                    "$ref": "#/definitions/department_description"
+                },
+                "job_department_id": {
+                    "$ref": "#/definitions/job_department_id"
+                },
+                "department_id": {
+                    "$ref": "#/definitions/department_id"
+                },
+                "work_order_id": {
+                    "$ref": "#/definitions/work_order_id"
+                },
+                "operating_unit": {
+                    "$ref": "#/definitions/operating_unit"
+                }
+            },
+            "type": "object",
+            "required": [
+                "department_id",
+                "description",
+                "job_department_id",
+                "operating_unit",
+                "work_order_id"
+            ]
+        },
+        "job_department_id": {
+            "maxLength": 4,
+            "description": "A four digit alphanumeric identifier that uniquely specifies a campus Department. This API uses job_department_id instead of the traditional department_id.",
+            "example": "0811",
+            "type": "string"
+        },
+        "department_id": {
+            "maxLength": 6,
+            "description": "A string up to 6 characters that represents a Physical Facilities department. This is not the same thing as the traditional department_id. In this API, that is the job_department_id",
+            "example": "380011",
+            "type": "string"
+        },
+        "work_order_id": {
+            "maxLength": 15,
+            "description": "An alpha-numeric identifier for a work order or service request used in cost accounting.",
+            "example": "ABC123",
+            "type": "string"
+        },
+        "departments": {
+            "items": {
+                "$ref": "#/definitions/department"
+            },
+            "description": "Collection of departments",
+            "xml": {
+                "name": "departments"
+            },
+            "type": "array"
+        },
+        "code": {
+            "description": "HTML response status code",
+            "example": "200",
+            "type": "string"
+        },
+        "operating_unit": {
+            "maxLength": 8,
+            "description": "An eight digit alphanumeric field that defines a financial reporting entity. They begin with either a two-digit Fund number or an eight character alphanumeric Project number.",
+            "minLength": 8,
+            "example": "11440011",
+            "type": "string"
+        },
+        "error_string": {
+            "description": "A description of an error that occurred in the API",
+            "example": "Malformed request. Please check the format of your request and try again.",
+            "type": "string"
+        }
+    },
+    "consumes": [
+        "application/json",
+        "application/xml"
+    ],
+    "responses": {
+        "400": {
+            "schema": {
+                "allOf": [
+                    {
+                        "$ref": "#/definitions/departments"
+                    },
+                    {
+                        "$ref": "#/definitions/department"
+                    },
+                    {
+                        "$ref": "#/definitions/malformed"
+                    }
+                ]
+            },
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "403": {
+            "description": "Access denied to protected data"
+        },
+        "404": {
+            "description": "The requested resource does not exist"
+        },
+        "500": {
+            "description": "Internal Server Error"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "Y-Time Physical Facilities Departments",
+        "description": "Provides ability to access and update Physical Facilities department information.",
+        "version": "v1"
+    }
+}

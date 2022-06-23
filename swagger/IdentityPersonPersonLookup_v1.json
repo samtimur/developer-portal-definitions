@@ -1,0 +1,2663 @@
+{
+    "basePath": "/domains/legacy/identity/person/personLookup/v1",
+    "x-mock_json": {
+        "PersonLookup": {
+            "Person Lookup Service": {
+                "response": {
+                    "result_set": [
+                        {
+                            "Permanent Address Block": {
+                                "address_line_5": "",
+                                "address_line_4": "",
+                                "address_line_1": "123 Main St.",
+                                "address_line_3": "801-111-1111",
+                                "address_line_2": "Bountiful, UT  84010"
+                            },
+                            "Campus Address Block": {
+                                "address_line_5": "",
+                                "address_line_4": "",
+                                "address_line_1": "1388 N University Ave",
+                                "address_line_3": "801-000-0000",
+                                "address_line_2": "Provo, UT  84602"
+                            },
+                            "person_id": "123456789",
+                            "home_town": "Bountiful",
+                            "department": "",
+                            "job_title": "",
+                            "Home Address Block": {
+                                "address_line_5": "",
+                                "address_line_4": "801-123-4567",
+                                "address_line_1": "123 Fake St.",
+                                "address_line_3": "Provo, UT  84604",
+                                "address_line_2": "Apt. 3"
+                            },
+                            "email_service": "https://y.byu.edu/ae/prod/person/cgi/sendEmail.cgi?personId=123456789",
+                            "registrar_warning": "N",
+                            "home_state_code": "UT",
+                            "sort_name": "Doe, John"
+                        }
+                    ],
+                    "total_result_size": 1,
+                    "view": "Directory",
+                    "warnings": [
+                        "This information is not to be used for commercial purposes."
+                    ],
+                    "result_page_count": 1
+                },
+                "request": {
+                    "status": "200",
+                    "resource": "/json/Doe/John",
+                    "method": "GET",
+                    "attributes": ""
+                },
+                "resource": {
+                    "methods": {
+                        "options": [
+                            "GET"
+                        ]
+                    },
+                    "identifiers": {
+                        "modifier": {
+                            "description": "Search pattern that will be combined with the search pattern identifier to further restricted the result set",
+                            "required": false
+                        },
+                        "search_pattern": {
+                            "conditions": "The characters '?' and '*' can be used to search for any character and any number of characters, respectively. For example: The search pattern J?n matches Jen and Jan.  The search pattern J*n matches Jen, Jan, John, Jordan, and Jason.  Searching with Johns in the search pattern identifier and Mar in the modifier identifier will match Mary Johns or Martin Johns, but not Martha Johnson. Searching with S* in the search pattern identifier and J* in the modifier identifier is too ambiguous and will not return a response.",
+                            "description": "Search pattern",
+                            "required": true
+                        },
+                        "page_number": {
+                            "description": "The page number of result details to retrieve",
+                            "required": false
+                        },
+                        "search_type": {
+                            "values": [
+                                "Name",
+                                "Hometown",
+                                "Phone",
+                                "PersonId"
+                            ],
+                            "description": "Type of information to search by. Name, hometown, phone number or person_id.",
+                            "required": false
+                        },
+                        "search_engine": {
+                            "default": "All",
+                            "values": [
+                                "All",
+                                "Student",
+                                "Employee",
+                                "Both"
+                            ],
+                            "description": "Identifies what search engine to use.  Student, employee (staff, admin, and faculty), or both. Searching for individuals who are not current students or employees required authorization.",
+                            "required": false
+                        }
+                    },
+                    "examples": "/All/Name/1/Smith or /Smith or /Employee/Name/1/Smith/Joseph or /All/Hometown/3/Provo/UT or /All/Phone/1/801-422-4000",
+                    "URI": "/[search_engine/search_type/page_number/]search_pattern[/modifier]"
+                }
+            }
+        }
+    },
+    "paths": {
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "WebService": {
+                                    "properties": {
+                                        "errors": {
+                                            "items": {
+                                                "properties": {
+                                                    "message": {
+                                                        "type": "string"
+                                                    },
+                                                    "httpStatusCode": {
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "code": {
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "operations": {
+                                            "items": {
+                                                "properties": {
+                                                    "path_identifiers": {
+                                                        "items": {
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "format": {
+                                                                    "type": "string"
+                                                                },
+                                                                "type": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "path": {
+                                                        "type": "string"
+                                                    },
+                                                    "method": {
+                                                        "type": "string"
+                                                    },
+                                                    "query_attributes": {
+                                                        "items": {
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "format": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "string"
+                                                                },
+                                                                "type": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "httpStatusCodes": {
+                                            "items": {
+                                                "properties": {
+                                                    "message": {
+                                                        "type": "string"
+                                                    },
+                                                    "code": {
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{lastName}/{firstName}": {
+            "get": {
+                "tags": [
+                    "PersonLookupService"
+                ],
+                "summary": "Search for person by last and first name.",
+                "description": "Search for person by last and first name.",
+                "parameters": [
+                    {
+                        "description": "string -> Last Name. Wildcards: ? and * (any char and any # of chars.)",
+                        "name": "lastName",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> First Name. Wildcards: ? and * (any char and any # of chars.)",
+                        "name": "firstName",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "Person Lookup Service": {
+                                    "properties": {
+                                        "response": {
+                                            "properties": {
+                                                "result_set": {
+                                                    "items": {
+                                                        "properties": {
+                                                            "Permanent Address Block": {
+                                                                "properties": {
+                                                                    "address_line_5": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_4": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_1": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_3": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_2": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "Campus Address Block": {
+                                                                "properties": {
+                                                                    "address_line_5": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_4": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_1": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_3": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_2": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "home_town": {
+                                                                "type": "string"
+                                                            },
+                                                            "department": {
+                                                                "type": "string"
+                                                            },
+                                                            "job_title": {
+                                                                "type": "string"
+                                                            },
+                                                            "Home Address Block": {
+                                                                "properties": {
+                                                                    "address_line_5": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_4": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_1": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_3": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_2": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "email_service": {
+                                                                "type": "string"
+                                                            },
+                                                            "registrar_warning": {
+                                                                "type": "string"
+                                                            },
+                                                            "home_state_code": {
+                                                                "type": "string"
+                                                            },
+                                                            "sort_name": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "total_result_size": {
+                                                    "type": "integer"
+                                                },
+                                                "view": {
+                                                    "type": "string"
+                                                },
+                                                "warnings": {
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "result_page_count": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "request": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string"
+                                                },
+                                                "resource": {
+                                                    "type": "string"
+                                                },
+                                                "method": {
+                                                    "type": "string"
+                                                },
+                                                "attributes": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "resource": {
+                                            "properties": {
+                                                "methods": {
+                                                    "properties": {
+                                                        "options": {
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "identifiers": {
+                                                    "properties": {
+                                                        "modifier": {
+                                                            "properties": {
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "search_pattern": {
+                                                            "properties": {
+                                                                "conditions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "page_number": {
+                                                            "properties": {
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "search_type": {
+                                                            "properties": {
+                                                                "values": {
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "type": "array"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "search_engine": {
+                                                            "properties": {
+                                                                "default": {
+                                                                    "type": "string"
+                                                                },
+                                                                "values": {
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "type": "array"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "examples": {
+                                                    "type": "string"
+                                                },
+                                                "URI": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "Person Lookup Service": {
+                                    "response": {
+                                        "result_set": [
+                                            {
+                                                "Permanent Address Block": {
+                                                    "address_line_5": "",
+                                                    "address_line_4": "",
+                                                    "address_line_1": "123 Main St.",
+                                                    "address_line_3": "801-111-1111",
+                                                    "address_line_2": "Bountiful, UT  84010"
+                                                },
+                                                "Campus Address Block": {
+                                                    "address_line_5": "",
+                                                    "address_line_4": "",
+                                                    "address_line_1": "1388 N University Ave",
+                                                    "address_line_3": "801-000-0000",
+                                                    "address_line_2": "Provo, UT  84602"
+                                                },
+                                                "person_id": "123456789",
+                                                "home_town": "Bountiful",
+                                                "department": "",
+                                                "job_title": "",
+                                                "Home Address Block": {
+                                                    "address_line_5": "",
+                                                    "address_line_4": "801-123-4567",
+                                                    "address_line_1": "123 Fake St.",
+                                                    "address_line_3": "Provo, UT  84604",
+                                                    "address_line_2": "Apt. 3"
+                                                },
+                                                "email_service": "https://y.byu.edu/ae/prod/person/cgi/sendEmail.cgi?personId=123456789",
+                                                "registrar_warning": "N",
+                                                "home_state_code": "UT",
+                                                "sort_name": "Doe, John"
+                                            }
+                                        ],
+                                        "total_result_size": 1,
+                                        "view": "Directory",
+                                        "warnings": [
+                                            "This information is not to be used for commercial purposes."
+                                        ],
+                                        "result_page_count": 1
+                                    },
+                                    "request": {
+                                        "status": "200",
+                                        "resource": "/json/Doe/John",
+                                        "method": "GET",
+                                        "attributes": ""
+                                    },
+                                    "resource": {
+                                        "methods": {
+                                            "options": [
+                                                "GET"
+                                            ]
+                                        },
+                                        "identifiers": {
+                                            "modifier": {
+                                                "description": "Search pattern that will be combined with the search pattern identifier to further restricted the result set",
+                                                "required": false
+                                            },
+                                            "search_pattern": {
+                                                "conditions": "The characters '?' and '*' can be used to search for any character and any number of characters, respectively. For example: The search pattern J?n matches Jen and Jan.  The search pattern J*n matches Jen, Jan, John, Jordan, and Jason.  Searching with Johns in the search pattern identifier and Mar in the modifier identifier will match Mary Johns or Martin Johns, but not Martha Johnson. Searching with S* in the search pattern identifier and J* in the modifier identifier is too ambiguous and will not return a response.",
+                                                "description": "Search pattern",
+                                                "required": true
+                                            },
+                                            "page_number": {
+                                                "description": "The page number of result details to retrieve",
+                                                "required": false
+                                            },
+                                            "search_type": {
+                                                "values": [
+                                                    "Name",
+                                                    "Hometown",
+                                                    "Phone",
+                                                    "PersonId"
+                                                ],
+                                                "description": "Type of information to search by. Name, hometown, phone number or person_id.",
+                                                "required": false
+                                            },
+                                            "search_engine": {
+                                                "default": "All",
+                                                "values": [
+                                                    "All",
+                                                    "Student",
+                                                    "Employee",
+                                                    "Both"
+                                                ],
+                                                "description": "Identifies what search engine to use.  Student, employee (staff, admin, and faculty), or both. Searching for individuals who are not current students or employees required authorization.",
+                                                "required": false
+                                            }
+                                        },
+                                        "examples": "/All/Name/1/Smith or /Smith or /Employee/Name/1/Smith/Joseph or /All/Hometown/3/Provo/UT or /All/Phone/1/801-422-4000",
+                                        "URI": "/[search_engine/search_type/page_number/]search_pattern[/modifier]"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getByFirstLastName",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{searchEngine}/{searchType}/{pageNumber}/{+searchPattern}": {
+            "get": {
+                "tags": [
+                    "PersonLookupService"
+                ],
+                "summary": "Specific search where searchPattern corresponds to the searchType. For searchType = name, the searchPattern would be the last name.",
+                "description": "Specific search where searchPattern corresponds to the searchType. For searchType = name, the searchPattern would be the last name.",
+                "parameters": [
+                    {
+                        "description": "string -> Options: All, Student, Employee, or Both. Defaults to All.",
+                        "name": "searchEngine",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> Options: Name, Hometown, Phone, or PersonId.",
+                        "name": "searchType",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> int. The page number that would be on the results page.",
+                        "name": "pageNumber",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> Search pattern. Wildcards: ? and * (any char and any # of chars.)",
+                        "name": "+searchPattern",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "Person Lookup Service": {
+                                    "properties": {
+                                        "response": {
+                                            "properties": {
+                                                "result_set": {
+                                                    "items": {
+                                                        "properties": {
+                                                            "Permanent Address Block": {
+                                                                "properties": {
+                                                                    "address_line_5": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_4": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_1": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_3": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_2": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "Campus Address Block": {
+                                                                "properties": {
+                                                                    "address_line_5": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_4": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_1": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_3": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_2": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "home_town": {
+                                                                "type": "string"
+                                                            },
+                                                            "department": {
+                                                                "type": "string"
+                                                            },
+                                                            "job_title": {
+                                                                "type": "string"
+                                                            },
+                                                            "Home Address Block": {
+                                                                "properties": {
+                                                                    "address_line_5": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_4": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_1": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_3": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_2": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "email_service": {
+                                                                "type": "string"
+                                                            },
+                                                            "registrar_warning": {
+                                                                "type": "string"
+                                                            },
+                                                            "home_state_code": {
+                                                                "type": "string"
+                                                            },
+                                                            "sort_name": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "total_result_size": {
+                                                    "type": "integer"
+                                                },
+                                                "view": {
+                                                    "type": "string"
+                                                },
+                                                "warnings": {
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "result_page_count": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "request": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string"
+                                                },
+                                                "resource": {
+                                                    "type": "string"
+                                                },
+                                                "method": {
+                                                    "type": "string"
+                                                },
+                                                "attributes": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "resource": {
+                                            "properties": {
+                                                "methods": {
+                                                    "properties": {
+                                                        "options": {
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "identifiers": {
+                                                    "properties": {
+                                                        "modifier": {
+                                                            "properties": {
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "search_pattern": {
+                                                            "properties": {
+                                                                "conditions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "page_number": {
+                                                            "properties": {
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "search_type": {
+                                                            "properties": {
+                                                                "values": {
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "type": "array"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "search_engine": {
+                                                            "properties": {
+                                                                "default": {
+                                                                    "type": "string"
+                                                                },
+                                                                "values": {
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "type": "array"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "examples": {
+                                                    "type": "string"
+                                                },
+                                                "URI": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "Person Lookup Service": {
+                                    "response": {
+                                        "result_set": [
+                                            {
+                                                "Permanent Address Block": {
+                                                    "address_line_5": "",
+                                                    "address_line_4": "",
+                                                    "address_line_1": "123 Main St.",
+                                                    "address_line_3": "801-111-1111",
+                                                    "address_line_2": "Bountiful, UT  84010"
+                                                },
+                                                "Campus Address Block": {
+                                                    "address_line_5": "",
+                                                    "address_line_4": "",
+                                                    "address_line_1": "1388 N University Ave",
+                                                    "address_line_3": "801-000-0000",
+                                                    "address_line_2": "Provo, UT  84602"
+                                                },
+                                                "person_id": "123456789",
+                                                "home_town": "Bountiful",
+                                                "department": "",
+                                                "job_title": "",
+                                                "Home Address Block": {
+                                                    "address_line_5": "",
+                                                    "address_line_4": "801-123-4567",
+                                                    "address_line_1": "123 Fake St.",
+                                                    "address_line_3": "Provo, UT  84604",
+                                                    "address_line_2": "Apt. 3"
+                                                },
+                                                "email_service": "https://y.byu.edu/ae/prod/person/cgi/sendEmail.cgi?personId=123456789",
+                                                "registrar_warning": "N",
+                                                "home_state_code": "UT",
+                                                "sort_name": "Doe, John"
+                                            }
+                                        ],
+                                        "total_result_size": 1,
+                                        "view": "Directory",
+                                        "warnings": [
+                                            "This information is not to be used for commercial purposes."
+                                        ],
+                                        "result_page_count": 1
+                                    },
+                                    "request": {
+                                        "status": "200",
+                                        "resource": "/json/Doe/John",
+                                        "method": "GET",
+                                        "attributes": ""
+                                    },
+                                    "resource": {
+                                        "methods": {
+                                            "options": [
+                                                "GET"
+                                            ]
+                                        },
+                                        "identifiers": {
+                                            "modifier": {
+                                                "description": "Search pattern that will be combined with the search pattern identifier to further restricted the result set",
+                                                "required": false
+                                            },
+                                            "search_pattern": {
+                                                "conditions": "The characters '?' and '*' can be used to search for any character and any number of characters, respectively. For example: The search pattern J?n matches Jen and Jan.  The search pattern J*n matches Jen, Jan, John, Jordan, and Jason.  Searching with Johns in the search pattern identifier and Mar in the modifier identifier will match Mary Johns or Martin Johns, but not Martha Johnson. Searching with S* in the search pattern identifier and J* in the modifier identifier is too ambiguous and will not return a response.",
+                                                "description": "Search pattern",
+                                                "required": true
+                                            },
+                                            "page_number": {
+                                                "description": "The page number of result details to retrieve",
+                                                "required": false
+                                            },
+                                            "search_type": {
+                                                "values": [
+                                                    "Name",
+                                                    "Hometown",
+                                                    "Phone",
+                                                    "PersonId"
+                                                ],
+                                                "description": "Type of information to search by. Name, hometown, phone number or person_id.",
+                                                "required": false
+                                            },
+                                            "search_engine": {
+                                                "default": "All",
+                                                "values": [
+                                                    "All",
+                                                    "Student",
+                                                    "Employee",
+                                                    "Both"
+                                                ],
+                                                "description": "Identifies what search engine to use.  Student, employee (staff, admin, and faculty), or both. Searching for individuals who are not current students or employees required authorization.",
+                                                "required": false
+                                            }
+                                        },
+                                        "examples": "/All/Name/1/Smith or /Smith or /Employee/Name/1/Smith/Joseph or /All/Hometown/3/Provo/UT or /All/Phone/1/801-422-4000",
+                                        "URI": "/[search_engine/search_type/page_number/]search_pattern[/modifier]"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetBySearchPatternSearchType",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{+searchPattern}": {
+            "get": {
+                "tags": [
+                    "PersonLookupService"
+                ],
+                "summary": "Search for person by whatever is in searchPattern. This could be BYU ID, Net ID, Last name, etc.",
+                "description": "Search for person by whatever is in searchPattern. This could be BYU ID, Net ID, Last name, etc.",
+                "parameters": [
+                    {
+                        "description": "string -> Search pattern. Wildcards: ? and * (any char and any # of chars.)",
+                        "name": "+searchPattern",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "Person Lookup Service": {
+                                    "properties": {
+                                        "response": {
+                                            "properties": {
+                                                "result_set": {
+                                                    "items": {
+                                                        "properties": {
+                                                            "Permanent Address Block": {
+                                                                "properties": {
+                                                                    "address_line_5": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_4": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_1": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_3": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_2": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "Campus Address Block": {
+                                                                "properties": {
+                                                                    "address_line_5": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_4": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_1": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_3": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_2": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "home_town": {
+                                                                "type": "string"
+                                                            },
+                                                            "department": {
+                                                                "type": "string"
+                                                            },
+                                                            "job_title": {
+                                                                "type": "string"
+                                                            },
+                                                            "Home Address Block": {
+                                                                "properties": {
+                                                                    "address_line_5": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_4": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_1": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_3": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_2": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "email_service": {
+                                                                "type": "string"
+                                                            },
+                                                            "registrar_warning": {
+                                                                "type": "string"
+                                                            },
+                                                            "home_state_code": {
+                                                                "type": "string"
+                                                            },
+                                                            "sort_name": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "total_result_size": {
+                                                    "type": "integer"
+                                                },
+                                                "view": {
+                                                    "type": "string"
+                                                },
+                                                "warnings": {
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "result_page_count": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "request": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string"
+                                                },
+                                                "resource": {
+                                                    "type": "string"
+                                                },
+                                                "method": {
+                                                    "type": "string"
+                                                },
+                                                "attributes": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "resource": {
+                                            "properties": {
+                                                "methods": {
+                                                    "properties": {
+                                                        "options": {
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "identifiers": {
+                                                    "properties": {
+                                                        "modifier": {
+                                                            "properties": {
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "search_pattern": {
+                                                            "properties": {
+                                                                "conditions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "page_number": {
+                                                            "properties": {
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "search_type": {
+                                                            "properties": {
+                                                                "values": {
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "type": "array"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "search_engine": {
+                                                            "properties": {
+                                                                "default": {
+                                                                    "type": "string"
+                                                                },
+                                                                "values": {
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "type": "array"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "examples": {
+                                                    "type": "string"
+                                                },
+                                                "URI": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "Person Lookup Service": {
+                                    "response": {
+                                        "result_set": [
+                                            {
+                                                "Permanent Address Block": {
+                                                    "address_line_5": "",
+                                                    "address_line_4": "",
+                                                    "address_line_1": "123 Main St.",
+                                                    "address_line_3": "801-111-1111",
+                                                    "address_line_2": "Bountiful, UT  84010"
+                                                },
+                                                "Campus Address Block": {
+                                                    "address_line_5": "",
+                                                    "address_line_4": "",
+                                                    "address_line_1": "1388 N University Ave",
+                                                    "address_line_3": "801-000-0000",
+                                                    "address_line_2": "Provo, UT  84602"
+                                                },
+                                                "person_id": "123456789",
+                                                "home_town": "Bountiful",
+                                                "department": "",
+                                                "job_title": "",
+                                                "Home Address Block": {
+                                                    "address_line_5": "",
+                                                    "address_line_4": "801-123-4567",
+                                                    "address_line_1": "123 Fake St.",
+                                                    "address_line_3": "Provo, UT  84604",
+                                                    "address_line_2": "Apt. 3"
+                                                },
+                                                "email_service": "https://y.byu.edu/ae/prod/person/cgi/sendEmail.cgi?personId=123456789",
+                                                "registrar_warning": "N",
+                                                "home_state_code": "UT",
+                                                "sort_name": "Doe, John"
+                                            }
+                                        ],
+                                        "total_result_size": 1,
+                                        "view": "Directory",
+                                        "warnings": [
+                                            "This information is not to be used for commercial purposes."
+                                        ],
+                                        "result_page_count": 1
+                                    },
+                                    "request": {
+                                        "status": "200",
+                                        "resource": "/json/Doe/John",
+                                        "method": "GET",
+                                        "attributes": ""
+                                    },
+                                    "resource": {
+                                        "methods": {
+                                            "options": [
+                                                "GET"
+                                            ]
+                                        },
+                                        "identifiers": {
+                                            "modifier": {
+                                                "description": "Search pattern that will be combined with the search pattern identifier to further restricted the result set",
+                                                "required": false
+                                            },
+                                            "search_pattern": {
+                                                "conditions": "The characters '?' and '*' can be used to search for any character and any number of characters, respectively. For example: The search pattern J?n matches Jen and Jan.  The search pattern J*n matches Jen, Jan, John, Jordan, and Jason.  Searching with Johns in the search pattern identifier and Mar in the modifier identifier will match Mary Johns or Martin Johns, but not Martha Johnson. Searching with S* in the search pattern identifier and J* in the modifier identifier is too ambiguous and will not return a response.",
+                                                "description": "Search pattern",
+                                                "required": true
+                                            },
+                                            "page_number": {
+                                                "description": "The page number of result details to retrieve",
+                                                "required": false
+                                            },
+                                            "search_type": {
+                                                "values": [
+                                                    "Name",
+                                                    "Hometown",
+                                                    "Phone",
+                                                    "PersonId"
+                                                ],
+                                                "description": "Type of information to search by. Name, hometown, phone number or person_id.",
+                                                "required": false
+                                            },
+                                            "search_engine": {
+                                                "default": "All",
+                                                "values": [
+                                                    "All",
+                                                    "Student",
+                                                    "Employee",
+                                                    "Both"
+                                                ],
+                                                "description": "Identifies what search engine to use.  Student, employee (staff, admin, and faculty), or both. Searching for individuals who are not current students or employees required authorization.",
+                                                "required": false
+                                            }
+                                        },
+                                        "examples": "/All/Name/1/Smith or /Smith or /Employee/Name/1/Smith/Joseph or /All/Hometown/3/Provo/UT or /All/Phone/1/801-422-4000",
+                                        "URI": "/[search_engine/search_type/page_number/]search_pattern[/modifier]"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getPersonLookupPage",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{searchEngine}/{searchType}/{pageNumber}/{+searchPattern}/{+modifier}": {
+            "get": {
+                "tags": [
+                    "PersonLookupService"
+                ],
+                "summary": "Specific search where searchPattern corresponds to the searchType. For searchType = name, the searchPattern will be the last name and the modifier will be the first.",
+                "description": "Specific search where searchPattern corresponds to the searchType. For searchType = name, the searchPattern will be the last name and the modifier will be the first.",
+                "parameters": [
+                    {
+                        "description": "string -> Options: All, Student, Employee, or Both. Defaults to All.",
+                        "name": "searchEngine",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> Options: Name, Hometown, Phone, or PersonId.",
+                        "name": "searchType",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> int. The page number that would be on the results page.",
+                        "name": "pageNumber",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> Search pattern. Wildcards: ? and * (any char and any # of chars.)",
+                        "name": "+searchPattern",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> First Name. Wildcards: ? and * (any char and any # of chars.)",
+                        "name": "+modifier",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "Person Lookup Service": {
+                                    "properties": {
+                                        "response": {
+                                            "properties": {
+                                                "result_set": {
+                                                    "items": {
+                                                        "properties": {
+                                                            "Permanent Address Block": {
+                                                                "properties": {
+                                                                    "address_line_5": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_4": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_1": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_3": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_2": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "Campus Address Block": {
+                                                                "properties": {
+                                                                    "address_line_5": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_4": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_1": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_3": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_2": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "home_town": {
+                                                                "type": "string"
+                                                            },
+                                                            "department": {
+                                                                "type": "string"
+                                                            },
+                                                            "job_title": {
+                                                                "type": "string"
+                                                            },
+                                                            "Home Address Block": {
+                                                                "properties": {
+                                                                    "address_line_5": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_4": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_1": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_3": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "address_line_2": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "email_service": {
+                                                                "type": "string"
+                                                            },
+                                                            "registrar_warning": {
+                                                                "type": "string"
+                                                            },
+                                                            "home_state_code": {
+                                                                "type": "string"
+                                                            },
+                                                            "sort_name": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "total_result_size": {
+                                                    "type": "integer"
+                                                },
+                                                "view": {
+                                                    "type": "string"
+                                                },
+                                                "warnings": {
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "result_page_count": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "request": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string"
+                                                },
+                                                "resource": {
+                                                    "type": "string"
+                                                },
+                                                "method": {
+                                                    "type": "string"
+                                                },
+                                                "attributes": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "resource": {
+                                            "properties": {
+                                                "methods": {
+                                                    "properties": {
+                                                        "options": {
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "identifiers": {
+                                                    "properties": {
+                                                        "modifier": {
+                                                            "properties": {
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "search_pattern": {
+                                                            "properties": {
+                                                                "conditions": {
+                                                                    "type": "string"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "page_number": {
+                                                            "properties": {
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "search_type": {
+                                                            "properties": {
+                                                                "values": {
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "type": "array"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "search_engine": {
+                                                            "properties": {
+                                                                "default": {
+                                                                    "type": "string"
+                                                                },
+                                                                "values": {
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "type": "array"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
+                                                                "required": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "examples": {
+                                                    "type": "string"
+                                                },
+                                                "URI": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "Person Lookup Service": {
+                                    "response": {
+                                        "result_set": [
+                                            {
+                                                "Permanent Address Block": {
+                                                    "address_line_5": "",
+                                                    "address_line_4": "",
+                                                    "address_line_1": "123 Main St.",
+                                                    "address_line_3": "801-111-1111",
+                                                    "address_line_2": "Bountiful, UT  84010"
+                                                },
+                                                "Campus Address Block": {
+                                                    "address_line_5": "",
+                                                    "address_line_4": "",
+                                                    "address_line_1": "1388 N University Ave",
+                                                    "address_line_3": "801-000-0000",
+                                                    "address_line_2": "Provo, UT  84602"
+                                                },
+                                                "person_id": "123456789",
+                                                "home_town": "Bountiful",
+                                                "department": "",
+                                                "job_title": "",
+                                                "Home Address Block": {
+                                                    "address_line_5": "",
+                                                    "address_line_4": "801-123-4567",
+                                                    "address_line_1": "123 Fake St.",
+                                                    "address_line_3": "Provo, UT  84604",
+                                                    "address_line_2": "Apt. 3"
+                                                },
+                                                "email_service": "https://y.byu.edu/ae/prod/person/cgi/sendEmail.cgi?personId=123456789",
+                                                "registrar_warning": "N",
+                                                "home_state_code": "UT",
+                                                "sort_name": "Doe, John"
+                                            }
+                                        ],
+                                        "total_result_size": 1,
+                                        "view": "Directory",
+                                        "warnings": [
+                                            "This information is not to be used for commercial purposes."
+                                        ],
+                                        "result_page_count": 1
+                                    },
+                                    "request": {
+                                        "status": "200",
+                                        "resource": "/json/Doe/John",
+                                        "method": "GET",
+                                        "attributes": ""
+                                    },
+                                    "resource": {
+                                        "methods": {
+                                            "options": [
+                                                "GET"
+                                            ]
+                                        },
+                                        "identifiers": {
+                                            "modifier": {
+                                                "description": "Search pattern that will be combined with the search pattern identifier to further restricted the result set",
+                                                "required": false
+                                            },
+                                            "search_pattern": {
+                                                "conditions": "The characters '?' and '*' can be used to search for any character and any number of characters, respectively. For example: The search pattern J?n matches Jen and Jan.  The search pattern J*n matches Jen, Jan, John, Jordan, and Jason.  Searching with Johns in the search pattern identifier and Mar in the modifier identifier will match Mary Johns or Martin Johns, but not Martha Johnson. Searching with S* in the search pattern identifier and J* in the modifier identifier is too ambiguous and will not return a response.",
+                                                "description": "Search pattern",
+                                                "required": true
+                                            },
+                                            "page_number": {
+                                                "description": "The page number of result details to retrieve",
+                                                "required": false
+                                            },
+                                            "search_type": {
+                                                "values": [
+                                                    "Name",
+                                                    "Hometown",
+                                                    "Phone",
+                                                    "PersonId"
+                                                ],
+                                                "description": "Type of information to search by. Name, hometown, phone number or person_id.",
+                                                "required": false
+                                            },
+                                            "search_engine": {
+                                                "default": "All",
+                                                "values": [
+                                                    "All",
+                                                    "Student",
+                                                    "Employee",
+                                                    "Both"
+                                                ],
+                                                "description": "Identifies what search engine to use.  Student, employee (staff, admin, and faculty), or both. Searching for individuals who are not current students or employees required authorization.",
+                                                "required": false
+                                            }
+                                        },
+                                        "examples": "/All/Name/1/Smith or /Smith or /Employee/Name/1/Smith/Joseph or /All/Hometown/3/Provo/UT or /All/Phone/1/801-422-4000",
+                                        "URI": "/[search_engine/search_type/page_number/]search_pattern[/modifier]"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetSearchPatternSearchType",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "response": {
+            "properties": {
+                "result_set": {
+                    "items": {
+                        "properties": {
+                            "Permanent Address Block": {
+                                "properties": {
+                                    "address_line_5": {
+                                        "type": "string"
+                                    },
+                                    "address_line_4": {
+                                        "type": "string"
+                                    },
+                                    "address_line_1": {
+                                        "type": "string"
+                                    },
+                                    "address_line_3": {
+                                        "type": "string"
+                                    },
+                                    "address_line_2": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "Campus Address Block": {
+                                "properties": {
+                                    "address_line_5": {
+                                        "type": "string"
+                                    },
+                                    "address_line_4": {
+                                        "type": "string"
+                                    },
+                                    "address_line_1": {
+                                        "type": "string"
+                                    },
+                                    "address_line_3": {
+                                        "type": "string"
+                                    },
+                                    "address_line_2": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "person_id": {
+                                "type": "string"
+                            },
+                            "home_town": {
+                                "type": "string"
+                            },
+                            "department": {
+                                "type": "string"
+                            },
+                            "job_title": {
+                                "type": "string"
+                            },
+                            "Home Address Block": {
+                                "properties": {
+                                    "address_line_5": {
+                                        "type": "string"
+                                    },
+                                    "address_line_4": {
+                                        "type": "string"
+                                    },
+                                    "address_line_1": {
+                                        "type": "string"
+                                    },
+                                    "address_line_3": {
+                                        "type": "string"
+                                    },
+                                    "address_line_2": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "email_service": {
+                                "type": "string"
+                            },
+                            "registrar_warning": {
+                                "type": "string"
+                            },
+                            "home_state_code": {
+                                "type": "string"
+                            },
+                            "sort_name": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "total_result_size": {
+                    "type": "integer"
+                },
+                "view": {
+                    "type": "string"
+                },
+                "warnings": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "result_page_count": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "result_set": {
+            "items": {
+                "properties": {
+                    "Permanent Address Block": {
+                        "properties": {
+                            "address_line_5": {
+                                "type": "string"
+                            },
+                            "address_line_4": {
+                                "type": "string"
+                            },
+                            "address_line_1": {
+                                "type": "string"
+                            },
+                            "address_line_3": {
+                                "type": "string"
+                            },
+                            "address_line_2": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "Campus Address Block": {
+                        "properties": {
+                            "address_line_5": {
+                                "type": "string"
+                            },
+                            "address_line_4": {
+                                "type": "string"
+                            },
+                            "address_line_1": {
+                                "type": "string"
+                            },
+                            "address_line_3": {
+                                "type": "string"
+                            },
+                            "address_line_2": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "person_id": {
+                        "type": "string"
+                    },
+                    "home_town": {
+                        "type": "string"
+                    },
+                    "department": {
+                        "type": "string"
+                    },
+                    "job_title": {
+                        "type": "string"
+                    },
+                    "Home Address Block": {
+                        "properties": {
+                            "address_line_5": {
+                                "type": "string"
+                            },
+                            "address_line_4": {
+                                "type": "string"
+                            },
+                            "address_line_1": {
+                                "type": "string"
+                            },
+                            "address_line_3": {
+                                "type": "string"
+                            },
+                            "address_line_2": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "email_service": {
+                        "type": "string"
+                    },
+                    "registrar_warning": {
+                        "type": "string"
+                    },
+                    "home_state_code": {
+                        "type": "string"
+                    },
+                    "sort_name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "errors": {
+            "items": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "httpStatusCode": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "addressBlock": {
+            "properties": {
+                "address_line_5": {
+                    "type": "string"
+                },
+                "address_line_4": {
+                    "type": "string"
+                },
+                "address_line_1": {
+                    "type": "string"
+                },
+                "address_line_3": {
+                    "type": "string"
+                },
+                "address_line_2": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "documentation": {
+            "properties": {
+                "WebService": {
+                    "properties": {
+                        "errors": {
+                            "items": {
+                                "properties": {
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                    "httpStatusCode": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "code": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "operations": {
+                            "items": {
+                                "properties": {
+                                    "path_identifiers": {
+                                        "items": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "format": {
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "path": {
+                                        "type": "string"
+                                    },
+                                    "method": {
+                                        "type": "string"
+                                    },
+                                    "query_attributes": {
+                                        "items": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "format": {
+                                                    "type": "string"
+                                                },
+                                                "required": {
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "httpStatusCodes": {
+                            "items": {
+                                "properties": {
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                    "code": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "resource": {
+            "properties": {
+                "methods": {
+                    "properties": {
+                        "options": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "identifiers": {
+                    "properties": {
+                        "modifier": {
+                            "properties": {
+                                "description": {
+                                    "type": "string"
+                                },
+                                "required": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "search_pattern": {
+                            "properties": {
+                                "conditions": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "required": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "page_number": {
+                            "properties": {
+                                "description": {
+                                    "type": "string"
+                                },
+                                "required": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "search_type": {
+                            "properties": {
+                                "values": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "required": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "search_engine": {
+                            "properties": {
+                                "default": {
+                                    "type": "string"
+                                },
+                                "values": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "required": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "examples": {
+                    "type": "string"
+                },
+                "URI": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "operations": {
+            "items": {
+                "properties": {
+                    "path_identifiers": {
+                        "items": {
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "format": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "path": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "type": "string"
+                    },
+                    "query_attributes": {
+                        "items": {
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "format": {
+                                    "type": "string"
+                                },
+                                "required": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "httpStatusCodes": {
+            "items": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "PersonLookup": {
+            "properties": {
+                "Person Lookup Service": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "result_set": {
+                                    "items": {
+                                        "properties": {
+                                            "Permanent Address Block": {
+                                                "properties": {
+                                                    "address_line_5": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_4": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_1": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_3": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_2": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "Campus Address Block": {
+                                                "properties": {
+                                                    "address_line_5": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_4": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_1": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_3": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_2": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "person_id": {
+                                                "type": "string"
+                                            },
+                                            "home_town": {
+                                                "type": "string"
+                                            },
+                                            "department": {
+                                                "type": "string"
+                                            },
+                                            "job_title": {
+                                                "type": "string"
+                                            },
+                                            "Home Address Block": {
+                                                "properties": {
+                                                    "address_line_5": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_4": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_1": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_3": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_2": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "email_service": {
+                                                "type": "string"
+                                            },
+                                            "registrar_warning": {
+                                                "type": "string"
+                                            },
+                                            "home_state_code": {
+                                                "type": "string"
+                                            },
+                                            "sort_name": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "total_result_size": {
+                                    "type": "integer"
+                                },
+                                "view": {
+                                    "type": "string"
+                                },
+                                "warnings": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "result_page_count": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "request": {
+                            "properties": {
+                                "status": {
+                                    "type": "string"
+                                },
+                                "resource": {
+                                    "type": "string"
+                                },
+                                "method": {
+                                    "type": "string"
+                                },
+                                "attributes": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "resource": {
+                            "properties": {
+                                "methods": {
+                                    "properties": {
+                                        "options": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "identifiers": {
+                                    "properties": {
+                                        "modifier": {
+                                            "properties": {
+                                                "description": {
+                                                    "type": "string"
+                                                },
+                                                "required": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "search_pattern": {
+                                            "properties": {
+                                                "conditions": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                },
+                                                "required": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "page_number": {
+                                            "properties": {
+                                                "description": {
+                                                    "type": "string"
+                                                },
+                                                "required": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "search_type": {
+                                            "properties": {
+                                                "values": {
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                },
+                                                "required": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "search_engine": {
+                                            "properties": {
+                                                "default": {
+                                                    "type": "string"
+                                                },
+                                                "values": {
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                },
+                                                "required": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "examples": {
+                                    "type": "string"
+                                },
+                                "URI": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "IdentityPersonPersonLookup",
+        "description": "PersonLookupService",
+        "version": "v1"
+    }
+}

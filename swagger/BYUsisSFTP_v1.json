@@ -1,0 +1,530 @@
+{
+    "basePath": "/domains/sis-sftp/v1",
+    "x-mock_json": {
+        "endorsements": {
+            "values": [
+                {
+                    "message": {
+                        "description": "Health message",
+                        "api_type": "read-only"
+                    },
+                    "metadata": {
+                        "message": "Success",
+                        "code": 0
+                    }
+                }
+            ],
+            "links": {
+                "byu_exams__info": {
+                    "method": "GET",
+                    "rel": "self",
+                    "href": "https://api.byu.edu/domains/sis-sftp/v1/health"
+                }
+            },
+            "metadata": {
+                "message": "Success",
+                "code": 0
+            }
+        }
+    },
+    "paths": {
+        "/key": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "put"
+                ],
+                "summary": "Add an ssh configuration",
+                "x-throttling-tier": "Unlimited",
+                "description": "Adds an ssh key, host, and known host to configuration.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/sftpConfigParm"
+                        },
+                        "description": "Configuration detail",
+                        "name": "config",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/sftpConfigRspPut"
+                        },
+                        "description": "Credentials saved."
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required."
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication error."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "putKey"
+            },
+            "x-controller": "controller",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "get"
+                ],
+                "summary": "Get ssh configuration",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get configured hosts.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/sftpConfigRspGet"
+                        },
+                        "description": "List of configured hosts."
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required."
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication error."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getKeyList"
+            }
+        },
+        "/health": {
+            "x-controller": "controller",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Health check",
+                "x-throttling-tier": "Unlimited",
+                "description": "A simple path health check",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/healthDetail"
+                        },
+                        "description": "Event detail",
+                        "name": "event",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/health"
+                        },
+                        "description": "Service is healthy"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "health"
+            }
+        },
+        "/key/*": {
+            "x-controller": "controller",
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "delete"
+                ],
+                "summary": "Remove an ssh configuration",
+                "x-throttling-tier": "Unlimited",
+                "description": "Remove an ssh key, host, and known host from configuration.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/sftpConfigRspPut"
+                        },
+                        "description": "Credentials saved."
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required."
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication error."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/get": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Get data via sftp from a remote host",
+                "x-throttling-tier": "Unlimited",
+                "description": "Use sftp protocol to get a file from a remote host.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/sftpGetParm"
+                        },
+                        "description": "Remote host and data file to get.",
+                        "name": "sftpGet",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/sftpGetRslt"
+                        },
+                        "description": "Remote data file information."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "sftpGet"
+            },
+            "x-controller": "controller"
+        },
+        "/put": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "retrieve"
+                ],
+                "summary": "Put data via sftp to a remote host",
+                "x-throttling-tier": "Unlimited",
+                "description": "Use sftp protocol to put data into a file on a remote host.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/sftpPutParm"
+                        },
+                        "description": "Remote host, data file, and data to put.",
+                        "name": "sftpPut",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/sftpPutRslt"
+                        },
+                        "description": "Remote data file information."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "sftpPut"
+            },
+            "x-controller": "controller"
+        },
+        "/key/{host}": {
+            "x-controller": "controller",
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "delete"
+                ],
+                "summary": "Remove an ssh configuration",
+                "x-throttling-tier": "Unlimited",
+                "description": "Remove an ssh key, host, and known host from configuration.",
+                "parameters": [
+                    {
+                        "description": "Host name of the key to delete",
+                        "name": "host",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/sftpConfigRspPut"
+                        },
+                        "description": "Credentials saved."
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required."
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication error."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "rmKey"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "sftpConfigRspGet": {
+            "description": "Configured host list response",
+            "properties": {
+                "list": {
+                    "items": {
+                        "properties": {
+                            "host": {
+                                "type": "string"
+                            },
+                            "lastModified": {
+                                "type": "number"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "required": [
+                "metadata",
+                "list"
+            ],
+            "type": "object"
+        },
+        "sftpPutParm": {
+            "description": "Parameters used to put a file using sftp.",
+            "properties": {
+                "port": {
+                    "default": 22,
+                    "description": "The port number for the remote sftp connection.",
+                    "type": "number"
+                },
+                "host": {
+                    "description": "The user@host poriton of an sftp command.",
+                    "type": "string"
+                },
+                "file": {
+                    "description": "The name of the remote file to send.",
+                    "type": "string"
+                },
+                "data": {
+                    "description": "The data to put into the remote file.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "host",
+                "file",
+                "data"
+            ],
+            "type": "object"
+        },
+        "error": {
+            "description": "Error response",
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "required": [
+                "metadata"
+            ],
+            "type": "object"
+        },
+        "healthDetail": {
+            "description": "Optional details of the health request",
+            "type": "object"
+        },
+        "simple_metadata": {
+            "properties": {
+                "message": {
+                    "default": "Success",
+                    "x-variable": "validation_response_message",
+                    "type": "string"
+                },
+                "code": {
+                    "default": 0,
+                    "x-variable": "validation_response_code",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "code",
+                "message"
+            ],
+            "type": "object"
+        },
+        "sftpConfigRspPut": {
+            "description": "Config put response",
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "required": [
+                "metadata"
+            ],
+            "type": "object"
+        },
+        "sftpConfigParm": {
+            "description": "sftp configuratio",
+            "properties": {
+                "known_host": {
+                    "description": "The knownn_hosts entry for the sftp command",
+                    "type": "string"
+                },
+                "host": {
+                    "description": "The user@host poriton of an sftp command",
+                    "type": "string"
+                },
+                "key": {
+                    "description": "The private key for the sftp command",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "host",
+                "key",
+                "known_host"
+            ],
+            "type": "object"
+        },
+        "sftpPutRslt": {
+            "description": "Get response",
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "required": [
+                "metadata"
+            ],
+            "type": "object"
+        },
+        "sftpGetRslt": {
+            "description": "Get response",
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "required": [
+                "metadata"
+            ],
+            "type": "object"
+        },
+        "health": {
+            "properties": {
+                "message": {
+                    "description": "Health message",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "sftpGetParm": {
+            "description": "Parameters used to retrieve a file using sftp.",
+            "properties": {
+                "port": {
+                    "default": 22,
+                    "description": "The port number for the remote sftp connection.",
+                    "type": "number"
+                },
+                "host": {
+                    "description": "The user@host poriton of an sftp command.",
+                    "type": "string"
+                },
+                "file": {
+                    "description": "The name of the remote file to retrieve.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "host",
+                "file"
+            ],
+            "type": "object"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "BYUsisSFTP",
+        "description": "SFTP endpoint for BYU SIS aka AIM.",
+        "license": {
+            "name": "Apache-2.0"
+        },
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

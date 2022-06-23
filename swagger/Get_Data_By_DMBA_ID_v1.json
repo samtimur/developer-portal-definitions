@@ -1,0 +1,89 @@
+{
+    "basePath": "/domains/erp/hr/get_data_by_dmba_id/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "maxLength": 9,
+                        "description": "DMBA ID",
+                        "minLength": 9,
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "query",
+                        "allowEmptyValue": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/employee"
+                        },
+                        "description": "The default response type is JSON.  Add an Accept header with value=application/xml to return an XML response.",
+                        "examples": {
+                            "application/json": {
+                                "employee": {
+                                    "paygroup": "ADM",
+                                    "dmba_id": "999999999",
+                                    "byu_id": "999999999",
+                                    "employee_record": "0"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "paygroup": {
+            "maxLength": 3,
+            "type": "string"
+        },
+        "dmba_id": {
+            "pattern": "^[0-9]{9}$",
+            "type": "string"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "type": "string"
+        },
+        "employee_record": {
+            "maxLength": 3,
+            "type": "string"
+        },
+        "employee": {
+            "properties": {
+                "paygroup": {
+                    "$ref": "#/definitions/paygroup"
+                },
+                "dmba_id": {
+                    "$ref": "#/definitions/dmba_id"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "employee_record": {
+                    "$ref": "#/definitions/employee_record"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "Get_Data_By_DMBA_ID",
+        "description": "Get Emplid, Empl_Rcd and Paygroup for an interface to process deductions by DMBA ID",
+        "version": "v1"
+    }
+}

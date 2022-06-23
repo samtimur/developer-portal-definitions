@@ -1,0 +1,3347 @@
+{
+    "tags": [
+        {
+            "name": "Admin"
+        },
+        {
+            "name": "Appointments"
+        },
+        {
+            "name": "Batch"
+        },
+        {
+            "name": "Categories"
+        },
+        {
+            "name": "Controls"
+        },
+        {
+            "name": "Evaluation"
+        },
+        {
+            "name": "Events"
+        },
+        {
+            "name": "Filenotes"
+        },
+        {
+            "name": "Incidents"
+        },
+        {
+            "name": "Messages"
+        },
+        {
+            "name": "Organizations"
+        },
+        {
+            "name": "Quicktexts"
+        },
+        {
+            "name": "Roles"
+        },
+        {
+            "name": "Student"
+        },
+        {
+            "name": "Student Overview"
+        },
+        {
+            "name": "Subcategories"
+        },
+        {
+            "name": "Task Definitions"
+        },
+        {
+            "name": "Task Sources"
+        },
+        {
+            "name": "Task Statuses"
+        },
+        {
+            "name": "Tasks"
+        },
+        {
+            "name": "Topic Groups"
+        },
+        {
+            "name": "Topics"
+        },
+        {
+            "name": "Workgroups"
+        }
+    ],
+    "basePath": "/domains/ymessage-archive/1.0",
+    "paths": {
+        "/tasks/student/{studentId}?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "List/Search all tasks for a student",
+                "tags": [
+                    "Tasks",
+                    "Incidents",
+                    "Student"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/tasks/student/{studentId}",
+                "parameters": [
+                    {
+                        "pattern": " \\d{9}",
+                        "name": "studentId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "categoryId",
+                        "type": "array",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "workgroupId",
+                        "type": "array",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "statusId",
+                        "type": "array",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "type",
+                        "enum": [
+                            "TASK",
+                            "INCIDENT"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "isOpen",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortColumn",
+                        "enum": [
+                            "STUDENT_NAME",
+                            "SUBJECT",
+                            "WORKGROUP_NAME",
+                            "EMPLOYEE_NAME",
+                            "EXPECTED_COMPLETION",
+                            "STATUS_NAME",
+                            "UPDATED_DATE",
+                            "CREATED_DATE"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "sortAscending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 0,
+                        "name": "page",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 100,
+                        "name": "results",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TaskJsonPagedList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "studentTaskList"
+            }
+        },
+        "/appointments/student/{studentId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "List/Search appointments",
+                "tags": [
+                    "Appointments",
+                    "Student"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "pattern": " \\d{9}",
+                        "name": "studentId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "employeeId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "scheduledStartsAfter",
+                        "format": "date-time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "scheduledStartsBefore",
+                        "format": "date-time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "aidYearTerm",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "categoryId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortColumn",
+                        "enum": [
+                            "SCHEDULED_START_DATE_TIME",
+                            "SCHEDULED_END_DATE_TIME",
+                            "ACTUAL_START_DATE_TIME",
+                            "ACTUAL_END_DATE_TIME",
+                            "CHECK_IN_TIME",
+                            "SUBJECT",
+                            "DESCRIPTION",
+                            "EMPLOYEE_NAME"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "sortAscending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 0,
+                        "name": "page",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 100,
+                        "name": "results",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/AppointmentJsonPagedList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "listAppointment"
+            }
+        },
+        "/tasks/{id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Update a Task",
+                "tags": [
+                    "Tasks",
+                    "Incidents"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "format": "int64",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success with no response body"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "updateTask"
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a single Task",
+                "tags": [
+                    "Tasks",
+                    "Incidents"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "format": "int64",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TaskJson"
+                        },
+                        "description": "successful operation"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "findTask"
+            }
+        },
+        "/messages/{id}/attachments?": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "saveAttachment",
+                "tags": [
+                    "Messages"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "text/plain"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/messages/{id}/attachments",
+                "parameters": [
+                    {
+                        "name": "filename",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "format": "int64",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "*/*"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "save"
+            }
+        },
+        "/tasks/{taskId}/attachments?": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "saveAttachment",
+                "tags": [
+                    "Incidents",
+                    "Tasks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "text/plain"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/tasks/{taskId}/attachments",
+                "parameters": [
+                    {
+                        "name": "filename",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "name": "taskId",
+                        "format": "int64",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "*/*"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "save"
+            }
+        },
+        "/appointments": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "List/Search appointments",
+                "tags": [
+                    "Appointments"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "studentId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "employeeId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "scheduledStartsAfter",
+                        "format": "date-time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "scheduledStartsBefore",
+                        "format": "date-time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "aidYearTerm",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "categoryId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortColumn",
+                        "enum": [
+                            "SCHEDULED_START_DATE_TIME",
+                            "SCHEDULED_END_DATE_TIME",
+                            "ACTUAL_START_DATE_TIME",
+                            "ACTUAL_END_DATE_TIME",
+                            "CHECK_IN_TIME",
+                            "SUBJECT",
+                            "DESCRIPTION",
+                            "EMPLOYEE_NAME"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "sortAscending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 0,
+                        "name": "page",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 100,
+                        "name": "results",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/AppointmentJsonPagedList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "listAppointment"
+            }
+        },
+        "/filenotes": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a new Filenote",
+                "tags": [
+                    "Filenotes"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "text/plain"
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "createFilenote"
+            }
+        },
+        "/filenotes/{filenoteId}/attachments?": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "saveAttachment",
+                "tags": [
+                    "Filenotes"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "text/plain"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/filenotes/{filenoteId}/attachments",
+                "parameters": [
+                    {
+                        "name": "filename",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "name": "filenoteId",
+                        "format": "int64",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "*/*"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "save"
+            }
+        },
+        "/filenotes/{filenoteId}/attachments": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "saveAttachment",
+                "tags": [
+                    "Filenotes"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "filename",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "name": "filenoteId",
+                        "format": "int64",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "*/*"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "save"
+            }
+        },
+        "/message-threads/{id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a single MessageThread",
+                "tags": [
+                    "Messages"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "format": "int64",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MessageThreadJson"
+                        },
+                        "description": "successful operation"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "findMessageThread"
+            }
+        },
+        "/messages/{id}/attachments": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "saveAttachment",
+                "tags": [
+                    "Messages"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "filename",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "format": "int64",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "*/*"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "save"
+            }
+        },
+        "/student-overview/{student-id}?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get an overview of a student's items for an employee to view",
+                "tags": [
+                    "Student Overview"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student-overview/{student-id}",
+                "parameters": [
+                    {
+                        "name": "student-id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "keywords",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "workgroupId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "categoryId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "subcategoryId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "aidYear",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "lastChangedAfter",
+                        "format": "date-time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "lastChangedBefore",
+                        "format": "date-time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "page",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "results",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortColumn",
+                        "enum": [
+                            "SUBJECT",
+                            "WORKGROUP_NAME",
+                            "EMPLOYEE_NAME",
+                            "CREATE_DATE",
+                            "UPDATE_DATE"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortAscending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "appointments",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "filenotes",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "incidents",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "tasks",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "messages",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/StudentOverviewList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "studentOverview"
+            }
+        },
+        "/messages/batch": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Send a batch of messages",
+                "tags": [
+                    "Messages",
+                    "Batch",
+                    "Admin"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BatchMessageResponse"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "sendBatchMessages"
+            }
+        },
+        "/tasks": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a new Task",
+                "tags": [
+                    "Tasks",
+                    "Incidents"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "text/plain"
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "createTask"
+            }
+        },
+        "/message-threads": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a new MessageThread",
+                "tags": [
+                    "Messages"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/MessageThreadCreationResponse"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "createMessageThread"
+            }
+        },
+        "/tasks/student/{studentId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "List/Search all tasks for a student",
+                "tags": [
+                    "Tasks",
+                    "Incidents",
+                    "Student"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "pattern": " \\d{9}",
+                        "name": "studentId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "categoryId",
+                        "type": "array",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "workgroupId",
+                        "type": "array",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "statusId",
+                        "type": "array",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "type",
+                        "enum": [
+                            "TASK",
+                            "INCIDENT"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "isOpen",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortColumn",
+                        "enum": [
+                            "STUDENT_NAME",
+                            "SUBJECT",
+                            "WORKGROUP_NAME",
+                            "EMPLOYEE_NAME",
+                            "EXPECTED_COMPLETION",
+                            "STATUS_NAME",
+                            "UPDATED_DATE",
+                            "CREATED_DATE"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "sortAscending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 0,
+                        "name": "page",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 100,
+                        "name": "results",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TaskJsonPagedList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "studentTaskList"
+            }
+        },
+        "/tasks/definitions": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a new TaskDefinition",
+                "tags": [
+                    "Tasks",
+                    "Task Definitions"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/TaskDefinitionCreationResponse"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "createTaskDefinition"
+            }
+        },
+        "/tasks/batch": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a batch of tasks",
+                "tags": [
+                    "Tasks",
+                    "Batch",
+                    "Admin"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BatchTaskResponse"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "sendBatchTasks"
+            }
+        },
+        "/student-overview/{student-id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get an overview of a student's items for an employee to view",
+                "tags": [
+                    "Student Overview"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "student-id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "keywords",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "workgroupId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "categoryId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "subcategoryId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "aidYear",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "lastChangedAfter",
+                        "format": "date-time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "lastChangedBefore",
+                        "format": "date-time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "page",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "results",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortColumn",
+                        "enum": [
+                            "SUBJECT",
+                            "WORKGROUP_NAME",
+                            "EMPLOYEE_NAME",
+                            "CREATE_DATE",
+                            "UPDATE_DATE"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortAscending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "appointments",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "filenotes",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "incidents",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "tasks",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "messages",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/StudentOverviewList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "studentOverview"
+            }
+        },
+        "/student/{studentId}/inbox": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get the student's inbox",
+                "tags": [
+                    "Student"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "pattern": " \\d{9}",
+                        "name": "studentId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "default": true,
+                        "name": "priority",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "categoryId",
+                        "type": "array",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortColumn",
+                        "enum": [
+                            "SUBJECT",
+                            "CREATED_DATE_TIME",
+                            "UPDATED_DATE_TIME"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "sortAscending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 0,
+                        "name": "page",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 100,
+                        "name": "results",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "keywords",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/StudentInboxList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "studentInbox"
+            }
+        },
+        "/tasks/definitions/{id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Update a TaskDefinition",
+                "tags": [
+                    "Tasks",
+                    "Task Definitions"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "updateTaskDefinition"
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a single TaskDefinition",
+                "tags": [
+                    "Tasks",
+                    "Task Definitions"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TaskDefinitionJson"
+                        },
+                        "description": "successful operation"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "findTaskDefinition"
+            }
+        },
+        "/messages/student/{studentId}/{queueType}?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a student's message queue",
+                "tags": [
+                    "Messages"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/messages/student/{studentId}/{queueType}",
+                "parameters": [
+                    {
+                        "pattern": " \\d{9}",
+                        "name": "studentId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "queueType",
+                        "enum": [
+                            "IN",
+                            "OUT",
+                            "ARCHIVED"
+                        ],
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "keywords",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "category",
+                        "type": "array",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortColumn",
+                        "enum": [
+                            "MESSAGE_ID",
+                            "STUDENT_NAME",
+                            "SUBJECT",
+                            "WORKGROUP_NAME",
+                            "ASSIGNED_TO_NAME",
+                            "DATE_CHANGED",
+                            "DATE_CREATED",
+                            "HAS_ATTACHMENTS"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "sortAscending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 0,
+                        "name": "page",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 100,
+                        "name": "results",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MessageJsonPagedList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "studentMessageQueue"
+            }
+        },
+        "/student/{studentId}/inbox?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get the student's inbox",
+                "tags": [
+                    "Student"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{studentId}/inbox",
+                "parameters": [
+                    {
+                        "pattern": " \\d{9}",
+                        "name": "studentId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "default": true,
+                        "name": "priority",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "categoryId",
+                        "type": "array",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortColumn",
+                        "enum": [
+                            "SUBJECT",
+                            "CREATED_DATE_TIME",
+                            "UPDATED_DATE_TIME"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "sortAscending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 0,
+                        "name": "page",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 100,
+                        "name": "results",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "keywords",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/StudentInboxList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "studentInbox"
+            }
+        },
+        "/appointments/{id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a single Appointment",
+                "tags": [
+                    "Appointments"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "format": "int64",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/AppointmentJson"
+                        },
+                        "description": "successful operation"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "findAppointment"
+            }
+        },
+        "/messages/student/{studentId}/{queueType}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a student's message queue",
+                "tags": [
+                    "Messages",
+                    "Student"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "pattern": " \\d{9}",
+                        "name": "studentId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "queueType",
+                        "enum": [
+                            "ACTIVE",
+                            "ARCHIVED"
+                        ],
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "keywords",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "category",
+                        "type": "array",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortColumn",
+                        "enum": [
+                            "MESSAGE_ID",
+                            "STUDENT_NAME",
+                            "SUBJECT",
+                            "WORKGROUP_NAME",
+                            "ASSIGNED_TO_NAME",
+                            "DATE_CHANGED",
+                            "DATE_CREATED",
+                            "HAS_ATTACHMENTS"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "sortAscending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 0,
+                        "name": "page",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 100,
+                        "name": "results",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MessageJsonPagedList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "studentMessageQueue"
+            }
+        },
+        "/appointments/student/{studentId}?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "List/Search appointments",
+                "tags": [
+                    "Appointments",
+                    "Student"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/appointments/student",
+                "parameters": [
+                    {
+                        "pattern": " \\d{9}",
+                        "name": "studentId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "employeeId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "scheduledStartsAfter",
+                        "format": "date-time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "scheduledStartsBefore",
+                        "format": "date-time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "aidYearTerm",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "categoryId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortColumn",
+                        "enum": [
+                            "SCHEDULED_START_DATE_TIME",
+                            "SCHEDULED_END_DATE_TIME",
+                            "ACTUAL_START_DATE_TIME",
+                            "ACTUAL_END_DATE_TIME",
+                            "CHECK_IN_TIME",
+                            "SUBJECT",
+                            "DESCRIPTION",
+                            "EMPLOYEE_NAME"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "sortAscending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 0,
+                        "name": "page",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 100,
+                        "name": "results",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/AppointmentJsonPagedList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "listAppointment"
+            }
+        },
+        "/tasks/{taskId}/attachments": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "saveAttachment",
+                "tags": [
+                    "Incidents",
+                    "Tasks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "filename",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "name": "taskId",
+                        "format": "int64",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "*/*"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "save"
+            }
+        },
+        "/filenotes/{id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a single Filenote",
+                "tags": [
+                    "Filenotes"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "format": "int64",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/FilenoteJson"
+                        },
+                        "description": "successful operation"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "findFilenote"
+            }
+        },
+        "/appointments?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "List/Search appointments",
+                "tags": [
+                    "Appointments"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/appointments",
+                "parameters": [
+                    {
+                        "name": "studentId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "employeeId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "scheduledStartsAfter",
+                        "format": "date-time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "scheduledStartsBefore",
+                        "format": "date-time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "aidYearTerm",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "categoryId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "sortColumn",
+                        "enum": [
+                            "SCHEDULED_START_DATE_TIME",
+                            "SCHEDULED_END_DATE_TIME",
+                            "ACTUAL_START_DATE_TIME",
+                            "ACTUAL_END_DATE_TIME",
+                            "CHECK_IN_TIME",
+                            "SUBJECT",
+                            "DESCRIPTION",
+                            "EMPLOYEE_NAME"
+                        ],
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "sortAscending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 0,
+                        "name": "page",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 100,
+                        "name": "results",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/AppointmentJsonPagedList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "listAppointment"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "StudentInboxList": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/StudentInboxItem"
+                    },
+                    "type": "array"
+                },
+                "totalResults": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "TaskDetailJson": {
+            "properties": {
+                "taskId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "detail": {
+                    "type": "string"
+                },
+                "createdDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "creator": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                }
+            },
+            "type": "object"
+        },
+        "CategorySummaryJson": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "active": {
+                    "default": false,
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "AnonymousPerson": {
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TaskSourceSummaryJson": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CheckInJson": {
+            "properties": {
+                "time": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StudentOverviewList": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/StudentOverviewItem"
+                    },
+                    "type": "array"
+                },
+                "totalResults": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "MessageJsonPagedList": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/MessageJson"
+                    },
+                    "type": "array"
+                },
+                "totalResults": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "AppointmentJson": {
+            "properties": {
+                "hasEvaluation": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "restricted": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "workgroup": {
+                    "$ref": "#/definitions/WorkgroupSummaryJson"
+                },
+                "checkIn": {
+                    "$ref": "#/definitions/CheckInJson"
+                },
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "scheduleType": {
+                    "enum": [
+                        "APPOINTMENT",
+                        "EVENT"
+                    ],
+                    "type": "string"
+                },
+                "category": {
+                    "$ref": "#/definitions/CategorySummaryJson"
+                },
+                "student": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "created": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "updated": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "subcategory": {
+                    "$ref": "#/definitions/SubcategorySummaryJson"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "actualTime": {
+                    "$ref": "#/definitions/TimesJson"
+                },
+                "aidYearTerm": {
+                    "type": "string"
+                },
+                "studentName": {
+                    "type": "string"
+                },
+                "createdDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "updatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "studentRead": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "scheduledTime": {
+                    "$ref": "#/definitions/TimesJson"
+                },
+                "attachments": {
+                    "items": {
+                        "$ref": "#/definitions/ItemAttachmentSummaryJson"
+                    },
+                    "type": "array"
+                },
+                "employee": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "shareType": {
+                    "enum": [
+                        "UNIVERSITY",
+                        "ORGANIZATION",
+                        "WORKGROUP",
+                        "PERSONAL"
+                    ],
+                    "type": "string"
+                },
+                "appointmentType": {
+                    "type": "string"
+                },
+                "exchangeId": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "WorkgroupSummaryJson": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "active": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "organizationId": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PersonSummaryJson": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "personId": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TaskJsonPagedList": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/TaskJson"
+                    },
+                    "type": "array"
+                },
+                "totalResults": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "Tracker": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ItemAttachmentSummaryJson": {
+            "properties": {
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "serverId": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "MessageThreadJson": {
+            "properties": {
+                "topic": {
+                    "$ref": "#/definitions/TopicSummaryJson"
+                },
+                "threadId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "restricted": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "assignee": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "messages": {
+                    "items": {
+                        "$ref": "#/definitions/MessageSummaryJson"
+                    },
+                    "type": "array"
+                },
+                "updatedBy": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "employeeActive": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "createdBy": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "aidYearTerm": {
+                    "type": "string"
+                },
+                "topicPerson": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "hasAttachments": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "updatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "createdDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "studentActive": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "categories": {
+                    "items": {
+                        "$ref": "#/definitions/CategorySummaryJson"
+                    },
+                    "type": "array"
+                },
+                "subcategories": {
+                    "items": {
+                        "$ref": "#/definitions/SubcategorySummaryJson"
+                    },
+                    "type": "array"
+                },
+                "shareType": {
+                    "enum": [
+                        "UNIVERSITY",
+                        "ORGANIZATION",
+                        "WORKGROUP",
+                        "PERSONAL"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "BatchMessageResponse": {
+            "properties": {
+                "threadIds": {
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "MessageJson": {
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "status": {
+                    "enum": [
+                        "UNREAD",
+                        "READ",
+                        "REPLIED",
+                        "FORWARDED",
+                        "UNKNOWN"
+                    ],
+                    "type": "string"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "fromPerson": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "fromWorkgroup": {
+                    "$ref": "#/definitions/WorkgroupSummaryJson"
+                },
+                "toWorkgroup": {
+                    "$ref": "#/definitions/WorkgroupSummaryJson"
+                },
+                "updatedBy": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "hide": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "thread": {
+                    "$ref": "#/definitions/MessageThreadSummaryJson"
+                },
+                "updatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "createdDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "toPerson": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "personalMessage": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "attachments": {
+                    "items": {
+                        "$ref": "#/definitions/ItemAttachmentSummaryJson"
+                    },
+                    "type": "array"
+                },
+                "anonymousFrom": {
+                    "$ref": "#/definitions/AnonymousPerson"
+                }
+            },
+            "type": "object"
+        },
+        "TaskDefinitionCreationResponse": {
+            "properties": {
+                "taskIds": {
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "definitionId": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "FilenoteJson": {
+            "properties": {
+                "summary": {
+                    "type": "string"
+                },
+                "restricted": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "workgroup": {
+                    "$ref": "#/definitions/WorkgroupSummaryJson"
+                },
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "updatedById": {
+                    "type": "string"
+                },
+                "author": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "student": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "details": {
+                    "items": {
+                        "$ref": "#/definitions/FilenoteDetailJson"
+                    },
+                    "type": "array"
+                },
+                "aidYearTerm": {
+                    "type": "string"
+                },
+                "createdDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "updatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "categories": {
+                    "items": {
+                        "$ref": "#/definitions/CategorySummaryJson"
+                    },
+                    "type": "array"
+                },
+                "attachments": {
+                    "items": {
+                        "$ref": "#/definitions/ItemAttachmentSummaryJson"
+                    },
+                    "type": "array"
+                },
+                "subcategories": {
+                    "items": {
+                        "$ref": "#/definitions/SubcategorySummaryJson"
+                    },
+                    "type": "array"
+                },
+                "shareType": {
+                    "enum": [
+                        "UNIVERSITY",
+                        "ORGANIZATION",
+                        "WORKGROUP",
+                        "PERSONAL"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "FilenoteDetailJson": {
+            "properties": {
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "detail": {
+                    "type": "string"
+                },
+                "createdDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "filenoteId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "creator": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                }
+            },
+            "type": "object"
+        },
+        "TaskDefinitionJson": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "category": {
+                    "$ref": "#/definitions/CategorySummaryJson"
+                },
+                "detail": {
+                    "type": "string"
+                },
+                "source": {
+                    "$ref": "#/definitions/TaskSourceSummaryJson"
+                },
+                "subcategory": {
+                    "$ref": "#/definitions/SubcategorySummaryJson"
+                },
+                "aidYearTerm": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "workgroup": {
+                    "$ref": "#/definitions/WorkgroupSummaryJson"
+                },
+                "studentVisible": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "defaultShareType": {
+                    "enum": [
+                        "UNIVERSITY",
+                        "ORGANIZATION",
+                        "WORKGROUP",
+                        "PERSONAL"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "MessageThreadCreationResponse": {
+            "properties": {
+                "threadId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "messageId": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "TaskStatusJson": {
+            "properties": {
+                "updatedById": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "open": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "active": {
+                    "default": false,
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "TimesJson": {
+            "properties": {
+                "start": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "end": {
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "MessageThreadSummaryJson": {
+            "properties": {
+                "topic": {
+                    "$ref": "#/definitions/TopicSummaryJson"
+                },
+                "threadId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "restricted": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "assignee": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "updatedBy": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "employeeActive": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "createdBy": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "aidYearTerm": {
+                    "type": "string"
+                },
+                "topicPerson": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "updatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "createdDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "hasAttachments": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "studentActive": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "categories": {
+                    "items": {
+                        "$ref": "#/definitions/CategorySummaryJson"
+                    },
+                    "type": "array"
+                },
+                "subcategories": {
+                    "items": {
+                        "$ref": "#/definitions/SubcategorySummaryJson"
+                    },
+                    "type": "array"
+                },
+                "shareType": {
+                    "enum": [
+                        "UNIVERSITY",
+                        "ORGANIZATION",
+                        "WORKGROUP",
+                        "PERSONAL"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "MessageSummaryJson": {
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "threadId": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "status": {
+                    "enum": [
+                        "UNREAD",
+                        "READ",
+                        "REPLIED",
+                        "FORWARDED",
+                        "UNKNOWN"
+                    ],
+                    "type": "string"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "fromPerson": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "fromWorkgroup": {
+                    "$ref": "#/definitions/WorkgroupSummaryJson"
+                },
+                "toWorkgroup": {
+                    "$ref": "#/definitions/WorkgroupSummaryJson"
+                },
+                "updatedBy": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "hide": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "updatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "createdDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "toPerson": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "personalMessage": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "attachments": {
+                    "items": {
+                        "$ref": "#/definitions/ItemAttachmentSummaryJson"
+                    },
+                    "type": "array"
+                },
+                "anonymousFrom": {
+                    "$ref": "#/definitions/AnonymousPerson"
+                }
+            },
+            "type": "object"
+        },
+        "BatchTaskResponse": {
+            "properties": {
+                "taskIds": {
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "SubcategorySummaryJson": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "categoryId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "active": {
+                    "default": false,
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "TaskJson": {
+            "properties": {
+                "definition": {
+                    "$ref": "#/definitions/TaskDefinitionJson"
+                },
+                "status": {
+                    "$ref": "#/definitions/TaskStatusJson"
+                },
+                "completionUrl": {
+                    "format": "url",
+                    "type": "string"
+                },
+                "restricted": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "type": {
+                    "enum": [
+                        "TASK",
+                        "INCIDENT"
+                    ],
+                    "type": "string"
+                },
+                "trackers": {
+                    "items": {
+                        "$ref": "#/definitions/Tracker"
+                    },
+                    "type": "array"
+                },
+                "creator": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "details": {
+                    "items": {
+                        "$ref": "#/definitions/TaskDetailJson"
+                    },
+                    "type": "array"
+                },
+                "student": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "studentReadFlag": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "expectedCompletion": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "createdDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "updatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "attachments": {
+                    "items": {
+                        "$ref": "#/definitions/ItemAttachmentSummaryJson"
+                    },
+                    "type": "array"
+                },
+                "employee": {
+                    "$ref": "#/definitions/PersonSummaryJson"
+                },
+                "shareType": {
+                    "enum": [
+                        "UNIVERSITY",
+                        "ORGANIZATION",
+                        "WORKGROUP",
+                        "PERSONAL"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StudentInboxItem": {
+            "properties": {
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "category_name": {
+                    "type": "string"
+                },
+                "student_id": {
+                    "type": "string"
+                },
+                "student_read": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "created_date_time": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "MESSAGE",
+                        "TASK",
+                        "INCIDENT",
+                        "APPOINTMENT"
+                    ],
+                    "type": "string"
+                },
+                "thread_id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "has_attachments": {
+                    "default": false,
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "TopicSummaryJson": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "groupId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "restrictedByDefault": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "active": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "shareType": {
+                    "enum": [
+                        "UNIVERSITY",
+                        "ORGANIZATION",
+                        "WORKGROUP",
+                        "PERSONAL"
+                    ],
+                    "type": "string"
+                },
+                "workgroupId": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StudentOverviewItem": {
+            "properties": {
+                "workgroup_name": {
+                    "type": "string"
+                },
+                "detail": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "share_type": {
+                    "enum": [
+                        "UNIVERSITY",
+                        "ORGANIZATION",
+                        "WORKGROUP",
+                        "PERSONAL"
+                    ],
+                    "type": "string"
+                },
+                "student_id": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "MESSAGE",
+                        "TASK",
+                        "INCIDENT",
+                        "APPOINTMENT",
+                        "FILENOTE"
+                    ],
+                    "type": "string"
+                },
+                "has_attachments": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "workgroup_id": {
+                    "type": "string"
+                },
+                "employee_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "subcategory_name": {
+                    "type": "string"
+                },
+                "category_name": {
+                    "type": "string"
+                },
+                "expected_completion": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "created_date_time": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "updated_date_time": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "employee_id": {
+                    "type": "string"
+                },
+                "thread_id": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "AppointmentJsonPagedList": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/AppointmentJson"
+                    },
+                    "type": "array"
+                },
+                "totalResults": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "page": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "YMessageArchive",
+        "description": "YMessage Archive WS",
+        "version": "1.0"
+    }
+}

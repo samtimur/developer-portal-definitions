@@ -1,0 +1,126 @@
+{
+    "basePath": "/domains/servicenow/standardchange/v1",
+    "paths": {
+        "/change_request": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create Standard Changes",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "changes": {
+                                    "items": {
+                                        "properties": {
+                                            "assigned_to": {
+                                                "description": "The Net ID of the user responsible for the Change Request default to the logged in user",
+                                                "minLength": 1,
+                                                "type": "string"
+                                            },
+                                            "short_description": {
+                                                "maxLength": 160,
+                                                "description": "This is the short description of the Change Request",
+                                                "minLength": 1,
+                                                "type": "string"
+                                            },
+                                            "request_date": {
+                                                "description": "YYYY-MM-DD is a valid format",
+                                                "format": "date",
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "description": "This is the description field on the Change Request",
+                                                "type": "string"
+                                            },
+                                            "state": {
+                                                "description": "10-Draft 20-Submitted, defaults to Submitted which is automatically approved",
+                                                "enum": [
+                                                    "10",
+                                                    "20"
+                                                ],
+                                                "type": "string"
+                                            },
+                                            "template_id": {
+                                                "maxLength": 32,
+                                                "description": "The sysId of the standard change template",
+                                                "minLength": 32,
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "template_id",
+                                            "short_description"
+                                        ]
+                                    },
+                                    "description": "Multiple standard change requests may be submitted",
+                                    "minItems": 1,
+                                    "uniqueItems": true,
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "changes"
+                            ],
+                            "type": "object"
+                        },
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "description": "",
+                            "properties": {
+                                "result": {
+                                    "items": {
+                                        "properties": {
+                                            "short_description": {
+                                                "type": "string"
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "change_sys_id": {
+                                                "minLength": 32,
+                                                "type": "string"
+                                            },
+                                            "number": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "minItems": 1,
+                                    "uniqueItems": true,
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "result"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "OK"
+                    }
+                },
+                "operationId": "Create Standard Change Request"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "title": "StandardChange",
+        "description": "Create Standard Changes through web service.",
+        "contact": {
+            "email": "oittools-ft@byu.edu",
+            "name": "OIT Tools Team"
+        },
+        "version": "v1"
+    }
+}

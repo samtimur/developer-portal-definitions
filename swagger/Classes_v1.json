@@ -1,0 +1,1016 @@
+{
+  "basePath": "/byuapi/classes/1.0.0",
+  "paths": {
+    "/*": {
+      "get": {
+        "x-auth-type": "Application & Application User",
+        "tags": [
+          "Classes"
+        ],
+        "summary": "Classes",
+        "x-throttling-tier": "Unlimited",
+        "description": "Returns a collection of AIM Classes",
+        "parameters": [
+          {
+            "description": "Enrollment period in which the class is offered",
+            "name": "year_term",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "The block of the AIM Class",
+            "name": "block",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "The subject area of the class offering",
+            "name": "teaching_area",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "The number designator for the course",
+            "name": "course_number",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "The level of the course",
+            "name": "course_level",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "The type of section (DAY, EVENING, SLC)",
+            "name": "section_type",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "How many credit hours the class is worth",
+            "name": "credit_hours",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "The building location of the AIM Class",
+            "name": "building",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "Limit the classes collection to the following days",
+            "name": "days_taught",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "The time the AIM Class begins",
+            "name": "begin_time",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "The time the AIM Class ends",
+            "name": "end_time",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "The teacher over the class",
+            "name": "instructor_id",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "The title of the course",
+            "name": "course_title",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "The description of the course",
+            "name": "course_description",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "Skip into the classes collection before starting to return items",
+            "name": "page_start",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "The number of items of the classes collection returned",
+            "name": "page_size",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "Defines a group of field sets to be returned in collection",
+            "name": "context",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "description": "List of field sets to be returned in collection",
+            "name": "field_sets",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/classes"
+            },
+            "description": "Collection Retrieved"
+          },
+          "204": {
+            "schema": {
+              "$ref": "#/definitions/classes"
+            },
+            "description": "page_start is too large for the collection returned"
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/error"
+            },
+            "description": "Invalid Request - unable to interpret request"
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/error"
+            },
+            "description": "Authentication required to access data"
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/error"
+            },
+            "description": "Access denied to protected data"
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/classes"
+            },
+            "description": "No Classes satisfy the query parameters - the collection is empty"
+          },
+          "409": {
+            "schema": {
+              "$ref": "#/definitions/error"
+            },
+            "description": "Query parameters conflict or are malformed"
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/error"
+            },
+            "description": "Unexpected error"
+          }
+        },
+        "operationId": "getClasses"
+      }
+    }
+  },
+  "host": "api.byu.edu:443",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "swagger": "2.0",
+  "definitions": {
+    "classes": {
+      "description": "A collection of Classes",
+      "properties": {
+        "values": {
+          "items": {
+            "$ref": "#/definitions/class"
+          },
+          "type": "array"
+        },
+        "links": {
+          "$ref": "#/definitions/classes_links"
+        },
+        "metadata": {
+          "$ref": "#/definitions/metadata"
+        }
+      },
+      "required": [
+        "values"
+      ],
+      "type": "object"
+    },
+    "assigned_instructor_links": {
+      "description": "Hypermedia Links that impact the specific instructor",
+      "properties": {
+        "assigned_instructors.getInstructor": {
+          "$ref": "#/definitions/link"
+        },
+        "assigned_instructors.deleteInstructor": {
+          "$ref": "#/definitions/link"
+        },
+        "assigned_instructors.modifyInstructor": {
+          "$ref": "#/definitions/link"
+        }
+      },
+      "type": "object"
+    },
+    "assigned_instructors": {
+      "description": "A collection of Instructors assigned to a class",
+      "properties": {
+        "values": {
+          "items": {
+            "$ref": "#/definitions/assigned_instructor"
+          },
+          "type": "array"
+        },
+        "links": {
+          "$ref": "#/definitions/assigned_instructors_links"
+        },
+        "metadata": {
+          "$ref": "#/definitions/metadata"
+        }
+      },
+      "type": "object"
+    },
+    "assigned_schedule": {
+      "description": "Schedule for a class",
+      "properties": {
+        "schedule_id": {
+          "$ref": "#/definitions/api_string"
+        },
+        "begin_time": {
+          "$ref": "#/definitions/api_string"
+        },
+        "set_up_id": {
+          "$ref": "#/definitions/api_string"
+        },
+        "date_time_updated": {
+          "$ref": "#/definitions/api_date"
+        },
+        "use_end_date": {
+          "$ref": "#/definitions/api_date"
+        },
+        "sun": {
+          "$ref": "#/definitions/api_string"
+        },
+        "fri": {
+          "$ref": "#/definitions/api_string"
+        },
+        "days_taught": {
+          "$ref": "#/definitions/api_string"
+        },
+        "thu": {
+          "$ref": "#/definitions/api_string"
+        },
+        "time_taught": {
+          "$ref": "#/definitions/api_string"
+        },
+        "title_code": {
+          "$ref": "#/definitions/api_string"
+        },
+        "curriculum_id": {
+          "$ref": "#/definitions/api_string"
+        },
+        "schedule_type": {
+          "$ref": "#/definitions/api_string"
+        },
+        "use_start_date": {
+          "$ref": "#/definitions/api_date"
+        },
+        "institution": {
+          "$ref": "#/definitions/api_string"
+        },
+        "building": {
+          "$ref": "#/definitions/api_string"
+        },
+        "section_number": {
+          "$ref": "#/definitions/api_string"
+        },
+        "allow_conflict": {
+          "$ref": "#/definitions/api_string"
+        },
+        "status": {
+          "$ref": "#/definitions/api_string"
+        },
+        "wed": {
+          "$ref": "#/definitions/api_string"
+        },
+        "mon": {
+          "$ref": "#/definitions/api_string"
+        },
+        "links": {
+          "$ref": "#/definitions/assigned_schedule_links"
+        },
+        "year_term": {
+          "$ref": "#/definitions/api_string"
+        },
+        "set_up_name": {
+          "$ref": "#/definitions/api_string"
+        },
+        "sequence_number": {
+          "$ref": "#/definitions/api_number"
+        },
+        "updated_by_id": {
+          "$ref": "#/definitions/api_person_id"
+        },
+        "sat": {
+          "$ref": "#/definitions/api_string"
+        },
+        "end_time": {
+          "$ref": "#/definitions/api_string"
+        },
+        "schedule_reason": {
+          "$ref": "#/definitions/api_string"
+        },
+        "set_up_description": {
+          "$ref": "#/definitions/api_string"
+        },
+        "tue": {
+          "$ref": "#/definitions/api_string"
+        },
+        "updated_by_name": {
+          "$ref": "#/definitions/api_string"
+        },
+        "room": {
+          "$ref": "#/definitions/api_string"
+        }
+      },
+      "type": "object"
+    },
+    "error": {
+      "description": "Error Information",
+      "properties": {
+        "explanation": {
+          "type": "string"
+        },
+        "error_data": {
+          "type": "string"
+        },
+        "return_code": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "assigned_instructors_links": {
+      "description": "Hypermedia Links that impact the entire collection",
+      "properties": {
+        "assigned_instructors.getInstructors": {
+          "$ref": "#/definitions/link"
+        }
+      },
+      "type": "object"
+    },
+    "api_person_id": {
+      "description": "A generic definition of a person ID for the BYU University API",
+      "properties": {
+        "display_label": {
+          "type": "string"
+        },
+        "related_resource": {
+          "type": "string"
+        },
+        "value": {
+          "pattern": "^[0-9]{9}$",
+          "type": "string"
+        },
+        "api_type": {
+          "enum": [
+            "modifiable",
+            "read-only",
+            "related",
+            "system"
+          ],
+          "type": "string"
+        },
+        "key": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "api_type"
+      ],
+      "type": "object"
+    },
+    "link": {
+      "description": "Hypermedia link format",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "DELETE",
+            "GET",
+            "OPTIONS",
+            "POST",
+            "PUT"
+          ],
+          "type": "string"
+        },
+        "rel": {
+          "type": "string"
+        },
+        "href": {
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rel",
+        "href",
+        "method",
+        "title"
+      ],
+      "type": "object"
+    },
+    "assigned_schedules": {
+      "description": "A collection of assigned_schedules",
+      "properties": {
+        "values": {
+          "items": {
+            "$ref": "#/definitions/assigned_schedule"
+          },
+          "type": "array"
+        },
+        "links": {
+          "$ref": "#/definitions/assigned_schedules_links"
+        },
+        "metadata": {
+          "$ref": "#/definitions/metadata"
+        }
+      },
+      "type": "object"
+    },
+    "class": {
+      "description": "A specific class",
+      "properties": {
+        "assigned_instructors": {
+          "$ref": "#/definitions/assigned_instructors"
+        },
+        "basic": {
+          "$ref": "#/definitions/basic"
+        },
+        "assigned_schedules": {
+          "$ref": "#/definitions/assigned_schedules"
+        }
+      },
+      "required": [
+        "basic"
+      ],
+      "type": "object"
+    },
+    "classes_links": {
+      "description": "Hypermedia Links that impact the entire Classes collection",
+      "properties": {
+        "classes.info": {
+          "$ref": "#/definitions/link"
+        }
+      },
+      "type": "object"
+    },
+    "assigned_instructor": {
+      "description": "Assigned instructors for a class",
+      "properties": {
+        "section_number": {
+          "$ref": "#/definitions/api_string"
+        },
+        "credit_institution": {
+          "$ref": "#/definitions/api_string"
+        },
+        "instructor_name": {
+          "$ref": "#/definitions/api_string"
+        },
+        "person_id": {
+          "$ref": "#/definitions/api_person_id"
+        },
+        "date_time_updated": {
+          "$ref": "#/definitions/api_date"
+        },
+        "links": {
+          "$ref": "#/definitions/assigned_instructor_links"
+        },
+        "year_term": {
+          "$ref": "#/definitions/api_string"
+        },
+        "net_id": {
+          "$ref": "#/definitions/api_string"
+        },
+        "updated_by_id": {
+          "$ref": "#/definitions/api_person_id"
+        },
+        "title_code": {
+          "$ref": "#/definitions/api_string"
+        },
+        "curriculum_id": {
+          "$ref": "#/definitions/api_string"
+        },
+        "byu_id": {
+          "$ref": "#/definitions/api_string"
+        },
+        "instructor_type": {
+          "$ref": "#/definitions/api_string"
+        },
+        "updated_by_name": {
+          "$ref": "#/definitions/api_string"
+        },
+        "email_address": {
+          "$ref": "#/definitions/api_string"
+        }
+      },
+      "type": "object"
+    },
+    "assigned_schedule_links": {
+      "description": "Hypermedia Links that impact the specific schedule",
+      "properties": {
+        "assigned_schedules.deleteSchedule": {
+          "$ref": "#/definitions/link"
+        },
+        "assigned_schedules.modifySchedule": {
+          "$ref": "#/definitions/link"
+        },
+        "assigned_schedules.getSchedule": {
+          "$ref": "#/definitions/link"
+        }
+      },
+      "type": "object"
+    },
+    "assigned_schedules_links": {
+      "description": "Hypermedia Links that impact the entire collection",
+      "properties": {
+        "assigned_schedules.getSchedules": {
+          "$ref": "#/definitions/link"
+        }
+      },
+      "type": "object"
+    },
+    "contexts_available": {
+      "description": "",
+      "properties": {
+        "summary": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "proof": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "class_schedule": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "class_roll": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "class_schedule_record": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "api_date": {
+      "description": "BYU API date property that is a key",
+      "properties": {
+        "display_label": {
+          "type": "string"
+        },
+        "related_resource": {
+          "type": "string"
+        },
+        "value": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "api_type": {
+          "enum": [
+            "modifiable",
+            "read-only",
+            "related",
+            "system"
+          ],
+          "type": "string"
+        },
+        "key": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "api_type"
+      ],
+      "type": "object"
+    },
+    "class_links": {
+      "description": "Hypermedia Links that impact a specific Class",
+      "properties": {
+        "basic.putStudentInWaitlist": {
+          "$ref": "#/definitions/link"
+        },
+        "basic.enrollStudentInClass": {
+          "$ref": "#/definitions/link"
+        },
+        "basic.modifyClass": {
+          "$ref": "#/definitions/link"
+        },
+        "basic.putStudentInWaitlistWithHours": {
+          "$ref": "#/definitions/link"
+        },
+        "basic.enrollStudentWithPermissionCodeWithHours": {
+          "$ref": "#/definitions/link"
+        },
+        "basic.enrollStudentWithPermissionCode": {
+          "$ref": "#/definitions/link"
+        },
+        "basic.enrollStudentInClassWithHours": {
+          "$ref": "#/definitions/link"
+        },
+        "basic.deleteClass": {
+          "$ref": "#/definitions/link"
+        },
+        "basic.getClassData": {
+          "$ref": "#/definitions/link"
+        }
+      },
+      "type": "object"
+    },
+    "api_number": {
+      "description": "A generic numeric field for the BYU University API",
+      "properties": {
+        "display_label": {
+          "type": "string"
+        },
+        "related_resource": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        },
+        "api_type": {
+          "enum": [
+            "modifiable",
+            "read-only",
+            "related",
+            "system"
+          ],
+          "type": "string"
+        },
+        "key": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "api_type"
+      ],
+      "type": "object"
+    },
+    "basic": {
+      "description": "Class Basic Item",
+      "properties": {
+        "grade_roll_type": {
+          "$ref": "#/definitions/api_string"
+        },
+        "honors": {
+          "$ref": "#/definitions/api_string"
+        },
+        "section_type": {
+          "$ref": "#/definitions/api_string"
+        },
+        "minimum_credit_hours": {
+          "$ref": "#/definitions/api_number"
+        },
+        "combine_linked_counts": {
+          "$ref": "#/definitions/api_string"
+        },
+        "enrollment_status": {
+          "$ref": "#/definitions/api_string"
+        },
+        "link_to_section_number": {
+          "$ref": "#/definitions/api_string"
+        },
+        "link_to_curriculum_id": {
+          "$ref": "#/definitions/api_string"
+        },
+        "reg_end_date": {
+          "$ref": "#/definitions/api_date"
+        },
+        "grade_year_term": {
+          "$ref": "#/definitions/api_string"
+        },
+        "teaching_area": {
+          "$ref": "#/definitions/api_string"
+        },
+        "course_when_taught": {
+          "$ref": "#/definitions/api_string"
+        },
+        "course_title": {
+          "$ref": "#/definitions/api_string"
+        },
+        "block_code": {
+          "$ref": "#/definitions/api_string"
+        },
+        "title_code": {
+          "$ref": "#/definitions/api_string"
+        },
+        "curriculum_id": {
+          "$ref": "#/definitions/api_string"
+        },
+        "withdraw_deadline_date": {
+          "$ref": "#/definitions/api_date"
+        },
+        "course_description": {
+          "$ref": "#/definitions/api_string"
+        },
+        "enrollment_counts": {
+          "$ref": "#/definitions/enrollment_counts"
+        },
+        "link_to_year_term": {
+          "$ref": "#/definitions/api_string"
+        },
+        "link_relation": {
+          "$ref": "#/definitions/api_string"
+        },
+        "reg_method": {
+          "$ref": "#/definitions/api_string"
+        },
+        "fixed_or_variable": {
+          "$ref": "#/definitions/api_string"
+        },
+        "class_status": {
+          "$ref": "#/definitions/api_string"
+        },
+        "section_number": {
+          "$ref": "#/definitions/api_string"
+        },
+        "credit_institution": {
+          "$ref": "#/definitions/api_string"
+        },
+        "service_learning": {
+          "$ref": "#/definitions/api_string"
+        },
+        "course_suffix": {
+          "$ref": "#/definitions/api_string"
+        },
+        "course_number": {
+          "$ref": "#/definitions/api_string"
+        },
+        "lab_quiz_flag": {
+          "$ref": "#/definitions/api_string"
+        },
+        "combine_linked_rolls": {
+          "$ref": "#/definitions/api_string"
+        },
+        "links": {
+          "$ref": "#/definitions/class_links"
+        },
+        "year_term": {
+          "$ref": "#/definitions/api_string"
+        },
+        "credit_hours": {
+          "$ref": "#/definitions/api_number"
+        },
+        "fee": {
+          "$ref": "#/definitions/api_string"
+        },
+        "class_start_date": {
+          "$ref": "#/definitions/api_date"
+        },
+        "class_end_date": {
+          "$ref": "#/definitions/api_date"
+        },
+        "waitlist_status": {
+          "$ref": "#/definitions/api_string"
+        },
+        "course_prerequisites": {
+          "$ref": "#/definitions/api_string"
+        },
+        "control_mix_date": {
+          "$ref": "#/definitions/api_date"
+        },
+        "link_to_title_code": {
+          "$ref": "#/definitions/api_string"
+        },
+        "reg_start_date": {
+          "$ref": "#/definitions/api_date"
+        }
+      },
+      "type": "object"
+    },
+    "enrollment_counts": {
+      "description": "",
+      "properties": {
+        "seats_available": {
+          "$ref": "#/definitions/api_number"
+        },
+        "unused_permission_codes": {
+          "$ref": "#/definitions/api_number"
+        },
+        "total_requests": {
+          "$ref": "#/definitions/api_number"
+        },
+        "waitlist_count": {
+          "$ref": "#/definitions/api_number"
+        },
+        "class_size": {
+          "$ref": "#/definitions/api_number"
+        },
+        "total_adds": {
+          "$ref": "#/definitions/api_number"
+        },
+        "total_enrolled": {
+          "$ref": "#/definitions/api_number"
+        },
+        "total_drops": {
+          "$ref": "#/definitions/api_number"
+        }
+      },
+      "type": "object"
+    },
+    "api_string": {
+      "description": "A generic description field for the BYU University API",
+      "properties": {
+        "desc": {
+          "type": "string"
+        },
+        "display_label": {
+          "type": "string"
+        },
+        "related_resource": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "ext_desc": {
+          "type": "string"
+        },
+        "api_type": {
+          "enum": [
+            "modifiable",
+            "read-only",
+            "related",
+            "system"
+          ],
+          "type": "string"
+        },
+        "key": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "api_type"
+      ],
+      "type": "object"
+    },
+    "metadata": {
+      "properties": {
+        "contexts_available": {
+          "$ref": "#/definitions/contexts_available"
+        },
+        "page_start": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "page_size": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "field_sets_returned": {
+          "items": {
+            "enum": [
+              "basic",
+              "enrollment_counts",
+              "add_approved_students",
+              "assigned_instructors",
+              "class_limitations",
+              "assigned_schedules",
+              "course_limitations",
+              "enrolled_students",
+              "linked_classes",
+              "notes",
+              "permission_to_add_codes",
+              "prerequisites",
+              "class_headers",
+              "supplemental_counts",
+              "waitlisted_students",
+              "enrolled_students_log",
+              "waitlisted_students_log"
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "page_end": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "default_field_sets": {
+          "items": {
+            "enum": [
+              "basic",
+              "enrollment_counts",
+              "add_approved_students",
+              "assigned_instructors",
+              "class_limitations",
+              "assigned_schedules",
+              "course_limitations",
+              "enrolled_students",
+              "linked_classes",
+              "notes",
+              "permission_to_add_codes",
+              "prerequisites",
+              "class_headers",
+              "supplemental_counts",
+              "waitlisted_students",
+              "enrolled_students_log",
+              "waitlisted_students_log"
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "max_page_size": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "collection_size": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "default_page_size": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "field_sets_available": {
+          "items": {
+            "enum": [
+              "basic",
+              "enrollment_counts",
+              "add_approved_students",
+              "assigned_instructors",
+              "class_limitations",
+              "assigned_schedules",
+              "course_limitations",
+              "enrolled_students",
+              "linked_classes",
+              "notes",
+              "permission_to_add_codes",
+              "prerequisites",
+              "class_headers",
+              "supplemental_counts",
+              "waitlisted_students",
+              "enrolled_students_log",
+              "waitlisted_students_log"
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "info": {
+    "title": "Classes",
+    "description": "Class Resource of the University API",
+    "version": "1.0.0"
+  }
+}

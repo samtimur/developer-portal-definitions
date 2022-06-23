@@ -1,0 +1,839 @@
+{
+    "basePath": "/domains/legacy/academic/classschedule/offerings/v1",
+    "x-mock_json": {
+        "CourseOfferingService": {
+            "response": {
+                "termDates": "Winter 2018 (08 Jan 2018 - 18 Apr 2018)",
+                "titleCode": "002",
+                "catalogNumber": "142",
+                "courseTotals": [
+                    {
+                        "seatsAvailable": "348",
+                        "capacity": "1250",
+                        "enrollment": "654",
+                        "waitlisted": "0",
+                        "raincheck": "0",
+                        "size": "1002"
+                    }
+                ],
+                "curriculumID": "01489",
+                "catalogSuffix": "",
+                "transcriptTitle": "Intro to Computer Programming",
+                "courseList": [
+                    {
+                        "startDate": "08 Jan 2018",
+                        "building": "TMCB",
+                        "envelopes": "",
+                        "instructor": "Teacher, Professor",
+                        "honors": "",
+                        "classTime": "9:00a - 9:50a",
+                        "classDays": "MWF",
+                        "totalEnrolled": "118",
+                        "sectionNumber": "001",
+                        "credits": "3.0",
+                        "waitlisted": "0",
+                        "endDate": "18 Apr 2018",
+                        "regMethod": "O",
+                        "raincheck": "",
+                        "size": "203",
+                        "labQuizSection": "",
+                        "sectionType": "",
+                        "availableSeats": 85,
+                        "room": "1170"
+                    }
+                ],
+                "departmentName": "C S"
+            },
+            "request": {
+                "status": 200,
+                "resource": "/json/01489/002/20181/",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{curriculumID_teachingArea}/{titleCode_catalogNumber}/{yearTerm}": {
+            "get": {
+                "summary": "Shows courses offered by specified Curriculum ID and Title Code OR Shows courses offered by a specified Teaching Area and Catalog Number",
+                "tags": [
+                    "CourseOfferingsService"
+                ],
+                "description": "Shows courses offered by specified Curriculum ID and Title Code OR Shows courses offered by a specified Teaching Area and Catalog Number",
+                "parameters": [
+                    {
+                        "description": "Identification of the Curriculum courses are in -> 5 digit int OR Determines a specific teaching area ->String of 3 to 5 chars",
+                        "name": "curriculumID_teachingArea",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "title code of the courses -> 3 digit int OR A specific catalog number -> 3 digit int, sometimes has apended char",
+                        "name": "titleCode_catalogNumber",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "year and term specified",
+                        "name": "yearTerm",
+                        "format": "[1-2][0-9]{3}[1345]",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "termDates": {
+                                            "type": "string"
+                                        },
+                                        "titleCode": {
+                                            "type": "string"
+                                        },
+                                        "catalogNumber": {
+                                            "type": "string"
+                                        },
+                                        "courseTotals": {
+                                            "items": {
+                                                "properties": {
+                                                    "seatsAvailable": {
+                                                        "type": "string"
+                                                    },
+                                                    "capacity": {
+                                                        "type": "string"
+                                                    },
+                                                    "enrollment": {
+                                                        "type": "string"
+                                                    },
+                                                    "waitlisted": {
+                                                        "type": "string"
+                                                    },
+                                                    "raincheck": {
+                                                        "type": "string"
+                                                    },
+                                                    "size": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "curriculumID": {
+                                            "type": "string"
+                                        },
+                                        "catalogSuffix": {
+                                            "type": "string"
+                                        },
+                                        "transcriptTitle": {
+                                            "type": "string"
+                                        },
+                                        "courseList": {
+                                            "items": {
+                                                "properties": {
+                                                    "startDate": {
+                                                        "type": "string"
+                                                    },
+                                                    "building": {
+                                                        "type": "string"
+                                                    },
+                                                    "envelopes": {
+                                                        "type": "string"
+                                                    },
+                                                    "instructor": {
+                                                        "type": "string"
+                                                    },
+                                                    "honors": {
+                                                        "type": "string"
+                                                    },
+                                                    "classTime": {
+                                                        "type": "string"
+                                                    },
+                                                    "classDays": {
+                                                        "type": "string"
+                                                    },
+                                                    "totalEnrolled": {
+                                                        "type": "string"
+                                                    },
+                                                    "sectionNumber": {
+                                                        "type": "string"
+                                                    },
+                                                    "credits": {
+                                                        "type": "string"
+                                                    },
+                                                    "waitlisted": {
+                                                        "type": "string"
+                                                    },
+                                                    "endDate": {
+                                                        "type": "string"
+                                                    },
+                                                    "regMethod": {
+                                                        "type": "string"
+                                                    },
+                                                    "raincheck": {
+                                                        "type": "string"
+                                                    },
+                                                    "size": {
+                                                        "type": "string"
+                                                    },
+                                                    "labQuizSection": {
+                                                        "type": "string"
+                                                    },
+                                                    "sectionType": {
+                                                        "type": "string"
+                                                    },
+                                                    "availableSeats": {
+                                                        "type": "integer"
+                                                    },
+                                                    "room": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "departmentName": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "termDates": "Winter 2018 (08 Jan 2018 - 18 Apr 2018)",
+                                    "titleCode": "002",
+                                    "catalogNumber": "142",
+                                    "courseTotals": [
+                                        {
+                                            "seatsAvailable": "348",
+                                            "capacity": "1250",
+                                            "enrollment": "654",
+                                            "waitlisted": "0",
+                                            "raincheck": "0",
+                                            "size": "1002"
+                                        }
+                                    ],
+                                    "curriculumID": "01489",
+                                    "catalogSuffix": "",
+                                    "transcriptTitle": "Intro to Computer Programming",
+                                    "courseList": [
+                                        {
+                                            "startDate": "08 Jan 2018",
+                                            "building": "TMCB",
+                                            "envelopes": "",
+                                            "instructor": "Teacher, Professor",
+                                            "honors": "",
+                                            "classTime": "9:00a - 9:50a",
+                                            "classDays": "MWF",
+                                            "totalEnrolled": "118",
+                                            "sectionNumber": "001",
+                                            "credits": "3.0",
+                                            "waitlisted": "0",
+                                            "endDate": "18 Apr 2018",
+                                            "regMethod": "O",
+                                            "raincheck": "",
+                                            "size": "203",
+                                            "labQuizSection": "",
+                                            "sectionType": "",
+                                            "availableSeats": 85,
+                                            "room": "1170"
+                                        }
+                                    ],
+                                    "departmentName": "C S"
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/json/01489/002/20181/",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetCourseOfferingByCurriculumIDTitleCodeORTeachingAreaCatalogNumber",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "startDate": {
+            "type": "string"
+        },
+        "titleCode": {
+            "type": "string"
+        },
+        "honors": {
+            "type": "string"
+        },
+        "instructor": {
+            "type": "string"
+        },
+        "classDays": {
+            "type": "string"
+        },
+        "sectionNumber": {
+            "type": "string"
+        },
+        "credits": {
+            "type": "string"
+        },
+        "regMethod": {
+            "type": "string"
+        },
+        "waitlisted": {
+            "type": "string"
+        },
+        "endDate": {
+            "type": "string"
+        },
+        "raincheck": {
+            "type": "string"
+        },
+        "response": {
+            "properties": {
+                "termDates": {
+                    "type": "string"
+                },
+                "titleCode": {
+                    "type": "string"
+                },
+                "catalogNumber": {
+                    "type": "string"
+                },
+                "courseTotals": {
+                    "items": {
+                        "properties": {
+                            "seatsAvailable": {
+                                "type": "string"
+                            },
+                            "capacity": {
+                                "type": "string"
+                            },
+                            "enrollment": {
+                                "type": "string"
+                            },
+                            "waitlisted": {
+                                "type": "string"
+                            },
+                            "raincheck": {
+                                "type": "string"
+                            },
+                            "size": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "curriculumID": {
+                    "type": "string"
+                },
+                "catalogSuffix": {
+                    "type": "string"
+                },
+                "transcriptTitle": {
+                    "type": "string"
+                },
+                "courseList": {
+                    "items": {
+                        "properties": {
+                            "startDate": {
+                                "type": "string"
+                            },
+                            "building": {
+                                "type": "string"
+                            },
+                            "envelopes": {
+                                "type": "string"
+                            },
+                            "instructor": {
+                                "type": "string"
+                            },
+                            "honors": {
+                                "type": "string"
+                            },
+                            "classTime": {
+                                "type": "string"
+                            },
+                            "classDays": {
+                                "type": "string"
+                            },
+                            "totalEnrolled": {
+                                "type": "string"
+                            },
+                            "sectionNumber": {
+                                "type": "string"
+                            },
+                            "credits": {
+                                "type": "string"
+                            },
+                            "waitlisted": {
+                                "type": "string"
+                            },
+                            "endDate": {
+                                "type": "string"
+                            },
+                            "regMethod": {
+                                "type": "string"
+                            },
+                            "raincheck": {
+                                "type": "string"
+                            },
+                            "size": {
+                                "type": "string"
+                            },
+                            "labQuizSection": {
+                                "type": "string"
+                            },
+                            "sectionType": {
+                                "type": "string"
+                            },
+                            "availableSeats": {
+                                "type": "integer"
+                            },
+                            "room": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "departmentName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "termDates": {
+            "type": "string"
+        },
+        "labQuizSection": {
+            "type": "string"
+        },
+        "seatsAvailable": {
+            "type": "string"
+        },
+        "catalogNumber": {
+            "type": "string"
+        },
+        "courseTotals": {
+            "items": {
+                "properties": {
+                    "seatsAvailable": {
+                        "type": "string"
+                    },
+                    "capacity": {
+                        "type": "string"
+                    },
+                    "enrollment": {
+                        "type": "string"
+                    },
+                    "waitlisted": {
+                        "type": "string"
+                    },
+                    "raincheck": {
+                        "type": "string"
+                    },
+                    "size": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "transcriptTitle": {
+            "type": "string"
+        },
+        "courseList": {
+            "items": {
+                "properties": {
+                    "startDate": {
+                        "type": "string"
+                    },
+                    "building": {
+                        "type": "string"
+                    },
+                    "envelopes": {
+                        "type": "string"
+                    },
+                    "instructor": {
+                        "type": "string"
+                    },
+                    "honors": {
+                        "type": "string"
+                    },
+                    "classTime": {
+                        "type": "string"
+                    },
+                    "classDays": {
+                        "type": "string"
+                    },
+                    "totalEnrolled": {
+                        "type": "string"
+                    },
+                    "sectionNumber": {
+                        "type": "string"
+                    },
+                    "credits": {
+                        "type": "string"
+                    },
+                    "waitlisted": {
+                        "type": "string"
+                    },
+                    "endDate": {
+                        "type": "string"
+                    },
+                    "regMethod": {
+                        "type": "string"
+                    },
+                    "raincheck": {
+                        "type": "string"
+                    },
+                    "size": {
+                        "type": "string"
+                    },
+                    "labQuizSection": {
+                        "type": "string"
+                    },
+                    "sectionType": {
+                        "type": "string"
+                    },
+                    "availableSeats": {
+                        "type": "integer"
+                    },
+                    "room": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "capacity": {
+            "type": "string"
+        },
+        "enrollment": {
+            "type": "string"
+        },
+        "availableSeats": {
+            "type": "integer"
+        },
+        "building": {
+            "type": "string"
+        },
+        "envelopes": {
+            "type": "string"
+        },
+        "classTime": {
+            "type": "string"
+        },
+        "status": {
+            "type": "number"
+        },
+        "curriculumID": {
+            "type": "string"
+        },
+        "resource": {
+            "type": "string"
+        },
+        "catalogSuffix": {
+            "type": "string"
+        },
+        "totalEnrolled": {
+            "type": "string"
+        },
+        "departmentName": {
+            "type": "string"
+        },
+        "size": {
+            "type": "string"
+        },
+        "statusMessage": {
+            "type": "string"
+        },
+        "CourseOfferingService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "termDates": {
+                            "type": "string"
+                        },
+                        "titleCode": {
+                            "type": "string"
+                        },
+                        "catalogNumber": {
+                            "type": "string"
+                        },
+                        "courseTotals": {
+                            "items": {
+                                "properties": {
+                                    "seatsAvailable": {
+                                        "type": "string"
+                                    },
+                                    "capacity": {
+                                        "type": "string"
+                                    },
+                                    "enrollment": {
+                                        "type": "string"
+                                    },
+                                    "waitlisted": {
+                                        "type": "string"
+                                    },
+                                    "raincheck": {
+                                        "type": "string"
+                                    },
+                                    "size": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "curriculumID": {
+                            "type": "string"
+                        },
+                        "catalogSuffix": {
+                            "type": "string"
+                        },
+                        "transcriptTitle": {
+                            "type": "string"
+                        },
+                        "courseList": {
+                            "items": {
+                                "properties": {
+                                    "startDate": {
+                                        "type": "string"
+                                    },
+                                    "building": {
+                                        "type": "string"
+                                    },
+                                    "envelopes": {
+                                        "type": "string"
+                                    },
+                                    "instructor": {
+                                        "type": "string"
+                                    },
+                                    "honors": {
+                                        "type": "string"
+                                    },
+                                    "classTime": {
+                                        "type": "string"
+                                    },
+                                    "classDays": {
+                                        "type": "string"
+                                    },
+                                    "totalEnrolled": {
+                                        "type": "string"
+                                    },
+                                    "sectionNumber": {
+                                        "type": "string"
+                                    },
+                                    "credits": {
+                                        "type": "string"
+                                    },
+                                    "waitlisted": {
+                                        "type": "string"
+                                    },
+                                    "endDate": {
+                                        "type": "string"
+                                    },
+                                    "regMethod": {
+                                        "type": "string"
+                                    },
+                                    "raincheck": {
+                                        "type": "string"
+                                    },
+                                    "size": {
+                                        "type": "string"
+                                    },
+                                    "labQuizSection": {
+                                        "type": "string"
+                                    },
+                                    "sectionType": {
+                                        "type": "string"
+                                    },
+                                    "availableSeats": {
+                                        "type": "integer"
+                                    },
+                                    "room": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "departmentName": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "method": {
+            "type": "string"
+        },
+        "sectionType": {
+            "type": "string"
+        },
+        "attributes": {
+            "type": "string"
+        },
+        "room": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicClassScheduleOfferings",
+        "description": "CourseOfferingsService",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

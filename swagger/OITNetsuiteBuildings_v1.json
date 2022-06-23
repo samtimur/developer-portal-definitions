@@ -1,0 +1,56 @@
+{
+    "basePath": "/domains/netsuite/buildings/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/buildings"
+                        },
+                        "description": "The default response type is JSON."
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "building": {
+            "description": "A row represents a single OIT Netsuite Building returned",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "bldg_code": {
+                    "type": "string"
+                },
+                "bnum": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "buildings": {
+            "items": {
+                "$ref": "#/definitions/building"
+            },
+            "type": "array"
+        }
+    },
+    "info": {
+        "title": "OITNetsuiteBuildings",
+        "description": "This web service returns the list of Netsuite Active Buildings",
+        "version": "v1"
+    }
+}

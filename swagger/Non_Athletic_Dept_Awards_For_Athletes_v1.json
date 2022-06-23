@@ -1,0 +1,142 @@
+{
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "returns a list of non-athletic awards for the specified athlete, including Pell Grant and HR Benefit status.",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "maxLength": 9,
+                        "description": "BYU ID",
+                        "minLength": 9,
+                        "name": "byu_id",
+                        "required": false,
+                        "type": "string",
+                        "in": "query",
+                        "allowEmptyValue": true
+                    },
+                    {
+                        "maxLength": 4,
+                        "description": "Aid Year",
+                        "minLength": 1,
+                        "name": "aidyear",
+                        "required": false,
+                        "type": "string",
+                        "in": "query",
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/aidresponse"
+                            },
+                            "type": "array"
+                        },
+                        "description": "athletic response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        },
+                        "description": "failed status"
+                    }
+                }
+            },
+            "options": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "aidresponse": {
+            "properties": {
+                "award_date": {
+                    "type": "string"
+                },
+                "department_description": {
+                    "type": "string"
+                },
+                "award_amount": {
+                    "type": "string"
+                },
+                "academic_status": {
+                    "type": "string"
+                },
+                "item_type_description": {
+                    "type": "string"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "award_type": {
+                    "type": "string"
+                },
+                "item_type": {
+                    "type": "string"
+                },
+                "award_status": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "year_term",
+                "item_type",
+                "award_type",
+                "award_date",
+                "award_amount",
+                "item_type_description",
+                "department_description",
+                "award_status",
+                "academic_status"
+            ],
+            "type": "object"
+        },
+        "errorModel": {
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "error_message": {
+                    "type": "string"
+                },
+                "error_message_number": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "status",
+                "error_message_number",
+                "error_message"
+            ],
+            "type": "object"
+        }
+    },
+    "externalDocs": {
+        "description": "Example Documentation\":\"",
+        "url": "https://www.byu.edu"
+    },
+    "info": {
+        "title": "Non_Athletic_Dept_Awards_For_Athletes",
+        "description": "This web service returns a list of non-athletic awards for the specified athlete, including Pell Grant and HR Benefit status.",
+        "contact": {
+            "email": "fgs@byu.edu",
+            "name": "Application Development - Student Financial Applications team",
+            "url": "<a href=\\\"https://www.byu.edu\">Click Here<\\a>"
+        },
+        "version": "v1"
+    },
+    "basePath": "/domains/erp/sa/y_non_athletic_awards/v1",
+    "host": "api.byu.edu:443"
+}

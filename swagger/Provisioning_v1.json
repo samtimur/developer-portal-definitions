@@ -1,0 +1,211 @@
+{
+    "paths": {
+        "/person/{byu_id}/check-access/{element}": {
+            "get": {
+                "summary": "Check access from a user to a specific application element",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Person's BYU_ID",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Application elements's name",
+                        "name": "element",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/person/{byu_id}/remove-access/{element}": {
+            "delete": {
+                "summary": "Remove access from a user to a specific application element",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Person's BYU_ID",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Application elements's name",
+                        "name": "element",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/person/{byu_id}/email": {
+            "post": {
+                "summary": "Email a user from provisioning",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Person's BYU_ID",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/email"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/person/{byu_id}/add-access": {
+            "put": {
+                "summary": "Add access from a user to a specific application ",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/element"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    },
+                    {
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/person/{byu_id}/add-error": {
+            "put": {
+                "summary": "Add an error from a user to a specific application ",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Person's BYU_ID",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/element"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "element": {
+            "properties": {
+                "byu_id": {
+                    "description": "BYU ID",
+                    "type": "string"
+                },
+                "provisioning_element": {
+                    "description": "element name",
+                    "type": "string"
+                }
+            }
+        },
+        "email": {
+            "properties": {
+                "textMessage": {
+                    "description": "plain text message",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "email address",
+                    "type": "string"
+                },
+                "subject": {
+                    "description": "message subject",
+                    "type": "string"
+                },
+                "htmlMessage": {
+                    "description": "html-formatted message",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "Provisioning",
+        "description": "Endpoints used by applications to edit users within the provisioning system ",
+        "version": "v1.0"
+    },
+    "basePath": "/public/v1.0",
+    "host": "api.byu.edu:443"
+}

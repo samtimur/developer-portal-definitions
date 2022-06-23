@@ -1,0 +1,1264 @@
+{
+    "paths": {
+        "/topic_groups/{topic_group_id}/topics": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a new topic",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The (database) id of the topic group that this topic is a part of",
+                        "name": "topic_group_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/TopicCreateInput"
+                        },
+                        "description": "Request body",
+                        "name": "create_input",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Topic"
+                        },
+                        "description": "A confirmation that the server received the request and will attempt to create the topic in sns, and store it in the database"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all topics",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The (database) id of the topic group that this topic is a part of",
+                        "name": "topic_group_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Topic"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of topics"
+                    }
+                }
+            }
+        },
+        "/topic_groups/{topic_group_id}/topics/{topic_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get information on a specific topic.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The (database) id of the topic to get from the database",
+                        "name": "topic_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The (database) id of the topic group that this topic is a part of",
+                        "name": "topic_group_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Topic"
+                        },
+                        "description": "If successful, returns a 200, with the topic as the response entity."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the logged in user is not part of the BYU_MPN_ADMIN gro group."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the id passed in does not exist in the database."
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "remove a specific topic.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The (database) id of the topic group that this topic is a part of",
+                        "name": "topic_group_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The (database) id of the topic to remove from the database",
+                        "name": "topic_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If successful, returns a 200, with an empty response entity."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the logged in user is not part of the BYU_MPN_ADMIN gro group."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the id passed in does not exist in the database."
+                    }
+                }
+            }
+        },
+        "/devices/{device_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Update an existing device.",
+                "x-throttling-tier": "Unlimited",
+                "description": "This endpoint can be used to update any or all of the following fields: device_name, byu_id, token, and device_platform.\nAny other fields included in the request body will be ignored. This method is also called when a user wishes to log out of their device by including a null byu_id. When the user logs back in this method is called with a valid byu_id in the request body. This method can only be called if you own the device or if you are a part of the BYU_MPN_ADMIN GRO group.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The id that corresponds to the database entry for the device",
+                        "name": "device_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/DeviceUpdateInput"
+                        },
+                        "description": "Request body",
+                        "name": "update_input",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Device"
+                        },
+                        "description": "If successful, returns a 200, with the updated device as the response entity."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the specified device id does not exist in the database then this error is thrown."
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get information on a specific device.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The (database) id of the device to get from the database",
+                        "name": "device_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Device"
+                        },
+                        "description": "If successful, returns a 200, with the device as the response entity."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the logged in user does not match the user to whom the device is registered to in the database, or if the user is not logged in with a BYU account."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the id passed in does not exist in the database."
+                    }
+                }
+            }
+        },
+        "/notifications/{notification_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get information on a specific notification.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The (database) id of the notification to get from the database",
+                        "name": "notification_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Notification"
+                        },
+                        "description": "If successful, returns a 200, with the notification as the response entity."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the logged in user is not part of the BYU_MPN_ADMIN gro group."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the id passed in does not exist in the database."
+                    }
+                }
+            }
+        },
+        "/devices": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a new device",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/DeviceCreateInput"
+                        },
+                        "description": "Request body",
+                        "name": "create_input",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Device"
+                        },
+                        "description": "A confirmation that the server received the request and will attempt to create the device and store it in the database and in sns."
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all devices, optionally filtering by byu_id or platform",
+                "x-throttling-tier": "Unlimited",
+                "description": "If the user is a part of the BYU_MPN_ADMIN GRO group, returns a list of devices as the response entity.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The platform to filter by",
+                        "name": "platforms",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The personId to filter by",
+                        "name": "byu_ids",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Device"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of devices"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/Exception"
+                        },
+                        "description": "This error occurs when the caller is not a part of the BYU_MPN_ADMIN GRO group."
+                    }
+                }
+            }
+        },
+        "/notifications": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a new notification",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/NotificationCreateInput"
+                        },
+                        "description": "Request body",
+                        "name": "create_input",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Notification"
+                        },
+                        "description": "A confirmation that the server received the request and will attempt to create/send the notification, and store it in the database."
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all notifications",
+                "x-throttling-tier": "Unlimited",
+                "description": "If the user is a part of the BYU_MPN_ADMIN GRO group, returns a list of notifications as the response entity.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Notification"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of notifications"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/Exception"
+                        },
+                        "description": "This error occurs when the caller is not a part of the BYU_MPN_ADMIN GRO group."
+                    }
+                }
+            }
+        },
+        "/topic_groups/{topic_group_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get information on a specific topic group.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The (database) id of the group topic to get from the database",
+                        "name": "topic_group_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "A Boolean query parameter indicating whether or not to include topics belonging to each topic group",
+                        "name": "include_topics",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TopicGroup"
+                        },
+                        "description": "If successful, returns a 200, with the topic group as the response entity."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the logged in user is not part of the BYU_MPN_ADMIN gro group."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the id passed in does not exist in the database."
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "remove a specific topic group.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The (database) id of the topic group to remove from the database",
+                        "name": "topic_group_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If successful, returns a 200, with an empty response entity."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the logged in user is not part of the BYU_MPN_ADMIN gro group."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the id passed in does not exist in the database."
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscription_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get information on a specific subscription.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The (database) id of the subscription to get from the database",
+                        "name": "subscription_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Subscription"
+                        },
+                        "description": "If successful, returns a 200, with the subscription as the response entity."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the logged in user is not part of the BYU_MPN_ADMIN gro group."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the id passed in does not exist in the database."
+                    }
+                }
+            }
+        },
+        "/events": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Webhook Endpoint",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Confirmation that the event posted successfully"
+                    }
+                }
+            }
+        },
+        "/status": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Check the status of the web service.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a 200 if the service is running",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/event-topic-mappings/{event_topic_mapping_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Update a specific Event Topic Mapping",
+                "x-throttling-tier": "Unlimited",
+                "description": "If the user is a part of the BYU_MPN_ADMIN GRO group, updates the Event Topic Mapping and returns the updated object.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The (database) id of the event topic mapping to get from the database",
+                        "name": "event_topic_mapping_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/EventTopicMappingInput"
+                        },
+                        "description": "Request body",
+                        "name": "mapping_input",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/EventTopicMapping"
+                            },
+                            "type": "object"
+                        },
+                        "description": "Event Topic Mapping matching the event_topic_mapping_id, if exists"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/Exception"
+                        },
+                        "description": "This error occurs when the caller is not a part of the BYU_MPN_ADMIN GRO group."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/Exception"
+                        },
+                        "description": "This error occurs when the event_topic_mapping_id provided does not exist."
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a specific Event Topic Mapping",
+                "x-throttling-tier": "Unlimited",
+                "description": "If the user is a part of the BYU_MPN_ADMIN GRO group, returns an event topic mapping matching the id.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The (database) id of the event topic mapping to get from the database",
+                        "name": "event_topic_mapping_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/EventTopicMapping"
+                            },
+                            "type": "object"
+                        },
+                        "description": "Event Topic Mapping matching the event_topic_mapping_id, if exists"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/Exception"
+                        },
+                        "description": "This error occurs when the event_topic_mapping_id provided does not exist."
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete a specific Event Topic Mapping",
+                "x-throttling-tier": "Unlimited",
+                "description": "If the user is a part of the BYU_MPN_ADMIN GRO group, deletes the Event Topic Mapping.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The (database) id of the event topic mapping to delete from the database",
+                        "name": "event_topic_mapping_id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If successful, returns a 200, with an empty response entity."
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/Exception"
+                        },
+                        "description": "This error occurs when the caller is not a part of the BYU_MPN_ADMIN GRO group."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/Exception"
+                        },
+                        "description": "This error occurs when the event_topic_mapping_id provided does not exist."
+                    }
+                }
+            }
+        },
+        "/topic_groups": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a new topic group",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/TopicGroupCreateInput"
+                        },
+                        "description": "Request body",
+                        "name": "create_input",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TopicGroup"
+                        },
+                        "description": "A confirmation that the server received the request and will attempt to create the topic group and store it in the database"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all topic groups",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "A Boolean query parameter indicating whether or not to include topics belonging to each topic group",
+                        "name": "include_topics",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "If the group can be subscribed to",
+                        "name": "subscribable",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/TopicGroup"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of topic groups"
+                    }
+                }
+            }
+        },
+        "/event-topic-mappings": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a new event topic mapping",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/EventTopicMappingInput"
+                        },
+                        "description": "Request body",
+                        "name": "mapping_input",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/EventTopicMapping"
+                        },
+                        "description": "A confirmation that the server received the request and updated the database with the new event topic mapping."
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/Exception"
+                        },
+                        "description": "This error occurs when the caller is not a part of the BYU_MPN_ADMIN GRO group."
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all Event Topic Mappings",
+                "x-throttling-tier": "Unlimited",
+                "description": "If the user is a part of the BYU_MPN_ADMIN GRO group, returns a list of event topic mappings.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/EventTopicMapping"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of event topic mappings"
+                    }
+                }
+            }
+        },
+        "/subscriptions": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create a new subscription",
+                "x-throttling-tier": "Unlimited",
+                "description": "Make sure to pass in either a topic id or group topic id that you are subscribing to",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/SubscriptionInput"
+                        },
+                        "description": "Request body",
+                        "name": "create_input",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Subscription"
+                        },
+                        "description": "A confirmation that the server received the request and will attempt to create the subscription, store it in the database, and subscribe you to the request topic in sns."
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all subscriptions",
+                "x-throttling-tier": "Unlimited",
+                "description": "If the user is a part of the BYU_MPN_ADMIN GRO group, returns a list of subscriptions as the response entity. If the user is not part of the BYU_MPN_ADMIN then the query param must include his byuId to view his subscriptions.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The byu id of the person whose subscriptions you want to see",
+                        "name": "byu_ids",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Subscription"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of subscriptions"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/Exception"
+                        },
+                        "description": "This error occurs when the caller is not a part of the BYU_MPN_ADMIN GRO group or the caller is trying to get subscriptions of a byuId other than his own."
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "When the query contains a topic_id this endpoint will delete a single subscription when it contains a topic_group_id it will delete a group of subscriptions, if you pass in both ids then the topic group id subscriptions will be deleted.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The byu id of the person whose subscriptions you want to see",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The id of a topic group to delete",
+                        "name": "topic_group_id",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The id of a topic to delete",
+                        "name": "topic_id",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If successful, returns a 200, with an empty response entity."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the logged in user is not part of the BYU_MPN_ADMIN gro group."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "If the id passed in does not exist in the database."
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "Exception": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "EventTopicMapping": {
+            "properties": {
+                "event_domain": {
+                    "type": "string"
+                },
+                "event_type": {
+                    "type": "string"
+                },
+                "event_entity": {
+                    "type": "string"
+                },
+                "topic_id": {
+                    "type": "integer"
+                },
+                "event_topic_mapping_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "event_topic_mapping_id",
+                "event_type",
+                "event_domain",
+                "event_entity",
+                "topic_id"
+            ],
+            "type": "object"
+        },
+        "SubscriptionInput": {
+            "properties": {
+                "topic_group_id": {
+                    "type": "integer"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "topic_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "byu_id"
+            ],
+            "type": "object"
+        },
+        "Device": {
+            "properties": {
+                "device_name": {
+                    "type": "string"
+                },
+                "endpoint_arn": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "device_id": {
+                    "type": "integer"
+                },
+                "device_platform": {
+                    "type": "string"
+                },
+                "date_registered": {
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "date_registered",
+                "date_time_updated",
+                "device_id",
+                "device_name",
+                "token",
+                "endpoint_arn",
+                "device_platform"
+            ],
+            "type": "object"
+        },
+        "EventTopicMappingInput": {
+            "properties": {
+                "event_domain": {
+                    "type": "string"
+                },
+                "event_type": {
+                    "type": "string"
+                },
+                "event_entity": {
+                    "type": "string"
+                },
+                "topic_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "event_type",
+                "event_domain",
+                "event_entity",
+                "topic_id"
+            ],
+            "type": "object"
+        },
+        "NotificationCreateInput": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "launch_url": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "device_id": {
+                    "type": "integer"
+                },
+                "topic_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "title",
+                "message"
+            ],
+            "type": "object"
+        },
+        "TopicGroup": {
+            "properties": {
+                "topics": {
+                    "items": {
+                        "$ref": "#/definitions/Topic"
+                    },
+                    "type": "array"
+                },
+                "topic_group_id": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "topic_group_id",
+                "name"
+            ],
+            "type": "object"
+        },
+        "Notification": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "launch_url": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "notification_id": {
+                    "type": "integer"
+                },
+                "device_id": {
+                    "type": "integer"
+                },
+                "topic_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "title",
+                "message",
+                "notification_id"
+            ],
+            "type": "object"
+        },
+        "DeviceUpdateInput": {
+            "properties": {
+                "device_name": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "device_platform": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "byu_id"
+            ],
+            "type": "object"
+        },
+        "TopicCreateInput": {
+            "properties": {
+                "topic_group_id": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "topic_group_id"
+            ],
+            "type": "object"
+        },
+        "Subscription": {
+            "properties": {
+                "subscription_id": {
+                    "type": "integer"
+                },
+                "topic_group_id": {
+                    "type": "integer"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "topic_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "subscription_id",
+                "byu_id"
+            ],
+            "type": "object"
+        },
+        "Topic": {
+            "properties": {
+                "subscribable": {
+                    "default": true,
+                    "type": "boolean"
+                },
+                "topic_group_id": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "topic_arn": {
+                    "type": "string"
+                },
+                "topic_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "topic_id",
+                "name",
+                "topic_arn",
+                "topic_group_id"
+            ],
+            "type": "object"
+        },
+        "DeviceCreateInput": {
+            "properties": {
+                "device_name": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "device_platform": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "byu_id",
+                "device_name",
+                "device_platform",
+                "token"
+            ],
+            "type": "object"
+        },
+        "TopicGroupCreateInput": {
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "MobilePushNotificationsV3",
+        "description": "Api to register and unregister mobile devices to receive notifications, and to send notifications to those devices.",
+        "version": "v3"
+    },
+    "basePath": "/domains/mpn/mpn/v3",
+    "host": "api.byu.edu:443"
+}

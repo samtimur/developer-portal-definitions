@@ -1,0 +1,509 @@
+{
+    "basePath": "/domains/legacy/academic/records/studentstandinginfo/v1",
+    "x-mock_json": {
+        "StudentStandingInfoService": {
+            "response": {
+                "person_id": "123456789",
+                "student_level": "U",
+                "student_name": "Student, Name",
+                "byu_id": "123456789",
+                "net_id": "netid_name",
+                "total_hours": "128.0"
+            },
+            "request": {
+                "status": 200,
+                "resource": "/json/single/netid/netid_name/",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        },
+        "StudentStandingInfoServicePackage": {
+            "response": {
+                "request_count": 0,
+                "package_id": 1,
+                "standing_list": []
+            },
+            "request": {
+                "status": 200,
+                "resource": "/result/1",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{action}/{package_id}": {
+            "get": {
+                "summary": "Get standing result",
+                "tags": [
+                    "StudentStatusInfoService"
+                ],
+                "description": "Get standing result",
+                "parameters": [
+                    {
+                        "description": "Determines action to take",
+                        "name": "action",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "package identification",
+                        "name": "package_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "request_count": {
+                                            "type": "number"
+                                        },
+                                        "package_id": {
+                                            "type": "number"
+                                        },
+                                        "standing_list": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "request_count": 0,
+                                    "package_id": 1,
+                                    "standing_list": []
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/result/1",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetStandingResult",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{action}/{id_type}/{id_id_list}": {
+            "get": {
+                "summary": "Get standing single",
+                "tags": [
+                    "StudentStandingInfoService"
+                ],
+                "description": "Get standing single",
+                "parameters": [
+                    {
+                        "description": "Determines action to take",
+                        "name": "action",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Identification type -> netid, byuid, or personid",
+                        "name": "id_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Identification OR list",
+                        "name": "id_id_list",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "person_id": {
+                                            "type": "string"
+                                        },
+                                        "student_level": {
+                                            "type": "string"
+                                        },
+                                        "student_name": {
+                                            "type": "string"
+                                        },
+                                        "byu_id": {
+                                            "type": "string"
+                                        },
+                                        "net_id": {
+                                            "type": "string"
+                                        },
+                                        "total_hours": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "person_id": "123456789",
+                                    "student_level": "U",
+                                    "student_name": "Student, Name",
+                                    "byu_id": "123456789",
+                                    "net_id": "netid_name",
+                                    "total_hours": "128.0"
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/json/single/netid/netid_name/",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetStandingSingle",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "response": {
+            "properties": {
+                "person_id": {
+                    "type": "string"
+                },
+                "student_level": {
+                    "type": "string"
+                },
+                "student_name": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "net_id": {
+                    "type": "string"
+                },
+                "total_hours": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "student_level": {
+            "type": "string"
+        },
+        "person_id": {
+            "type": "string"
+        },
+        "responsePackage": {
+            "properties": {
+                "request_count": {
+                    "type": "number"
+                },
+                "package_id": {
+                    "type": "number"
+                },
+                "standing_list": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "StudentStandingInfoService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "person_id": {
+                            "type": "string"
+                        },
+                        "student_level": {
+                            "type": "string"
+                        },
+                        "student_name": {
+                            "type": "string"
+                        },
+                        "byu_id": {
+                            "type": "string"
+                        },
+                        "net_id": {
+                            "type": "string"
+                        },
+                        "total_hours": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "integer"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "StudentStandingInfoServicePackage": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "request_count": {
+                            "type": "number"
+                        },
+                        "package_id": {
+                            "type": "number"
+                        },
+                        "standing_list": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "integer"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "student_name": {
+            "type": "string"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "integer"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "byu_id": {
+            "type": "string"
+        },
+        "request_count": {
+            "type": "number"
+        },
+        "package_id": {
+            "type": "number"
+        },
+        "standing_list": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "net_id": {
+            "type": "string"
+        },
+        "total_hours": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicRecordsStudentStandingInfo",
+        "description": "This service provides the following information about a student: 1) their graduate/undergraduate status and 2) if an undergraduate, how many hours they have accumulated. The service allows for the submission of up to 200 IDs at a time (valid ID types that can be requested are: Net ID, BYU ID and Person ID).",
+        "version": "v1"
+    }
+}

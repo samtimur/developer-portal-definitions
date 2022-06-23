@@ -1,0 +1,1444 @@
+{
+    "tags": [],
+    "basePath": "/domains/identity/id_match/v1",
+    "x-components": {
+        "requestBodies": {
+            "postBody": {
+                "schema": {
+                    "properties": {
+                        "sex": {
+                            "pattern": "^(M|m|F|f)$",
+                            "type": "string"
+                        },
+                        "phone": {
+                            "x-nullable": true,
+                            "type": "string"
+                        },
+                        "date_of_birth": {
+                            "format": "date",
+                            "type": "string"
+                        },
+                        "address_country_code": {
+                            "x-nullable": true,
+                            "pattern": "^[a-zA-Z]{1,5}$",
+                            "description": "Case insensitive filter of address country code.",
+                            "type": "string"
+                        },
+                        "surname": {
+                            "pattern": "^(?=.*\\S).*$",
+                            "description": "family name",
+                            "type": "string"
+                        },
+                        "address_state_code": {
+                            "x-nullable": true,
+                            "type": "string"
+                        },
+                        "address_city": {
+                            "x-nullable": true,
+                            "type": "string"
+                        },
+                        "cmis_id": {
+                            "x-nullable": true,
+                            "pattern": "^(?=.*\\S).*$",
+                            "description": "Only use with church account.",
+                            "type": "string"
+                        },
+                        "address_line_4": {
+                            "x-nullable": true,
+                            "pattern": "^(?=.*\\S).*$",
+                            "type": "string"
+                        },
+                        "first_name": {
+                            "pattern": "^(?=.*\\S).*$",
+                            "description": "first name",
+                            "type": "string"
+                        },
+                        "address_line_1": {
+                            "x-nullable": true,
+                            "pattern": "^(?=.*\\S).*$",
+                            "type": "string"
+                        },
+                        "email": {
+                            "pattern": "^\\S+@\\S+$",
+                            "type": "string"
+                        },
+                        "church_account_id": {
+                            "pattern": "^(?=.*\\S).*$",
+                            "type": "string"
+                        },
+                        "address_line_3": {
+                            "x-nullable": true,
+                            "pattern": "^(?=.*\\S).*$",
+                            "type": "string"
+                        },
+                        "church_user_name": {
+                            "pattern": "^(?=.*\\S).*$",
+                            "type": "string"
+                        },
+                        "address_line_2": {
+                            "x-nullable": true,
+                            "pattern": "^(?=.*\\S).*$",
+                            "type": "string"
+                        },
+                        "address_postal_code": {
+                            "x-nullable": true,
+                            "type": "string"
+                        },
+                        "phone_country_code": {
+                            "default": "USA",
+                            "pattern": "^[a-zA-Z]{1,5}$",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "first_name",
+                        "surname",
+                        "email",
+                        "church_account_id",
+                        "church_user_name",
+                        "date_of_birth",
+                        "sex"
+                    ],
+                    "type": "object"
+                },
+                "description": "Used to find or create an identity.",
+                "name": "body",
+                "required": true,
+                "in": "body"
+            }
+        },
+        "responses": {
+            "400": {
+                "schema": {
+                    "properties": {
+                        "metadata": {
+                            "readOnly": true,
+                            "additionalProperties": true,
+                            "properties": {
+                                "validation_response": {
+                                    "properties": {
+                                        "message": {
+                                            "default": "OK",
+                                            "x-variable": "validation_response_message",
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "default": 200,
+                                            "x-variable": "validation_response_code",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "validation_information": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "x-variable": "validation_information",
+                                    "type": "array"
+                                },
+                                "cache": {
+                                    "properties": {
+                                        "date_time": {
+                                            "x-variable": "cache_date_time",
+                                            "format": "date-time",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "date_time"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "validation_response"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "metadata"
+                    ],
+                    "type": "object"
+                },
+                "description": "Bad Request",
+                "examples": {
+                    "application/json": {
+                        "metadata": {
+                            "validation_response": {
+                                "message": "Bad Request",
+                                "code": 400
+                            }
+                        }
+                    }
+                }
+            },
+            "401": {
+                "schema": {
+                    "properties": {
+                        "metadata": {
+                            "readOnly": true,
+                            "additionalProperties": true,
+                            "properties": {
+                                "validation_response": {
+                                    "properties": {
+                                        "message": {
+                                            "default": "OK",
+                                            "x-variable": "validation_response_message",
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "default": 200,
+                                            "x-variable": "validation_response_code",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "validation_information": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "x-variable": "validation_information",
+                                    "type": "array"
+                                },
+                                "cache": {
+                                    "properties": {
+                                        "date_time": {
+                                            "x-variable": "cache_date_time",
+                                            "format": "date-time",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "date_time"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "validation_response"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "metadata"
+                    ],
+                    "type": "object"
+                },
+                "description": "Unauthorized",
+                "examples": {
+                    "application/json": {
+                        "metadata": {
+                            "validation_response": {
+                                "message": "Unauthorized",
+                                "code": 401
+                            }
+                        }
+                    }
+                }
+            },
+            "403": {
+                "schema": {
+                    "properties": {
+                        "metadata": {
+                            "readOnly": true,
+                            "additionalProperties": true,
+                            "properties": {
+                                "validation_response": {
+                                    "properties": {
+                                        "message": {
+                                            "default": "OK",
+                                            "x-variable": "validation_response_message",
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "default": 200,
+                                            "x-variable": "validation_response_code",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "validation_information": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "x-variable": "validation_information",
+                                    "type": "array"
+                                },
+                                "cache": {
+                                    "properties": {
+                                        "date_time": {
+                                            "x-variable": "cache_date_time",
+                                            "format": "date-time",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "date_time"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "validation_response"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "metadata"
+                    ],
+                    "type": "object"
+                },
+                "description": "Forbidden",
+                "examples": {
+                    "application/json": {
+                        "metadata": {
+                            "validation_response": {
+                                "message": "Forbidden",
+                                "code": 403
+                            }
+                        }
+                    }
+                }
+            },
+            "409": {
+                "schema": {
+                    "properties": {
+                        "metadata": {
+                            "readOnly": true,
+                            "additionalProperties": true,
+                            "properties": {
+                                "validation_response": {
+                                    "properties": {
+                                        "message": {
+                                            "default": "OK",
+                                            "x-variable": "validation_response_message",
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "default": 200,
+                                            "x-variable": "validation_response_code",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "validation_information": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "x-variable": "validation_information",
+                                    "type": "array"
+                                },
+                                "cache": {
+                                    "properties": {
+                                        "date_time": {
+                                            "x-variable": "cache_date_time",
+                                            "format": "date-time",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "date_time"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "validation_response"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "metadata"
+                    ],
+                    "type": "object"
+                },
+                "description": "Conflict",
+                "examples": {
+                    "application/json": {
+                        "metadata": {
+                            "validation_response": {
+                                "message": "Conflict",
+                                "code": 409
+                            }
+                        }
+                    }
+                }
+            },
+            "500": {
+                "schema": {
+                    "properties": {
+                        "metadata": {
+                            "readOnly": true,
+                            "additionalProperties": true,
+                            "properties": {
+                                "validation_response": {
+                                    "properties": {
+                                        "message": {
+                                            "default": "OK",
+                                            "x-variable": "validation_response_message",
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "default": 200,
+                                            "x-variable": "validation_response_code",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "validation_information": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "x-variable": "validation_information",
+                                    "type": "array"
+                                },
+                                "cache": {
+                                    "properties": {
+                                        "date_time": {
+                                            "x-variable": "cache_date_time",
+                                            "format": "date-time",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "date_time"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "validation_response"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "metadata"
+                    ],
+                    "type": "object"
+                },
+                "description": "Internal Server Error",
+                "examples": {
+                    "application/json": {
+                        "metadata": {
+                            "validation_response": {
+                                "message": "Internal Server Error",
+                                "code": 500
+                            }
+                        }
+                    }
+                }
+            },
+            "502": {
+                "schema": {
+                    "properties": {
+                        "metadata": {
+                            "readOnly": true,
+                            "additionalProperties": true,
+                            "properties": {
+                                "validation_response": {
+                                    "properties": {
+                                        "message": {
+                                            "default": "OK",
+                                            "x-variable": "validation_response_message",
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "default": 200,
+                                            "x-variable": "validation_response_code",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "validation_information": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "x-variable": "validation_information",
+                                    "type": "array"
+                                },
+                                "cache": {
+                                    "properties": {
+                                        "date_time": {
+                                            "x-variable": "cache_date_time",
+                                            "format": "date-time",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "date_time"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "validation_response"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "metadata"
+                    ],
+                    "type": "object"
+                },
+                "description": "Bad Gateway",
+                "examples": {
+                    "application/json": {
+                        "metadata": {
+                            "validation_response": {
+                                "message": "Bad Gateway",
+                                "code": 502
+                            }
+                        }
+                    }
+                }
+            },
+            "504": {
+                "schema": {
+                    "properties": {
+                        "metadata": {
+                            "readOnly": true,
+                            "additionalProperties": true,
+                            "properties": {
+                                "validation_response": {
+                                    "properties": {
+                                        "message": {
+                                            "default": "OK",
+                                            "x-variable": "validation_response_message",
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "default": 200,
+                                            "x-variable": "validation_response_code",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "validation_information": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "x-variable": "validation_information",
+                                    "type": "array"
+                                },
+                                "cache": {
+                                    "properties": {
+                                        "date_time": {
+                                            "x-variable": "cache_date_time",
+                                            "format": "date-time",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "date_time"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "validation_response"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "metadata"
+                    ],
+                    "type": "object"
+                },
+                "description": "Gateway Timeout",
+                "examples": {
+                    "application/json": {
+                        "metadata": {
+                            "validation_response": {
+                                "message": "Gateway Timeout",
+                                "code": 504
+                            }
+                        }
+                    }
+                }
+            },
+            "match": {
+                "schema": {
+                    "properties": {
+                        "person_id": {
+                            "type": "string"
+                        },
+                        "byu_id": {
+                            "type": "string"
+                        },
+                        "metadata": {
+                            "readOnly": true,
+                            "additionalProperties": true,
+                            "properties": {
+                                "validation_response": {
+                                    "properties": {
+                                        "message": {
+                                            "default": "OK",
+                                            "x-variable": "validation_response_message",
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "default": 200,
+                                            "x-variable": "validation_response_code",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "validation_information": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "x-variable": "validation_information",
+                                    "type": "array"
+                                },
+                                "cache": {
+                                    "properties": {
+                                        "date_time": {
+                                            "x-variable": "cache_date_time",
+                                            "format": "date-time",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "date_time"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "validation_response"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "headers": {
+                    "location": {
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "description": "Matched Identity"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/ping": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "text/plain"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Match or create identity",
+                "tags": [
+                    "match"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-operation": "post",
+                "description": "Find a match or create a BYU identity",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "sex": {
+                                    "pattern": "^(M|m|F|f)$",
+                                    "type": "string"
+                                },
+                                "phone": {
+                                    "x-nullable": true,
+                                    "type": "string"
+                                },
+                                "date_of_birth": {
+                                    "format": "date",
+                                    "type": "string"
+                                },
+                                "address_country_code": {
+                                    "x-nullable": true,
+                                    "pattern": "^[a-zA-Z]{1,5}$",
+                                    "description": "Case insensitive filter of address country code.",
+                                    "type": "string"
+                                },
+                                "surname": {
+                                    "pattern": "^(?=.*\\S).*$",
+                                    "description": "family name",
+                                    "type": "string"
+                                },
+                                "address_state_code": {
+                                    "x-nullable": true,
+                                    "type": "string"
+                                },
+                                "address_city": {
+                                    "x-nullable": true,
+                                    "type": "string"
+                                },
+                                "cmis_id": {
+                                    "x-nullable": true,
+                                    "pattern": "^(?=.*\\S).*$",
+                                    "description": "Only use with church account.",
+                                    "type": "string"
+                                },
+                                "address_line_4": {
+                                    "x-nullable": true,
+                                    "pattern": "^(?=.*\\S).*$",
+                                    "type": "string"
+                                },
+                                "first_name": {
+                                    "pattern": "^(?=.*\\S).*$",
+                                    "description": "first name",
+                                    "type": "string"
+                                },
+                                "address_line_1": {
+                                    "x-nullable": true,
+                                    "pattern": "^(?=.*\\S).*$",
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "pattern": "^\\S+@\\S+$",
+                                    "type": "string"
+                                },
+                                "church_account_id": {
+                                    "pattern": "^(?=.*\\S).*$",
+                                    "type": "string"
+                                },
+                                "address_line_3": {
+                                    "x-nullable": true,
+                                    "pattern": "^(?=.*\\S).*$",
+                                    "type": "string"
+                                },
+                                "church_user_name": {
+                                    "pattern": "^(?=.*\\S).*$",
+                                    "type": "string"
+                                },
+                                "address_line_2": {
+                                    "x-nullable": true,
+                                    "pattern": "^(?=.*\\S).*$",
+                                    "type": "string"
+                                },
+                                "address_postal_code": {
+                                    "x-nullable": true,
+                                    "type": "string"
+                                },
+                                "phone_country_code": {
+                                    "default": "USA",
+                                    "pattern": "^[a-zA-Z]{1,5}$",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "first_name",
+                                "surname",
+                                "email",
+                                "church_account_id",
+                                "church_user_name",
+                                "date_of_birth",
+                                "sex"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Used to find or create an identity.",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "person_id": {
+                                    "type": "string"
+                                },
+                                "byu_id": {
+                                    "type": "string"
+                                },
+                                "metadata": {
+                                    "readOnly": true,
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "headers": {
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Matched Identity"
+                    },
+                    "201": {
+                        "schema": {
+                            "properties": {
+                                "person_id": {
+                                    "type": "string"
+                                },
+                                "byu_id": {
+                                    "type": "string"
+                                },
+                                "metadata": {
+                                    "readOnly": true,
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "headers": {
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Matched Identity"
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "readOnly": true,
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Bad Request",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Bad Request",
+                                        "code": 400
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "readOnly": true,
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Unauthorized",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Unauthorized",
+                                        "code": 401
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "readOnly": true,
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Forbidden",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Forbidden",
+                                        "code": 403
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "readOnly": true,
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Conflict",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Conflict",
+                                        "code": 409
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "readOnly": true,
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Internal Server Error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "502": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "readOnly": true,
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Bad Gateway",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Bad Gateway",
+                                        "code": 502
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "504": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "readOnly": true,
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Gateway Timeout",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Gateway Timeout",
+                                        "code": 504
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "post"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "security": [],
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "Match Identity",
+        "description": "Domain Level API used to find possible matching identities before creating another one.",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

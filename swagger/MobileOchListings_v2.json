@@ -1,0 +1,488 @@
+{
+    "paths": {
+        "/listings/{listing_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Add/Remove listing from my favorites",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "listing id",
+                        "name": "listing_id",
+                        "type": "number",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/UpdateFavoriteInput"
+                        },
+                        "description": "flag to add (true) or remove (false) listing from favorite listings",
+                        "name": "input",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BasicMessage"
+                        },
+                        "description": "Successfully added/removed listings from favorites"
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/BasicMessage"
+                        },
+                        "description": "internal error"
+                    }
+                }
+            }
+        },
+        "/listingCodes": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get listing search possible query parameters",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/ListingCodes"
+                            },
+                            "type": "array"
+                        },
+                        "description": "list of query parameters you can use in listing search"
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/BasicMessage"
+                        },
+                        "description": "internal error"
+                    }
+                }
+            }
+        },
+        "/listings": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Search vacancy listings",
+                "x-throttling-tier": "Unlimited",
+                "description": "There are other possible query params, but these are the most used. For more, call the GET /listingCodes endpoint",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Filter search by listing type [Men, Women, Family, Graduate]",
+                        "name": "Listing_listingType",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by facility type [Condo, Exempt Condo, Large Complex, Medium Complex, Small Complex]",
+                        "name": "Other_FacilityType",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by only your favorite listings [true, false]",
+                        "name": "Other_myFavorite",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by lower bounds of rent (meaning rent must be greater than this value)",
+                        "name": "TermContract_rentLow",
+                        "type": "number",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by upper bounds of rent (meaning rent must be less than this value)",
+                        "name": "TermContract_rentHigh",
+                        "type": "number",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by the number of spaces available (spaces available must be greater than or equal to this value)",
+                        "name": "TermContract_spacesAvailable",
+                        "type": "number",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by whether the vacancy is \"shared\" or \"private\"",
+                        "name": "TermContract_sharedPrivate",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by the term the vacancy listing is listed for [Fall, Fall/Winter, Winter, Spring, Spring/Summer, Summer, Year Round]",
+                        "name": "TermContract_availableFor",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by who pays the cable utility bill [Paid by Landlord, Paid by Renter, Hookup Required]",
+                        "name": "Utility_Cable",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by who pays the electricity utility bill [Paid by Landlord, Paid by Renter, Hookup Required]",
+                        "name": "Utility_Electricity",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by who pays the garbage utility bill [Paid by Landlord, Paid by Renter, Hookup Required]",
+                        "name": "Utility_Garbage",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by who pays the gas utility bill [Paid by Landlord, Paid by Renter, Hookup Required]",
+                        "name": "Utility_Gas",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by who pays the internet utility bill [Paid by Landlord, Paid by Renter, Hookup Required]",
+                        "name": "Utility_Internet",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by who pays the phone utility bill [Paid by Landlord, Paid by Renter, Hookup Required]",
+                        "name": "Utility_Phone",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by who pays the sewer utility bill [Paid by Landlord, Paid by Renter, Hookup Required]",
+                        "name": "Utility_Sewer",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Filter search by who pays the water utility bill [Paid by Landlord, Paid by Renter, Hookup Required]",
+                        "name": "Utility_Water",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Listing"
+                            },
+                            "type": "array"
+                        },
+                        "description": "searched listings"
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/BasicMessage"
+                        },
+                        "description": "internal error"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "ListingCodeTermContract": {
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "queryParamName": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "ListingCodeOther": {
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "queryParamName": {
+                    "type": "string"
+                },
+                "possibleValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "ListingCodeListing": {
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "queryParamName": {
+                    "type": "string"
+                },
+                "possibleValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "Listing": {
+            "properties": {
+                "contactWebsite": {
+                    "type": "string"
+                },
+                "facilityName": {
+                    "type": "string"
+                },
+                "contactPhone": {
+                    "type": "string"
+                },
+                "contactEmail": {
+                    "type": "string"
+                },
+                "listingType": {
+                    "type": "string"
+                },
+                "facilityWebsite": {
+                    "type": "string"
+                },
+                "listingId": {
+                    "type": "number"
+                },
+                "favorite": {
+                    "type": "boolean"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "listingAttributes": {
+                    "items": {
+                        "$ref": "#/definitions/ListingAttribute"
+                    },
+                    "type": "array"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "zipCode": {
+                    "type": "string"
+                },
+                "listingTitle": {
+                    "type": "string"
+                },
+                "contactPerson": {
+                    "type": "string"
+                },
+                "dateAvailable": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "termContracts": {
+                    "items": {
+                        "$ref": "#/definitions/TermContract"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "listingId",
+                "listingTitle",
+                "listingType",
+                "address",
+                "favorite"
+            ]
+        },
+        "ListingAttribute": {
+            "properties": {
+                "attributeValue": {
+                    "type": "string"
+                },
+                "attributeCategory": {
+                    "type": "string"
+                },
+                "attributeType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "attributeCategory",
+                "attributeType"
+            ]
+        },
+        "BasicMessage": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "success"
+            ]
+        },
+        "TermContract": {
+            "properties": {
+                "sharedPrivate": {
+                    "type": "string"
+                },
+                "deposit": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "averageUtilities": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "availableFor": {
+                    "type": "string"
+                },
+                "rent": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "availableYear": {
+                    "type": "string"
+                },
+                "spacesAvailable": {
+                    "minimum": 1,
+                    "maximum": 6,
+                    "type": "number"
+                }
+            },
+            "required": [
+                "availableFor"
+            ]
+        },
+        "ListingCodes": {
+            "properties": {
+                "Listing": {
+                    "items": {
+                        "$ref": "#/definitions/ListingCodeListing"
+                    },
+                    "type": "array"
+                },
+                "Other": {
+                    "items": {
+                        "$ref": "#/definitions/ListingCodeOther"
+                    },
+                    "type": "array"
+                },
+                "TermContract": {
+                    "items": {
+                        "$ref": "#/definitions/ListingCodeTermContract"
+                    },
+                    "type": "array"
+                },
+                "Utility": {
+                    "items": {
+                        "$ref": "#/definitions/ListingCodeUtility"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "UpdateFavoriteInput": {
+            "properties": {
+                "favorite": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "favorite"
+            ]
+        },
+        "ListingCodeUtility": {
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "queryParamName": {
+                    "type": "string"
+                },
+                "possibleValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "MobileOchListings",
+        "version": "v2"
+    },
+    "basePath": "/domains/och/v2",
+    "host": "api.byu.edu:443"
+}

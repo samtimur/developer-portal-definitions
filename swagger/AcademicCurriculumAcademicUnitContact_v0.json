@@ -1,0 +1,1968 @@
+{
+    "basePath": "/domains/legacy/academic/curriculum/academicunitcontact/v0",
+    "x-mock_json": {
+        "ContactTypeList": {
+            "AcademicUnitContactService": {
+                "response": {
+                    "contactTypeList": [
+                        {
+                            "contactType": "AdvisementCenter"
+                        }
+                    ],
+                    "Contacts": [
+                        {
+                            "phone": "123-456-7890",
+                            "person_id": "123456789",
+                            "updated": "15 Jul 2014 08:34 am",
+                            "address": "",
+                            "email": "example@email.com",
+                            "name": "Person, Name",
+                            "updated_by": "Person, Name",
+                            "effective_date": "01 Jul 2014",
+                            "contact_type": "ASSOCIATE DEAN GRADES",
+                            "expired_date": "31 Dec 2999",
+                            "note": ""
+                        }
+                    ],
+                    "unit_type": "SCHOOL",
+                    "unit_level": "2",
+                    "academic_unit_id": "1008",
+                    "official_name": "Education, David O. McKay School of"
+                },
+                "request": {
+                    "status": 200,
+                    "resource": "/json/1008/a",
+                    "method": "GET",
+                    "attributes": "",
+                    "statusMessage": "Service request is OK and a response has been generated."
+                }
+            }
+        }
+    },
+    "paths": {
+        "/documentation": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "service definition",
+                "x-throttling-tier": "Unlimited",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation"
+            }
+        },
+        "/delete/{academic_unit_id}/{contact_type}/{effective_date}/{expired_date}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "AcademicUnitContactService"
+                ],
+                "summary": "Deletes an academic unit contact if there is no person ID",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes an academic unit contact if there is no person ID",
+                "parameters": [
+                    {
+                        "description": "string -> ",
+                        "name": "academic_unit_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> [ADVISEMENT CENTER]|[CHAIR]|[DEAN]|[GRAD COORDINATOR]|[GRAD SECRETARY]|[GRAD CONTACT]|[GRADE ROLL MONITOR]|[SCHED OFFICER]",
+                        "name": "contact_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "date -> DD MMM YYYY",
+                        "name": "effective_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "date -> DD MMM YYYY",
+                        "name": "expired_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "deleteTheAcademicUnitContact"
+            }
+        },
+        "/{academic_unit_id}/{contact_type}/{person_id}/{effective_date}/{expired_date}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "AcademicUnitContactService"
+                ],
+                "summary": "Updates an academic unit contact or inserts a new one. Note, if the specified update is not found, an insert is performed using current date as effective date, and 31 Dec 2999 as expired date.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Updates an academic unit contact or inserts a new one. Note, if the specified update is not found, an insert is performed using current date as effective date, and 31 Dec 2999 as expired date.",
+                "parameters": [
+                    {
+                        "description": "string -> ",
+                        "name": "academic_unit_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> [ADVISEMENT CENTER]|[CHAIR]|[DEAN]|[GRAD COORDINATOR]|[GRAD SECRETARY]|[GRAD CONTACT]|[GRADE ROLL MONITOR]|[SCHED OFFICER]",
+                        "name": "contact_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> ",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "date -> DD MMM YYYY",
+                        "name": "effective_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "date -> DD MMM YYYY",
+                        "name": "expired_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Address",
+                        "name": "address",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Phone number",
+                        "name": "phone",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "individual persons email",
+                        "name": "email",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Note for contact",
+                        "name": "note",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "DD MM YYYY",
+                        "name": "new_effective_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "DD MM YYYY",
+                        "name": "new_expired_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "updateAcademicUnitContact"
+            }
+        },
+        "/{academic_unit_id}/{filter}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "AcademicUnitContactService"
+                ],
+                "summary": "Returns table of room assignments by academic unit",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns table of room assignments by academic unit",
+                "parameters": [
+                    {
+                        "description": "string -> ",
+                        "name": "academic_unit_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> [F,C,A] - F (future), C (current), or A (active)",
+                        "name": "filter",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "AcademicUnitContactService": {
+                                    "properties": {
+                                        "response": {
+                                            "properties": {
+                                                "contactTypeList": {
+                                                    "items": {
+                                                        "properties": {
+                                                            "contactType": {
+                                                                "enum": [
+                                                                    "AdvisementCenter",
+                                                                    "Associate Dean - Grades",
+                                                                    "CHAIR",
+                                                                    "Curriculum Editor",
+                                                                    "DEAN",
+                                                                    "GRAD COORDINATOR",
+                                                                    "Grad Secretary",
+                                                                    "Grade Contact",
+                                                                    "Grade Roll Monitor",
+                                                                    "SCHED OFFICER",
+                                                                    "Teaching Area",
+                                                                    "View Data Warehouse data"
+                                                                ],
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "Contacts": {
+                                                    "items": {
+                                                        "properties": {
+                                                            "phone": {
+                                                                "type": "string"
+                                                            },
+                                                            "person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "updated": {
+                                                                "type": "string"
+                                                            },
+                                                            "address": {
+                                                                "type": "string"
+                                                            },
+                                                            "email": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "updated_by": {
+                                                                "type": "string"
+                                                            },
+                                                            "effective_date": {
+                                                                "type": "string"
+                                                            },
+                                                            "contact_type": {
+                                                                "type": "string"
+                                                            },
+                                                            "expired_date": {
+                                                                "type": "string"
+                                                            },
+                                                            "note": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "unit_type": {
+                                                    "type": "string"
+                                                },
+                                                "unit_level": {
+                                                    "type": "string"
+                                                },
+                                                "academic_unit_id": {
+                                                    "type": "string"
+                                                },
+                                                "official_name": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "request": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "number"
+                                                },
+                                                "resource": {
+                                                    "type": "string"
+                                                },
+                                                "method": {
+                                                    "type": "string"
+                                                },
+                                                "attributes": {
+                                                    "type": "string"
+                                                },
+                                                "statusMessage": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "AcademicUnitContactService": {
+                                    "response": {
+                                        "contactTypeList": [
+                                            {
+                                                "contactType": "AdvisementCenter"
+                                            }
+                                        ],
+                                        "Contacts": [
+                                            {
+                                                "phone": "123-456-7890",
+                                                "person_id": "123456789",
+                                                "updated": "15 Jul 2014 08:34 am",
+                                                "address": "",
+                                                "email": "example@email.com",
+                                                "name": "Person, Name",
+                                                "updated_by": "Person, Name",
+                                                "effective_date": "01 Jul 2014",
+                                                "contact_type": "ASSOCIATE DEAN GRADES",
+                                                "expired_date": "31 Dec 2999",
+                                                "note": ""
+                                            }
+                                        ],
+                                        "unit_type": "SCHOOL",
+                                        "unit_level": "2",
+                                        "academic_unit_id": "1008",
+                                        "official_name": "Education, David O. McKay School of"
+                                    },
+                                    "request": {
+                                        "status": 200,
+                                        "resource": "/json/1008/a",
+                                        "method": "GET",
+                                        "attributes": "",
+                                        "statusMessage": "Service request is OK and a response has been generated."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getAcademicUnitContact"
+            }
+        },
+        "/delete/{academic_unit_id}/{contact_type}/{person_id}/{effective_date}/{expired_date}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "AcademicUnitContactService"
+                ],
+                "summary": "Deletes an academic unit contact",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes an academic unit contact",
+                "parameters": [
+                    {
+                        "description": "string -> ",
+                        "name": "academic_unit_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> [ADVISEMENT CENTER]|[CHAIR]|[DEAN]|[GRAD COORDINATOR]|[GRAD SECRETARY]|[GRAD CONTACT]|[GRADE ROLL MONITOR]|[SCHED OFFICER]",
+                        "name": "contact_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> ",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "date -> DD MMM YYYY",
+                        "name": "effective_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "date -> DD MMM YYYY",
+                        "name": "expired_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "deleteAcademicUnitContact"
+            }
+        },
+        "/{academic_unit_id}/{contact_type}/{effective_date}/{expired_date}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "AcademicUnitContactService"
+                ],
+                "summary": "Updates an academic unit contact without person id or inserts a new one. Note, if the specified update is not found, an insert is performed using current date as effective date, and 31 Dec 2999 as expired date.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Updates an academic unit contact without person id or inserts a new one. Note, if the specified update is not found, an insert is performed using current date as effective date, and 31 Dec 2999 as expired date.",
+                "parameters": [
+                    {
+                        "description": "string -> ",
+                        "name": "academic_unit_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> [ADVISEMENT CENTER]|[CHAIR]|[DEAN]|[GRAD COORDINATOR]|[GRAD SECRETARY]|[GRAD CONTACT]|[GRADE ROLL MONITOR]|[SCHED OFFICER]",
+                        "name": "contact_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "date -> DD MMM YYYY",
+                        "name": "effective_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "date -> DD MMM YYYY",
+                        "name": "expired_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Address",
+                        "name": "address",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Phone number",
+                        "name": "phone",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "individual persons email",
+                        "name": "email",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Note for contact",
+                        "name": "note",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "DD MM YYYY",
+                        "name": "new_effective_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "DD MM YYYY",
+                        "name": "new_expired_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "updateTheAcademicUnitContact"
+            }
+        },
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "AcademicUnitContactService"
+                ],
+                "summary": "Returns list of contact types for put's and delete's",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns list of contact types for put's and delete's",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "AcademicUnitContactService": {
+                                    "properties": {
+                                        "response": {
+                                            "properties": {
+                                                "contactTypeList": {
+                                                    "items": {
+                                                        "properties": {
+                                                            "contactType": {
+                                                                "enum": [
+                                                                    "AdvisementCenter",
+                                                                    "Associate Dean - Grades",
+                                                                    "CHAIR",
+                                                                    "Curriculum Editor",
+                                                                    "DEAN",
+                                                                    "GRAD COORDINATOR",
+                                                                    "Grad Secretary",
+                                                                    "Grade Contact",
+                                                                    "Grade Roll Monitor",
+                                                                    "SCHED OFFICER",
+                                                                    "Teaching Area",
+                                                                    "View Data Warehouse data"
+                                                                ],
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "Contacts": {
+                                                    "items": {
+                                                        "properties": {
+                                                            "phone": {
+                                                                "type": "string"
+                                                            },
+                                                            "person_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "updated": {
+                                                                "type": "string"
+                                                            },
+                                                            "address": {
+                                                                "type": "string"
+                                                            },
+                                                            "email": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "updated_by": {
+                                                                "type": "string"
+                                                            },
+                                                            "effective_date": {
+                                                                "type": "string"
+                                                            },
+                                                            "contact_type": {
+                                                                "type": "string"
+                                                            },
+                                                            "expired_date": {
+                                                                "type": "string"
+                                                            },
+                                                            "note": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "unit_type": {
+                                                    "type": "string"
+                                                },
+                                                "unit_level": {
+                                                    "type": "string"
+                                                },
+                                                "academic_unit_id": {
+                                                    "type": "string"
+                                                },
+                                                "official_name": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "request": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "number"
+                                                },
+                                                "resource": {
+                                                    "type": "string"
+                                                },
+                                                "method": {
+                                                    "type": "string"
+                                                },
+                                                "attributes": {
+                                                    "type": "string"
+                                                },
+                                                "statusMessage": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "AcademicUnitContactService": {
+                                    "response": {
+                                        "contactTypeList": [
+                                            {
+                                                "contactType": "AdvisementCenter"
+                                            }
+                                        ],
+                                        "Contacts": [
+                                            {
+                                                "phone": "123-456-7890",
+                                                "person_id": "123456789",
+                                                "updated": "15 Jul 2014 08:34 am",
+                                                "address": "",
+                                                "email": "example@email.com",
+                                                "name": "Person, Name",
+                                                "updated_by": "Person, Name",
+                                                "effective_date": "01 Jul 2014",
+                                                "contact_type": "ASSOCIATE DEAN GRADES",
+                                                "expired_date": "31 Dec 2999",
+                                                "note": ""
+                                            }
+                                        ],
+                                        "unit_type": "SCHOOL",
+                                        "unit_level": "2",
+                                        "academic_unit_id": "1008",
+                                        "official_name": "Education, David O. McKay School of"
+                                    },
+                                    "request": {
+                                        "status": 200,
+                                        "resource": "/json/1008/a",
+                                        "method": "GET",
+                                        "attributes": "",
+                                        "statusMessage": "Service request is OK and a response has been generated."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getContactTypeList"
+            }
+        },
+        "/{academic_unit_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "AcademicUnitContactService"
+                ],
+                "summary": "Inserts a new academic unit contact. Note cannot create duplicate contacts with the same unit id, contact type, person_id, effective_id and expired_date",
+                "x-throttling-tier": "Unlimited",
+                "description": "Inserts a new academic unit contact. Note cannot create duplicate contacts with the same unit id, contact type, person_id, effective_id and expired_date",
+                "parameters": [
+                    {
+                        "description": "string -> ",
+                        "name": "academic_unit_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "[ADVISEMENT CENTER]|[CHAIR]|[DEAN]|[GRAD COORDINATOR]|[GRAD SECRETARY]|[GRAD CONTACT]|[GRADE ROLL MONITOR]|[SCHED OFFICER]",
+                        "name": "contact_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Address",
+                        "name": "address",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Individual person identifier",
+                        "name": "person_id",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Phone number",
+                        "name": "phone",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "individual persons email",
+                        "name": "email",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Note for contact",
+                        "name": "note",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "DD MM YYYY",
+                        "name": "effective_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "DD MM YYYY",
+                        "name": "expired_date",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "insertAcademicUnitContact"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "phone": {
+            "type": "string"
+        },
+        "AcademicUnitContactService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "contactTypeList": {
+                            "items": {
+                                "properties": {
+                                    "contactType": {
+                                        "enum": [
+                                            "AdvisementCenter",
+                                            "Associate Dean - Grades",
+                                            "CHAIR",
+                                            "Curriculum Editor",
+                                            "DEAN",
+                                            "GRAD COORDINATOR",
+                                            "Grad Secretary",
+                                            "Grade Contact",
+                                            "Grade Roll Monitor",
+                                            "SCHED OFFICER",
+                                            "Teaching Area",
+                                            "View Data Warehouse data"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "Contacts": {
+                            "items": {
+                                "properties": {
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "person_id": {
+                                        "type": "string"
+                                    },
+                                    "updated": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "updated_by": {
+                                        "type": "string"
+                                    },
+                                    "effective_date": {
+                                        "type": "string"
+                                    },
+                                    "contact_type": {
+                                        "type": "string"
+                                    },
+                                    "expired_date": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "unit_type": {
+                            "type": "string"
+                        },
+                        "unit_level": {
+                            "type": "string"
+                        },
+                        "academic_unit_id": {
+                            "type": "string"
+                        },
+                        "official_name": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "person_id": {
+            "type": "string"
+        },
+        "ContactTypeList": {
+            "properties": {
+                "AcademicUnitContactService": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "contactTypeList": {
+                                    "items": {
+                                        "properties": {
+                                            "contactType": {
+                                                "enum": [
+                                                    "AdvisementCenter",
+                                                    "Associate Dean - Grades",
+                                                    "CHAIR",
+                                                    "Curriculum Editor",
+                                                    "DEAN",
+                                                    "GRAD COORDINATOR",
+                                                    "Grad Secretary",
+                                                    "Grade Contact",
+                                                    "Grade Roll Monitor",
+                                                    "SCHED OFFICER",
+                                                    "Teaching Area",
+                                                    "View Data Warehouse data"
+                                                ],
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "Contacts": {
+                                    "items": {
+                                        "properties": {
+                                            "phone": {
+                                                "type": "string"
+                                            },
+                                            "person_id": {
+                                                "type": "string"
+                                            },
+                                            "updated": {
+                                                "type": "string"
+                                            },
+                                            "address": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "updated_by": {
+                                                "type": "string"
+                                            },
+                                            "effective_date": {
+                                                "type": "string"
+                                            },
+                                            "contact_type": {
+                                                "type": "string"
+                                            },
+                                            "expired_date": {
+                                                "type": "string"
+                                            },
+                                            "note": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "unit_type": {
+                                    "type": "string"
+                                },
+                                "unit_level": {
+                                    "type": "string"
+                                },
+                                "academic_unit_id": {
+                                    "type": "string"
+                                },
+                                "official_name": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "request": {
+                            "properties": {
+                                "status": {
+                                    "type": "number"
+                                },
+                                "resource": {
+                                    "type": "string"
+                                },
+                                "method": {
+                                    "type": "string"
+                                },
+                                "attributes": {
+                                    "type": "string"
+                                },
+                                "statusMessage": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "unit_level": {
+            "type": "string"
+        },
+        "academic_unit_id": {
+            "type": "string"
+        },
+        "response": {
+            "properties": {
+                "contactTypeList": {
+                    "items": {
+                        "properties": {
+                            "contactType": {
+                                "enum": [
+                                    "AdvisementCenter",
+                                    "Associate Dean - Grades",
+                                    "CHAIR",
+                                    "Curriculum Editor",
+                                    "DEAN",
+                                    "GRAD COORDINATOR",
+                                    "Grad Secretary",
+                                    "Grade Contact",
+                                    "Grade Roll Monitor",
+                                    "SCHED OFFICER",
+                                    "Teaching Area",
+                                    "View Data Warehouse data"
+                                ],
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "Contacts": {
+                    "items": {
+                        "properties": {
+                            "phone": {
+                                "type": "string"
+                            },
+                            "person_id": {
+                                "type": "string"
+                            },
+                            "updated": {
+                                "type": "string"
+                            },
+                            "address": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "updated_by": {
+                                "type": "string"
+                            },
+                            "effective_date": {
+                                "type": "string"
+                            },
+                            "contact_type": {
+                                "type": "string"
+                            },
+                            "expired_date": {
+                                "type": "string"
+                            },
+                            "note": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "unit_type": {
+                    "type": "string"
+                },
+                "unit_level": {
+                    "type": "string"
+                },
+                "academic_unit_id": {
+                    "type": "string"
+                },
+                "official_name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "contactTypeList": {
+            "properties": {
+                "contactType": {
+                    "enum": [
+                        "AdvisementCenter",
+                        "Associate Dean - Grades",
+                        "CHAIR",
+                        "Curriculum Editor",
+                        "DEAN",
+                        "GRAD COORDINATOR",
+                        "Grad Secretary",
+                        "Grade Contact",
+                        "Grade Roll Monitor",
+                        "SCHED OFFICER",
+                        "Teaching Area",
+                        "View Data Warehouse data"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "errors": {
+            "items": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "httpStatusCode": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "address": {
+            "type": "string"
+        },
+        "email": {
+            "type": "string"
+        },
+        "updated": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Contacts": {
+            "properties": {
+                "phone": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "updated": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updated_by": {
+                    "type": "string"
+                },
+                "effective_date": {
+                    "type": "string"
+                },
+                "contact_type": {
+                    "type": "string"
+                },
+                "expired_date": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "updated_by": {
+            "type": "string"
+        },
+        "contactType": {
+            "enum": [
+                "AdvisementCenter",
+                "Associate Dean - Grades",
+                "CHAIR",
+                "Curriculum Editor",
+                "DEAN",
+                "GRAD COORDINATOR",
+                "Grad Secretary",
+                "Grade Contact",
+                "Grade Roll Monitor",
+                "SCHED OFFICER",
+                "Teaching Area",
+                "View Data Warehouse data"
+            ],
+            "type": "string"
+        },
+        "effective_date": {
+            "type": "string"
+        },
+        "unit_type": {
+            "type": "string"
+        },
+        "contact_type": {
+            "type": "string"
+        },
+        "ErrorResponse": {
+            "properties": {
+                "response": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "errors": {
+                    "items": {
+                        "properties": {
+                            "message": {
+                                "type": "string"
+                            },
+                            "httpStatusCode": {
+                                "type": "number"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "code": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "expired_date": {
+            "type": "string"
+        },
+        "note": {
+            "type": "string"
+        },
+        "official_name": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicCurriculumAcademicUnitContact",
+        "description": "This service returns a listing of contacts within an academic unit, some of which include the advisement center, the chair, and the grad secretary.",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v0"
+    }
+}

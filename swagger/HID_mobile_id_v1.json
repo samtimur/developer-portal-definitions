@@ -1,0 +1,273 @@
+{
+    "paths": {
+        "/credential": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Creates credential for a user",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "invitation_code": {
+                                    "description": "The invitation code.",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "User is not authorized to have credential."
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "A user cannot be found with that net_id."
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Server Error."
+                    }
+                }
+            }
+        },
+        "/eligibility": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Checks if a user is eligible for a credential ",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "reason": {
+                                    "description": "The reason behind the eligibility",
+                                    "type": "string"
+                                },
+                                "eligible": {
+                                    "description": "The user status.",
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "description": "Ok"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "User cannot call this resource."
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Server Error."
+                    }
+                }
+            }
+        },
+        "/user": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Creates a user in HID",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "person": {
+                                    "properties": {
+                                        "first_name": {
+                                            "type": "string"
+                                        },
+                                        "person_id": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "department": {
+                                            "type": "string"
+                                        },
+                                        "restricted": {
+                                            "type": "string"
+                                        },
+                                        "last_name": {
+                                            "type": "string"
+                                        },
+                                        "byu_id": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "array"
+                                        },
+                                        "net_id": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "User cannot call this resource."
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Server Error."
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Deletes a user in HID",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "person": {
+                                    "properties": {
+                                        "first_name": {
+                                            "type": "string"
+                                        },
+                                        "person_id": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "department": {
+                                            "type": "string"
+                                        },
+                                        "restricted": {
+                                            "type": "string"
+                                        },
+                                        "last_name": {
+                                            "type": "string"
+                                        },
+                                        "byu_id": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "array"
+                                        },
+                                        "net_id": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "User cannot call this resource."
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Server Error."
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "error": {
+            "properties": {
+                "readable_error": {
+                    "description": "Human readable error",
+                    "type": "string"
+                },
+                "debug_error": {
+                    "description": "Debug error",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "HID_mobile_id",
+        "description": "API for BYU mobile app to issue HID mobile credentials",
+        "version": "v1.0"
+    },
+    "basePath": "/HID/v1.0/mobile_id",
+    "host": "api.byu.edu:443"
+}

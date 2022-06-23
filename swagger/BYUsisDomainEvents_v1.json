@@ -1,0 +1,133 @@
+{
+    "basePath": "/domains/byu-sis-domain-event/v1",
+    "x-mock_json": {},
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{uuid}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "return event for uuid",
+                "tags": [
+                    "retrieve"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns event for given uuid",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/path_uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/event"
+                        },
+                        "description": "The event"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/{uuid}/{pid}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "return event for uuid",
+                "tags": [
+                    "retrieve"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns event for given uuid",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/path_uuid"
+                    },
+                    {
+                        "$ref": "#/parameters/pid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/event"
+                        },
+                        "description": "The event"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "parameters": {
+        "path_uuid": {
+            "description": "An event uuid",
+            "name": "uuid",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "pid": {
+            "description": "An user identifier (person id)",
+            "name": "pid",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        }
+    },
+    "definitions": {
+        "error": {
+            "description": "Error response",
+            "properties": {
+                "message": {
+                    "description": "A description of the error.",
+                    "type": "string"
+                },
+                "err": {
+                    "description": "A number relating to the type of success or error.",
+                    "type": "number"
+                }
+            },
+            "type": "object",
+            "required": [
+                "err",
+                "message"
+            ]
+        },
+        "event": {
+            "description": "Details of the event",
+            "type": "object"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "BYUsisDomainEvents",
+        "description": "Domain event endpoint for BYU SIS aka AIM.",
+        "license": {
+            "name": "Apache-2.0"
+        },
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

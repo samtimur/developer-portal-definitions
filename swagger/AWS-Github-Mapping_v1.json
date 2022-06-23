@@ -1,0 +1,77 @@
+{
+    "paths": {
+        "/attach": {
+            "post": {
+                "summary": "Adds AWS account secrets to Github repository",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "aws_account matches GRO group name (aws-byu-org-trn)",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "aws_account": {
+                                    "type": "string"
+                                },
+                                "github_username": {
+                                    "type": "string"
+                                },
+                                "byu_id": {
+                                    "type": "string"
+                                },
+                                "github_repo": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "byu_id",
+                                "github_username",
+                                "github_repo",
+                                "aws_account"
+                            ]
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mapping successful"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "User does not have proper rights on Github repo"
+                    },
+                    "404": {
+                        "description": "Github user or repo could not be found"
+                    },
+                    "500": {
+                        "description": "Github not responding"
+                    },
+                    "502": {
+                        "description": "Fatal server error"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "AWS-Github-Mapping",
+        "description": "Maps AWS accounts to Github Repositories",
+        "version": "v1.0.0"
+    },
+    "basePath": "/domains/aws-github/v1.0.0",
+    "host": "api.byu.edu:443"
+}

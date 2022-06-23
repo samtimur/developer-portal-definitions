@@ -1,0 +1,552 @@
+{
+    "basePath": "/domains/testscores/v1",
+    "paths": {
+        "/{byu_id}": {
+            "x-controller": "test-scores",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Test Scores"
+                ],
+                "summary": "Test Scores information for a person",
+                "x-throttling-tier": "Unlimited",
+                "description": "Retrieve Test Scores information for a person",
+                "parameters": [
+                    {
+                        "description": "Primary IAM key",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/test_scores"
+                        },
+                        "description": "The test scores information for the individual"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "There is no Test Score information for this individual"
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "Query parameters conflict or are malformed"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getTestScores"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "test_date": {
+            "description": "Date test administered",
+            "properties": {
+                "display_label": {
+                    "default": "test date",
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string",
+                    "x-template": ":test_date"
+                },
+                "api_type": {
+                    "default": "read-only",
+                    "enum": [
+                        "read-only",
+                        "modifiable"
+                    ],
+                    "type": "string"
+                },
+                "key": {
+                    "default": true,
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "type": "object"
+        },
+        "sub_level_metadata": {
+            "allOf": [
+                {
+                    "properties": {
+                        "page_start": {
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "page_size": {
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "page_end": {
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "max_page_size": {
+                            "type": "integer"
+                        },
+                        "collection_size": {
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "default_page_size": {
+                            "minimum": 1,
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            ]
+        },
+        "test_component": {
+            "description": "Test Component & Score",
+            "properties": {
+                "component_name": {
+                    "$ref": "#/definitions/component_name"
+                },
+                "component_score": {
+                    "$ref": "#/definitions/component_score"
+                }
+            },
+            "type": "object"
+        },
+        "simple_metadata": {
+            "properties": {
+                "validation_response": {
+                    "properties": {
+                        "message": {
+                            "type": "string"
+                        },
+                        "code": {
+                            "type": "integer"
+                        }
+                    },
+                    "required": [
+                        "code",
+                        "message"
+                    ],
+                    "type": "object"
+                },
+                "validation_information": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "cache": {
+                    "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                    "properties": {
+                        "date_time": {
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "validation_response"
+            ],
+            "type": "object"
+        },
+        "date_time_updated": {
+            "description": "When was the Test Score's data last updated?",
+            "properties": {
+                "display_label": {
+                    "default": "Application last updated when?",
+                    "type": "string"
+                },
+                "value": {
+                    "format": "date-time",
+                    "type": "string",
+                    "x-template": ":date_time_updated"
+                },
+                "api_type": {
+                    "default": "system",
+                    "enum": [
+                        "system"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "type": "object"
+        },
+        "component_name": {
+            "description": "Name of test component",
+            "properties": {
+                "display_label": {
+                    "default": "component name",
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string",
+                    "x-template": ":test_component_description"
+                },
+                "domain": {
+                    "default": "https://api.byu.edu/byuapi/meta/component_names?test=:component_name",
+                    "format": "uri",
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string",
+                    "x-template": ":component_name"
+                },
+                "api_type": {
+                    "default": "read-only",
+                    "enum": [
+                        "read-only",
+                        "modifiable"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "type": "object"
+        },
+        "test_score": {
+            "description": "Test Score for test scores API",
+            "properties": {
+                "date_time_verified": {
+                    "$ref": "#/definitions/date_time_verified"
+                },
+                "test_date": {
+                    "$ref": "#/definitions/test_date"
+                },
+                "updated_by_id": {
+                    "$ref": "#/definitions/updated_by_id"
+                },
+                "verified_by_id": {
+                    "$ref": "#/definitions/verified_by_id"
+                },
+                "date_time_updated": {
+                    "$ref": "#/definitions/date_time_updated"
+                },
+                "test_name": {
+                    "$ref": "#/definitions/test_name"
+                },
+                "test_components": {
+                    "items": {
+                        "$ref": "#/definitions/test_component"
+                    },
+                    "type": "array"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "composite_score": {
+                    "$ref": "#/definitions/composite_score"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "type": "object"
+        },
+        "component_score": {
+            "description": "Score on test component",
+            "properties": {
+                "display_label": {
+                    "default": "component score",
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string",
+                    "x-template": ":component_score"
+                },
+                "api_type": {
+                    "default": "read-only",
+                    "enum": [
+                        "read-only",
+                        "modifiable"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "type": "object"
+        },
+        "error_response": {
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "required": [
+                "metadata"
+            ],
+            "type": "object"
+        },
+        "test_scores": {
+            "description": "Test Scores for the test scores API",
+            "properties": {
+                "values": {
+                    "items": {
+                        "$ref": "#/definitions/test_score"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "description": "Hypermedia Links that impact the collection of Test Scores",
+                    "properties": {
+                        "test_scores__info": {
+                            "description": "Hypermedia link that retrieves a test score",
+                            "properties": {
+                                "method": {
+                                    "default": "GET",
+                                    "enum": [
+                                        "GET"
+                                    ],
+                                    "type": "string"
+                                },
+                                "rel": {
+                                    "default": "self",
+                                    "enum": [
+                                        "self"
+                                    ],
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "default": "https://api.byu.edu/domains/testScores/v1/:byu_id",
+                                    "format": "uri",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "rel",
+                                "href",
+                                "method"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/sub_level_metadata"
+                }
+            },
+            "required": [
+                "values"
+            ],
+            "type": "object"
+        },
+        "date_time_verified": {
+            "description": "When was the Test Score's data verified?",
+            "properties": {
+                "display_label": {
+                    "default": "Verified when?",
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string",
+                    "x-template": ":date_time_verified"
+                },
+                "api_type": {
+                    "default": "system",
+                    "enum": [
+                        "system"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "type": "object"
+        },
+        "updated_by_id": {
+            "description": "Who last updated the Test Score's data?",
+            "properties": {
+                "display_label": {
+                    "default": "Application last updated by?",
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string",
+                    "x-template": ":updated_by_id"
+                },
+                "api_type": {
+                    "default": "system",
+                    "enum": [
+                        "system"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "type": "object"
+        },
+        "verified_by_id": {
+            "description": "Who verified test score submission",
+            "properties": {
+                "display_label": {
+                    "default": "Verified by",
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string",
+                    "x-template": ":verified_by_id"
+                },
+                "api_type": {
+                    "default": "modifiable",
+                    "enum": [
+                        "read-only",
+                        "modifiable"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "type": "object"
+        },
+        "test_name": {
+            "description": "Name of test",
+            "properties": {
+                "display_label": {
+                    "default": "test name",
+                    "type": "string"
+                },
+                "domain": {
+                    "format": "uri",
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string",
+                    "x-template": ":test_name"
+                },
+                "api_type": {
+                    "default": "read-only",
+                    "enum": [
+                        "read-only",
+                        "modifiable"
+                    ],
+                    "type": "string"
+                },
+                "key": {
+                    "default": true,
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "type": "object"
+        },
+        "byu_id": {
+            "description": "Synonym for the byu_id",
+            "properties": {
+                "display_label": {
+                    "default": "byu id",
+                    "type": "string"
+                },
+                "value": {
+                    "maxLength": 9,
+                    "type": "string",
+                    "x-template": ":byu_id"
+                },
+                "api_type": {
+                    "default": "read-only",
+                    "enum": [
+                        "read-only",
+                        "modifiable"
+                    ],
+                    "type": "string"
+                },
+                "key": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "type": "object"
+        },
+        "composite_score": {
+            "description": "Composite score of test/evaluation",
+            "properties": {
+                "display_label": {
+                    "default": "composite score",
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string",
+                    "x-template": ":composite_score"
+                },
+                "api_type": {
+                    "default": "read-only",
+                    "enum": [
+                        "read-only",
+                        "modifiable"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "Test Scores",
+        "description": "Test Scores Resources of the Test Scores Domain",
+        "version": "1.0.0"
+    }
+}

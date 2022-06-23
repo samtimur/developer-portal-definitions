@@ -1,0 +1,631 @@
+{
+    "basePath": "/domains/legacy/academic/advisement/departmentlistpage/v1",
+    "x-mock_json": {
+        "DeptListPageService": {
+            "response": {
+                "classInfo": [
+                    {
+                        "deptname": "ACC",
+                        "sort_name": "Accounting"
+                    }
+                ]
+            },
+            "request": {
+                "status": 200,
+                "resource": "/",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        },
+        "ClassListPage": {
+            "response": {
+                "classInfo": [
+                    {
+                        "title": "Principles of Accounting",
+                        "catnum": 200,
+                        "deptname": "AAC",
+                        "suffix": ""
+                    }
+                ]
+            },
+            "request": {
+                "status": 200,
+                "resource": "/ACC",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{deptName}": {
+            "get": {
+                "summary": "GET",
+                "tags": [
+                    "DepartmentListPageService"
+                ],
+                "description": "Returns an individual department name",
+                "parameters": [
+                    {
+                        "description": "Individual name of department",
+                        "name": "deptName",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "description": "A list of classes within a specific department.",
+                            "properties": {
+                                "response": {
+                                    "description": "",
+                                    "properties": {
+                                        "classInfo": {
+                                            "items": {
+                                                "properties": {
+                                                    "title": {
+                                                        "description": "Title and explanation of class.",
+                                                        "type": "string"
+                                                    },
+                                                    "catnum": {
+                                                        "description": "",
+                                                        "type": "number"
+                                                    },
+                                                    "deptname": {
+                                                        "description": "Department name of class.",
+                                                        "type": "string"
+                                                    },
+                                                    "suffix": {
+                                                        "description": "",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "example": {
+                                        "classInfo": [
+                                            {
+                                                "title": "Principles of Accounting",
+                                                "catnum": 200,
+                                                "deptname": "AAC",
+                                                "suffix": ""
+                                            }
+                                        ]
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "description": "",
+                                    "properties": {
+                                        "status": {
+                                            "description": "Returns status of a REST request to determine success.",
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "description": "A resource.",
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "description": "REST method for request service.",
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "description": "",
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "description": "Explanation of return status of request.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "status": 200,
+                                        "resource": "/",
+                                        "method": "GET",
+                                        "attributes": "",
+                                        "statusMessage": "Service request is OK and a response has been generated."
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "An individual department",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "classInfo": [
+                                        {
+                                            "title": "Principles of Accounting",
+                                            "catnum": 200,
+                                            "deptname": "AAC",
+                                            "suffix": ""
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/ACC",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Error in the composition of the service request."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "You do not have access to this resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource cannot be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain further information."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Server error occurred generating the response."
+                    }
+                },
+                "operationId": "getDepartment",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/*": {
+            "get": {
+                "summary": "GET",
+                "tags": [
+                    "DepartmentListPageService"
+                ],
+                "description": "Returns a list of department names",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "description": "A list of all departments.",
+                            "properties": {
+                                "response": {
+                                    "description": "",
+                                    "properties": {
+                                        "classInfo": {
+                                            "items": {
+                                                "properties": {
+                                                    "deptname": {
+                                                        "description": "Department name of class.",
+                                                        "type": "string"
+                                                    },
+                                                    "sort_name": {
+                                                        "description": "Title of department.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "example": {
+                                        "classInfo": [
+                                            {
+                                                "deptname": "ACC",
+                                                "sort_name": "Accounting"
+                                            }
+                                        ]
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "description": "",
+                                    "properties": {
+                                        "status": {
+                                            "description": "Returns status of a REST request to determine success.",
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "description": "A resource.",
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "description": "REST method for request service.",
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "description": "",
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "description": "Explanation of return status of request.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "status": 200,
+                                        "resource": "/",
+                                        "method": "GET",
+                                        "attributes": "",
+                                        "statusMessage": "Service request is OK and a response has been generated."
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "A list of department names",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "classInfo": [
+                                        {
+                                            "deptname": "ACC",
+                                            "sort_name": "Accounting"
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Error in the composition of the service request."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "You do not have access to this resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource cannot be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain further information."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Server error occurred generating the response."
+                    }
+                },
+                "operationId": "getDepartmentName",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "DeptListPageRequest": {
+            "description": "",
+            "properties": {
+                "status": {
+                    "description": "Returns status of a REST request to determine success.",
+                    "type": "number"
+                },
+                "resource": {
+                    "description": "A resource.",
+                    "type": "string"
+                },
+                "method": {
+                    "description": "REST method for request service.",
+                    "type": "string"
+                },
+                "attributes": {
+                    "description": "",
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "description": "Explanation of return status of request.",
+                    "type": "string"
+                }
+            },
+            "example": {
+                "status": 200,
+                "resource": "/",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            },
+            "type": "object"
+        },
+        "DeptListPageResponse": {
+            "description": "",
+            "properties": {
+                "classInfo": {
+                    "items": {
+                        "properties": {
+                            "deptname": {
+                                "description": "Department name of class.",
+                                "type": "string"
+                            },
+                            "sort_name": {
+                                "description": "Title of department.",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "example": {
+                "classInfo": [
+                    {
+                        "deptname": "ACC",
+                        "sort_name": "Accounting"
+                    }
+                ]
+            },
+            "type": "object"
+        },
+        "DeptListPageService": {
+            "description": "A list of all departments.",
+            "properties": {
+                "response": {
+                    "description": "",
+                    "properties": {
+                        "classInfo": {
+                            "items": {
+                                "properties": {
+                                    "deptname": {
+                                        "description": "Department name of class.",
+                                        "type": "string"
+                                    },
+                                    "sort_name": {
+                                        "description": "Title of department.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "example": {
+                        "classInfo": [
+                            {
+                                "deptname": "ACC",
+                                "sort_name": "Accounting"
+                            }
+                        ]
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "description": "",
+                    "properties": {
+                        "status": {
+                            "description": "Returns status of a REST request to determine success.",
+                            "type": "number"
+                        },
+                        "resource": {
+                            "description": "A resource.",
+                            "type": "string"
+                        },
+                        "method": {
+                            "description": "REST method for request service.",
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "description": "",
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "description": "Explanation of return status of request.",
+                            "type": "string"
+                        }
+                    },
+                    "example": {
+                        "status": 200,
+                        "resource": "/",
+                        "method": "GET",
+                        "attributes": "",
+                        "statusMessage": "Service request is OK and a response has been generated."
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "ClassListPageResponse": {
+            "description": "",
+            "properties": {
+                "classInfo": {
+                    "items": {
+                        "properties": {
+                            "title": {
+                                "description": "Title and explanation of class.",
+                                "type": "string"
+                            },
+                            "catnum": {
+                                "description": "",
+                                "type": "number"
+                            },
+                            "deptname": {
+                                "description": "Department name of class.",
+                                "type": "string"
+                            },
+                            "suffix": {
+                                "description": "",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "example": {
+                "classInfo": [
+                    {
+                        "title": "Principles of Accounting",
+                        "catnum": 200,
+                        "deptname": "AAC",
+                        "suffix": ""
+                    }
+                ]
+            },
+            "type": "object"
+        },
+        "ClassListByDeptService": {
+            "description": "A list of classes within a specific department.",
+            "properties": {
+                "response": {
+                    "description": "",
+                    "properties": {
+                        "classInfo": {
+                            "items": {
+                                "properties": {
+                                    "title": {
+                                        "description": "Title and explanation of class.",
+                                        "type": "string"
+                                    },
+                                    "catnum": {
+                                        "description": "",
+                                        "type": "number"
+                                    },
+                                    "deptname": {
+                                        "description": "Department name of class.",
+                                        "type": "string"
+                                    },
+                                    "suffix": {
+                                        "description": "",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "example": {
+                        "classInfo": [
+                            {
+                                "title": "Principles of Accounting",
+                                "catnum": 200,
+                                "deptname": "AAC",
+                                "suffix": ""
+                            }
+                        ]
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "description": "",
+                    "properties": {
+                        "status": {
+                            "description": "Returns status of a REST request to determine success.",
+                            "type": "number"
+                        },
+                        "resource": {
+                            "description": "A resource.",
+                            "type": "string"
+                        },
+                        "method": {
+                            "description": "REST method for request service.",
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "description": "",
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "description": "Explanation of return status of request.",
+                            "type": "string"
+                        }
+                    },
+                    "example": {
+                        "status": 200,
+                        "resource": "/",
+                        "method": "GET",
+                        "attributes": "",
+                        "statusMessage": "Service request is OK and a response has been generated."
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "AcademicAdvisementDepartmentListPage",
+        "description": "This service accesses resources in the Department List portion of the AIM System.",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

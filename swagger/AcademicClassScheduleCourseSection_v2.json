@@ -1,0 +1,547 @@
+{
+    "basePath": "/domains/legacy/academic/classschedule/coursesection/v2",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{year_term}/{teaching_area_or_curriculum_id}/{catalog_number_or_title_code}/{section_number}": {
+            "get": {
+                "summary": "Request information for a section based on the teaching area and catalog number",
+                "tags": [
+                    "CourseSectionService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Request information for a section based on the teaching area and catalog number",
+                "parameters": [
+                    {
+                        "description": "Determines the specific year and term desired",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Distinct teaching area OR identification of the curriculum",
+                        "name": "teaching_area_or_curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Catalog number associated with a specific section OR title code for an individual section",
+                        "name": "catalog_number_or_title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Determines a specific section",
+                        "name": "section_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CourseSectionService"
+                        },
+                        "description": "Returns data for a specific section"
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetByTeachingAreaCatalogNumber"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "allow_flex_title": {
+            "type": "string"
+        },
+        "honors": {
+            "type": "string"
+        },
+        "begin_time": {
+            "type": "string"
+        },
+        "grade_due_date": {
+            "type": "string"
+        },
+        "combine_title_code": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        },
+        "cross_list_flag": {
+            "type": "string"
+        },
+        "com_combine_section": {
+            "type": "string"
+        },
+        "com_title_code": {
+            "type": "string"
+        },
+        "exam_date": {
+            "type": "string"
+        },
+        "title_code": {
+            "type": "string"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "byu_id": {
+            "type": "string"
+        },
+        "course_section_final_exam_schedule": {
+            "properties": {
+                "exam_date": {
+                    "$ref": "#/definitions/exam_date"
+                },
+                "exam_end_time": {
+                    "$ref": "#/definitions/exam_end_time"
+                },
+                "exam_begin_time": {
+                    "$ref": "#/definitions/exam_begin_time"
+                },
+                "exam_day": {
+                    "$ref": "#/definitions/exam_day"
+                },
+                "exam_building": {
+                    "$ref": "#/definitions/exam_building"
+                },
+                "exam_room": {
+                    "$ref": "#/definitions/exam_room"
+                }
+            },
+            "type": "object"
+        },
+        "fixed_or_variable": {
+            "type": "string"
+        },
+        "reg_method": {
+            "type": "string"
+        },
+        "section_number": {
+            "type": "string"
+        },
+        "service_learning": {
+            "type": "string"
+        },
+        "catalog_number": {
+            "type": "string"
+        },
+        "com_dept_name": {
+            "type": "string"
+        },
+        "combine_section": {
+            "type": "string"
+        },
+        "grade_rule": {
+            "type": "string"
+        },
+        "net_id": {
+            "type": "string"
+        },
+        "credit_hours": {
+            "type": "number"
+        },
+        "fee": {
+            "type": "string"
+        },
+        "end_time": {
+            "type": "string"
+        },
+        "com_section_number": {
+            "type": "string"
+        },
+        "course_section_schedule_set": {
+            "properties": {
+                "sequence_number": {
+                    "$ref": "#/definitions/sequence_number"
+                },
+                "days_taught": {
+                    "$ref": "#/definitions/days_taught"
+                },
+                "building": {
+                    "$ref": "#/definitions/building"
+                },
+                "begin_time": {
+                    "$ref": "#/definitions/begin_time"
+                },
+                "end_time": {
+                    "$ref": "#/definitions/end_time"
+                },
+                "room": {
+                    "$ref": "#/definitions/room"
+                }
+            },
+            "type": "object"
+        },
+        "reg_start_date": {
+            "type": "string"
+        },
+        "course_section_combine_set": {
+            "items": {
+                "properties": {
+                    "com_catalog_number": {
+                        "$ref": "#/definitions/com_catalog_number"
+                    },
+                    "com_title_code": {
+                        "$ref": "#/definitions/com_title_code"
+                    },
+                    "com_section_number": {
+                        "$ref": "#/definitions/com_section_number"
+                    },
+                    "com_dept_name": {
+                        "$ref": "#/definitions/com_dept_name"
+                    },
+                    "com_course_title": {
+                        "$ref": "#/definitions/com_course_title"
+                    },
+                    "com_section_type": {
+                        "$ref": "#/definitions/com_section_type"
+                    },
+                    "com_combine_title_code": {
+                        "$ref": "#/definitions/com_combine_title_code"
+                    },
+                    "com_curriculum_id": {
+                        "$ref": "#/definitions/com_curriculum_id"
+                    },
+                    "com_combine_curr_id": {
+                        "$ref": "#/definitions/com_combine_curr_id"
+                    },
+                    "com_combine_section": {
+                        "$ref": "#/definitions/com_combine_section"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "room": {
+            "type": "string"
+        },
+        "section_size": {
+            "type": "number"
+        },
+        "wdrop_date": {
+            "type": "string"
+        },
+        "section_type": {
+            "type": "string"
+        },
+        "minimum_credit_hours": {
+            "type": "number"
+        },
+        "exam_day": {
+            "type": "string"
+        },
+        "com_curriculum_id": {
+            "type": "string"
+        },
+        "reg_end_date": {
+            "type": "string"
+        },
+        "com_catalog_number": {
+            "type": "string"
+        },
+        "response": {
+            "properties": {
+                "course_section_info": {
+                    "$ref": "#/definitions/course_section_info"
+                },
+                "course_section_schedule_set": {
+                    "$ref": "#/definitions/course_section_schedule_set"
+                },
+                "course_section_final_exam_schedule": {
+                    "$ref": "#/definitions/course_section_final_exam_schedule"
+                },
+                "course_section_instructor_set": {
+                    "$ref": "#/definitions/course_section_instructor_set"
+                },
+                "course_section_combine_set": {
+                    "$ref": "#/definitions/course_section_combine_set"
+                }
+            },
+            "type": "object"
+        },
+        "days_taught": {
+            "type": "string"
+        },
+        "teaching_area": {
+            "type": "string"
+        },
+        "end_date": {
+            "type": "string"
+        },
+        "course_title": {
+            "type": "string"
+        },
+        "block_code": {
+            "type": "string"
+        },
+        "exam_end_time": {
+            "type": "string"
+        },
+        "com_course_title": {
+            "type": "string"
+        },
+        "curriculum_id": {
+            "type": "string"
+        },
+        "com_section_type": {
+            "type": "string"
+        },
+        "com_combine_title_code": {
+            "type": "string"
+        },
+        "rain_check": {
+            "type": "string"
+        },
+        "credit_type": {
+            "type": "string"
+        },
+        "section_status_flag": {
+            "type": "string"
+        },
+        "exam_room": {
+            "type": "string"
+        },
+        "combine_curr_id": {
+            "type": "string"
+        },
+        "building": {
+            "type": "string"
+        },
+        "person_id": {
+            "type": "string"
+        },
+        "CourseSectionService": {
+            "properties": {
+                "response": {
+                    "$ref": "#/definitions/response"
+                },
+                "request": {
+                    "$ref": "#/definitions/request"
+                }
+            },
+            "type": "object"
+        },
+        "course_section_instructor_set": {
+            "items": {
+                "properties": {
+                    "person_id": {
+                        "$ref": "#/definitions/person_id"
+                    },
+                    "byu_id": {
+                        "$ref": "#/definitions/byu_id"
+                    },
+                    "net_id": {
+                        "$ref": "#/definitions/net_id"
+                    },
+                    "type": {
+                        "$ref": "#/definitions/type"
+                    },
+                    "sort_name": {
+                        "$ref": "#/definitions/sort_name"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "exam_building": {
+            "type": "string"
+        },
+        "com_combine_curr_id": {
+            "type": "string"
+        },
+        "sort_name": {
+            "type": "string"
+        },
+        "sequence_number": {
+            "type": "number"
+        },
+        "course_section_info": {
+            "properties": {
+                "section_size": {
+                    "$ref": "#/definitions/section_size"
+                },
+                "allow_flex_title": {
+                    "$ref": "#/definitions/allow_flex_title"
+                },
+                "wdrop_date": {
+                    "$ref": "#/definitions/wdrop_date"
+                },
+                "honors": {
+                    "$ref": "#/definitions/honors"
+                },
+                "minimum_credit_hours": {
+                    "$ref": "#/definitions/minimum_credit_hours"
+                },
+                "section_type": {
+                    "$ref": "#/definitions/section_type"
+                },
+                "grade_due_date": {
+                    "$ref": "#/definitions/grade_due_date"
+                },
+                "combine_title_code": {
+                    "$ref": "#/definitions/combine_title_code"
+                },
+                "cross_list_flag": {
+                    "$ref": "#/definitions/cross_list_flag"
+                },
+                "reg_end_date": {
+                    "$ref": "#/definitions/reg_end_date"
+                },
+                "teaching_area": {
+                    "$ref": "#/definitions/teaching_area"
+                },
+                "end_date": {
+                    "$ref": "#/definitions/end_date"
+                },
+                "course_title": {
+                    "$ref": "#/definitions/course_title"
+                },
+                "block_code": {
+                    "$ref": "#/definitions/block_code"
+                },
+                "title_code": {
+                    "$ref": "#/definitions/title_code"
+                },
+                "curriculum_id": {
+                    "$ref": "#/definitions/curriculum_id"
+                },
+                "rain_check": {
+                    "$ref": "#/definitions/rain_check"
+                },
+                "credit_type": {
+                    "$ref": "#/definitions/credit_type"
+                },
+                "section_status_flag": {
+                    "$ref": "#/definitions/section_status_flag"
+                },
+                "fixed_or_variable": {
+                    "$ref": "#/definitions/fixed_or_variable"
+                },
+                "reg_method": {
+                    "$ref": "#/definitions/reg_method"
+                },
+                "combine_curr_id": {
+                    "$ref": "#/definitions/combine_curr_id"
+                },
+                "section_number": {
+                    "$ref": "#/definitions/section_number"
+                },
+                "service_learning": {
+                    "$ref": "#/definitions/service_learning"
+                },
+                "catalog_number": {
+                    "$ref": "#/definitions/catalog_number"
+                },
+                "combine_section": {
+                    "$ref": "#/definitions/combine_section"
+                },
+                "grade_rule": {
+                    "$ref": "#/definitions/grade_rule"
+                },
+                "credit_hours": {
+                    "$ref": "#/definitions/credit_hours"
+                },
+                "fee": {
+                    "$ref": "#/definitions/fee"
+                },
+                "lab_quiz_section": {
+                    "$ref": "#/definitions/lab_quiz_section"
+                },
+                "grade_submission_method": {
+                    "$ref": "#/definitions/grade_submission_method"
+                },
+                "reg_start_date": {
+                    "$ref": "#/definitions/reg_start_date"
+                },
+                "start_date": {
+                    "$ref": "#/definitions/start_date"
+                }
+            },
+            "type": "object"
+        },
+        "exam_begin_time": {
+            "type": "string"
+        },
+        "lab_quiz_section": {
+            "type": "number"
+        },
+        "grade_submission_method": {
+            "type": "string"
+        },
+        "start_date": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicClassScheduleCourseSection",
+        "description": "This service provides standard information about a section of a course. It does not provide a class roll.",
+        "version": "v2"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/Course_Section_v1.0"
+    }
+}

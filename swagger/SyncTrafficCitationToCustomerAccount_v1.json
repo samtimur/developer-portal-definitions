@@ -1,0 +1,84 @@
+{
+    "basePath": "/domains/erp/sa/y_citation_upd/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "citation": {
+                                    "properties": {
+                                        "number": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "number"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "citation"
+                            ]
+                        },
+                        "description": "Request Body. All responses return 200. results status = \"Error\" if citation could not be sync'ed.",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "title": "Results",
+                            "properties": {
+                                "results": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "status"
+                                    ]
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "results"
+                            ]
+                        },
+                        "description": "All responses return 200. results status = \"Error\" if citation could not be sync'ed."
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "SyncTrafficCitationToCustomerAccount",
+        "description": "Synchronize BYU Traffic Citation to Customer Account",
+        "version": "v1"
+    }
+}

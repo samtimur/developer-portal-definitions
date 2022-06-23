@@ -1,0 +1,145 @@
+{
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/table/{tableName}": {
+            "post": {
+                "summary": "Create a record",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Which table",
+                        "name": "tableName",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Return the display value (true), actual value (false), or both (all) for reference fields (default: false)",
+                        "name": "sysparm_display_value",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "True to exclude Table API links for reference fields (default: false)",
+                        "name": "sysparm_exclude_reference_link",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "A comma-separated list of fields to return in the response",
+                        "name": "sysparm_fields",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "True to set raw value of input fields (default: false)",
+                        "name": "sysparm_input_display_value",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "True to suppress auto generation of system fields (default:false)",
+                        "name": "sysparm_suppress_auto_sys_field",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Render the response according to the specified UI view (overridden by sysparm_fields)",
+                        "name": "sysparm_view",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "operationId": "Update Incident Request"
+            },
+            "get": {
+                "summary": "Retrieve multiple records",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Retrieves multiple incidents per call based on the query.",
+                "parameters": [
+                    {
+                        "description": "Which table",
+                        "name": "tableName",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "number=INC0123456 or active=true^assignment_group=javascript:getMyAssignmentGroups()",
+                        "name": "sysparm_query",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Return the display value (true), actual value (false), or both (all) for reference fields (default: false)",
+                        "name": "sysparm_display_value",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "True to exclude Table API links for reference fields (default: false)",
+                        "name": "sysparm_exclude_reference_link",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "True to suppress pagination header (default:false)",
+                        "name": "sysparm_suppress_pagination_header",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Render the response according to the specified UI view (overridden by sysparm_fields)",
+                        "name": "sysparm_view",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "A comma-separated list of fields to return in the response",
+                        "name": "sysparm_fields",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "title": "ServiceNowTableAPI",
+        "description": "Allows you to perform create, read, and update operations on the any table in ServiceNow.",
+        "contact": {
+            "email": "oittools-ft@byu.edu",
+            "name": "OIT Tools Team"
+        },
+        "version": "v1"
+    },
+    "basePath": "/domains/servicenow/tableapi/v1"
+}

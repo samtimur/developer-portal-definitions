@@ -1,0 +1,86 @@
+{
+    "basePath": "/domains/erp/hr/verify_ssn_access/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "Net ID",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "query",
+                        "allowEmptyValue": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/verify_ssn_access"
+                        },
+                        "description": "The default response type is JSON.  Add an Accept header with value=application/xml to return an XML response.",
+                        "examples": {
+                            "application/json": {
+                                "verify_ssn_access": {
+                                    "verification": {
+                                        "access": "N"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "options": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "verification": {
+            "properties": {
+                "access": {
+                    "$ref": "#/definitions/access"
+                }
+            }
+        },
+        "access": {
+            "properties": {
+                "value": {
+                    "enum": [
+                        "N",
+                        "Y"
+                    ],
+                    "type": "string"
+                }
+            }
+        },
+        "verify_ssn_access": {
+            "properties": {
+                "verification": {
+                    "$ref": "#/definitions/verification"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "VERIFY_SSN_ACCESS",
+        "description": "Returns a value of 'Y' if the person has access to the SSN Maintenance page.",
+        "version": "v1"
+    }
+}

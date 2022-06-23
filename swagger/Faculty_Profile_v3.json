@@ -1,0 +1,4520 @@
+{
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/entities": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all of the available entities from Digital Measures",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/entities"
+                        },
+                        "description": "Service request is OK and the list of entities is in the response"
+                    }
+                }
+            }
+        },
+        "/authorization": {
+            "post": {
+                "description": "Creates an authorized client",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/authorized_client"
+                        },
+                        "name": "authorized client",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/authorized_client"
+                        },
+                        "description": "Service request is OK and the created authorized client in the response"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "description": "Returns all the authorized clients and their authorizations",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/authorized_client"
+                            }
+                        },
+                        "description": "Service request is OK and the list of authorized clients is in the response"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{byu_id}/{field_set}/{item_id}/{file_upload}": {
+            "get": {
+                "description": "Returns the requested file upload",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/field_set"
+                    },
+                    {
+                        "$ref": "#/parameters/item_id"
+                    },
+                    {
+                        "$ref": "#/parameters/file_upload"
+                    },
+                    {
+                        "$ref": "#/parameters/public_data_only"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "Content-Disposition": {
+                                "description": "inline; filename=\"{name of the uploaded file}\"",
+                                "type": "string"
+                            },
+                            "Content-Type": {
+                                "description": "format of the uploaded file",
+                                "type": "string"
+                            }
+                        },
+                        "description": "The requested file"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/authorization/{byu_id}": {
+            "put": {
+                "description": "Updates the specified authorized client",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/authorized_client"
+                        },
+                        "name": "authorized client",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/authorized_client"
+                        },
+                        "description": "Service request is OK and the authorized client is in the response"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "description": "Returns the specified authorized client",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/authorized_client"
+                        },
+                        "description": "Service request is OK and the authorized client is in the response"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "description": "Deletes the specified authorized client",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/authorized_client"
+                        },
+                        "description": "Service request is OK"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/faculty/{byu_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all data for the specified faculty member",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/field_sets"
+                    },
+                    {
+                        "$ref": "#/parameters/public_data_only"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/faculty_response"
+                        },
+                        "description": "Service request is OK and the faculty member data is in the response body."
+                    },
+                    "204": {
+                        "description": "Service request is OK and no data is available."
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/faculty": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all of the PCI information for faculty",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/public_data_only"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/faculty"
+                        },
+                        "description": "Service request is OK and the list of faculty information is in the response"
+                    }
+                }
+            }
+        },
+        "/info": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns lists of all colleges, departments, and field sets that faculty profile supports",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/info"
+                        },
+                        "description": "lists of all colleges, departments, and field sets that faculty profile supports"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "file_upload": {
+            "description": "Items uploaded by faculty",
+            "enum": [
+                "photo",
+                "vita",
+                "creative_work_digital_review",
+                "faculty_development_plan",
+                "annual_review_additional_document",
+                "annual_activity_report_archive",
+                "department_chair_letter",
+                "department_evaluation_report",
+                "past_vita",
+                "presentation",
+                "syllabus",
+                "conflict_plan"
+            ],
+            "type": "string"
+        },
+        "presentations": {
+            "items": {
+                "$ref": "#/definitions/presentations_object"
+            },
+            "description": "All Faculty presentation information",
+            "type": "array"
+        },
+        "collegefunding": {
+            "items": {
+                "$ref": "#/definitions/collegefunding_object"
+            },
+            "description": "Funding entered by the College",
+            "type": "array"
+        },
+        "creativeworks_object": {
+            "description": "Single Faculty Creative work",
+            "properties": {
+                "crtv_wrk_descr": {
+                    "description": "Creative Work Description",
+                    "example": "Choreographed dance with Cosmo and the Cougarettes",
+                    "type": "string"
+                },
+                "crtv_wrk_lgcy_strt_day": {
+                    "description": "Creative work legacy start day",
+                    "example": "01",
+                    "type": "string"
+                },
+                "crtv_wrk_peer_rvwd_flg": {
+                    "description": "Is the work peer reviewed",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "No",
+                    "type": "string"
+                },
+                "crtv_wrk_lgcy_strt_dtr_bgn": {
+                    "description": "Creative Work Legacy Start Date Range Begin",
+                    "example": "2018-12-01",
+                    "type": "string"
+                },
+                "crtv_wrk_pubd_dtr_end": {
+                    "description": "Last day of the month of a Date Range",
+                    "example": "2018-12-31",
+                    "type": "string"
+                },
+                "crtv_wrk_cntrbtr_vsblty_flg": {
+                    "description": "Creative works visibility flag",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "crtv_wrk_lgcy_strt_dtr_end": {
+                    "description": "Creative Work Legacy Start Date Range End",
+                    "example": "2018-12-31",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "unique id",
+                    "example": "199073544192",
+                    "type": "string"
+                },
+                "crtv_wrk_acceptd_dtr_end": {
+                    "description": "Last day of the month of a date range",
+                    "example": "2018-07-31",
+                    "type": "string"
+                },
+                "crtv_wrk_submitd_mnth": {
+                    "description": "Month Submitted",
+                    "example": "March",
+                    "type": "string"
+                },
+                "crtv_wrk_dgtl_file_rvw": {
+                    "description": "Uploaded Review of creative work",
+                    "example": "Digital review of creative work goes here.",
+                    "type": "string"
+                },
+                "crtv_wrk_othr_typ_descr": {
+                    "description": "Creative Work other type description",
+                    "example": "Filmed Cougarettes dance with Cosmo",
+                    "type": "string"
+                },
+                "crtv_wrk_lgcy_trm_yr": {
+                    "description": "Year the work was ended",
+                    "example": "2015",
+                    "type": "string"
+                },
+                "crtv_wrk_titl": {
+                    "description": "Title",
+                    "example": "Cosmo Cougar Half Time show",
+                    "type": "string"
+                },
+                "crtv_wrk_venue_descr": {
+                    "description": "Venue Description",
+                    "example": "LaVell Edwards Stadium",
+                    "type": "string"
+                },
+                "crtv_wrk_acceptd_dtr_bgn": {
+                    "description": "First day of the month of a date range",
+                    "example": "2018-09-01",
+                    "type": "string"
+                },
+                "crtv_wrk_cptrd_descr": {
+                    "description": "Description of the media used to record the the creative work",
+                    "example": "Department Website",
+                    "type": "string"
+                },
+                "crtv_wrk_lgcy_trm_dtr_bgn": {
+                    "description": "Other creative work end date range begin",
+                    "example": "2018-12-01",
+                    "type": "string"
+                },
+                "crtv_wrk_pubd_mnth": {
+                    "description": "Month Published",
+                    "example": "August",
+                    "type": "string"
+                },
+                "crtv_wrk_lgcy_stu_cntrbtrs": {
+                    "description": "Student Contributors from the legacy system",
+                    "example": "Brigham Young",
+                    "type": "string"
+                },
+                "crtv_wrk_submitd_dtr_end": {
+                    "description": "Last day of the month of a date range",
+                    "example": "2018-09-31",
+                    "type": "string"
+                },
+                "crtv_wrk_acceptd_mnth": {
+                    "description": "Creative work accepted Month",
+                    "example": "May",
+                    "type": "string"
+                },
+                "crtv_wrk_acceptd_yr": {
+                    "description": "Year the work was accepted",
+                    "example": "2018",
+                    "type": "string"
+                },
+                "crtv_wrk_pubd_dtr_bgn": {
+                    "description": "First day of the month of a date range",
+                    "example": "2018-08-01",
+                    "type": "string"
+                },
+                "crtv_wrk_lgcy_prfrmnc_yr": {
+                    "description": "Performance year from legacy system",
+                    "example": "2018",
+                    "type": "string"
+                },
+                "crtv_wrk_lgcy_strt_mnth": {
+                    "description": "Creative work start Month",
+                    "example": "July",
+                    "type": "string"
+                },
+                "crtv_wrk_rvw_sgnfcnc": {
+                    "description": "Creative work review significance",
+                    "example": "National review",
+                    "type": "string"
+                },
+                "crtv_wrk_pubd_yr": {
+                    "description": "Published Year",
+                    "example": "2018",
+                    "type": "string"
+                },
+                "perform_exhibit_contributors": {
+                    "items": {
+                        "$ref": "#/definitions/perform_exhibit_contributor_object"
+                    },
+                    "description": "Faculty Creative Work's Contributors",
+                    "type": "array"
+                },
+                "crtv_wrk_lgcy_trm_mnth": {
+                    "description": "Creative work end Month",
+                    "example": "April",
+                    "type": "string"
+                },
+                "crtv_wrk_lgcy_trm_dtr_end": {
+                    "description": "Other creative work end date range end",
+                    "example": "2018-12-31",
+                    "type": "string"
+                },
+                "crtv_wrk_dgtl_file_url": {
+                    "description": "Creative works digital file url",
+                    "example": "https://lib.byu.edu/collections/",
+                    "type": "string"
+                },
+                "crtv_wrk_lgcy_strt_yr": {
+                    "description": "Start year from legacy system",
+                    "example": "Forms Field Pairing",
+                    "type": "string"
+                },
+                "crtv_wrk_type": {
+                    "description": "Work Type",
+                    "example": "Half Time Show",
+                    "type": "string"
+                },
+                "crtv_wrk_submitd_yr": {
+                    "description": "Year Submitted",
+                    "example": "2018",
+                    "type": "string"
+                },
+                "crtv_wrk_submitd_dtr_bgn": {
+                    "description": "First day of the month of a date range",
+                    "example": "2018-08-01",
+                    "type": "string"
+                },
+                "crtv_wrk_lgcy_trm_day": {
+                    "description": "Creative work legacy end day",
+                    "example": "31",
+                    "type": "string"
+                },
+                "crtv_wrk_rvw_typ": {
+                    "description": "Creative work review type",
+                    "example": "Peer",
+                    "type": "string"
+                },
+                "crtv_wrk_lgcy_nstu_cntrbrs": {
+                    "description": "Nonstudent Contributors from the legacy system",
+                    "example": "LaVell Edwards",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "intellprop_invent_object": {
+            "description": "Single Patent Contributor",
+            "properties": {
+                "ptnt_invntr_name": {
+                    "description": "The inventor's name",
+                    "example": "Cosmo Cougar",
+                    "type": "string"
+                },
+                "ptnt_invntr_fname": {
+                    "description": "The inventor's first name",
+                    "example": "Cosmo",
+                    "type": "string"
+                },
+                "ptnt_invntr_lname": {
+                    "description": "The inventor's last name",
+                    "example": "Cougar",
+                    "type": "string"
+                },
+                "ptnt_invntr_mname": {
+                    "description": "The inventor's middle name",
+                    "example": "John",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "directstudentlearning_object": {
+            "description": "Direct Student Learning Activity info",
+            "properties": {
+                "dsl_actvt_typ_othr_xpln": {
+                    "maxLength": 20000,
+                    "description": "Explanation of activity type role beyond the Activity Type",
+                    "example": "Training student advisors",
+                    "type": "string"
+                },
+                "dsl_student": {
+                    "$ref": "#/definitions/student_object"
+                },
+                "dsl_actvt_typ": {
+                    "maxLength": 20000,
+                    "description": "Student Learning Activity Type",
+                    "example": "Study Hall",
+                    "type": "string"
+                },
+                "dsl_fac_role": {
+                    "description": "Faculty's role in student DSL activity",
+                    "enum": [
+                        "Committee Chair",
+                        "Committee Member",
+                        "Supervisor",
+                        "Advisor",
+                        "Other"
+                    ],
+                    "example": "Supervisor",
+                    "type": "string"
+                },
+                "dsl_wrk_descr": {
+                    "maxLength": 20000,
+                    "description": "Description of student learning activities",
+                    "example": "Trained students to work as writing advisors",
+                    "type": "string"
+                },
+                "dsl_stg_of_cmpltn": {
+                    "description": "Level of completion of the students DSL experience",
+                    "enum": [
+                        "Completed",
+                        "In Process",
+                        "Proposal"
+                    ],
+                    "example": "Completed",
+                    "type": "string"
+                },
+                "dsl_wrk_titl": {
+                    "maxLength": 20000,
+                    "description": "Title the student has assigned to their direct student learning activity",
+                    "example": "Cosmo Cougar's student learning project",
+                    "type": "string"
+                },
+                "dsl_fac_role_othr_xpln": {
+                    "maxLength": 20000,
+                    "description": "Additional explanation of faculty member's role in student DSL activity",
+                    "example": "I am the mascot of the BYU football team",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "pasthist": {
+            "items": {
+                "$ref": "#/definitions/pasthist_object"
+            },
+            "description": "All Employment History Information",
+            "type": "array"
+        },
+        "publicationsauthor_object": {
+            "description": "Author Information",
+            "properties": {
+                "id": {
+                    "description": "unique id",
+                    "example": "199073544192",
+                    "type": "string"
+                },
+                "fac_pubn_authr_mname": {
+                    "maxLength": 20000,
+                    "description": "Middle Name of the editor of the publication",
+                    "example": "C",
+                    "type": "string"
+                },
+                "fac_pubn_authr_role": {
+                    "maxLength": 20000,
+                    "description": "Authorship role",
+                    "example": "Author",
+                    "type": "string"
+                },
+                "fac_pubn_authr_vsblty_flg": {
+                    "description": "Authorship Visibility",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "fac_pubn_authr_fname": {
+                    "maxLength": 20000,
+                    "description": "First Name of the editor of the publication",
+                    "example": "Cougar",
+                    "type": "string"
+                },
+                "fac_pubn_authrshp_typ": {
+                    "maxLength": 20000,
+                    "description": "Authorship Type",
+                    "example": "Equal",
+                    "type": "string"
+                },
+                "fac_pubn_authr_lname": {
+                    "maxLength": 20000,
+                    "description": "Last Name of the editor of the publication",
+                    "example": "Cougar",
+                    "type": "string"
+                },
+                "fac_pubn_authr_name": {
+                    "maxLength": 20000,
+                    "description": "Name of the author of the publication",
+                    "example": "Cosmo C Cougar",
+                    "type": "string"
+                },
+                "fac_pubn_stu_authr_edu_lvl": {
+                    "maxLength": 20000,
+                    "description": "Degree earned",
+                    "example": "BYU Masters",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "creativeworks": {
+            "items": {
+                "$ref": "#/definitions/creativeworks_object"
+            },
+            "description": "Faculty Creative Works",
+            "type": "array"
+        },
+        "field_set": {
+            "description": "Sets of faculty data that can be requested",
+            "enum": [
+                "pci",
+                "admin",
+                "directstudentlearning",
+                "awardhonor",
+                "collegefunding",
+                "education",
+                "pasthist",
+                "scheduledcourses",
+                "publications",
+                "presentations",
+                "otherteaching",
+                "member",
+                "consult",
+                "professionalcitizenship",
+                "adminassignment",
+                "externalgrants",
+                "patentsall",
+                "internationalexpertise",
+                "byucitizenship",
+                "licensecertification",
+                "facultyfunding",
+                "creativeworks",
+                "annualreviews",
+                "conflict"
+            ],
+            "type": "string"
+        },
+        "faculty_response": {
+            "description": "Response with various employees' data",
+            "properties": {
+                "employees": {
+                    "items": {
+                        "$ref": "#/definitions/faculty_profile"
+                    }
+                }
+            }
+        },
+        "info": {
+            "description": "Lists of all colleges, departments, and field sets that faculty profile supports",
+            "properties": {
+                "colleges": {
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "field_sets": {
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "departments": {
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "student_object": {
+            "description": "Direct Student Learning Activity info",
+            "properties": {
+                "dsl_stu_lname": {
+                    "description": "Student Last Name",
+                    "example": "Cougar",
+                    "type": "string"
+                },
+                "dsl_stu_lvl": {
+                    "description": "Student Degree Level",
+                    "example": "BYU Masters",
+                    "type": "string"
+                },
+                "dsl_stu_fname": {
+                    "description": "Student First Name",
+                    "example": "Cosmo",
+                    "type": "string"
+                },
+                "dsl_stu_compnstn": {
+                    "maxLength": 20000,
+                    "description": "Indicates whether the student received credit, was paid, both, or neither from DSL experience",
+                    "example": "Paid",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "education_object": {
+            "description": "Single Faculty Eduction Information",
+            "properties": {
+                "fac_edu_deg_lvl": {
+                    "description": "Faculty Education Degree Level",
+                    "enum": [
+                        "Associate",
+                        "Bachelor",
+                        "Master",
+                        "Doctor"
+                    ],
+                    "example": "Bachelor",
+                    "type": "string"
+                },
+                "fac_edu_deg_cmpltd_yr": {
+                    "description": "The year that all the academic degree requirements were completed",
+                    "format": "date",
+                    "example": "1992",
+                    "type": "string"
+                },
+                "fac_edu_deg_name_abrvtn": {
+                    "description": "Degree abbreviation",
+                    "example": "PhD",
+                    "type": "string"
+                },
+                "fac_edu_deg_cmpltd_dtr_bgn": {
+                    "description": "The first day of the year that all the academic degree requirements were completed",
+                    "format": "date",
+                    "example": "2018-01-01",
+                    "type": "string"
+                },
+                "fac_edu_thesis_titl": {
+                    "description": "Thesis title",
+                    "example": "Teaching & Learning: Football Physics",
+                    "type": "string"
+                },
+                "fac_edu_mjr": {
+                    "maxLength": 20000,
+                    "description": "Education major",
+                    "example": "English",
+                    "type": "string"
+                },
+                "fac_edu_institn": {
+                    "description": "Institution name",
+                    "example": "Brigham Young University",
+                    "type": "string"
+                },
+                "fac_edu_highest_deg_earned_flg": {
+                    "description": "Indicates if the degree is the last degree earned",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "No",
+                    "type": "string"
+                },
+                "fac_edu_hnrs_and_dstnctns": {
+                    "description": "Faculty Education Honors and Distinctions",
+                    "example": "Dean's List of Excellence, April 2010",
+                    "type": "string"
+                },
+                "fac_edu_vsblty_flg": {
+                    "description": "Indicates if a faculty member wants the associated info to be visible on the college faculty directory/website",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "fac_edu_deg_cmpltd_dtr_end": {
+                    "description": "The last day of the year that all the academic degree requirements were completed",
+                    "format": "date",
+                    "example": "2018-12-31",
+                    "type": "string"
+                },
+                "fac_edu_suprtng_areas_of_emph": {
+                    "description": "Supporting Areas of Emphasis",
+                    "example": "Economics",
+                    "type": "string"
+                },
+                "fac_edu_termnl_deg_flg": {
+                    "description": "Terminal Degree Flag",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "No",
+                    "type": "string"
+                },
+                "fac_edu_institn_locn": {
+                    "description": "Institution Location",
+                    "example": "Brigham Young University Campus",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "languages": {
+            "items": {
+                "$ref": "#/definitions/languages_object"
+            },
+            "description": "Faculty International languages",
+            "type": "array"
+        },
+        "otherteaching": {
+            "items": {
+                "$ref": "#/definitions/otherteaching_object"
+            },
+            "description": "All Other Teaching Activity Information",
+            "type": "array"
+        },
+        "patentsconfidential_object": {
+            "description": "Single Confidential Patent Information",
+            "properties": {
+                "ptnt_dscl_titl": {
+                    "description": "Disclosure Title",
+                    "example": "Disclosure Title",
+                    "type": "string"
+                },
+                "ptnt_dscl_mod_yr": {
+                    "description": "Disclosure Modified Year",
+                    "example": "2017",
+                    "type": "string"
+                },
+                "ptnt_dscl_mod_dtr_bgn": {
+                    "description": "First day of the month of the disclosure mod date range",
+                    "example": "2018-04-01",
+                    "type": "string"
+                },
+                "ptnt_dscl_submit_dtr_bgn": {
+                    "description": "Disclosure Submitted date range begin",
+                    "example": "2017-03-01",
+                    "type": "string"
+                },
+                "ptnt_dscl_submit_yr": {
+                    "description": "Disclosure Submit Year",
+                    "example": "2014",
+                    "type": "string"
+                },
+                "ptnt_dscl_submit_dtr_end": {
+                    "description": "Disclosure Submitted date range end",
+                    "example": "2017-03-31",
+                    "type": "string"
+                },
+                "ptnt_dscl_mod_dtr_end": {
+                    "description": "Disclosure Modification date range end",
+                    "example": "2018-12-31",
+                    "type": "string"
+                },
+                "ptnt_dscl_submit_day": {
+                    "description": "Disclosure submitted day",
+                    "example": "31",
+                    "type": "string"
+                },
+                "ptnt_dscl_submit_mnth": {
+                    "description": "Submit Month",
+                    "example": "April",
+                    "type": "string"
+                },
+                "ptnt_dscl_not_filed_at_byu_flg": {
+                    "description": "Disclosure not filed at BYU flag",
+                    "example": "true",
+                    "type": "string"
+                },
+                "ptnt_dscl_byu_nmbr": {
+                    "description": "Disclosure BYU Number",
+                    "example": "2018-123",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "professionalcitizenship_object": {
+            "description": "Professional Citizenship Activity Information",
+            "properties": {
+                "fac_prfsnl_citz_strt_yr": {
+                    "description": "Faculty Profile Date Range Start Year",
+                    "example": "2018-05-01",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_compnstn": {
+                    "description": "Compensation",
+                    "example": "Pro Bono",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_trm_mnth": {
+                    "description": "Date range end month",
+                    "example": "April",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_org_name": {
+                    "description": "Organization name",
+                    "example": "Women's Experience in Antiquity Conference",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_strt_dtr_bgn": {
+                    "description": "Faculty Profile Starting Date Range Begin",
+                    "example": "2017-05-01",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_psitn": {
+                    "description": "Citizenship Position",
+                    "example": "Department",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_scope": {
+                    "description": "Scope of the Activity",
+                    "example": "National",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_vsblty_flg": {
+                    "description": "Faculty Directory Visibility Flag",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "fac_prfsnl_citz_rspnsblt_descr": {
+                    "description": "Responsibility description",
+                    "example": "A description of the responsibility would go here.",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_strt_mnth": {
+                    "description": "Date range start month",
+                    "example": "April",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_elect_app": {
+                    "description": "Are they elected or appointed",
+                    "example": "No, neither",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_trm_yr": {
+                    "description": "FacultyProfile Date Range End Year",
+                    "example": "2018-05-31",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_trm_dtr_end": {
+                    "description": "Last day of the month of a date range",
+                    "example": "2018-12-31",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_strt_dtr_end": {
+                    "description": "Faculty Profile Starting Date Range End",
+                    "example": "2018-05-01",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_typ": {
+                    "description": "Citizenship Type",
+                    "example": "Professional",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_othr_psitn": {
+                    "description": "Other Citizenship Position",
+                    "example": "Other",
+                    "type": "string"
+                },
+                "fac_prfsnl_citz_trm_dtr_bgn": {
+                    "description": "First day of the month of a date range",
+                    "example": "2016-12-01",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "consult_object": {
+            "description": "Consultation activity information",
+            "properties": {
+                "fac_cnsltng_trm_day": {
+                    "description": "Date Range End Day",
+                    "example": "2018-12-31",
+                    "type": "string"
+                },
+                "fac_cnsltng_load": {
+                    "description": "Consulting Load",
+                    "example": "3",
+                    "type": "string"
+                },
+                "fac_cnsltng_strt_dtr_bgn": {
+                    "description": "Starting Date Range Begin",
+                    "example": "2018-01-01",
+                    "type": "string"
+                },
+                "fac_cnsltng_strt_mnth": {
+                    "description": "Start Month",
+                    "example": "April",
+                    "type": "string"
+                },
+                "fac_cnsltng_locn": {
+                    "maxLength": 20000,
+                    "description": "Consulting Location",
+                    "example": "Salt Lake City, Ut",
+                    "type": "string"
+                },
+                "fac_cnsltng_clnt_name": {
+                    "maxLength": 20000,
+                    "description": "Consultation name",
+                    "example": "Temple Historian, The Church of Jesus Christ of Latter-day Saints",
+                    "type": "string"
+                },
+                "fac_cnsltng_vsblty_flg": {
+                    "description": "Visibility Flag",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "fac_cnsltng_strt_day": {
+                    "description": "Date Range Start Day",
+                    "example": "2017-01-01",
+                    "type": "string"
+                },
+                "fac_cnsltng_trm_dtr_end": {
+                    "description": "Faculty Profile ending date range end",
+                    "format": "date",
+                    "example": "2018-12-31",
+                    "type": "string"
+                },
+                "fac_cnsltng_trm_mnth": {
+                    "description": "Month at the end of the date range",
+                    "example": "March",
+                    "type": "string"
+                },
+                "fac_cnsltng_trm_dtr_bgn": {
+                    "description": "Faculty Profile ending date range begin",
+                    "example": "2014-01-01",
+                    "type": "string"
+                },
+                "fac_cnsltng_descr": {
+                    "maxLength": 20000,
+                    "description": "Consulting Work Description",
+                    "example": "A description of the consulting work provided would be displayed here and has a max limit of 20000 characters.",
+                    "type": "string"
+                },
+                "fac_cnsltng_strt_yr": {
+                    "description": "Faculty Profile Date Range Start Year",
+                    "example": "2018-05-01",
+                    "type": "string"
+                },
+                "fac_cnsltng_strt_dtr_end": {
+                    "description": "Faculty Profile Starting Date Range End",
+                    "example": "2018-05-01",
+                    "type": "string"
+                },
+                "fac_cnsltng_trm_yr": {
+                    "description": "FacultyProfile Date Range End Year",
+                    "example": "2018-05-31",
+                    "type": "string"
+                },
+                "fac_cnsltng_compnstn": {
+                    "description": "Compensation",
+                    "enum": [
+                        "Compensated",
+                        "Pro Bono"
+                    ],
+                    "example": "Pro bono",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "byucitizenship": {
+            "description": "BYU Citizenship Information",
+            "properties": {
+                "fac_byu_citz_strt_yr": {
+                    "description": "FacultyProfile Date Range Begin Year",
+                    "example": "2010",
+                    "type": "string"
+                },
+                "fac_byu_citz_strt_mnth": {
+                    "description": "The date range start month",
+                    "example": "April",
+                    "type": "string"
+                },
+                "fac_byu_citz_cmitee_name": {
+                    "description": "Professional Citizenship Committee Name",
+                    "example": "Strategic Planning Committee",
+                    "type": "string"
+                },
+                "fac_byu_citz_psitn_othr_xpln": {
+                    "description": "Position Explanation",
+                    "example": "Chairman",
+                    "type": "string"
+                },
+                "fac_byu_citz_vsblty_flg": {
+                    "description": "Citizenship Visibility",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "fac_byu_citz_trm_dtr_end": {
+                    "description": "FacultyProfile Ending Date Range End",
+                    "example": "2018-04-31",
+                    "type": "string"
+                },
+                "fac_byu_citz_scope": {
+                    "description": "Citizenship scope",
+                    "example": "Department",
+                    "type": "string"
+                },
+                "fac_byu_citz_trm_dtr_bgn": {
+                    "description": "FacultyProfile Ending Date Range Begin",
+                    "example": "2016-12-01",
+                    "type": "string"
+                },
+                "fac_byu_citz_trm_mnth": {
+                    "description": "End Month",
+                    "example": "April",
+                    "type": "string"
+                },
+                "fac_byu_citz_strt_dtr_end": {
+                    "description": "Faculty Profile Starting Date Range End",
+                    "example": "2018-05-01",
+                    "type": "string"
+                },
+                "fac_byu_citz_rspnsblts_descr": {
+                    "description": "Responsibilities Description",
+                    "example": "Description of all responsibilities assigned to this position.",
+                    "type": "string"
+                },
+                "fac_byu_citz_psitn": {
+                    "description": "Position",
+                    "example": "Committee",
+                    "type": "string"
+                },
+                "fac_byu_citz_curat_report": {
+                    "description": "BYU Citizenship Curation Report",
+                    "example": "Curation report would list all relevant information here.",
+                    "type": "string"
+                },
+                "fac_byu_citz_strt_dtr_bgn": {
+                    "description": "Faculty Profile Starting Date Range Begin",
+                    "example": "2017-05-01",
+                    "type": "string"
+                },
+                "fac_byu_citz_trm_yr": {
+                    "description": "Faculty Profile Date Range End Year",
+                    "example": "2015",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "pci": {
+            "description": "Personal and Contact information",
+            "properties": {
+                "fac_separation_yr": {
+                    "description": "Year the employee left BYU employment",
+                    "format": "date",
+                    "example": "2018",
+                    "type": "string"
+                },
+                "fac_cfs_strt_rank": {
+                    "maxLength": 20000,
+                    "description": "The rank the faculty member had when they achieved continuing faculty status",
+                    "example": "Professor",
+                    "type": "string"
+                },
+                "fac_attain_prof_rank_dtr_end": {
+                    "description": "Faculty Attained Professor Rank Date Range End",
+                    "format": "date",
+                    "example": "2008-04-30",
+                    "type": "string"
+                },
+                "fac_cfs_grntd_yr": {
+                    "description": "Year that faculty was granted continuing faculty status",
+                    "format": "date",
+                    "example": "2005",
+                    "type": "string"
+                },
+                "fac_attain_asst_rank_dtr_end": {
+                    "description": "Faculty Attained Assistant Rank Date Range End",
+                    "format": "date",
+                    "example": "2008-04-30",
+                    "type": "string"
+                },
+                "fac_curr_rank": {
+                    "maxLength": 20000,
+                    "description": "Current faculty rank",
+                    "example": "Associate Professor",
+                    "type": "string"
+                },
+                "surname": {
+                    "maxLength": 20000,
+                    "description": "Faculty's Last Name",
+                    "example": "Cougar",
+                    "type": "string"
+                },
+                "fac_ft_hire_strt_dtr_end": {
+                    "description": "Faculty Full-time Start Date Range End",
+                    "format": "date",
+                    "example": "2000-09-30",
+                    "type": "string"
+                },
+                "home_phone_line_number": {
+                    "description": "Last four digits of faculty's home phone number",
+                    "example": "1234",
+                    "type": "string"
+                },
+                "fp_curr_cv_locn": {
+                    "description": "Current CV Location",
+                    "example": "comsoc/pci/cv/cosmocougar.pdf",
+                    "type": "string"
+                },
+                "fac_3_yr_rvw_psd_yr": {
+                    "description": "Year the faculty passed their three year review",
+                    "format": "date",
+                    "example": "2003",
+                    "type": "string"
+                },
+                "fac_attain_prof_rank_dtr_bgn": {
+                    "description": "Faculty Attained Professor Rank Date Range Begin",
+                    "format": "date",
+                    "example": "2008-12-01",
+                    "type": "string"
+                },
+                "fac_orignl_hire_dtr_bgn": {
+                    "description": "Original Hire Date Range Begin",
+                    "format": "date",
+                    "example": "2000-09-30",
+                    "type": "string"
+                },
+                "fac_dir_cv_vsblty_flg": {
+                    "description": "Boolean on whether a faculty's CV information is visible",
+                    "example": "true",
+                    "type": "string"
+                },
+                "first_name": {
+                    "maxLength": 20000,
+                    "description": "Faculty's First Name",
+                    "example": "Cosmo",
+                    "type": "string"
+                },
+                "fac_attain_prof_rank_yr": {
+                    "description": "Year the faculty attained professor rank",
+                    "format": "date",
+                    "example": "2002",
+                    "type": "string"
+                },
+                "fac_dir_photo_vsblty_flg": {
+                    "description": "Boolean values for whether a faculty's photo is visible on the directory",
+                    "example": "true",
+                    "type": "string"
+                },
+                "fp_fac_photo_locn": {
+                    "description": "Location of Faculty Profile Photograph",
+                    "example": "comsoc/pci/cosmo%20cougar%2003-1.jpg",
+                    "type": "string"
+                },
+                "cell_phone_line_number": {
+                    "description": "Last four digits of a cell phone number",
+                    "example": "1234",
+                    "type": "string"
+                },
+                "fac_cfs_strt_mnth": {
+                    "description": "Month started Continuing Faculty Status",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "January",
+                    "type": "string"
+                },
+                "home_phone_prefix": {
+                    "description": "Faculty's home phone's middle three digits",
+                    "example": "123",
+                    "type": "string"
+                },
+                "fac_resrch_intrsts": {
+                    "maxLength": 20000,
+                    "description": "Things this faculty member researches",
+                    "example": "Applications of Linear Algebra",
+                    "type": "string"
+                },
+                "fac_separation_dtr_end": {
+                    "description": "Faculty Separation Date Range End",
+                    "format": "date",
+                    "example": "2018-09-30",
+                    "type": "string"
+                },
+                "fac_orignl_hire_mnth": {
+                    "description": "The month that the faculty was originally hired",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "January",
+                    "type": "string"
+                },
+                "adjnct_fac_strt_dtr_end": {
+                    "description": "Adjunct Faculty Start Date Range End",
+                    "format": "date",
+                    "example": "2000-09-30",
+                    "type": "string"
+                },
+                "fac_dept_phone_line_nmber": {
+                    "description": "The last 4 digits for a department's fax number",
+                    "example": "1234",
+                    "type": "string"
+                },
+                "fac_3_yr_rvw_psd_dtr_end": {
+                    "description": "Faculty Third Year Review Passed Date Range End",
+                    "format": "date",
+                    "example": "2000-01-31",
+                    "type": "string"
+                },
+                "fac_ft_strt_mnth": {
+                    "description": "Month the faculty member started full time employment at BYU",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "January",
+                    "type": "string"
+                },
+                "fac_dept_phone_prefx": {
+                    "description": "The middle three numbers of the department phone for a faculty member",
+                    "example": "123",
+                    "type": "string"
+                },
+                "employee_standing": {
+                    "maxLength": 20000,
+                    "description": "Status of current employee work activity",
+                    "example": "Active",
+                    "type": "string"
+                },
+                "fac_3_yr_rvw_psd_mnth": {
+                    "description": "Month that faculty passed their 3 year review",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "January",
+                    "type": "string"
+                },
+                "fac_cfs_grntd_dtr_bgn": {
+                    "description": "Faculty CFS Granted Date Range Begin",
+                    "format": "date",
+                    "example": "2005-06-30",
+                    "type": "string"
+                },
+                "fac_alt_name": {
+                    "maxLength": 20000,
+                    "description": "Alternative names faculty may use for publications",
+                    "example": "Cosmo Cougar, Esquire",
+                    "type": "string"
+                },
+                "fac_bgrphy": {
+                    "maxLength": 20000,
+                    "description": "Faculty's biography for department websites",
+                    "example": "Cosmo Cougar is the mascot for the BYU football team, and an aspiring football physicist",
+                    "type": "string"
+                },
+                "fac_cfs_grntd_mnth": {
+                    "description": "Month the faculty was granted Continuing faculty Status",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "January",
+                    "type": "string"
+                },
+                "fac_tchng_intrsts": {
+                    "maxLength": 20000,
+                    "description": "What the faculty is interested in teaching",
+                    "example": "Physics of football",
+                    "type": "string"
+                },
+                "sex": {
+                    "description": "Faculty's Sex",
+                    "enum": [
+                        "Male",
+                        "Female"
+                    ],
+                    "type": "string"
+                },
+                "fac_attain_asst_rank_mnth": {
+                    "description": "Month the faculty attained Assistant Professor rank",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "January",
+                    "type": "string"
+                },
+                "preferred_first_name": {
+                    "maxLength": 20000,
+                    "description": "Faculty's preferred first name",
+                    "example": "Cosmo",
+                    "type": "string"
+                },
+                "fac_cfs_strt_yr": {
+                    "description": "Year started Continuing Faculty Status",
+                    "format": "date",
+                    "example": "2000",
+                    "type": "string"
+                },
+                "fac_cfs_curr_status": {
+                    "description": "Faculty's continuing faculty status",
+                    "enum": [
+                        "Non-CFS",
+                        "CFS Track",
+                        "Has CFS"
+                    ],
+                    "example": "Has CFS",
+                    "type": "string"
+                },
+                "office_phone_prefix": {
+                    "description": "The middle three numbers of the office phone for a faculty member",
+                    "example": "123",
+                    "type": "string"
+                },
+                "home_address": {
+                    "maxLength": 20000,
+                    "description": "Faculty's home address",
+                    "example": "123 Cougar Lane, Provo, Utah, 84602",
+                    "type": "string"
+                },
+                "fac_separation_dtr_bgn": {
+                    "description": "Faculty Separation Date Range Begin",
+                    "format": "date",
+                    "example": "2019-01-30",
+                    "type": "string"
+                },
+                "fac_3_yr_rvw_psd_dtr_bgn": {
+                    "description": "Faculty Third Year Review Passed Date Range Begin",
+                    "format": "date",
+                    "example": "2008-01-01",
+                    "type": "string"
+                },
+                "adjnct_fac_strt_mnth": {
+                    "description": "Adjunct Faculty Start Month",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "January",
+                    "type": "string"
+                },
+                "fax_area_code": {
+                    "description": "Faculty's fax number area code",
+                    "example": "801",
+                    "type": "string"
+                },
+                "fac_separation_mnth": {
+                    "description": "Month the faculty ended employment with BYU",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "January",
+                    "type": "string"
+                },
+                "work_contact_email_address": {
+                    "maxLength": 20000,
+                    "description": "Work Email Address",
+                    "example": "cosmocougar@byu.edu",
+                    "type": "string"
+                },
+                "office_phone_area_code": {
+                    "description": "Area code for faculty's office phone",
+                    "example": "801",
+                    "type": "string"
+                },
+                "fac_personal_web_url": {
+                    "maxLength": 20000,
+                    "description": "URL for the faculty member's personal website",
+                    "example": "https://www.cosmocougar.com",
+                    "type": "string"
+                },
+                "fac_attain_asst_rank_yr": {
+                    "description": "Year the faculty attained assistant professor rank",
+                    "format": "date",
+                    "example": "2003",
+                    "type": "string"
+                },
+                "fac_attain_prof_rank_mnth": {
+                    "description": "Month the faculty attained Full Professor rank",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "January",
+                    "type": "string"
+                },
+                "adjnct_fac_strt_dtr_bgn": {
+                    "description": "Adjunct Faculty Start Date Range Begin",
+                    "format": "date",
+                    "example": "2000-09-01",
+                    "type": "string"
+                },
+                "fac_ft_hire_strt_dtr_bgn": {
+                    "description": "Faculty Full-time Start Date Range Begin",
+                    "format": "date",
+                    "example": "2000-09-01",
+                    "type": "string"
+                },
+                "fac_attain_asoc_rank_yr": {
+                    "description": "Year the faculty attained Associate Professor rank",
+                    "format": "date",
+                    "example": "2001",
+                    "type": "string"
+                },
+                "fac_orignl_hire_yr": {
+                    "description": "Original year hired as faculty",
+                    "format": "date",
+                    "example": "1992",
+                    "type": "string"
+                },
+                "fac_attain_asoc_rank_dtr_end": {
+                    "description": "Faculty Attained Associate Rank Date Range End",
+                    "format": "date",
+                    "example": "2008-12-31",
+                    "type": "string"
+                },
+                "fax_phone_prefix": {
+                    "description": "The middle three digits on the faculty's fax number",
+                    "example": "123",
+                    "type": "string"
+                },
+                "suffix": {
+                    "maxLength": 20000,
+                    "description": "Faculty Name Suffix",
+                    "example": "Jr",
+                    "type": "string"
+                },
+                "fac_cfs_strt_dtr_end": {
+                    "description": "Faculty CFS Started Date Range End",
+                    "format": "date",
+                    "example": "2000-09-31",
+                    "type": "string"
+                },
+                "fac_dept_phone_area_code": {
+                    "description": "Area code for faculty's department phone",
+                    "example": "801",
+                    "type": "string"
+                },
+                "home_phone_area_code": {
+                    "description": "First three numbers of faculty's home phone number",
+                    "example": "801",
+                    "type": "string"
+                },
+                "cell_phone_prefix": {
+                    "description": "Middle three numbers of faculty's cell phone",
+                    "example": "123",
+                    "type": "string"
+                },
+                "fac_orignl_hire_dtr_end": {
+                    "description": "Original Hire Date Range End",
+                    "format": "date",
+                    "example": "2000-09-30",
+                    "type": "string"
+                },
+                "fac_cfs_grntd_dtr_end": {
+                    "description": "Faculty CFS Granted Date Range End",
+                    "format": "date",
+                    "example": "2005-03-31",
+                    "type": "string"
+                },
+                "fac_ft_strt_yr": {
+                    "description": "Year the faculty started full time employment",
+                    "format": "date",
+                    "example": "2000",
+                    "type": "string"
+                },
+                "work_address": {
+                    "maxLength": 20000,
+                    "description": "Address of faculty's office",
+                    "example": "123 Work Street, Provo, Utah, 84606",
+                    "type": "string"
+                },
+                "fac_attain_asoc_rank_mnth": {
+                    "description": "Month the faculty attained Associate Professor rank",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "January",
+                    "type": "string"
+                },
+                "fac_cfs_strt_dtr_bgn": {
+                    "description": "Faculty CFS Started Date Range Begin",
+                    "format": "date",
+                    "example": "2005-09-01",
+                    "type": "string"
+                },
+                "fac_attain_asoc_rank_dtr_bgn": {
+                    "description": "Faculty Attained Associate Rank Date Range Begin",
+                    "format": "date",
+                    "example": "2008-05-01",
+                    "type": "string"
+                },
+                "cell_phone_area_code": {
+                    "description": "the area code for the faculty member's cell phone number",
+                    "example": "801",
+                    "type": "string"
+                },
+                "adjnct_fac_strt_yr": {
+                    "description": "Year started Continuing Adjunct Faculty Status",
+                    "format": "date",
+                    "example": "2000",
+                    "type": "string"
+                },
+                "fac_attain_asst_rank_dtr_bgn": {
+                    "description": "Faculty Attained Assistant Rank Date Range Begin",
+                    "format": "date",
+                    "example": "2008-04-01",
+                    "type": "string"
+                },
+                "fax_phone_line_number": {
+                    "description": "The last 4 digits for a faculty's fax number",
+                    "example": "1234",
+                    "type": "string"
+                },
+                "office_phone_line_number": {
+                    "description": "The last four digits of the faculty's office phone number",
+                    "example": "1234",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "licensecertification_object": {
+            "description": "Single License or Certification",
+            "properties": {
+                "fac_cert_scope": {
+                    "description": "Faculty Certification Scope",
+                    "example": "International",
+                    "type": "string"
+                },
+                "fac_cert_titl": {
+                    "description": "Certification Title",
+                    "example": "Google Analytics",
+                    "type": "string"
+                },
+                "fac_cert_trm_mnth": {
+                    "description": "Faculty Profile Date Range End Month",
+                    "example": "April",
+                    "type": "string"
+                },
+                "fac_cert_spnsr_org_name": {
+                    "description": "Faculty Certification Sponsoring Organization Name",
+                    "example": "Public Relations Society of America",
+                    "type": "string"
+                },
+                "fac_cert_strt_dtr_end": {
+                    "description": "Faculty Profile Starting Date Range End",
+                    "example": "2018-05-01",
+                    "type": "string"
+                },
+                "fac_cert_strt_yr": {
+                    "description": "Faculty Profile Date Range Start Year",
+                    "example": "2017",
+                    "type": "string"
+                },
+                "fac_cert_strt_mnth": {
+                    "description": "Faculty Profile Date Range Start Month",
+                    "example": "April",
+                    "type": "string"
+                },
+                "fac_cert_trm_dtr_bgn": {
+                    "description": "Faculty Profile Ending Date Range Begin",
+                    "example": "2018-04-01",
+                    "type": "string"
+                },
+                "fac_cert_trm_yr": {
+                    "description": "Faculty Profile Date Range End Year",
+                    "example": "2017",
+                    "type": "string"
+                },
+                "fac_cert_descr": {
+                    "description": "Description of license or certification",
+                    "example": "Foreign Language Proficiency Certificate",
+                    "type": "string"
+                },
+                "fac_cert_trm_dtr_end": {
+                    "description": "Faculty Profile Ending Date Range End",
+                    "example": "2019-01-31",
+                    "type": "string"
+                },
+                "fac_cert_strt_dtr_bgn": {
+                    "description": "Faculty Profile Starting Date Range Begin",
+                    "example": "2017-05-01",
+                    "type": "string"
+                },
+                "fac_cert_vsblty_flg": {
+                    "description": "Faculty Directory Visibility Flag",
+                    "example": true,
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "patentsall_object": {
+            "description": "Patent Information",
+            "properties": {
+                "ptnt_issued_mnth": {
+                    "description": "The month on which the patent was issued",
+                    "example": "May",
+                    "type": "string"
+                },
+                "ptnt_issued_day": {
+                    "description": "The day of the month on which the patent was issued",
+                    "example": "31",
+                    "type": "string"
+                },
+                "ptnt_filed_dtr_end": {
+                    "description": "The last day of the month when the patent was filed",
+                    "example": "2018-04-31",
+                    "type": "string"
+                },
+                "ptnt_titl": {
+                    "description": "Name of disclosure",
+                    "example": "Methods for BYU Cougars",
+                    "type": "string"
+                },
+                "ptnt_filed_mnth": {
+                    "description": "The month on which the patent was filed",
+                    "example": "April",
+                    "type": "string"
+                },
+                "ptnt_filed_yr": {
+                    "description": "The year on which the patent was filed",
+                    "example": "2000",
+                    "type": "string"
+                },
+                "ptnt_issued_dtr_end": {
+                    "description": "The last day of the month when the patent was issued",
+                    "example": "2018-04-31",
+                    "type": "string"
+                },
+                "intellprop_invent": {
+                    "items": {
+                        "$ref": "#/definitions/intellprop_invent_object"
+                    },
+                    "description": "All Patent Contributors",
+                    "type": "array"
+                },
+                "ptnt_abndnd_or_xprd_flg": {
+                    "description": "Indicates if the patent expired or has been abandoned",
+                    "enum": [
+                        "Abandoned",
+                        "Expired"
+                    ],
+                    "example": "Expired",
+                    "type": "string"
+                },
+                "ptnt_issued_yr": {
+                    "description": "The year on which the patent was issued",
+                    "example": "2010",
+                    "type": "string"
+                },
+                "ptnt_nmbr": {
+                    "description": "The assigned patent number",
+                    "example": "12345678",
+                    "type": "string"
+                },
+                "ptnt_issued_dtr_bgn": {
+                    "description": "The first day of the month when the patent was issued",
+                    "example": "2016-12-01",
+                    "type": "string"
+                },
+                "ptnt_filed_day": {
+                    "description": "The day of the month on which the patent was filed",
+                    "example": "05",
+                    "type": "string"
+                },
+                "ptnt_filed_dtr_bgn": {
+                    "description": "The first day of the month when the patent was filed",
+                    "example": "2016-12-01",
+                    "type": "string"
+                },
+                "ptnt_filed_cntry": {
+                    "description": "The name of the country where the patent was issued",
+                    "example": "United States of America",
+                    "type": "string"
+                },
+                "ptnt_filed_app_nmbr": {
+                    "description": "The assigned patent application number",
+                    "example": "87654321",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "adminassignment_object": {
+            "description": "Admin Assignment",
+            "properties": {
+                "fac_admnstv_psitn_othr_name": {
+                    "description": "Faculty Administrative Position Other Name",
+                    "example": "TODO",
+                    "type": "string"
+                },
+                "fac_admnstv_psitn_unit_name": {
+                    "description": "Faculty Administrative Position Unit Name",
+                    "example": "Office of Development",
+                    "type": "string"
+                },
+                "fac_admnstv_psitn_scope": {
+                    "description": "Faculty Administrative Position Scope",
+                    "example": "Department/School",
+                    "type": "string"
+                },
+                "fac_admnstv_psitn_titl": {
+                    "description": "Faculty Administrative Position Title",
+                    "example": "Dean",
+                    "type": "string"
+                },
+                "fac_admnstv_psitn_strt_dtr_bgn": {
+                    "description": "Faculty Profile Starting Date Range Begin",
+                    "example": "2017-05-01",
+                    "type": "string"
+                },
+                "fac_admnstv_psitn_trm_dtr_end": {
+                    "description": "Faculty Profile Ending Date Range End",
+                    "example": "2019-12-31",
+                    "type": "string"
+                },
+                "fac_admnstv_psitn_trm_yr": {
+                    "description": "Faculty Profile Date Range End Year",
+                    "example": "2018",
+                    "type": "string"
+                },
+                "fac_admnstv_psitn_strt_dtr_end": {
+                    "description": "Faculty Profile Starting Date Range End",
+                    "example": "2017-10-10",
+                    "type": "string"
+                },
+                "fac_admnstv_psitn_strt_yr": {
+                    "description": "Faculty Profile Date Range Start Year",
+                    "example": "2017",
+                    "type": "string"
+                },
+                "fac_admnstv_psitn_trm_dtr_bgn": {
+                    "description": "Faculty Profile Ending Date Range Begin",
+                    "example": "2019-12-31",
+                    "type": "string"
+                },
+                "fac_admnstv_psitn_vsblty_flg": {
+                    "description": "Faculty Directory Visibility Flag",
+                    "example": false,
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "faculty_profile": {
+            "description": "information pertaining to the faculty profile of given byu id",
+            "properties": {
+                "collegefunding": {
+                    "$ref": "#/definitions/collegefunding"
+                },
+                "presentations": {
+                    "$ref": "#/definitions/presentations"
+                },
+                "facultyfunding": {
+                    "$ref": "#/definitions/facultyfunding"
+                },
+                "directstudentlearning": {
+                    "$ref": "#/definitions/directstudentlearning"
+                },
+                "pasthist": {
+                    "$ref": "#/definitions/pasthist"
+                },
+                "creativeworks": {
+                    "$ref": "#/definitions/creativeworks"
+                },
+                "education": {
+                    "$ref": "#/definitions/education"
+                },
+                "awardhonor": {
+                    "$ref": "#/definitions/awardhonor"
+                },
+                "otherteaching": {
+                    "$ref": "#/definitions/otherteaching"
+                },
+                "byu_id": {
+                    "description": "The byu id of the faculty member",
+                    "example": "012345678",
+                    "type": "string"
+                },
+                "consult": {
+                    "$ref": "#/definitions/consult"
+                },
+                "byucitizenship": {
+                    "$ref": "#/definitions/byucitizenship"
+                },
+                "member": {
+                    "$ref": "#/definitions/member"
+                },
+                "pci": {
+                    "$ref": "#/definitions/pci"
+                },
+                "patentsall": {
+                    "$ref": "#/definitions/patentsall"
+                },
+                "net_id": {
+                    "description": "The net id of the faculty member",
+                    "example": "jwilli504",
+                    "type": "string"
+                },
+                "scheduledcourses": {
+                    "$ref": "#/definitions/scheduledcourses"
+                },
+                "adminassignment": {
+                    "$ref": "#/definitions/adminassignment"
+                },
+                "publications": {
+                    "$ref": "#/definitions/publications"
+                },
+                "licensecertification": {
+                    "$ref": "#/definitions/licensecertification"
+                },
+                "internationalexpertise": {
+                    "$ref": "#/definitions/internationalexpertise"
+                },
+                "professionalcitizenship": {
+                    "$ref": "#/definitions/professionalcitizenship"
+                },
+                "admin": {
+                    "$ref": "#/definitions/admin"
+                },
+                "annualreviews": {
+                    "items": {
+                        "$ref": "#/definitions/annualreview"
+                    },
+                    "description": "annual reviews",
+                    "type": "array"
+                },
+                "conflict": {
+                    "items": {
+                        "$ref": "#/definitions/conflict"
+                    },
+                    "description": "conflict of interests",
+                    "type": "array"
+                },
+                "externalgrants": {
+                    "$ref": "#/definitions/externalgrants"
+                }
+            },
+            "type": "object"
+        },
+        "entities": {
+            "description": "Entity response from Digital Measures",
+            "properties": {
+                "field_sets": {
+                    "$ref": "#/definitions/field_set_obj"
+                },
+                "description": {
+                    "description": "The description of the entities passed from Digital Measures",
+                    "example": "Common",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "congrant_invest_object": {
+            "description": "Single College Grant Funding Information",
+            "properties": {
+                "gfundext_invstgtr_lname": {
+                    "description": "Grant Funding College Entered Investigator Last Name",
+                    "example": "Smith",
+                    "type": "string"
+                },
+                "gfundcoll_invstgtr_fname": {
+                    "description": "Grant Funding College Entered Investigator First Name",
+                    "example": "John",
+                    "type": "string"
+                },
+                "gfundext_invstgtr_mname": {
+                    "description": "Grant Funding College Entered Investigator Middle Name",
+                    "example": "Robert",
+                    "type": "string"
+                },
+                "gfundcoll_invstgtr_role": {
+                    "description": "Grant Funding College Entered Investigator Role",
+                    "example": "Principal",
+                    "type": "string"
+                },
+                "gfundcoll_invstgtr_name": {
+                    "description": "Grant Funding College Entered Investigator Name",
+                    "example": "John Robert Smith",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "scheduledcourses": {
+            "items": {
+                "$ref": "#/definitions/scheduledcourses_object"
+            },
+            "description": "Faculty Scheduled Courses",
+            "type": "array"
+        },
+        "publications": {
+            "items": {
+                "$ref": "#/definitions/publications_object"
+            },
+            "description": "Publications Information",
+            "type": "array"
+        },
+        "internationalexpertise": {
+            "description": "Faculty International Experience",
+            "properties": {
+                "languages": {
+                    "$ref": "#/definitions/languages"
+                },
+                "experiences": {
+                    "$ref": "#/definitions/experiences"
+                }
+            },
+            "type": "object"
+        },
+        "licensecertification": {
+            "items": {
+                "$ref": "#/definitions/licensecertification_object"
+            },
+            "description": "All Licenses and Certifications",
+            "type": "array"
+        },
+        "patentsconfidential": {
+            "items": {
+                "$ref": "#/definitions/patentsall_object"
+            },
+            "description": "All Confidential Patent Information",
+            "type": "array"
+        },
+        "authorized_client": {
+            "description": "A Client authorized to access faculty profile data",
+            "properties": {
+                "department_authorizations": {
+                    "description": "Departments and the field sets the client is authorized to view for that department",
+                    "example": {
+                        "PM: Mathematics": [
+                            "pci",
+                            "admin"
+                        ]
+                    },
+                    "type": "object"
+                },
+                "byu_id": {
+                    "example": 123456789,
+                    "type": "string"
+                },
+                "college_authorizations": {
+                    "description": "Colleges and the field sets the client is authorized to view for that college",
+                    "example": {
+                        "David O. McKay School of Education": [
+                            "pci"
+                        ],
+                        "Family, Home, and Social Sciences": [
+                            "pci",
+                            "admin"
+                        ]
+                    },
+                    "type": "object"
+                }
+            }
+        },
+        "conflict": {
+            "description": "conflict of interest",
+            "properties": {
+                "id": {
+                    "description": "unique id",
+                    "example": "199073544192",
+                    "type": "string"
+                },
+                "conflict_of_interest_dtr_bgn": {
+                    "description": "beginning of date range",
+                    "type": "string"
+                },
+                "conflict_of_interest_statement_of_compliance": {
+                    "description": "compliance statement",
+                    "type": "string"
+                },
+                "conflict_of_interest_approved_plan": {
+                    "description": "path to uploaded conflict plan",
+                    "type": "string"
+                },
+                "conflict_of_interest_conflicting_activities": {
+                    "items": {
+                        "description": "conflict activities",
+                        "$ref": "#/definitions/conflict_activity"
+                    },
+                    "description": "list of conflicting activities",
+                    "type": "array"
+                },
+                "conflict_of_interest_year": {
+                    "description": "year of conflict",
+                    "type": "string"
+                },
+                "conflict_of_interest_date_range_end": {
+                    "description": "end of date range",
+                    "type": "string"
+                }
+            }
+        },
+        "faculty": {
+            "items": {
+                "$ref": "#/definitions/pci"
+            },
+            "description": "All PCI information for available faculty",
+            "type": "array"
+        },
+        "externalgrants": {
+            "items": {
+                "$ref": "#/definitions/externalgrants_object"
+            },
+            "description": "All External Grants",
+            "type": "array"
+        },
+        "externalgrants_object": {
+            "description": "Single External Grant",
+            "properties": {
+                "gfundext_estmatd_totl_amt": {
+                    "description": "Estimated Total Amount",
+                    "example": "1500000",
+                    "type": "string"
+                },
+                "gfundext_strt_mnth": {
+                    "description": "Faculty Profile date range start month",
+                    "example": "April",
+                    "type": "string"
+                },
+                "gfundext_lgcy_invstgtn_trm_yr": {
+                    "description": "Faculty Profile Date Range End Year",
+                    "example": "2015",
+                    "type": "string"
+                },
+                "gfundext_spnsr_org": {
+                    "description": "Sponsor Organization",
+                    "example": "National Science Foundation (NSF)",
+                    "type": "string"
+                },
+                "gfundext_trm_mnth": {
+                    "description": "Faculty Profile date range end month",
+                    "example": "March",
+                    "type": "string"
+                },
+                "gfundext_byu_acct_nmbr": {
+                    "description": "BYU Account Number",
+                    "example": "1234",
+                    "type": "string"
+                },
+                "gfundext_trm_dtr_end": {
+                    "description": "Faculty Profile Ending Date Range End",
+                    "example": "2020-12-31",
+                    "type": "string"
+                },
+                "gfundext_sbcntrct_agncy": {
+                    "description": "Subcontract Agency",
+                    "example": "US Government",
+                    "type": "string"
+                },
+                "gfundext_spnsr_org_typ": {
+                    "description": "Sponsor Organization Type",
+                    "example": "Academic",
+                    "type": "string"
+                },
+                "gfundext_lgcy_invstgtr_name": {
+                    "description": "Investigator name from the legacy system",
+                    "example": "Cosmo Cougar",
+                    "type": "string"
+                },
+                "gfundext_strt_dtr_bgn": {
+                    "description": "FacultyProfile Starting Date Range Begin",
+                    "example": "2018-03-01",
+                    "type": "string"
+                },
+                "gfundext_lgcy_invstgtn_yr": {
+                    "description": "Investigation year from the legacy system",
+                    "example": "2018",
+                    "type": "string"
+                },
+                "congrant_invest": {
+                    "description": "External Grant Funding Investigator Information",
+                    "properties": {
+                        "gfundext_invstgtr_name": {
+                            "description": "Investigator name",
+                            "example": "Brigham Young",
+                            "type": "string"
+                        },
+                        "gfundext_invstgtr_lname": {
+                            "description": "Investigator last name",
+                            "example": "Young",
+                            "type": "string"
+                        },
+                        "gfundext_invstgtr_fname": {
+                            "description": "Investigator first name",
+                            "example": "Brigham",
+                            "type": "string"
+                        },
+                        "gfundext_invstgtr_mname": {
+                            "description": "Investigator middle name",
+                            "example": "John",
+                            "type": "string"
+                        },
+                        "gfundcoll_invstgtr_role": {
+                            "description": "Grant Funding College Entered Investigator Role",
+                            "example": "Primary",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "gfundext_trm_dtr_bgn": {
+                    "description": "Faculty Profile Ending Date Range Begin",
+                    "example": "2019-04-01",
+                    "type": "string"
+                },
+                "gfundext_lgcy_invstgtn_strt_yr": {
+                    "description": "Faculty Profile Date Range Start Year",
+                    "example": "2012",
+                    "type": "string"
+                },
+                "gfundext_strt_dtr_end": {
+                    "description": "Faculty Profile Starting Date Range End",
+                    "example": "2018-04-31",
+                    "type": "string"
+                },
+                "gfundext_propsl_titl": {
+                    "description": "Proposal Title",
+                    "example": "RI: Medium: WildLight: Digital Modeling of the Natural World",
+                    "type": "string"
+                },
+                "gfundext_spnsr_org_othr_titl": {
+                    "description": "Sponsor Organization other title",
+                    "example": "Brigham Young University",
+                    "type": "string"
+                },
+                "gfundext_curr_status": {
+                    "description": "Current Status",
+                    "example": "Funded",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "languages_object": {
+            "description": "Single Faculty language information",
+            "properties": {
+                "speaking_proficiency": {
+                    "description": "Speaking Proficiency",
+                    "example": "Low",
+                    "type": "string"
+                },
+                "translator": {
+                    "description": "Is a translator",
+                    "example": "No",
+                    "type": "string"
+                },
+                "write_proficiency": {
+                    "description": "Writing Proficiency",
+                    "example": "High",
+                    "type": "string"
+                },
+                "native_language_flag": {
+                    "description": "Is it their native language",
+                    "example": "No",
+                    "type": "string"
+                },
+                "read_proficiency": {
+                    "description": "Reading Proficiency",
+                    "example": "Medium",
+                    "type": "string"
+                },
+                "language": {
+                    "description": "Language Name",
+                    "example": "Spanish",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "otherteaching_object": {
+            "description": "Other teaching activity information",
+            "properties": {
+                "fac_othr_tchng_audnc_typ": {
+                    "description": "Audience Type",
+                    "enum": [
+                        "Internal to Brigham Young University",
+                        "External to Brigham Young University",
+                        "Both"
+                    ],
+                    "example": "Both",
+                    "type": "string"
+                },
+                "fac_othr_tchng_trm_dtr_end": {
+                    "description": "Other teaching end date range end",
+                    "example": "2018-12-31",
+                    "type": "string"
+                },
+                "fac_othr_tchng_othr_typ": {
+                    "description": "Type beyond Instruction Type",
+                    "example": "Study Hall",
+                    "type": "string"
+                },
+                "fac_othr_tchng_prtcpnt_qnty": {
+                    "description": "Number of participants",
+                    "example": "100",
+                    "type": "number"
+                },
+                "fac_othr_tchng_instrcn_typ": {
+                    "description": "Instruction Type",
+                    "enum": [
+                        "Certification",
+                        "Continuing Education",
+                        "Guest Lecturer",
+                        "Professional Development",
+                        "Review Course",
+                        "Seminar",
+                        "Workshop",
+                        "Other"
+                    ],
+                    "example": "Guest Lecturer",
+                    "type": "string"
+                },
+                "fac_othr_tchng_strt_dtr_end": {
+                    "description": "Other teaching begin date range end",
+                    "example": "2018-04-31",
+                    "type": "string"
+                },
+                "fac_othr_tchng_compnstn": {
+                    "description": "Compensation for teaching Activity",
+                    "enum": [
+                        "Compensated",
+                        "Pro Bono"
+                    ],
+                    "example": "Pro Bono",
+                    "type": "string"
+                },
+                "fac_othr_tchng_strt_yr": {
+                    "description": "Other teaching starting year",
+                    "example": "2010",
+                    "type": "string"
+                },
+                "fac_othr_tchng_trm_yr": {
+                    "description": "Other teaching ending year",
+                    "example": "2018",
+                    "type": "string"
+                },
+                "fac_othr_tchng_spnsr_org": {
+                    "description": "Sponsor Organization",
+                    "example": "BYU faculty",
+                    "type": "string"
+                },
+                "fac_othr_tchng_descr": {
+                    "maxLength": 20000,
+                    "description": "Description of teaching activities",
+                    "example": "A description of the teaching activity would go here and can be up to 20000 characters long.",
+                    "type": "string"
+                },
+                "fac_othr_tchng_trm_mnth": {
+                    "description": "Other teaching ending month",
+                    "example": "April",
+                    "type": "string"
+                },
+                "fac_othr_tchng_class_titl": {
+                    "maxLength": 20000,
+                    "description": "Class title",
+                    "example": "Reading with Cosmo Cougar",
+                    "type": "string"
+                },
+                "fac_othr_tchng_strt_mnth": {
+                    "description": "Other teaching starting month",
+                    "example": "May",
+                    "type": "string"
+                },
+                "fac_othr_tchng_venue": {
+                    "maxLength": 20000,
+                    "description": "Teaching Venue",
+                    "example": "Library",
+                    "type": "string"
+                },
+                "fac_othr_tchng_trm_dtr_bgn": {
+                    "description": "Other teaching end date range begin",
+                    "example": "2018-01-31",
+                    "type": "string"
+                },
+                "fac_othr_tchng_strt_dtr_bgn": {
+                    "description": "Other teaching start date range begin",
+                    "example": "2018-01-01",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "experiences": {
+            "items": {
+                "$ref": "#/definitions/experiences_object"
+            },
+            "description": "Faculty experiences",
+            "type": "array"
+        },
+        "facultyfunding": {
+            "items": {
+                "$ref": "#/definitions/facultyfunding_object"
+            },
+            "description": "Faculty Grant Funding Information",
+            "type": "array"
+        },
+        "directstudentlearning": {
+            "items": {
+                "$ref": "#/definitions/directstudentlearning_object"
+            },
+            "description": "Faculty involvement in student learning",
+            "type": "array"
+        },
+        "collegefunding_object": {
+            "description": "Single type of funding from the College",
+            "properties": {
+                "gfundcoll_strt_dtr_bgn": {
+                    "description": "Faculty Profile Starting Date Range Begin",
+                    "example": "2018-01-01",
+                    "type": "string"
+                },
+                "congrant_invest": {
+                    "items": {
+                        "$ref": "#/definitions/congrant_invest_object"
+                    },
+                    "description": "All College Grant Funding Information",
+                    "type": "array"
+                },
+                "gfundcoll_propsl_titl": {
+                    "maxLength": 20000,
+                    "description": "Funding Proposal Title",
+                    "example": "GE Academy",
+                    "type": "string"
+                },
+                "gfundcoll_spnsr_org": {
+                    "maxLength": 20000,
+                    "description": "Name of the unit sponsoring the grant award",
+                    "example": "University Department of General Education",
+                    "type": "string"
+                },
+                "gfundcoll_estmatd_totl_amt": {
+                    "description": "Grant Funding College Entered Amount",
+                    "example": "1000",
+                    "type": "string"
+                },
+                "gfundcoll_awrd_descr": {
+                    "maxLength": 20000,
+                    "description": "Description of award",
+                    "example": "General University research funding",
+                    "type": "string"
+                },
+                "gfundcoll_strt_dtr_end": {
+                    "description": "Faculty Profile Starting Date Range End",
+                    "example": "2018-12-31",
+                    "type": "string"
+                },
+                "gfundcoll_strt_mnth": {
+                    "description": "Month when the college entered funding source began",
+                    "example": "April",
+                    "type": "string"
+                },
+                "gfundcoll_spnsr_org_typ": {
+                    "description": "Type of Sponsoring Unit",
+                    "enum": [
+                        "Department",
+                        "College",
+                        "University",
+                        "Other"
+                    ],
+                    "example": "University",
+                    "type": "string"
+                },
+                "gfundcoll_strt_yr": {
+                    "description": "Year when the college entered funding source began",
+                    "example": "2018",
+                    "type": "string"
+                },
+                "gfundcoll_typ": {
+                    "description": "Type of funding",
+                    "enum": [
+                        "Conference Travel",
+                        "Graduate Mentoring Award",
+                        "Mentoring Environment Grant (MEG)",
+                        "Professional Development Award",
+                        "Research/Creative Work Award",
+                        "Royalty",
+                        "Teaching Award",
+                        "Other"
+                    ],
+                    "example": "Creative Work Award",
+                    "type": "string"
+                },
+                "gfundcoll_lgcy_invstgtr_name": {
+                    "maxLength": 20000,
+                    "description": "Names of investigators from legacy system",
+                    "example": "Brigham Young",
+                    "type": "string"
+                },
+                "gfundcoll_curr_status": {
+                    "description": "Funding Status",
+                    "enum": [
+                        "Currently Under Review",
+                        "Funded",
+                        "Not Funded"
+                    ],
+                    "example": "Funded",
+                    "type": "string"
+                },
+                "gfundcoll_othr_typ": {
+                    "description": "Type of funding if not listed in Funding Type",
+                    "example": "Research",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "facultyfunding_object": {
+            "description": "Single Faculty Grant Funding Information",
+            "properties": {
+                "gfundfac_trm_dtr_end": {
+                    "description": "Faculty Profile Ending Date Range End",
+                    "example": "2019-02-28",
+                    "type": "string"
+                },
+                "gfundfac_trm_dtr_bgn": {
+                    "description": "Faculty Profile Ending Date Range Begin",
+                    "example": "2019-02-01",
+                    "type": "string"
+                },
+                "gfundfac_awrd_titl": {
+                    "description": "Name assigned to the funding awarded",
+                    "example": "Forms Field Pairing",
+                    "type": "string"
+                },
+                "gfundfac_strt_yr": {
+                    "description": "Faculty Profile Date Range Start Year",
+                    "example": "2018",
+                    "type": "string"
+                },
+                "gfundfac_strt_mnth": {
+                    "description": "Faculty Profile Date Range Start Month",
+                    "example": "April",
+                    "type": "string"
+                },
+                "gfundfac_awrd_descr": {
+                    "description": "Award description",
+                    "example": "Award for the completion of faculty program.",
+                    "type": "string"
+                },
+                "gfundfac_spnsr_unit_typ": {
+                    "description": "Unit that sponsored the funding awarded",
+                    "example": "Adobe Systems, Inc.",
+                    "type": "string"
+                },
+                "gfundfac_strt_dtr_bgn": {
+                    "description": "Faculty Profile Starting Date Range Begin",
+                    "example": "2015-01-01",
+                    "type": "string"
+                },
+                "gfundfac_trm_mnth": {
+                    "description": "Faculty Profile Date Range End Year",
+                    "example": "May",
+                    "type": "string"
+                },
+                "gfundfac_trm_yr": {
+                    "description": "Faculty Profile Date Range End Year",
+                    "example": "2010",
+                    "type": "string"
+                },
+                "gfundfac_org_name": {
+                    "description": "Title of the organization",
+                    "example": "Other",
+                    "type": "string"
+                },
+                "gfundfac_invstgtr_name": {
+                    "description": "Other investigators involved",
+                    "example": "Cosmo Cougar",
+                    "type": "string"
+                },
+                "gfundfac_strt_dtr_end": {
+                    "description": "Faculty Profile Starting Date Range End",
+                    "example": "2015-01-15",
+                    "type": "string"
+                },
+                "gfundfac_amt": {
+                    "description": "Total monetary value provided by the sponsoring unit for this award",
+                    "example": "3000",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "education": {
+            "items": {
+                "$ref": "#/definitions/education_object"
+            },
+            "description": "All Faculty Education Information",
+            "type": "array"
+        },
+        "awardhonor": {
+            "items": {
+                "$ref": "#/definitions/awardhonor_object"
+            },
+            "description": "Information on Awards earned by Faculty",
+            "type": "array"
+        },
+        "awardhonor_object": {
+            "description": "information on an award earned by faculty",
+            "properties": {
+                "fac_awrd_or_hnr_trm_yr": {
+                    "description": "The year that the associated activity ended",
+                    "format": "date",
+                    "example": "2017",
+                    "type": "string"
+                },
+                "fac_awrd_or_hnr_descr": {
+                    "maxLength": 20000,
+                    "description": "Faculty Award or Honor Description",
+                    "example": "Who is the best mascot at BYU",
+                    "type": "string"
+                },
+                "fac_awrd_or_hnr_trm_dtr_bgn": {
+                    "description": "Faculty Profile Ending Date Range Begin",
+                    "example": "2011-09-01",
+                    "type": "string"
+                },
+                "fac_awrd_or_hnr_name": {
+                    "maxLength": 20000,
+                    "description": "Faculty Award or Honor Name",
+                    "example": "Best BYU mascot",
+                    "type": "string"
+                },
+                "fac_awrd_or_hnr_spnsr_org": {
+                    "description": "Faculty Award Sponsoring Organization",
+                    "example": "BYU",
+                    "type": "string"
+                },
+                "fac_awrd_or_hnr_strt_dtr_end": {
+                    "description": "Faculty Profile Starting Date Range End",
+                    "example": "2011-09-30",
+                    "type": "string"
+                },
+                "fac_awrd_or_hnr_strt_dtr_bgn": {
+                    "description": "Faculty Profile Starting Date Range Begin",
+                    "example": "2011-09-01",
+                    "type": "string"
+                },
+                "fac_awrd_or_hnr_trm_dtr_end": {
+                    "description": "Faculty Profile Ending Date Range End",
+                    "example": "2011-09-30",
+                    "type": "string"
+                },
+                "fac_awrd_or_hnr_vsblty_flg": {
+                    "description": "Faculty Directory Visibility Flag",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "fac_awrd_or_hnr_strt_yr": {
+                    "description": "The year that the associated activity started",
+                    "format": "date",
+                    "example": "2017",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "annualreview": {
+            "description": "URL to vita, along with year uploaded",
+            "properties": {
+                "annual_review_cv_locn": {
+                    "description": "path to uploaded vita",
+                    "type": "string"
+                },
+                "annual_review_scholarship_report": {
+                    "description": "scholarship report",
+                    "type": "string"
+                },
+                "annual_review_current_citizenship_goals": {
+                    "description": "current citizenship goals",
+                    "type": "string"
+                },
+                "annual_review_professional_faculty_current_other_assignments": {
+                    "description": "professional faculty assignments",
+                    "type": "string"
+                },
+                "annual_review_current_faculty_development_plan_for_pre_cfs_faculty": {
+                    "description": "path to uploaded developement plan",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "unique id",
+                    "example": "199073544192",
+                    "type": "string"
+                },
+                "annual_review_previous_scholarship_goals": {
+                    "description": "past scholarship goals",
+                    "type": "string"
+                },
+                "annual_review_vita_uploaded_flag": {
+                    "description": "indicates if a vita has been uploaded for this review",
+                    "type": "boolean"
+                },
+                "annual_review_current_scholarship_goals": {
+                    "description": "current scholarship goals",
+                    "type": "string"
+                },
+                "annual_review_date_range_end": {
+                    "description": "end of date range",
+                    "type": "string"
+                },
+                "annual_review_department_evaluation_committee_report": {
+                    "description": "path to department evaluation",
+                    "type": "string"
+                },
+                "annual_review_additional_questions_and_topics": {
+                    "description": "additional questions",
+                    "type": "string"
+                },
+                "annual_review_teaching_report": {
+                    "description": "teaching report",
+                    "type": "string"
+                },
+                "annual_review_department_chair_letter": {
+                    "description": "path to department letter",
+                    "type": "string"
+                },
+                "annual_review_professional_faculty_previous_other_report": {
+                    "description": "past professional faculty report",
+                    "type": "string"
+                },
+                "annual_review_previous_teaching_goals": {
+                    "description": "past teaching goals",
+                    "type": "string"
+                },
+                "annual_review_preparation_and_documents_archive": {
+                    "description": "path to documents archive",
+                    "type": "string"
+                },
+                "annual_review_conflict_of_interest_completed_flag": {
+                    "description": "indicates if all conflicts of interest have been entered",
+                    "type": "boolean"
+                },
+                "annual_review_faculty_ready_flag": {
+                    "description": "indicates if this review is ready",
+                    "type": "boolean"
+                },
+                "annual_review_all_activities_entered_flag": {
+                    "description": "indicates if all activities for this review have been entered",
+                    "type": "boolean"
+                },
+                "annual_review_year": {
+                    "description": "year the review was performed",
+                    "type": "number"
+                },
+                "annual_review_dtr_bgn": {
+                    "description": "beginning of date range",
+                    "type": "string"
+                },
+                "annual_review_professional_faculty_previous_other_goals": {
+                    "description": "past professional faculty goals",
+                    "type": "string"
+                },
+                "annual_review_citizenship_report": {
+                    "description": "citizenship report",
+                    "type": "string"
+                },
+                "annual_review_previous_citizenship_goals": {
+                    "description": "past citizenship goals",
+                    "type": "string"
+                },
+                "annual_review_current_teaching_goals": {
+                    "description": "current teaching goals",
+                    "type": "string"
+                },
+                "annual_review_preparation_and_documents_archive_flag": {
+                    "description": "indicates if an archive file has been added",
+                    "type": "boolean"
+                },
+                "annual_review_document": {
+                    "description": "path to review document",
+                    "type": "string"
+                }
+            }
+        },
+        "member_object": {
+            "description": "Professional Membership information",
+            "properties": {
+                "fac_mbershp_org_scope": {
+                    "description": "Scope of the organization",
+                    "enum": [
+                        "International",
+                        "National",
+                        "Regional",
+                        "State",
+                        "Local"
+                    ],
+                    "example": "International",
+                    "type": "string"
+                },
+                "fac_mbershp_org_name": {
+                    "maxLength": 20000,
+                    "description": "Organization Name",
+                    "example": "IWAC (International Writing Across the Curriculum)",
+                    "type": "string"
+                },
+                "fac_mbershp_strt_dtr_end": {
+                    "description": "Faculty Profile Starting Date Range End",
+                    "example": "2011-09-30",
+                    "type": "string"
+                },
+                "fac_mbershp_strt_yr": {
+                    "description": "Faculty Profile Date Range Start Year",
+                    "example": "2018-05-01",
+                    "type": "string"
+                },
+                "fac_mbershp_vsblty_flg": {
+                    "description": "Faculty Directory Visibility Flag",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "fac_mbershp_trm_dtr_end": {
+                    "description": "Facutly Profile ending date range end",
+                    "format": "date",
+                    "example": "2018-12-31",
+                    "type": "string"
+                },
+                "fac_mbershp_trm_yr": {
+                    "description": "FacultyProfile Date Range End Year",
+                    "example": "2018-05-31",
+                    "type": "string"
+                },
+                "fac_mbershp_strt_dtr_bgn": {
+                    "description": "Faculty Profile Starting Date Range Begin",
+                    "example": "2011-09-01",
+                    "type": "string"
+                },
+                "fac_mbershp_org_descr": {
+                    "maxLength": 20000,
+                    "description": "Faculty Professional Membership Organization Description",
+                    "example": "Society to increase the understanding around Education",
+                    "type": "string"
+                },
+                "fac_mbershp_trm_dtr_bgn": {
+                    "description": "Facutly Profile ending date range begin",
+                    "format": "date",
+                    "example": "2018-12-01",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "presentationauthor_object": {
+            "description": "Single Faculty Presentation Author Information",
+            "properties": {
+                "fac_prsntn_prsntr_role": {
+                    "description": "Presentation Role",
+                    "example": "Primary",
+                    "type": "string"
+                },
+                "fac_prsntn_prsntr_lname": {
+                    "description": "Presenter Last Name",
+                    "example": "Cougar",
+                    "type": "string"
+                },
+                "fac_prsntn_prsntr_name": {
+                    "description": "Presenter Name",
+                    "example": "Cosmo Cougar",
+                    "type": "string"
+                },
+                "fac_prsntn_stu_prsntr_edu_lvl": {
+                    "description": "Student Presenter Education Level",
+                    "example": "BYU Bachelor's",
+                    "type": "string"
+                },
+                "fac_prsntn_prsntr_mname": {
+                    "description": "Presenter Middle Name",
+                    "example": "Kramer",
+                    "type": "string"
+                },
+                "fac_prsntn_prsntr_fname": {
+                    "description": "Presenter First Name",
+                    "example": "Cosmo",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "consult": {
+            "items": {
+                "$ref": "#/definitions/consult_object"
+            },
+            "description": "All Consultation Activities",
+            "type": "array"
+        },
+        "member": {
+            "items": {
+                "$ref": "#/definitions/member_object"
+            },
+            "description": "All Professional Memberships",
+            "type": "array"
+        },
+        "scheduledcourses_object": {
+            "description": "Faculty Course",
+            "properties": {
+                "section_type": {
+                    "description": "A designation of the setting of a class being offered",
+                    "enum": [
+                        "CONF WKSHP",
+                        "DAY",
+                        "EMBA",
+                        "EVENING",
+                        "IDAHO",
+                        "IND STUDY",
+                        "JERUSALEM",
+                        "MISC-CE",
+                        "NAUVOO",
+                        "ONLINE",
+                        "SALT LAKE",
+                        "SEM AWAY",
+                        "ST ABROAD"
+                    ],
+                    "example": "DAY",
+                    "type": "string"
+                },
+                "instrctr_rtng_cmpltn_flg": {
+                    "description": "Indicates if the student has completed the student ratings questionnaire for that section that semester",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "Yes",
+                    "type": "string"
+                },
+                "crs_class_sylbus": {
+                    "description": "Uploaded faculty member's syllabus for the specified scheduled course",
+                    "example": "cosmo11/schteach/Mascot 101 syllabus Fall 2016(6)-1.doc",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "unique id",
+                    "example": "199073544192",
+                    "type": "string"
+                },
+                "teaching_area": {
+                    "description": "2 to 5 character name of a discipline that has been adopted by the university",
+                    "enum": [
+                        "A HTG",
+                        "ACC",
+                        "AEROS",
+                        "AFRIK",
+                        "ALBAN",
+                        "AM ST",
+                        "ANES",
+                        "ANTHR",
+                        "ARAB",
+                        "ARMEN",
+                        "ART",
+                        "ARTED",
+                        "ARTHC",
+                        "ASIAN",
+                        "ASL",
+                        "ASLP",
+                        "AVS",
+                        "BIO",
+                        "BIOL",
+                        "BULGN",
+                        "BUS M",
+                        "C S",
+                        "CAMBO",
+                        "CANT",
+                        "CE EN",
+                        "CEBU",
+                        "CFM",
+                        "CH EN",
+                        "CHEM",
+                        "CHIN",
+                        "CHUM",
+                        "CL CV",
+                        "CLSCS",
+                        "CM",
+                        "CMLIT",
+                        "CMPST",
+                        "COMD",
+                        "COMMS",
+                        "CP IN",
+                        "CPSE",
+                        "CREOL",
+                        "CSANM",
+                        "CZECH",
+                        "DANCE",
+                        "DANSH",
+                        "DES",
+                        "DESAN",
+                        "DESGD",
+                        "DESIL",
+                        "DESPH",
+                        "DIGHT",
+                        "DUTCH",
+                        "EC EN",
+                        "ECE",
+                        "ECON",
+                        "EDLF",
+                        "EIME",
+                        "EL ED",
+                        "ELANG",
+                        "EMBA",
+                        "EMPA",
+                        "ENG T",
+                        "ENGL",
+                        "ESL",
+                        "ESTON",
+                        "EUROP",
+                        "EXSC",
+                        "F S N",
+                        "FAMLF",
+                        "FHSS",
+                        "FIJI",
+                        "FIN",
+                        "FINN",
+                        "FL&HE",
+                        "FLANG",
+                        "FM",
+                        "FNART",
+                        "FPM",
+                        "FREN",
+                        "G E",
+                        "GEOG",
+                        "GEOL",
+                        "GERM",
+                        "GREEK",
+                        "HAWAI",
+                        "HCOLL",
+                        "HEB",
+                        "HEPE",
+                        "HFL",
+                        "HINDI",
+                        "HIST",
+                        "HLTH",
+                        "HMONG",
+                        "HOMEC",
+                        "HON P",
+                        "HONRS",
+                        "HUM",
+                        "HUNG",
+                        "I SYS",
+                        "IAS",
+                        "ICLND",
+                        "ICS",
+                        "IHUM",
+                        "INBIO",
+                        "INDES",
+                        "INDON",
+                        "IP&T",
+                        "IR",
+                        "IS",
+                        "IT",
+                        "ITAL",
+                        "JAPAN",
+                        "KICHE",
+                        "KOREA",
+                        "LABE",
+                        "LAO",
+                        "LATIN",
+                        "LATVI",
+                        "LAW",
+                        "LFSCI",
+                        "LING",
+                        "LINGC",
+                        "LITHU",
+                        "LT AM",
+                        "M B A",
+                        "M COM",
+                        "MALAG",
+                        "MALAY",
+                        "MANEC",
+                        "MATH",
+                        "MBA",
+                        "ME EN",
+                        "MESA",
+                        "MFET",
+                        "MFG",
+                        "MFHD",
+                        "MFT",
+                        "MGT",
+                        "MIL S",
+                        "MMBIO",
+                        "MONGO",
+                        "MPA",
+                        "MTHED",
+                        "MUSIC",
+                        "NAVAJ",
+                        "NDFS",
+                        "NE LG",
+                        "NES",
+                        "NEURO",
+                        "NORWE",
+                        "NURS",
+                        "ORG B",
+                        "P MGT",
+                        "P POL",
+                        "PAS",
+                        "PDBIO",
+                        "PE",
+                        "PERSI",
+                        "PETE",
+                        "PHIL",
+                        "PHSCS",
+                        "PHY S",
+                        "PL SC",
+                        "POLI",
+                        "POLSH",
+                        "PORT",
+                        "PSYCH",
+                        "PWS",
+                        "QUECH",
+                        "RECM",
+                        "REL A",
+                        "REL C",
+                        "REL E",
+                        "RMYL",
+                        "ROM",
+                        "RUSS",
+                        "SAMOA",
+                        "SC ED",
+                        "SCAND",
+                        "SFL",
+                        "SLAT",
+                        "SLN",
+                        "SLOVK",
+                        "SOC",
+                        "SOC W",
+                        "SPAN",
+                        "SRBCR",
+                        "STAC",
+                        "STANM",
+                        "STAT",
+                        "STDEV",
+                        "SWAHI",
+                        "SWED",
+                        "T ED",
+                        "TAGAL",
+                        "TAHTN",
+                        "TECH",
+                        "TEE",
+                        "TELL",
+                        "TES",
+                        "TMA",
+                        "TONGA",
+                        "TTE",
+                        "TURK",
+                        "UKRAI",
+                        "UNIV",
+                        "VA",
+                        "VAANM",
+                        "VADES",
+                        "VAEDU",
+                        "VAGD",
+                        "VAILL",
+                        "VAPHO",
+                        "VASTU",
+                        "WELSH",
+                        "WRTG",
+                        "WS"
+                    ],
+                    "example": "ENGL",
+                    "type": "string"
+                },
+                "total_section_credit_hours": {
+                    "description": "Total section credit hours taken by students in a given section",
+                    "example": "2500",
+                    "type": "string"
+                },
+                "term_start_date": {
+                    "description": "Term start date",
+                    "example": "2011-10-01",
+                    "type": "string"
+                },
+                "title_code": {
+                    "description": "3-digit code that, combined with a Curriculum ID, refers to a specific set of content or course",
+                    "example": "001",
+                    "type": "string"
+                },
+                "crs_section_coments": {
+                    "maxLength": 25000,
+                    "description": "Text comments about the associated course section",
+                    "example": "Students did not like the grammar & punctuation video clips.",
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "description": "A 5-digit code identifying a curriculum unit",
+                    "example": "11111",
+                    "type": "string"
+                },
+                "count_of_d": {
+                    "description": "Number of D grades given in a section",
+                    "example": 2,
+                    "type": "string"
+                },
+                "count_of_e": {
+                    "description": "Number of E grades given in a section",
+                    "example": 0,
+                    "type": "string"
+                },
+                "total_enrolled": {
+                    "maxLength": 20000,
+                    "description": "Number of students enrolled in the course",
+                    "example": "250",
+                    "type": "string"
+                },
+                "count_of_b": {
+                    "description": "Number of B grades given in a section",
+                    "example": 13,
+                    "type": "string"
+                },
+                "display_year": {
+                    "description": "Year portion of Display Year Term",
+                    "format": "date",
+                    "example": "2019",
+                    "type": "string"
+                },
+                "count_of_c": {
+                    "description": "Number of C grades given in a section",
+                    "example": 0,
+                    "type": "string"
+                },
+                "crs_aim_data_flg": {
+                    "description": "Indicates if the data came from AIM",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "Yes",
+                    "type": "string"
+                },
+                "crs_new_crs_prep_flg": {
+                    "description": "Indicates if this course is a new one for the faculty member",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "No",
+                    "type": "string"
+                },
+                "count_of_a": {
+                    "description": "Number of A grades given in a section",
+                    "example": 12,
+                    "type": "string"
+                },
+                "lgcy_crs_rtng_respns_rate": {
+                    "maxLength": 20000,
+                    "description": "Course Rating Response Rate",
+                    "example": "70",
+                    "type": "string"
+                },
+                "new_tchng_materl": {
+                    "maxLength": 20000,
+                    "description": "Description of new teaching material or pedagogical innovations used in a course",
+                    "example": "Used video clips to teach grammar and punctuation.",
+                    "type": "string"
+                },
+                "section_number": {
+                    "description": "The section number in a course",
+                    "example": "001",
+                    "type": "string"
+                },
+                "team_taught_flag": {
+                    "description": "Indicates if a section is being taught by a team of instructors rather than a single instructor",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "No",
+                    "type": "string"
+                },
+                "crs_fac_addl_compnstn_flg": {
+                    "description": "Indicates if the faculty received supplemental compensation for teaching the associated course",
+                    "enum": [
+                        "Compensated",
+                        "Pro Bono"
+                    ],
+                    "example": "Compensated",
+                    "type": "string"
+                },
+                "catalog_number": {
+                    "description": "3-digit numerical designation of a course's level of instruction",
+                    "example": 307,
+                    "type": "string"
+                },
+                "catalog_suffix": {
+                    "maxLength": 20000,
+                    "description": "A single character value added to a Catalog Number to designate a special format for the course",
+                    "example": "R",
+                    "type": "string"
+                },
+                "term_end_date": {
+                    "description": "Term end date",
+                    "example": "2011-07-01",
+                    "type": "string"
+                },
+                "lgcy_ovrall_crs_rtng": {
+                    "maxLength": 20000,
+                    "description": "Overall course rating",
+                    "example": "55",
+                    "type": "string"
+                },
+                "credit_hours": {
+                    "description": "Generally includes a minimum of one or two hour of instruction per week in a semester",
+                    "example": "3",
+                    "type": "number"
+                },
+                "crs_new_frmt_for_xstng_crs_flg": {
+                    "description": "Indicates if the faculty member is using a new format for an existing course",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "Yes",
+                    "type": "string"
+                },
+                "instrctr_rtng_respns_rate": {
+                    "maxLength": 20000,
+                    "description": "Number of students who completed the Overall Instructor question divided by the number of students enrolled in the course",
+                    "example": "55",
+                    "type": "string"
+                },
+                "section_gpa": {
+                    "description": "The grade point average of all grades in a section of a course in a given term",
+                    "example": "3.53",
+                    "type": "string"
+                },
+                "employee_classification_code": {
+                    "description": "Three digit code that represents the employee classification",
+                    "example": "FAC",
+                    "type": "string"
+                },
+                "instrctr_rtng_uncrtnty_range": {
+                    "maxLength": 20000,
+                    "description": "Range calculated by statistically accounting for sampling and measurement error",
+                    "example": "0.3-0.3",
+                    "type": "string"
+                },
+                "term": {
+                    "description": "Course term",
+                    "example": "03",
+                    "type": "string"
+                },
+                "instrctr_rtng": {
+                    "maxLength": 20000,
+                    "description": "Overall Instructor Rating",
+                    "example": "80",
+                    "type": "string"
+                },
+                "transcript_title": {
+                    "maxLength": 20000,
+                    "description": "Abbreviated Course Title that will show in the Class Schedule and on the student's transcript",
+                    "example": "Writing Within Psychology",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "field_set_obj": {
+            "description": "Fieldset returned from Digital Measures",
+            "properties": {
+                "name": {
+                    "description": "The name of the field set passed from Digital Measures",
+                    "example": "Personal and Contact Information (Add Vita)",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "field_sets": {
+            "items": {
+                "$ref": "#/definitions/field_set"
+            },
+            "description": "List of field sets grouped together",
+            "type": "array"
+        },
+        "perform_exhibit_contributor_object": {
+            "description": "Single Contributor",
+            "properties": {
+                "crtv_wrk_role_descr": {
+                    "description": "Role Description",
+                    "example": "Director",
+                    "type": "string"
+                },
+                "crtv_wrk_cntrbtr_fp_id": {
+                    "description": "Contributor ID",
+                    "example": "123456",
+                    "type": "string"
+                },
+                "crtv_wrk_cntrbtr_lname": {
+                    "description": "Last Name of Contributor",
+                    "example": "Cougar",
+                    "type": "string"
+                },
+                "crtv_wrk_stu_authr_edu_lvl": {
+                    "description": "Education Level",
+                    "example": "Bachelor's Degree",
+                    "type": "string"
+                },
+                "crtv_wrk_cntrbtr_fname": {
+                    "description": "First Name of Contributor",
+                    "example": "Cosmo",
+                    "type": "string"
+                },
+                "crtv_wrk_cntrbtr_mname": {
+                    "description": "Middle Name of Contributor",
+                    "example": "Kramer",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "patentsall": {
+            "items": {
+                "$ref": "#/definitions/patentsall_object"
+            },
+            "description": "Non confidential Patent Information",
+            "type": "array"
+        },
+        "conflict_activity": {
+            "description": "conflict activity",
+            "properties": {
+                "conflict_of_interest_amount_of_time": {
+                    "description": "amount of conflicting time",
+                    "type": "string"
+                },
+                "conflict_of_interest_activity": {
+                    "description": "conflict activity",
+                    "type": "string"
+                },
+                "conflict_of_interest_type": {
+                    "description": "type of conflict",
+                    "type": "string"
+                },
+                "conflict_of_interest_period_of_involvement": {
+                    "description": "period of conflict",
+                    "type": "string"
+                },
+                "conflict_of_interest_compensated_flg": {
+                    "description": "indicates if faculty member is compensated for conflict",
+                    "type": "string"
+                }
+            }
+        },
+        "adminassignment": {
+            "items": {
+                "$ref": "#/definitions/adminassignment_object"
+            },
+            "description": "All Admin Assignments",
+            "type": "array"
+        },
+        "presentations_object": {
+            "description": "Single Faculty Presentation",
+            "properties": {
+                "fac_prsntn_lgcy_stu_prsntrs": {
+                    "description": "Names of student presenters in the old version of Faculty Profile",
+                    "example": "Cosmo Cougar",
+                    "type": "string"
+                },
+                "fac_prsntn_dtr_bgn": {
+                    "description": "First day of the month when the presentation was given",
+                    "example": "2011-09-01",
+                    "type": "string"
+                },
+                "fac_prsntn_commisnd_flg": {
+                    "description": "Indicates if the presentation has been invited or commissioned",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "No",
+                    "type": "string"
+                },
+                "fac_prsntn_acadmc_typ": {
+                    "description": "The kind of presentation that was given",
+                    "example": "Academic",
+                    "type": "string"
+                },
+                "fac_prsntn_vsblty_flg": {
+                    "description": "Indicates whether or not a faculty member would like the associated information to be made visible",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "fac_prsntn_conf_name": {
+                    "description": "The conference/meeting where the Faculty Member presented their work",
+                    "example": "Rocky Mountain Modern Language Association",
+                    "type": "string"
+                },
+                "fac_prsntn_spnsr_org": {
+                    "description": "Organization that sponsored the conference/meeting where the presentation was given",
+                    "example": "MLA",
+                    "type": "string"
+                },
+                "fac_prsntn_yr": {
+                    "description": "Year the presentation was given",
+                    "example": "2010",
+                    "type": "string"
+                },
+                "fac_prsntn_dtr_end": {
+                    "description": "Last day of the month when the presentation was given",
+                    "example": "2010-09-31",
+                    "type": "string"
+                },
+                "fac_prsntn_locn": {
+                    "description": "Presentation location",
+                    "example": "Provo, Utah",
+                    "type": "string"
+                },
+                "fac_prsntn_lgcy_nstu_prsntrs": {
+                    "description": "Names of non-student presenters in the old version of Faculty Profile",
+                    "example": "Dr. Cosmo Cougar",
+                    "type": "string"
+                },
+                "fac_prsntn_pubd_in_prcdngs_flg": {
+                    "description": "Indicates if the presentation has been published in preceedings",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "No",
+                    "type": "string"
+                },
+                "presenter": {
+                    "items": {
+                        "$ref": "#/definitions/presentationauthor_object"
+                    },
+                    "description": "All Presentation Authors",
+                    "type": "array"
+                },
+                "id": {
+                    "description": "unique id",
+                    "example": "199073544192",
+                    "type": "string"
+                },
+                "fac_prsntn_titl": {
+                    "description": "Presentation name",
+                    "example": "Assessing Faculty Development in Writing Across the Curriculum Courses",
+                    "type": "string"
+                },
+                "fac_prsntn_peer_rvwd_flg": {
+                    "description": "Indicates if the presentation was academically peer-reviewed",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "Yes",
+                    "type": "string"
+                },
+                "fac_prsntn_scope": {
+                    "description": "Scope of the venue that hosted the presentation",
+                    "example": "National",
+                    "type": "string"
+                },
+                "fac_prsntn_upldd_file": {
+                    "description": "Internal path to a digital version of the presentation",
+                    "example": "byu.edu/presentation/goes/here/presentation.pdf",
+                    "type": "string"
+                },
+                "fac_prsntn_pubd_elswhre_flg": {
+                    "description": "Indicates if the presentation has been published elsewhere",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "No",
+                    "type": "string"
+                },
+                "fac_prsntn_mnth": {
+                    "description": "Presentation month",
+                    "example": "September",
+                    "type": "string"
+                },
+                "fac_prsntn_abstrct": {
+                    "description": "Presentation Summary",
+                    "example": "Description of the presentation and is usually at least a paragraph long.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "professionalcitizenship": {
+            "items": {
+                "$ref": "#/definitions/professionalcitizenship_object"
+            },
+            "description": "All Professional Citizenship Activities",
+            "type": "array"
+        },
+        "publications_object": {
+            "description": "Publication information",
+            "properties": {
+                "fac_pubn_pg_count": {
+                    "maxLength": 20000,
+                    "description": "Publication Page Count",
+                    "example": "17-24",
+                    "type": "string"
+                },
+                "fac_pubn_pubd_yr": {
+                    "description": "publication published year",
+                    "format": "date",
+                    "example": "2012",
+                    "type": "string"
+                },
+                "fac_pubn_acceptd_mnth": {
+                    "description": "Month the publication was accepted",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "January",
+                    "type": "string"
+                },
+                "visible": {
+                    "description": "Visibility of the publication",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "fac_pubn_acceptd_dtr_bgn": {
+                    "description": "First day of the month that publication is accepted",
+                    "format": "date",
+                    "example": "2012-12-01",
+                    "type": "string"
+                },
+                "fac_pubn_titl": {
+                    "maxLength": 20000,
+                    "description": "Publication Title",
+                    "example": "Teaching & Learning: Football Physics",
+                    "type": "string"
+                },
+                "fac_pubn_jrnl_circ_audnc": {
+                    "description": "Scope of the audience",
+                    "enum": [
+                        "International",
+                        "National",
+                        "Regional",
+                        "State",
+                        "Local"
+                    ],
+                    "example": "International",
+                    "type": "string"
+                },
+                "fac_pubn_book_vol": {
+                    "maxLength": 20000,
+                    "description": "Volume publication is published in",
+                    "example": "28",
+                    "type": "string"
+                },
+                "fac_pubn_pubr_cntry": {
+                    "maxLength": 20000,
+                    "description": "Publisher Country",
+                    "example": "US",
+                    "type": "string"
+                },
+                "fac_pubn_venue_qlty": {
+                    "maxLength": 20000,
+                    "description": "Venue Quality",
+                    "example": "Peer Reviewed",
+                    "type": "string"
+                },
+                "fac_pubn_lgcy_stu_authr_names": {
+                    "maxLength": 20000,
+                    "description": "Student author names from the legacy system",
+                    "example": "Cosmo Cougar",
+                    "type": "string"
+                },
+                "fac_pubn_submitd_dtr_end": {
+                    "description": "Last day of the month that the submission of the publication",
+                    "format": "date",
+                    "example": "2008-12-31",
+                    "type": "string"
+                },
+                "authors": {
+                    "items": {
+                        "$ref": "#/definitions/publicationsauthor_object"
+                    },
+                    "description": "All author information from a publication",
+                    "type": "array"
+                },
+                "fac_pubn_pubd_strt_dt": {
+                    "description": "Published Date Range Begin",
+                    "example": "2017-05-01",
+                    "type": "string"
+                },
+                "fac_pubn_pubd_day": {
+                    "description": "Published day",
+                    "example": "31",
+                    "type": "string"
+                },
+                "fac_pubn_commisnd_flg": {
+                    "description": "Indicates if the publication was invited or commissioned",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "No",
+                    "type": "string"
+                },
+                "fac_pubn_dgtl_objct_id": {
+                    "description": "Unique string assigned by a registration agency to identify content and provide a link",
+                    "example": "10-1234-1234",
+                    "type": "string"
+                },
+                "fac_pubn_submitd_yr": {
+                    "description": "Year the publication was submitted",
+                    "format": "date",
+                    "example": "2012",
+                    "type": "string"
+                },
+                "fac_pubn_issn_nmbr": {
+                    "maxLength": 20000,
+                    "description": "Publication issue number",
+                    "example": "28",
+                    "type": "string"
+                },
+                "fac_pubn_peer_rvwd_flg": {
+                    "description": "Peer Reviewed Publication flag",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "Yes",
+                    "type": "string"
+                },
+                "fac_pubn_book_titl": {
+                    "maxLength": 20000,
+                    "description": "Publication Book Title",
+                    "example": "Teaching & Learning: Football Physics",
+                    "type": "string"
+                },
+                "fac_pubn_acceptd_dtr_end": {
+                    "description": "Last day of the month publication was accepted",
+                    "format": "date",
+                    "example": "2004-10-31",
+                    "type": "string"
+                },
+                "fac_pubn_pubd_end_dt": {
+                    "description": "Published Date Range End",
+                    "example": "2018-05-01",
+                    "type": "string"
+                },
+                "fac_pubn_isbn_nmbr": {
+                    "maxLength": 20000,
+                    "description": "Publication ISBN",
+                    "example": "978-3-16-148410-0",
+                    "type": "string"
+                },
+                "fac_pubn_abstrct": {
+                    "maxLength": 20000,
+                    "description": "Publication abstract",
+                    "example": "This publication is meant to walk an individual through the design of a pulley system and the uses it provides.",
+                    "type": "string"
+                },
+                "fac_pubn_submitd_dtr_bgn": {
+                    "description": "First day of the month that publication is submitted ",
+                    "format": "date",
+                    "example": "2013-10-01",
+                    "type": "string"
+                },
+                "fac_pubn_pubr_city_and_state": {
+                    "description": "City and state of the publisher",
+                    "example": "Provo, Utah",
+                    "type": "string"
+                },
+                "fac_pubn_othr_typ": {
+                    "maxLength": 20000,
+                    "description": "Publication other type",
+                    "example": "Academic Journal",
+                    "type": "string"
+                },
+                "fac_pubn_submitd_mnth": {
+                    "description": "Publication submitted month",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "January",
+                    "type": "string"
+                },
+                "fac_pubn_pubr": {
+                    "maxLength": 20000,
+                    "description": "Publisher",
+                    "example": "Department of Teaching & Learning",
+                    "type": "string"
+                },
+                "fac_pubn_pubd_mnth": {
+                    "description": "Month published",
+                    "enum": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "example": "May",
+                    "type": "string"
+                },
+                "fac_pubn_editn": {
+                    "description": "Publication Edition",
+                    "example": "1",
+                    "type": "string"
+                },
+                "fac_pubn_lgcy_nstu_authr_names": {
+                    "maxLength": 20000,
+                    "description": "Nonstudent author names from the legacy system",
+                    "example": "Kevin J. Worthen",
+                    "type": "string"
+                },
+                "fac_pubn_editr_names": {
+                    "maxLength": 20000,
+                    "description": "Name of the editor of the publication",
+                    "example": "Brigham Young",
+                    "type": "string"
+                },
+                "fac_pubn_acceptd_yr": {
+                    "description": "Year the publication was accepted",
+                    "format": "date",
+                    "example": "2014",
+                    "type": "string"
+                },
+                "fac_pubn_typ": {
+                    "description": "Publication type",
+                    "enum": [
+                        "Abstract",
+                        "Blog, Scholarly",
+                        "Book Review",
+                        "Book, Anthology",
+                        "Book, Anthology Poetry",
+                        "Book, Anthology, Nonfiction",
+                        "Book, Anthology, Short Fiction",
+                        "Book, Artistic",
+                        "Book, Chapter/ Section in Scholarly Book",
+                        "Book, Chapter/ Section in Textbook",
+                        "Book, Edited",
+                        "Book, Nonfiction",
+                        "Book, Novel",
+                        "Book, Poetry",
+                        "Book, Scholarly",
+                        "Book, Scholarly/Critical Edition",
+                        "Book, Short Fiction",
+                        "Book, Textbook",
+                        "Book, Textbook, Instructor's Manual",
+                        "Book, Textbook, Study Guide",
+                        "Broadcast Media",
+                        "CD/DVD",
+                        "Conference Proceedings",
+                        "Creative Contribution",
+                        "Database",
+                        "Editorial",
+                        "Encyclopedia/Dictionary Entry",
+                        "Journal Article, Academic Journal",
+                        "Journal Article, Professional or Trade Magazine Article",
+                        "Journal Contribution, Nonfiction",
+                        "Journal Contribution, Poetry",
+                        "Journal Contribution, Short Fiction",
+                        "Magazine Article",
+                        "Monograph",
+                        "Music Composition",
+                        "Newsletter",
+                        "Newspaper article",
+                        "Play Script",
+                        "Regular Column in Journal or Newspaper",
+                        "Research Report",
+                        "Screenplay",
+                        "Software",
+                        "Software, Instructional",
+                        "Technical Report",
+                        "Translation or Transcription",
+                        "Website",
+                        "Working Paper",
+                        "Written Case with Instructional Material",
+                        "Other"
+                    ],
+                    "example": "Journal",
+                    "type": "string"
+                },
+                "fac_pubn_url": {
+                    "description": "Publication url",
+                    "example": "https://www.byu.edu/",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "admin": {
+            "items": {
+                "$ref": "#/definitions/admin_object"
+            },
+            "description": "All Administrative Information",
+            "type": "array"
+        },
+        "experiences_object": {
+            "description": "Single faculty experience",
+            "properties": {
+                "fac_intl_xprts_trm_yr": {
+                    "description": "Faculty International Expertise Experience End Year",
+                    "example": "2016",
+                    "type": "string"
+                },
+                "fac_intl_xprts_strt_yr": {
+                    "description": "Faculty International Expertise Experience Start Year",
+                    "example": "2012",
+                    "type": "string"
+                },
+                "fac_intl_xprts_affil": {
+                    "description": "Affiliates",
+                    "example": "Ashland University; Georgetown College; Universidade do Estado de Santa Catarina; Universidade Federal Rural do Rio de Janeiro",
+                    "type": "string"
+                },
+                "fac_intl_xprts_cntry": {
+                    "description": "Country",
+                    "example": "Brazil",
+                    "type": "string"
+                },
+                "fac_intl_xprts_descr": {
+                    "description": "Description",
+                    "example": "The description of the faculty experience goes here.",
+                    "type": "string"
+                },
+                "fac_intl_xprts_fund_src": {
+                    "description": "Funding Source",
+                    "example": "FIPSE (U.S. Dept. of Education)",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "admin_object": {
+            "description": "Administrative Information",
+            "properties": {
+                "fac_hist_coll": {
+                    "description": "College that a faculty member is associated with",
+                    "enum": [
+                        "David O. McKay School of Education",
+                        "Engineering",
+                        "Family, Home, and Social Sciences",
+                        "Fine Arts and Communications",
+                        "Humanities",
+                        "J. Reuben Clark Law School",
+                        "Harold B. Lee Library",
+                        "Life Sciences",
+                        "Marriott School of Management",
+                        "Nursing",
+                        "Physical and Mathematical Sciences",
+                        "Religious Education",
+                        "Student Life",
+                        "Unassigned"
+                    ],
+                    "example": "Family, Home, and Social Sciences",
+                    "type": "string"
+                },
+                "fac_hist_rank": {
+                    "maxLength": 20000,
+                    "description": "The faculty member's title, rank, or position",
+                    "example": "Associate Teaching Professor",
+                    "type": "string"
+                },
+                "fac_hist_dept": {
+                    "description": "Department that a faculty member is associated with",
+                    "enum": [
+                        "EDU: CITES",
+                        "EDU: College Office",
+                        "EDU: Communication Disorders",
+                        "EDU: Counseling Psychology and Special Education",
+                        "EDU: Educational Leadership and Foundations",
+                        "EDU: Instructional Psychology and Technology",
+                        "EDU: Teacher Education",
+                        "ENG: Chemical Engineering",
+                        "ENG: Civil and Environmental Engineering",
+                        "ENG: College Office",
+                        "ENG: Electrical and Computer Engineering",
+                        "ENG: Mechanical Engineering",
+                        "ENG: Technology",
+                        "FAC: Art",
+                        "FAC: College Office",
+                        "FAC: Communications",
+                        "FAC: Dance",
+                        "FAC: Design",
+                        "FAC: Music",
+                        "FAC: Theatre and Media Arts",
+                        "FHSS: Anthropology",
+                        "FHSS: College Office",
+                        "FHSS: Economics",
+                        "FHSS: Family Life",
+                        "FHSS: Geography",
+                        "FHSS: History",
+                        "FHSS: Political Science",
+                        "FHSS: Psychology",
+                        "FHSS: Social Work",
+                        "FHSS: Sociology",
+                        "HUM: Asian and Near Eastern Languages",
+                        "HUM: Center for Language Studies",
+                        "HUM: College Office",
+                        "HUM: Comparative Arts and Letters",
+                        "HUM: English",
+                        "HUM: French and Italian Languages",
+                        "HUM: Germanic and Slavic Languages",
+                        "HUM: Linguistics and English Language",
+                        "HUM: Office of Digital Humanities",
+                        "HUM: Philosophy",
+                        "HUM: Spanish and Portuguese Languages",
+                        "LAW: Law Library",
+                        "LAW: Law School",
+                        "LIB: Information Technology",
+                        "LIB: Library",
+                        "LIB: Public Services",
+                        "LIB: Special Collections",
+                        "LIB: Technical Services",
+                        "LS: Biology",
+                        "LS: College Office",
+                        "LS: Exercise Sciences",
+                        "LS: Health Science",
+                        "LS: Microbiology and Molecular Biology",
+                        "LS: Nutrition, Dietetics, and Food Science",
+                        "LS: Physiology and Developmental Biology",
+                        "LS: Plant and Wildlife Sciences",
+                        "MSM: Accountancy",
+                        "MSM: Business Management",
+                        "MSM: College Office",
+                        "MSM: Experience Design and Management",
+                        "MSM: Finance",
+                        "MSM: Information Systems",
+                        "MSM: Management",
+                        "MSM: Public Management",
+                        "NURS: Nursing",
+                        "PM: Chemistry and Biochemistry",
+                        "PM: College Office",
+                        "PM: Computer Science",
+                        "PM: Geological Sciences",
+                        "PM: Mathematics",
+                        "PM: Mathematics Education",
+                        "PM: Physics and Astronomy",
+                        "PM: Statistics",
+                        "REL: Ancient Scripture",
+                        "REL: Church History and Doctrine",
+                        "REL: College Office",
+                        "STL: Counseling and Career Center",
+                        "STL: Student Life",
+                        "UN: Maxwell Institute",
+                        "UN: Support"
+                    ],
+                    "example": "FHSS: College Office",
+                    "type": "string"
+                },
+                "fac_hist_schlrshp_xpctatn_flg": {
+                    "description": "Indicates if the faculty member is expected to publish scholarship and/or produce creative works",
+                    "example": "true",
+                    "type": "string"
+                },
+                "fac_hist_hstrcl_coll_name": {
+                    "maxLength": 20000,
+                    "description": "Previous college that a faculty member is associated with",
+                    "example": "Family, Home, and Social Sciences",
+                    "type": "string"
+                },
+                "fac_hist_end_dt": {
+                    "description": "Last day of the year for a specific faculty member's yearly record entry",
+                    "format": "date",
+                    "example": "2011-12-31",
+                    "type": "string"
+                },
+                "fac_hist_trak": {
+                    "description": "The type of track that the given faculty member is on",
+                    "enum": [
+                        "Professorial",
+                        "Professional",
+                        "Adjunct"
+                    ],
+                    "example": "Professional",
+                    "type": "string"
+                },
+                "fac_hist_emplstatus": {
+                    "description": "Full-time status",
+                    "enum": [
+                        "Full-time Faculty",
+                        "Part-time Faculty",
+                        "Adjunct Faculty"
+                    ],
+                    "example": "Adjunct Faculty",
+                    "type": "string"
+                },
+                "fac_hist_hstrcl_dept_name": {
+                    "maxLength": 20000,
+                    "description": "Previous department that a faculty member is associated with",
+                    "example": "FHSS: College Office",
+                    "type": "string"
+                },
+                "fac_hist_gduate_fac_flg": {
+                    "description": "Indicates if the faculty member has been approved to serve on a student's graduate committee or mentor a graduate student",
+                    "enum": [
+                        "Yes",
+                        "No"
+                    ],
+                    "example": "No",
+                    "type": "string"
+                },
+                "fac_hist_yr": {
+                    "description": "Year for a specific faculty member's yearly record entry",
+                    "format": "date",
+                    "example": "2017",
+                    "type": "string"
+                },
+                "fac_hist_leave_typ": {
+                    "description": "Type of leave given",
+                    "enum": [
+                        "Professorial",
+                        "Professional",
+                        "Adjunct"
+                    ],
+                    "example": "Professional",
+                    "type": "string"
+                },
+                "fac_hist_cfs_code": {
+                    "description": "Indicates if the faculty CFS status",
+                    "enum": [
+                        "Non-CFS",
+                        "CFS Track",
+                        "Has CFS"
+                    ],
+                    "example": "Has CFS",
+                    "type": "string"
+                },
+                "fac_hist_bgn_dt": {
+                    "description": "First day of the year for a specific faculty member's yearly record entry",
+                    "format": "date",
+                    "example": "2011-01-01",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "pasthist_object": {
+            "description": "Single Employment History Information",
+            "properties": {
+                "fac_emplhist_descr": {
+                    "maxLength": 20000,
+                    "description": "A description of a faculty member's work and relevant information about the work experience",
+                    "example": "Cosmo was Brigham Young University's school mascot",
+                    "type": "string"
+                },
+                "fac_emplhist_strt_yr": {
+                    "description": "Employment history start year",
+                    "example": "2018",
+                    "type": "string"
+                },
+                "fac_emplhist_trm_dtr_bgn": {
+                    "description": "For an activity ending on a given month or year, this is the first date of the corresponding month or year",
+                    "format": "date",
+                    "example": "2017-01-01",
+                    "type": "string"
+                },
+                "fac_emplhist_strt_dtr_end": {
+                    "description": "Faculty Profile Starting Date Range End",
+                    "example": "2018-05-01",
+                    "type": "string"
+                },
+                "fac_emplhist_typ": {
+                    "description": "Type of previous employment that the faculty member was involved",
+                    "enum": [
+                        "Academic - Post-Secondary",
+                        "Academic - P-12",
+                        "Professional",
+                        "Military",
+                        "Government",
+                        "Other"
+                    ],
+                    "example": "Government",
+                    "type": "string"
+                },
+                "fac_emplhist_strt_dtr_bgn": {
+                    "description": "Faculty Profile Starting Date Range Begin",
+                    "example": "2011-09-01",
+                    "type": "string"
+                },
+                "fac_emplhist_trm_yr": {
+                    "description": "Employment history end year",
+                    "example": "2017",
+                    "type": "string"
+                },
+                "fac_emplhist_cmpny_ownr_flg": {
+                    "description": "Indicates if the company that a faculty member was previously employed was also owned by that faculty member",
+                    "example": "false",
+                    "type": "string"
+                },
+                "fac_emplhist_titl": {
+                    "maxLength": 20000,
+                    "description": "Title, rank, or position that a faculty member previously held",
+                    "example": "Part-time faculty in English Department",
+                    "type": "string"
+                },
+                "fac_emplhist_trm_dtr_end": {
+                    "description": "for an activity ending on a given month or year, this is the last date of the corresponding month or year",
+                    "format": "date",
+                    "example": "2017-12-31",
+                    "type": "string"
+                },
+                "fac_emplhist_org": {
+                    "maxLength": 20000,
+                    "description": "Name of the organization where faculty member was employed",
+                    "example": "Brigham Young University",
+                    "type": "string"
+                },
+                "fac_emplhist_vsblty_flg": {
+                    "description": "Faculty Directory Visibility Flag",
+                    "example": false,
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "parameters": {
+        "file_upload": {
+            "description": "the uploaded file type",
+            "name": "file_upload",
+            "enum": [
+                "photo",
+                "vita",
+                "creative_work_digital_review",
+                "faculty_development_plan",
+                "annual_review_additional_document",
+                "annual_activity_report_archive",
+                "department_chair_letter",
+                "department_evaluation_report",
+                "past_vita",
+                "presentation",
+                "syllabus",
+                "conflict_plan"
+            ],
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "public_data_only": {
+            "description": "if set to true, only items with the visibility flag set to true will be returned",
+            "name": "public_data_only",
+            "type": "boolean",
+            "in": "query"
+        },
+        "field_sets": {
+            "collectionFormat": "csv",
+            "items": {
+                "enum": [
+                    "pci",
+                    "admin",
+                    "directstudentlearning",
+                    "awardhonor",
+                    "collegefunding",
+                    "education",
+                    "pasthist",
+                    "scheduledcourses",
+                    "publications",
+                    "presentations",
+                    "otherteaching",
+                    "member",
+                    "consult",
+                    "professionalcitizenship",
+                    "adminassignment",
+                    "externalgrants",
+                    "patentsall",
+                    "internationalexpertise",
+                    "byucitizenship",
+                    "licensecertification",
+                    "facultyfunding",
+                    "creativeworks",
+                    "annualreviews",
+                    "conflict"
+                ]
+            },
+            "description": "indicates which field sets are to be returned",
+            "name": "field_sets",
+            "required": false,
+            "type": "array",
+            "in": "query"
+        },
+        "authorized_client": {
+            "schema": {
+                "$ref": "#/definitions/authorized_client"
+            },
+            "description": "Updated authorized client",
+            "name": "authorized client",
+            "required": true,
+            "in": "body"
+        },
+        "item_id": {
+            "description": "a unique item id",
+            "name": "item_id",
+            "required": true,
+            "type": "integer",
+            "in": "path"
+        },
+        "byu_id": {
+            "description": "byu id",
+            "name": "byu_id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "field_set": {
+            "description": "indicates the field set to be queried",
+            "name": "field_set",
+            "enum": [
+                "pci",
+                "admin",
+                "directstudentlearning",
+                "awardhonor",
+                "collegefunding",
+                "education",
+                "pasthist",
+                "scheduledcourses",
+                "publications",
+                "presentations",
+                "otherteaching",
+                "member",
+                "consult",
+                "professionalcitizenship",
+                "adminassignment",
+                "externalgrants",
+                "patentsall",
+                "internationalexpertise",
+                "byucitizenship",
+                "licensecertification",
+                "facultyfunding",
+                "creativeworks",
+                "annualreviews",
+                "conflict"
+            ],
+            "required": true,
+            "type": "string",
+            "in": "path"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "responses": {
+        "400": {
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "403": {
+            "description": "Access denied to protected data"
+        },
+        "404": {
+            "description": "The requested resource does not exist"
+        },
+        "500": {
+            "description": "Internal Server Error"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "faculty_profile",
+        "description": "Web service for the Faculty Profile application",
+        "version": "v3"
+    },
+    "basePath": "/domains/facultyprofile/v3"
+}

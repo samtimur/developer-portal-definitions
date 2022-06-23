@@ -1,0 +1,294 @@
+{
+    "basePath": "/domains/servicenow/cmdb/identifyReconcile/v1",
+    "paths": {
+        "/*": {
+            "post": {
+                "summary": "Create or update multiple CIs and the relationships between them in the CMDB",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The name of the application sending data to the CMDB. To add additional options, please contact us.",
+                        "name": "sysparm_data_source",
+                        "enum": [
+                            "Genetec",
+                            "NetDoc",
+                            "NIT",
+                            "OFIS",
+                            "vCenter"
+                        ],
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/body"
+                        },
+                        "description": "Pass CI s and relationships to the CMDB",
+                        "name": "Create or update CIs and relationships",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/identifyReconcileResponse"
+                        },
+                        "description": "Returns an summary object"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "Items": {
+            "items": {
+                "properties": {
+                    "values": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "className": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "operation": {
+            "type": "string"
+        },
+        "responseRelations": {
+            "items": {
+                "properties": {
+                    "operation": {
+                        "$ref": "#/definitions/operation"
+                    },
+                    "sysId": {
+                        "type": "string"
+                    },
+                    "identifierEntrySysId": {
+                        "type": "string"
+                    },
+                    "className": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "body": {
+            "example": {
+                "relations": [
+                    {
+                        "child": 2,
+                        "parent": 0,
+                        "type": "Supports::Connected to"
+                    }
+                ],
+                "items": [
+                    {
+                        "values": {
+                            "mac_address": "String",
+                            "building": "bc25122913e962402edf5a132244b007",
+                            "u_gear_hostname": "String",
+                            "model_id": "bc25122913e962402edf5a132244b007",
+                            "manufacturer": "10881d1dc611227501ac4f3e20f236ff",
+                            "u_ci_status": "0a3e6462cc14d600afe2c18f38823502",
+                            "room": "bc25122913e962402edf5a132244b007",
+                            "serial_number": "String"
+                        },
+                        "className": "u_cmdb_ci_y_time_clock"
+                    },
+                    {
+                        "values": {
+                            "name": "10M 126",
+                            "u_number": 126
+                        },
+                        "className": "u_cmdb_ci_vlan"
+                    },
+                    {
+                        "values": {
+                            "u_building": "bc25122913e962402edf5a132244b007",
+                            "u_room": "bc25122913e962402edf5a132244b007",
+                            "u_jack__": "2015",
+                            "u_netdoc_uid": "2015 CTB 260"
+                        },
+                        "className": "u_cmdb_ci_jack"
+                    }
+                ]
+            },
+            "properties": {
+                "relations": {
+                    "$ref": "#/definitions/Relations"
+                },
+                "items": {
+                    "$ref": "#/definitions/Items"
+                }
+            },
+            "type": "object"
+        },
+        "Relations": {
+            "items": {
+                "properties": {
+                    "child": {
+                        "type": "integer"
+                    },
+                    "parent": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "responseItems": {
+            "items": {
+                "properties": {
+                    "identificationAttempts": {
+                        "items": {
+                            "properties": {
+                                "attemptResult": {
+                                    "type": "string"
+                                },
+                                "searchOnTable": {
+                                    "type": "string"
+                                },
+                                "attributes": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "identifierName": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "operation": {
+                        "$ref": "#/definitions/operation"
+                    },
+                    "sysId": {
+                        "description": "This is rad",
+                        "type": "string"
+                    },
+                    "identifierEntrySysId": {
+                        "type": "string"
+                    },
+                    "className": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "identifyReconcileResponse": {
+            "example": {
+                "result": {
+                    "relations": [
+                        {
+                            "operation": "INSERT",
+                            "sysId": "3e726cc813c98700be81bb722244b04b",
+                            "identifierEntrySysId": "Unknown",
+                            "className": "cmdb_rel_ci"
+                        }
+                    ],
+                    "items": [
+                        {
+                            "identificationAttempts": [
+                                {
+                                    "attemptResult": "NO_MATCH",
+                                    "searchOnTable": "u_cmdb_ci_y_time_clock",
+                                    "attributes": [
+                                        "u_gear_hostname"
+                                    ],
+                                    "identifierName": "Y Time Clocks"
+                                }
+                            ],
+                            "operation": "INSERT",
+                            "sysId": "fe726cc813c98700be81bb722244b044",
+                            "identifierEntrySysId": "Unknown",
+                            "className": "u_cmdb_ci_y_time_clock"
+                        },
+                        {
+                            "identificationAttempts": [
+                                {
+                                    "attemptResult": "MATCHED",
+                                    "searchOnTable": "u_cmdb_ci_vlan",
+                                    "attributes": [
+                                        "name"
+                                    ],
+                                    "identifierName": "VLANs"
+                                }
+                            ],
+                            "operation": "UPDATE",
+                            "sysId": "425269df4f0be240aa42d49f0310c7f7",
+                            "identifierEntrySysId": "f2a5cb680fcb2200f431db0be1050e32",
+                            "className": "u_cmdb_ci_vlan"
+                        },
+                        {
+                            "identificationAttempts": [
+                                {
+                                    "attemptResult": "MATCHED",
+                                    "searchOnTable": "u_cmdb_ci_jack",
+                                    "attributes": [
+                                        "u_netdoc_uid"
+                                    ],
+                                    "identifierName": "Jack"
+                                }
+                            ],
+                            "operation": "UPDATE",
+                            "sysId": "b1cc30ac0f4b3200f431db0be1050e2f",
+                            "identifierEntrySysId": "7dc6c7200f0f2200f431db0be1050ed7",
+                            "className": "u_cmdb_ci_jack"
+                        }
+                    ]
+                }
+            },
+            "properties": {
+                "result": {
+                    "properties": {
+                        "relations": {
+                            "$ref": "#/definitions/responseRelations"
+                        },
+                        "items": {
+                            "$ref": "#/definitions/responseItems"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "CMDB_Identify_Reconcile",
+        "description": "IdentifyReconcile API for CMDB\n\nServiceNow Documentation -->https://docs.servicenow.com/bundle/istanbul-servicenow-platform/page/integrate/inbound-rest/reference/r_IdentifyReconcileAPIPOST.html",
+        "contact": {
+            "email": "oittools-ft@byu.edu",
+            "name": "OIT Tools Team"
+        },
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443"
+}

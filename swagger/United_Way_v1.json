@@ -1,0 +1,176 @@
+{
+    "basePath": "/domains/erp/fs/United_Way/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/*": {
+            "post": {
+                "summary": "Creates a new effective-dated contribution in PeopleSoft",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "agency2": {
+                                    "$ref": "#/definitions/agency2"
+                                },
+                                "agency1": {
+                                    "$ref": "#/definitions/agency1"
+                                },
+                                "agency1_amount": {
+                                    "$ref": "#/definitions/agency1_amount"
+                                },
+                                "number_of_months": {
+                                    "$ref": "#/definitions/number_of_months"
+                                },
+                                "byu_id": {
+                                    "$ref": "#/definitions/byu_id"
+                                },
+                                "agency2_amount": {
+                                    "$ref": "#/definitions/agency2_amount"
+                                },
+                                "is_deduction": {
+                                    "$ref": "#/definitions/is_deduction"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "byu_id",
+                                "is_deduction",
+                                "agency1",
+                                "agency1_amount",
+                                "agency2",
+                                "agency2_amount",
+                                "number_of_months"
+                            ]
+                        },
+                        "description": "The new contribution",
+                        "name": "contribution",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/success"
+                        },
+                        "description": "Contribution changes were successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "GET only supplied for infohub. Do not call the GET.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/request"
+                        },
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "agency2": {
+            "description": "The code for a chartiable organization. Must match organization code in PeopleSoft.",
+            "example": "SEALS",
+            "type": "string"
+        },
+        "agency1": {
+            "description": "The code for a chartiable organization. Must match organization code in PeopleSoft.",
+            "example": "ULS",
+            "type": "string"
+        },
+        "agency1_amount": {
+            "description": "The contribution amount going to agency1. Must be supplied if agency1 has been populated.",
+            "example": 10,
+            "type": "number"
+        },
+        "number_of_months": {
+            "description": "For reoccurring payroll deductions. Indicates the amount of months the contribution will reoccur.",
+            "example": 6,
+            "type": "integer"
+        },
+        "request": {
+            "properties": {
+                "agency2": {
+                    "$ref": "#/definitions/agency2"
+                },
+                "agency1": {
+                    "$ref": "#/definitions/agency1"
+                },
+                "number_of_months": {
+                    "$ref": "#/definitions/number_of_months"
+                },
+                "agency1_amount": {
+                    "$ref": "#/definitions/agency1_amount"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "agency2_amount": {
+                    "$ref": "#/definitions/agency2_amount"
+                },
+                "is_deduction": {
+                    "$ref": "#/definitions/is_deduction"
+                }
+            },
+            "required": [
+                "byu_id",
+                "is_deduction",
+                "agency1",
+                "agency1_amount",
+                "agency2",
+                "agency2_amount",
+                "number_of_months"
+            ]
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "example": "123456789",
+            "type": "string"
+        },
+        "agency2_amount": {
+            "description": "The contribution amount going to agency2. Must be supplied if agency2 has been populated.",
+            "example": 12,
+            "type": "number"
+        },
+        "success": {
+            "description": "status: success",
+            "type": "string"
+        },
+        "is_deduction": {
+            "pattern": "true/false",
+            "description": "Indicates whether the supplied contribution is a payroll deduction or a one-time credit card or eCheck.",
+            "example": "true",
+            "type": "boolean"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "United Way",
+        "description": "Web service to update United Way contributions in PeopleSoft",
+        "version": "1.0.0"
+    }
+}

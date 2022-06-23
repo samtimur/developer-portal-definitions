@@ -1,0 +1,494 @@
+{
+    "basePath": "/domains/erp/fs/journals/v3",
+    "paths": {
+        "/jrnl": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns process status on specific journal entry",
+                "tags": [
+                    "journal"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns status of specified journal entry and date",
+                "parameters": [
+                    {
+                        "description": "Returns status journal that matches the journal_id",
+                        "name": "journal_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "pattern": "yyyy-MM-dd",
+                        "description": "Date correlated with specified journal_id (yyyy-MM-dd)",
+                        "name": "journal_date",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "properties": {
+                                            "header_fiscal_year": {
+                                                "type": "string"
+                                            },
+                                            "header_description": {
+                                                "type": "string"
+                                            },
+                                            "journal_ledger": {
+                                                "type": "string"
+                                            },
+                                            "journal_id": {
+                                                "type": "string"
+                                            },
+                                            "journal_monetary_amount": {
+                                                "type": "string"
+                                            },
+                                            "header_accounting_period": {
+                                                "type": "string"
+                                            },
+                                            "header_posted_date": {
+                                                "type": "string"
+                                            },
+                                            "operating_unit": {
+                                                "type": "string"
+                                            },
+                                            "journal_source": {
+                                                "type": "string"
+                                            },
+                                            "journal_header_status_code": {
+                                                "type": "string"
+                                            },
+                                            "header_budget_status_code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "Invalid date. Please format date as yyyy-mm-dd",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Incorrect date format"
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "A journal with that ID (0123456789) and date (01011990) was not found.",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Journal not found"
+                    }
+                }
+            }
+        },
+        "/jrnls": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns Journal Header and all lines",
+                "tags": [
+                    "journal"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns Journal Header and all lines",
+                "parameters": [
+                    {
+                        "description": "ID correlating to desired journal header",
+                        "name": "journal_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "pattern": "yyyy-MM-dd",
+                        "description": "Date correlated with specified journal_id (yyyy-MM-dd)",
+                        "name": "journal_date",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "lines": {
+                                    "items": {
+                                        "properties": {
+                                            "journal_line": {
+                                                "type": "string"
+                                            },
+                                            "journal_line_date": {
+                                                "type": "string"
+                                            },
+                                            "journal_line_reference": {
+                                                "type": "string"
+                                            },
+                                            "account_field": {
+                                                "type": "string"
+                                            },
+                                            "class_field": {
+                                                "type": "string"
+                                            },
+                                            "payment_amount": {
+                                                "type": "string"
+                                            },
+                                            "journal_line_description": {
+                                                "type": "string"
+                                            },
+                                            "operating_unit": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "array"
+                                },
+                                "header": {
+                                    "properties": {
+                                        "business_unit": {
+                                            "type": "string"
+                                        },
+                                        "header_description": {
+                                            "type": "string"
+                                        },
+                                        "journal_date": {
+                                            "type": "string"
+                                        },
+                                        "journal_ledger": {
+                                            "type": "string"
+                                        },
+                                        "journal_id": {
+                                            "type": "string"
+                                        },
+                                        "journal_monetary_amount": {
+                                            "type": "string"
+                                        },
+                                        "journal_source": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "journal_id",
+                                        "journal_date",
+                                        "ledger_group",
+                                        "description",
+                                        "journal_source",
+                                        "business_unit"
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "Invalid date. Please format date as yyyy-mm-dd",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Incorrect date format"
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "A journal with that ID (0123456789) and date (01011990) not found.",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Journals not found"
+                    }
+                }
+            }
+        },
+        "/oprid": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns all journals with a specific OPRID or within an hour limit",
+                "tags": [
+                    "journal"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns journal information that can be filtered with a specific OPRID, a limit on how many hours ago the journal was created, or both. If hours is left blank it defaults to 72 to prevent unreasonably long query times.",
+                "parameters": [
+                    {
+                        "description": "OPRID",
+                        "name": "oprid",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Hours",
+                        "name": "hours",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Source Code",
+                        "name": "source code",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "journals": {
+                                    "items": {
+                                        "properties": {
+                                            "status_code": {
+                                                "type": "string"
+                                            },
+                                            "source_code": {
+                                                "type": "string"
+                                            },
+                                            "amount": {
+                                                "type": "string"
+                                            },
+                                            "oprid": {
+                                                "type": "string"
+                                            },
+                                            "journal_id": {
+                                                "type": "string"
+                                            },
+                                            "entry_date": {
+                                                "type": "string"
+                                            },
+                                            "operating_units": {
+                                                "items": {
+                                                    "example": "operating unit",
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            }
+                                        }
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "A journal associated with that OPID does not exist or no journals have been created within the hour limit given.",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Journals not found"
+                    }
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Posts journal entry to the database",
+                "tags": [
+                    "journal"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Posts journal and lines to the staging tables for further process",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "journal": {
+                                    "properties": {
+                                        "lines": {
+                                            "items": {
+                                                "properties": {
+                                                    "journal_line": {
+                                                        "description": "Line number for the journal line",
+                                                        "example": "1",
+                                                        "type": "string"
+                                                    },
+                                                    "journal_line_date": {
+                                                        "description": "Date asssociated with the line entry",
+                                                        "example": "07012018",
+                                                        "type": "string"
+                                                    },
+                                                    "journal_line_reference": {
+                                                        "description": "journal_ln_ref",
+                                                        "type": "string"
+                                                    },
+                                                    "account_field": {
+                                                        "description": "Account",
+                                                        "example": "1234",
+                                                        "type": "string"
+                                                    },
+                                                    "payment_amount": {
+                                                        "description": "Monetary Amount",
+                                                        "example": "100.00",
+                                                        "type": "string"
+                                                    },
+                                                    "class_field": {
+                                                        "description": "Class",
+                                                        "example": "00000",
+                                                        "type": "string"
+                                                    },
+                                                    "journal_line_description": {
+                                                        "description": "Description",
+                                                        "example": "journal line purchase",
+                                                        "type": "string"
+                                                    },
+                                                    "operating_unit": {
+                                                        "description": "Operating Unit",
+                                                        "example": "12345678",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "header": {
+                                            "properties": {
+                                                "peoplesoft_business_unit": {
+                                                    "description": "Business, usually 'BYU'",
+                                                    "example": "BYU",
+                                                    "type": "string"
+                                                },
+                                                "header_description": {
+                                                    "description": "Description of journal entry",
+                                                    "example": "my journal",
+                                                    "type": "string"
+                                                },
+                                                "journal_date": {
+                                                    "description": "The date associated with the journal_id",
+                                                    "example": "07012018",
+                                                    "type": "string"
+                                                },
+                                                "journal_ledger": {
+                                                    "description": "Ledger group of journal",
+                                                    "example": "BUDGETS",
+                                                    "type": "string"
+                                                },
+                                                "journal_id": {
+                                                    "description": "The id of the journal entry",
+                                                    "example": "AAA123456",
+                                                    "type": "string"
+                                                },
+                                                "journal_source": {
+                                                    "description": "Source of Journal submission",
+                                                    "example": "123",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "journal_source",
+                                                "ledger_group",
+                                                "journal_id",
+                                                "journal_date"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "header",
+                                        "lines"
+                                    ]
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "journal and line information",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "Status of journal entry",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "validation_response": {
+                                    "items": {
+                                        "example": "Invalid journal entry",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Invalid"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "swagger": "2.0",
+    "info": {
+        "title": "Journal",
+        "description": "Processes and returns process status of Journal Entry.",
+        "version": "v3"
+    }
+}

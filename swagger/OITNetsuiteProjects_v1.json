@@ -1,0 +1,91 @@
+{
+    "basePath": "/domains/netsuite/projects/v1",
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/projects"
+                        },
+                        "description": "The default response type is JSON."
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "project": {
+            "description": "A row represents a single project in the group of all projects returned",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "total_possible_committed": {
+                    "type": "number"
+                },
+                "end_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "status": {
+                    "enum": [
+                        "Active",
+                        "Cancelled",
+                        "Close-Out",
+                        "Closed",
+                        "Completed",
+                        "Finalized",
+                        "Not Started",
+                        "On Hold",
+                        "Planned",
+                        "Pre-Approval"
+                    ],
+                    "type": "string"
+                },
+                "planned_deliverables": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project_manager": {
+                    "type": "string"
+                },
+                "internal_id": {
+                    "type": "integer"
+                },
+                "start_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "total_approved_funding": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "projects": {
+            "items": {
+                "$ref": "#/definitions/project"
+            },
+            "type": "array"
+        }
+    },
+    "info": {
+        "title": "OITNetsuiteProjects",
+        "description": "This web service returns the list of Netsuite Active Projects",
+        "version": "v1"
+    }
+}

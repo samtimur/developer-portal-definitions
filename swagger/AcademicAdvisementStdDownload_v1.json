@@ -1,0 +1,724 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "AcademicAdvisementStdDownload",
+        "description": "This service accesses advisement logs using the AIM system.",
+        "version": "v1",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/domains/legacy/academic/advisement/stddownload/v1",
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "paths": {
+        "/{program_code_list}": {
+            "get": {
+                "summary": "Returns a list of students in a program for the current year term. Ordered alphabetically by major.",
+                "description": "Returns a list of students in a program for the current year term. Ordered alphabetically by major.",
+                "operationId": "getStudentList",
+                "parameters": [
+                    {
+                        "name": "program_code_list",
+                        "description": "string -> A '&' delimited list of 6 digit program codes. ie: 233160&355460&392160",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "StdDownloadService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service request is OK and a response has been generated.",
+                        "schema": {
+                            "description": "Student download for advisement logs.",
+                            "type": "object",
+                            "properties": {
+                                "StdDownloadService": {
+                                    "type": "object",
+                                    "properties": {
+                                        "request": {
+                                            "description": "",
+                                            "type": "object",
+                                            "properties": {
+                                                "method": {
+                                                    "type": "string",
+                                                    "description": "REST method for request service."
+                                                },
+                                                "resource": {
+                                                    "type": "string",
+                                                    "description": "A resource."
+                                                },
+                                                "attributes": {
+                                                    "type": "string",
+                                                    "description": ""
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "description": "Return status of a REST request to determine success."
+                                                },
+                                                "statusMessage": {
+                                                    "type": "string",
+                                                    "description": "Explanation of return status of request."
+                                                }
+                                            }
+                                        },
+                                        "response": {
+                                            "description": "",
+                                            "type": "object",
+                                            "properties": {
+                                                "students": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "name": {
+                                                                "description": "",
+                                                                "type": "string"
+                                                            },
+                                                            "address": {
+                                                                "description": "",
+                                                                "type": "string"
+                                                            },
+                                                            "email_address": {
+                                                                "description": "",
+                                                                "type": "string"
+                                                            },
+                                                            "major": {
+                                                                "description": "",
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "StdDownloadService": {
+                                    "request": {
+                                        "method": "GET",
+                                        "resource": "/json/232666/",
+                                        "attributes": "",
+                                        "status": 200,
+                                        "statusMessage": "Service request is OK and a response has been generated."
+                                    },
+                                    "response": {
+                                        "students": [
+                                            {
+                                                "name": "Person, Name",
+                                                "address": "Address",
+                                                "email_address": "email@example.com",
+                                                "major": "Nursing"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Failure to authenticate.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "The target resource can not be found for the provided resource identifiers.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "The service method is not supported by the service.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "409": {
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/{program_code_list}/{year_term}": {
+            "get": {
+                "summary": "Returns a list of students and their graduation status. Ordered alphabetically by program.",
+                "description": "Returns a list of students and their graduation status. Ordered alphabetically by program.",
+                "operationId": "getGradSummary",
+                "parameters": [
+                    {
+                        "name": "program_code_list",
+                        "description": "string -> A '&' delimited list of 6 digit program codes. ie: 233160&355460&392160",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "year_term",
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "StdDownloadService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service request is OK and a response has been generated.",
+                        "schema": {
+                            "description": "",
+                            "type": "object",
+                            "properties": {
+                                "StdDownloadService": {
+                                    "type": "object",
+                                    "properties": {
+                                        "request": {
+                                            "description": "",
+                                            "type": "object",
+                                            "properties": {
+                                                "method": {
+                                                    "type": "string",
+                                                    "description": "REST method for request service."
+                                                },
+                                                "resource": {
+                                                    "type": "string",
+                                                    "description": "A resource."
+                                                },
+                                                "attributes": {
+                                                    "type": "string",
+                                                    "description": ""
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "description": "Return status of a REST request to determine success."
+                                                },
+                                                "statusMessage": {
+                                                    "type": "string",
+                                                    "description": "Explanation of return status of request."
+                                                }
+                                            }
+                                        },
+                                        "response": {
+                                            "description": "",
+                                            "type": "object",
+                                            "properties": {
+                                                "gradSummary": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "BYUid": {
+                                                                "description": "",
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "description": "",
+                                                                "type": "string"
+                                                            },
+                                                            "program": {
+                                                                "description": "",
+                                                                "type": "string"
+                                                            },
+                                                            "degree": {
+                                                                "description": "",
+                                                                "type": "string"
+                                                            },
+                                                            "approved": {
+                                                                "description": "",
+                                                                "type": "string"
+                                                            },
+                                                            "thesisStatus": {
+                                                                "description": "",
+                                                                "type": "string"
+                                                            },
+                                                            "deptClearStatus": {
+                                                                "description": "",
+                                                                "type": "string"
+                                                            },
+                                                            "universityClearStatus": {
+                                                                "description": "",
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "StdDownloadService": {
+                                    "request": {
+                                        "method": "GET",
+                                        "resource": "/json/232666/20175",
+                                        "attributes": "",
+                                        "status": 200,
+                                        "statusMessage": "Service request is OK and a response has been generated."
+                                    },
+                                    "response": {
+                                        "gradSummary": [
+                                            {
+                                                "BYUid": "123456789",
+                                                "name": "Student, Name",
+                                                "program": "Tax",
+                                                "degree": "MACC",
+                                                "approved": "Yes",
+                                                "thesisStatus": "WAIVED",
+                                                "deptClearStatus": "C",
+                                                "universityClearStatus": "R"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Failure to authenticate.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "The target resource can not be found for the provided resource identifiers.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "The service method is not supported by the service.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "409": {
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "description": "service definition",
+                "operationId": "getServiceDocumentation",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "StdDownload": {
+            "description": "Student download for advisement logs.",
+            "type": "object",
+            "properties": {
+                "StdDownloadService": {
+                    "type": "object",
+                    "properties": {
+                        "request": {
+                            "description": "",
+                            "type": "object",
+                            "properties": {
+                                "method": {
+                                    "type": "string",
+                                    "description": "REST method for request service."
+                                },
+                                "resource": {
+                                    "type": "string",
+                                    "description": "A resource."
+                                },
+                                "attributes": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "status": {
+                                    "type": "number",
+                                    "description": "Return status of a REST request to determine success."
+                                },
+                                "statusMessage": {
+                                    "type": "string",
+                                    "description": "Explanation of return status of request."
+                                }
+                            }
+                        },
+                        "response": {
+                            "description": "",
+                            "type": "object",
+                            "properties": {
+                                "students": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "description": "",
+                                                "type": "string"
+                                            },
+                                            "address": {
+                                                "description": "",
+                                                "type": "string"
+                                            },
+                                            "email_address": {
+                                                "description": "",
+                                                "type": "string"
+                                            },
+                                            "major": {
+                                                "description": "",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "StdTermDownload": {
+            "description": "",
+            "type": "object",
+            "properties": {
+                "StdDownloadService": {
+                    "type": "object",
+                    "properties": {
+                        "request": {
+                            "description": "",
+                            "type": "object",
+                            "properties": {
+                                "method": {
+                                    "type": "string",
+                                    "description": "REST method for request service."
+                                },
+                                "resource": {
+                                    "type": "string",
+                                    "description": "A resource."
+                                },
+                                "attributes": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "status": {
+                                    "type": "number",
+                                    "description": "Return status of a REST request to determine success."
+                                },
+                                "statusMessage": {
+                                    "type": "string",
+                                    "description": "Explanation of return status of request."
+                                }
+                            }
+                        },
+                        "response": {
+                            "description": "",
+                            "type": "object",
+                            "properties": {
+                                "gradSummary": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "BYUid": {
+                                                "description": "",
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "description": "",
+                                                "type": "string"
+                                            },
+                                            "program": {
+                                                "description": "",
+                                                "type": "string"
+                                            },
+                                            "degree": {
+                                                "description": "",
+                                                "type": "string"
+                                            },
+                                            "approved": {
+                                                "description": "",
+                                                "type": "string"
+                                            },
+                                            "thesisStatus": {
+                                                "description": "",
+                                                "type": "string"
+                                            },
+                                            "deptClearStatus": {
+                                                "description": "",
+                                                "type": "string"
+                                            },
+                                            "universityClearStatus": {
+                                                "description": "",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "StdDownRequest": {
+            "description": "",
+            "type": "object",
+            "properties": {
+                "method": {
+                    "type": "string",
+                    "description": "REST method for request service."
+                },
+                "resource": {
+                    "type": "string",
+                    "description": "A resource."
+                },
+                "attributes": {
+                    "type": "string",
+                    "description": ""
+                },
+                "status": {
+                    "type": "number",
+                    "description": "Return status of a REST request to determine success."
+                },
+                "statusMessage": {
+                    "type": "string",
+                    "description": "Explanation of return status of request."
+                }
+            }
+        },
+        "StdDownResponse": {
+            "description": "",
+            "type": "object",
+            "properties": {
+                "students": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "description": "",
+                                "type": "string"
+                            },
+                            "address": {
+                                "description": "",
+                                "type": "string"
+                            },
+                            "email_address": {
+                                "description": "",
+                                "type": "string"
+                            },
+                            "major": {
+                                "description": "",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "StdTermDownResponse": {
+            "description": "",
+            "type": "object",
+            "properties": {
+                "gradSummary": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "BYUid": {
+                                "description": "",
+                                "type": "string"
+                            },
+                            "name": {
+                                "description": "",
+                                "type": "string"
+                            },
+                            "program": {
+                                "description": "",
+                                "type": "string"
+                            },
+                            "degree": {
+                                "description": "",
+                                "type": "string"
+                            },
+                            "approved": {
+                                "description": "",
+                                "type": "string"
+                            },
+                            "thesisStatus": {
+                                "description": "",
+                                "type": "string"
+                            },
+                            "deptClearStatus": {
+                                "description": "",
+                                "type": "string"
+                            },
+                            "universityClearStatus": {
+                                "description": "",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "name": {
+            "description": "",
+            "type": "string"
+        },
+        "address": {
+            "description": "",
+            "type": "string"
+        },
+        "email_address": {
+            "description": "",
+            "type": "string"
+        },
+        "major": {
+            "description": "",
+            "type": "string"
+        },
+        "BYUid": {
+            "description": "",
+            "type": "string"
+        },
+        "program": {
+            "description": "",
+            "type": "string"
+        },
+        "degree": {
+            "description": "",
+            "type": "string"
+        },
+        "approved": {
+            "description": "",
+            "type": "string"
+        },
+        "thesisStatus": {
+            "description": "",
+            "type": "string"
+        },
+        "deptClearStatus": {
+            "description": "",
+            "type": "string"
+        },
+        "universityClearStatus": {
+            "description": "",
+            "type": "string"
+        }
+    },
+    "x-mock_json": {
+        "StdDownload": {
+            "StdDownloadService": {
+                "request": {
+                    "method": "GET",
+                    "resource": "/json/232666/",
+                    "attributes": "",
+                    "status": 200,
+                    "statusMessage": "Service request is OK and a response has been generated."
+                },
+                "response": {
+                    "students": [
+                        {
+                            "name": "Person, Name",
+                            "address": "Address",
+                            "email_address": "email@example.com",
+                            "major": "Nursing"
+                        }
+                    ]
+                }
+            }
+        },
+        "StdTermDownload": {
+            "StdDownloadService": {
+                "request": {
+                    "method": "GET",
+                    "resource": "/json/232666/20175",
+                    "attributes": "",
+                    "status": 200,
+                    "statusMessage": "Service request is OK and a response has been generated."
+                },
+                "response": {
+                    "gradSummary": [
+                        {
+                            "BYUid": "123456789",
+                            "name": "Student, Name",
+                            "program": "Tax",
+                            "degree": "MACC",
+                            "approved": "Yes",
+                            "thesisStatus": "WAIVED",
+                            "deptClearStatus": "C",
+                            "universityClearStatus": "R"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

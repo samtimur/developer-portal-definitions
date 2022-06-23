@@ -1,0 +1,799 @@
+{
+    "basePath": "/domains/legacy/academic/records/examcredit/v1",
+    "paths": {
+        "/addOtherExam": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Add Non-BYU Exam",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Person ID (9 digit number)",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Curriculum ID (5 digit number)",
+                        "name": "curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Title Code (3 digit number)",
+                        "name": "title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Credit Hours (number less than 10, multiple of .5)",
+                        "name": "credit_hours",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Grade (only P)",
+                        "name": "grade",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Test Date (MMYYYY format)",
+                        "name": "test_date",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Test Type",
+                        "name": "test_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Test Version",
+                        "name": "test_version",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Test Score (number)",
+                        "name": "test_score",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Repeat Flag (Y or N)",
+                        "name": "repeat",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Flag to indicate if other class or exam records for this course should be marked as repeated (Y or N)",
+                        "name": "set_other_repeat",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Flag to indicate if grade should override the grade rule.   (Y or not used)",
+                        "name": "force_grade",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation"
+            }
+        },
+        "/addBYUExam": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Add BYU Exam",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Person ID (9 digit number)",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Curriculum ID (5 digit number)",
+                        "name": "curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Title code (3 digit number)",
+                        "name": "title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Credit Hours (number less than 10, multiple of .5)",
+                        "name": "credit_hours",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Grade (A, A-, B+, B, B-, C+, C, C-, D+, D, D-, E, P)",
+                        "name": "grade",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Year/Term (5 digit number between 19001 and 29995, ending in 1, 3, 4, or 5)",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Repeat Flag (Y or N)",
+                        "name": "repeat",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Flag to indicate if other class or exam records for this course should be marked as repeated (Y or N)",
+                        "name": "set_other_repeat",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Flag to indicate if grade should override the grade rule.   (Y or not used)",
+                        "name": "force_grade",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/updateOtherExam/{std_exam_class_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Update Non-BYU Exam",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Exam Class ID (7 digit number)",
+                        "name": "std_exam_class_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Credit Hours (number less than 10, multiple of .5)",
+                        "name": "credit_hours",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Grade (only P)",
+                        "name": "grade",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Repeat Flag (Y or N)",
+                        "name": "repeat",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Flag to indicate if grade should override the grade rule.   (Y or not used)",
+                        "name": "force_grade",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/{personId}": {
+            "get": {
+                "tags": [
+                    "ExamCreditService"
+                ],
+                "summary": "Shows page according to specified person Id",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Shows page according to specified person Id",
+                "parameters": [
+                    {
+                        "description": "string -> 9 digit number; [0-9]{9}",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/RecExamCreditService"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getRecExamCreditPageById"
+            }
+        },
+        "/{person_id}/{std_exam_class_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets a specific exam credit record according to the exam id",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "string -> 9 digit number; [0-9]{9}",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> 7 digit number; [0-9]{7}",
+                        "name": "std_exam_class_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/updateBYUExam/{std_exam_class_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Update BYU Exam",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Exam Class ID (7 digit number)",
+                        "name": "std_exam_class_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Credit Hours (number less than 10, multiple of .5)",
+                        "name": "credit_hours",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Grade (A, A-, B+, B, B-, C+, C, C-, D+, D, D-, E, P)",
+                        "name": "grade",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Honors Flag (Y or N)",
+                        "name": "honors_flag",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Service/Learning Flag (Y or N)",
+                        "name": "serv_learn_flag",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Repeat Flag (Y or N)",
+                        "name": "repeat",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Flag to indicate if grade should override the grade rule.   (Y or not used)",
+                        "name": "force_grade",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/testEquivalencies/{test_date}/{test_type}/{test_version}/{test_score}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "List test class equivalencies",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Test Date (MMYYYY format)",
+                        "name": "test_date",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Test Type",
+                        "name": "test_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Test Version",
+                        "name": "test_version",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Test Score",
+                        "name": "test_score",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/deleteOtherExam/{std_exam_class_id}/{test_date}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete Non-BYU Exam",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Exam Class ID (7 digit number)",
+                        "name": "std_exam_class_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Test Date (MMYYYY format)",
+                        "name": "test_date",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/deleteBYUExam/{std_exam_class_id}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete BYU Exam",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Exam Class Id (7 digit number)",
+                        "name": "std_exam_class_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/setRepeat": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Set class to repeated",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Person ID (9 digit number)",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Curriculum ID (5 digit number)",
+                        "name": "curriculum_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Title Code (3 digit number)",
+                        "name": "title_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Year/Term (5 digit number between 19001 and 29995, ending in 1, 3, 4, or 5)",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "otherExam": {
+            "properties": {
+                "testType": {
+                    "type": "string"
+                },
+                "titleCode": {
+                    "type": "string"
+                },
+                "curriculumID": {
+                    "type": "string"
+                },
+                "testDescription": {
+                    "type": "string"
+                },
+                "standardExamClassID": {
+                    "type": "string"
+                },
+                "testDate": {
+                    "description": "mm/yyyy",
+                    "type": "string"
+                },
+                "isUpdatedByName": {
+                    "type": "string"
+                },
+                "dateTimeUpdated": {
+                    "description": "yyyy-mm-dd",
+                    "type": "string"
+                },
+                "repeatStatus": {
+                    "type": "string"
+                },
+                "transcriptTitle": {
+                    "type": "string"
+                },
+                "creditHours": {
+                    "type": "number"
+                },
+                "grade": {
+                    "type": "string"
+                },
+                "testScore": {
+                    "type": "number"
+                },
+                "courseName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "response": {
+            "properties": {
+                "otherExams": {
+                    "items": {
+                        "$ref": "#/definitions/otherExam"
+                    },
+                    "type": "array"
+                },
+                "numberOfOtherExams": {
+                    "type": "integer"
+                },
+                "numberOfBYUExams": {
+                    "type": "integer"
+                },
+                "otherData": {
+                    "items": {
+                        "$ref": "#/definitions/otherData"
+                    },
+                    "type": "array"
+                },
+                "BYUExams": {
+                    "items": {},
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "errors": {
+            "items": {
+                "$ref": "#/definitions/error_data"
+            },
+            "type": "array"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "otherData": {
+            "properties": {
+                "testDate": {
+                    "description": "mm/yyyy",
+                    "type": "string"
+                },
+                "testType": {
+                    "type": "string"
+                },
+                "testName": {
+                    "type": "string"
+                },
+                "testScore": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "ErrorResponse": {
+            "properties": {
+                "response": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "errors": {
+                    "$ref": "#/definitions/errors"
+                },
+                "request": {
+                    "$ref": "#/definitions/request"
+                }
+            },
+            "type": "object"
+        },
+        "RecExamCreditService": {
+            "properties": {
+                "response": {
+                    "$ref": "#/definitions/response"
+                },
+                "request": {
+                    "$ref": "#/definitions/request"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/Exam_Credit_v1.0"
+    },
+    "info": {
+        "title": "AcademicRecordsExamCredit",
+        "description": "This service returns a student's exam credits (AP, CLEP, IB, etc.) from the AIM System.",
+        "version": "v1"
+    }
+}

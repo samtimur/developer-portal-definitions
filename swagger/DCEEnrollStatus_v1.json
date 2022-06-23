@@ -1,0 +1,77 @@
+{
+    "paths": {
+        "/isEnrolled/netid/{netid}/departments/{departments}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "This service will return a boolean value indicating if the student with the specified Net ID is enrolled in any product in the specified departments",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "RouteY Net ID",
+                        "name": "netid",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Comma delimited list of one or more of the following: BGS|CW|IS",
+                        "name": "departments",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/isEnrolled/netid/{netid}/departments/{departments}/types/{types}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "This service will return a boolean value indicating if the student with the specified Net ID is enrolled in any product of the specified types in the specified departments",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "RouteY Net ID",
+                        "name": "netid",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Comma delimited list of one or more of the following: BGS|CW|IS",
+                        "name": "departments",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Comma delimited list of one or more of the following: Any|High School|Personal Enrichment|University|General. Defaults to Any",
+                        "name": "types",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "DCEEnrollStatus",
+        "description": "Provides enrollment status information",
+        "version": "v1.0"
+    },
+    "basePath": "/domains/DCE/EnrollStatus/v1.0",
+    "host": "api.byu.edu:443"
+}

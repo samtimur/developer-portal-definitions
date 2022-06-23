@@ -1,0 +1,301 @@
+{
+  "basePath": "/domains/legacy/academic/registration/drop/v1.1",
+  "paths": {
+    "/documentation": {
+      "get": {
+        "summary": "service definition",
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited",
+        "description": "service definition",
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Success"
+          }
+        },
+        "operationId": "getServiceDocumentation"
+      }
+    },
+    "/{person_id}/{year_term}": {
+      "delete": {
+        "summary": "Drop all classes for the specified person_id and year_term.",
+        "tags": [
+          "AcademicRegistrationDrop"
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited",
+        "description": "Drop all classes for the specified person_id and year_term.",
+        "parameters": [
+          {
+            "description": "string -> ",
+            "name": "person_id",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },
+          {
+            "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+            "name": "year_term",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },
+          {
+            "description": "simulate",
+            "name": "simulate",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Service request is OK and a response has been generated."
+          },
+          "400": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+          },
+          "403": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "The user does not have access to the resource."
+          },
+          "404": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "The target resource can not be found for the provided resource identifiers."
+          },
+          "405": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "The service method is not supported by the service."
+          },
+          "409": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "A conflict has occurred. The response structure may contain information about the conflict."
+          },
+          "500": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+          }
+        },
+        "operationId": "dropClassByYearTermAndPersonId"
+      }
+    },
+    "/{person_id}/{year_term}/{envelope_id}": {
+      "delete": {
+        "summary": "Drop all classes for the specified person_id and year_term and envelope_id.",
+        "tags": [
+          "AcademicRegistrationDrop"
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited",
+        "description": "Drop all classes for the specified person_id and year_term and envelope_id.",
+        "parameters": [
+          {
+            "description": "string -> ",
+            "name": "person_id",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },
+          {
+            "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+            "name": "year_term",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },
+          {
+            "description": "envelope_id -> [0-9]{5}",
+            "name": "envelope_id",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },
+          {
+            "description": "simulate",
+            "name": "simulate",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Service request is OK and a response has been generated."
+          },
+          "400": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+          },
+          "403": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "The user does not have access to the resource."
+          },
+          "404": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "The target resource can not be found for the provided resource identifiers."
+          },
+          "405": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "The service method is not supported by the service."
+          },
+          "409": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "A conflict has occurred. The response structure may contain information about the conflict."
+          },
+          "500": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+          }
+        },
+        "operationId": "dropClassByEnvelopeIdAndYearTermAndPersonId"
+      }
+    },
+    "/{person_id}/{year_term}/{curriculum_id}/{title_code}/{section_number}": {
+      "delete": {
+        "summary": "Drops class for the specified person_id, year_term, curriculum_id, title_code, and section_number, and drops all postrequisites of the class (prerequisites that are registered for any future year terms), and if the class is part of an envelope that cannot be broken, it will drop any other classes in the envelope and their cascading effects.",
+        "tags": [
+          "AcademicRegistrationDrop"
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited",
+        "description": "Drops class for the specified person_id, year_term, curriculum_id, title_code, and section_number, and drops all postrequisites of the class (prerequisites that are registered for any future year terms), and if the class is part of an envelope that cannot be broken, it will drop any other classes in the envelope and their cascading effects.",
+        "parameters": [
+          {
+            "description": "string -> ",
+            "name": "person_id",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },
+          {
+            "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+            "name": "year_term",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },
+          {
+            "description": "curriculum_id -> [0-9]{5}",
+            "name": "curriculum_id",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },
+          {
+            "description": "title_code -> [0-9]{3}",
+            "name": "title_code",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },
+          {
+            "description": "section_number -> [0-9]{3}",
+            "name": "section_number",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },
+          {
+            "description": "simulate",
+            "name": "simulate",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Service request is OK and a response has been generated."
+          },
+          "400": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+          },
+          "403": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "The user does not have access to the resource."
+          },
+          "404": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "The target resource can not be found for the provided resource identifiers."
+          },
+          "405": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "The service method is not supported by the service."
+          },
+          "409": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "A conflict has occurred. The response structure may contain information about the conflict."
+          },
+          "500": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+          }
+        },
+        "operationId": "dropClassByCurriculumIdTitleCodeSectionNumberYearTermAndPersonId"
+      }
+    }
+  },
+  "host": "api.byu.edu:443",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "swagger": "2.0",
+  "definitions": {},
+  "info": {
+    "title": "AcademicRegistrationDrop",
+    "description": "DropClassService",
+    "version": "v1.1"
+  }
+}

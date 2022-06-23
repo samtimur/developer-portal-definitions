@@ -1,0 +1,3140 @@
+{
+    "basePath": "/domains/legacy/academic/registration/waitlist/1.0.0",
+    "x-mock_json": {
+        "WaitlistQueueManagementServicePerson": {
+            "response": {
+                "queue": [
+                    {
+                        "major_emphasis": "Computer Science",
+                        "section_number": "001",
+                        "person_id": "123456789",
+                        "catalog_number": "428",
+                        "error_timestamp": "",
+                        "added_by_name": "Name, Person",
+                        "add_error_message": "",
+                        "year_term": "20185",
+                        "date_requested": "2018-04-10T04:51:42",
+                        "catalog_suffix": "",
+                        "enrolled_section_number": "",
+                        "credit_hours": 3,
+                        "sort_name": "Name, Student",
+                        "added_by_id": "123456789",
+                        "title_code": "003",
+                        "curriculum_id": "01512",
+                        "byu_id": "123456789",
+                        "position_in_queue": 6,
+                        "department_name": "C S",
+                        "class_standing": "Senior",
+                        "email_address": "email"
+                    }
+                ],
+                "section_number": "",
+                "combined_classes": [],
+                "title_code": "",
+                "curriculum_id": "",
+                "log_size": 0,
+                "queue_size": 0,
+                "log": [
+                    {
+                        "action_date": "2018-04-10T04:51:42",
+                        "major_emphasis": "Computer Science",
+                        "section_number": "001",
+                        "person_id": "123456789",
+                        "catalog_number": "428",
+                        "year_term": "20185",
+                        "catalog_suffix": "",
+                        "credit_hours": 3,
+                        "sort_name": "Name, Person",
+                        "action_by_name": "Name, Person",
+                        "title_code": "003",
+                        "position_in_log": 0,
+                        "curriculum_id": "01512",
+                        "action": "WL Insert",
+                        "action_by_id": "123456789",
+                        "byu_id": "123456789",
+                        "department_name": "C S",
+                        "class_standing": "Senior",
+                        "email_address": "email"
+                    }
+                ]
+            },
+            "request": {
+                "status": 200,
+                "resource": "/json/20181/123456789/",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        },
+        "WaitlistQueueManagementService": {
+            "response": {
+                "queue": [],
+                "section_number": "002",
+                "combined_classes": [],
+                "title_code": "002",
+                "catalog_number": "142",
+                "curriculum_id": "01489",
+                "log_size": 0,
+                "transcript_title": "Intro to Computer Programming",
+                "queue_size": 0,
+                "department_name": "C S",
+                "catalog_suffix": "",
+                "log": []
+            },
+            "request": {
+                "status": 200,
+                "resource": "/json/01489/002/002/20175/",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        }
+    },
+    "paths": {
+        "/documentation": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "service definition",
+                "x-throttling-tier": "Unlimited",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation"
+            }
+        },
+        "/{year_term}/{person_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "WaitlistQueueManagementService"
+                ],
+                "summary": "Returns a student from the queue. Detailed meta data will not be included if include_details is false.  include_details will default to true if not included in the query string. include_logs will default to true if not included in the query string. include_queue will default to true if not included in the query string.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a student from the queue. Detailed meta data will not be included if include_details is false.  include_details will default to true if not included in the query string. include_logs will default to true if not included in the query string. include_queue will default to true if not included in the query string.",
+                "parameters": [
+                    {
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> #########",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Returns information about the course itself as well as the queue and log sizes.  (Defaults to true)",
+                        "name": "include_details",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Returns the current queue of students waiting to add the class. (Defaults to true)",
+                        "name": "include_queue",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Returns the complete log of queue information.  (Defaults to false)",
+                        "name": "include_logs",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "queue": {
+                                            "items": {
+                                                "properties": {
+                                                    "major_emphasis": {
+                                                        "type": "string"
+                                                    },
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "person_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "error_timestamp": {
+                                                        "type": "string"
+                                                    },
+                                                    "added_by_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "add_error_message": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_requested": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_suffix": {
+                                                        "type": "string"
+                                                    },
+                                                    "enrolled_section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "number"
+                                                    },
+                                                    "sort_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "added_by_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "byu_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "position_in_queue": {
+                                                        "type": "number"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_standing": {
+                                                        "type": "string"
+                                                    },
+                                                    "email_address": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "section_number": {
+                                            "type": "string"
+                                        },
+                                        "combined_classes": {
+                                            "items": {},
+                                            "type": "array"
+                                        },
+                                        "title_code": {
+                                            "type": "string"
+                                        },
+                                        "curriculum_id": {
+                                            "type": "string"
+                                        },
+                                        "log_size": {
+                                            "type": "number"
+                                        },
+                                        "queue_size": {
+                                            "type": "number"
+                                        },
+                                        "log": {
+                                            "items": {
+                                                "properties": {
+                                                    "action_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "major_emphasis": {
+                                                        "type": "string"
+                                                    },
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "person_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_suffix": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "number"
+                                                    },
+                                                    "sort_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "action_by_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "position_in_log": {
+                                                        "type": "number"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "action": {
+                                                        "type": "string"
+                                                    },
+                                                    "action_by_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "byu_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_standing": {
+                                                        "type": "string"
+                                                    },
+                                                    "email_address": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "queue": [
+                                        {
+                                            "major_emphasis": "Computer Science",
+                                            "section_number": "001",
+                                            "person_id": "123456789",
+                                            "catalog_number": "428",
+                                            "error_timestamp": "",
+                                            "added_by_name": "Name, Person",
+                                            "add_error_message": "",
+                                            "year_term": "20185",
+                                            "date_requested": "2018-04-10T04:51:42",
+                                            "catalog_suffix": "",
+                                            "enrolled_section_number": "",
+                                            "credit_hours": 3,
+                                            "sort_name": "Name, Student",
+                                            "added_by_id": "123456789",
+                                            "title_code": "003",
+                                            "curriculum_id": "01512",
+                                            "byu_id": "123456789",
+                                            "position_in_queue": 6,
+                                            "department_name": "C S",
+                                            "class_standing": "Senior",
+                                            "email_address": "email"
+                                        }
+                                    ],
+                                    "section_number": "",
+                                    "combined_classes": [],
+                                    "title_code": "",
+                                    "curriculum_id": "",
+                                    "log_size": 0,
+                                    "queue_size": 0,
+                                    "log": [
+                                        {
+                                            "action_date": "2018-04-10T04:51:42",
+                                            "major_emphasis": "Computer Science",
+                                            "section_number": "001",
+                                            "person_id": "123456789",
+                                            "catalog_number": "428",
+                                            "year_term": "20185",
+                                            "catalog_suffix": "",
+                                            "credit_hours": 3,
+                                            "sort_name": "Name, Person",
+                                            "action_by_name": "Name, Person",
+                                            "title_code": "003",
+                                            "position_in_log": 0,
+                                            "curriculum_id": "01512",
+                                            "action": "WL Insert",
+                                            "action_by_id": "123456789",
+                                            "byu_id": "123456789",
+                                            "department_name": "C S",
+                                            "class_standing": "Senior",
+                                            "email_address": "email"
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/json/20181/123456789/",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getWaitlistedStudent"
+            }
+        },
+        "/{curriculum_id}/{title_code}/{section}/{year_term}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "WaitlistQueueManagementService"
+                ],
+                "summary": "Returns the waitlist queue and/or log for a class. Detailed meta data will not be included if include_details is false.  include_details will default to true if not included in the query string. include_logs will default to true if not included in the query string. include_queue will default to true if not included in the query string.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the waitlist queue and/or log for a class. Detailed meta data will not be included if include_details is false.  include_details will default to true if not included in the query string. include_logs will default to true if not included in the query string. include_queue will default to true if not included in the query string.",
+                "parameters": [
+                    {
+                        "description": "string -> #####",
+                        "name": "curriculum_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> ###",
+                        "name": "title_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> ###",
+                        "name": "section",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Returns information about the course itself as well as the queue and log sizes.  (Defaults to true)",
+                        "name": "include_details",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Returns the current queue of students waiting to add the class. (Defaults to true)",
+                        "name": "include_queue",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Returns the complete log of queue information.  (Defaults to false)",
+                        "name": "include_logs",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "queue": {
+                                            "items": {
+                                                "properties": {
+                                                    "major_emphasis": {
+                                                        "type": "string"
+                                                    },
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "person_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "error_timestamp": {
+                                                        "type": "string"
+                                                    },
+                                                    "added_by_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "add_error_message": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_requested": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_suffix": {
+                                                        "type": "string"
+                                                    },
+                                                    "enrolled_section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "number"
+                                                    },
+                                                    "sort_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "added_by_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "byu_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "position_in_queue": {
+                                                        "type": "number"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_standing": {
+                                                        "type": "string"
+                                                    },
+                                                    "email_address": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "section_number": {
+                                            "type": "string"
+                                        },
+                                        "combined_classes": {
+                                            "items": {},
+                                            "type": "array"
+                                        },
+                                        "title_code": {
+                                            "type": "string"
+                                        },
+                                        "catalog_number": {
+                                            "type": "string"
+                                        },
+                                        "curriculum_id": {
+                                            "type": "string"
+                                        },
+                                        "log_size": {
+                                            "type": "number"
+                                        },
+                                        "transcript_title": {
+                                            "type": "string"
+                                        },
+                                        "queue_size": {
+                                            "type": "number"
+                                        },
+                                        "department_name": {
+                                            "type": "string"
+                                        },
+                                        "catalog_suffix": {
+                                            "type": "string"
+                                        },
+                                        "log": {
+                                            "items": {
+                                                "properties": {
+                                                    "action_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "major_emphasis": {
+                                                        "type": "string"
+                                                    },
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "person_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_suffix": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "number"
+                                                    },
+                                                    "sort_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "action_by_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "position_in_log": {
+                                                        "type": "number"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "action": {
+                                                        "type": "string"
+                                                    },
+                                                    "action_by_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "byu_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_standing": {
+                                                        "type": "string"
+                                                    },
+                                                    "email_address": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "queue": [],
+                                    "section_number": "002",
+                                    "combined_classes": [],
+                                    "title_code": "002",
+                                    "catalog_number": "142",
+                                    "curriculum_id": "01489",
+                                    "log_size": 0,
+                                    "transcript_title": "Intro to Computer Programming",
+                                    "queue_size": 0,
+                                    "department_name": "C S",
+                                    "catalog_suffix": "",
+                                    "log": []
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/json/01489/002/002/20175/",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getWaitlistInfo"
+            }
+        },
+        "/delete/{curriculum_id}/{title_code}/{section}/{year_term}/{person_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "WaitlistQueueManagementService"
+                ],
+                "summary": "Removes a student from the queue",
+                "x-throttling-tier": "Unlimited",
+                "description": "Removes a student from the queue",
+                "parameters": [
+                    {
+                        "description": "string -> #####",
+                        "name": "curriculum_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> ###",
+                        "name": "title_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> ###",
+                        "name": "section",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> #########",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Returns information about the course itself as well as the queue and log sizes.  (Defaults to true)",
+                        "name": "include_details",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Returns the current queue of students waiting to add the class. (Defaults to true)",
+                        "name": "include_queue",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Returns the complete log of queue information.  (Defaults to false)",
+                        "name": "include_logs",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "queue": {
+                                            "items": {
+                                                "properties": {
+                                                    "major_emphasis": {
+                                                        "type": "string"
+                                                    },
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "person_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "error_timestamp": {
+                                                        "type": "string"
+                                                    },
+                                                    "added_by_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "add_error_message": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_requested": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_suffix": {
+                                                        "type": "string"
+                                                    },
+                                                    "enrolled_section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "number"
+                                                    },
+                                                    "sort_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "added_by_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "byu_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "position_in_queue": {
+                                                        "type": "number"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_standing": {
+                                                        "type": "string"
+                                                    },
+                                                    "email_address": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "section_number": {
+                                            "type": "string"
+                                        },
+                                        "combined_classes": {
+                                            "items": {},
+                                            "type": "array"
+                                        },
+                                        "title_code": {
+                                            "type": "string"
+                                        },
+                                        "catalog_number": {
+                                            "type": "string"
+                                        },
+                                        "curriculum_id": {
+                                            "type": "string"
+                                        },
+                                        "log_size": {
+                                            "type": "number"
+                                        },
+                                        "transcript_title": {
+                                            "type": "string"
+                                        },
+                                        "queue_size": {
+                                            "type": "number"
+                                        },
+                                        "department_name": {
+                                            "type": "string"
+                                        },
+                                        "catalog_suffix": {
+                                            "type": "string"
+                                        },
+                                        "log": {
+                                            "items": {
+                                                "properties": {
+                                                    "action_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "major_emphasis": {
+                                                        "type": "string"
+                                                    },
+                                                    "section_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "person_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "catalog_suffix": {
+                                                        "type": "string"
+                                                    },
+                                                    "credit_hours": {
+                                                        "type": "number"
+                                                    },
+                                                    "sort_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "action_by_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "title_code": {
+                                                        "type": "string"
+                                                    },
+                                                    "position_in_log": {
+                                                        "type": "number"
+                                                    },
+                                                    "curriculum_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "action": {
+                                                        "type": "string"
+                                                    },
+                                                    "action_by_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "byu_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "class_standing": {
+                                                        "type": "string"
+                                                    },
+                                                    "email_address": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "errors": {
+                                    "items": {
+                                        "properties": {
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "code": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "deleteWaitlistedStudent"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "queue": {
+            "items": {
+                "properties": {
+                    "major_emphasis": {
+                        "type": "string"
+                    },
+                    "section_number": {
+                        "type": "string"
+                    },
+                    "person_id": {
+                        "type": "string"
+                    },
+                    "catalog_number": {
+                        "type": "string"
+                    },
+                    "error_timestamp": {
+                        "type": "string"
+                    },
+                    "added_by_name": {
+                        "type": "string"
+                    },
+                    "add_error_message": {
+                        "type": "string"
+                    },
+                    "year_term": {
+                        "type": "string"
+                    },
+                    "date_requested": {
+                        "type": "string"
+                    },
+                    "catalog_suffix": {
+                        "type": "string"
+                    },
+                    "enrolled_section_number": {
+                        "type": "string"
+                    },
+                    "credit_hours": {
+                        "type": "number"
+                    },
+                    "sort_name": {
+                        "type": "string"
+                    },
+                    "added_by_id": {
+                        "type": "string"
+                    },
+                    "title_code": {
+                        "type": "string"
+                    },
+                    "curriculum_id": {
+                        "type": "string"
+                    },
+                    "byu_id": {
+                        "type": "string"
+                    },
+                    "position_in_queue": {
+                        "type": "number"
+                    },
+                    "department_name": {
+                        "type": "string"
+                    },
+                    "class_standing": {
+                        "type": "string"
+                    },
+                    "email_address": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "combined_classes": {
+            "items": {},
+            "type": "array"
+        },
+        "major_emphasis": {
+            "type": "string"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "log_size": {
+            "type": "number"
+        },
+        "add_error_message": {
+            "type": "string"
+        },
+        "enrolled_section_number": {
+            "type": "string"
+        },
+        "response": {
+            "properties": {
+                "queue": {
+                    "items": {
+                        "properties": {
+                            "major_emphasis": {
+                                "type": "string"
+                            },
+                            "section_number": {
+                                "type": "string"
+                            },
+                            "person_id": {
+                                "type": "string"
+                            },
+                            "catalog_number": {
+                                "type": "string"
+                            },
+                            "error_timestamp": {
+                                "type": "string"
+                            },
+                            "added_by_name": {
+                                "type": "string"
+                            },
+                            "add_error_message": {
+                                "type": "string"
+                            },
+                            "year_term": {
+                                "type": "string"
+                            },
+                            "date_requested": {
+                                "type": "string"
+                            },
+                            "catalog_suffix": {
+                                "type": "string"
+                            },
+                            "enrolled_section_number": {
+                                "type": "string"
+                            },
+                            "credit_hours": {
+                                "type": "number"
+                            },
+                            "sort_name": {
+                                "type": "string"
+                            },
+                            "added_by_id": {
+                                "type": "string"
+                            },
+                            "title_code": {
+                                "type": "string"
+                            },
+                            "curriculum_id": {
+                                "type": "string"
+                            },
+                            "byu_id": {
+                                "type": "string"
+                            },
+                            "position_in_queue": {
+                                "type": "number"
+                            },
+                            "department_name": {
+                                "type": "string"
+                            },
+                            "class_standing": {
+                                "type": "string"
+                            },
+                            "email_address": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "section_number": {
+                    "type": "string"
+                },
+                "combined_classes": {
+                    "items": {},
+                    "type": "array"
+                },
+                "title_code": {
+                    "type": "string"
+                },
+                "catalog_number": {
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "type": "string"
+                },
+                "log_size": {
+                    "type": "number"
+                },
+                "transcript_title": {
+                    "type": "string"
+                },
+                "queue_size": {
+                    "type": "number"
+                },
+                "department_name": {
+                    "type": "string"
+                },
+                "catalog_suffix": {
+                    "type": "string"
+                },
+                "log": {
+                    "items": {
+                        "properties": {
+                            "action_date": {
+                                "type": "string"
+                            },
+                            "major_emphasis": {
+                                "type": "string"
+                            },
+                            "section_number": {
+                                "type": "string"
+                            },
+                            "person_id": {
+                                "type": "string"
+                            },
+                            "catalog_number": {
+                                "type": "string"
+                            },
+                            "year_term": {
+                                "type": "string"
+                            },
+                            "catalog_suffix": {
+                                "type": "string"
+                            },
+                            "credit_hours": {
+                                "type": "number"
+                            },
+                            "sort_name": {
+                                "type": "string"
+                            },
+                            "action_by_name": {
+                                "type": "string"
+                            },
+                            "title_code": {
+                                "type": "string"
+                            },
+                            "position_in_log": {
+                                "type": "number"
+                            },
+                            "curriculum_id": {
+                                "type": "string"
+                            },
+                            "action": {
+                                "type": "string"
+                            },
+                            "action_by_id": {
+                                "type": "string"
+                            },
+                            "byu_id": {
+                                "type": "string"
+                            },
+                            "department_name": {
+                                "type": "string"
+                            },
+                            "class_standing": {
+                                "type": "string"
+                            },
+                            "email_address": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "errors": {
+            "items": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "httpStatusCode": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "title_code": {
+            "type": "string"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "position_in_log": {
+            "type": "number"
+        },
+        "action": {
+            "type": "string"
+        },
+        "curriculum_id": {
+            "type": "string"
+        },
+        "byu_id": {
+            "type": "string"
+        },
+        "WaitlistQueueManagementServicePerson": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "queue": {
+                            "items": {
+                                "properties": {
+                                    "major_emphasis": {
+                                        "type": "string"
+                                    },
+                                    "section_number": {
+                                        "type": "string"
+                                    },
+                                    "person_id": {
+                                        "type": "string"
+                                    },
+                                    "catalog_number": {
+                                        "type": "string"
+                                    },
+                                    "error_timestamp": {
+                                        "type": "string"
+                                    },
+                                    "added_by_name": {
+                                        "type": "string"
+                                    },
+                                    "add_error_message": {
+                                        "type": "string"
+                                    },
+                                    "year_term": {
+                                        "type": "string"
+                                    },
+                                    "date_requested": {
+                                        "type": "string"
+                                    },
+                                    "catalog_suffix": {
+                                        "type": "string"
+                                    },
+                                    "enrolled_section_number": {
+                                        "type": "string"
+                                    },
+                                    "credit_hours": {
+                                        "type": "number"
+                                    },
+                                    "sort_name": {
+                                        "type": "string"
+                                    },
+                                    "added_by_id": {
+                                        "type": "string"
+                                    },
+                                    "title_code": {
+                                        "type": "string"
+                                    },
+                                    "curriculum_id": {
+                                        "type": "string"
+                                    },
+                                    "byu_id": {
+                                        "type": "string"
+                                    },
+                                    "position_in_queue": {
+                                        "type": "number"
+                                    },
+                                    "department_name": {
+                                        "type": "string"
+                                    },
+                                    "class_standing": {
+                                        "type": "string"
+                                    },
+                                    "email_address": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "section_number": {
+                            "type": "string"
+                        },
+                        "combined_classes": {
+                            "items": {},
+                            "type": "array"
+                        },
+                        "title_code": {
+                            "type": "string"
+                        },
+                        "curriculum_id": {
+                            "type": "string"
+                        },
+                        "log_size": {
+                            "type": "number"
+                        },
+                        "queue_size": {
+                            "type": "number"
+                        },
+                        "log": {
+                            "items": {
+                                "properties": {
+                                    "action_date": {
+                                        "type": "string"
+                                    },
+                                    "major_emphasis": {
+                                        "type": "string"
+                                    },
+                                    "section_number": {
+                                        "type": "string"
+                                    },
+                                    "person_id": {
+                                        "type": "string"
+                                    },
+                                    "catalog_number": {
+                                        "type": "string"
+                                    },
+                                    "year_term": {
+                                        "type": "string"
+                                    },
+                                    "catalog_suffix": {
+                                        "type": "string"
+                                    },
+                                    "credit_hours": {
+                                        "type": "number"
+                                    },
+                                    "sort_name": {
+                                        "type": "string"
+                                    },
+                                    "action_by_name": {
+                                        "type": "string"
+                                    },
+                                    "title_code": {
+                                        "type": "string"
+                                    },
+                                    "position_in_log": {
+                                        "type": "number"
+                                    },
+                                    "curriculum_id": {
+                                        "type": "string"
+                                    },
+                                    "action": {
+                                        "type": "string"
+                                    },
+                                    "action_by_id": {
+                                        "type": "string"
+                                    },
+                                    "byu_id": {
+                                        "type": "string"
+                                    },
+                                    "department_name": {
+                                        "type": "string"
+                                    },
+                                    "class_standing": {
+                                        "type": "string"
+                                    },
+                                    "email_address": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "department_name": {
+            "type": "string"
+        },
+        "ErrorResponse": {
+            "properties": {
+                "response": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "errors": {
+                    "items": {
+                        "properties": {
+                            "message": {
+                                "type": "string"
+                            },
+                            "httpStatusCode": {
+                                "type": "number"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "code": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "action_date": {
+            "type": "string"
+        },
+        "section_number": {
+            "type": "string"
+        },
+        "person_id": {
+            "type": "string"
+        },
+        "catalog_number": {
+            "type": "string"
+        },
+        "error_timestamp": {
+            "type": "string"
+        },
+        "added_by_name": {
+            "type": "string"
+        },
+        "WaitlistQueueManagementService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "queue": {
+                            "items": {
+                                "properties": {
+                                    "major_emphasis": {
+                                        "type": "string"
+                                    },
+                                    "section_number": {
+                                        "type": "string"
+                                    },
+                                    "person_id": {
+                                        "type": "string"
+                                    },
+                                    "catalog_number": {
+                                        "type": "string"
+                                    },
+                                    "error_timestamp": {
+                                        "type": "string"
+                                    },
+                                    "added_by_name": {
+                                        "type": "string"
+                                    },
+                                    "add_error_message": {
+                                        "type": "string"
+                                    },
+                                    "year_term": {
+                                        "type": "string"
+                                    },
+                                    "date_requested": {
+                                        "type": "string"
+                                    },
+                                    "catalog_suffix": {
+                                        "type": "string"
+                                    },
+                                    "enrolled_section_number": {
+                                        "type": "string"
+                                    },
+                                    "credit_hours": {
+                                        "type": "number"
+                                    },
+                                    "sort_name": {
+                                        "type": "string"
+                                    },
+                                    "added_by_id": {
+                                        "type": "string"
+                                    },
+                                    "title_code": {
+                                        "type": "string"
+                                    },
+                                    "curriculum_id": {
+                                        "type": "string"
+                                    },
+                                    "byu_id": {
+                                        "type": "string"
+                                    },
+                                    "position_in_queue": {
+                                        "type": "number"
+                                    },
+                                    "department_name": {
+                                        "type": "string"
+                                    },
+                                    "class_standing": {
+                                        "type": "string"
+                                    },
+                                    "email_address": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "section_number": {
+                            "type": "string"
+                        },
+                        "combined_classes": {
+                            "items": {},
+                            "type": "array"
+                        },
+                        "title_code": {
+                            "type": "string"
+                        },
+                        "catalog_number": {
+                            "type": "string"
+                        },
+                        "curriculum_id": {
+                            "type": "string"
+                        },
+                        "log_size": {
+                            "type": "number"
+                        },
+                        "transcript_title": {
+                            "type": "string"
+                        },
+                        "queue_size": {
+                            "type": "number"
+                        },
+                        "department_name": {
+                            "type": "string"
+                        },
+                        "catalog_suffix": {
+                            "type": "string"
+                        },
+                        "log": {
+                            "items": {
+                                "properties": {
+                                    "action_date": {
+                                        "type": "string"
+                                    },
+                                    "major_emphasis": {
+                                        "type": "string"
+                                    },
+                                    "section_number": {
+                                        "type": "string"
+                                    },
+                                    "person_id": {
+                                        "type": "string"
+                                    },
+                                    "catalog_number": {
+                                        "type": "string"
+                                    },
+                                    "year_term": {
+                                        "type": "string"
+                                    },
+                                    "catalog_suffix": {
+                                        "type": "string"
+                                    },
+                                    "credit_hours": {
+                                        "type": "number"
+                                    },
+                                    "sort_name": {
+                                        "type": "string"
+                                    },
+                                    "action_by_name": {
+                                        "type": "string"
+                                    },
+                                    "title_code": {
+                                        "type": "string"
+                                    },
+                                    "position_in_log": {
+                                        "type": "number"
+                                    },
+                                    "curriculum_id": {
+                                        "type": "string"
+                                    },
+                                    "action": {
+                                        "type": "string"
+                                    },
+                                    "action_by_id": {
+                                        "type": "string"
+                                    },
+                                    "byu_id": {
+                                        "type": "string"
+                                    },
+                                    "department_name": {
+                                        "type": "string"
+                                    },
+                                    "class_standing": {
+                                        "type": "string"
+                                    },
+                                    "email_address": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "year_term": {
+            "type": "string"
+        },
+        "catalog_suffix": {
+            "type": "string"
+        },
+        "date_requested": {
+            "type": "string"
+        },
+        "log": {
+            "items": {
+                "properties": {
+                    "action_date": {
+                        "type": "string"
+                    },
+                    "major_emphasis": {
+                        "type": "string"
+                    },
+                    "section_number": {
+                        "type": "string"
+                    },
+                    "person_id": {
+                        "type": "string"
+                    },
+                    "catalog_number": {
+                        "type": "string"
+                    },
+                    "year_term": {
+                        "type": "string"
+                    },
+                    "catalog_suffix": {
+                        "type": "string"
+                    },
+                    "credit_hours": {
+                        "type": "number"
+                    },
+                    "sort_name": {
+                        "type": "string"
+                    },
+                    "action_by_name": {
+                        "type": "string"
+                    },
+                    "title_code": {
+                        "type": "string"
+                    },
+                    "position_in_log": {
+                        "type": "number"
+                    },
+                    "curriculum_id": {
+                        "type": "string"
+                    },
+                    "action": {
+                        "type": "string"
+                    },
+                    "action_by_id": {
+                        "type": "string"
+                    },
+                    "byu_id": {
+                        "type": "string"
+                    },
+                    "department_name": {
+                        "type": "string"
+                    },
+                    "class_standing": {
+                        "type": "string"
+                    },
+                    "email_address": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "credit_hours": {
+            "type": "number"
+        },
+        "sort_name": {
+            "type": "string"
+        },
+        "added_by_id": {
+            "type": "string"
+        },
+        "action_by_name": {
+            "type": "string"
+        },
+        "action_by_id": {
+            "type": "string"
+        },
+        "position_in_queue": {
+            "type": "number"
+        },
+        "queue_size": {
+            "type": "number"
+        },
+        "transcript_title": {
+            "type": "string"
+        },
+        "responsePerson": {
+            "properties": {
+                "queue": {
+                    "items": {
+                        "properties": {
+                            "major_emphasis": {
+                                "type": "string"
+                            },
+                            "section_number": {
+                                "type": "string"
+                            },
+                            "person_id": {
+                                "type": "string"
+                            },
+                            "catalog_number": {
+                                "type": "string"
+                            },
+                            "error_timestamp": {
+                                "type": "string"
+                            },
+                            "added_by_name": {
+                                "type": "string"
+                            },
+                            "add_error_message": {
+                                "type": "string"
+                            },
+                            "year_term": {
+                                "type": "string"
+                            },
+                            "date_requested": {
+                                "type": "string"
+                            },
+                            "catalog_suffix": {
+                                "type": "string"
+                            },
+                            "enrolled_section_number": {
+                                "type": "string"
+                            },
+                            "credit_hours": {
+                                "type": "number"
+                            },
+                            "sort_name": {
+                                "type": "string"
+                            },
+                            "added_by_id": {
+                                "type": "string"
+                            },
+                            "title_code": {
+                                "type": "string"
+                            },
+                            "curriculum_id": {
+                                "type": "string"
+                            },
+                            "byu_id": {
+                                "type": "string"
+                            },
+                            "position_in_queue": {
+                                "type": "number"
+                            },
+                            "department_name": {
+                                "type": "string"
+                            },
+                            "class_standing": {
+                                "type": "string"
+                            },
+                            "email_address": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "section_number": {
+                    "type": "string"
+                },
+                "combined_classes": {
+                    "items": {},
+                    "type": "array"
+                },
+                "title_code": {
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "type": "string"
+                },
+                "log_size": {
+                    "type": "number"
+                },
+                "queue_size": {
+                    "type": "number"
+                },
+                "log": {
+                    "items": {
+                        "properties": {
+                            "action_date": {
+                                "type": "string"
+                            },
+                            "major_emphasis": {
+                                "type": "string"
+                            },
+                            "section_number": {
+                                "type": "string"
+                            },
+                            "person_id": {
+                                "type": "string"
+                            },
+                            "catalog_number": {
+                                "type": "string"
+                            },
+                            "year_term": {
+                                "type": "string"
+                            },
+                            "catalog_suffix": {
+                                "type": "string"
+                            },
+                            "credit_hours": {
+                                "type": "number"
+                            },
+                            "sort_name": {
+                                "type": "string"
+                            },
+                            "action_by_name": {
+                                "type": "string"
+                            },
+                            "title_code": {
+                                "type": "string"
+                            },
+                            "position_in_log": {
+                                "type": "number"
+                            },
+                            "curriculum_id": {
+                                "type": "string"
+                            },
+                            "action": {
+                                "type": "string"
+                            },
+                            "action_by_id": {
+                                "type": "string"
+                            },
+                            "byu_id": {
+                                "type": "string"
+                            },
+                            "department_name": {
+                                "type": "string"
+                            },
+                            "class_standing": {
+                                "type": "string"
+                            },
+                            "email_address": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "class_standing": {
+            "type": "string"
+        },
+        "email_address": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicRegistrationWaitlist",
+        "description": "This service returns the wait list queue information for either a student or a course from the AIM System.",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "1.0.0"
+    }
+}

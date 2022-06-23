@@ -1,0 +1,112 @@
+{
+    "basePath": "/domains/erp/sa/MyFinancialCenterEvents/v2",
+    "paths": {
+        "/service_indicators/{unique_id}/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the text that should be displayed in the mobile push notification for Service Indicators that have been placed on a user's account in My Financial Center. The unique_id URL parameter is a value given in events that have been raised from My Financial Center when the Service Indicator was placed on the account.",
+                "parameters": [
+                    {
+                        "name": "unique_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ServiceIndicatorModel"
+                        },
+                        "description": "Information about a service indicator in My Financial Center."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Bad request. Error described in response body."
+                    }
+                }
+            }
+        },
+        "/transactions/{unique_id}/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the text that should be displayed in the mobile push notification for transactions that have posted to a user's account. The unique_id URL parameter is a value given in events that have been raised from My Financial Center when the transaction is intially posted the the account.",
+                "parameters": [
+                    {
+                        "name": "unique_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TransactionModel"
+                        },
+                        "description": "Information about a My Financial Center trasaction"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Bad request. Error described in response body."
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "TransactionModel": {
+            "properties": {
+                "display_title": {
+                    "type": "string"
+                },
+                "display_message": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "ErrorModel": {
+            "properties": {
+                "error_message": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceIndicatorModel": {
+            "properties": {
+                "redirect_url": {
+                    "type": "string"
+                },
+                "display_title": {
+                    "type": "string"
+                },
+                "display_message": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "MyFinancialCenterEvents",
+        "description": "Detailed information about events raised from My Financial Center.",
+        "contact": {
+            "email": "sft_ft@byu.edu",
+            "name": "OIT Student Financial Applications"
+        },
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443"
+}

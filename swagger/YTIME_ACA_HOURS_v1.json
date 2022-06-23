@@ -1,0 +1,256 @@
+{
+    "basePath": "/domains/erp/hr/aca_hours/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{byu_id}": {
+            "get": {
+                "summary": "Get aca report information for given byu id.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get aca report information for given byu id.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/aca_report"
+                        },
+                        "description": "Successfully returned aca report information."
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "parameters": {
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "name": "byu_id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        }
+    },
+    "definitions": {
+        "employment_history": {
+            "items": {
+                "$ref": "#/definitions/job"
+            },
+            "description": "collection of jobs",
+            "type": "array"
+        },
+        "hr_empl_class": {
+            "description": "Defines a discrete bundle that describes a set of employees. The bundle conceptually includes the employee classification, employee status, employee standing, paygroup and others. This bundle is used to quickly set values for an employee. Examples include: Staff (Full-Time), Staff (Temporary), Faculty F/T (Regular), Faculty F/T (Researcher).",
+            "example": "Staff(Full-Time)",
+            "type": "string"
+        },
+        "hr_employee_status": {
+            "description": "The HR Employee Status field. Not to be confused with employee_status. This field is used to determine the Employee Standing.",
+            "example": "Active",
+            "type": "string"
+        },
+        "period_hours": {
+            "items": {
+                "$ref": "#/definitions/period"
+            },
+            "description": "collection of periods",
+            "type": "array"
+        },
+        "department": {
+            "description": "An organizational grouping of financial Operating Units. A Department usually contains one or more Operating Units and each Department may contain Departments as part of a hierarchical reporting structure within the University.",
+            "example": "Athletic Building Code",
+            "type": "string"
+        },
+        "average_hours_per_week": {
+            "description": "the average of hours worked per week across all active employee records.",
+            "example": 15.5,
+            "type": "number"
+        },
+        "stop_date": {
+            "description": "The date that a defined period of time stops on. Format YYYY-MM-DD",
+            "example": "2018-12-20",
+            "type": "string"
+        },
+        "job": {
+            "description": "The information about a job",
+            "properties": {
+                "pay_period_weeks": {
+                    "$ref": "#/definitions/period_weeks"
+                },
+                "hr_empl_class": {
+                    "$ref": "#/definitions/hr_empl_class"
+                },
+                "hr_employee_status": {
+                    "$ref": "#/definitions/hr_employee_status"
+                },
+                "supervisor": {
+                    "$ref": "#/definitions/supervisor"
+                },
+                "department": {
+                    "$ref": "#/definitions/department"
+                },
+                "period_hours": {
+                    "$ref": "#/definitions/period_hours"
+                },
+                "stop_date": {
+                    "$ref": "#/definitions/stop_date"
+                },
+                "paycheck_hours": {
+                    "$ref": "#/definitions/paycheck_hours"
+                },
+                "start_date": {
+                    "$ref": "#/definitions/start_date"
+                },
+                "chartblock": {
+                    "$ref": "#/definitions/chartblock"
+                }
+            },
+            "type": "object"
+        },
+        "remaining_weeks": {
+            "description": "The number of weeks left in the annual pay cycle.",
+            "example": 20,
+            "type": "number"
+        },
+        "period": {
+            "description": "The information pertaining to a pay period",
+            "properties": {
+                "pay_frequency": {
+                    "$ref": "#/definitions/pay_frequency"
+                },
+                "paycheck_hours": {
+                    "$ref": "#/definitions/paycheck_hours"
+                },
+                "stop_end": {
+                    "$ref": "#/definitions/stop_date"
+                },
+                "start_date": {
+                    "$ref": "#/definitions/start_date"
+                }
+            },
+            "type": "object"
+        },
+        "name_lnf": {
+            "description": "The complete name of the person, presented in the following order: Suname,First Middle The term 'Sort Name' is a synonym for this.",
+            "example": "Last,First Middle",
+            "type": "string"
+        },
+        "period_weeks": {
+            "description": "The number of weeks representing a period of time that an employee works.",
+            "example": 4,
+            "type": "number"
+        },
+        "pay_frequency": {
+            "description": "The frequency at which someone is paid. The most common are bi-weekly and monthly. Non-exempt, hourly employees (i.e. Staff, Student, etc) are paid on a bi-weekly basis. Exempt, salaried employees (i.e. Faculty and Administrative) are paid on a monthly basis.",
+            "example": "Biweekly",
+            "type": "string"
+        },
+        "supervisor": {
+            "description": "The person responsible for the performance of an employee.",
+            "example": "Kelly,Shannon",
+            "type": "string"
+        },
+        "pay_period_start_date": {
+            "description": "The start date for a pay period in format YYYY-MM-DD",
+            "example": "2018-10-20",
+            "type": "string"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "example": "123456789",
+            "type": "string"
+        },
+        "paycheck_hours": {
+            "description": "The number of hours that an employee worked during a period of work associated with a job.",
+            "example": 24.25,
+            "type": "number"
+        },
+        "pay_period_time_total": {
+            "description": "A calculated time value that represents the amount of time worked on all jobs (Employee Record Numbers) by the employee in a specific pay period.",
+            "example": 100.25,
+            "type": "number"
+        },
+        "check_date_most_recent": {
+            "description": "The date of the most recent paycheck",
+            "example": "2018-10-20",
+            "type": "string"
+        },
+        "aca_report": {
+            "description": "ACA information",
+            "properties": {
+                "employment_history": {
+                    "$ref": "#/definitions/employment_history"
+                },
+                "average_hours_per_week": {
+                    "$ref": "#/definitions/average_hours_per_week"
+                },
+                "pay_period_start_date": {
+                    "$ref": "#/definitions/pay_period_start_date"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "pay_period_time_total": {
+                    "$ref": "#/definitions/pay_period_time_total"
+                },
+                "remaining_weeks": {
+                    "$ref": "#/definitions/remaining_weeks"
+                },
+                "check_date_most_recent": {
+                    "$ref": "#/definitions/check_date_most_recent"
+                },
+                "name_lnf": {
+                    "$ref": "#/definitions/name_lnf"
+                }
+            },
+            "type": "object"
+        },
+        "start_date": {
+            "description": "The date that a defined period of time begins on. Format YYYY-MM-DD",
+            "example": "2018-10-20",
+            "type": "string"
+        },
+        "chartblock": {
+            "description": "The combination of chart fields required for a journal entry, including Operating Unit, Account Field, and Class Field.",
+            "example": "00000000-0000-00000",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "400": {
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "404": {
+            "description": "The requested resource does not exist"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "YTIME_ACA_HOURS",
+        "description": "Provides ACA information for employee",
+        "version": "v1"
+    }
+}

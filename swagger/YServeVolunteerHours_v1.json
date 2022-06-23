@@ -1,0 +1,1285 @@
+{
+    "basePath": "/yserve/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/programs/{id}": {
+            "get": {
+                "summary": "Get a program by id",
+                "tags": [
+                    "Programs",
+                    "Resources"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a program maintained by the Y-Serve people.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/program_object"
+                        },
+                        "description": "Got program."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not Found"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/programs": {
+            "get": {
+                "summary": "Get a list of programs",
+                "tags": [
+                    "Programs",
+                    "Resources"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a list of programs maintained by Y-Serve to use in submitting hours or to search through.",
+                "parameters": [
+                    {
+                        "collectionFormat": "multi",
+                        "description": "filter programs by tag ids",
+                        "name": "tags",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/program_collection"
+                        },
+                        "description": "Got programs."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            },
+            "options": {
+                "summary": "Programs",
+                "tags": [
+                    "Programs"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "What can this endpoint do?",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/methods"
+                        },
+                        "description": "Supported HTTP Methods"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getProgramOptions"
+            }
+        },
+        "/tag-categories/{id}/tags": {
+            "get": {
+                "summary": "Get a list of tags.",
+                "tags": [
+                    "Tag Category",
+                    "Tags",
+                    "Resources"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a list of tags associated with a tag category by this id.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/tag_collection"
+                        },
+                        "description": "Got tags."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not Found"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/tag-categories": {
+            "get": {
+                "summary": "Get tag categories",
+                "tags": [
+                    "Tags",
+                    "Tag Categories",
+                    "Resources"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get tags to use in searching through programs.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/tag_category_collection"
+                        },
+                        "description": "Got Tag Categories."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            },
+            "options": {
+                "summary": "Tag Categories",
+                "tags": [
+                    "Tags",
+                    "Tag Categories"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "What can this endpoint do?",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/methods"
+                        },
+                        "description": "Supported HTTP Methods"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getTagCategoryOptions"
+            }
+        },
+        "/hours/{id}": {
+            "get": {
+                "summary": "Returns an Hour object",
+                "tags": [
+                    "Hours"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns an Hour submitted by this user with a specific id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/hour_object"
+                        },
+                        "description": "An hour object"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not Found"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getHourById"
+            },
+            "delete": {
+                "summary": "Deletes an Hour object",
+                "tags": [
+                    "Hours"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns an nothing if hour is deleted specific id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "succesful deletion"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/unauthorized"
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not Found"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getHourById"
+            }
+        },
+        "/programs/{id}/directors": {
+            "get": {
+                "summary": "Get a list of program directors.",
+                "tags": [
+                    "Programs",
+                    "Directors",
+                    "Resources"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a list of directors associated with a program by this id.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/director_collection"
+                        },
+                        "description": "Got directors."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not Found"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/volunteer-roles": {
+            "get": {
+                "summary": "Get volunteer roles",
+                "tags": [
+                    "Volunteer Roles",
+                    "Resources"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get volunteer roles to use in submitting hours",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/volunteer_roles"
+                        },
+                        "description": "Got Volunteer Roles."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            },
+            "options": {
+                "summary": "Volunteer Roles",
+                "tags": [
+                    "Volunteer Roles"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "What can this endpoint do?",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/methods"
+                        },
+                        "description": "Supported HTTP Methods"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getVolunteerRoleOptions"
+            }
+        },
+        "/programs/{id}/tags": {
+            "get": {
+                "summary": "Get a list of tags.",
+                "tags": [
+                    "Programs",
+                    "Tags",
+                    "Resources"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a list of tags associated with a program by this id.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/tag_collection"
+                        },
+                        "description": "Got tags."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not Found"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/directors/{id}": {
+            "get": {
+                "summary": "Get a director.",
+                "tags": [
+                    "Directors",
+                    "Resources"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a director by id.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/director_object"
+                        },
+                        "description": "Got director."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not Found"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/tags/{id}": {
+            "get": {
+                "summary": "Get a tag.",
+                "tags": [
+                    "Tags",
+                    "Resources"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a tag by id.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/tag_object"
+                        },
+                        "description": "Got tag."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not Found"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/tag-categories/{id}": {
+            "get": {
+                "summary": "Get a tag category.",
+                "tags": [
+                    "Tags",
+                    "Tag Category",
+                    "Resources"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a tag category by id.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/tag_category_object"
+                        },
+                        "description": "Got tag category."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Not Found"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/tags": {
+            "get": {
+                "summary": "Get a list of tags",
+                "tags": [
+                    "Tags",
+                    "Resources"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a list of tags maintained by Y-Serve to use in searching for programs.",
+                "responses": {
+                    "200": {
+                        "description": "Got tags."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            },
+            "options": {
+                "summary": "Tags",
+                "tags": [
+                    "Tags"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "What can this endpoint do?",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/methods"
+                        },
+                        "description": "Supported HTTP Methods"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getTagOptions"
+            }
+        },
+        "/hours": {
+            "post": {
+                "summary": "Create a new Hours object",
+                "tags": [
+                    "Hours"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Create a new hours object",
+                "parameters": [
+                    {
+                        "name": "program_id",
+                        "format": "uint32",
+                        "type": "integer",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "number of minutes volunteered",
+                        "name": "time_recorded",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "get from volunteer roles resource",
+                        "name": "volunteer_role",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "name": "description",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "date_of_service",
+                        "format": "date",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/hour_object"
+                        },
+                        "description": "Returns the Hour that was added"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "The request contains conflicting, malformed, or invalid data"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to add a new Teaching Area"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "createHourObject"
+            },
+            "get": {
+                "summary": "Returns a collection of Hours",
+                "tags": [
+                    "Hours"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a collection of Hours submitted by this user",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/hour_collection"
+                        },
+                        "description": "A collection of hours"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getHours"
+            },
+            "options": {
+                "summary": "Hours",
+                "tags": [
+                    "Hours"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "What can this endpoint do?",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/methods"
+                        },
+                        "description": "Supported HTTP Methods"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getTeachingAreasOptions"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "methods": {
+            "items": {
+                "enum": [
+                    "GET",
+                    "POST",
+                    "OPTIONS"
+                ],
+                "type": "string"
+            },
+            "description": "Supported HTTP Methods",
+            "type": "array",
+            "uniqueItems": true
+        },
+        "director_collection_links": {
+            "description": "Hypermedia Links that relate to the director collection",
+            "properties": {
+                "directors__info": {
+                    "$ref": "#/definitions/link"
+                },
+                "programs__list": {
+                    "$ref": "#/definitions/link"
+                }
+            },
+            "type": "object"
+        },
+        "program_object_links": {
+            "description": "Hypermedia Links that relate to the  object/collection",
+            "properties": {
+                "program_directors__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "programs__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "programs__info": {
+                    "$ref": "#/definitions/link"
+                },
+                "program_tags__list": {
+                    "$ref": "#/definitions/link"
+                }
+            },
+            "type": "object"
+        },
+        "tag": {
+            "description": "Tag properties",
+            "properties": {
+                "id": {
+                    "format": "uint32",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "tag_category_id": {
+                    "format": "uint32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "hour_collection": {
+            "description": "A collection of hours",
+            "properties": {
+                "Hours": {
+                    "items": {
+                        "$ref": "#/definitions/hour"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "$ref": "#/definitions/hour_links"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "link": {
+            "description": "Hypermedia link format",
+            "properties": {
+                "method": {
+                    "enum": [
+                        "GET",
+                        "OPTIONS",
+                        "POST"
+                    ],
+                    "type": "string"
+                },
+                "rel": {
+                    "type": "string"
+                },
+                "href": {
+                    "format": "uri",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "rel",
+                "href",
+                "method"
+            ]
+        },
+        "tag_object": {
+            "description": "A tag object",
+            "properties": {
+                "Hour": {
+                    "$ref": "#/definitions/tag"
+                },
+                "links": {
+                    "$ref": "#/definitions/tag_links"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "tag_links": {
+            "description": "Hypermedia Links that relate to the tag object",
+            "properties": {
+                "tags__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "tag_category_tags__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "tags__info": {
+                    "$ref": "#/definitions/link"
+                }
+            },
+            "type": "object"
+        },
+        "hour_object": {
+            "description": "An hour object",
+            "properties": {
+                "Hour": {
+                    "$ref": "#/definitions/hour"
+                },
+                "links": {
+                    "$ref": "#/definitions/hour_links"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "hour_links": {
+            "description": "Hypermedia Links that impact the hour object",
+            "properties": {
+                "hours__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "hours__create": {
+                    "$ref": "#/definitions/link"
+                },
+                "hours__delete": {
+                    "$ref": "#/definitions/link"
+                },
+                "hours__info": {
+                    "$ref": "#/definitions/link"
+                }
+            },
+            "type": "object"
+        },
+        "program_collection_links": {
+            "description": "Hypermedia Links that relate to the  object/collection",
+            "properties": {
+                "tags__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "programs__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "tag_categories__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "programs__info": {
+                    "$ref": "#/definitions/link"
+                }
+            },
+            "type": "object"
+        },
+        "tag_category_object": {
+            "description": "A tag object",
+            "properties": {
+                "Hour": {
+                    "$ref": "#/definitions/tag_category"
+                },
+                "links": {
+                    "$ref": "#/definitions/tag_category_links"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "director_links": {
+            "description": "Hypermedia Links that relate to the director object",
+            "properties": {
+                "directors__info": {
+                    "$ref": "#/definitions/link"
+                },
+                "programs__info": {
+                    "$ref": "#/definitions/link"
+                },
+                "program_directors__info": {
+                    "$ref": "#/definitions/link"
+                }
+            },
+            "type": "object"
+        },
+        "tag_category": {
+            "description": "Tag properties",
+            "properties": {
+                "id": {
+                    "format": "uint32",
+                    "type": "integer"
+                },
+                "color": {
+                    "description": "hex format for color associated with tags in this category.",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "metadata": {
+            "properties": {
+                "validation_response": {
+                    "$ref": "#/definitions/validation_response"
+                },
+                "collection_size": {
+                    "minimum": 0,
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "tag_collection": {
+            "description": "An collection of tags",
+            "properties": {
+                "Tags": {
+                    "items": {
+                        "$ref": "#/definitions/tag"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "$ref": "#/definitions/tag_collection_links"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "error": {
+            "description": "Error Information",
+            "properties": {
+                "explanation": {
+                    "type": "string"
+                },
+                "error_data": {
+                    "type": "string"
+                },
+                "return_code": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "tag_collection_links": {
+            "description": "Hypermedia Links that relate to the tag collection",
+            "properties": {
+                "tags__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "tags__info": {
+                    "$ref": "#/definitions/link"
+                },
+                "programs__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "tag_categories__list": {
+                    "$ref": "#/definitions/link"
+                }
+            },
+            "type": "object"
+        },
+        "director_object": {
+            "description": "A director object",
+            "properties": {
+                "Hour": {
+                    "$ref": "#/definitions/director"
+                },
+                "links": {
+                    "$ref": "#/definitions/director_links"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "tag_category_collection": {
+            "description": "An collection of tag categories",
+            "properties": {
+                "Tags": {
+                    "items": {
+                        "$ref": "#/definitions/tag_category"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "$ref": "#/definitions/tag_category_collection_links"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "program_object": {
+            "properties": {
+                "links": {
+                    "$ref": "#/definitions/program_object_links"
+                },
+                "Program": {
+                    "$ref": "#/definitions/program"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "hour": {
+            "description": "Hour properties",
+            "properties": {
+                "id": {
+                    "format": "uint32",
+                    "type": "integer"
+                },
+                "date_of_service": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "time_recorded": {
+                    "description": "number of minutes volunteered",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "program_id": {
+                    "format": "uint32",
+                    "type": "integer"
+                },
+                "volunteer_role": {
+                    "description": "get from volunteer roles resource",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "director": {
+            "description": "Director properties",
+            "properties": {
+                "id": {
+                    "format": "uint32",
+                    "type": "integer"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "order": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "extra": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "program_id": {
+                    "format": "uint32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "program_collection": {
+            "properties": {
+                "Programs": {
+                    "items": {
+                        "$ref": "#/definitions/program"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "$ref": "#/definitions/program_collection_links"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "validation_response": {
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "return_code": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "tag_category_collection_links": {
+            "description": "Hypermedia Links that relate to the  object/collection",
+            "properties": {
+                "tags__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "tag_categories__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "programs__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "tag_categories__info": {
+                    "$ref": "#/definitions/link"
+                }
+            },
+            "type": "object"
+        },
+        "director_collection": {
+            "description": "An collection of directors",
+            "properties": {
+                "Directors": {
+                    "items": {
+                        "$ref": "#/definitions/director"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "$ref": "#/definitions/director_collection_links"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "program": {
+            "description": "Program object",
+            "properties": {
+                "header_image": {
+                    "type": "string"
+                },
+                "l_o_marketing_director_needed": {
+                    "type": "boolean"
+                },
+                "instagram_link": {
+                    "type": "string"
+                },
+                "experiences": {
+                    "type": "string"
+                },
+                "l_o_program_director_needed": {
+                    "type": "boolean"
+                },
+                "facebook_link": {
+                    "type": "string"
+                },
+                "volunteers_needed": {
+                    "type": "string"
+                },
+                "get_involved": {
+                    "type": "string"
+                },
+                "id": {
+                    "format": "uint32",
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "email_link": {
+                    "type": "string"
+                },
+                "header_image_alt": {
+                    "type": "string"
+                },
+                "calendar": {
+                    "type": "string"
+                },
+                "l_o_executive_director_needed": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "tag_category_links": {
+            "description": "Hypermedia Links that relate to the  object/collection",
+            "properties": {
+                "tag_category_tag__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "tag_categories__list": {
+                    "$ref": "#/definitions/link"
+                },
+                "tag_categories__info": {
+                    "$ref": "#/definitions/link"
+                }
+            },
+            "type": "object"
+        },
+        "unauthorized": {
+            "description": "This user is not authorized to access or edit this information",
+            "properties": {},
+            "type": "object"
+        },
+        "volunteer_roles": {
+            "description": "Volunteer roles to help in selecting what to submit what role in hours",
+            "properties": {
+                "volunteer_roles": {
+                    "items": {
+                        "properties": {
+                            "value": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "Y-Serve Volunteer Hours",
+        "description": "Submit and view hours for volunteers",
+        "version": "v1"
+    }
+}

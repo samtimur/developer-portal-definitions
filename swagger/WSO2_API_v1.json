@@ -1,0 +1,176 @@
+{
+    "basePath": "/domains/api-management/wso2/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/status": {
+            "get": {
+                "summary": "Microservice status report",
+                "tags": [
+                    "Status"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "The /status endpoint reports the current status of the microservice backing \nthe API\n",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Status"
+                        },
+                        "description": "A status report"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        },
+        "/apis": {
+            "get": {
+                "summary": "Get API Information",
+                "tags": [
+                    "API"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "The /apis endpoint allows the user to get information about a specific API or a set\nof APIs.\n",
+                "parameters": [
+                    {
+                        "description": "context path of the API",
+                        "name": "context",
+                        "format": "path",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/APIResponse"
+                        },
+                        "description": "An Array of APIs"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "API": {
+            "properties": {
+                "id": {
+                    "description": "The API's id in WSO2",
+                    "type": "integer"
+                },
+                "Name": {
+                    "description": "The name of the API in WSO2",
+                    "type": "string"
+                },
+                "Context": {
+                    "description": "The context path of the API",
+                    "format": "path",
+                    "type": "string"
+                },
+                "Links": {
+                    "$ref": "#/definitions/APILinks"
+                },
+                "Version": {
+                    "description": "The version identifier for this version of the API",
+                    "type": "string"
+                },
+                "Provider": {
+                    "description": "The provider of the API",
+                    "format": "domain/username",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Status": {
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/RequestStatus"
+                },
+                "data": {
+                    "description": "A contextual status report about the system.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "RequestStatus": {
+            "description": "The status of the request. 'ok' signifies a successful request, 'error' signifies an error with the request.",
+            "type": "string"
+        },
+        "APIResponse": {
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/RequestStatus"
+                },
+                "data": {
+                    "items": {
+                        "$ref": "#/definitions/API"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Error": {
+            "properties": {
+                "error": {
+                    "description": "The error message from the backend",
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/RequestStatus"
+                },
+                "data": {
+                    "description": "The data element is typically and empty string in error cases.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "APILinks": {
+            "properties": {
+                "Publisher": {
+                    "description": "The Publisher link for the API",
+                    "format": "url",
+                    "type": "string"
+                },
+                "Invoke": {
+                    "description": "The full invokation url for the API",
+                    "format": "url",
+                    "type": "string"
+                },
+                "Store": {
+                    "description": "The store link for the API",
+                    "format": "url",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "WSO2_API",
+        "description": "Control and query information from WSO2",
+        "version": "v1"
+    }
+}

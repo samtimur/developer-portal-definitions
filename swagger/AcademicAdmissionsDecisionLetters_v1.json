@@ -1,0 +1,214 @@
+{
+    "basePath": "/domains/legacy/academic/admissions/decision_letters/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{school}/{person_id}/{year_term}/{notify}": {
+            "put": {
+                "summary": "Generates the admissions decision letter for an applicant and sends the email notification",
+                "tags": [
+                    "DecisionLettersService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Generates the admissions decision letter for an applicant and sends the email notification",
+                "parameters": [
+                    {
+                        "description": "School providing the decision (BYUH, BYUI, LDSBC)",
+                        "name": "school",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Person ID of the applicant",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "5 digit year/term (YYYYT)",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "send email notification. valid value = y",
+                        "name": "notify",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/DecisionLettersServiceSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/DecisionLettersServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GenerateDecisionLetterAnd Notify"
+            }
+        },
+        "/{school}/{person_id}/{year_term}": {
+            "put": {
+                "summary": "Generates the admissions decision letter for an applicant",
+                "tags": [
+                    "DecisionLettersService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Generates the admissions decision letter for an applicant",
+                "parameters": [
+                    {
+                        "description": "School providing the decision (BYUH, BYUI, LDSBC)",
+                        "name": "school",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Person ID of the applicant",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "5 digit year/term (YYYYT)",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/DecisionLettersServiceSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/DecisionLettersServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GenerateDecisionLetter"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "errors": {
+            "items": {
+                "$ref": "#/definitions/error_data"
+            },
+            "type": "array"
+        },
+        "DecisionLettersServiceSuccess": {
+            "properties": {
+                "DecisionLettersService": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DecisionLettersServiceError": {
+            "properties": {
+                "DecisionLettersService": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "errors": {
+                            "$ref": "#/definitions/errors"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "AcademicAdmissionsDecisionLetters",
+        "description": "This service generates the decision letter for an applicant.",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/DecisionLetters_v1.0"
+    }
+}

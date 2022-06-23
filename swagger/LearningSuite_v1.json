@@ -1,0 +1,3070 @@
+{
+    "paths": {
+        "/coursebuilder/instructor-information": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create new instructor information",
+                "x-throttling-tier": "Unlimited",
+                "description": "A URI will be returned in the \"Location\" header specifying the location of the newly created object.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Instructor"
+                        },
+                        "description": "New instructor info",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "Location": {
+                                "description": "The location of the created resource",
+                                "type": "string"
+                            }
+                        },
+                        "description": "Teacher's here, hide the diet caffeinated drink that will remain unnamed"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/course/curriculumID/{curriculumId}/titleCode/{titleCode}/owner/{ownerId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets the most recent coursebuilder course for the given owner, curriculumID, and titleCode",
+                "x-throttling-tier": "Unlimited",
+                "description": "Example Query: /coursebuilder/course/curriculumID/123456789/titleCode/20111/owner/1234124",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Id of the curriculum",
+                        "name": "curriculumId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Code of the title",
+                        "name": "titleCode",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "personId of course owner",
+                        "name": "ownerId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Course"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of courses"
+                    }
+                }
+            }
+        },
+        "/announcements/announcement/instructorID/{instructorId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get announcements for a given instructor",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the instructor to get announcements for",
+                        "name": "instructorId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Announcement"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of announcements"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/course/owner/{ownerId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets all items for a given owner",
+                "x-throttling-tier": "Unlimited",
+                "description": "Example Query: /coursebuilder/course/owner/123456789",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "PersonID of the owner",
+                        "name": "ownerId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Course"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of courses"
+                    }
+                }
+            }
+        },
+        "/announcements/announcement/personEnrolledCourses/{personId}/yearTerm/{yearTerm}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all announcements for courses a given person is enrolled in during a given yearterm",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Person id of the person to get announcements for",
+                        "name": "personId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Year term to get announcements for, e.g., '20165'",
+                        "name": "yearTerm",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Announcement"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of announcements"
+                    }
+                }
+            }
+        },
+        "/announcements/sysannouncement": {
+            "post": {
+                "summary": "Create a new announcement",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Create a new announcement. Returns the uri of the newly created announcement in the Location header of the response",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/SysAnnouncement"
+                        },
+                        "description": "Request body",
+                        "name": "announcement",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "Location": {
+                                "description": "The uri where the announcement can be found, e.g., '/announcements/announcement/IJQITd0cCrpT'",
+                                "type": "string"
+                            }
+                        },
+                        "description": "Announcement created"
+                    }
+                }
+            }
+        },
+        "/assignments/category/calendarOnly/{calendarOnly}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get assignment categories",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Whether to filter by calendar only or not",
+                        "name": "calendarOnly",
+                        "type": "boolean",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Category"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of categories"
+                    }
+                }
+            }
+        },
+        "/syllabus/material/courseID/{courseId}/includeBooklist/{includeBooklist}": {
+            "get": {
+                "summary": "Get information about materials required for a course",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Id of the course to get info for",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Whether to get the booklist or not",
+                        "name": "includeBooklist",
+                        "type": "boolean",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Material"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of materials"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/course/personEnrolled/{personId}/period/{period}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets the courses a given person is enrolled in for the given period (he is enrolled in a section that is grouped in the course)",
+                "x-throttling-tier": "Unlimited",
+                "description": "Example Query: /coursebuilder/course/personEnrolled/123456789/period/20111",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Enrolled personId",
+                        "name": "personId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "5 digit year term (yyyyT) e.g 20165 = 2016 Fall",
+                        "name": "period",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Course"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of courses"
+                    }
+                }
+            }
+        },
+        "/pages/page-and-content/{id}": {
+            "get": {
+                "summary": "Get a content page by id",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Id of the content",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Content"
+                        },
+                        "description": "Content page"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/office-hour": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create new office hour",
+                "x-throttling-tier": "Unlimited",
+                "description": "A URI will be returned in the \"Location\" header specifying the location of the newly created object.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/OfficeHour"
+                        },
+                        "description": "New office hour",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "Location": {
+                                "description": "The location of the created resource",
+                                "type": "string"
+                            }
+                        },
+                        "description": "Office hour created"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/course/{courseId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets the course with the given ID",
+                "x-throttling-tier": "Unlimited",
+                "description": "Example Query: /coursebuilder/course/Jjhp9AFoRYo5",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the course",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Course"
+                        },
+                        "description": "The requested course"
+                    }
+                }
+            }
+        },
+        "/syllabus/syllabus": {
+            "post": {
+                "summary": "Create a new syllabus object",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Syllabus"
+                        },
+                        "description": "Request body",
+                        "name": "syllabus",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "Location": {
+                                "description": "The uri where the syllabus is located, e.g., '/syllabus/syllabus/Kaf5wuPjbAnQ'",
+                                "type": "string"
+                            }
+                        },
+                        "description": "Syllabus created"
+                    }
+                }
+            }
+        },
+        "/announcements/sysannouncement/type/custom/name/{name}": {
+            "get": {
+                "summary": "Get custom announcements by name",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Custom name of the announcement type",
+                        "name": "name",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SysAnnouncement"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of announcements"
+                    }
+                }
+            }
+        },
+        "/syllabus/material": {
+            "post": {
+                "summary": "Create a new course material object",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Material"
+                        },
+                        "description": "Request body",
+                        "name": "material",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "Location": {
+                                "description": "The uri where the material is located, e.g., '/syllabus/material/Kaf5wuPjbAnQ'",
+                                "type": "string"
+                            }
+                        },
+                        "description": "Material created"
+                    }
+                }
+            }
+        },
+        "/syllabus/material/syllabusID/{syllabusId}/includeBooklist/{includeBooklist}": {
+            "get": {
+                "summary": "Get information about materials related to a syllabus",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Id of the syllabus to get info for",
+                        "name": "syllabusId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Whether to get the booklist or not",
+                        "name": "includeBooklist",
+                        "type": "boolean",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Material"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of materials"
+                    }
+                }
+            }
+        },
+        "/announcements/sysannouncement/type/{type}/name//expireDate/{expireDate}/beginDate/{beginDate}": {
+            "get": {
+                "summary": "Get announcements by type and by expiration and begin time",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Type to filter by",
+                        "name": "type",
+                        "enum": [
+                            "all",
+                            "instructors"
+                        ],
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Expire date, in seconds (I think)",
+                        "name": "expireDate",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Begin date, in seconds (I think)",
+                        "name": "beginDate",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SysAnnouncement"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of announcements"
+                    }
+                }
+            }
+        },
+        "/announcements/announcement/{id}": {
+            "put": {
+                "summary": "Update an existing announcement",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Announcement"
+                        },
+                        "description": "Request body",
+                        "name": "announcement",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "description": "ID of the announcement to modify",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get info about an announcement",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the announcement to get",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Announcement"
+                        },
+                        "description": "The requested announcement"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete an existing announcement",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the announcement to delete",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/assignments/category": {
+            "post": {
+                "summary": "Create a new assignment category",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Category"
+                        },
+                        "description": "Request body",
+                        "name": "category",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "Location": {
+                                "description": "The uri where the announcement can be found, e.g., '/assignments/category/IJQITd0cCrpT'",
+                                "type": "string"
+                            }
+                        },
+                        "description": "Category created"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/material": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create new material",
+                "x-throttling-tier": "Unlimited",
+                "description": "A URI will be returned in the \"Location\" header specifying the location of the newly created object.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CourseMaterial"
+                        },
+                        "description": "New course material",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "Location": {
+                                "description": "The location of the created resource",
+                                "type": "string"
+                            }
+                        },
+                        "description": "Material created"
+                    }
+                }
+            }
+        },
+        "/assignments/category/{id}": {
+            "put": {
+                "summary": "Update an existing assignment category",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Category"
+                        },
+                        "description": "Request body",
+                        "name": "category",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "description": "ID of the category to modify",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "summary": "Get an assignment category by id",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Id of the resource to get",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Category"
+                        },
+                        "description": "Requested category"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete an existing assignment category",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the category to delete",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/coursebuilder/teaching-assistant-information/{id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Edit teaching assistant information by ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the teaching assistant info that you would like to edit",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Instructor"
+                        },
+                        "description": "New Instructor Info",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get teaching assistant information by ID",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the teaching assistant info that you would like",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Instructor"
+                        },
+                        "description": "Requested resource"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete teaching assistant information by ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the teaching assistant info that you would like to delete",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Teaching assistant deleted"
+                    }
+                }
+            }
+        },
+        "/syllabus/syllabus/{id}": {
+            "put": {
+                "summary": "Modify an existing model by parameters passed in the HTTP body",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Id of the model to update",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Syllabus"
+                        },
+                        "description": "Request body, containing updated data",
+                        "name": "syllabus",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "summary": "GETs the model with the given ID",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Model id",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Syllabus"
+                        },
+                        "description": "ok"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete an existing model by id",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Id of the model to delete",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/coursebuilder/course/personTeaching/{personId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets the courses a given person is teaching in the current semester either as owner, instructor, or TA",
+                "x-throttling-tier": "Unlimited",
+                "description": "Example Query: /coursebuilder/course/personTeaching/123456789",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "The owner, instructor, or TA's personId",
+                        "name": "personId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Year term to filter by",
+                        "name": "period",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Not completely sure - in an example query, the value of this parameter is 'university'",
+                        "name": "type",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "If ownedOnly is true, only the courses specifically owned will be returned",
+                        "name": "ownedOnly",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Course"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of courses matching the given criteria"
+                    }
+                }
+            }
+        },
+        "/syllabus/material/{id}": {
+            "put": {
+                "summary": "Modify an existing model by parameters passed in the HTTP body",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Id of the model to update",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Material"
+                        },
+                        "description": "Request body, containing updated data",
+                        "name": "Material",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "summary": "GETs the model with the given ID",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Model id",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Material"
+                        },
+                        "description": "Requested model object"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete an existing model by id",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Id of the model to delete",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/coursebuilder/course/personTeaching/{personId}/period/{period}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets the courses a given person is teaching either as owner, instructor, or TA",
+                "x-throttling-tier": "Unlimited",
+                "description": "Example Query: /coursebuilder/course/personTeaching/123456789/period/20171",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "The owner, instructor, or TA's personId",
+                        "name": "personId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Year term to filter by. If \"past\" is passed in, returns all courses for the last 4 semesters.",
+                        "name": "period",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Not completely sure - in an example query, the value of this parameter is 'university'",
+                        "name": "type",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "If ownedOnly is true, only the courses specifically owned will be returned",
+                        "name": "ownedOnly",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Course"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of courses matching the given criteria"
+                    }
+                }
+            }
+        },
+        "/announcements/announcement/courseID/{courseId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get announcements for a course",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the course to get announcements for",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Announcement"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of announcements"
+                    }
+                }
+            }
+        },
+        "/assignments/assignment/courseID/{courseId}/includeScores/1": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get assignments for a course, including the scores",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the course in question",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Assignment"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of assignments"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/office-hour/courseID/{courseId}": {
+            "get": {
+                "summary": "Get office hours for a given course",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Id of the course to get office hours for",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/OfficeHour"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of office hours"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/teaching-assistant-information": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create new teaching assistant information",
+                "x-throttling-tier": "Unlimited",
+                "description": "A URI will be returned in the \"Location\" header specifying the location of the newly created object.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Instructor"
+                        },
+                        "description": "New teaching assistant info",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "Location": {
+                                "description": "The location of the created resource",
+                                "type": "string"
+                            }
+                        },
+                        "description": "Teaching assistant created"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/office-hour/personInformationID/{personInformationId}": {
+            "get": {
+                "summary": "Get office hours for a given instructor",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Information id (not personId) of the instructor to get office hours for",
+                        "name": "personInformationId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/OfficeHour"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of office hours"
+                    }
+                }
+            }
+        },
+        "/syllabus/material/materialID/{materialId}": {
+            "get": {
+                "summary": "GETs all the info for a given material",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "MaterialId of the resource to get",
+                        "name": "materialId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/syllabus/material/syllabusID/{syllabusId}": {
+            "get": {
+                "summary": "GETs all the sections for a given syllabus",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "SyllabusId of the resource to get",
+                        "name": "syllabusId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Material"
+                            },
+                            "type": "array"
+                        },
+                        "description": "list of materials"
+                    }
+                }
+            }
+        },
+        "/announcements/sysannouncement/{id}": {
+            "put": {
+                "summary": "Update an existing announcement",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/SysAnnouncement"
+                        },
+                        "description": "Request body",
+                        "name": "announcement",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "description": "ID of the announcement to modify",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get info about an announcement",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the announcement to get",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/SysAnnouncement"
+                        },
+                        "description": "The requested announcement"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete an existing announcement",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the announcement to delete",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/assignments/assignment/courseID/{courseId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get assignments for a course",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the course in question",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Assignment"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of assignments"
+                    }
+                }
+            }
+        },
+        "/calendar/aggregate/courseID/{courseId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a calendar for a course",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the course in question",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/coursebuilder/grading-scale": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Creates a new grading scale",
+                "x-throttling-tier": "Unlimited",
+                "description": "A URI will be returned in the \"Location\" header specifying the location of the newly created object.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/GradeScale"
+                        },
+                        "description": "Grade Scale to be created",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "Location": {
+                                "description": "The location of the created resource",
+                                "type": "string"
+                            }
+                        },
+                        "description": "Grade scale created"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/instructor-information/{id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Edit instructor information by ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the instructor info that you would like to edit",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Instructor"
+                        },
+                        "description": "New Instructor Info",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get instructor information by ID",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the instructor info that you would like",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Instructor"
+                        },
+                        "description": "Requested resource"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete instructor information by ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the instructor info that you would like to delete",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Teacher's gone, party on"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/grading-scale/{id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Edit a grade scale by ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the grade scale you would like to edit",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/GradeScale"
+                        },
+                        "description": "New Grade Scale",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a grade scale by ID",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the grade scale you would like",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/GradeScale"
+                        },
+                        "description": "The requested grade scale"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete a grade scale by ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the grade scale you would like to delete",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/coursebuilder/office-hour/{id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Edit office hour by ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the office hour that you would like to edit",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/OfficeHour"
+                        },
+                        "description": "New office hour Info",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get office hour resource by ID",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the office hour that you would like",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/OfficeHour"
+                        },
+                        "description": "Requested resource"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete office hour by ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the office hour that you would like to delete",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Office hour deleted"
+                    }
+                }
+            }
+        },
+        "/calendar/aggregate/endDate/{endDate}": {
+            "get": {
+                "summary": "GETs all items before a given [[timestamp]]",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Date, in seconds (since 1970)",
+                        "name": "endDate",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CalendarItem"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of calendar events"
+                    }
+                }
+            }
+        },
+        "/announcements/announcement": {
+            "post": {
+                "summary": "Create a new announcement",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Create a new announcement. Returns the uri of the newly created announcement in the Location header of the response",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Announcement"
+                        },
+                        "description": "Request body",
+                        "name": "announcement",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "Location": {
+                                "description": "The uri where the announcement can be found, e.g., '/announcements/announcement/IJQITd0cCrpT'",
+                                "type": "string"
+                            }
+                        },
+                        "description": "Announcement created"
+                    }
+                }
+            }
+        },
+        "/calendar/aggregate/start/{time}": {
+            "get": {
+                "summary": "GETs all items after a given [[timestamp]] using the endDate of the calendarItem",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Date, in seconds (since 1970)",
+                        "name": "time",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CalendarItem"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of calendar events"
+                    }
+                }
+            }
+        },
+        "/announcements/sysannouncement/type/{type}": {
+            "get": {
+                "summary": "Get announcements by type",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Type to filter by",
+                        "name": "type",
+                        "enum": [
+                            "all",
+                            "instructors",
+                            "custom"
+                        ],
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SysAnnouncement"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of system announcements by type"
+                    }
+                }
+            }
+        },
+        "/assignments/category/courseID/{courseId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get assignment categories for a course",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the course",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Category"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of categories"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/material/courseID/{courseId}": {
+            "get": {
+                "summary": "Get all items for a given course",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Id of the course to get items for",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CourseMaterial"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of course materials"
+                    }
+                }
+            }
+        },
+        "/syllabus/syllabus/courseID/{courseId}": {
+            "get": {
+                "summary": "GETs all syllabi for a given course",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Id of the course to get info for",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Syllabus"
+                            },
+                            "type": "array"
+                        },
+                        "description": "list of syllabi"
+                    }
+                }
+            }
+        },
+        "/announcements/sysannouncement/type/custom/name/{name}/expireDate/{expireDate}/beginDate/{beginDate}": {
+            "get": {
+                "summary": "Get custom announcements by name, and by expiration and begin time",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Custom name of the announcement type",
+                        "name": "name",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Expire date, in seconds (I think)",
+                        "name": "expireDate",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Begin date, in seconds (I think)",
+                        "name": "beginDate",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SysAnnouncement"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of announcements"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/teaching-assistant-information/courseID/{courseId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get teaching assistant information for a specific course",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the course",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Instructor"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of teaching assistants"
+                    }
+                }
+            }
+        },
+        "/assignments/category/courseID/{courseId}/title/{title}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get assignment categories for a course by title",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the course",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Title of the category",
+                        "name": "title",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Category"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of categories"
+                    }
+                }
+            }
+        },
+        "/lsgradebook/student-progress/courseID/{courseId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get current person's score for the specified course",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the course",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/StudentProgress"
+                        },
+                        "description": "Student progress"
+                    }
+                }
+            }
+        },
+        "/pages/page-and-content/courseID/{courseId}": {
+            "get": {
+                "summary": "Get a list of content pages for a course",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Id of the course",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Content"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of content pages"
+                    }
+                }
+            }
+        },
+        "/calendar/aggregate/beginDate/{beginDate}": {
+            "get": {
+                "summary": "GETs all items after a given [[timestamp]] using the beginDate of the calendarItem",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "Date, in seconds (since 1970)",
+                        "name": "beginDate",
+                        "type": "integer",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CalendarItem"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of calendar events"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/material/{id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Edit material by ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the material that you would like to edit",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CourseMaterial"
+                        },
+                        "description": "New Material Info",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get material resource by ID",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the material that you would like",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CourseMaterial"
+                        },
+                        "description": "Requested resource"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete material by ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "ID of the material that you would like to delete",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Material deleted"
+                    }
+                }
+            }
+        },
+        "/coursebuilder/instructor-information/courseID/{courseId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get instructor information for a specific course",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of the course",
+                        "name": "courseId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Instructor"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of instructors"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "GradeScale": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "courseID": {
+                    "type": "string"
+                },
+                "items": {
+                    "properties": {
+                        "D": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "E": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "D+": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "A": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "B": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "C": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "B-": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "B+": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "C+": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "A-": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "C-": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "D-": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                },
+                "maxPoints": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "isCourseScale": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "instructorID": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Material": {
+            "properties": {
+                "edition": {
+                    "type": "string"
+                },
+                "newPrice": {
+                    "format": "float",
+                    "type": "number"
+                },
+                "vendor": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "syllabusID": {
+                    "type": "string"
+                },
+                "publisher": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "usedPrice": {
+                    "format": "float",
+                    "type": "number"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "isbn": {
+                    "type": "string"
+                },
+                "displayOrder": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "publishedDate": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "Assignment": {
+            "properties": {
+                "weight": {
+                    "format": "float",
+                    "type": "number"
+                },
+                "categoryID": {
+                    "type": "string"
+                },
+                "beginDate": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "rubric": {
+                    "type": "string"
+                },
+                "studentScore": {
+                    "type": "string"
+                },
+                "passScoreRequired": {
+                    "type": "boolean"
+                },
+                "description": {
+                    "maxLength": 12000,
+                    "type": "string"
+                },
+                "name": {
+                    "maxLength": 100,
+                    "type": "string"
+                },
+                "passingScore": {
+                    "format": "float",
+                    "type": "number"
+                },
+                "scoreEntry": {
+                    "type": "string"
+                },
+                "points": {
+                    "format": "float",
+                    "type": "number"
+                },
+                "gradingScale": {
+                    "type": "string"
+                },
+                "dueDate": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "displayOrderCalendarBegin": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "typeID": {
+                    "type": "string"
+                },
+                "onlineSubmission": {
+                    "type": "string"
+                },
+                "includeScoreInFinalGrade": {
+                    "type": "boolean"
+                },
+                "minScore": {
+                    "format": "float",
+                    "type": "number"
+                },
+                "courseID": {
+                    "type": "string"
+                },
+                "scoreVisibleDate": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "allowLateSubmission": {
+                    "type": "boolean"
+                },
+                "allowScoreDrop": {
+                    "type": "boolean"
+                },
+                "extraCredit": {
+                    "type": "boolean"
+                },
+                "graded": {
+                    "type": "boolean"
+                },
+                "displayOrderCalendar": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "visibleDate": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "displayOrder": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "courseID",
+                "categoryID",
+                "name",
+                "beginDate",
+                "dueDate",
+                "graded",
+                "scoreVisibleDate",
+                "url"
+            ],
+            "type": "object"
+        },
+        "OfficeHour": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "beginMinute": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "wednesday": {
+                    "type": "boolean"
+                },
+                "personInformationID": {
+                    "type": "string"
+                },
+                "beginHour": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "thursday": {
+                    "type": "boolean"
+                },
+                "monday": {
+                    "type": "boolean"
+                },
+                "endMinute": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "sunday": {
+                    "type": "boolean"
+                },
+                "saturday": {
+                    "type": "boolean"
+                },
+                "friday": {
+                    "type": "boolean"
+                },
+                "tuesday": {
+                    "type": "boolean"
+                },
+                "endHour": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "Instructor": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "officeLocation": {
+                    "type": "string"
+                },
+                "courseID": {
+                    "type": "string"
+                },
+                "mobilePhone": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "hidden": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "professionalTitle": {
+                    "type": "string"
+                },
+                "byAppointment": {
+                    "type": "boolean"
+                },
+                "homePhone": {
+                    "type": "string"
+                },
+                "officePhone": {
+                    "type": "string"
+                },
+                "personID": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Syllabus": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "titleCode": {
+                    "maxLength": 3,
+                    "type": "string"
+                },
+                "courseID": {
+                    "type": "string"
+                },
+                "curriculumID": {
+                    "maxLength": 5,
+                    "type": "string"
+                },
+                "owner": {
+                    "maxLength": 9,
+                    "type": "string"
+                },
+                "period": {
+                    "maxLength": 8,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Announcement": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "availableDate": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "createdBy": {
+                    "type": "string"
+                },
+                "yearTerm": {
+                    "type": "string"
+                },
+                "attachment": {
+                    "type": "string"
+                },
+                "published": {
+                    "type": "boolean"
+                },
+                "instructorID": {
+                    "type": "string"
+                },
+                "date": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "updatedBy": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Section": {
+            "properties": {
+                "titleCode": {
+                    "maxLength": 8,
+                    "type": "string"
+                },
+                "courseID": {
+                    "type": "string"
+                },
+                "curriculumID": {
+                    "maxLength": 5,
+                    "type": "string"
+                },
+                "sectionNumber": {
+                    "type": "string"
+                },
+                "period": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Course": {
+            "properties": {
+                "titleCode": {
+                    "type": "string"
+                },
+                "visible": {
+                    "type": "boolean"
+                },
+                "externalURL": {
+                    "type": "string"
+                },
+                "curriculumID": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "period": {
+                    "type": "string"
+                },
+                "devCourse": {
+                    "type": "boolean"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "sections": {
+                    "items": {
+                        "$ref": "#/definitions/Section"
+                    },
+                    "type": "array"
+                },
+                "shortTitle": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "setup": {
+                    "type": "boolean"
+                },
+                "owner": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Category": {
+            "properties": {
+                "pointsDecimals": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "lsCategoryID": {
+                    "type": "string"
+                },
+                "weight": {
+                    "format": "float",
+                    "type": "number"
+                },
+                "courseID": {
+                    "type": "string"
+                },
+                "gbCategoryID": {
+                    "type": "string"
+                },
+                "equalAssignWeight": {
+                    "type": "boolean"
+                },
+                "viewPercent": {
+                    "type": "boolean"
+                },
+                "lowScoresToDrop": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "viewPoints": {
+                    "type": "boolean"
+                },
+                "graded": {
+                    "type": "boolean"
+                },
+                "headingID": {
+                    "type": "string"
+                },
+                "extraCredit": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "viewLetterGrade": {
+                    "type": "boolean"
+                },
+                "calendarOnly": {
+                    "type": "boolean"
+                },
+                "displayOrder": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "percentDecimals": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "StudentProgress": {
+            "properties": {
+                "currentProgress": {
+                    "properties": {
+                        "title": {
+                            "type": "string"
+                        },
+                        "percent": {
+                            "type": "string"
+                        },
+                        "disclaimer": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "points": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "totalProgress": {
+                    "properties": {
+                        "title": {
+                            "type": "string"
+                        },
+                        "percent": {
+                            "type": "string"
+                        },
+                        "disclaimer": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "points": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "note": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CourseMaterial": {
+            "properties": {
+                "edition": {
+                    "type": "string"
+                },
+                "courseID": {
+                    "type": "string"
+                },
+                "newPrice": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "vendor": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "publisher": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "usedPrice": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "isbn": {
+                    "type": "string"
+                },
+                "publishedDate": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "required": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "Content": {
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "courseID": {
+                    "type": "string"
+                },
+                "children": {
+                    "items": {
+                        "$ref": "#/definitions/Content"
+                    },
+                    "type": "array"
+                },
+                "contentType": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CalendarItem": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "courseID": {
+                    "type": "string"
+                },
+                "categoryID": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "displayOrder": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "endDate": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "headingID": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "calendarItem",
+                        "assignment",
+                        "Exam",
+                        "ExamTC",
+                        "ExamOther"
+                    ],
+                    "type": "string"
+                },
+                "graded": {
+                    "type": "boolean"
+                },
+                "extraCredit": {
+                    "type": "boolean"
+                },
+                "beginDate": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "SysAnnouncement": {
+            "properties": {
+                "typeName": {
+                    "description": "Identifier for the custom type, if type is 'custom'",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "critical": {
+                    "type": "boolean"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "level": {
+                    "enum": [
+                        "info",
+                        "notice",
+                        "warning",
+                        "quote"
+                    ],
+                    "type": "string"
+                },
+                "createdBy": {
+                    "type": "string"
+                },
+                "expireDate": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "type": {
+                    "enum": [
+                        "all",
+                        "instructors",
+                        "custom"
+                    ],
+                    "type": "string"
+                },
+                "beginDate": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dateUpdated": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "updatedBy": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "LearningSuite",
+        "description": "Gives access to the LearningSuite resources. Currently, this service is locked down to only accept requests from the BYU Mobile Application managed by Eric Romrell",
+        "version": "v1"
+    },
+    "basePath": "/domains/learningsuite/v1",
+    "host": "api.byu.edu:443"
+}

@@ -1,0 +1,204 @@
+{
+    "paths": {
+        "/student/progressToDegree/batch/{requestID}": {
+            "get": {
+                "summary": "Get the results from a previously run batch",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Each request will return an array of items corresponding to the ids sent in the POST request.  If there are more items and the query needs to be run again, then lastKey will be set.  You can use lastKey directly as the startKey query parameter for the next query.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Request ID is a combination of requestor and now from the post request separated by a colon(requestor:now)",
+                        "name": "requestID",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Page size for pagination (default is 50)",
+                        "name": "limit",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "lastKey attribute in body of previous query to start on the next page of pagination",
+                        "name": "startKey",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "summary": "Perform a what if analysis",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/pdf"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get advisement information for students",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json",
+                    "application/pdf"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/student/progressToDegree/batch": {
+            "post": {
+                "summary": "Run batch analysis and cache results to be fetched later",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "This endpoint is used to run a batch of students through the PTD analysis.  Many students can cause the batch to take a long time to run, so an email is sent when the batch is finished (only in production mode.) Additional information is required in order to store the batch and query the results.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/BatchBody"
+                        },
+                        "description": "data needed to process a batch",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "delete": {
+                "summary": "Delete a batch and it's cached results",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes batches created by it's sibling POST endpoint",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "name": {
+                                    "description": "Name given to the batch at the time of creation",
+                                    "type": "string"
+                                },
+                                "requestor": {
+                                    "description": "BYU_ID of the person who made the request",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "BatchBody": {
+            "properties": {
+                "now": {
+                    "description": "date timestamp (in seconds) of when the request is made",
+                    "type": "number"
+                },
+                "ids": {
+                    "items": "string",
+                    "description": "Array of BYU_IDs for each student to be included in the analysis",
+                    "type": "array"
+                },
+                "yearTerm": {
+                    "description": "yearterm to be used in the analysis of each student",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the batch to make it easier to find later",
+                    "type": "string"
+                },
+                "requestor": {
+                    "description": "BYU_ID of the person making the request (this person will also receive an email notification when batch is complete)",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "requestor",
+                "name",
+                "now",
+                "yearTerm",
+                "ids"
+            ],
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "BYUAdvisementAPI",
+        "description": "BYU Advisement API",
+        "version": "v1.0"
+    },
+    "basePath": "/advisement/v1.0",
+    "host": "api.byu.edu:443"
+}

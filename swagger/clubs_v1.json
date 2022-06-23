@@ -1,0 +1,114 @@
+{
+    "paths": {
+        "/clubs": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "List all clubs",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/events/{id}": {
+            "get": {
+                "summary": "Details about single event",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Event ID",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/events": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "List all events, with optional filters",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "club_id",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Earliest event date, e.g. \"2017-01-30\"",
+                        "name": "start",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Latest event date, e.g. \"2017-02-18\"",
+                        "name": "end",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/*": {
+            "get": {
+                "summary": "wildcard",
+                "responses": {
+                    "200": {}
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/clubs/{id}": {
+            "get": {
+                "summary": "Details about single club",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Club ID",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "clubs",
+        "description": "BYUSA Clubs and Academic Associations",
+        "version": "v1"
+    },
+    "basePath": "/domains/byusa/clubs/v1",
+    "host": "api.byu.edu:443"
+}

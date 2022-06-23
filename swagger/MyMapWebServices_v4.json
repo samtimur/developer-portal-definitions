@@ -1,0 +1,4212 @@
+{
+    "basePath": "/domains/mymap/v4",
+    "tags": [
+        {
+            "name": "AdminOnly"
+        },
+        {
+            "name": "Electives"
+        },
+        {
+            "name": "Program"
+        },
+        {
+            "name": "Program Notes"
+        },
+        {
+            "name": "Program Plans"
+        },
+        {
+            "name": "Reports"
+        },
+        {
+            "name": "Student"
+        },
+        {
+            "name": "Student Plans"
+        },
+        {
+            "name": "Study List"
+        }
+    ],
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/student/{personId}/programs/{programId}/plans/{groupNumber}?": {
+            "post": {
+                "tags": [
+                    "Program",
+                    "Program Plans",
+                    "Student"
+                ],
+                "summary": "Plan a course for a requirement",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/plans/{groupNumber}",
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "addPlan"
+            }
+        },
+        "/student/{personId}/electives/courses/{departmentName}": {
+            "get": {
+                "tags": [
+                    "Electives",
+                    "Student"
+                ],
+                "summary": "List department classes",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "departmentName",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/JsonPlannableCourseGroup"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "getCourses"
+            }
+        },
+        "/student/{personId}/electives/courses/{departmentName}?": {
+            "get": {
+                "tags": [
+                    "Electives",
+                    "Student"
+                ],
+                "summary": "List department classes",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/electives/courses/{departmentName}",
+                "parameters": [
+                    {
+                        "name": "departmentName",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/JsonPlannableCourseGroup"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "getCourses"
+            }
+        },
+        "/student/{personId}/reports/explore/{programId}": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "Exploring progress report PDF",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Takes the student's classes and sees what requirements they fulfill in a given program.",
+                "produces": [
+                    "application/pdf"
+                ],
+                "parameters": [
+                    {
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "explore"
+            }
+        },
+        "/gradreport/{netId}/{programId}": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "Generate a progress report",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/pdf"
+                ],
+                "parameters": [
+                    {
+                        "name": "netId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "generateProgressReport"
+            }
+        },
+        "/gradreport/{netId}/{programId}?": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "Generate a progress report",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/pdf"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/gradreport/{netId}/{programId}",
+                "parameters": [
+                    {
+                        "name": "netId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "generateProgressReport"
+            }
+        },
+        "/student/{personId}/electives/courses": {
+            "get": {
+                "tags": [
+                    "Electives",
+                    "Student"
+                ],
+                "summary": "Fetch a list of all campus departments",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/JsonElectiveDepartment"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "getDepartments"
+            }
+        },
+        "/student/{personId}/plans?": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Student",
+                    "Student Plans"
+                ],
+                "summary": "Get current plans",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/plans",
+                "parameters": [
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/OrganizedPlans"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getPlans"
+            }
+        },
+        "/student/{personId}/programs/{programId}/{groupNumber}/study-list/{departmentName}?": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Study List",
+                    "Student"
+                ],
+                "summary": "List department classess",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/{groupNumber}/study-list/{departmentName}",
+                "parameters": [
+                    {
+                        "name": "departmentName",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/JsonPlannableCourseGroup"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "getCourses"
+            }
+        },
+        "/student/{personId}/plans/{yearTerm}?": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Student",
+                    "Student Plans"
+                ],
+                "summary": "Get planned courses for a year term",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/plans/{yearTerm}",
+                "parameters": [
+                    {
+                        "name": "yearTerm",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SavedPlan"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "getYearTermPlans"
+            }
+        },
+        "/student/{personId}/electives/courses?": {
+            "get": {
+                "tags": [
+                    "Electives",
+                    "Student"
+                ],
+                "summary": "Fetch a list of all campus departments",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/electives/courses",
+                "parameters": [
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/JsonElectiveDepartment"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "getDepartments"
+            }
+        },
+        "/student/{personId}/programs/{programId}/requirements/{groupNumber}": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Student"
+                ],
+                "summary": "Get all the possible classes for a requirement and its children",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JsonMatchedRequirement"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "getRequirementPlanning"
+            }
+        },
+        "/student/{personId}/programs/{programId}/{groupNumber}/study-list": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Study List",
+                    "Student"
+                ],
+                "summary": "Fetch a list of all campus departments",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/JsonElectiveDepartment"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getDepartments"
+            }
+        },
+        "/student/{personId}/programs": {
+            "get": {
+                "tags": [
+                    "Student"
+                ],
+                "summary": "List a student's programs",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JsonStudentProgramSummary"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getPrograms"
+            }
+        },
+        "/student/{personId}/reports/summary?": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "Academic summary report PDF",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/pdf"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/reports/summary",
+                "parameters": [
+                    {
+                        "default": false,
+                        "name": "exploring",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "academicSummary"
+            }
+        },
+        "/student/{personId}/programs/{programId}/plans/{groupNumber}/{sequenceNumber}/organize/{yearTerm}": {
+            "put": {
+                "tags": [
+                    "Program",
+                    "Program Plans",
+                    "Student"
+                ],
+                "summary": "Organize a plan to be taken in a given year term",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "yearTerm",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "organizePlan"
+            }
+        },
+        "/student/{personId}/programs/{programId}/plans/{groupNumber}/{sequenceNumber}": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Program Plans",
+                    "Student"
+                ],
+                "summary": "Fetch saved plan",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/SavedPlan"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "getPlan"
+            },
+            "delete": {
+                "tags": [
+                    "Program",
+                    "Program Plans",
+                    "Student"
+                ],
+                "summary": "Remove a plan",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "unplan"
+            }
+        },
+        "/student/{personId}/programs/{programId}?": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Student"
+                ],
+                "summary": "Get a program",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Includes the requirements and the student's taken/planned courses.",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}",
+                "parameters": [
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JsonStudentProgram"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getStudentProgram"
+            }
+        },
+        "/student/{personId}/reports": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "List available reports",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/JsonLink"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getLinks"
+            }
+        },
+        "/student/{personId}/programs/{programId}/notes/{groupNumber}?": {
+            "post": {
+                "tags": [
+                    "Program",
+                    "Program Notes",
+                    "Student"
+                ],
+                "summary": "Add a program note",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "The text of the note should be passed as the message body.",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/notes/{groupNumber}",
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "text/plain"
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "addNote"
+            }
+        },
+        "/student/{personId}/reports/progress/full": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "Full progress report PDF",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/pdf"
+                ],
+                "parameters": [
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "fullProgressReport"
+            }
+        },
+        "/student/{personId}/programs/{programId}/plans/{groupNumber}/planHere": {
+            "post": {
+                "tags": [
+                    "Program",
+                    "Program Plans",
+                    "Student"
+                ],
+                "summary": "Plan a course at a given place",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Usually used if a course is used elsewhere, but the student wants to use it in the given place instead.",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "curriculumId",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "titleCode",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "yearTerm",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "planHere"
+            }
+        },
+        "/student/{personId}/programs/{programId}": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Student"
+                ],
+                "summary": "Get a program",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Includes the requirements and the student's taken/planned courses.",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JsonStudentProgram"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getStudentProgram"
+            }
+        },
+        "/student/{personId}/programs/{programId}/plans/{groupNumber}/planHere?": {
+            "post": {
+                "tags": [
+                    "Program",
+                    "Program Plans",
+                    "Student"
+                ],
+                "summary": "Plan a course at a given place",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Usually used if a course is used elsewhere, but the student wants to use it in the given place instead.",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/plans/{groupNumber}/planHere",
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "curriculumId",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "titleCode",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "yearTerm",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "planHere"
+            }
+        },
+        "/student/{personId}/programs/{programId}/{groupNumber}/study-list?": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Study List",
+                    "Student"
+                ],
+                "summary": "Fetch a list of all campus departments",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/{groupNumber}/study-list",
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/JsonElectiveDepartment"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getDepartments"
+            }
+        },
+        "/student/{personId}/reports/explore/{programId}?": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "Exploring progress report PDF",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Takes the student's classes and sees what requirements they fulfill in a given program.",
+                "produces": [
+                    "application/pdf"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/reports/explore/{programId}",
+                "parameters": [
+                    {
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "explore"
+            }
+        },
+        "/admin/program-templates": {
+            "post": {
+                "tags": [
+                    "AdminOnly"
+                ],
+                "summary": "ADMIN ONLY. Proactively rebuild a given number of cached programs.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "default": 100,
+                        "description": "How many programs to rebuild. This process will rebuild the caches for the most-used `N` programs. Must be between 25 and 400.",
+                        "name": "build-program-count",
+                        "format": "int32",
+                        "required": false,
+                        "type": "integer",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "rebuildAll"
+            }
+        },
+        "/student/{personId}/reports/explore?": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "List explorable programs",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Includes all active major, emphasis, specialization, and minor programs",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/reports/explore",
+                "parameters": [
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ExploreProgramList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "exploreList"
+            }
+        },
+        "/student/{personId}/reports/batch?": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "AIM batch report",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "If none of the query parameters are given (or all are false), all parameters will default to true.",
+                "produces": [
+                    "application/pdf"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/reports/batch",
+                "parameters": [
+                    {
+                        "default": false,
+                        "name": "renderGE",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "name": "renderPrograms",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "name": "renderAcademicSummary",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "batchReport"
+            }
+        },
+        "/student/{personId}/plans/{yearTerm}": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Student",
+                    "Student Plans"
+                ],
+                "summary": "Get planned courses for a year term",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "yearTerm",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SavedPlan"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "getYearTermPlans"
+            }
+        },
+        "/admin/missing-maps": {
+            "get": {
+                "tags": [
+                    "AdminOnly"
+                ],
+                "summary": "ADMIN ONLY. Find missing MAP URLs",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "text/plain"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "findMissingMaps"
+            }
+        },
+        "/student/{personId}/reports/progress/full?": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "Full progress report PDF",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/pdf"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/reports/progress/full",
+                "parameters": [
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "fullProgressReport"
+            }
+        },
+        "/student/{personId}/programs?": {
+            "get": {
+                "tags": [
+                    "Student"
+                ],
+                "summary": "List a student's programs",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs",
+                "parameters": [
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JsonStudentProgramSummary"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getPrograms"
+            }
+        },
+        "/student/{personId}/reports/progress/partial": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "Get a partial progress report PDF",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Will include fiven programs and, optionally, the academic summary",
+                "produces": [
+                    "application/pdf"
+                ],
+                "parameters": [
+                    {
+                        "name": "reportType",
+                        "enum": [
+                            "GE",
+                            "MAJOR",
+                            "ACADEMIC_SUMMARY"
+                        ],
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "name": "programId",
+                        "required": false,
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "name": "includeSummary",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "partialReport"
+            }
+        },
+        "/student/{personId}/programs/{programId}/requirements/{groupNumber}?": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Student"
+                ],
+                "summary": "Get all the possible classes for a requirement and its children",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/requirements/{groupNumber}",
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JsonMatchedRequirement"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "getRequirementPlanning"
+            }
+        },
+        "/student/{personId}/reports?": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "List available reports",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/reports",
+                "parameters": [
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/JsonLink"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getLinks"
+            }
+        },
+        "/student/{personId}/programs/{programId}/{groupNumber}/study-list/{departmentName}": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Study List",
+                    "Student"
+                ],
+                "summary": "List department classess",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "departmentName",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/JsonPlannableCourseGroup"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "getCourses"
+            }
+        },
+        "/student/{personId}/reports/progress/partial?": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "Get a partial progress report PDF",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Will include fiven programs and, optionally, the academic summary",
+                "produces": [
+                    "application/pdf"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/reports/progress/partial",
+                "parameters": [
+                    {
+                        "name": "reportType",
+                        "enum": [
+                            "GE",
+                            "MAJOR",
+                            "ACADEMIC_SUMMARY"
+                        ],
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "name": "programId",
+                        "required": false,
+                        "type": "array",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "name": "includeSummary",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "partialReport"
+            }
+        },
+        "/student/{personId}/reports/batch": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "AIM batch report",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "If none of the query parameters are given (or all are false), all parameters will default to true.",
+                "produces": [
+                    "application/pdf"
+                ],
+                "parameters": [
+                    {
+                        "default": false,
+                        "name": "renderGE",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "name": "renderPrograms",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "name": "renderAcademicSummary",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "batchReport"
+            }
+        },
+        "/student/{personId}/reports/summary": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "Academic summary report PDF",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/pdf"
+                ],
+                "parameters": [
+                    {
+                        "default": false,
+                        "name": "exploring",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "academicSummary"
+            }
+        },
+        "/student/{personId}/reports/explore": {
+            "get": {
+                "tags": [
+                    "Reports",
+                    "Student"
+                ],
+                "summary": "List explorable programs",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Includes all active major, emphasis, specialization, and minor programs",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ExploreProgramList"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "exploreList"
+            }
+        },
+        "/student/{personId}/programs/{programId}/plans/{groupNumber}/{sequenceNumber}?": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Program Plans",
+                    "Student"
+                ],
+                "summary": "Fetch saved plan",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/plans/{groupNumber}/{sequenceNumber}",
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/SavedPlan"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "getPlan"
+            },
+            "delete": {
+                "tags": [
+                    "Program",
+                    "Program Plans",
+                    "Student"
+                ],
+                "summary": "Remove a plan",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/plans/{groupNumber}/{sequenceNumber}",
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "unplan"
+            }
+        },
+        "/student/{personId}/programs/{programId}/notes/{groupNumber}": {
+            "post": {
+                "tags": [
+                    "Program",
+                    "Program Notes",
+                    "Student"
+                ],
+                "summary": "Add a program note",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "The text of the note should be passed as the message body.",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "text/plain"
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "addNote"
+            }
+        },
+        "/student/{personId}/programs/{programId}/plans/{groupNumber}/{sequenceNumber}/organize/{yearTerm}?": {
+            "put": {
+                "tags": [
+                    "Program",
+                    "Program Plans",
+                    "Student"
+                ],
+                "summary": "Organize a plan to be taken in a given year term",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/plans/{groupNumber}/{sequenceNumber}/organize/{yearTerm}",
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "yearTerm",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "organizePlan"
+            }
+        },
+        "/student/{personId}/programs/{programId}/{groupNumber}": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Student"
+                ],
+                "summary": "Get requirement status",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JsonMatchedRequirement"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "getRequirementStatus"
+            }
+        },
+        "/student/{personId}/programs/{programId}/notes/{groupNumber}/{sequenceNumber}": {
+            "put": {
+                "tags": [
+                    "Program",
+                    "Program Notes",
+                    "Student"
+                ],
+                "summary": "Change a note's text",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "text/plain"
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "updateNote"
+            },
+            "get": {
+                "tags": [
+                    "Program",
+                    "Program Notes",
+                    "Student"
+                ],
+                "summary": "Fetch a note",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JsonNote"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "getNote"
+            },
+            "delete": {
+                "tags": [
+                    "Program",
+                    "Program Notes",
+                    "Student"
+                ],
+                "summary": "Delete a note",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "deleteNote"
+            }
+        },
+        "/student/{personId}/programs/{programId}/plans/{groupNumber}": {
+            "post": {
+                "tags": [
+                    "Program",
+                    "Program Plans",
+                    "Student"
+                ],
+                "summary": "Plan a course for a requirement",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "addPlan"
+            }
+        },
+        "/admin/program-templates?": {
+            "post": {
+                "tags": [
+                    "AdminOnly"
+                ],
+                "summary": "ADMIN ONLY. Proactively rebuild a given number of cached programs.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/admin/program-templates",
+                "parameters": [
+                    {
+                        "default": 100,
+                        "description": "How many programs to rebuild. This process will rebuild the caches for the most-used `N` programs. Must be between 25 and 400.",
+                        "name": "build-program-count",
+                        "format": "int32",
+                        "required": false,
+                        "type": "integer",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "rebuildAll"
+            }
+        },
+        "/student/{personId}/programs/{programId}/notes/{groupNumber}/{sequenceNumber}?": {
+            "put": {
+                "tags": [
+                    "Program",
+                    "Program Notes",
+                    "Student"
+                ],
+                "summary": "Change a note's text",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/notes/{groupNumber}/{sequenceNumber}",
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "text/plain"
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "updateNote"
+            },
+            "get": {
+                "tags": [
+                    "Program",
+                    "Program Notes",
+                    "Student"
+                ],
+                "summary": "Fetch a note",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/notes/{groupNumber}/{sequenceNumber}",
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JsonNote"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Not Authorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "getNote"
+            },
+            "delete": {
+                "tags": [
+                    "Program",
+                    "Program Notes",
+                    "Student"
+                ],
+                "summary": "Delete a note",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/notes/{groupNumber}/{sequenceNumber}",
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Not Authorized"
+                    }
+                },
+                "operationId": "deleteNote"
+            }
+        },
+        "/student/{personId}/plans": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Student",
+                    "Student Plans"
+                ],
+                "summary": "Get current plans",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/OrganizedPlans"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getPlans"
+            }
+        },
+        "/student/{personId}/programs/{programId}/{groupNumber}?": {
+            "get": {
+                "tags": [
+                    "Program",
+                    "Student"
+                ],
+                "summary": "Get requirement status",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "x-wso2-swagger-fixer-original-path": "/student/{personId}/programs/{programId}/{groupNumber}",
+                "parameters": [
+                    {
+                        "name": "groupNumber",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The program ID (NOT the program code). Can also be one of the following shortcuts: 'ge', 'electives', or 'university' for the student's General Education, Elective, and University/Religion programs, respectively.",
+                        "name": "programId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "default": false,
+                        "description": "If `true`, the student's cache-related data will be cleared.",
+                        "name": "clear-cache",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "description": "The student's person ID, or 'me' for the currently-authenticated user.",
+                        "name": "personId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JsonMatchedRequirement"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "operationId": "getRequirementStatus"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "OrganizedPlans": {
+            "properties": {
+                "unorganized": {
+                    "items": {
+                        "$ref": "#/definitions/SavedPlan"
+                    },
+                    "type": "array"
+                },
+                "organized": {
+                    "additionalProperties": {
+                        "items": {
+                            "$ref": "#/definitions/SavedPlan"
+                        },
+                        "type": "array"
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "LinkGroupLine": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/StatusLine"
+                },
+                {
+                    "properties": {
+                        "text": {
+                            "type": "string"
+                        },
+                        "links": {
+                            "items": {
+                                "$ref": "#/definitions/LinkStatusLine"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "JsonRating": {
+            "properties": {
+                "total": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "registered": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "planned": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "completed": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "JsonHeaderRequirement": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/JsonMatchedRequirement"
+                },
+                {
+                    "properties": {
+                        "title": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "PlanInfo": {
+            "properties": {
+                "plannable": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "whenTaught": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/JsonWhenTaught"
+                    },
+                    "type": "object"
+                },
+                "prerequisites": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/definitions/Prereq"
+                        },
+                        "type": "array"
+                    },
+                    "type": "array"
+                },
+                "prerequisiteStatus": {
+                    "$ref": "#/definitions/PrereqReport"
+                }
+            },
+            "type": "object"
+        },
+        "JsonCourse": {
+            "properties": {
+                "plan": {
+                    "$ref": "#/definitions/SavedPlan"
+                },
+                "substitutionKey": {
+                    "type": "string"
+                },
+                "registered": {
+                    "type": "boolean"
+                },
+                "yearTerm": {
+                    "type": "string"
+                },
+                "advanced": {
+                    "type": "boolean"
+                },
+                "grade": {
+                    "type": "string"
+                },
+                "used": {
+                    "type": "boolean"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "planned": {
+                    "type": "boolean"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "completed": {
+                    "type": "boolean"
+                },
+                "statusLines": {
+                    "items": {
+                        "$ref": "#/definitions/StatusLine"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "JsonCourseGroup": {
+            "properties": {
+                "titleCode": {
+                    "type": "string"
+                },
+                "flags": {
+                    "items": {
+                        "enum": [
+                            "CAN_USE_AGAIN",
+                            "EXPIRED",
+                            "OBSOLETE_PLAN"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                },
+                "courses": {
+                    "items": {
+                        "$ref": "#/definitions/JsonCourse"
+                    },
+                    "type": "array"
+                },
+                "curriculumId": {
+                    "type": "string"
+                },
+                "insufficientGrade": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "transcriptTitle": {
+                    "type": "string"
+                },
+                "advanced": {
+                    "type": "boolean"
+                },
+                "departmentName": {
+                    "type": "string"
+                },
+                "additionalInfo": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "key": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "RequirementStatus": {
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "complete": {
+                    "type": "boolean"
+                },
+                "stats": {
+                    "type": "string"
+                },
+                "planned": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "JsonClassesRequirement": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/JsonMatchedRequirement"
+                },
+                {
+                    "properties": {
+                        "title": {
+                            "type": "string"
+                        },
+                        "courses": {
+                            "items": {
+                                "$ref": "#/definitions/JsonCourseGroup"
+                            },
+                            "type": "array"
+                        },
+                        "status": {
+                            "$ref": "#/definitions/RequirementStatus"
+                        },
+                        "rating": {
+                            "$ref": "#/definitions/JsonRating"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "Prereq": {
+            "properties": {
+                "met": {
+                    "type": "boolean"
+                },
+                "titleCode": {
+                    "type": "string"
+                },
+                "curriculumId": {
+                    "type": "string"
+                },
+                "status": {
+                    "enum": [
+                        "TAKEN",
+                        "CURRENT",
+                        "REGISTERED",
+                        "PLANNED",
+                        "NOT_MET"
+                    ],
+                    "type": "string"
+                },
+                "courseTitle": {
+                    "type": "string"
+                },
+                "metYearTerm": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "JsonStudentProgram": {
+            "properties": {
+                "programId": {
+                    "type": "string"
+                },
+                "gradCutoffText": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "programCode": {
+                    "type": "string"
+                },
+                "programText": {
+                    "type": "string"
+                },
+                "requirements": {
+                    "items": {
+                        "$ref": "#/definitions/JsonMatchedRequirement"
+                    },
+                    "type": "array"
+                },
+                "entryYearTerm": {
+                    "type": "string"
+                },
+                "mapUrl": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StatusLine": {
+            "discriminator": "type",
+            "properties": {
+                "type": {
+                    "enum": [
+                        "text",
+                        "link",
+                        "action",
+                        "linkGroup"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "JsonNote": {
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "self": {
+                    "format": "uri",
+                    "type": "string"
+                },
+                "groupNumber": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "sequenceNumber": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "JsonStudyListRequirement": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/JsonMatchedRequirement"
+                },
+                {
+                    "properties": {
+                        "title": {
+                            "type": "string"
+                        },
+                        "studyListType": {
+                            "enum": [
+                                "STUDY_LIST",
+                                "ELECTIVE"
+                            ],
+                            "type": "string"
+                        },
+                        "courses": {
+                            "items": {
+                                "$ref": "#/definitions/JsonCourseGroup"
+                            },
+                            "type": "array"
+                        },
+                        "status": {
+                            "$ref": "#/definitions/RequirementStatus"
+                        },
+                        "rating": {
+                            "$ref": "#/definitions/JsonRating"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "JsonTextRequirement": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/JsonMatchedRequirement"
+                },
+                {
+                    "properties": {
+                        "lines": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "JsonStudentProgramSummary": {
+            "properties": {
+                "university": {
+                    "$ref": "#/definitions/JsonProgramInfo"
+                },
+                "others": {
+                    "items": {
+                        "$ref": "#/definitions/JsonProgramInfo"
+                    },
+                    "type": "array"
+                },
+                "graduate": {
+                    "type": "boolean"
+                },
+                "ge": {
+                    "$ref": "#/definitions/JsonProgramInfo"
+                },
+                "majors": {
+                    "items": {
+                        "$ref": "#/definitions/JsonProgramInfo"
+                    },
+                    "type": "array"
+                },
+                "elective": {
+                    "$ref": "#/definitions/JsonProgramInfo"
+                },
+                "canChangeMajor": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "JsonMatchedRequirement": {
+            "properties": {
+                "subHeader": {
+                    "type": "string"
+                },
+                "level": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "advanced": {
+                    "type": "boolean"
+                },
+                "children": {
+                    "items": {
+                        "$ref": "#/definitions/JsonMatchedRequirement"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "items": {
+                        "$ref": "#/definitions/JsonLink"
+                    },
+                    "type": "array"
+                },
+                "completionTitle": {
+                    "type": "string"
+                },
+                "groupNumber": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "notes": {
+                    "items": {
+                        "$ref": "#/definitions/JsonNote"
+                    },
+                    "type": "array"
+                },
+                "sequenceNumber": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "key": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "SavedPlan": {
+            "properties": {
+                "titleCode": {
+                    "type": "string"
+                },
+                "curriculumId": {
+                    "type": "string"
+                },
+                "catalogSuffix": {
+                    "type": "string"
+                },
+                "links": {
+                    "items": {
+                        "$ref": "#/definitions/JsonLink"
+                    },
+                    "type": "array"
+                },
+                "groupNumber": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "departmentName": {
+                    "type": "string"
+                },
+                "sequenceNumber": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "intendedSource": {
+                    "enum": [
+                        "CLASS",
+                        "EXAM",
+                        "NON_EQUIVALENT_SUBSTITUTION",
+                        "NONE",
+                        "PETITION",
+                        "POST_BACC",
+                        "SENIOR",
+                        "SUBSTITUTION",
+                        "TRANSFER",
+                        "TEST_WAIVER",
+                        "WAIVER",
+                        "PLAN"
+                    ],
+                    "type": "string"
+                },
+                "planInfo": {
+                    "$ref": "#/definitions/PlanInfo"
+                },
+                "programId": {
+                    "type": "string"
+                },
+                "catalogNumber": {
+                    "type": "string"
+                },
+                "creditHours": {
+                    "type": "number"
+                },
+                "plannedYearTerm": {
+                    "type": "string"
+                },
+                "personId": {
+                    "type": "string"
+                },
+                "requirementType": {
+                    "type": "string"
+                },
+                "useYearTerm": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "TextStatusLine": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/StatusLine"
+                },
+                {
+                    "properties": {
+                        "text": {
+                            "type": "string"
+                        },
+                        "flags": {
+                            "items": {
+                                "enum": [
+                                    "CAN_USE_AGAIN",
+                                    "EXPIRED",
+                                    "OBSOLETE_PLAN"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "uniqueItems": true
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "JsonGroupRequirement": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/JsonMatchedRequirement"
+                },
+                {
+                    "properties": {
+                        "title": {
+                            "type": "string"
+                        },
+                        "courses": {
+                            "items": {
+                                "$ref": "#/definitions/JsonCourseGroup"
+                            },
+                            "type": "array"
+                        },
+                        "status": {
+                            "$ref": "#/definitions/RequirementStatus"
+                        },
+                        "rating": {
+                            "$ref": "#/definitions/JsonRating"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "ExploreProgramList": {
+            "properties": {
+                "majors": {
+                    "items": {
+                        "$ref": "#/definitions/ExploreProgram"
+                    },
+                    "type": "array"
+                },
+                "minors": {
+                    "items": {
+                        "$ref": "#/definitions/ExploreProgram"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "JsonLink": {
+            "properties": {
+                "template": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "method": {
+                    "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "DELETE"
+                    ],
+                    "type": "string"
+                },
+                "rel": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "uri": {
+                    "format": "uri",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PrereqReport": {
+            "properties": {
+                "met": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "enum": [
+                        "TAKEN",
+                        "CURRENT",
+                        "REGISTERED",
+                        "PLANNED",
+                        "NOT_MET"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ExploreProgram": {
+            "properties": {
+                "programId": {
+                    "type": "string"
+                },
+                "degree": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "uri": {
+                    "format": "uri",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "JsonWhenTaught": {
+            "properties": {
+                "onDemand": {
+                    "type": "boolean"
+                },
+                "frequency": {
+                    "enum": [
+                        "ODD",
+                        "EVEN",
+                        "ALL",
+                        "NONE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ActionStatusLine": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/StatusLine"
+                },
+                {
+                    "properties": {
+                        "link": {
+                            "$ref": "#/definitions/JsonLink"
+                        },
+                        "action": {
+                            "enum": [
+                                "PLAN",
+                                "UNPLAN",
+                                "USE_HERE"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "JsonElectiveDepartment": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "link": {
+                    "format": "uri",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PlanOption": {
+            "properties": {
+                "titleCode": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "curriculumId": {
+                    "type": "string"
+                },
+                "retake": {
+                    "type": "boolean"
+                },
+                "yearTerm": {
+                    "type": "string"
+                },
+                "hours": {
+                    "type": "number"
+                },
+                "intendedSource": {
+                    "enum": [
+                        "CLASS",
+                        "EXAM",
+                        "NON_EQUIVALENT_SUBSTITUTION",
+                        "NONE",
+                        "PETITION",
+                        "POST_BACC",
+                        "SENIOR",
+                        "SUBSTITUTION",
+                        "TRANSFER",
+                        "TEST_WAIVER",
+                        "WAIVER",
+                        "PLAN"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "JsonProgramInfo": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "primaryProgram": {
+                    "type": "boolean"
+                },
+                "yearTermReentered": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "yearTermEntered": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "programType": {
+                    "type": "string"
+                },
+                "uri": {
+                    "format": "uri",
+                    "type": "string"
+                },
+                "mapUrl": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "JsonPlannableCourseGroup": {
+            "properties": {
+                "titleCode": {
+                    "type": "string"
+                },
+                "flags": {
+                    "items": {
+                        "enum": [
+                            "CAN_USE_AGAIN",
+                            "EXPIRED",
+                            "OBSOLETE_PLAN"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                },
+                "courses": {
+                    "items": {
+                        "$ref": "#/definitions/JsonCourse"
+                    },
+                    "type": "array"
+                },
+                "planLink": {
+                    "$ref": "#/definitions/JsonLink"
+                },
+                "curriculumId": {
+                    "type": "string"
+                },
+                "insufficientGrade": {
+                    "type": "boolean"
+                },
+                "planOptions": {
+                    "items": {
+                        "$ref": "#/definitions/PlanOption"
+                    },
+                    "type": "array"
+                },
+                "departmentName": {
+                    "type": "string"
+                },
+                "additionalInfo": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "variableHours": {
+                    "type": "boolean"
+                },
+                "hoursOptions": {
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "advanced": {
+                    "type": "boolean"
+                },
+                "transcriptTitle": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "LinkStatusLine": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/StatusLine"
+                },
+                {
+                    "properties": {
+                        "text": {
+                            "type": "string"
+                        },
+                        "target": {
+                            "type": "string"
+                        },
+                        "linkType": {
+                            "enum": [
+                                "usedElsewhere"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        }
+    },
+    "info": {
+        "title": "MyMap Web Services",
+        "description": "MyMap Web Services",
+        "version": "v4"
+    }
+}

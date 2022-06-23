@@ -1,0 +1,692 @@
+{
+    "basePath": "/domains/erp/hr/get_dmba_emp_summary/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/*": {
+            "get": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/get_dmba_emp_summary"
+                        },
+                        "description": "The default response type is JSON.  Add an Accept header with value=application/xml to return an XML response.",
+                        "examples": {
+                            "application/json": {
+                                "dmba_data": {
+                                    "employment_history": {
+                                        "history": [
+                                            {
+                                                "history_from_date": "2001-04-23",
+                                                "history_thru_date": "2002-01-11",
+                                                "history_company_code": "B03",
+                                                "history_company_description": "BRIGHAM YOUNG UNIVERSITY"
+                                            },
+                                            {
+                                                "history_from_date": "2014-07-14",
+                                                "history_thru_date": {},
+                                                "history_company_code": "B03",
+                                                "history_company_description": "BRIGHAM YOUNG UNIVERSITY"
+                                            }
+                                        ]
+                                    },
+                                    "group_term_life_spouse_amount": "2000",
+                                    "medical_billing_code": "A A LPF3NMCMDD",
+                                    "supplemental_group_term_life_effective_date": "2014-09-01",
+                                    "family_data": {
+                                        "dependant": [
+                                            {
+                                                "relationship": "Employee",
+                                                "first_name": "Blaine",
+                                                "ineligible_date": {},
+                                                "last_name": "DeBeers",
+                                                "birthdate": "1959-01-28",
+                                                "gender": "M"
+                                            },
+                                            {
+                                                "relationship": "Spouse",
+                                                "first_name": "Liv",
+                                                "ineligible_date": {},
+                                                "last_name": "Moore",
+                                                "birthdate": "1958-10-17",
+                                                "gender": "F"
+                                            },
+                                            {
+                                                "relationship": "Child",
+                                                "first_name": "Peyton",
+                                                "ineligible_date": {},
+                                                "last_name": "Charles",
+                                                "birthdate": "1978-07-01",
+                                                "gender": "F"
+                                            }
+                                        ]
+                                    },
+                                    "medical_plan_provider": "Deseret Value",
+                                    "group_term_life_dependant_amount": "2000",
+                                    "fsa_dependant_deduction_amount": "0",
+                                    "benlife_deduction_amount": "0",
+                                    "accidental_death_insurance_amount": "220000",
+                                    "savings_plans": {
+                                        "saving_plan": [
+                                            {
+                                                "plan_percent": "3.5",
+                                                "plan_effective_date": "2015-07-03",
+                                                "plan_deduction_code": "235",
+                                                "plan_pay_frequency": "Monthly",
+                                                "plan_deduction_amount": "234.56",
+                                                "plan_description": "DMBA RPP Retirement Benefit"
+                                            },
+                                            {
+                                                "plan_percent": "6",
+                                                "plan_effective_date": "2014-08-29",
+                                                "plan_deduction_code": "223",
+                                                "plan_pay_frequency": "Monthly",
+                                                "plan_deduction_amount": "123.45",
+                                                "plan_description": "DMBA Roth 401k"
+                                            },
+                                            {
+                                                "plan_percent": "4",
+                                                "plan_effective_date": "2015-06-26",
+                                                "plan_deduction_code": "233",
+                                                "plan_pay_frequency": "Monthly",
+                                                "plan_deduction_amount": "456.7",
+                                                "plan_description": "DMBA Thrift Match"
+                                            }
+                                        ]
+                                    },
+                                    "supplemental_group_term_life_spouse_amount": "100000",
+                                    "medical_plan_enrollment_date": "2014-07-14",
+                                    "supplemental_group_term_life_dependant_amount": "5000",
+                                    "fsa_medical_deduction_amount": "216.67",
+                                    "group_term_life_insurance_amount": "50000",
+                                    "group_term_life_effective_date": "2014-07-14",
+                                    "accidental_death_spouse_amount": "100000",
+                                    "metlife_deduction_amount": "0",
+                                    "loans": {
+                                        "loan": {}
+                                    },
+                                    "medical_deduction_amount": "108.2",
+                                    "accidental_death_deduction_amount": "13.6",
+                                    "liberty_deduction_amount": "0",
+                                    "supplemental_group_term_life_deduction_amount": "13.22",
+                                    "eye_med_deduction_amount": "26.3",
+                                    "accidental_death_dependant_amount": "5000",
+                                    "effective_date": "2017-03-12",
+                                    "accidental_death_effective_date": "2014-09-01",
+                                    "supplemental_group_term_life_insurance_amount": "220000"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "plan_effective_date": {
+            "properties": {
+                "value": {
+                    "format": "date",
+                    "type": "string"
+                }
+            }
+        },
+        "family_data": {
+            "properties": {
+                "dependant": {
+                    "$ref": "#/definitions/dependant"
+                }
+            }
+        },
+        "loan_description": {
+            "properties": {
+                "value": {
+                    "maxLength": 30,
+                    "type": "string"
+                }
+            }
+        },
+        "dmba_data": {
+            "properties": {
+                "employment_history": {
+                    "$ref": "#/definitions/employment_history"
+                },
+                "group_term_life_spouse_amount": {
+                    "$ref": "#/definitions/group_term_life_spouse_amount"
+                },
+                "medical_billing_code": {
+                    "$ref": "#/definitions/medical_billing_code"
+                },
+                "supplemental_group_term_life_effective_date": {
+                    "$ref": "#/definitions/supplemental_group_term_life_effective_date"
+                },
+                "family_data": {
+                    "$ref": "#/definitions/family_data"
+                },
+                "medical_plan_provider": {
+                    "$ref": "#/definitions/medical_plan_provider"
+                },
+                "group_term_life_dependant_amount": {
+                    "$ref": "#/definitions/group_term_life_dependant_amount"
+                },
+                "fsa_dependant_deduction_amount": {
+                    "$ref": "#/definitions/fsa_dependant_deduction_amount"
+                },
+                "benlife_deduction_amount": {
+                    "$ref": "#/definitions/benlife_deduction_amount"
+                },
+                "accidental_death_insurance_amount": {
+                    "$ref": "#/definitions/accidental_death_insurance_amount"
+                },
+                "savings_plans": {
+                    "$ref": "#/definitions/savings_plans"
+                },
+                "supplemental_group_term_life_spouse_amount": {
+                    "$ref": "#/definitions/supplemental_group_term_life_spouse_amount"
+                },
+                "medical_plan_enrollment_date": {
+                    "$ref": "#/definitions/medical_plan_enrollment_date"
+                },
+                "supplemental_group_term_life_dependant_amount": {
+                    "$ref": "#/definitions/supplemental_group_term_life_dependant_amount"
+                },
+                "fsa_medical_deduction_amount": {
+                    "$ref": "#/definitions/fsa_medical_deduction_amount"
+                },
+                "group_term_life_insurance_amount": {
+                    "$ref": "#/definitions/group_term_life_insurance_amount"
+                },
+                "group_term_life_effective_date": {
+                    "$ref": "#/definitions/group_term_life_effective_date"
+                },
+                "accidental_death_spouse_amount": {
+                    "$ref": "#/definitions/accidental_death_spouse_amount"
+                },
+                "metlife_deduction_amount": {
+                    "$ref": "#/definitions/metlife_deduction_amount"
+                },
+                "loans": {
+                    "$ref": "#/definitions/loans"
+                },
+                "medical_deduction_amount": {
+                    "$ref": "#/definitions/medical_deduction_amount"
+                },
+                "accidental_death_deduction_amount": {
+                    "$ref": "#/definitions/accidental_death_deduction_amount"
+                },
+                "liberty_deduction_amount": {
+                    "$ref": "#/definitions/liberty_deduction_amount"
+                },
+                "supplemental_group_term_life_deduction_amount": {
+                    "$ref": "#/definitions/supplemental_group_term_life_deduction_amount"
+                },
+                "eye_med_deduction_amount": {
+                    "$ref": "#/definitions/eye_med_deduction_amount"
+                },
+                "accidental_death_dependant_amount": {
+                    "$ref": "#/definitions/accidental_death_dependant_amount"
+                },
+                "effective_date": {
+                    "$ref": "#/definitions/effective_date"
+                },
+                "accidental_death_effective_date": {
+                    "$ref": "#/definitions/accidental_death_effective_date"
+                },
+                "supplemental_group_term_life_insurance_amount": {
+                    "$ref": "#/definitions/supplemental_group_term_life_insurance_amount"
+                }
+            }
+        },
+        "group_term_life_dependant_amount": {
+            "properties": {
+                "value": {
+                    "maxLength": 7,
+                    "type": "integer"
+                }
+            }
+        },
+        "first_name": {
+            "properties": {
+                "value": {
+                    "maxLength": 30,
+                    "type": "string"
+                }
+            }
+        },
+        "plan_pay_frequency": {
+            "properties": {
+                "value": {
+                    "maxLength": 5,
+                    "type": "string"
+                }
+            }
+        },
+        "gender": {
+            "properties": {
+                "value": {
+                    "maxLength": 1,
+                    "type": "string"
+                }
+            }
+        },
+        "supplemental_group_term_life_spouse_amount": {
+            "properties": {
+                "value": {
+                    "maxLength": 7,
+                    "type": "integer"
+                }
+            }
+        },
+        "supplemental_group_term_life_dependant_amount": {
+            "properties": {
+                "value": {
+                    "maxLength": 7,
+                    "type": "integer"
+                }
+            }
+        },
+        "medical_plan_enrollment_date": {
+            "properties": {
+                "value": {
+                    "format": "date",
+                    "type": "string"
+                }
+            }
+        },
+        "plan_deduction_code": {
+            "properties": {
+                "value": {
+                    "maxLength": 6,
+                    "type": "string"
+                }
+            }
+        },
+        "loan": {
+            "properties": {
+                "loan_amount": {
+                    "$ref": "#/definitions/loan_amount"
+                },
+                "loan_deduction_code": {
+                    "$ref": "#/definitions/loan_deduction_code"
+                },
+                "loan_description": {
+                    "$ref": "#/definitions/loan_description"
+                }
+            }
+        },
+        "metlife_deduction_amount": {
+            "properties": {
+                "value": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "liberty_deduction_amount": {
+            "properties": {
+                "value": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "medical_deduction_amount": {
+            "properties": {
+                "value": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "supplemental_group_term_life_deduction_amount": {
+            "properties": {
+                "value": {
+                    "format": "date",
+                    "type": "string"
+                }
+            }
+        },
+        "ineligible_date": {
+            "properties": {
+                "value": {
+                    "format": "date",
+                    "type": "string"
+                }
+            }
+        },
+        "eye_med_deduction_amount": {
+            "properties": {
+                "value": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "last_name": {
+            "properties": {
+                "value": {
+                    "maxLength": 30,
+                    "type": "string"
+                }
+            }
+        },
+        "accidental_death_effective_date": {
+            "properties": {
+                "value": {
+                    "format": "date",
+                    "type": "string"
+                }
+            }
+        },
+        "get_dmba_emp_summary": {
+            "properties": {
+                "dmba_data": {
+                    "$ref": "#/definitions/dmba_data"
+                }
+            }
+        },
+        "dependant": {
+            "properties": {
+                "relationship": {
+                    "$ref": "#/definitions/relationship"
+                },
+                "first_name": {
+                    "$ref": "#/definitions/first_name"
+                },
+                "ineligible_date": {
+                    "$ref": "#/definitions/ineligible_date"
+                },
+                "last_name": {
+                    "$ref": "#/definitions/last_name"
+                },
+                "birthdate": {
+                    "$ref": "#/definitions/birthdate"
+                },
+                "gender": {
+                    "$ref": "#/definitions/gender"
+                }
+            }
+        },
+        "loan_amount": {
+            "properties": {
+                "value": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "employment_history": {
+            "properties": {
+                "history": {
+                    "$ref": "#/definitions/history"
+                }
+            }
+        },
+        "group_term_life_spouse_amount": {
+            "properties": {
+                "value": {
+                    "maxLength": 7,
+                    "type": "integer"
+                }
+            }
+        },
+        "medical_billing_code": {
+            "properties": {
+                "value": {
+                    "maxLength": 14,
+                    "type": "string"
+                }
+            }
+        },
+        "supplemental_group_term_life_effective_date": {
+            "properties": {
+                "value": {
+                    "format": "date",
+                    "type": "string"
+                }
+            }
+        },
+        "medical_plan_provider": {
+            "properties": {
+                "value": {
+                    "maxLength": 30,
+                    "type": "string"
+                }
+            }
+        },
+        "plan_description": {
+            "properties": {
+                "value": {
+                    "maxLength": 30,
+                    "type": "string"
+                }
+            }
+        },
+        "fsa_dependant_deduction_amount": {
+            "properties": {
+                "value": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "history_company_code": {
+            "properties": {
+                "value": {
+                    "maxLength": 3,
+                    "type": "string"
+                }
+            }
+        },
+        "history_company_description": {
+            "properties": {
+                "value": {
+                    "maxLength": 30,
+                    "type": "string"
+                }
+            }
+        },
+        "benlife_deduction_amount": {
+            "properties": {
+                "value": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "loan_deduction_code": {
+            "properties": {
+                "value": {
+                    "maxLength": 6,
+                    "type": "string"
+                }
+            }
+        },
+        "history_from_date": {
+            "properties": {
+                "value": {
+                    "format": "date",
+                    "type": "string"
+                }
+            }
+        },
+        "plan_deduction_amount": {
+            "properties": {
+                "value": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "birthdate": {
+            "properties": {
+                "value": {
+                    "format": "date",
+                    "type": "string"
+                }
+            }
+        },
+        "accidental_death_insurance_amount": {
+            "properties": {
+                "value": {
+                    "maxLength": 7,
+                    "type": "integer"
+                }
+            }
+        },
+        "savings_plans": {
+            "properties": {
+                "saving_plan": {
+                    "$ref": "#/definitions/saving_plan"
+                }
+            }
+        },
+        "fsa_medical_deduction_amount": {
+            "properties": {
+                "value": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "group_term_life_insurance_amount": {
+            "properties": {
+                "value": {
+                    "maxLength": 7,
+                    "type": "integer"
+                }
+            }
+        },
+        "history_thru_date": {
+            "properties": {
+                "value": {
+                    "format": "date",
+                    "type": "string"
+                }
+            }
+        },
+        "group_term_life_effective_date": {
+            "properties": {
+                "value": {
+                    "format": "date",
+                    "type": "string"
+                }
+            }
+        },
+        "accidental_death_spouse_amount": {
+            "properties": {
+                "value": {
+                    "maxLength": 7,
+                    "type": "integer"
+                }
+            }
+        },
+        "plan_percent": {
+            "properties": {
+                "value": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "relationship": {
+            "properties": {
+                "value": {
+                    "maxLength": 2,
+                    "type": "string"
+                }
+            }
+        },
+        "loans": {
+            "properties": {
+                "loan": {
+                    "$ref": "#/definitions/loan"
+                }
+            }
+        },
+        "history": {
+            "properties": {
+                "history_from_date": {
+                    "$ref": "#/definitions/history_from_date"
+                },
+                "history_thru_date": {
+                    "$ref": "#/definitions/history_thru_date"
+                },
+                "history_company_code": {
+                    "$ref": "#/definitions/history_company_code"
+                },
+                "history_company_description": {
+                    "$ref": "#/definitions/history_company_description"
+                }
+            }
+        },
+        "accidental_death_deduction_amount": {
+            "properties": {
+                "value": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "accidental_death_dependant_amount": {
+            "properties": {
+                "value": {
+                    "maxLength": 7,
+                    "type": "integer"
+                }
+            }
+        },
+        "effective_date": {
+            "properties": {
+                "value": {
+                    "format": "date",
+                    "type": "string"
+                }
+            }
+        },
+        "saving_plan": {
+            "properties": {
+                "plan_percent": {
+                    "$ref": "#/definitions/plan_percent"
+                },
+                "plan_effective_date": {
+                    "$ref": "#/definitions/plan_effective_date"
+                },
+                "plan_deduction_code": {
+                    "$ref": "#/definitions/plan_deduction_code"
+                },
+                "plan_pay_frequency": {
+                    "$ref": "#/definitions/plan_pay_frequency"
+                },
+                "plan_deduction_amount": {
+                    "$ref": "#/definitions/plan_deduction_amount"
+                },
+                "plan_description": {
+                    "$ref": "#/definitions/plan_description"
+                }
+            }
+        },
+        "supplemental_group_term_life_insurance_amount": {
+            "properties": {
+                "value": {
+                    "maxLength": 7,
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "GET_DMBA_EMP_SUMMARY",
+        "description": "Self-service web service that returns DMBA Employee Summary Data",
+        "version": "v1"
+    }
+}

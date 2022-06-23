@@ -1,0 +1,1273 @@
+{
+    "basePath": "/domains/sis/event/1.0",
+    "x-mock_json": {
+        "subscription": {
+            "links": {
+                "health__info": {
+                    "method": "GET",
+                    "rel": "self",
+                    "href": "https://api.byu.edu/domains/sis/events/v1/health"
+                }
+            },
+            "metadata": {
+                "message": "Success",
+                "code": 200
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{stg}/queued": {
+            "x-controller": "evtCtrl",
+            "post": {
+                "summary": "The c framework can notify of an event in the queue. It also sends its hostname as {stg}.",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "A simple event receiver",
+                "parameters": [
+                    {
+                        "description": "Event stage",
+                        "name": "stg",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/queueDetail"
+                        },
+                        "description": "Queue detail",
+                        "name": "queue",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/health"
+                        },
+                        "description": "Service is healthy"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Queue message not understood."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "queued",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "summary": "The c framework can notify of an event in the queue. It also sends its hostname as {stg}.",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "A simple event receiver",
+                "parameters": [
+                    {
+                        "description": "Event stage",
+                        "name": "stg",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/queueDetail"
+                        },
+                        "description": "Queue detail",
+                        "name": "queue",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/health"
+                        },
+                        "description": "Service is healthy"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Queue message not understood."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getQueued",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/health": {
+            "x-controller": "evtCtrl",
+            "get": {
+                "summary": "Health check",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "A simple path health check",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/healthDetail"
+                        },
+                        "description": "Event detail",
+                        "name": "health",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/health"
+                        },
+                        "description": "Service is healthy"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "health",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/domain/subscription/{idp1}-{idp2}-{idp3}-{idp4}-{idp5}/owners": {
+            "x-controller": "subscription",
+            "post": {
+                "summary": "add/del subscription owners.",
+                "tags": [
+                    "owners"
+                ],
+                "description": "Add or remove registraton owners for the id.",
+                "parameters": [
+                    {
+                        "description": "Subscription id",
+                        "name": "idp1",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp2",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp3",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp4",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp5",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/ownerPostBody"
+                        },
+                        "description": "Set of owners that should be subscribed.",
+                        "name": "ownChg",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionResponse"
+                        },
+                        "description": "Successfull, owners subscription changed."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "chgSubscriptionOwnerForId2",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "put": {
+                "summary": "Set subscription owners.",
+                "tags": [
+                    "owners"
+                ],
+                "description": "Set subscription owners for the id.",
+                "parameters": [
+                    {
+                        "description": "Subscription id",
+                        "name": "idp1",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp2",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp3",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp4",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp5",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/genericArray"
+                        },
+                        "description": "Set owners that should be subscribed.",
+                        "name": "ownSet",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionResponse"
+                        },
+                        "description": "Successfull, subscription subscription."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "setSubscriptionOwnerForId2",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/restartQueue": {
+            "x-controller": "subscription",
+            "get": {
+                "summary": "Restart event queue.",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "Restart the event queue.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/queueDetail"
+                        },
+                        "description": "Event detail",
+                        "name": "event",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/health"
+                        },
+                        "description": "Service is healthy"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "restartQueue",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/domain/subscription/{id}/entities": {
+            "x-controller": "subscription",
+            "post": {
+                "summary": "add/del subscription entities.",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "Add or remove subscription entities for id.",
+                "parameters": [
+                    {
+                        "description": "Subscription id",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/entityPostBody"
+                        },
+                        "description": "Set of entities that should be subscribed.",
+                        "name": "entitySet",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionResponse"
+                        },
+                        "description": "Successfull, changed entities for subscription id."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "chgSubscriptionEntityForId",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "put": {
+                "summary": "Set call_attribute, domain, entity, event_type from subscription.",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "Set domain, entity, event_type from subscription for the id.",
+                "parameters": [
+                    {
+                        "description": "Subscription id",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/entityList"
+                        },
+                        "description": "Set of call_attribute, domain, entity, event_types that should be subscribed.",
+                        "name": "entitySet",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionResponse"
+                        },
+                        "description": "Successfully id subscriptions."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "setSubscriptionEntityForId",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{stg}/event": {
+            "x-controller": "evtCtrl",
+            "post": {
+                "summary": "This isn't currently in use.",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "A simple event receiver",
+                "parameters": [
+                    {
+                        "description": "Event stage",
+                        "name": "stg",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/eventDetail"
+                        },
+                        "description": "Event detail",
+                        "name": "event",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/health"
+                        },
+                        "description": "Service is healthy"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "webEventStage",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/domain/subscription/{idp1}-{idp2}-{idp3}-{idp4}-{idp5}/entities": {
+            "x-controller": "subscription",
+            "post": {
+                "summary": "add/del subscription entities.",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "Add or remove subscription entities for id.",
+                "parameters": [
+                    {
+                        "description": "Subscription id",
+                        "name": "idp1",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp2",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp3",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp4",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp5",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/entityPostBody"
+                        },
+                        "description": "Set of entities that should be subscribed.",
+                        "name": "entitySet",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionResponse"
+                        },
+                        "description": "Successfull, changed entities for subscription id."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "chgSubscriptionEntityForId2",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "put": {
+                "summary": "Set call_attribute, domain, entity, event_type from subscription.",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "Set domain, entity, event_type from subscription for the id.",
+                "parameters": [
+                    {
+                        "description": "Subscription id",
+                        "name": "idp1",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp2",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp3",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp4",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "idp5",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/entityList"
+                        },
+                        "description": "Set of call_attribute, domain, entity, event_types that should be subscribed.",
+                        "name": "entitySet",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionResponse"
+                        },
+                        "description": "Successfully id subscriptions."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "setSubscriptionEntityForId2",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/domain/subscription": {
+            "x-controller": "subscription",
+            "put": {
+                "summary": "Create the subscription for the given url.",
+                "tags": [
+                    "subscribe"
+                ],
+                "description": "Create a subscription for the url provided in the body.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionBody"
+                        },
+                        "description": "The subscription url.",
+                        "name": "subscription",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionResponse"
+                        },
+                        "description": "Successfully removed subscription for the id."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "createSubscription",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "summary": "List of subscriptions.",
+                "tags": [
+                    "subscribe"
+                ],
+                "description": "List of current domain subscriptions this authentication has access to.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionListResponse"
+                        },
+                        "description": "Successfully listed subscriptions."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "listSubscriptions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/domain/entities": {
+            "x-controller": "subscription",
+            "get": {
+                "summary": "List of available entities.",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "Returns call_attribute, domain, entity, event_type entities available for domain subscription.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/entityListResult"
+                        },
+                        "description": "Successfully id subscriptions."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "listEntities",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/domain/subscription/{id}": {
+            "x-controller": "subscription",
+            "get": {
+                "summary": "Entity subscriptions requested for id",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "Returns call_attribute, domain, entity, event_type subscriptions for the given id.",
+                "parameters": [
+                    {
+                        "description": "Subscription id",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionResponse"
+                        },
+                        "description": "Successfully id subscriptions."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "getSubscriptionForId",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "summary": "Remove subscriptions for the given id.",
+                "tags": [
+                    "remove"
+                ],
+                "description": "Remove subscriptions for the given id.",
+                "parameters": [
+                    {
+                        "description": "Subscription id",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionRemovalResponse"
+                        },
+                        "description": "Successfully removed subscription for the id."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "delSubscriptionForId",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/domain/subscription/{id}/owners": {
+            "x-controller": "subscription",
+            "post": {
+                "summary": "add/del subscription owners.",
+                "tags": [
+                    "owners"
+                ],
+                "description": "Add or remove registraton owners for the id.",
+                "parameters": [
+                    {
+                        "description": "Subscription id",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/ownerPostBody"
+                        },
+                        "description": "Set of owners that should be subscribed.",
+                        "name": "ownChg",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionResponse"
+                        },
+                        "description": "Successfull, owners subscription changed."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "chgSubscriptionOwnerForId",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "put": {
+                "summary": "Set subscription owners.",
+                "tags": [
+                    "owners"
+                ],
+                "description": "Set subscription owners for the id.",
+                "parameters": [
+                    {
+                        "description": "Subscription id",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/genericArray"
+                        },
+                        "description": "Set owners that should be subscribed.",
+                        "name": "ownSet",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionResponse"
+                        },
+                        "description": "Successfull, subscription subscription."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "setSubscriptionOwnerForId",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/event": {
+            "x-controller": "evtCtrl",
+            "post": {
+                "summary": "Event receiver",
+                "tags": [
+                    "retrieve"
+                ],
+                "description": "A simple event receiver. These are actual events not just an entity.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/eventDetail"
+                        },
+                        "description": "Event detail",
+                        "name": "event",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/health"
+                        },
+                        "description": "Service is healthy"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "webEvent",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/domain/subscription/{id}/{code}": {
+            "x-controller": "subscription",
+            "get": {
+                "summary": "Verify subscriptions for the given id.",
+                "tags": [
+                    "verify"
+                ],
+                "description": "Verify subscriptions for the given id.",
+                "parameters": [
+                    {
+                        "description": "Subscription id",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Subscription id",
+                        "name": "code",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscriptionVerificationResponse"
+                        },
+                        "description": "Successfully verified subscription for the id."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Error trying to service request."
+                    }
+                },
+                "operationId": "verifySubscriptionForId",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "subscriptionVerificationResponse": {
+            "description": "Standard verification response",
+            "type": "object"
+        },
+        "subscriptionResponse": {
+            "description": "Standard subscription response",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "events": {
+                    "$ref": "#/definitions/entitySetData"
+                },
+                "by": {
+                    "$ref": "#/definitions/modifiedBy"
+                },
+                "owners": {
+                    "$ref": "#/definitions/ownerSetData"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "type": "object",
+            "required": [
+                "metadata"
+            ]
+        },
+        "ownerList": {
+            "items": {
+                "$ref": "#/definitions/owner"
+            },
+            "description": "Owners of a subscription.",
+            "type": "array"
+        },
+        "error": {
+            "description": "Error response",
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "type": "object",
+            "required": [
+                "metadata"
+            ]
+        },
+        "genericObject": {
+            "description": "Generic object",
+            "type": "object"
+        },
+        "simple_metadata": {
+            "description": "Standard response to all service calls.",
+            "properties": {
+                "message": {
+                    "default": "Success",
+                    "x-variable": "validation_response_message",
+                    "type": "string"
+                },
+                "code": {
+                    "default": 0,
+                    "x-variable": "validation_response_code",
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ]
+        },
+        "modifiedBy": {
+            "description": "Record of who made the change and when.",
+            "properties": {
+                "dt": {
+                    "type": "number"
+                },
+                "byuId": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "entity": {
+            "description": "Event entity",
+            "properties": {
+                "call_attribute": {
+                    "type": "string"
+                },
+                "entity": {
+                    "type": "string"
+                },
+                "event_type": {
+                    "type": "string"
+                },
+                "domain": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "call_attribute",
+                "domain",
+                "entity",
+                "event_type"
+            ]
+        },
+        "ownerSetData": {
+            "items": {
+                "properties": {
+                    "personId": {
+                        "type": "string"
+                    },
+                    "netId": {
+                        "type": "string"
+                    },
+                    "by": {
+                        "$ref": "#/definitions/modifiedBy"
+                    },
+                    "byuId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "byuId",
+                    "personId",
+                    "netId"
+                ]
+            },
+            "description": "Owners of a subscription.",
+            "type": "array"
+        },
+        "subscriptionBody": {
+            "description": "Subscription request.",
+            "properties": {
+                "events": {
+                    "$ref": "#/definitions/entityList"
+                },
+                "owners": {
+                    "$ref": "#/definitions/ownerList"
+                },
+                "secure_url": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "secure_url"
+            ]
+        },
+        "entityListResult": {
+            "description": "Entities of a subscription.",
+            "properties": {
+                "entities": {
+                    "$ref": "#/definitions/entityList"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "type": "object",
+            "required": [
+                "metadata",
+                "entities"
+            ]
+        },
+        "health": {
+            "properties": {
+                "message": {
+                    "description": "Health message",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ownerPostBody": {
+            "description": "Add and/or remove owners from a subscription.",
+            "properties": {
+                "del": {
+                    "$ref": "#/definitions/ownerList"
+                },
+                "add": {
+                    "$ref": "#/definitions/ownerList"
+                }
+            },
+            "type": "object"
+        },
+        "entityPostBody": {
+            "description": "Add and/or remove call_attribute, domain, entity, event_types from this domain event subscriber.",
+            "properties": {
+                "del": {
+                    "$ref": "#/definitions/entityList"
+                },
+                "add": {
+                    "$ref": "#/definitions/entityList"
+                }
+            },
+            "type": "object"
+        },
+        "healthDetail": {
+            "description": "Optional details of the health request",
+            "type": "object"
+        },
+        "entityList": {
+            "items": {
+                "$ref": "#/definitions/entity"
+            },
+            "description": "Entities of a subscription.",
+            "type": "array"
+        },
+        "queueDetail": {
+            "description": "Details of the queue pushed to us",
+            "type": "object"
+        },
+        "owner": {
+            "description": "Subscription owner",
+            "properties": {
+                "personId": {
+                    "type": "string"
+                },
+                "netId": {
+                    "type": "string"
+                },
+                "byuId": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "byuId",
+                "netId",
+                "personId"
+            ]
+        },
+        "subscriptionListResponse": {
+            "description": "List of subscriptions.",
+            "properties": {
+                "list": {
+                    "items": {
+                        "$ref": "#/definitions/subscriptionBody"
+                    },
+                    "type": "array"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "type": "object",
+            "required": [
+                "metadata"
+            ]
+        },
+        "genericArray": {
+            "items": {
+                "$ref": "#/definitions/genericObject"
+            },
+            "description": "Generic array",
+            "type": "array"
+        },
+        "entitySetData": {
+            "items": {
+                "properties": {
+                    "call_attribute": {
+                        "type": "string"
+                    },
+                    "entity": {
+                        "type": "string"
+                    },
+                    "event_type": {
+                        "type": "string"
+                    },
+                    "domain": {
+                        "type": "string"
+                    },
+                    "by": {
+                        "$ref": "#/definitions/modifiedBy"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "call_attribute",
+                    "domain",
+                    "entity",
+                    "event_type"
+                ]
+            },
+            "description": "Entities of a subscription.",
+            "type": "array"
+        },
+        "eventDetail": {
+            "description": "Details of the event pushed to us",
+            "type": "object"
+        },
+        "subscriptionRemovalResponse": {
+            "description": "Standard removal response",
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/simple_metadata"
+                }
+            },
+            "type": "object",
+            "required": [
+                "metadata"
+            ]
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "BYUsisEvents",
+        "description": "Event endpoint for BYU SIS aka AIM.",
+        "license": {
+            "name": "Apache-2.0"
+        },
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

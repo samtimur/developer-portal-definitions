@@ -1,0 +1,140 @@
+{
+    "basePath": "/domains/banking-validation/v2",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/admin/call-log/csv": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "since",
+                        "type": "number",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "before",
+                        "type": "number",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "userId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/admin/call-log": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "since",
+                        "type": "number",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "before",
+                        "type": "number",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "userId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "count",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/admin/call-log/count": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/validate-ach": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "routingNumber",
+                        "type": "string",
+                        "required": true,
+                        "in": "formData"
+                    },
+                    {
+                        "name": "accountNumber",
+                        "type": "string",
+                        "required": true,
+                        "in": "formData"
+                    },
+                    {
+                        "name": "type",
+                        "type": "string",
+                        "required": true,
+                        "in": "formData"
+                    },
+                    {
+                        "default": false,
+                        "name": "bypassCache",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": true,
+                        "name": "allowPaidCalls",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "Caller-BYU-Person-ID",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "BankingValidation",
+        "description": "ACH Banking Validation web service to validate echecks",
+        "version": "v2"
+    }
+}

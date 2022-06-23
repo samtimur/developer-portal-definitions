@@ -1,0 +1,1976 @@
+{
+    "basePath": "/domains/flashcards/v1",
+    "paths": {
+        "/buckets/{bucket}/decks/{deck}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Removes given deck from given bucket",
+                "tags": [
+                    "buckets",
+                    "decks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "id of bucket",
+                        "name": "bucket",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Deck"
+                            },
+                            "type": "array"
+                        },
+                        "description": "all remaining decks for given bucket"
+                    },
+                    "401": {
+                        "description": "not authorized - only bucket creator can remove deck"
+                    }
+                }
+            }
+        },
+        "/decks/{deck}/ratings/{rating}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch given rating from given deck",
+                "tags": [
+                    "decks",
+                    "ratings"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets a rating belonging to a deck, both specified by ID.  Ensures that the user has\nread access to the deck and that the rating is actually in the deck as passed by the\nuser.  If these conditions are not met, gives a 404.  Otherwise, returns 200 along with\nthe JSON-ified rating model.",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "id of rating",
+                        "name": "rating",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Rating"
+                            },
+                            "type": "array"
+                        },
+                        "description": "given rating from given deck"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to the deck or card not found"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Deletes given rating from given deck",
+                "tags": [
+                    "decks",
+                    "ratings"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes a rating belonging to a deck, both specified by ID.  Ensures that the user has\nread access to the deck and that the rating is actually in the deck as passed by the\nuser.  If these conditions are not met, gives a 404.  Also, ensures that the requesting\nuser is the owner of the rating.  Returns a 401 if this is not true.  On success, returns\na 201.",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "id of rating",
+                        "name": "rating",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "deleted rating"
+                    },
+                    "404": {
+                        "description": "rating not found - must own rating to delete"
+                    }
+                }
+            }
+        },
+        "/shares/{share}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Deletes given share from given deck",
+                "tags": [
+                    "decks",
+                    "shares"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes a rating, specified by ID.  Gets the deck and defers to destroyWithDeck",
+                "parameters": [
+                    {
+                        "description": "id of share",
+                        "name": "share",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "no response"
+                    },
+                    "401": {
+                        "description": "must own share to delete"
+                    },
+                    "404": {
+                        "description": "share not found"
+                    }
+                }
+            }
+        },
+        "/ratings/user/{user}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch ratings for given user",
+                "tags": [
+                    "ratings",
+                    "users"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets all the ratings by a given user.  Only allows the user to access their own ratings.\nReturns a 401 if the client tries to access someone else's ratings.  On success, returns\n200 with a json array.",
+                "parameters": [
+                    {
+                        "description": "person id of user",
+                        "name": "user",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Rating"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of ratings for given user"
+                    },
+                    "401": {
+                        "description": "not authorized - not current user"
+                    }
+                }
+            }
+        },
+        "/ratings/{rating}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch given rating",
+                "tags": [
+                    "ratings"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets a rating, specified by ID.  Gets the deck and defers to showWithDeck.",
+                "parameters": [
+                    {
+                        "description": "id of rating",
+                        "name": "rating",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Rating"
+                            },
+                            "type": "array"
+                        },
+                        "description": "given rating"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to rating's deck or card not found"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Deletes given rating from given deck",
+                "tags": [
+                    "decks",
+                    "ratings"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes a rating, specified by ID.  Gets the deck and defers to destroyWithDeck",
+                "parameters": [
+                    {
+                        "description": "id of rating",
+                        "name": "rating",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "deleted rating"
+                    },
+                    "404": {
+                        "description": "rating not found - must own rating to delete"
+                    }
+                }
+            }
+        },
+        "/decks/{deck}/views/count": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch view count for given deck",
+                "tags": [
+                    "decks",
+                    "views"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "view count for given deck"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to the deck"
+                    }
+                }
+            }
+        },
+        "/decks/{deck}/cards/{card}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Updates card info using given attributes",
+                "tags": [
+                    "decks",
+                    "cards"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Checks if user can edit the card's deck, then sets the changed attributes\non the card, saves, and returns saved card.",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "id of card",
+                        "name": "card",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CreateCard"
+                        },
+                        "description": "Any of these attributes may be included",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Card"
+                        },
+                        "description": "updated card"
+                    },
+                    "404": {
+                        "description": "card not found - must have write access to deck"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch given card from given deck",
+                "tags": [
+                    "decks",
+                    "cards"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "If user has access to the deck and the card is in the deck,\nreturns the requested card.",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "id of card",
+                        "name": "card",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Card"
+                            },
+                            "type": "array"
+                        },
+                        "description": "given card from given deck"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to the deck or card not found"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Deletes given card from given deck",
+                "tags": [
+                    "decks",
+                    "cards"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes a card belonging to a deck, both specified by ID.  Ensures that the user has\nread access to the deck and that the card is actually in the deck as passed by the\nuser.  If these conditions are not met, gives a 404.  Also, ensures that the requesting\nuser is the owner of the card.  Returns a 401 if this is not true.  On success, returns\na 201.",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "id of card",
+                        "name": "card",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "deleted card"
+                    },
+                    "404": {
+                        "description": "card not found - must own card to delete"
+                    }
+                }
+            }
+        },
+        "/buckets/{bucket}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Updates bucket info using given attributes",
+                "tags": [
+                    "buckets"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Uses the attributes passed in, and checks them against the bucket's list\nof editable attributes. Edits are only allowed by the user who created\nthe bucket.",
+                "parameters": [
+                    {
+                        "description": "id of bucket",
+                        "name": "bucket",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CreateBucket"
+                        },
+                        "description": "Any of these attributes may be included",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Bucket"
+                        },
+                        "description": "updated bucket"
+                    },
+                    "404": {
+                        "description": "bucket not found"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Retrieves bucket with given id",
+                "tags": [
+                    "buckets"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Should eager load decks? or deck ids?",
+                "parameters": [
+                    {
+                        "description": "id of bucket",
+                        "name": "bucket",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Bucket"
+                        },
+                        "description": "bucket with given id"
+                    },
+                    "404": {
+                        "description": "bucket not found"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Removes given bucket",
+                "tags": [
+                    "buckets"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "id of bucket",
+                        "name": "bucket",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "bucket has been deleted"
+                    },
+                    "401": {
+                        "description": "not authorized - only bucket creator can delete"
+                    }
+                }
+            }
+        },
+        "/decks/{deck}/views": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Creates a new view for given deck",
+                "tags": [
+                    "decks",
+                    "views"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CreateView"
+                        },
+                        "description": "attributes for the new view",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/View"
+                            },
+                            "type": "array"
+                        },
+                        "description": "newly created view"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to the deck"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch views for given deck",
+                "tags": [
+                    "decks",
+                    "views"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/View"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of views for given deck"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to the deck"
+                    }
+                }
+            }
+        },
+        "/decks/{deck}/shares": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Creates a new share for given deck",
+                "tags": [
+                    "decks",
+                    "shares"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Either shared_with or shared_with_course *must* be included.\nAny one of can_read, can_copy, can_write *must* also be included.\nPrivileges stack - ie copy access also has read, and write has all.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CreateShare"
+                        },
+                        "description": "attributes for the new share",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Share"
+                            },
+                            "type": "array"
+                        },
+                        "description": "newly created share"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to the deck"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch shares for given deck",
+                "tags": [
+                    "decks",
+                    "shares"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Share"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of shares for given deck"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to the deck"
+                    }
+                }
+            }
+        },
+        "/user/{user}/buckets": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch buckets for given user",
+                "tags": [
+                    "buckets",
+                    "users"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Currently, this only works for the logged in user, so is the same as all.\nHowever, in the future could be used with different users.\nGets all buckets created by user that was passed in.\nReturns 401 if incorrect user is passed in.",
+                "parameters": [
+                    {
+                        "description": "person id of user",
+                        "name": "user",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Bucket"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of buckets for given user"
+                    },
+                    "401": {
+                        "description": "not authorized - not current user"
+                    }
+                }
+            }
+        },
+        "/user/{user}/ratings": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch ratings for given user",
+                "tags": [
+                    "ratings",
+                    "users"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets all the ratings by a given user.  Only allows the user to access their own ratings.\nReturns a 401 if the client tries to access someone else's ratings.  On success, returns\n200 with a json array.",
+                "parameters": [
+                    {
+                        "description": "person id of user",
+                        "name": "user",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Rating"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of ratings for given user"
+                    },
+                    "401": {
+                        "description": "not authorized - not current user"
+                    }
+                }
+            }
+        },
+        "/cards/{card}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Updates card info using given attributes",
+                "tags": [
+                    "cards"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Checks if user can edit the card's deck, then sets the changed attributes\non the card, saves, and returns saved card.",
+                "parameters": [
+                    {
+                        "description": "id of card",
+                        "name": "card",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CreateCard"
+                        },
+                        "description": "Any of these attributes may be included",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Card"
+                        },
+                        "description": "updated card"
+                    },
+                    "404": {
+                        "description": "card not found - must have write access to deck"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch given card",
+                "tags": [
+                    "cards"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Finds the card's deck model, then defers to showWithDeck.",
+                "parameters": [
+                    {
+                        "description": "id of card",
+                        "name": "card",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Card"
+                            },
+                            "type": "array"
+                        },
+                        "description": "given card"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to card's deck or card not found"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Deletes given card",
+                "tags": [
+                    "cards"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes a card, specified by ID.  Gets the deck and defers to destroyWithDeck",
+                "parameters": [
+                    {
+                        "description": "id of card",
+                        "name": "card",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "deleted card"
+                    },
+                    "404": {
+                        "description": "card not found - must own card to delete"
+                    }
+                }
+            }
+        },
+        "/decks": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Creates a new deck",
+                "tags": [
+                    "decks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Creates a new deck and adds one blank card to it.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CreateDeck"
+                        },
+                        "description": "attributes for the new deck",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Deck"
+                            },
+                            "type": "array"
+                        },
+                        "description": "newly created deck"
+                    },
+                    "422": {
+                        "description": "validation error - title required"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch decks for current user",
+                "tags": [
+                    "decks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets all decks for current user, which includes decks created by that user,\nand decks shared with current user (with any level of privilege).",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Deck"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of decks for current user"
+                    }
+                }
+            }
+        },
+        "/decks/recent": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch decks recently viewed by current user",
+                "tags": [
+                    "decks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets up to last 10 decks recently viewed by current user.\nSorted by most recently viewed deck first.\nEager loads the average rating and returns it",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Deck"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of decks recently viewed by current user"
+                    }
+                }
+            }
+        },
+        "/decks/created": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch decks created by current user",
+                "tags": [
+                    "decks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Deck"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of decks created by current user"
+                    }
+                }
+            }
+        },
+        "/user/{user}/decks": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch decks for given user",
+                "tags": [
+                    "decks",
+                    "users"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Currently, this only works for the logged in user, so is the same as all.\nHowever, in the future could be used with different users.\nGets all decks shared with and created by user that was passed in.\nReturns 401 if incorrect user is passed in.",
+                "parameters": [
+                    {
+                        "description": "person id of user",
+                        "name": "user",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Deck"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of decks for given user"
+                    },
+                    "401": {
+                        "description": "not authorized - not current user"
+                    }
+                }
+            }
+        },
+        "/files/{file}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch given file",
+                "tags": [
+                    "files"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "id of file",
+                        "name": "file",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "file"
+                        },
+                        "description": "given file"
+                    }
+                }
+            }
+        },
+        "/decks/{deck}/shares/{share}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Deletes given share from given deck",
+                "tags": [
+                    "decks",
+                    "shares"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes a rating belonging to a deck, both specified by ID.  Ensures that the user has\nread access to the deck and that the rating is actually in the deck as passed by the\nuser.  If these conditions are not met, gives a 404.  Also, ensures that the requesting\nuser is the owner of the rating.  Returns a 401 if this is not true.  On success, returns\na 201.",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "id of share",
+                        "name": "share",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "no response"
+                    },
+                    "401": {
+                        "description": "must own share to delete"
+                    },
+                    "404": {
+                        "description": "share not found"
+                    }
+                }
+            }
+        },
+        "/buckets/{bucket}/decks": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Adds given deck to given bucket",
+                "tags": [
+                    "buckets",
+                    "decks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "id of bucket",
+                        "name": "bucket",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/DeckID"
+                        },
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Deck"
+                            },
+                            "type": "array"
+                        },
+                        "description": "all decks for given bucket"
+                    },
+                    "401": {
+                        "description": "not authorized - only bucket creator can add deck"
+                    },
+                    "422": {
+                        "description": "validation error - deck may only be in one bucket at a time"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch decks for given bucket",
+                "tags": [
+                    "buckets",
+                    "decks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "id of bucket",
+                        "name": "bucket",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Deck"
+                            },
+                            "type": "array"
+                        },
+                        "description": "all decks for given bucket"
+                    }
+                }
+            }
+        },
+        "/buckets": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Creates a new bucket",
+                "tags": [
+                    "buckets"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Creates a new bucket using attributes passed in the request.\nReturns 201 if bucket created, or 422 if required attribute 'title'\nis not included. Display order defaults to 0 if not included.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CreateBucket"
+                        },
+                        "description": "attributes for the new bucket",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Bucket"
+                            },
+                            "type": "array"
+                        },
+                        "description": "newly created bucket"
+                    },
+                    "422": {
+                        "description": "validation error - title required"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch buckets for current user",
+                "tags": [
+                    "buckets"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets all buckets (but not decks?) for current user.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Bucket"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of buckets for current user"
+                    }
+                }
+            }
+        },
+        "/decks/{deck}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Updates deck info using given attributes",
+                "tags": [
+                    "decks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Uses the attributes passed in, and checks them against the Deck's list\nof editable attributes. For public read/copy, checks if current user is\nthe user who created the deck as well.",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CreateDeck"
+                        },
+                        "description": "Any of these attributes may be included",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Deck"
+                        },
+                        "description": "updated deck"
+                    },
+                    "404": {
+                        "description": "deck not found"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Retrieves deck with given id",
+                "tags": [
+                    "decks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Checks if current user has permission to access deck before returning.\nEager loads everything: views, ratings, scores, shares, cards.",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Deck"
+                        },
+                        "description": "deck with given id"
+                    },
+                    "404": {
+                        "description": "deck not found"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Removes given deck",
+                "tags": [
+                    "decks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Only the user who created the deck is allowed to delete it.",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "bucket",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "deck has been deleted"
+                    },
+                    "401": {
+                        "description": "not authorized - only deck creator can delete"
+                    }
+                }
+            }
+        },
+        "/cards/user/{user}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch cards for given user",
+                "tags": [
+                    "cards",
+                    "users"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets all the cards by a given user.  Only allows the user to access their own cards.",
+                "parameters": [
+                    {
+                        "description": "person id of user",
+                        "name": "user",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Card"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of cards for given user"
+                    },
+                    "401": {
+                        "description": "not authorized - not current user"
+                    }
+                }
+            }
+        },
+        "/decks/{deck}/cards": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Creates a new card for given deck",
+                "tags": [
+                    "decks",
+                    "cards"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Using the attributes provided, creates a new card.",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CreateCard"
+                        },
+                        "description": "attributes for the new card",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Card"
+                            },
+                            "type": "array"
+                        },
+                        "description": "newly created card"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to the deck"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch cards for given deck",
+                "tags": [
+                    "decks",
+                    "cards"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "If user has access to the deck, returns cards of that deck.",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Card"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of cards for given deck"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to the deck"
+                    }
+                }
+            }
+        },
+        "/files": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Uploads a file",
+                "tags": [
+                    "files"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Only image or audio",
+                        "name": "file",
+                        "type": "file",
+                        "required": true,
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "file is uploaded"
+                    }
+                }
+            }
+        },
+        "/decks/{deck}/ratings": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Creates a new rating for given deck",
+                "tags": [
+                    "decks",
+                    "ratings"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Creates a rating of a given deck.  Ensures that the accessing user has read\naccess to the deck.  Returns a 404 if the user doesn't have read access to\nthe given deck or if the deck does not exist.  Validates the input before\ncreating the rating.  Upon error, gives a 422 along with a JSON object describing\nthe validation error(s).  Upon success, returns 200 along with the JSON-ified model.",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CreateRating"
+                        },
+                        "description": "attributes for the new rating",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Rating"
+                            },
+                            "type": "array"
+                        },
+                        "description": "newly created rating"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to the deck"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch ratings for given deck",
+                "tags": [
+                    "decks",
+                    "ratings"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets all of the ratings of the given deck.  Ensures that the accessing user\nhas read access to the deck.  Returns a 404 if the user does not have read\naccess to the deck or if the deck does not exist.",
+                "parameters": [
+                    {
+                        "description": "id of deck",
+                        "name": "deck",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Rating"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of ratings for given deck"
+                    },
+                    "404": {
+                        "description": "Must have at least read access to the deck"
+                    }
+                }
+            }
+        },
+        "/user/{user}/cards": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch cards for given user",
+                "tags": [
+                    "cards",
+                    "users"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets all the cards by a given user.  Only allows the user to access their own cards.",
+                "parameters": [
+                    {
+                        "description": "person id of user",
+                        "name": "user",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Card"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of cards for given user"
+                    },
+                    "401": {
+                        "description": "not authorized - not current user"
+                    }
+                }
+            }
+        },
+        "/decks/shared": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Fetch decks shared with current user",
+                "tags": [
+                    "decks"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets all decks shared with current user, with any level of privilege.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Deck"
+                            },
+                            "type": "array"
+                        },
+                        "description": "array of decks shared with current user"
+                    }
+                }
+            }
+        },
+        "/files/{fileid}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "fileid",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/decks/batch/{decks}/cards": {
+            "get": {
+                "responses": {
+                    "200": {}
+                },
+                "parameters": [
+                    {
+                        "name": "decks",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "parameters": {
+        "Authorization": {
+            "name": "Authorization",
+            "type": "string",
+            "required": true,
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "CreateCard": {
+            "properties": {
+                "back_side": {
+                    "type": "string"
+                },
+                "front_side": {
+                    "type": "string"
+                },
+                "hint": {
+                    "type": "string"
+                }
+            }
+        },
+        "Deck": {
+            "properties": {
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "created_by": {
+                    "type": "integer"
+                },
+                "lastScore": {
+                    "type": "float"
+                },
+                "public_copy": {
+                    "type": "boolean"
+                },
+                "deleted_at": {
+                    "type": "integer"
+                },
+                "avgRating": {
+                    "type": "float"
+                },
+                "period": {
+                    "type": "string"
+                },
+                "edited_name": {
+                    "type": "string"
+                },
+                "shares": {
+                    "items": {
+                        "$ref": "#/definitions/Share"
+                    },
+                    "type": "array"
+                },
+                "course": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "scores": {
+                    "items": {
+                        "$ref": "#/definitions/Score"
+                    },
+                    "type": "array"
+                },
+                "views": {
+                    "items": {
+                        "$ref": "#/definitions/View"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "cover_data": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "integer"
+                },
+                "edited_by": {
+                    "type": "integer"
+                },
+                "created_name": {
+                    "type": "string"
+                },
+                "edited_at": {
+                    "type": "integer"
+                },
+                "viewCount": {
+                    "type": "integer"
+                },
+                "cards": {
+                    "items": {
+                        "$ref": "#/definitions/Card"
+                    },
+                    "type": "array"
+                },
+                "ratings": {
+                    "items": {
+                        "$ref": "#/definitions/Rating"
+                    },
+                    "type": "array"
+                },
+                "public_read": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "title"
+            ]
+        },
+        "CreateView": {
+            "properties": {
+                "person": {
+                    "type": "string"
+                }
+            }
+        },
+        "Bucket": {
+            "properties": {
+                "created_by": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "integer"
+                },
+                "decks": {
+                    "items": {
+                        "$ref": "#/definitions/Deck"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "integer"
+                },
+                "display_order": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "title"
+            ]
+        },
+        "File": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "uploaded_by": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "integer"
+                },
+                "hash": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "integer"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "size": {
+                    "type": "integer"
+                }
+            }
+        },
+        "CreateDeck": {
+            "properties": {
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "course": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "public_copy": {
+                    "type": "boolean"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "cover_data": {
+                    "type": "string"
+                },
+                "period": {
+                    "type": "string"
+                },
+                "public_read": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "title"
+            ]
+        },
+        "CreateBucket": {
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "display_order": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "title"
+            ]
+        },
+        "DeckID": {
+            "properties": {
+                "deck_id": {
+                    "type": "string"
+                }
+            },
+            "required": "deck_id"
+        },
+        "Share": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "can_read": {
+                    "type": "boolean"
+                },
+                "updated_at": {
+                    "type": "integer"
+                },
+                "deck_id": {
+                    "type": "string"
+                },
+                "shared_with": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "integer"
+                },
+                "can_write": {
+                    "type": "boolean"
+                },
+                "can_copy": {
+                    "type": "boolean"
+                },
+                "shared_with_course": {
+                    "type": "string"
+                }
+            }
+        },
+        "CreateShare": {
+            "properties": {
+                "can_read": {
+                    "type": "boolean"
+                },
+                "shared_with": {
+                    "type": "string"
+                },
+                "can_write": {
+                    "type": "boolean"
+                },
+                "can_copy": {
+                    "type": "boolean"
+                },
+                "shared_with_course": {
+                    "type": "string"
+                }
+            }
+        },
+        "CreateRating": {
+            "properties": {
+                "rating": {
+                    "type": "integer"
+                },
+                "comment": {
+                    "type": "string"
+                }
+            }
+        },
+        "View": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "person": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "integer"
+                },
+                "deck_id": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "integer"
+                }
+            }
+        },
+        "CreateScore": {
+            "properties": {
+                "score": {
+                    "type": "float"
+                }
+            }
+        },
+        "rating": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "person": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "integer"
+                },
+                "deck_id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "integer"
+                },
+                "rating": {
+                    "type": "integer"
+                },
+                "comment": {
+                    "type": "string"
+                }
+            }
+        },
+        "Score": {
+            "properties": {
+                "created_by": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "integer"
+                },
+                "deck_id": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "integer"
+                },
+                "score": {
+                    "type": "float"
+                },
+                "created_at": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Card": {
+            "properties": {
+                "created_by": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "integer"
+                },
+                "deck_id": {
+                    "type": "string"
+                },
+                "back_side": {
+                    "type": "string"
+                },
+                "front_side": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "integer"
+                },
+                "hint": {
+                    "type": "string"
+                },
+                "edited_by": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "BYU-Flashcards",
+        "description": "Flashcard app",
+        "contact": {
+            "email": "ctl@byu.edu",
+            "name": "BYU Center for Teaching and Learning",
+            "url": "http://ctl.byu.edu"
+        },
+        "version": "v1"
+    }
+}

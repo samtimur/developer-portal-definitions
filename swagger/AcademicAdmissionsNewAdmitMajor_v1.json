@@ -1,0 +1,162 @@
+{
+    "basePath": "/domains/legacy/academic/admissions/new_admit_major/v1",
+    "paths": {
+        "/{id_type}/{id_value}": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "NewAdmitMajorService"
+                ],
+                "summary": "Populate major for newly admitted applicant",
+                "x-throttling-tier": "Unlimited",
+                "description": "Populate major for newly admitted applicant",
+                "parameters": [
+                    {
+                        "description": "Determines the type of id - personid, byuid, netid",
+                        "name": "id_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Holds the value of the id according to the id_type",
+                        "name": "id_value",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Year term the major is to be effective",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "6-digit code of the major to be added",
+                        "name": "major_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Applicant type of the person",
+                        "name": "applicant_type",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/StdProgramsAdmServiceSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/StdProgramsAdmServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "PostMajorForNewAdmit"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "errors": {
+            "items": {
+                "$ref": "#/definitions/error_data"
+            },
+            "type": "array"
+        },
+        "StdProgramsAdmServiceSuccess": {
+            "properties": {
+                "NewAdmitMajorService": {
+                    "properties": {
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StdProgramsAdmServiceError": {
+            "properties": {
+                "NewAdmitMajorService": {
+                    "properties": {
+                        "response": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "errors": {
+                            "$ref": "#/definitions/errors"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        }
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/Enrollment_v1.0"
+    },
+    "info": {
+        "title": "AcademicAdmissionsNewAdmitMajor",
+        "description": "Populate major for newly admitted applicant.",
+        "version": "v1"
+    }
+}

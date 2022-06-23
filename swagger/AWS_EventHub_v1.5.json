@@ -1,0 +1,1892 @@
+{
+    "basePath": "/byuapi/eventhub/v1.5",
+    "x-mock_json": {
+        "publishers_list": {
+            "publishers": [
+                {
+                    "publisher_id": "013212342",
+                    "publisher_name": "TEST-RAISER",
+                    "description": "Test Events"
+                },
+                {
+                    "publisher_id": "0122456782",
+                    "publisher_name": "BYU-TESTER",
+                    "description": "BYU Test Events"
+                }
+            ],
+            "metadata": {
+                "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                }
+            }
+        },
+        "event_types": {
+            "event_types": [
+                {
+                    "schema": {
+                        "time": "standard date time formatting",
+                        "table": "this is where a description goes",
+                        "new status": "either ready, invalid, or pending"
+                    },
+                    "publisher_name": "SCHED",
+                    "description": "OracleDB: basic_event",
+                    "event_type": "Basic Info Added"
+                },
+                {
+                    "schema": {
+                        "segment": "",
+                        "date": "2 digit month / 2 digit day / 4 digit year"
+                    },
+                    "publisher_name": "ITEMS",
+                    "description": "",
+                    "event_type": "Segment Updated"
+                },
+                {
+                    "schema": {
+                        "scholarship": "Boolean describing if a student has any scholarships for the upcoming semsester",
+                        "student_id": "student's BYU ID",
+                        "scholarship_amount": "monetary value of all scholarships and grants added together"
+                    },
+                    "publisher_name": "BYU-IAM-Test",
+                    "description": "Scholarship Test",
+                    "event_type": "Award"
+                }
+            ],
+            "metadata": {
+                "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                }
+            }
+        },
+        "publisher_definition_create": {
+            "publisher_definition": {
+                "publisher_id": "013212342",
+                "publisher_name": "TEST-RAISER",
+                "description": "Test Events"
+            },
+            "metadata": {
+                "validation_response": {
+                    "message": "Success",
+                    "code": 201
+                }
+            }
+        },
+        "event_types_post": {
+            "event_type": {
+                "publisher_name": "ITEMS",
+                "description": " ",
+                "event_type": "Segment Updated"
+            }
+        }
+    },
+    "paths": {
+        "/event_types": {
+            "x-controller": "event_types",
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "event_types"
+                ],
+                "summary": "Defines a new event type.",
+                "x-throttling-tier": "Unlimited",
+                "description": "creates an event type, publisher must exist already",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/event_type_item"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/event_type_definition_create"
+                        },
+                        "description": "Event type Added"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "409": {
+                        "$ref": "#/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "create_event_type"
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "event_types"
+                ],
+                "summary": "Lists the set of event_types visible on the Administrative Portal.",
+                "x-throttling-tier": "Unlimited",
+                "description": "retrieves ALL event_types",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "maxLength": 40,
+                        "minLength": 1,
+                        "name": "publisher_name",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 25,
+                        "minLength": 1,
+                        "name": "event_type",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/event_types"
+                        },
+                        "description": "event_types Retrieved",
+                        "examples": {
+                            "application/json": {
+                                "$ref": "#/x-mock_json/event_types"
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No results found"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "get_event_types"
+            }
+        },
+        "/events/{eventID}": {
+            "x-controller": "events",
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "events"
+                ],
+                "summary": "Acknowledge an event",
+                "x-throttling-tier": "Unlimited",
+                "description": "removes a specific item off of the users queue",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "eventID",
+                        "name": "eventID",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Event Item Acknowledged"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "acknowledgeEventDelete"
+            }
+        },
+        "/events": {
+            "x-controller": "events",
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "events"
+                ],
+                "summary": "Create a new event",
+                "x-throttling-tier": "Unlimited",
+                "description": "creator of the publisher may raise an event",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/event_array"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/event_array_returned"
+                        },
+                        "description": "Event raised"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "409": {
+                        "$ref": "#/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "createEvent"
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "events"
+                ],
+                "summary": "Retrieve a collection of events",
+                "x-throttling-tier": "Unlimited",
+                "description": "manually retrieves all events from users queue",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "default": 1,
+                        "description": "Defines how many events to return. Defaults to 1.",
+                        "name": "count",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/event_array_returned"
+                        },
+                        "description": "Collection Retrieved"
+                    },
+                    "204": {
+                        "description": "No content"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "409": {
+                        "$ref": "#/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "getEvents"
+            }
+        },
+        "/subscribers": {
+            "x-controller": "subscribers",
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "subscriptions"
+                ],
+                "summary": "Defines a new subscription.",
+                "x-throttling-tier": "Unlimited",
+                "description": "create a new subscription linked to the byuID found in the JWT",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/subscription_item"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/subscription_item"
+                        },
+                        "description": "Subscription Added"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "409": {
+                        "$ref": "#/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "createSubscription"
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "subscriptions"
+                ],
+                "summary": "Lists the set of subscriptions visible on the Administrative Portal.",
+                "x-throttling-tier": "Unlimited",
+                "description": "gets all of the USERS subscriptions",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/subscription_array"
+                        },
+                        "description": "subscriptions Retrieved"
+                    },
+                    "204": {
+                        "description": "No results found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "getSubscriptions"
+            }
+        },
+        "/health": {
+            "x-controller": "health",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Currently, only shows the system is up",
+                "x-throttling-tier": "Unlimited",
+                "description": "get a simple 200",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "The system is up"
+                    }
+                },
+                "operationId": "health_check"
+            }
+        },
+        "/publishers/{publisher_name}": {
+            "x-controller": "publishers",
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "publishers"
+                ],
+                "summary": "Delete a publisher",
+                "x-throttling-tier": "Unlimited",
+                "description": "creator of the publisher may delete it as long as it is not in use by any event_type",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "publisher_name",
+                        "name": "publisher_name",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Publisher successfully removed"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "deletePublisher"
+            }
+        },
+        "/publishers": {
+            "x-controller": "publishers",
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "publishers"
+                ],
+                "summary": "Defines a new Publisher.",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/publisher",
+                            "example": {
+                                "description": "Raise Test Events"
+                            }
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/publisher_definition_create"
+                        },
+                        "description": "Publisher Added",
+                        "examples": {
+                            "application/json": {
+                                "$ref": "#/x-mock_json/publisher_definition_create"
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "409": {
+                        "$ref": "#/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "createPublisher"
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "publishers"
+                ],
+                "summary": "Lists the set of publishers visible on the Administrative Portal.",
+                "x-throttling-tier": "Unlimited",
+                "description": "retrieves all publishers",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "maxLength": 40,
+                        "minLength": 1,
+                        "description": "Case insensitive search is performed for publisher. Wild card \\* may be used TODO",
+                        "name": "publisher_name",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/publishers_list"
+                        },
+                        "description": "Publishers Retrieved",
+                        "examples": {
+                            "application/json": {
+                                "$ref": "#/x-mock_json/publishers_list"
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Not found in table"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "getPublishers"
+            }
+        },
+        "/webhooks": {
+            "x-controller": "webhooks",
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "webhooks"
+                ],
+                "summary": "Modify a webhook",
+                "x-throttling-tier": "Unlimited",
+                "description": "users may modify their own webhook",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/webhook_created"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/webhook_created"
+                        },
+                        "description": "Event Item Retrieved"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "modifyWebhook"
+            },
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "webhooks"
+                ],
+                "summary": "Register webhook",
+                "x-throttling-tier": "Unlimited",
+                "description": "Register webhook, links it to users byuID",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/webhook_item"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/webhook_created"
+                        },
+                        "description": "Event raised"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "409": {
+                        "$ref": "#/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "registerWebhook"
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "webhooks"
+                ],
+                "summary": "Retrieve your webhook",
+                "x-throttling-tier": "Unlimited",
+                "description": "retrieves all of the USERS webhooks",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/webhook_array"
+                        },
+                        "description": "Collection Retrieved"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "409": {
+                        "$ref": "#/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "getWebhooks"
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "webhooks"
+                ],
+                "summary": "Delete a webhook",
+                "x-throttling-tier": "Unlimited",
+                "description": "user may delete the webhook associated with their byuID",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Webhook successfully removed"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "deleteWebhook"
+            }
+        },
+        "/subscribers/{publisher_name}/{event_type}": {
+            "x-controller": "subscribers",
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "subscriptions"
+                ],
+                "summary": "Delete a subscription",
+                "x-throttling-tier": "Unlimited",
+                "description": "user may delete their OWN subscription",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "publisher_name",
+                        "name": "publisher_name",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "event_type",
+                        "name": "event_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Publisher successfully removed"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "deleteSubscription"
+            }
+        },
+        "/event_types/{publisher_name}/{event_type}": {
+            "x-controller": "event_types",
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "event_types"
+                ],
+                "summary": "Modify an event type",
+                "x-throttling-tier": "Unlimited",
+                "description": "creator may modify an event_type",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "publisher_name",
+                        "name": "publisher_name",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "event_type",
+                        "name": "event_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/event_type_definition_create"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/event_type_definition_create"
+                        },
+                        "description": "Event type successfully modified"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "409": {
+                        "$ref": "#/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "modify_event_type"
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "event_types"
+                ],
+                "summary": "Delete an event type",
+                "x-throttling-tier": "Unlimited",
+                "description": "creator may delete an event_type as long as it has no subscribers",
+                "parameters": [
+                    {
+                        "description": "OAuth Access Token From API Manager",
+                        "name": "authorization",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": " BYU signed JWT forwarded on from a service that received the BYU signed JWT sent directly from BYU's API Manager",
+                        "name": "x-jwt-assertion-original",
+                        "type": "string",
+                        "required": false,
+                        "in": "header"
+                    },
+                    {
+                        "description": "publisher_name",
+                        "name": "publisher_name",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "event_type",
+                        "name": "event_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Event type successfully removed"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "operationId": "delete_event_type"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "event_type_item": {
+            "example": {
+                "schema": {
+                    "seasonal": false,
+                    "allergens": {
+                        "peanuts": true,
+                        "soy": false
+                    },
+                    "Flavor Name": ""
+                },
+                "publisher_name": "BYU-CREAMERY",
+                "description": "a new flavor of BYU Creamery Ice Cream",
+                "event_type": "new flavor"
+            },
+            "properties": {
+                "schema": {
+                    "type": "object"
+                },
+                "publisher_id": {
+                    "$ref": "#/definitions/publisher_id"
+                },
+                "publisher_name": {
+                    "x-variable": "publisher_name",
+                    "type": "string"
+                },
+                "description": {
+                    "minLength": 0,
+                    "type": "string"
+                },
+                "event_type": {
+                    "x-variable": "event_type",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "event_type",
+                "description"
+            ]
+        },
+        "event_header": {
+            "properties": {
+                "publisher_id": {
+                    "$ref": "#/definitions/publisher_id"
+                },
+                "publisher_name": {
+                    "maxLength": 40,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "event_dt": {
+                    "type": "string"
+                },
+                "event_type": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "event_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "event_type"
+            ]
+        },
+        "publisher_id": {
+            "minLength": 1,
+            "description": "The ID connected to the publisher, found in the JWT. Guaranteed to be unique",
+            "x-variable": "publisher_id",
+            "type": "string"
+        },
+        "error": {
+            "description": "Additional explanation for error conditions",
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object",
+            "required": [
+                "metadata"
+            ]
+        },
+        "webhook_item": {
+            "example": {
+                "security_option": "None",
+                "subscriber_id": "369121518",
+                "push_option": "Push Event",
+                "endpoint": "http://myWebsite.events"
+            },
+            "properties": {
+                "security_option": {
+                    "pattern": "^(?:HMAC|None)$",
+                    "type": "string"
+                },
+                "subscriber_name": {
+                    "type": "string"
+                },
+                "subscriber_id": {
+                    "type": "string"
+                },
+                "push_option": {
+                    "pattern": "^(?:Push Event|Push Alert)$",
+                    "type": "string"
+                },
+                "endpoint": {
+                    "minLength": 1,
+                    "format": "uri",
+                    "type": "string"
+                },
+                "security_key": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "endpoint"
+            ]
+        },
+        "event_returned": {
+            "example": {
+                "event_header": {
+                    "publisher_id": "12345",
+                    "publisher_name": "BYU-CREAMERY",
+                    "event_dt": "2018-06-26T18:05:45.00Z",
+                    "event_type": "Flavor Added",
+                    "event_id": "0510be65-235c-4d1ad"
+                },
+                "event_body": {
+                    "ingredients": {
+                        "chocolate": "lots",
+                        "milk": "cow",
+                        "allergens": "yes"
+                    },
+                    "flavor": "Chocolate Silk Pie"
+                }
+            },
+            "properties": {
+                "event_header": {
+                    "$ref": "#/definitions/event_header_returned"
+                },
+                "event_body": {
+                    "description": "this is the meat of the event, what actually changed. The EventHub does no policing about the event_body, but it should follow the schema found in the corresponding registered event_type",
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "required": [
+                "event_header",
+                "event_body"
+            ]
+        },
+        "publisher_definition_create": {
+            "properties": {
+                "publisher_definition": {
+                    "$ref": "#/definitions/publisher"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "publisher": {
+            "example": {
+                "publisher_id": "1358",
+                "publisher_name": "BYU-CREAMERY",
+                "description": "any events related to creamery ice cream"
+            },
+            "properties": {
+                "publisher_id": {
+                    "$ref": "#/definitions/publisher_id"
+                },
+                "publisher_name": {
+                    "maxLength": 40,
+                    "minLength": 1,
+                    "description": "The Name of the publisher, retrieved from the JWT",
+                    "x-variable": "publisher_name",
+                    "type": "string"
+                },
+                "description": {
+                    "minLength": 1,
+                    "description": "Information about the publisher",
+                    "x-variable": "publisher_description",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description"
+            ],
+            "type": "object"
+        },
+        "subscription_item": {
+            "example": {
+                "publisher_id": "54321",
+                "event_type": "Address Changed",
+                "webhook_id": "37"
+            },
+            "properties": {
+                "publisher_id": {
+                    "$ref": "#/definitions/publisher_id"
+                },
+                "publisher_name": {
+                    "description": "Not guaranteed to be unique. Include either unique publisher_name or publisher_id",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "event_type": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "webhook_id": {
+                    "description": "ID is generated by the EventHub when creating a new webhook. Make a webhook first, then use the ID to subscribe",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "subscriber_name": {
+                    "type": "string"
+                },
+                "subscriber_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "event_type",
+                "webhook_id",
+                "publisher_id"
+            ]
+        },
+        "event_type_definition_create": {
+            "properties": {
+                "event_type_definition": {
+                    "$ref": "#/definitions/event_type_item"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object",
+            "required": [
+                "event_type_definition",
+                "metadata"
+            ]
+        },
+        "event_array": {
+            "properties": {
+                "events": {
+                    "items": {
+                        "$ref": "#/definitions/event"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object",
+            "required": [
+                "events"
+            ]
+        },
+        "publishers_list": {
+            "properties": {
+                "publishers": {
+                    "default": [],
+                    "items": {
+                        "$ref": "#/definitions/publisher"
+                    },
+                    "type": "array"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object"
+        },
+        "event_header_returned": {
+            "example": {
+                "publisher_id": "12345",
+                "publisher_name": "BYU-CREAMERY",
+                "event_dt": "2018-06-26T18:05:45.00Z",
+                "event_type": "Flavor Added",
+                "event_id": "0510be65-235c-4d1ad"
+            },
+            "properties": {
+                "publisher_id": {
+                    "$ref": "#/definitions/publisher_id"
+                },
+                "publisher_name": {
+                    "maxLength": 40,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "event_dt": {
+                    "type": "string"
+                },
+                "event_type": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "event_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "event_type",
+                "event_dt",
+                "event_id"
+            ]
+        },
+        "subscription_array": {
+            "items": {
+                "$ref": "#/definitions/subscription_item"
+            },
+            "type": "array"
+        },
+        "event_array_returned": {
+            "properties": {
+                "events": {
+                    "items": {
+                        "$ref": "#/definitions/event_returned"
+                    },
+                    "type": "array"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object",
+            "required": [
+                "events"
+            ]
+        },
+        "event_types": {
+            "properties": {
+                "event_types": {
+                    "items": {
+                        "$ref": "#/definitions/event_type_item"
+                    },
+                    "type": "array"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object",
+            "required": [
+                "event_types"
+            ]
+        },
+        "event": {
+            "example": {
+                "event_header": {
+                    "event_type": "flavor added"
+                },
+                "event_body": {
+                    "ingredients": {
+                        "chocolate": "lots",
+                        "milk": "cow",
+                        "allergens": "yes"
+                    },
+                    "flavor": "Chocolate Silk Pie"
+                }
+            },
+            "properties": {
+                "event_header": {
+                    "$ref": "#/definitions/event_header"
+                },
+                "event_body": {
+                    "description": "this is the meat of the event, what actually changed. The EventHub does no policing about the event_body, but it should follow the schema found in the corresponding registered event_type",
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "required": [
+                "event_header",
+                "event_body"
+            ]
+        },
+        "webhook_with_webhookID": {
+            "example": {
+                "security_option": "None",
+                "webhook_id": "42",
+                "subscriber_name": "Freshman Housing",
+                "subscriber_id": "369121518",
+                "push_option": "Push Event",
+                "endpoint": "http://myWebsite.events"
+            },
+            "properties": {
+                "security_option": {
+                    "pattern": "^(?:HMAC|None)$",
+                    "type": "string"
+                },
+                "webhook_id": {
+                    "description": "ID is generated by Webhook, returned after creation or query, and referenced when creating subscriptions",
+                    "type": "string"
+                },
+                "subscriber_id": {
+                    "type": "string"
+                },
+                "push_option": {
+                    "pattern": "^(?:Push Event|Push Alert)$",
+                    "type": "string"
+                },
+                "endpoint": {
+                    "minLength": 1,
+                    "format": "uri",
+                    "type": "string"
+                },
+                "security_key": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "endpoint",
+                "push_option",
+                "security_option",
+                "webhook_id"
+            ]
+        },
+        "webhook_array": {
+            "items": {
+                "$ref": "#/definitions/webhook_with_webhookID"
+            },
+            "type": "array"
+        },
+        "webhook_created": {
+            "properties": {
+                "webhook": {
+                    "$ref": "#/definitions/webhook_with_webhookID"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/metadata"
+                }
+            },
+            "type": "object",
+            "required": [
+                "webhook"
+            ]
+        },
+        "metadata": {
+            "example": {
+                "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                },
+                "validation_information": [
+                    "honestly I don't know what this is for TODO",
+                    "still don't know what this is for"
+                ],
+                "cache": {
+                    "date_time": "2017-07-21T17:32:28Z"
+                }
+            },
+            "properties": {
+                "validation_response": {
+                    "properties": {
+                        "message": {
+                            "default": "Success",
+                            "x-variable": "validation_response_message",
+                            "type": "string"
+                        },
+                        "code": {
+                            "default": 200,
+                            "x-variable": "validation_response_code",
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "code",
+                        "message"
+                    ]
+                },
+                "validation_information": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "cache": {
+                    "description": "If data is from live source, value will be null, otherwise it will be date-time of cache",
+                    "properties": {
+                        "date_time": {
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "responses": {
+        "400": {
+            "schema": {
+                "$ref": "#/definitions/error"
+            },
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "401": {
+            "schema": {
+                "$ref": "#/definitions/error"
+            },
+            "description": "Authentication required"
+        },
+        "403": {
+            "schema": {
+                "$ref": "#/definitions/error"
+            },
+            "description": "Access denied - not authorized"
+        },
+        "404": {
+            "schema": {
+                "$ref": "#/definitions/error"
+            },
+            "description": "Resource not found"
+        },
+        "409": {
+            "schema": {
+                "$ref": "#/definitions/error"
+            },
+            "description": "Body of the request contains conflicting, malformed, or invalid data"
+        },
+        "500": {
+            "schema": {
+                "$ref": "#/definitions/error"
+            },
+            "description": "Internal Server Error"
+        },
+        "504": {
+            "description": "Gateway timeout"
+        },
+        "default": {
+            "schema": {
+                "$ref": "#/definitions/error"
+            },
+            "description": "Unexpected Error"
+        }
+    },
+    "info": {
+        "title": "AWS_EventHub",
+        "description": "Node.js implementation of the C code, deployed using AWS. ",
+        "contact": {
+            "email": "redjojo@gmail.com",
+            "name": "Joanna Hugo Felsted",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1.5"
+    }
+}

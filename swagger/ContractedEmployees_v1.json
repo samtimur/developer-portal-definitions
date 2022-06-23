@@ -1,0 +1,239 @@
+{
+    "basePath": "/domains/erp/hr/contracted_employees/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/orion/{orion_session_id}/{y_sport_id}": {
+            "get": {
+                "description": "Finds employees by Y Sport ID.",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/orion_session_id"
+                    },
+                    {
+                        "$ref": "#/parameters/y_sport_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/employee"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/orion/{orion_session_id}": {
+            "get": {
+                "description": "Finds employees by Orion session ID.",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/orion_session_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/employee"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "parameters": {
+        "y_sport_id": {
+            "pattern": "",
+            "description": "the Y Sport ID",
+            "name": "y_sport_id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "orion_session_id": {
+            "pattern": "",
+            "description": "The Orion Session ID",
+            "name": "orion_session_id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        }
+    },
+    "definitions": {
+        "first_name": {
+            "description": "The first given name of a person.",
+            "type": "string"
+        },
+        "hire_date": {
+            "description": "The date an employee started their most recent employment at BYU.",
+            "format": "date",
+            "example": "2021-01-01",
+            "type": "string"
+        },
+        "empl_background_check_dtm": {
+            "description": "The moment in time when of the most recent employment background check has been completed for an employee.",
+            "format": "datetime",
+            "type": "string"
+        },
+        "middle_name": {
+            "description": "The given middle name of the person.",
+            "type": "string"
+        },
+        "byu_id": {
+            "pattern": "[0-9]{9}",
+            "description": "The nine-digit computer-generated ID assigned to each identity in BYU-IAM, which is printed on the BYU ID Card in the format xx-xxx-xxxx and serves as a unique identifier. The BYU ID should be used for identification at points of service, as well as for system-to-system identification.",
+            "type": "string"
+        },
+        "surname": {
+            "description": "The surname, family name, or last name of a person.",
+            "type": "string"
+        },
+        "employee": {
+            "properties": {
+                "first_name": {
+                    "$ref": "#/definitions/first_name"
+                },
+                "hire_date": {
+                    "$ref": "#/definitions/hire_date"
+                },
+                "empl_background_check_dtm": {
+                    "$ref": "#/definitions/empl_background_check_dtm"
+                },
+                "middle_name": {
+                    "$ref": "#/definitions/middle_name"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "surname": {
+                    "$ref": "#/definitions/surname"
+                },
+                "net_id": {
+                    "$ref": "#/definitions/net_id"
+                },
+                "hr_status": {
+                    "$ref": "#/definitions/hr_status"
+                },
+                "hr_employee_group_code": {
+                    "$ref": "#/definitions/hr_employee_group_code"
+                },
+                "hr_employee_group": {
+                    "$ref": "#/definitions/hr_employee_group"
+                },
+                "preferred_name": {
+                    "$ref": "#/definitions/preferred_name"
+                }
+            }
+        },
+        "hr_status": {
+            "description": "Designates whether a person is currently an employee or a BYU affiliated employee (e.g., LDS Philanthropies, ROTC, etc.).",
+            "enum": [
+                "A",
+                "I"
+            ],
+            "type": "string"
+        },
+        "net_id": {
+            "description": "A unique identifier used for enterprise sign-in (with a password and/or other security provisions such as two-factor authentication).",
+            "type": "string"
+        },
+        "hr_employee_group_code": {
+            "description": "A three character code that represents the HR Employee Group.",
+            "example": "STA",
+            "type": "string"
+        },
+        "hr_employee_group": {
+            "description": "Defines the employee group for HR purposes. The most common employee groups are Faculty, Administrative Staff, Staff, and Student. Not to be confused with hr_empl_class_code. Similar to the Employee Classification.",
+            "example": "Student",
+            "type": "string"
+        },
+        "preferred_name": {
+            "description": "The complete name derived from Preferred First Name and Preferred Surname.",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "400": {
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "403": {
+            "description": "Access denied to protected data"
+        },
+        "500": {
+            "description": "Internal Server Error"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "Contracted Employees",
+        "description": "An API for providing data about contracted employees.",
+        "version": "1.0.0"
+    }
+}

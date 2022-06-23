@@ -1,0 +1,2911 @@
+{
+    "basePath": "/byuapi/network/v0",
+    "tags": [
+        {
+            "description": "Availability for the network routers, firewall and switches",
+            "name": "Availability"
+        },
+        {
+            "description": "Information security cameras",
+            "name": "Cameras"
+        },
+        {
+            "description": "Information about the physical layout of the network",
+            "name": "Documentation"
+        },
+        {
+            "description": "Details about host devices connected to the network",
+            "name": "Hosts"
+        },
+        {
+            "description": "IP Address Management",
+            "name": "IP Address Management"
+        },
+        {
+            "description": "Data analysis on network information",
+            "name": "Metrics"
+        },
+        {
+            "description": "Information on nodes",
+            "name": "Node Management"
+        },
+        {
+            "description": "Network Reports",
+            "name": "Reports"
+        },
+        {
+            "description": "View and modify network switch configurations",
+            "name": "Switches"
+        },
+        {
+            "description": "View information about WAPs accross campus",
+            "name": "Wireless Access Points"
+        },
+        {
+            "description": "To support path parameters with slashes in them",
+            "name": "Workarounds"
+        }
+    ],
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/node_management/get_nodes_not_polled": {
+            "get": {
+                "tags": [
+                    "Node Management"
+                ],
+                "summary": "List of unreachable devices",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "SolarWinds",
+                                    "type": "string"
+                                },
+                                "unreachable_devices": {
+                                    "items": {
+                                        "$ref": "#/definitions/unreachable_devices"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/switches/{switch}": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "Basic details for a single switch",
+                "description": "See \"/switches\"",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/switch_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_source"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "SolarWinds",
+                                    "type": "string"
+                                },
+                                "switch": {
+                                    "$ref": "#/definitions/switch"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/switches/{switch}/interfaces/{interface}/{interface1}/host": {
+            "get": {
+                "tags": [
+                    "Workarounds"
+                ],
+                "summary": "Details about the connected host",
+                "description": "Duplicate of /switches/{switch}/interfaces/{interface}/host where interface name contains a slash",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/switch_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_interface_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_interface1_path"
+                    },
+                    {
+                        "$ref": "#/parameters/host_source"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "host": {
+                                    "$ref": "#/definitions/host"
+                                },
+                                "source": {
+                                    "example": "Netdisco",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Device Found"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/ipam/role_changes/{date}": {
+            "get": {
+                "summary": "Retrieve all ipam changes for the past day",
+                "tags": [
+                    "IP Address Management"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ipam_date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ipam_objects"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/switches/{switch}/interfaces/{interface}/{interface1}/jack": {
+            "get": {
+                "tags": [
+                    "Workarounds"
+                ],
+                "summary": "Jack Lookup by Switch/Interface",
+                "description": "Duplicate of /switches/{switch}/interfaces/{interface}/jack where interface name contains a slash",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/switch_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_interface_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_interface1_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/jack_info"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/reports/netdoc": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Report on what need to be updated in netdoc",
+                "description": "List of nodes that are not in netdoc but are in solarwinds and a list of nodes that are in netdoc but not in solarwinds. Mathematically it is the symmetric difference of the two.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "NetDoc",
+                                    "type": "string"
+                                },
+                                "netdoc": {
+                                    "properties": {
+                                        "nodes_in_netdoc_not_in_sw": {
+                                            "items": {
+                                                "properties": {
+                                                    "Switch": {
+                                                        "example": "S2-016-B",
+                                                        "type": "number"
+                                                    },
+                                                    "Port": {
+                                                        "example": "E1/8",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "nodes_not_in_netdoc_in_sw": {
+                                            "items": {
+                                                "properties": {
+                                                    "Switch": {
+                                                        "example": "MC-1146-REPLAY",
+                                                        "type": "number"
+                                                    },
+                                                    "Port": {
+                                                        "example": "DEFAULT_VLAN",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/switches/{switch}/modules": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "List all switch modules",
+                "description": "",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/switch_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_source"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "Netdisco",
+                                    "type": "string"
+                                },
+                                "modules": {
+                                    "items": {
+                                        "properties": {
+                                            "model": {
+                                                "type": "string"
+                                            },
+                                            "slot": {
+                                                "example": "1",
+                                                "type": "string"
+                                            },
+                                            "serial": {
+                                                "type": "string"
+                                            },
+                                            "version": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/metrics/bandwidth/{host}": {
+            "get": {
+                "tags": [
+                    "Metrics"
+                ],
+                "summary": "Returns the bandwidth for an interface",
+                "description": "A successful response returns bandwidth information for the desired duration",
+                "parameters": [
+                    {
+                        "description": "switch hostname",
+                        "name": "host",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Number of hours/days to go back for data. Must be greater than end.",
+                        "name": "start",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Humber of hours/days to go back for data. Must be less than start",
+                        "name": "end",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "list of interfaces seperated by commas ex, TenGigabitEthernet1/5,TenGigabitEthernet1/6",
+                        "name": "interfaces",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "solarwinds",
+                                    "type": "string"
+                                },
+                                "start": {
+                                    "example": "2019-07-18 12:55:43",
+                                    "type": "string"
+                                },
+                                "end": {
+                                    "example": "2019-07-18 13:55:43",
+                                    "type": "string"
+                                },
+                                "bandwidth": {
+                                    "properties": {
+                                        "data": {
+                                            "items": {
+                                                "properties": {
+                                                    "inAvg": {
+                                                        "example": 1211321231,
+                                                        "type": "number"
+                                                    },
+                                                    "timestamp": {
+                                                        "example": "2019-07-18 13:44:27",
+                                                        "type": "string"
+                                                    },
+                                                    "maxOut": {
+                                                        "example": 6413421345.1,
+                                                        "type": "number"
+                                                    },
+                                                    "outTotal": {
+                                                        "example": 999999999.9,
+                                                        "type": "number"
+                                                    },
+                                                    "outAvg": {
+                                                        "example": 12345115632.5,
+                                                        "type": "number"
+                                                    },
+                                                    "hostname": {
+                                                        "example": "ITB-EXAMPLE101-A",
+                                                        "type": "string"
+                                                    },
+                                                    "maxIn": {
+                                                        "example": 2222222222.2,
+                                                        "type": "number"
+                                                    },
+                                                    "inTotal": {
+                                                        "example": 99999999.9,
+                                                        "type": "number"
+                                                    },
+                                                    "interface": {
+                                                        "example": "TenGigabitEthernet1/5",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/metrics/wireless_count": {
+            "get": {
+                "tags": [
+                    "Metrics"
+                ],
+                "summary": "List of number of clients on the network given a period of time",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/start_time"
+                    },
+                    {
+                        "$ref": "#/parameters/interval"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "METRICSDB",
+                                    "type": "string"
+                                },
+                                "client_count": {
+                                    "items": {
+                                        "$ref": "#/definitions/count"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/availability/firewall": {
+            "get": {
+                "summary": "Firewall availability information",
+                "tags": [
+                    "Availability"
+                ],
+                "parameters": [
+                    {
+                        "description": "Query start time relative to now. Should be an integer followed by 'd', 'h', 'm', or 's' (days, hours, minutes, or seconds). For example, if start_time is '1d' and end_time is '3h', the query will range from 1 day ago to 3 hours ago.",
+                        "name": "start_time",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Query end time relative to now. Should be an integer followed by 'd', 'h', 'm', or 's' (days, hours, minutes, or seconds). For example, if start_time is '1d' and end_time is '3h', the query will range from 1 day ago to 3 hours ago.",
+                        "name": "end_time",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "SolarWinds",
+                                    "type": "string"
+                                },
+                                "switches_availability": {
+                                    "$ref": "#/definitions/availability",
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/metrics/top_destinations": {
+            "get": {
+                "tags": [
+                    "Metrics"
+                ],
+                "summary": "Most visited websites by clients",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "METRICSDB",
+                                    "type": "string"
+                                },
+                                "top_destinations": {
+                                    "items": {
+                                        "$ref": "#/definitions/top_destinations"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/ipam/qip_dump_subnets": {
+            "get": {
+                "tags": [
+                    "QIP"
+                ],
+                "summary": "Returns a list of subnet addresses",
+                "description": "A successful response contains the subnet_address, subnet_mask,  and subnet_name",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "QIP",
+                                    "type": "string"
+                                },
+                                "qip_dump_subnets": {
+                                    "items": {
+                                        "properties": {
+                                            "subnet_mask": {
+                                                "example": "255.255.255.255",
+                                                "type": "string"
+                                            },
+                                            "subnet_address": {
+                                                "example": "10.1.11.111",
+                                                "type": "string"
+                                            },
+                                            "subnet_name": {
+                                                "example": "BNSN-C011-B C011 LAB V200",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/hosts/{host}": {
+            "get": {
+                "tags": [
+                    "Hosts"
+                ],
+                "summary": "Locate a host on the network",
+                "description": "There has been some confusion as to the meaning of the responses from this tool. There are cases in which a host cannot be exactly located, and so the 'switch' and 'interface' fields give the most precise answer availble. However, the host cannot be assumed to be directly connected to that interface. Disabling a port as the result of a Findhost response may adversely affect a portion of the network, so use the information from this tool carefully!",
+                "parameters": [
+                    {
+                        "description": "Hostname (first label of DNS name), IPv4 Address, or MAC Address (in any standard format) to search for",
+                        "name": "host",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "$ref": "#/parameters/host_source"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "host": {
+                                    "$ref": "#/definitions/host"
+                                },
+                                "source": {
+                                    "example": "Netdisco",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Device Found"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/buildings/{building}/rooms/{room}/jacks": {
+            "get": {
+                "tags": [
+                    "Documentation"
+                ],
+                "summary": "List the jacks in a room",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/building_path"
+                    },
+                    {
+                        "$ref": "#/parameters/room_number_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "NetDoc",
+                                    "type": "string"
+                                },
+                                "jacks": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "example": [
+                                        "2007",
+                                        "2008",
+                                        "2009",
+                                        "2010",
+                                        "2011",
+                                        "2012",
+                                        "2033",
+                                        "2034"
+                                    ],
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/switches/{switch}/neighbors": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "List of neighboring switches and their ports",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/switch_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_source"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "neighbors": {
+                                    "$ref": "#/definitions/neighbors"
+                                },
+                                "source": {
+                                    "example": "netdisco",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/buildings/{building}/jacks/{jack}": {
+            "get": {
+                "tags": [
+                    "Documentation"
+                ],
+                "summary": "Jack Lookup by Building/Jack",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/building_path"
+                    },
+                    {
+                        "$ref": "#/parameters/jack_number_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/jack_info"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/metrics/wired_count": {
+            "get": {
+                "tags": [
+                    "Metrics"
+                ],
+                "summary": "List of number wired clients on the network",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "ELK",
+                                    "type": "string"
+                                },
+                                "client_count": {
+                                    "items": {
+                                        "$ref": "#/definitions/count"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/buildings/{building}/rooms": {
+            "get": {
+                "tags": [
+                    "Documentation"
+                ],
+                "summary": "List the rooms in a building",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/building_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "NetDoc",
+                                    "type": "string"
+                                },
+                                "rooms": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "example": [
+                                        "0001A",
+                                        "0001B",
+                                        "1234",
+                                        "Outside"
+                                    ],
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/buildings": {
+            "get": {
+                "tags": [
+                    "Documentation"
+                ],
+                "summary": "List all documented building abbreviations",
+                "description": "A successful response contains an array of building abbreviations, each of which is used as the unique identifer to request information about that building",
+                "parameters": [
+                    {
+                        "description": "Only buildings that contain a jack of the given number will be included in the response",
+                        "name": "jack",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "NetDoc",
+                                    "type": "string"
+                                },
+                                "buildings": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "example": [
+                                        "ASB",
+                                        "BNSN",
+                                        "CTB",
+                                        "JFSB",
+                                        "JKB",
+                                        "JSB"
+                                    ],
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/waps/aruba": {
+            "get": {
+                "tags": [
+                    "Wireless Access Points"
+                ],
+                "summary": "Lists all aruba WAPs",
+                "description": "Lists all aruba WAPs with Solarwinds as the source",
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/waps"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/phones": {
+            "get": {
+                "tags": [
+                    "Hosts"
+                ],
+                "summary": "Lists IP phones on the network",
+                "description": "A successful response contains a list of IP phones",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "nitdb",
+                                    "type": "string"
+                                },
+                                "phones": {
+                                    "items": {
+                                        "properties": {
+                                            "Serial": {
+                                                "example": "FCH2141DAQJ",
+                                                "type": "string"
+                                            },
+                                            "Port": {
+                                                "example": "1/11",
+                                                "type": "string"
+                                            },
+                                            "AppLoadId": {
+                                                "example": "rootfs288xx.12",
+                                                "type": "string"
+                                            },
+                                            "DN": {
+                                                "example": 11111,
+                                                "type": "string"
+                                            },
+                                            "Model": {
+                                                "example": "CP-8811",
+                                                "type": "string"
+                                            },
+                                            "IP": {
+                                                "example": "11.1.11.11",
+                                                "type": "string"
+                                            },
+                                            "MAC": {
+                                                "example": "F8B7E2478AF2",
+                                                "type": "string"
+                                            },
+                                            "BootLoadId": {
+                                                "example": "sb2288xx.BE",
+                                                "type": "string"
+                                            },
+                                            "Hostname": {
+                                                "example": "SEPF8B7E2478AF2",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/switches": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "Collection of Layer 2 Capable Devices",
+                "description": "A successful response contains an array of switches, with some basic details for each. The \"supported\" field indicates whether the given data source can provide more information about this device (via any /switches/{switch}/* endpoints)",
+                "parameters": [
+                    {
+                        "description": "If \"true\", only routers will be included in the response. If \"false\", routers will be excluded from the response",
+                        "name": "router",
+                        "type": "boolean",
+                        "in": "query"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_source"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "switches": {
+                                    "items": {
+                                        "$ref": "#/definitions/switch"
+                                    },
+                                    "type": "array"
+                                },
+                                "source": {
+                                    "example": "SolarWinds",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/subnets": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "List all configured subnets",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/subnet_source"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "Netdisco",
+                                    "type": "string"
+                                },
+                                "subnets": {
+                                    "items": {
+                                        "$ref": "#/definitions/subnet"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/switches/{switch}/interfaces/{interface}/{interface1}/{interface2}/jack": {
+            "get": {
+                "tags": [
+                    "Workarounds"
+                ],
+                "summary": "Jack Lookup by Switch/Interface",
+                "description": "Duplicate of /switches/{switch}/interfaces/{interface}/jack where interface name contains two slashes",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/switch_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_interface_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_interface1_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_interface2_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/jack_info"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/cameras/camera_list": {
+            "get": {
+                "tags": [
+                    "Cameras"
+                ],
+                "summary": "Information on security cameras",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "Genetec",
+                                    "type": "string"
+                                },
+                                "cameras": {
+                                    "items": {
+                                        "$ref": "#/definitions/camera"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/switches/{switch}/interfaces/{interface}/jack": {
+            "get": {
+                "tags": [
+                    "Documentation"
+                ],
+                "summary": "Jack Lookup by Switch/Interface",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/switch_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_interface_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/jack_info"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/buildings/{building}": {
+            "get": {
+                "tags": [
+                    "Documentation"
+                ],
+                "summary": "Look up a building's full name",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/building_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "building": {
+                                    "properties": {
+                                        "building": {
+                                            "example": "ASB",
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "example": "Abraham O. Smoot Admin Bldg",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "source": {
+                                    "example": "NetDoc",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/waps/xirrus": {
+            "get": {
+                "tags": [
+                    "Wireless Access Points"
+                ],
+                "summary": "Lists all xirrus WAPs",
+                "description": "Lists all xirrus WAPs with Solarwinds as the source",
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/waps"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/qip_notes/{host}": {
+            "get": {
+                "tags": [
+                    "QIP"
+                ],
+                "summary": "Lists qip notes involving the given switch hostname or ip",
+                "description": "A successful response contains a list of qip notes  assosiated with the given hostname",
+                "parameters": [
+                    {
+                        "description": "Hostname (first label of DNS name), IPv4 Address, or MAC Address  (in any standard format) to search for",
+                        "name": "host",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "QIP",
+                                    "type": "string"
+                                },
+                                "notes": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "example": [
+                                        "example.byu.edu IN NS per SCwert22345 19 Apr 2019 by WoW.",
+                                        "example.byu.edu IN NS per SC12343412 19 Apr 2019 by MTG"
+                                    ],
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/metrics/network_device_count": {
+            "get": {
+                "tags": [
+                    "Metrics"
+                ],
+                "summary": "List of number of devices on the network given a period of time",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "device_count": {
+                                    "items": {
+                                        "$ref": "#/definitions/count"
+                                    },
+                                    "type": "array"
+                                },
+                                "source": {
+                                    "example": "METRICSDB",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/availability/routers": {
+            "get": {
+                "summary": "Router availability information",
+                "tags": [
+                    "Availability"
+                ],
+                "parameters": [
+                    {
+                        "description": "Query start time relative to now. Should be an integer followed by 'd', 'h', 'm', or 's' (days, hours, minutes, or seconds). For example, if start_time is '1d' and end_time is '3h', the query will range from 1 day ago to 3 hours ago.",
+                        "name": "start_time",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Query end time relative to now. Should be an integer followed by 'd', 'h', 'm', or 's' (days, hours, minutes, or seconds). For example, if start_time is '1d' and end_time is '3h', the query will range from 1 day ago to 3 hours ago.",
+                        "name": "end_time",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "routers_availability": {
+                                    "$ref": "#/definitions/availability",
+                                    "type": "object"
+                                },
+                                "source": {
+                                    "example": "SolarWinds",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/waps": {
+            "get": {
+                "tags": [
+                    "Wireless Access Points"
+                ],
+                "summary": "Lists all WAPs",
+                "description": "Lists all WAPs with Solarwinds as the source",
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/waps"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/subnets/{ip}": {
+            "get": {
+                "tags": [
+                    "Switches"
+                ],
+                "summary": "Identify the subnet containing the given IP",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ip_address_path"
+                    },
+                    {
+                        "$ref": "#/parameters/subnet_source"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "subnet": {
+                                    "$ref": "#/definitions/subnet"
+                                },
+                                "source": {
+                                    "example": "Netdisco",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/hosts/{host}/vendor": {
+            "get": {
+                "tags": [
+                    "Hosts"
+                ],
+                "summary": "Returns a hosts vendor name",
+                "description": "A successful response contains the vendor associated with the given MAC address",
+                "parameters": [
+                    {
+                        "description": "MAC address (in any standard format)",
+                        "name": "host",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "nitdb",
+                                    "type": "string"
+                                },
+                                "vendor": {
+                                    "example": "Apple",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/switches/{switch}/interfaces/{interface}/host": {
+            "get": {
+                "tags": [
+                    "Hosts"
+                ],
+                "summary": "Details about the connected host",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/switch_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_interface_path"
+                    },
+                    {
+                        "$ref": "#/parameters/host_source"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "host": {
+                                    "$ref": "#/definitions/host"
+                                },
+                                "source": {
+                                    "example": "Netdisco",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Device Found"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/availability/switches": {
+            "get": {
+                "summary": "Switch availability information",
+                "tags": [
+                    "Availability"
+                ],
+                "x-throttling-tier": "Silver",
+                "parameters": [
+                    {
+                        "description": "Query start time relative to now. Should be an integer followed by 'd', 'h', 'm', or 's' (days, hours, minutes, or seconds). For example, if start_time is '1d' and end_time is '3h', the query will range from 1 day ago to 3 hours ago.",
+                        "name": "start_time",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Query end time relative to now. Should be an integer followed by 'd', 'h', 'm', or 's' (days, hours, minutes, or seconds). For example, if start_time is '1d' and end_time is '3h', the query will range from 1 day ago to 3 hours ago.",
+                        "name": "end_time",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "source": {
+                                    "example": "SolarWinds",
+                                    "type": "string"
+                                },
+                                "switches_availability": {
+                                    "$ref": "#/definitions/availability",
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User"
+            }
+        },
+        "/switches/{switch}/interfaces/{interface}/{interface1}/{interface2}/host": {
+            "get": {
+                "tags": [
+                    "Workarounds"
+                ],
+                "summary": "Details about the connected host",
+                "description": "Duplicate of /switches/{switch}/interfaces/{interface}/host where interface name contains two slashes",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/switch_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_interface_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_interface1_path"
+                    },
+                    {
+                        "$ref": "#/parameters/switch_interface2_path"
+                    },
+                    {
+                        "$ref": "#/parameters/host_source"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "host": {
+                                    "$ref": "#/definitions/host"
+                                },
+                                "source": {
+                                    "example": "Netdisco",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Device Found"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/waps/extreme": {
+            "get": {
+                "tags": [
+                    "Wireless Access Points"
+                ],
+                "summary": "Lists all extreme WAPs",
+                "description": "Lists all extreme WAPs with Solarwinds as the source",
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/waps"
+                    },
+                    "400": {
+                        "$ref": "#/responses/bad_request"
+                    },
+                    "401": {
+                        "$ref": "#/responses/unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/responses/not_found"
+                    },
+                    "500": {
+                        "$ref": "#/responses/internal_error"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "ipam_objects": {
+            "properties": {
+                "ip_addresses": {
+                    "items": {
+                        "$ref": "#/definitions/ipam_ip_object"
+                    },
+                    "type": "array"
+                },
+                "subnets": {
+                    "items": {
+                        "$ref": "#/definitions/ipam_subnet_object"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "count": {
+            "properties": {
+                "timestamp": {
+                    "$ref": "#/definitions/datetime"
+                },
+                "count": {
+                    "example": 4798,
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "access_policy": {
+            "properties": {
+                "methods": {
+                    "items": {
+                        "example": "GET",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "urls": {
+                    "items": {
+                        "example": "/permissions/example",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "example": "permissions",
+                    "type": "string"
+                },
+                "groups": {
+                    "items": {
+                        "example": "IDN",
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "role_details": {
+            "description": "Collection of role details",
+            "properties": {
+                "ip_addresses": {
+                    "items": {
+                        "$ref": "#/definitions/role_ipaddress"
+                    },
+                    "type": "array"
+                },
+                "subnets": {
+                    "items": {
+                        "$ref": "#/definitions/role_subnet"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "unavailable_device": {
+            "properties": {
+                "hostname": {
+                    "example": "AASP-134A-A",
+                    "type": "string"
+                },
+                "availability": {
+                    "example": 99.98872747363347,
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "switch": {
+            "properties": {
+                "platform": {
+                    "type": "string"
+                },
+                "ip_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "stacked": {
+                    "example": false,
+                    "type": "boolean"
+                },
+                "vendor": {
+                    "type": "string"
+                },
+                "supported": {
+                    "example": false,
+                    "type": "boolean"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "last_discover": {
+                    "$ref": "#/definitions/datetime"
+                },
+                "version": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "top_destinations": {
+            "properties": {
+                "timestamp": {
+                    "$ref": "#/definitions/datetime"
+                },
+                "count": {
+                    "example": 41907,
+                    "type": "integer"
+                },
+                "url": {
+                    "example": "microsoft.com",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "role_ipaddress": {
+            "properties": {
+                "ip_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "subnet_name": {
+                    "$ref": "#/definitions/subnet_name"
+                },
+                "readonly": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "subnet": {
+            "properties": {
+                "router": {
+                    "example": "my-hostname",
+                    "type": "string"
+                },
+                "description": {
+                    "example": "Loopback",
+                    "type": "string"
+                },
+                "mask": {
+                    "example": "255.0.0.0",
+                    "type": "string"
+                },
+                "interface": {
+                    "example": "lo",
+                    "type": "string"
+                },
+                "last_discover": {
+                    "$ref": "#/definitions/datetime"
+                },
+                "network": {
+                    "example": "127.0.0.0",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "datetime": {
+            "example": "yyyy-mm-dd hh:mm:ss",
+            "type": "string"
+        },
+        "role_subnet": {
+            "properties": {
+                "subnet_mask": {
+                    "$ref": "#/definitions/subnet_mask"
+                },
+                "subnet_address": {
+                    "$ref": "#/definitions/subnet_address"
+                },
+                "subnet_name": {
+                    "$ref": "#/definitions/subnet_name"
+                },
+                "readonly": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "availability": {
+            "properties": {
+                "total": {
+                    "example": 98.7654321,
+                    "type": "number"
+                },
+                "unavailable_nodes": {
+                    "items": {
+                        "$ref": "#/definitions/unavailable_device"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "host": {
+            "properties": {
+                "mac_address": {
+                    "$ref": "#/definitions/mac_address"
+                },
+                "ip_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "router": {
+                    "type": "string"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "vlan": {
+                    "format": "int32",
+                    "example": 503,
+                    "type": "integer"
+                },
+                "switch": {
+                    "type": "string"
+                },
+                "last_seen": {
+                    "$ref": "#/definitions/datetime"
+                },
+                "interface": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ip_roles": {
+            "description": "IPAM roles",
+            "properties": {
+                "results": {
+                    "properties": {
+                        "ip_address_type": {
+                            "example": "Static",
+                            "type": "string"
+                        },
+                        "mac_address": {
+                            "$ref": "#/definitions/mac_address"
+                        },
+                        "object_desc": {
+                            "type": "string"
+                        },
+                        "subnet_mask": {
+                            "$ref": "#/definitions/ip_address"
+                        },
+                        "device_type": {
+                            "example": "Workstation",
+                            "type": "string"
+                        },
+                        "roles": {
+                            "items": {
+                                "$ref": "#/definitions/ip_role"
+                            },
+                            "type": "array"
+                        },
+                        "object_name": {
+                            "example": "osa",
+                            "type": "string"
+                        },
+                        "subnet_address": {
+                            "$ref": "#/definitions/ip_address"
+                        },
+                        "subnet_name": {
+                            "$ref": "#/definitions/subnet_name"
+                        },
+                        "domain_name": {
+                            "example": "ctrls.byu.edu",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "camera": {
+            "properties": {
+                "firmware": {
+                    "example": "5.40.17",
+                    "type": "string"
+                },
+                "unit_ip_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "model": {
+                    "example": "AXIS P3364",
+                    "type": "string"
+                },
+                "camera_name": {
+                    "example": "(Duplicate IP with HLJ Elevator) HLJ 1127 Center NorthEast",
+                    "type": "string"
+                },
+                "unit_mac_address": {
+                    "example": "00047D04C635",
+                    "type": "string"
+                },
+                "unit_guid": {
+                    "example": "00000000-0000-0000-0000-00408CEBF68D",
+                    "type": "string"
+                },
+                "logical_id": {
+                    "type": "string"
+                },
+                "camera_guid": {
+                    "example": "00000000-0000-0000-0000-00047D04C635",
+                    "type": "string"
+                },
+                "manufacturer": {
+                    "example": "Axis",
+                    "type": "string"
+                },
+                "type": {
+                    "example": "Fixed",
+                    "type": "string"
+                },
+                "unit_name": {
+                    "example": "10.36.33.133 - Unit",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ipam_subnet_object": {
+            "properties": {
+                "subnet_id": {
+                    "example": 123456,
+                    "type": "string"
+                },
+                "update_user": {
+                    "$ref": "#/definitions/netid"
+                },
+                "subnet_mask": {
+                    "$ref": "#/definitions/subnet_mask"
+                },
+                "last_update": {
+                    "$ref": "#/definitions/datetime"
+                },
+                "subnet_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "subnet_name": {
+                    "$ref": "#/definitions/subnet_name"
+                },
+                "role_name": {
+                    "$ref": "#/definitions/role_name"
+                }
+            }
+        },
+        "admin_roles": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/role_name"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "ipam_roles_object": {
+            "properties": {
+                "roles": {
+                    "$ref": "#/definitions/ipam_roles"
+                }
+            }
+        },
+        "mac_address": {
+            "example": "xx:xx:xx:xx:xx:xx",
+            "type": "string"
+        },
+        "ip_address": {
+            "example": "x.x.x.x",
+            "type": "string"
+        },
+        "ipam_ip_object": {
+            "properties": {
+                "update_user": {
+                    "$ref": "#/definitions/netid"
+                },
+                "ip_address": {
+                    "$ref": "#/definitions/ip_address"
+                },
+                "last_update": {
+                    "$ref": "#/definitions/date"
+                },
+                "address_id": {
+                    "example": 123456,
+                    "type": "string"
+                },
+                "subnet_name": {
+                    "$ref": "#/definitions/subnet_name"
+                },
+                "role_name": {
+                    "$ref": "#/definitions/role_name"
+                }
+            }
+        },
+        "neighbors": {
+            "items": {
+                "properties": {
+                    "description": {
+                        "example": "F:AASP-201-A Gi1/1/1",
+                        "type": "string"
+                    },
+                    "neighbor": {
+                        "example": "aasp-201-a",
+                        "type": "string"
+                    },
+                    "neighbor_port": {
+                        "example": "GigabitEthernet1/1/1",
+                        "type": "string"
+                    },
+                    "local_port": {
+                        "example": "B1",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "unreachable_devices": {
+            "properties": {
+                "timestamp": {
+                    "$ref": "#/definitions/datetime"
+                },
+                "Hostname": {
+                    "example": "aasp-201-a",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "client_details": {
+            "properties": {
+                "@mac": {
+                    "$ref": "#/definitions/mac_address"
+                },
+                "association": {
+                    "items": {
+                        "properties": {
+                            "disconnect_time": {
+                                "example": "2010-03-26T13:13:41-06:00",
+                                "type": "string"
+                            },
+                            "bytes_used": {
+                                "example": "0",
+                                "type": "string"
+                            },
+                            "lan_elements": {
+                                "properties": {
+                                    "lan": {
+                                        "properties": {
+                                            "@hostname": {
+                                                "example": "byu.app.byu.edu",
+                                                "type": "string"
+                                            },
+                                            "@ip_address": {
+                                                "$ref": "#/definitions/ip_address"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "ap": {
+                                "properties": {
+                                    "#text": {
+                                        "example": "ITB-2206-2306-AP1",
+                                        "type": "string"
+                                    },
+                                    "@id": {
+                                        "example": "540144887",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "ssid": {
+                                "example": "eduroam",
+                                "type": "string"
+                            },
+                            "vlan": {
+                                "example": "970",
+                                "type": "string"
+                            },
+                            "@id": {
+                                "example": "540144887",
+                                "type": "string"
+                            },
+                            "connect_time": {
+                                "example": "2010-03-26T13:13:41-06:00",
+                                "type": "string"
+                            },
+                            "radio_mode": {
+                                "example": "ac",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "assoc_stat": {
+                    "example": "false or true",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "role_members": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/netid"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "role_name": {
+            "example": "FHSS Family Home Social Sciences",
+            "type": "string"
+        },
+        "ipam_roles": {
+            "items": {
+                "example": "ASB CSR",
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "admin_role": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "support_group": {
+                    "type": "string"
+                }
+            }
+        },
+        "ip_role": {
+            "properties": {
+                "support_group": {
+                    "$ref": "#/definitions/support_group"
+                },
+                "role_scope": {
+                    "example": "single ip object/subnet",
+                    "type": "string"
+                },
+                "role_name": {
+                    "$ref": "#/definitions/role_name"
+                },
+                "readonly": {
+                    "$ref": "#/definitions/read_only"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "switch_interface_path": {
+            "description": "Full name of the target interface (case-sensitive). Abbreviations are not supported",
+            "name": "interface",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "switch_source": {
+            "default": "SolarWinds",
+            "description": "Specify the data source to use",
+            "name": "source",
+            "enum": [
+                "Netdisco",
+                "SolarWinds"
+            ],
+            "required": false,
+            "type": "string",
+            "in": "query"
+        },
+        "interval": {
+            "description": "A start_time of 1 and interval of day would return 24 hours worth of data",
+            "name": "interval",
+            "required": true,
+            "type": "string",
+            "in": "query"
+        },
+        "switch_interface1_path": {
+            "description": "Second part of interface name",
+            "name": "interface1",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "room_number_path": {
+            "description": "Room number",
+            "name": "room",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "ipam_date": {
+            "description": "start date",
+            "name": "date",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        },
+        "switch_path": {
+            "description": "Hostname or IP Address of the target switch. Note that in some cases, a hostname may not be found, even if a matching DNS record exists. This usually indicates an error in configuration or documentation",
+            "name": "switch",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "ip_address_path": {
+            "description": "IPv4 Address",
+            "name": "ip",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "switch_interface2_path": {
+            "description": "Third part of interface name",
+            "name": "interface2",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "building_path": {
+            "description": "Building abbreviation",
+            "name": "building",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "mac_address_path": {
+            "description": "Mac Address",
+            "name": "mac_address",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "host_source": {
+            "default": "Netdisco",
+            "description": "Specify the data source to use",
+            "name": "source",
+            "enum": [
+                "Netdisco"
+            ],
+            "required": false,
+            "type": "string",
+            "in": "query"
+        },
+        "role": {
+            "description": "IPAM role name",
+            "name": "role",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        },
+        "access_policy_path": {
+            "description": "Policy name",
+            "name": "policy",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "start_time": {
+            "description": "How far you want to go back.",
+            "name": "start_time",
+            "required": true,
+            "type": "integer",
+            "in": "query"
+        },
+        "access_policy_body": {
+            "schema": {
+                "$ref": "#/definitions/access_policy"
+            },
+            "name": "policy_definition",
+            "required": true,
+            "in": "body"
+        },
+        "subnet_source": {
+            "default": "Netdisco",
+            "description": "Specify the data source to use",
+            "name": "source",
+            "enum": [
+                "Netdisco"
+            ],
+            "required": false,
+            "type": "string",
+            "in": "query"
+        },
+        "role_name": {
+            "description": "IPAM role name",
+            "name": "role",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        },
+        "jack_number_path": {
+            "description": "Ethernet Jack Number",
+            "name": "jack",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "identifier": {
+            "description": "Net ID",
+            "name": "identifier",
+            "required": true,
+            "type": "string",
+            "in": "query"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "responses": {
+        "bad_request": {
+            "schema": {
+                "properties": {
+                    "message": {
+                        "description": "Explains why the request is invalid",
+                        "example": "Request could not be handled because...",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "Bad Request"
+        },
+        "jack_info": {
+            "schema": {
+                "properties": {
+                    "jack": {
+                        "properties": {
+                            "building": {
+                                "example": "ITB",
+                                "type": "string"
+                            },
+                            "jack": {
+                                "example": "1234",
+                                "type": "string"
+                            },
+                            "status": {
+                                "example": "Data",
+                                "type": "string"
+                            },
+                            "switch": {
+                                "example": "ITB-1204-C",
+                                "type": "string"
+                            },
+                            "interface": {
+                                "example": "FastEthernet0/1",
+                                "type": "string"
+                            },
+                            "room": {
+                                "example": "4321",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "source": {
+                        "example": "NetDoc",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "Success"
+        },
+        "not_found": {
+            "schema": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "Resource Not Found"
+        },
+        "waps": {
+            "schema": {
+                "properties": {
+                    "source": {
+                        "example": "Solarwinds",
+                        "type": "string"
+                    },
+                    "waps": {
+                        "items": {
+                            "properties": {
+                                "platform": {
+                                    "example": "Xirrus XR-520H WiFi Array",
+                                    "type": "string"
+                                },
+                                "ip_address": {
+                                    "example": "10.1.11.11",
+                                    "type": "string"
+                                },
+                                "building": {
+                                    "example": "KMBL",
+                                    "type": "string"
+                                },
+                                "hostname": {
+                                    "example": "KMBL-1111A-A2B1",
+                                    "type": "string"
+                                },
+                                "FQDN": {
+                                    "example": "KMBL-1111A-A2B1.dcs.byu.edu",
+                                    "type": "string"
+                                },
+                                "campus": {
+                                    "example": "BYU Provo Campus",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "Success"
+        },
+        "unauthorized": {
+            "schema": {
+                "properties": {
+                    "message": {
+                        "example": "Invalid/missing token",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "Unauthorized"
+        },
+        "forbidden": {
+            "schema": {
+                "properties": {
+                    "message": {
+                        "example": "Operation not allowed for this user",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "Forbidden"
+        },
+        "internal_error": {
+            "schema": {
+                "properties": {
+                    "message": {
+                        "example": "Internal Server Error",
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "description": "This timestamp is logged, along with a full stack trace, as a semi-unique error identifier to track down 500 errors. Contact developers at the provided email for further support.",
+                        "format": "double",
+                        "example": 1543451147.5313718,
+                        "type": "number"
+                    },
+                    "support": {
+                        "description": "Contact email address for developers",
+                        "example": "john.smith@example.org",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "Internal Server Error"
+        }
+    },
+    "info": {
+        "title": "NetworkInformationTool",
+        "description": "This service has been created as an API-First replacement for the Network Information Tool (nit.byu.edu)",
+        "contact": {
+            "email": "netdevs@byu.edu",
+            "name": "Network Development Team"
+        },
+        "version": "v0"
+    }
+}

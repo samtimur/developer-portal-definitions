@@ -1,0 +1,594 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "AcademicRecordsRecVerification",
+        "description": "The operations of this service correspond to the Enrollment Verification Page (REC07) web page.",
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/domains/legacy/academic/records/recverification/v1",
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "paths": {
+        "/*": {
+            "get": {
+                "summary": "gets a list of printers available to print from",
+                "description": "gets a list of printers available to print from",
+                "operationId": "getPrinters",
+                "parameters": [],
+                "tags": [
+                    "RecVerificationService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service request is OK and a response has been generated.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "RecVerificationService": {
+                                    "type": "object",
+                                    "properties": {
+                                        "request": {
+                                            "type": "object",
+                                            "properties": {
+                                                "method": {
+                                                    "type": "string"
+                                                },
+                                                "resource": {
+                                                    "type": "string"
+                                                },
+                                                "attributes": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "number"
+                                                },
+                                                "statusMessage": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "response": {
+                                            "type": "object",
+                                            "properties": {
+                                                "Printers": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "printer_number": {
+                                                                "type": "string"
+                                                            },
+                                                            "printer_name": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "RecVerificationService": {
+                                    "request": {
+                                        "method": "GET",
+                                        "resource": "/json/",
+                                        "attributes": "",
+                                        "status": 200,
+                                        "statusMessage": "Service request is OK and a response has been generated."
+                                    },
+                                    "response": {
+                                        "Printers": [
+                                            {
+                                                "printer_number": "6",
+                                                "printer_name": "asb_b150_6_tray3"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "request": {
+                                    "type": "object",
+                                    "properties": {
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "code": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                },
+                                "response": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Failure to authenticate",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "request": {
+                                    "type": "object",
+                                    "properties": {
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "code": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                },
+                                "response": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "request": {
+                                    "type": "object",
+                                    "properties": {
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "code": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                },
+                                "response": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The target resource can not be found for the provided resource identifiers.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "request": {
+                                    "type": "object",
+                                    "properties": {
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "code": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                },
+                                "response": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "request": {
+                                    "type": "object",
+                                    "properties": {
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "code": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "httpStatusCode": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                },
+                                "response": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "description": "service definition",
+                "operationId": "getServiceDocumentation",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "request": {
+                    "type": "object",
+                    "properties": {
+                        "method": {
+                            "type": "string"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "status": {
+                            "type": "number"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "httpStatusCode": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                },
+                "response": {
+                    "type": "object",
+                    "properties": {}
+                }
+            }
+        },
+        "errors": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "httpStatusCode": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "error_data": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                }
+            }
+        },
+        "RecVerificationService": {
+            "type": "object",
+            "properties": {
+                "RecVerificationService": {
+                    "type": "object",
+                    "properties": {
+                        "request": {
+                            "type": "object",
+                            "properties": {
+                                "method": {
+                                    "type": "string"
+                                },
+                                "resource": {
+                                    "type": "string"
+                                },
+                                "attributes": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "number"
+                                },
+                                "statusMessage": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "response": {
+                            "type": "object",
+                            "properties": {
+                                "Printers": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "printer_number": {
+                                                "type": "string"
+                                            },
+                                            "printer_name": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "request": {
+            "type": "object",
+            "properties": {
+                "method": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "number"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            }
+        },
+        "response": {
+            "type": "object",
+            "properties": {
+                "Printers": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "printer_number": {
+                                "type": "string"
+                            },
+                            "printer_name": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Printers": {
+            "type": "object",
+            "properties": {
+                "printer_number": {
+                    "type": "string"
+                },
+                "printer_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "printer_number": {
+            "type": "string"
+        },
+        "printer_name": {
+            "type": "string"
+        }
+    },
+    "x-mock_json": {
+        "RecVerificationService": {
+            "RecVerificationService": {
+                "request": {
+                    "method": "GET",
+                    "resource": "/json/",
+                    "attributes": "",
+                    "status": 200,
+                    "statusMessage": "Service request is OK and a response has been generated."
+                },
+                "response": {
+                    "Printers": [
+                        {
+                            "printer_number": "6",
+                            "printer_name": "asb_b150_6_tray3"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,397 @@
+{
+    "basePath": "/domains/regapi/processed_carts/v1",
+    "paths": {
+        "/{person_id},{year_term}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Processed carts",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term for which the cart pertains",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/processed_cart"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empyt\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getProcessedCart"
+            }
+        },
+        "/{person_id},{year_term}/classes/{curriculum_id},{title_code},{section_number}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "adds class request to the processed_cart",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term of the cart",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The curriculum_id of the class to be added to the cart",
+                        "name": "curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The title-code of the class to be added to the cart",
+                        "name": "title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The section_number of the class to be added to the cart",
+                        "name": "section_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/processed_class"
+                        },
+                        "description": "The class structure to be added to the cart",
+                        "name": "class",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/processed_class"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empyt\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "addClassToProcessedCart"
+            }
+        },
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Retrieve a collection of processed_carts",
+                "parameters": [
+                    {
+                        "description": "The person_id to which the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The year-term of the carts being selected",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/processed_cart"
+                        },
+                        "description": "Success"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "getProcessedCarts"
+            }
+        },
+        "/{person_id},{year_term}/envelopes/{envelope_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Adds an envelope request to the cart",
+                "parameters": [
+                    {
+                        "description": "The person_id of the student for whom the cart is for",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The year_term for which the cart pertains",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The envelope_id of the envelope request to be added to the class",
+                        "name": "envelope_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/processed_envelope"
+                        },
+                        "description": "The envelope structure to be added to the cart",
+                        "name": "envelope",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/processed_envelope"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "No cart satisfies the query paramters - the collection is empyt\""
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        },
+                        "description": "Error"
+                    }
+                },
+                "operationId": "addEnvelopeToProcessedCart"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "processed_class": {
+            "properties": {
+                "class_log_id": {
+                    "type": "string"
+                },
+                "section_number": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "course_title": {
+                    "type": "string"
+                },
+                "title_code": {
+                    "type": "string"
+                },
+                "catalog_number": {
+                    "type": "string"
+                },
+                "curriculum_id": {
+                    "type": "string"
+                },
+                "dept_name": {
+                    "type": "string"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "catalog_suffix": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "processed_envelope": {
+            "properties": {
+                "envelope_id": {
+                    "type": "string"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "processed_classes": {
+                    "items": {
+                        "$ref": "#/definitions/processed_class"
+                    },
+                    "type": "array"
+                },
+                "envelope_log_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "processed_cart": {
+            "properties": {
+                "processed_envelopes": {
+                    "items": {
+                        "$ref": "#/definitions/processed_envelope"
+                    },
+                    "type": "array"
+                },
+                "processed_date_time": {
+                    "type": "number"
+                },
+                "processed": {
+                    "type": "boolean"
+                },
+                "person_id": {
+                    "type": "string"
+                },
+                "processed_success": {
+                    "type": "boolean"
+                },
+                "waitlist": {
+                    "type": "boolean"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "checkout": {
+                    "type": "boolean"
+                },
+                "processed_classes": {
+                    "items": {
+                        "$ref": "#/definitions/processed_class"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "ErrorResponse": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "message"
+            ]
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "AutoRegProcessedCarts",
+        "version": "v1"
+    }
+}

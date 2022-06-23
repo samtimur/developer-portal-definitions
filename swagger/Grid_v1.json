@@ -1,0 +1,299 @@
+{
+    "basePath": "/domains/erp/fs/grid/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/model": {
+            "get": {
+                "tags": [
+                    "Get"
+                ],
+                "summary": "Returns Models based on the Manufacturer",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Models from the specified Manufacturer ID will be returned",
+                "parameters": [
+                    {
+                        "description": "Returns models from specified Manufacturer ID",
+                        "name": "manufacturer",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "models": {
+                                    "items": {
+                                        "properties": {
+                                            "asset_depreciation_method": {
+                                                "description": "method of depreciation",
+                                                "type": "string"
+                                            },
+                                            "asset_profile_code_description": {
+                                                "description": "description of depreciation",
+                                                "type": "string"
+                                            },
+                                            "asset_depreciation_life": {
+                                                "description": "life of Depreciation",
+                                                "type": "string"
+                                            },
+                                            "asset_model_code": {
+                                                "description": "model",
+                                                "type": "string"
+                                            },
+                                            "asset_model_description": {
+                                                "description": "description of model",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "asset_manufacturer_description": {
+                                    "description": "Manufacturer based on manufacturer_id",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "asset_model_description",
+                                "asset_model_code"
+                            ]
+                        },
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "models": {
+                                    "depreciation_description": "description of depreciaiton",
+                                    "depreciation_method": "method of depreciation",
+                                    "depreciation_life": "life of depreciation",
+                                    "asset_model_code": "model",
+                                    "asset_model_description": "description of model"
+                                },
+                                "asset_manufacturer_description": "manufacturer of models"
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "description": "Bad Request",
+                            "type": "string"
+                        },
+                        "description": "Bad Request",
+                        "examples": {
+                            "application/json": [
+                                "There are no models for the manufacturer_id {manufacturer_id}. Please try again with a different manufacturer_id."
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/depreciation": {
+            "get": {
+                "tags": [
+                    "Get"
+                ],
+                "summary": "Returns depreciation of assets that begin with 'IT'",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "accumulated depreciation will be returned",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "depreciation": {
+                                    "items": {
+                                        "properties": {
+                                            "asset_id": {
+                                                "description": "asset identification 12 digits",
+                                                "type": "string"
+                                            },
+                                            "asset_depreciation": {
+                                                "description": "accumulated depreciation",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object",
+                            "required": [
+                                "asset_id",
+                                "asset_depreciation"
+                            ]
+                        },
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "depreciation": {
+                                    "asset_id": "000000000000",
+                                    "asset_depreciation": "0.0"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "schema": {
+                            "description": "No Content",
+                            "type": "string"
+                        },
+                        "description": "No Content",
+                        "examples": {
+                            "application/json": [
+                                "There are no asset IDs that begin with IT. Please create new assets or alter existing Asset IDs to begin with IT."
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Posts asset to Y_GRID table",
+                "tags": [
+                    "Post"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Posts asset fields in users json to Y_GRID table",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "asset_id": {
+                                    "description": "ASSET_ID",
+                                    "type": "string"
+                                },
+                                "model": {
+                                    "description": "MODEL",
+                                    "type": "string"
+                                },
+                                "area_id": {
+                                    "description": "AREA_ID",
+                                    "type": "string"
+                                },
+                                "journal_ln_amt": {
+                                    "description": "MONETARY_AMOUNT",
+                                    "type": "number"
+                                },
+                                "location": {
+                                    "description": "LOCATION",
+                                    "type": "string"
+                                },
+                                "in_service_date": {
+                                    "description": "IN_SERVICE_DT",
+                                    "type": "string"
+                                },
+                                "class_field": {
+                                    "description": "CLASS_FLD",
+                                    "type": "string"
+                                },
+                                "cost": {
+                                    "description": "COST",
+                                    "type": "number"
+                                },
+                                "asset_description": {
+                                    "description": "DESCR",
+                                    "type": "string"
+                                },
+                                "ref": {
+                                    "description": "JRNL_LN_REF",
+                                    "type": "string"
+                                },
+                                "journal_id": {
+                                    "description": "JOURNAL_ID",
+                                    "type": "string"
+                                },
+                                "account": {
+                                    "description": "ACCOUNT",
+                                    "type": "string"
+                                },
+                                "journal_ln_descr": {
+                                    "description": "LINE_DESCR",
+                                    "type": "string"
+                                },
+                                "operating_unit": {
+                                    "description": "OPERATING_UNIT",
+                                    "type": "string"
+                                },
+                                "comments": {
+                                    "description": "COMMENTS",
+                                    "type": "string"
+                                },
+                                "contact": {
+                                    "description": "AVAIL_CONTACT",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Asset information",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "Success": {
+                                    "description": "Asset has been posted successfully",
+                                    "example": "Your Asset {asset_id} has been posted",
+                                    "type": "string"
+                                },
+                                "warnings": {
+                                    "items": {
+                                        "example": "warning messages",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "errors": {
+                                    "items": {
+                                        "example": "error messages",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "Success": {
+                                    "description": "Asset has not been posted",
+                                    "example": "Your Asset {asset_id} was not posted",
+                                    "type": "string"
+                                },
+                                "warnings": {
+                                    "items": {
+                                        "example": "warning messages",
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "Grid",
+        "description": "Grid POST and GET",
+        "version": "v1"
+    }
+}

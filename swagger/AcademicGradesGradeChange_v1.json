@@ -1,0 +1,371 @@
+{
+    "basePath": "/domains/legacy/academic/grades/gradechange/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "service definition",
+                "x-throttling-tier": "Unlimited",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation"
+            }
+        },
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "pass through request",
+                "x-throttling-tier": "Unlimited",
+                "description": "Pass through all requests to underlying service.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "passThrough"
+            }
+        },
+        "/{year_term}/{curriculum_id}/{title_code}/{section}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Changes grades for students in the given class section. Either the grade_changes parameter or the t_grade_changes parameter or both must be provided.",
+                "tags": [
+                    "GradeChangeService"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Changes grades for students in the given class section. Either the grade_changes parameter or the t_grade_changes parameter or both must be provided.",
+                "parameters": [
+                    {
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> 5 digit number",
+                        "name": "curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> 3 digit number",
+                        "name": "title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> Must be 3 digit number. i.e. 001 for section one.",
+                        "name": "section",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> Repeating string formatted as person_id, grade, reason(,attended(Y,N,O),date_last_attended(YYYYMMDD) only if changing to a failing grade);...",
+                        "name": "grade_changes",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "string -> Repeating string formatted as person_id, grade, reason, change_all_year_terms(Y,N);...",
+                        "name": "t_grade_changes",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "doGradeChange"
+            },
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Changes grades for students in the given class section. Either the grade_changes parameter or the t_grade_changes parameter or both must be provided.",
+                "tags": [
+                    "GradeChangeService"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Changes grades for students in the given class section. Either the grade_changes parameter or the t_grade_changes parameter or both must be provided.",
+                "parameters": [
+                    {
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> 5 digit number",
+                        "name": "curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> 3 digit number",
+                        "name": "title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> Must be 3 digit number. i.e. 001 for section one.",
+                        "name": "section",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> Repeating string formatted as person_id, grade, reason(,attended(Y,N,O),date_last_attended(YYYYMMDD) only if changing to a failing grade);...",
+                        "name": "grade_changes",
+                        "type": "string",
+                        "required": false,
+                        "in": "body"
+                    },
+                    {
+                        "description": "string -> Repeating string formatted as person_id, grade, reason, change_all_year_terms(Y,N);...",
+                        "name": "t_grade_changes",
+                        "type": "string",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "doGradeChange"
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns the enrolled students for the given class with all current grades.",
+                "tags": [
+                    "GradeChangeService"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the enrolled students for the given class with all current grades.",
+                "parameters": [
+                    {
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> 5 digit number",
+                        "name": "curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> 3 digit number",
+                        "name": "title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> Must be 3 digit number. i.e. 001 for section one.",
+                        "name": "section",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getGradeChangeInfo"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {},
+    "info": {
+        "title": "AcademicGradesGradeChange",
+        "description": "GradeChangeService",
+        "version": "v1"
+    }
+}

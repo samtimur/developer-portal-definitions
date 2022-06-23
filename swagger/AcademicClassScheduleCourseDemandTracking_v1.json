@@ -1,0 +1,223 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "AcademicClassScheduleCourseDemandTracking",
+        "description": "This service summarizes the student log of class demand-raincheck lists from registration.",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/Course_Demand_Tracking_v1.0"
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/domains/legacy/academic/classschedule/coursedemandtracking/v1",
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "paths": {
+        "/{yearTerm}/{currId}/{titleCode}/{view}": {
+            "get": {
+                "summary": "Returns list of rainchecked students for selected course.",
+                "description": "Returns list of rainchecked students for selected course.",
+                "operationId": "getCourseDemand",
+                "parameters": [
+                    {
+                        "name": "yearTerm",
+                        "description": "yearTerm -> [1-2][0-9]{3}[1345]",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "currId",
+                        "description": "string -> 5 digit number",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "titleCode",
+                        "description": "string -> 3 digit number",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "view",
+                        "description": "string -> [A|C|AD|DR|D|N] All, Cleared to register, Added the class, Dropped the class, Deleted, No Action",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "CourseDemandTrackingService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service request is OK and a response has been generated.",
+                        "schema": {
+                            "$ref": "#/definitions/CourseDemandTrackingService"
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Failure to authenticate.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "The target resource can not be found for the provided resource identifiers.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "description": "service definition",
+                "operationId": "getServiceDocumentation",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "CourseDemandTrackingService": {
+            "type": "object",
+            "properties": {
+                "request": {
+                    "$ref": "#/definitions/request"
+                },
+                "response": {
+                    "$ref": "#/definitions/response"
+                }
+            }
+        },
+        "request": {
+            "type": "object",
+            "properties": {
+                "method": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "number"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            }
+        },
+        "response": {
+            "type": "object",
+            "properties": {
+                "dept_name": {
+                    "$ref": "#/definitions/dept_name"
+                },
+                "catalog_number": {
+                    "$ref": "#/definitions/catalog_number"
+                },
+                "catalog_suffix": {
+                    "$ref": "#/definitions/catalog_suffix"
+                },
+                "transcript_title": {
+                    "$ref": "#/definitions/transcript_title"
+                },
+                "curriculum_id": {
+                    "$ref": "#/definitions/curriculum_id"
+                },
+                "title_code": {
+                    "$ref": "#/definitions/title_code"
+                },
+                "rain_check_sum": {
+                    "$ref": "#/definitions/rain_check_sum"
+                },
+                "section_size_sum": {
+                    "$ref": "#/definitions/section_size_sum"
+                },
+                "number_of_sections": {
+                    "$ref": "#/definitions/number_of_sections"
+                },
+                "number_enrolled": {
+                    "$ref": "#/definitions/number_enrolled"
+                },
+                "rainChecks": {
+                    "$ref": "#/definitions/rainChecks"
+                }
+            }
+        },
+        "dept_name": {
+            "type": "string"
+        },
+        "catalog_number": {
+            "type": "string"
+        },
+        "catalog_suffix": {
+            "type": "string"
+        },
+        "transcript_title": {
+            "type": "string"
+        },
+        "curriculum_id": {
+            "type": "string"
+        },
+        "title_code": {
+            "type": "string"
+        },
+        "rain_check_sum": {
+            "type": "string"
+        },
+        "section_size_sum": {
+            "type": "string"
+        },
+        "number_of_sections": {
+            "type": "string"
+        },
+        "number_enrolled": {
+            "type": "string"
+        },
+        "rainChecks": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}

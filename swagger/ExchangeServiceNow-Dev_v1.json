@@ -1,0 +1,1629 @@
+{
+    "paths": {
+        "/change-netid/{netid}/{newnetid}": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Changes a user's NetID in AD / Office 365 / Box to newnetid@byu.edu",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "netid",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "newnetid",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/update-student-employee-mailbox/{accountId}/{+emailAddress}": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "If it is able to change the primary email address on an account it does so and returns a 200. Otherwise returns a 409",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/set-account-status/{command}/{accountId}": {
+            "put": {
+                "summary": "Unlocks the given Active Directory account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Must be unlock, enable, or disable",
+                        "name": "command",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/validate-personal-address/{accountId}/{+emailAddress}/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Checks that an AD account does not have a mail box and that the email address is unreserved or valid",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-secondary-smtp/{accountId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": " Returns the @ad.byu.edu and @byu.mail.onmicrosoft.com addresses for the given account",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-account-info/{+accountId}/restrictedrecords": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns common information for an account. Useful for OSC and CSRs troubleshooting. Optionally returns restricted records",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "+accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-addresses/{accountId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns all email addresses associated with the email account, excluding the @ad.byu.edu and @byu.mail.onmicrosoft.com addresses",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/invite-box-user/{accountId}": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Invites a user back into the enterprise",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/unlock-mailbox/{accountId}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Unlocks a mailbox by allowing access to it again. Removes Send/Receive quotas of 0.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/validate-personal-address/{accountId}/{+emailAddress}/{location}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Checks that an AD account does not have a mail box and that the email address is unreserved or valid",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "location",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/set-mailbox/enableIMAP/{accountId}": {
+            "put": {
+                "summary": "Enables IMAP for an account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/cancel-mailbox/{accountId}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Call for ServiceNow to either remove the employee email address from a student employee mailbox or to lock a mailbox for a non-student.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/delete-eam-alias-info/{+emailAddress}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Deletes a particular EAM Alias. To be used by Alias Manager.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/validate-put-eam-alias/{+emailAddress}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Validates the creation or update of an EAM Alias without making any changes.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/putEamAlias"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-health-stats": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets API Status",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-account-info/{+accountId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns common information for an account. Useful for OSC and CSRs troubleshooting",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "+accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/reconnect-mailbox": {
+            "put": {
+                "summary": "Reconnects a disconnected mailbox to the user it used to be connected to. The reconnect must happen before Exchange policy has completed a deletion of the mailbox.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/accountId"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/rollout-box-user/{accountId}": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Rolls a user out of the enterprise",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/lock-mailbox/{accountId}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Locks a mailbox so it cannot be logged into. Also sets Quotas for send/receive to 0 so it cannot receive or send email.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/*": {
+            "get": {
+                "summary": "Ping",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Always returns true.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/get-lit-hold/{accountId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns True if account is on litigation hold. False otherwise",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/create-shared-mailbox": {
+            "post": {
+                "summary": "Creates a shared mailbox and adds permissions to that shared mailbox",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/createShared"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/validate-student-address/{accountId}/{location}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Validates an AD user exists (Ignores if it has a mailbox). It returns the email address that the user should be assigned.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "location",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/set-mailbox/setMassMailing/{accountId}": {
+            "put": {
+                "summary": "Sets Anti-spam outbound policy (Mass Mailing).",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/validate-user-group": {
+            "post": {
+                "summary": "Verifies that Users and Groups are fine to use with Exchange Full Access and SendAs Permissions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/validate-user-group"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/validate-resource-address/{accountId}/{+emailAddress}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Checks an email address for both reservation and format",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/put-eam-alias-info/{+emailAddress}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Creates or updates a particular EAM Alias. To be used by Alias Manager.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/putEamAlias"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/search-recipients/restrictedrecords": {
+            "post": {
+                "summary": "Finds all mailboxes that match the search query. Returns restricted records as well.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/searchRecipients"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/validate-student-employee-mailbox-update/{accountId}/{+emailAddress}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns 200 if it is okay to change the email address on the account. Otherwise returns a 409 if there is an issue",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-pwd-stats/{netid}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets Last Bad Password Attempt Time / Number of Bad Passwords for a User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "netid",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/search-message-trace": {
+            "post": {
+                "summary": "Search for messages that have passed through Exchange Online.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/searchMessageTrace"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-employment-status/{netid}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns the employment codes for someone. 404 means they were never an employee",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "netid",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-enabled-status/{accountId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Given a user's account ID, checks to see if the user exists and is marked as enabled.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/start-online-move-request": {
+            "post": {
+                "summary": "Starts a move of a mailbox to Exchange Online.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/onlineMoveRequest"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "202": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/validate-generic-address/{accountId}/{+emailAddress}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Checks an email address for both reservation and format",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/create-resource": {
+            "post": {
+                "summary": "Create a mailbox and account for a Room or for Equipment.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/createResource"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/set-mailbox/disableIMAP/{accountId}": {
+            "put": {
+                "summary": "Disables IMAP for an account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/create-student-mailbox-express": {
+            "post": {
+                "summary": "Creates a mailbox for a student and assumes netid@student.byu.edu. Will unlock a mailbox if it is already locked and possibly migrate them to the cloud. Do not use this function unless you talk to the EUP team first",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/studentMailboxExpress"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "201": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/create-student-mailbox": {
+            "post": {
+                "summary": "Creates a mailbox for an existing student given the user's current and valid account ID. Will return 201 if student already has an account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/studentMailbox"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "201": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-email-alias/{+emailAddress}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Recursively looks up an email address in Alias Manager. Returns the results and any errors it finds",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-box-user/{accountId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets Information about a user in Box",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/validate-shared-address/{accountId}/{+emailAddress}/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Checks an email address for both reservation and format",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/validate-student-address/{accountId}/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Validates an AD user exists (Ignores if it has a mailbox). It returns the email address that the user should be assigned.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-email-alias-destinations/{+emailAddress}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Recursively looks up an email address in Alias Manager to find the ultimate destinations.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/set-mailbox/antispamQuarantineNotify/{accountId}": {
+            "put": {
+                "summary": "Removes Anti-spam inbound policy (Junk Email Folder).",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/set-mailbox/antispamJunkEmailFolder/{accountId}": {
+            "put": {
+                "summary": "Sets Anti-spam inbound policy (Junk Email Folder).",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-eam-alias-info/{+emailAddress}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns information relating to a particular EAM Alias. To be used by Alias Manager.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "+emailAddress",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/search-recipients": {
+            "post": {
+                "summary": "Finds all mailboxes that match the search query.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/searchRecipients"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-account-type/{+accountId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns the account type for an account. Examples are Generic,User,Shared,Room,Equipment",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "+accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/get-box-user/{accountId}/restrictedrecords": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets Information about a user in Box. Returns restricted records",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/create-generic-mailbox": {
+            "post": {
+                "summary": "Creates a generic mailbox and Exchange user account to be used by a department (Generic account).",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/createGeneric"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/create-user-mailbox": {
+            "post": {
+                "summary": "Creates a mailbox for an existing user given the user's current and valid account ID.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/userMailbox"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/set-mailbox/notMassMailing/{accountId}": {
+            "put": {
+                "summary": "Removes Anti-spam outbound policy (Mass Mailing).",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        },
+        "/enable-distributiongroup/{+group}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Mail enables security groups in Exchange",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "+group",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {},
+                    "500": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "studentMailbox": {
+            "properties": {
+                "smtp": {
+                    "type": "string"
+                },
+                "accountId": {
+                    "type": "string"
+                },
+                "online": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "smtp",
+                "accountId"
+            ]
+        },
+        "userMailbox": {
+            "properties": {
+                "smtp": {
+                    "type": "string"
+                },
+                "accountId": {
+                    "type": "string"
+                },
+                "online": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "smtp",
+                "accountId"
+            ]
+        },
+        "createResource": {
+            "properties": {
+                "accountId": {
+                    "type": "string"
+                },
+                "bookingdelegates": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "emailAlias": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "resourceName": {
+                    "type": "string"
+                },
+                "online": {
+                    "type": "string"
+                },
+                "delegates": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "accountId",
+                "emailAlias",
+                "type",
+                "resourceName",
+                "delegates"
+            ]
+        },
+        "accountId": {
+            "properties": {
+                "accountId": {
+                    "type": "string"
+                }
+            }
+        },
+        "onlineMoveRequest": {
+            "properties": {
+                "baditemlimit": {
+                    "type": "string"
+                },
+                "whatif": {
+                    "type": "boolean"
+                },
+                "completeAfter": {
+                    "type": "string"
+                },
+                "accountId": {
+                    "type": "string"
+                },
+                "batchName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "accountId"
+            ]
+        },
+        "validate-user-group": {
+            "properties": {
+                "usergroup": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "createShared": {
+            "properties": {
+                "sendas": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "accountName": {
+                    "type": "string"
+                },
+                "accountId": {
+                    "type": "string"
+                },
+                "fullaccess": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "emailAlias": {
+                    "type": "string"
+                },
+                "online": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "sendas",
+                "accountName",
+                "fullaccess",
+                "accountId",
+                "emailAlias"
+            ]
+        },
+        "searchRecipients": {
+            "properties": {
+                "attributes": {
+                    "type": "string"
+                },
+                "searchstring": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "searchstring"
+            ]
+        },
+        "createGeneric": {
+            "properties": {
+                "accountName": {
+                    "type": "string"
+                },
+                "accountId": {
+                    "type": "string"
+                },
+                "emailAlias": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "searchMessageTrace": {
+            "properties": {
+                "startDate": {
+                    "type": "string"
+                },
+                "senderAddress": {
+                    "type": "string"
+                },
+                "page": {
+                    "type": "string"
+                },
+                "pageSize": {
+                    "type": "string"
+                },
+                "recipientAddress": {
+                    "type": "string"
+                },
+                "endDate": {
+                    "type": "string"
+                }
+            }
+        },
+        "putEamAlias": {
+            "properties": {
+                "forwardTo": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "owners": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "studentMailboxExpress": {
+            "properties": {
+                "accountId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "accountId"
+            ]
+        }
+    },
+    "info": {
+        "title": "ExchangeServiceNow",
+        "description": "API endpoints for use by Service Now email orders, Provisioning, Office Help, and Alias Manager",
+        "version": "1.0"
+    },
+    "basePath": "/exchange-sn-dev/1.0",
+    "host": "api.byu.edu:443"
+}

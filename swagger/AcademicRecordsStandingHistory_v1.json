@@ -1,0 +1,470 @@
+{
+    "basePath": "/domains/legacy/academic/records/standinghistory/v1",
+    "x-mock_json": {
+        "RecAcadStandingService": {
+            "response": {
+                "threshold_date": "08 Jan 2018",
+                "logs": [],
+                "has_block": false,
+                "current_standing": "GOOD",
+                "academic_standings": [
+                    {
+                        "byu_gpa_original": 2.79,
+                        "term_gpa": 3.17,
+                        "term_gpa_orig": 3.17,
+                        "year_term_desc": "Winter Semester 2015",
+                        "year_term": "20151",
+                        "term_graded_hours": 14.5,
+                        "standing": "GOOD"
+                    }
+                ]
+            },
+            "request": {
+                "status": 200,
+                "resource": "/json/123456789/",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/{person_id}": {
+            "get": {
+                "summary": "Shows current academic standing identified by person id OR Updates a students academic standing current/previous by person id OR Updates the student's Threshold date",
+                "tags": [
+                    "StandingHistoryService"
+                ],
+                "description": "Shows current academic standing identified by person id OR Updates a students academic standing current/previous by person id OR Updates the student's Threshold date",
+                "parameters": [
+                    {
+                        "description": "string -> nine digit number",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "string -> year and term specified",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "string -> new academic standing",
+                        "name": "new_standing",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "string -> DD MM YYYY",
+                        "name": "threshold_date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "threshold_date": {
+                                            "type": "string"
+                                        },
+                                        "logs": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "has_block": {
+                                            "type": "boolean"
+                                        },
+                                        "current_standing": {
+                                            "type": "string"
+                                        },
+                                        "academic_standings": {
+                                            "items": {
+                                                "properties": {
+                                                    "byu_gpa_original": {
+                                                        "type": "number"
+                                                    },
+                                                    "term_gpa": {
+                                                        "type": "number"
+                                                    },
+                                                    "term_gpa_orig": {
+                                                        "type": "number"
+                                                    },
+                                                    "year_term_desc": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "term_graded_hours": {
+                                                        "type": "number"
+                                                    },
+                                                    "standing": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "threshold_date": "08 Jan 2018",
+                                    "logs": [],
+                                    "has_block": false,
+                                    "current_standing": "GOOD",
+                                    "academic_standings": [
+                                        {
+                                            "byu_gpa_original": 2.79,
+                                            "term_gpa": 3.17,
+                                            "term_gpa_orig": 3.17,
+                                            "year_term_desc": "Winter Semester 2015",
+                                            "year_term": "20151",
+                                            "term_graded_hours": 14.5,
+                                            "standing": "GOOD"
+                                        }
+                                    ]
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/json/123456789/",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetAcadStandingORUpdateRecAcadStandingORupdateRecAcadStandingThreshold",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "threshold_date": {
+            "type": "string"
+        },
+        "term_gpa": {
+            "type": "number"
+        },
+        "logs": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "year_term_desc": {
+            "type": "string"
+        },
+        "has_block": {
+            "type": "boolean"
+        },
+        "year_term": {
+            "type": "string"
+        },
+        "current_standing": {
+            "type": "string"
+        },
+        "academic_standings": {
+            "items": {
+                "properties": {
+                    "byu_gpa_original": {
+                        "type": "number"
+                    },
+                    "term_gpa": {
+                        "type": "number"
+                    },
+                    "term_gpa_orig": {
+                        "type": "number"
+                    },
+                    "year_term_desc": {
+                        "type": "string"
+                    },
+                    "year_term": {
+                        "type": "string"
+                    },
+                    "term_graded_hours": {
+                        "type": "number"
+                    },
+                    "standing": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "response": {
+            "properties": {
+                "threshold_date": {
+                    "type": "string"
+                },
+                "logs": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_block": {
+                    "type": "boolean"
+                },
+                "current_standing": {
+                    "type": "string"
+                },
+                "academic_standings": {
+                    "items": {
+                        "properties": {
+                            "byu_gpa_original": {
+                                "type": "number"
+                            },
+                            "term_gpa": {
+                                "type": "number"
+                            },
+                            "term_gpa_orig": {
+                                "type": "number"
+                            },
+                            "year_term_desc": {
+                                "type": "string"
+                            },
+                            "year_term": {
+                                "type": "string"
+                            },
+                            "term_graded_hours": {
+                                "type": "number"
+                            },
+                            "standing": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "byu_gpa_original": {
+            "type": "number"
+        },
+        "term_gpa_orig": {
+            "type": "number"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "term_graded_hours": {
+            "type": "number"
+        },
+        "RecAcadStandingService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "threshold_date": {
+                            "type": "string"
+                        },
+                        "logs": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "has_block": {
+                            "type": "boolean"
+                        },
+                        "current_standing": {
+                            "type": "string"
+                        },
+                        "academic_standings": {
+                            "items": {
+                                "properties": {
+                                    "byu_gpa_original": {
+                                        "type": "number"
+                                    },
+                                    "term_gpa": {
+                                        "type": "number"
+                                    },
+                                    "term_gpa_orig": {
+                                        "type": "number"
+                                    },
+                                    "year_term_desc": {
+                                        "type": "string"
+                                    },
+                                    "year_term": {
+                                        "type": "string"
+                                    },
+                                    "term_graded_hours": {
+                                        "type": "number"
+                                    },
+                                    "standing": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "standing": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicRecordsStandingHistory",
+        "description": "This service returns a student's complete academic standing history from the AIM System.",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

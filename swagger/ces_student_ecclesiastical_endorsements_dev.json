@@ -1,0 +1,2365 @@
+{
+    "tags": [
+        {
+            "description": "Status of the API",
+            "name": "status"
+        },
+        {
+            "description": "Everything about the endorsement requests",
+            "name": "endorsements"
+        },
+        {
+            "description": "Everything about the LDS Leaders who have or may make endorsement decisions",
+            "name": "leaders"
+        },
+        {
+            "description": "Everything about CES Chaplains and the chaplain queue",
+            "name": "chaplain_queue"
+        }
+    ],
+    "basePath": "/domains/ces/student_endorsements/dev",
+    "paths": {
+        "/status.info": {
+            "get": {
+                "tags": [
+                    "status"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "View API status detailed info",
+                "x-throttling-tier": "Unlimited",
+                "description": "View API status detailed info",
+                "responses": {
+                    "200": {
+                        "description": "Returns OK if API is up and running. Returns extra information regarding the APIs dependencies"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "statusInfo"
+            }
+        },
+        "/chaplain/queue": {
+            "post": {
+                "tags": [
+                    "chaplain_queue"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Add to the Chaplain Queue",
+                "x-throttling-tier": "Unlimited",
+                "description": "Add to the Chaplain Queue",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/ChaplainQueuePost"
+                        },
+                        "description": "Chaplain Queue to be created",
+                        "name": "chaplainQueue",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/ChaplainQueue"
+                        },
+                        "description": "Returns created Chaplain Queue"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "createChaplainQueue"
+            },
+            "get": {
+                "tags": [
+                    "chaplain_queue"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Search the Chaplain Queue",
+                "x-throttling-tier": "Unlimited",
+                "description": "Search the Chaplain Queue",
+                "parameters": [
+                    {
+                        "description": "filter results by Endorsement id",
+                        "name": "endorsementId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by Leader id",
+                        "name": "leaderId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by reasons",
+                        "name": "reasons",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by schools",
+                        "name": "schools",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by assigned chaplain person id",
+                        "name": "assignedChaplain",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "[true|false] filter results by pending chaplain queues (defaults to true)",
+                        "name": "pending",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/ChaplainQueue"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Returns the search results for chaplain queue"
+                    }
+                },
+                "operationId": "searchChaplainQueue"
+            }
+        },
+        "/chaplain/queue/{endorsementId}/events": {
+            "post": {
+                "tags": [
+                    "chaplain_queue"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Add Chaplain Event",
+                "x-throttling-tier": "Unlimited",
+                "description": "Add an event to Chaplain Queue",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "endorsementId",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/ChaplainEventPost"
+                        },
+                        "description": "event",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ChaplainQueue"
+                        },
+                        "description": "Returns successfully created the Chaplain event"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "addChaplainEvent"
+            },
+            "get": {
+                "tags": [
+                    "chaplain_queue"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "View Chaplain Events",
+                "x-throttling-tier": "Unlimited",
+                "description": "View specific Chaplain Queue's events",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "endorsementId",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/EndorsementEvent"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Returns Chaplain Events for a specified Chaplain Queue"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "viewChaplainEvents"
+            }
+        },
+        "/endorsements/{id}": {
+            "put": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Update endorsement ?",
+                "x-throttling-tier": "Unlimited",
+                "description": "(not sure if we need this one due to being able to add to the honorCodeAgreement and unit in separate endpoints)",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/EndorsementPost",
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Endorsement"
+                        },
+                        "description": "Returns updated endorsement"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "updateEndorsement"
+            },
+            "get": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Get endorsement by id",
+                "x-throttling-tier": "Unlimited",
+                "description": "Retrieves the endorsement by the endorsement id",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Endorsement"
+                        },
+                        "description": "Returns the specified endorsement"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getEndorsement"
+            },
+            "delete": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Cancel endorsement by id",
+                "x-throttling-tier": "Unlimited",
+                "description": "Student/applicant chooses to cancel their endorsement. This will cancel the endorsement instead of delete",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Endorsement canceled"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "cancelEndorsement"
+            }
+        },
+        "/chaplain/queue/{endorsementId}": {
+            "get": {
+                "tags": [
+                    "chaplain_queue"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "View Chaplain Queue",
+                "x-throttling-tier": "Unlimited",
+                "description": "View specific Chaplain Queue",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "endorsementId",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ChaplainQueue"
+                        },
+                        "description": "Returns specified Chaplain Queue"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "viewChaplainQueue"
+            },
+            "delete": {
+                "tags": [
+                    "chaplain_queue"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete Chaplain Queue",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes Chaplain Queue",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "endorsementId",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Chaplain Queue deleted"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "deleteChaplainQueue"
+            }
+        },
+        "/endorsements/{id}/unit": {
+            "put": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Change unit ?",
+                "x-throttling-tier": "Unlimited",
+                "description": "(not sure if needed) admin can change the unit for an endorsement",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/SelectUnitPost",
+                            "type": "object"
+                        },
+                        "description": "LDS Unit Number and LDS flag",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Applicant/student successfully changed the selected LDS unit"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "changeUnit"
+            },
+            "post": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Select a unit",
+                "x-throttling-tier": "Unlimited",
+                "description": "Applicant/student selects an lds unit",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/SelectUnitPost",
+                            "type": "object"
+                        },
+                        "description": "LDS Unit Number and LDS flag",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Applicant/student successfully selected an LDS unit"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "selectUnit"
+            },
+            "get": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "View the unit for endorsement by id",
+                "x-throttling-tier": "Unlimited",
+                "description": "Display the lds unit id (and maybe other unit info) selected by the applicant/student for a particular endorsement",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Returns the unit the applicant/student selected"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "viewUnit"
+            },
+            "delete": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Not in unit",
+                "x-throttling-tier": "Unlimited",
+                "description": "Leader marks the applicant/student as not in their unit. This removes the unit, removes any decisions, and changes the endorsement status to notSubmitted (meaning applicant/student needs to choose their unit again)",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Applicant/student marked as not in unit"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "notInUnit"
+            }
+        },
+        "/chaplain/queue/{endorsementId}/assignedChaplain": {
+            "post": {
+                "tags": [
+                    "chaplain_queue"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Reassign Chaplain Queue to chaplain",
+                "x-throttling-tier": "Unlimited",
+                "description": "Reassigns Chaplain Queue to a chaplain",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "endorsementId",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/AssignedChaplainQueuePost"
+                        },
+                        "description": "assignedChaplain",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ChaplainQueue"
+                        },
+                        "description": "Returns updated Chaplain Queue"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "reassignChaplain"
+            }
+        },
+        "/chaplain/{id}": {
+            "get": {
+                "tags": [
+                    "chaplain_queue"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "View CES Chaplain",
+                "x-throttling-tier": "Unlimited",
+                "description": "View specific CES Chaplain",
+                "parameters": [
+                    {
+                        "description": "chaplain id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Chaplain"
+                        },
+                        "description": "Returns specified chaplain"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "viewChaplain"
+            },
+            "delete": {
+                "tags": [
+                    "chaplain_queue"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Expire CES Chaplain",
+                "x-throttling-tier": "Unlimited",
+                "description": "Expires specific CES Chaplain",
+                "parameters": [
+                    {
+                        "description": "chaplain id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Chaplain"
+                        },
+                        "description": "Returns expired chaplain"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "expireChaplain"
+            }
+        },
+        "/endorsements": {
+            "post": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Start new endorsement",
+                "x-throttling-tier": "Unlimited",
+                "description": "Starts a new endorsement request for the logged in applicant/student",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/EndorsementPost"
+                        },
+                        "description": "Request Body",
+                        "name": "endorsement",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/Endorsement"
+                        },
+                        "description": "Endorsement started successfully"
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Invalid request"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not authorized"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "startEndorsement"
+            },
+            "get": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Search endorsements",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a list of endorsements",
+                "parameters": [
+                    {
+                        "description": "filter results to anything requested after requestedFromDatetime",
+                        "name": "requestedFromDatetime",
+                        "format": "date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results to anything requested before requestedToDatetime",
+                        "name": "requestedToDatetime",
+                        "format": "date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results to anything updated after updatedFromDatetime",
+                        "name": "updatedFromDatetime",
+                        "format": "date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results to anything updated before updatedToDatetime",
+                        "name": "updatedToDatetime",
+                        "format": "date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results to anything completed after completedFromDatetime",
+                        "name": "completedFromDatetime",
+                        "format": "date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results to anything completed before completedToDatetime",
+                        "name": "completedToDatetime",
+                        "format": "date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by endorsement type (CONTINUING/APPLICANT)",
+                        "name": "endorsementType",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by personId (mutually exclusive with personId, byuId, and netId)",
+                        "name": "personId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by byuId (mutually exclusive with personId, byuId, and netId)",
+                        "name": "byuId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by netId (mutually exclusive with personId, byuId, and netId)",
+                        "name": "netId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by byuIdahoId (mutually exclusive with byuIdahoId, byuHawaiiId, and ldsbcId)",
+                        "name": "byuIdahoId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by byuHawaiiId (mutually exclusive with byuIdahoId, byuHawaiiId, and ldsbcId)",
+                        "name": "byuHawaiiId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by netId (mutually exclusive with byuIdahoId, byuHawaiiId, and ldsbcId)",
+                        "name": "ldsbcId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by leaderId?",
+                        "name": "leaderId",
+                        "format": "int32",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by lds unit number",
+                        "name": "unit",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by status (notSubmitted, pending, completed)",
+                        "name": "status",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by if the endorsement is expired or not",
+                        "name": "isExpired",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Endorsement"
+                            },
+                            "type": "array"
+                        },
+                        "description": "An array of endorsement objects"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "searchEndorsements"
+            }
+        },
+        "/endorsements/{id}/honorcodeAgreement": {
+            "post": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Agree to the honor code",
+                "x-throttling-tier": "Unlimited",
+                "description": "Applicant/student agrees to the honor code",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "format": "date",
+                            "type": "string"
+                        },
+                        "description": "Applicant/student successfully agreed to the honorcode"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "agreeToHonorcode"
+            },
+            "get": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "View the honorcode agreement for endorsement by id",
+                "x-throttling-tier": "Unlimited",
+                "description": "Displays when the applicant/student agreed to the honorcode for this particular endorsement",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Returns the date of when the applicant/student agreed to the honorcode"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "viewHonorCodeAgreement"
+            }
+        },
+        "/endorsements/{id}/logs": {
+            "get": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "View logs for an endorsement",
+                "x-throttling-tier": "Unlimited",
+                "description": "Admin view of the internal events that happened to an endorsement",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/EndorsementEvent"
+                            },
+                            "type": "array"
+                        },
+                        "description": "An array of endorsement event log objects for the specified endorsement"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "viewEndorsementLogs"
+            }
+        },
+        "/endorsements/merge": {
+            "post": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Merge endorsement requests from one person_id to another person_id",
+                "x-throttling-tier": "Unlimited",
+                "description": "Search for withdrawn endorsements between two dates",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/MergeRequest"
+                        },
+                        "description": "oldPersonId and newPersonId",
+                        "name": "mergeRequest",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Endorsements merged successfully"
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Invalid request"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not authorized"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "mergeEndorsements"
+            }
+        },
+        "/endorsements/simple/batch": {
+            "post": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Get simple endorsement statuses in a batch (NOTE: not in prod yet)",
+                "x-throttling-tier": "Unlimited",
+                "description": "Retrieves simple endorsement statuses for list of ids",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/BatchRequest"
+                        },
+                        "description": "List of IDs to search with the id type.",
+                        "name": "batchRequest",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/BatchResult"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Returns the latest endorsement"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "searchSimpleStatusBatch"
+            }
+        },
+        "/endorsements/{id}/decisions/{decisionId}": {
+            "put": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Change decision",
+                "x-throttling-tier": "Unlimited",
+                "description": "Leader changes their decision",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "decision id",
+                        "name": "decisionId",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "new decision (endorsed, not endorsed, chaplain contact)",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Decision"
+                        },
+                        "description": "Returns updated decision"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "changeDecision"
+            },
+            "get": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "View specific decision by id",
+                "x-throttling-tier": "Unlimited",
+                "description": "View a decision for an endorsement",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "decision id",
+                        "name": "decisionId",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Decision"
+                        },
+                        "description": "Returns specified decision"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getDecision"
+            },
+            "delete": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "delete decision ?",
+                "x-throttling-tier": "Unlimited",
+                "description": "(not sure if needed because we don't want to delete decisions)",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "decision id",
+                        "name": "decisionId",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Decision deleted successfully"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "removeDecision"
+            }
+        },
+        "/chaplain/queue/{endorsementId}/decisions": {
+            "post": {
+                "tags": [
+                    "chaplain_queue"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Chaplain makes decision for chaplain queue",
+                "x-throttling-tier": "Unlimited",
+                "description": "Chaplain makes decision for chaplain queue",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "endorsementId",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/ChaplainQueueDecisionPost"
+                        },
+                        "description": "decision",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ChaplainQueue"
+                        },
+                        "description": "Returns successfully updated the Chaplain queue after decision"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "makeChaplainQueueDecision"
+            }
+        },
+        "/status": {
+            "get": {
+                "tags": [
+                    "status"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "View API status",
+                "x-throttling-tier": "Unlimited",
+                "description": "View API status",
+                "responses": {
+                    "200": {
+                        "description": "Returns OK if API is up and running"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "status"
+            }
+        },
+        "/endorsements/{id}/decisions": {
+            "post": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Make decision for endorsement",
+                "x-throttling-tier": "Unlimited",
+                "description": "Leader makes a decisions for an endorsement",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/DecisionPost"
+                        },
+                        "description": "decision (endorsed, not endorsed, chaplain contact)",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/Decision"
+                        },
+                        "description": "Returns created decision"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "makeDecision"
+            },
+            "get": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "View decisions for endorsement",
+                "x-throttling-tier": "Unlimited",
+                "description": "View decisions for endorsement (pending or completed)",
+                "parameters": [
+                    {
+                        "description": "endorsement id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "description": "include the leader json object in the decision object. defaults to true",
+                        "name": "includeLeader",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Decision"
+                            },
+                            "type": "array"
+                        },
+                        "description": "An array of decision objects for the specified endorsement"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "viewDecisions"
+            }
+        },
+        "/leaders": {
+            "post": {
+                "tags": [
+                    "leaders"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Add LDS leader",
+                "x-throttling-tier": "Unlimited",
+                "description": "Adds an LDS leader",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/LeaderPost"
+                        },
+                        "description": "LDS leader (LDS id, unit id, leader name etc.)",
+                        "name": "leader",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/Leader"
+                        },
+                        "description": "Returns created leader"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "createLeader"
+            },
+            "get": {
+                "tags": [
+                    "leaders"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "View LDS leaders",
+                "x-throttling-tier": "Unlimited",
+                "description": "View a list of LDS leaders",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "filter results by LDS CMIS id",
+                        "name": "ldsCmisId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by LDS unit id",
+                        "name": "unit",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by leader name",
+                        "name": "name",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by calling",
+                        "name": "calling",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by leader level",
+                        "name": "level",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "filter results by isActive flag",
+                        "name": "isActive",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Leader"
+                            },
+                            "type": "array"
+                        },
+                        "description": "An array of leaders objects"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "searchLeaders"
+            }
+        },
+        "/chaplain": {
+            "post": {
+                "tags": [
+                    "chaplain_queue"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Saves a new active chaplain",
+                "x-throttling-tier": "Unlimited",
+                "description": "Saves a new active chaplain",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/ChaplainPost"
+                        },
+                        "description": "CES Chaplain (person_id, school)",
+                        "name": "chaplain",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/Chaplain"
+                        },
+                        "description": "Returns created chaplain"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "createChaplain"
+            },
+            "get": {
+                "tags": [
+                    "chaplain_queue"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Gets all active university chaplains",
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets all active university chaplains",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Chaplain"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Returns a map of the person_id of the university chaplain and which school they are over"
+                    }
+                },
+                "operationId": "getAllChaplains"
+            }
+        },
+        "/leaders/{id}": {
+            "put": {
+                "tags": [
+                    "leaders"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Update LDS leader",
+                "x-throttling-tier": "Unlimited",
+                "description": "Updates LDS leader",
+                "parameters": [
+                    {
+                        "description": "leader id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/LeaderPost"
+                        },
+                        "description": "LDS leader to be updated (LDS id, unit id, leader name etc.)",
+                        "name": "leader",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Leader"
+                        },
+                        "description": "Returns updated leader"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "updateLeader"
+            },
+            "get": {
+                "tags": [
+                    "leaders"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "View LDS leader",
+                "x-throttling-tier": "Unlimited",
+                "description": "View specific LDS leader",
+                "parameters": [
+                    {
+                        "description": "leader id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Leader"
+                        },
+                        "description": "Returns specified Leader"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "viewLeader"
+            },
+            "delete": {
+                "tags": [
+                    "leaders"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete LDS leader",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes LDS leader",
+                "parameters": [
+                    {
+                        "description": "leader id",
+                        "name": "id",
+                        "format": "int32",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Leader deleted"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "deleteLeader"
+            }
+        },
+        "/endorsements/withdrawn": {
+            "get": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Search for withdrawn endorsements between two dates",
+                "x-throttling-tier": "Unlimited",
+                "description": "Search for withdrawn endorsements between two dates",
+                "parameters": [
+                    {
+                        "name": "fromDate",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "name": "toDate",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/WithdrawnEndorsement"
+                            },
+                            "type": "array"
+                        },
+                        "description": "An array of withdrawn endorsements"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getWithdrawnEndorsements"
+            }
+        },
+        "/endorsements/byuId/{byuId}/latestRequestStatus": {
+            "get": {
+                "tags": [
+                    "endorsements"
+                ],
+                "x-auth-type": "Application & Application User",
+                "summary": "Get latest endorsement status for byuId",
+                "x-throttling-tier": "Unlimited",
+                "description": "Retrieves the most recent endorsement for byuId",
+                "parameters": [
+                    {
+                        "description": "byu id",
+                        "name": "byuId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "only return latest completed endorsement",
+                        "name": "isCompleted",
+                        "required": false,
+                        "type": "boolean",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/SimpleEndorsementStatus"
+                        },
+                        "description": "Returns the latest endorsement"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "operationId": "getLatestEndorsementStatus"
+            }
+        }
+    },
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "SimpleEndorsementStatusWithDecisions": {
+            "properties": {
+                "requestStatus": {
+                    "$ref": "#/definitions/EndorsementStatusEnum"
+                },
+                "dateRequested": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "requestId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "stakePresidentStatus": {
+                    "$ref": "#/definitions/UnprivilegedEndorsementDecisionEnum"
+                },
+                "completedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "personId": {
+                    "type": "string"
+                },
+                "chaplainStatus": {
+                    "$ref": "#/definitions/UnprivilegedEndorsementDecisionEnum"
+                },
+                "requestType": {
+                    "$ref": "#/definitions/EndorsementTypeEnum"
+                },
+                "netId": {
+                    "type": "string"
+                },
+                "byuId": {
+                    "type": "string"
+                },
+                "bishopStatus": {
+                    "$ref": "#/definitions/UnprivilegedEndorsementDecisionEnum"
+                }
+            },
+            "type": "object"
+        },
+        "EndorsementTypeEnum": {
+            "enum": [
+                "CONTINUING",
+                "APPLICANT"
+            ],
+            "type": "string"
+        },
+        "CallingEnum": {
+            "enum": [
+                "STAKE_PRESIDENT",
+                "STAKE_FIRST_COUNSELOR(",
+                "STAKE_SECOND_COUNSELOR",
+                "BISHOP",
+                "DISTRICT_PRESIDENT",
+                "MISSION_PRESIDENT",
+                "BRANCH_PRESIDENT",
+                "MISSION_FIRST_COUNSELOR",
+                "MISSION_SECOND_COUNSELOR",
+                "CHAPLAIN",
+                "NON_LDS",
+                "OTHER_LV1",
+                "OTHER_LV2"
+            ],
+            "type": "string"
+        },
+        "AssignedChaplainQueuePost": {
+            "properties": {
+                "assignedChaplain": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "assignedChaplain"
+            ],
+            "type": "object"
+        },
+        "ChaplainQueueDecisionPost": {
+            "properties": {
+                "decision": {
+                    "$ref": "#/definitions/EndorsementDecisionEnum"
+                }
+            },
+            "required": [
+                "decision"
+            ],
+            "type": "object"
+        },
+        "BatchRequest": {
+            "properties": {
+                "idType": {
+                    "type": "string"
+                },
+                "ids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "endorsementTypes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "afterDate": {
+                    "format": "date",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ids"
+            ],
+            "type": "object"
+        },
+        "SelectUnitPost": {
+            "properties": {
+                "ldsUnitNumber": {
+                    "type": "string"
+                },
+                "lds": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "ldsUnitNumber"
+            ],
+            "type": "object"
+        },
+        "ChapQueueReasonEnum": {
+            "enum": [
+                "LEADER_CONTACT",
+                "NON_LDS_NEW",
+                "NON_LDS_CONTINUING"
+            ],
+            "type": "string"
+        },
+        "EndorsementDecisionEnum": {
+            "enum": [
+                "AWAITING_DECISION",
+                "ENDORSED",
+                "NOT_ENDORSED",
+                "CHAPLAIN_CONTACT"
+            ],
+            "type": "string"
+        },
+        "ChaplainQueue": {
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "updatedByLeaderId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "reason": {
+                    "$ref": "#/definitions/ChapQueueReasonEnum"
+                },
+                "updatedByPersonId": {
+                    "type": "string"
+                },
+                "assignedChaplain": {
+                    "type": "string"
+                },
+                "clearedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "Leader": {
+                    "$ref": "#/definitions/Leader"
+                },
+                "leaderId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "endorsement": {
+                    "$ref": "#/definitions/Endorsement"
+                },
+                "updatedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ChapQueueEventEnum": {
+            "enum": [
+                "CHAPLAIN_EMAILED",
+                "CHAPLAIN_PHONED",
+                "CHAPLAIN_CONTACTED_LEADER",
+                "CHAPLAIN_REASSIGNED",
+                "CHAPLAIN_RESOLVE_WITHOUT_DECISION",
+                "CHAPLAIN_DECISION_MADE"
+            ],
+            "type": "string"
+        },
+        "CesSchoolEnum": {
+            "enum": [
+                "BYU",
+                "BYUI",
+                "BYUH",
+                "LDSBC"
+            ],
+            "type": "string"
+        },
+        "Decision": {
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "level": {
+                    "$ref": "#/definitions/DecisionLevelEnum"
+                },
+                "endorsementId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "updatedByLeaderId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "leader": {
+                    "$ref": "#/definitions/Leader"
+                },
+                "updatedByPersonId": {
+                    "type": "string"
+                },
+                "leaderId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "datetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "decision": {
+                    "$ref": "#/definitions/EndorsementDecisionEnum"
+                },
+                "updatedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "endorsementId"
+            ],
+            "type": "object"
+        },
+        "EndorsementStatusEnum": {
+            "enum": [
+                "STUDENT_IN_PROCESS",
+                "LEADER_IN_PROCESS",
+                "CHAPLAIN_IN_PROCESS",
+                "COMPLETE",
+                "EXPIRED"
+            ],
+            "type": "string"
+        },
+        "WithdrawnEndorsement": {
+            "properties": {
+                "endorsedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "endorsement": {
+                    "$ref": "#/definitions/Endorsement"
+                },
+                "withdrawnDatetime": {
+                    "format": "date",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Endorsement": {
+            "properties": {
+                "expirationDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "updatedByLeaderId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "status": {
+                    "$ref": "#/definitions/EndorsementStatusEnum"
+                },
+                "agreedToHonorcodeDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "updatedByPersonId": {
+                    "type": "string"
+                },
+                "completedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/EndorsementTypeEnum"
+                },
+                "sortName": {
+                    "type": "string"
+                },
+                "updatedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "requestedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "ldsUnitNumber": {
+                    "type": "string"
+                },
+                "decisions": {
+                    "items": {
+                        "$ref": "#/definitions/Decision"
+                    },
+                    "type": "array"
+                },
+                "personId": {
+                    "type": "string"
+                },
+                "ldsUnitName": {
+                    "type": "string"
+                },
+                "netId": {
+                    "type": "string"
+                },
+                "lds": {
+                    "type": "boolean"
+                },
+                "byuId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "personId"
+            ],
+            "type": "object"
+        },
+        "BatchResult": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "endorsements": {
+                    "items": {
+                        "$ref": "#/definitions/SimpleEndorsementStatusWithDecisions"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "ChaplainPost": {
+            "properties": {
+                "expirationDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "school": {
+                    "$ref": "#/definitions/CesSchoolEnum"
+                },
+                "personId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "personId",
+                "school"
+            ],
+            "type": "object"
+        },
+        "EndorsementEvent": {
+            "properties": {
+                "decisionDecision": {
+                    "$ref": "#/definitions/EndorsementDecisionEnum"
+                },
+                "updatedByLeaderId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "chaplainReassignedToId": {
+                    "type": "string"
+                },
+                "updatedByPersonId": {
+                    "type": "string"
+                },
+                "endorsementAgreedToHonorcodeDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "eventType": {
+                    "type": "string"
+                },
+                "updatedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "decisionLevel": {
+                    "$ref": "#/definitions/DecisionLevelEnum"
+                },
+                "endorsementId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "decisionLeaderId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "endorsementExpirationDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "endorsementIsLds": {
+                    "type": "boolean"
+                },
+                "endorsementRequestedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "endorsementType": {
+                    "$ref": "#/definitions/EndorsementTypeEnum"
+                },
+                "endorsementLdsUnitNumber": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "endorsementId",
+                "eventType",
+                "updatedDatetime"
+            ],
+            "type": "object"
+        },
+        "ChaplainEventPost": {
+            "properties": {
+                "reassignToId": {
+                    "type": "string"
+                },
+                "event": {
+                    "$ref": "#/definitions/ChapQueueEventEnum"
+                }
+            },
+            "type": "object"
+        },
+        "Leader": {
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "ldsPositionId": {
+                    "type": "string"
+                },
+                "level": {
+                    "$ref": "#/definitions/LeaderLevelEnum"
+                },
+                "ldsUnitNumber": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updatedByPersonId": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "calling": {
+                    "$ref": "#/definitions/CallingEnum"
+                },
+                "retrievalDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "ldsCmisId": {
+                    "type": "string"
+                },
+                "retrievalExpirationDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "updatedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "ldsCmisId",
+                "ldsUnitNumber",
+                "isActive",
+                "updatedByPersonId"
+            ],
+            "type": "object"
+        },
+        "DecisionLevelEnum": {
+            "enum": [
+                "LEVEL_1",
+                "LEVEL_2",
+                "CHAPLAIN"
+            ],
+            "type": "string"
+        },
+        "LeaderPost": {
+            "properties": {
+                "ldsPositionId": {
+                    "type": "string"
+                },
+                "ldsUnitNumber": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "calling": {
+                    "$ref": "#/definitions/CallingEnum"
+                },
+                "ldsCmisId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ldsCmisId",
+                "ldsUnitNumber",
+                "name",
+                "calling"
+            ],
+            "type": "object"
+        },
+        "ChaplainQueuePost": {
+            "properties": {
+                "endorsementId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "reason": {
+                    "$ref": "#/definitions/ChapQueueReasonEnum"
+                },
+                "leaderId": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "reason",
+                "endorsementId"
+            ],
+            "type": "object"
+        },
+        "Chaplain": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "expirationDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "school": {
+                    "$ref": "#/definitions/CesSchoolEnum"
+                },
+                "leader": {
+                    "$ref": "#/definitions/Leader"
+                },
+                "updatedByPersonId": {
+                    "type": "string"
+                },
+                "personId": {
+                    "type": "string"
+                },
+                "updatedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "personId",
+                "school",
+                "updatedByPersonId"
+            ],
+            "type": "object"
+        },
+        "UnprivilegedEndorsementDecisionEnum": {
+            "enum": [
+                "AWAITING_DECISION",
+                "COMPLETE"
+            ],
+            "type": "string"
+        },
+        "LeaderLevelEnum": {
+            "enum": [
+                "NONE",
+                "LEVEL_1",
+                "LEVEL_2",
+                "MISSION",
+                "OTHER_LV1",
+                "OTHER_LV2",
+                "CHAPLAIN"
+            ],
+            "type": "string"
+        },
+        "DecisionPost": {
+            "properties": {
+                "level": {
+                    "$ref": "#/definitions/DecisionLevelEnum"
+                },
+                "decisionDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "leaderId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "decision": {
+                    "$ref": "#/definitions/EndorsementDecisionEnum"
+                }
+            },
+            "required": [
+                "decision"
+            ],
+            "type": "object"
+        },
+        "SimpleEndorsementStatus": {
+            "properties": {
+                "requestStatus": {
+                    "$ref": "#/definitions/EndorsementStatusEnum"
+                },
+                "dateRequested": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "requestId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "stakePresidentStatus": {
+                    "$ref": "#/definitions/UnprivilegedEndorsementDecisionEnum"
+                },
+                "completedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "chaplainStatus": {
+                    "$ref": "#/definitions/UnprivilegedEndorsementDecisionEnum"
+                },
+                "requestType": {
+                    "$ref": "#/definitions/EndorsementTypeEnum"
+                },
+                "byuId": {
+                    "type": "string"
+                },
+                "bishopStatus": {
+                    "$ref": "#/definitions/UnprivilegedEndorsementDecisionEnum"
+                }
+            },
+            "type": "object"
+        },
+        "MergeRequest": {
+            "properties": {
+                "oldPersonId": {
+                    "type": "string"
+                },
+                "newPersonId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "oldPersonId",
+                "newPersonId"
+            ],
+            "type": "object"
+        },
+        "EndorsementPost": {
+            "properties": {
+                "requestedDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "ldsUnitNumber": {
+                    "type": "string"
+                },
+                "expirationDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "agreedToHonorcodeDatetime": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "personId": {
+                    "type": "string"
+                },
+                "netId": {
+                    "type": "string"
+                },
+                "lds": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "$ref": "#/definitions/EndorsementTypeEnum"
+                },
+                "byuId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "type": "object"
+        }
+    },
+    "consumes": [
+        "application/json",
+        "application/xml"
+    ],
+    "info": {
+        "title": "ces_student_ecclesiastical_endorsements",
+        "description": "Ecclesiastical Endorsement API for CES applicants and students.",
+        "contact": {
+            "email": "scott_hutchings@byu.edu",
+            "name": "Scott Hutchings"
+        },
+        "version": "dev"
+    },
+    "host": "api.byu.edu:443"
+}

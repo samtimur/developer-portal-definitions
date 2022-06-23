@@ -1,0 +1,5399 @@
+{
+    "basePath": "/domains/litigation/api1/1.0.0",
+    "tags": [
+        {
+            "description": "Admin can do everything",
+            "name": "Admin"
+        },
+        {
+            "description": "Global Admin can do everything",
+            "name": "Global Admin"
+        },
+        {
+            "description": "Matter Editors only do GET",
+            "name": "Matter Editors"
+        },
+        {
+            "description": "Environment is Dev",
+            "name": "dev"
+        },
+        {
+            "description": "Owned by OGC",
+            "name": "ogc"
+        }
+    ],
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/matters/{matterId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putMatters",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MattersReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putMatters",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getMatters",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MattersReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getMatters",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteMatters",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteMatters",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/eventTimelines": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postEventTimelines",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/EventTimelinesReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postEventTimelines",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getEventTimelines",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/EventTimelinesReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getEventTimelines",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/institutions": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postInstitutions",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/InstitutionReturn"
+                        },
+                        "description": "201 OK"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postInstitutions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getInstitutions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/InstitutionReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getInstitutions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/matters/{matterId}/outsideCounsels/{counselId}": {
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteOutsideCounsels",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteOutsideCounsels",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                },
+                {
+                    "name": "counselId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/jurisdictions": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postJurisdictions",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/JurisdictionReturn"
+                        },
+                        "description": "201 OK"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postJurisdictions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getJurisdictions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JurisdictionReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getJurisdictions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/matters/{matterId}/categories": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postMatterCategories",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterCategoriesReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postMatterCategories",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getMatterCategories",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterCategoriesReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getMatterCategories",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/caseStatuses": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postCaseStatuses",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CaseStatusReturn"
+                        },
+                        "description": "200 OK"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postCaseStatuses",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getCaseStatuses",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CaseStatusReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getCaseStatuses",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/users/{userId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "permissions",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/UsersReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putUsers",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "permissions",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteUsers",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "userId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/OpposingParties": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postOpposingParties",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/OpposingPartiesReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postOpposingParties",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getOpposingParties",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/OpposingPartiesReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getOpposingParties",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/eventTimelines/{eventId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putEventTimelines",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/EventTimelinesReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putEventTimelines",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteEventTimelines",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteEventTimelines",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                },
+                {
+                    "name": "eventId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/permissions": {
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "permissions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/PermissionsReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getPermissions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/universityRelationships": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postUnivRelationships",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/UniversityRelationshipReturn"
+                        },
+                        "description": "201 OK"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postUniversityRelationships",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getUnivRelationships",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/UniversityRelationshipReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getUniversityRelationships",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/permissions/matter/{roleId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "permissions",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterRoleReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putMatterRole",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "permissions",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteMatterRole",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "roleId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/caseDockets/{pleadingId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putDockets",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CaseDocketReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putDockets",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteDockets",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteDockets",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                },
+                {
+                    "name": "pleadingId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/judges": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postJudges",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/JudgeReturn"
+                        },
+                        "description": "201 OK"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postJudge",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getJudges",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JudgeReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getJudges",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/auditReports": {
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get audit report",
+                "x-lambda-function": "getAuditReports",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/AuditReportsReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getAuditReports",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/firms": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postFirms",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/FirmsReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postFirms",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getFirms",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/FirmsReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getFirms",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/matters/{matterId}/jurisdictions": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postMatterJurisdictions",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterJuridisctionReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postMatterJurisdictions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getMatterJurisdictions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterJuridisctionReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getMatterJurisdictions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/universityRelationships/{universityRelationshipId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putUnivRelationships",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/UniversityRelationshipReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putUniversityRelationships",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteUnivRelationships",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteUniversityRelationships",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "universityRelationshipId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/categories": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postCategories",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/CategoryReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postCategories",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getCategories",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CategoryReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getCategories",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/BYUEmployees": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postBYUEmployees",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/BYUEmployeeReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postBYUEmployees",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getBYUEmployees",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BYUEmployeeReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getBYUEmployees",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/permissions/general/{roleId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "permissions",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/GeneralRoleReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putGeneralRole",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "permissions",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteGeneralRole",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "roleId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/BYUEmployees/{BYUEmployeeId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putBYUEmployees",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BYUEmployeeReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putBYUEmployees",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteBYUEmployees",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteBYUEmployees",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "BYUEmployeeId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/users": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "permissions",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/UsersReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postUsers",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "permissions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/UsersReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getUsers",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/BYUEmployeeTypes/{BYUEmployeeTypeId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putBYUEmployeeTypes",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BYUEmployeeTypeReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putBYUEmployeeTypes",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteBYUEmployeeTypes",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteBYUEmployeeTypes",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "BYUEmployeeTypeId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/judges/{matterJudgeId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "matterJudges",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterJudgeReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putMatterJudges",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "matterJudges",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteMatterJudges",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                },
+                {
+                    "name": "matterJudgeId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/jurisdictions/{jurisdictionId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putMatterJurisdictions",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterJuridisctionReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putMatterJurisdiction",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteMatterJurisdictions",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteMatterJurisdictions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                },
+                {
+                    "name": "jurisdictionId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/permissions/roles": {
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "permissions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/PermissionRolesReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getPermissionRoles",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/claimStatuses/{claimStatusId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putClaimStatuses",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ClaimStatusReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putClaimStatuses",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteClaimStatuses",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteClaimStatuses",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "claimStatusId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/firms": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postMatterFirms",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterFirmsReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postMatterFirms",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getMatterFirms",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterFirmsReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getMatterFirms",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/settlementOffers/{settlementOfferId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putSettlementOffers",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/SettlementOffersReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putSettlementOffers",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteSettlementOffers",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteSettlementOffers",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                },
+                {
+                    "name": "settlementOfferId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/judges/{judgeId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putJudges",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JudgeReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putJudge",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteJudges",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteJudges",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "judgeId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/permissions/general": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "permissions",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/GeneralRoleReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postGeneralRole",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "permissions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/GeneralRoleReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getGeneralRole",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/matters/{matterId}/notes": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postNotes",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/NotesReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postNotes",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getNotes",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/NotesReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getNotes",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/fetchMatter/{matterId}": {
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "fetchMatters",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MattersReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "fetchMatters",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/claims": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postClaims",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/ClaimsReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postClaims",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getClaims",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ClaimsReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getClaims",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/claimStatuses": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postClaimStatuses",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/ClaimStatusReturn"
+                        },
+                        "description": "201 OK"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postClaimStatuses",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getClaimStatuses",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ClaimStatusReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getClaimStatuses",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/matters/{matterId}/OpposingParties/{partyId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putOpposingParties",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/OpposingPartiesReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putOpposingParties",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteOpposingParties",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteOpposingParties",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                },
+                {
+                    "name": "partyId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/tasks": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postLitigationTasks",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/LitigationTasksReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postLitigationTasks",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getLitigationTasks",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/LitigationTasksReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getLitigationTasks",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/tasks/{taskId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putLitigationTasks",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/LitigationTasksReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putLitigationTasks",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteLitigationTasks",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteLitigationTasks",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                },
+                {
+                    "name": "taskId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/outsideAttorneys": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postOutsideAttorneys",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/OutsideAttorneyReturn"
+                        },
+                        "description": "201 OK"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postOutsideAttorneys",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getOutsideAttorneys",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/OutsideAttorneyReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getOutsideAttorneys",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/userPermissions": {
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get all user permissions",
+                "x-lambda-function": "getUserPermissions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/UserPermissionsReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getUserPermissions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/tasks": {
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get all tasks/deadlines",
+                "x-lambda-function": "getTasks",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/LitigationTasksReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getTasks",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/categories/{categoryId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putCategories",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CategoryReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putCategories",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteCategories",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteCategories",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "categoryId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/firms/{firmId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putFirms",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/FirmsReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putFirms",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteFirms",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteFirms",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "firmId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/judges": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "matterJudges",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterJudgeReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postMatterJudges",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "matterJudges",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterJudgeReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getMatterJudges",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/caseDockets": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postDockets",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/CaseDocketReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postDockets",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getDockets",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterJuridisctionReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getDockets",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/institutions/{institutionId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putInstitutions",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/InstitutionReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putInstitutions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteInstitutions",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteInstitutions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "institutionId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/permissions/matter": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "permissions",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterRoleReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postMatterRole",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "permissions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterRoleReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getMatterRole",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/BYUEmployeeTypes": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postBYUEmployeeTypes",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BYUEmployeeTypeReturn"
+                        },
+                        "description": "200 OK"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postBYUEmployeeTypes",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getBYUEmployeeTypes",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BYUEmployeeTypeReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getBYUEmployeeTypes",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/caseStatuses/{caseStatusId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putCaseStatuses",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CaseStatusReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putCaseStatuses",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteCaseStatuses",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteCaseStatuses",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "caseStatusId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postMatters",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/MattersReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postMatters",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/matters/{matterId}/categories/{categoryId}": {
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteMatterCategories",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteMatterCategories",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                },
+                {
+                    "name": "categoryId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/claims/{claimId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putClaims",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ClaimsReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putClaims",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteClaims",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteClaims",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                },
+                {
+                    "name": "claimId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/firms/{firmId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putMatterFirms",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MatterFirmsReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putMatterFirms",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteMatterFirms",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteMatterFirms",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                },
+                {
+                    "name": "firmId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/outsideCounsels": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postOutsideCounsels",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/OutsideCounselsReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postOutsideCounsels",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getOutsideCounsels",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/OutsideCounselsReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getOutsideCounsels",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/outsideAttorneys/{outsideAttorneyId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putOutsideAttorneys",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/OutsideAttorneyReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putOutsideAttorneys",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteOutsideAttorneys",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteOutsideAttorneys",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "outsideAttorneyId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/jurisdictions/{jurisdictionId}": {
+            "put": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "put data",
+                "x-lambda-function": "putJurisdictions",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/JurisdictionReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "putJurisdictions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "delete data",
+                "x-lambda-function": "deleteJurisdictions",
+                "responses": {
+                    "204": {
+                        "description": "204 response: Succesfully processed request, but not returning any content"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "deleteJurisdictions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "jurisdictionId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/matters/{matterId}/settlementOffers": {
+            "post": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "dev"
+                ],
+                "summary": "post data",
+                "x-lambda-function": "postSettlementOffers",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "$ref": "#/definitions/SettlementOffersReturn"
+                        },
+                        "description": "201 Created: The request has been fulfilled and resulted in a new resource being created."
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "postSettlementOffers",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getSettlementOffers",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/SettlementOffersReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getSettlementOffers",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "parameters": [
+                {
+                    "name": "matterId",
+                    "type": "integer",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/caseLists": {
+            "get": {
+                "tags": [
+                    "Admin",
+                    "Global Admin",
+                    "Matter Editors",
+                    "dev"
+                ],
+                "summary": "get data",
+                "x-lambda-function": "getCaseLists",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/caseListsReturn"
+                        },
+                        "description": "200 response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "Error response"
+                    }
+                },
+                "operationId": "getCaseLists",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "InstitutionReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/Institution"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "PostOpposingParties": {
+            "properties": {
+                "matterId": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "universityRelationshipId": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterId",
+                "name",
+                "universityRelationshipId"
+            ]
+        },
+        "PostOutsideCounsels": {
+            "properties": {
+                "matterId": {
+                    "type": "integer"
+                },
+                "outsideAttorneyId": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterId",
+                "outsideAttorneyId"
+            ]
+        },
+        "PostMatters": {
+            "properties": {
+                "matterTitle": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterTitle"
+            ]
+        },
+        "PostBYUEmployee": {
+            "properties": {
+                "lastName": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "netId": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "byuEmployeeTypeId": {
+                    "minimum": 1,
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "firstName",
+                "lastName",
+                "netId",
+                "byuEmployeeTypeId",
+                "active"
+            ]
+        },
+        "CaseDocketReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/CaseDocket"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "Jurisdiction": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "name",
+                "active"
+            ]
+        },
+        "PostOutsideAttorney": {
+            "properties": {
+                "lastName": {
+                    "type": "string"
+                },
+                "firmId": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "bioUrl": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "firstName",
+                "lastName",
+                "firmId",
+                "type",
+                "active"
+            ]
+        },
+        "JurisdictionReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/Jurisdiction"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "MattersReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/Matters"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "PostSettlementOffers": {
+            "properties": {
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "amount"
+            ]
+        },
+        "BYUEmployeeType": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "type",
+                "active"
+            ]
+        },
+        "BYUEmployeeReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/BYUEmployee"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "PostCaseDocket": {
+            "properties": {
+                "matterId": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterId",
+                "name"
+            ]
+        },
+        "LitigationTasks": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "task": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "task"
+            ]
+        },
+        "CaseStatus": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "status",
+                "active"
+            ]
+        },
+        "AuditReportsReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/AuditReports"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "PostMatterJuridisction": {
+            "properties": {
+                "matterId": {
+                    "type": "integer"
+                },
+                "jurisdictionId": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterId",
+                "jurisdictionId"
+            ]
+        },
+        "MatterJuridisctionReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/MatterJuridisction"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "MatterJudgeReturn": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "matterId": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "jurisdictionId": {
+                    "minimum": 1,
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "name",
+                "jurisdictionId",
+                "matterId"
+            ]
+        },
+        "Firm": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "name",
+                "active"
+            ]
+        },
+        "EventTimelines": {
+            "properties": {
+                "matterId": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "event": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterId",
+                "event"
+            ]
+        },
+        "UserPermissionsReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/UserPermissions"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "OutsideCounsels": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "matterId": {
+                    "type": "integer"
+                },
+                "outsideAttorneyId": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "matterId",
+                "outsideAttorneyId"
+            ]
+        },
+        "PostFirm": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "active"
+            ]
+        },
+        "PostJudge": {
+            "properties": {
+                "lastName": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "bioUrl": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "firstName",
+                "lastName",
+                "active"
+            ]
+        },
+        "PostInstitution": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "active"
+            ]
+        },
+        "PostNotes": {
+            "properties": {
+                "note": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "note"
+            ]
+        },
+        "CategoryReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/Category"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "PostCategory": {
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "category",
+                "active"
+            ]
+        },
+        "UniversityRelationship": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "relationship": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "relationship",
+                "active"
+            ]
+        },
+        "BYUEmployeeTypeReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/BYUEmployeeType"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "PostBYUEmployeeType": {
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "type",
+                "active"
+            ]
+        },
+        "Notes": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "note": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "note"
+            ]
+        },
+        "OutsideAttorneyReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/OutsideAttorney"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "Claims": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "claim": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "claim"
+            ]
+        },
+        "UsersReturn": {
+            "type": "object"
+        },
+        "CaseLists": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "matterUrl": {
+                    "type": "string"
+                },
+                "institutionNoticeDate": {
+                    "type": "string"
+                },
+                "primaryAttorneyId": {
+                    "type": "integer"
+                },
+                "matterNumber": {
+                    "type": "integer"
+                },
+                "matterTitle": {
+                    "type": "string"
+                },
+                "institution": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "matterTitle",
+                "institution",
+                "matterNumber",
+                "matterUrl",
+                "primaryAttorneyId",
+                "institutionNoticeDate"
+            ]
+        },
+        "OpposingPartiesReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/OpposingParties"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "EventTimelinesReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/EventTimelines"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "LitigationTasksReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/LitigationTasks"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "PostClaims": {
+            "properties": {
+                "claim": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "claim"
+            ]
+        },
+        "PostCaseStatus": {
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "status",
+                "active"
+            ]
+        },
+        "CaseStatusReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/CaseStatus"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "ErrorModel": {
+            "properties": {
+                "error": {
+                    "properties": {
+                        "message": {
+                            "type": "string"
+                        },
+                        "errors": {
+                            "items": {
+                                "properties": {
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                    "reason": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "required": [
+                                    "reason",
+                                    "message"
+                                ]
+                            },
+                            "type": "array"
+                        },
+                        "code": {
+                            "minimum": 100,
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "code",
+                        "message"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "error"
+            ]
+        },
+        "OutsideAttorney": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "firmId": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "bioUrl": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "firstName",
+                "lastName",
+                "firmId",
+                "type",
+                "active"
+            ]
+        },
+        "UniversityRelationshipReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/UniversityRelationship"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "Matters": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "matterTitle": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "matterTitle"
+            ]
+        },
+        "PermissionsReturn": {
+            "type": "object"
+        },
+        "PostUniversityRelationship": {
+            "properties": {
+                "relationship": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "relationship",
+                "active"
+            ]
+        },
+        "PostJurisdiction": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "active"
+            ]
+        },
+        "AuditReports": {
+            "properties": {
+                "basicAssessment": {
+                    "type": "string"
+                },
+                "caseDescription": {
+                    "type": "string"
+                },
+                "matterNumber": {
+                    "type": "string"
+                },
+                "matterTitle": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "institution": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "institution",
+                "matterNumber",
+                "matterTitle",
+                "caseDescription",
+                "basicAssessment",
+                "status"
+            ]
+        },
+        "PostMatterFirms": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "matterId": {
+                    "type": "integer"
+                },
+                "firmId": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "matterId",
+                "firmId"
+            ]
+        },
+        "PostMatterCategories": {
+            "properties": {
+                "matterId": {
+                    "type": "integer"
+                },
+                "categoryId": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterId",
+                "categoryId"
+            ]
+        },
+        "caseListsReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/CaseLists"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "OutsideCounselsReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/OutsideCounsels"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "MatterFirmsReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/MatterFirms"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "SettlementOffersReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/SettlementOffers"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "OpposingParties": {
+            "properties": {
+                "matterId": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "universityRelationshipId": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterId",
+                "name",
+                "universityRelationshipId"
+            ]
+        },
+        "ClaimsReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/Claims"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "BYUEmployee": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "netId": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "byuEmployeeTypeId": {
+                    "minimum": 1,
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "firstName",
+                "lastName",
+                "netId",
+                "byuEmployeeTypeId",
+                "active"
+            ]
+        },
+        "ClaimStatus": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "status",
+                "active"
+            ]
+        },
+        "SettlementOffers": {
+            "properties": {
+                "matterId": {
+                    "minimum": 1,
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterId"
+            ]
+        },
+        "PostPermission": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "code"
+            ]
+        },
+        "Permission": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "name",
+                "code",
+                "description"
+            ]
+        },
+        "FirmsReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/Firm"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "MatterJuridisction": {
+            "properties": {
+                "matterId": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "jurisdictionId": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterId",
+                "jurisdictionId"
+            ]
+        },
+        "PermissionReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/Permission"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "MatterRoleReturn": {
+            "type": "object"
+        },
+        "MatterCategories": {
+            "properties": {
+                "matterId": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "categoryId": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterId",
+                "categoryId"
+            ]
+        },
+        "ClaimStatusReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/ClaimStatus"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "GeneralRoleReturn": {
+            "type": "object"
+        },
+        "PermissionRolesReturn": {
+            "type": "object"
+        },
+        "Institution": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "name",
+                "active"
+            ]
+        },
+        "PostClaimStatus": {
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "status",
+                "active"
+            ]
+        },
+        "PostEventTimelines": {
+            "properties": {
+                "matterId": {
+                    "type": "integer"
+                },
+                "event": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterId",
+                "event"
+            ]
+        },
+        "UserPermissions": {
+            "properties": {
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "code"
+            ]
+        },
+        "Judge": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "bioUrl": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "firstName",
+                "lastName",
+                "active"
+            ]
+        },
+        "Category": {
+            "properties": {
+                "id": {
+                    "minimum": 2,
+                    "type": "integer"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "category",
+                "active"
+            ]
+        },
+        "CaseDocket": {
+            "properties": {
+                "matterId": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "matterId",
+                "name"
+            ]
+        },
+        "MatterCategoriesReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/MatterCategories"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "NotesReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/Notes"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "JudgeReturn": {
+            "properties": {
+                "data": {
+                    "properties": {
+                        "items": {
+                            "items": {
+                                "$ref": "#/definitions/Judge"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object",
+                    "required": [
+                        "items"
+                    ]
+                }
+            },
+            "type": "object",
+            "required": [
+                "data"
+            ]
+        },
+        "PostLitigationTasks": {
+            "properties": {
+                "task": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "task"
+            ]
+        },
+        "MatterFirms": {
+            "properties": {
+                "id": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "matterId": {
+                    "type": "integer"
+                },
+                "firmId": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "matterId",
+                "firmId"
+            ]
+        }
+    },
+    "info": {
+        "title": "ogc-litigation",
+        "description": "API for OGC Litigation Site",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "contact": {
+            "email": "risk_webmaster@byu.edu",
+            "name": "Risk Mgmt IT",
+            "url": "https://risk.byu.edu"
+        },
+        "version": "1.0"
+    }
+}

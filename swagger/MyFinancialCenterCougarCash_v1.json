@@ -1,0 +1,405 @@
+{
+    "basePath": "/domains/erp/sa/MyFinancialCenterCougarCash/v1",
+    "paths": {
+        "/accounts/{byu_id}": {
+            "get": {
+                "tags": [
+                    "Cardholder"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns information about the user's Cougar Cash account",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/AccountModel"
+                        },
+                        "description": "Returns information about the user's Cougar Cash Account"
+                    },
+                    "401": {
+                        "$ref": "#/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/Forbidden"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "The requested BYU ID number was not found."
+                    }
+                }
+            }
+        },
+        "/accounts/{byu_id}/card_status": {
+            "put": {
+                "tags": [
+                    "Cardholder"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Updates the lost/found status of a user's ID card",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/CardModel"
+                        },
+                        "description": "The current status of a user's ID card",
+                        "name": "body",
+                        "in": "body"
+                    },
+                    {
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CardModel"
+                        },
+                        "description": "A boolean value indicating whether the ID card for a user has been marked lost"
+                    },
+                    "401": {
+                        "$ref": "#/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/Forbidden"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "The requested BYU ID number was not found."
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Cardholder"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns whether the ID card for a user has been marked as lost.",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CardModel"
+                        },
+                        "description": "A boolean value indicating whether the ID card for a user has been marked lost"
+                    },
+                    "401": {
+                        "$ref": "#/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/Forbidden"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "The requested BYU ID number was not found."
+                    }
+                }
+            }
+        },
+        "/accounts/{byu_id}/transactions": {
+            "get": {
+                "tags": [
+                    "Cardholder"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns an array of transactions for all Cougar Cash accounts between the start and end dates defined in the query parameters",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The start date time to retrieve transactions for. If omitted the default is 30 days before the `end_date_time`. The expected format is `YYYY-MM-DDTHH:mm:SS.ssssss+/-hhmm`.",
+                        "name": "begin_date_time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The end date time to retrieve transactions for. If omitted the default is the current date and time. The expected format is `YYYY-MM-DDTHH:mm:SS.ssssss+/-hhmm`.",
+                        "name": "end_date_time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/TransactionModel"
+                        },
+                        "description": "An array of transactions for all Cougar Cash accounts that fall between the requested start and end datetimes for the user"
+                    },
+                    "401": {
+                        "$ref": "#/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/Forbidden"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "The requested BYU ID number was not found."
+                    }
+                }
+            }
+        },
+        "/meta/cougar_cash_account_limits": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Misc"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the minimum and maximum amounts allowed for deposits and the credit card fee percentage that will be assessed for credit card deposits",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CougarCashLimitsModel"
+                        },
+                        "description": "An object with the minimum and maximum amounts allowed for deposits and the credit card fee percentage that will be assessed for credit card deposits."
+                    }
+                }
+            }
+        },
+        "/meta/cougar_cash_account_ids": {
+            "get": {
+                "tags": [
+                    "Misc"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a list of account IDs associated with Cougar Cash.",
+                "parameters": [
+                    {
+                        "items": {
+                            "type": "integer"
+                        },
+                        "description": "Limit results to those that match the provided account ID or IDs.",
+                        "name": "filter",
+                        "type": "array",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/CougarCashAccountModel"
+                        },
+                        "description": "An array of all Cougar Cash account IDs and descriptions"
+                    }
+                }
+            }
+        },
+        "/accounts/{byu_id}/start_payment": {
+            "post": {
+                "tags": [
+                    "Deposits"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Starts a payment within Payment Manager for a user",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/DepositRequest"
+                        },
+                        "description": "The amount and payment type for the deposit. Expected values for payment_type are `BANK_ACCOUNT` and `CREDIT_CARD`.",
+                        "name": "body",
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/DepositModel"
+                        },
+                        "description": "asdf"
+                    },
+                    "401": {
+                        "$ref": "#/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/responses/Forbidden"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "The requested BYU ID number was not found."
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "AccountModel": {
+            "properties": {
+                "balance": {
+                    "format": "float",
+                    "type": "number"
+                },
+                "card_lost": {
+                    "type": "boolean"
+                },
+                "can_add_funds": {
+                    "type": "boolean"
+                },
+                "can_add_cougar_cash_direct": {
+                    "type": "boolean"
+                },
+                "can_manage_account": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "CougarCashAccountModel": {
+            "properties": {
+                "accounts": {
+                    "items": {
+                        "properties": {
+                            "account_id": {
+                                "type": "integer"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "TransactionModel": {
+            "properties": {
+                "transactions": {
+                    "$ref": "#/definitions/TransactionsModel"
+                }
+            }
+        },
+        "DepositRequest": {
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "payment_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "CardModel": {
+            "properties": {
+                "card_lost": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "TransactionsModel": {
+            "items": {
+                "properties": {
+                    "transaction_amount": {
+                        "format": "float",
+                        "type": "number"
+                    },
+                    "transaction_date": {
+                        "format": "datetime",
+                        "type": "string"
+                    },
+                    "transaction_description": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "ErrorModel": {
+            "properties": {
+                "error_message": {
+                    "type": "string"
+                }
+            }
+        },
+        "DepositModel": {
+            "properties": {
+                "fee": {
+                    "type": "number"
+                },
+                "payment_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "CougarCashLimitsModel": {
+            "properties": {
+                "cc_fee_percent": {
+                    "type": "string"
+                },
+                "minimum_deposit": {
+                    "type": "string"
+                },
+                "maximum_deposit": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "responses": {
+        "Forbidden": {
+            "schema": {
+                "$ref": "#/definitions/ErrorModel"
+            },
+            "description": "Forbidden"
+        },
+        "Unauthorized": {
+            "description": "Credentials not provided. Access denied."
+        }
+    },
+    "info": {
+        "title": "MyFinancialCenterCougarCash",
+        "description": "Cougar Cash web service",
+        "contact": {
+            "email": "sft_ft@byu.edu",
+            "name": "OIT Student Financial Applications"
+        },
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443"
+}

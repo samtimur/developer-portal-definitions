@@ -1,0 +1,715 @@
+{
+    "basePath": "/domains/erp/hr/elapsed_time_punch/v1",
+    "paths": {
+        "/{byu_id},{employee_record}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Summary of elapsed time",
+                "x-throttling-tier": "Unlimited",
+                "description": "Information about non reported time.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/employee_record"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/elapsed_time_summary"
+                        },
+                        "description": "Summary of elapsed time.",
+                        "examples": {
+                            "application/xml": "<?xml version=\"1.0\"?>\n<elapsed_time_summary>\n    <sick_leave_balance_hours>00:00</sick_leave_balance_hours>\n    <vacation_leave_balance_hours>00:00</vacation_leave_balance_hours>\n    <elapsed_time_dates>\n        <elapsed_time_date>\n            <punch_date>2020-02-08</punch_date>\n            <other_hours>00:00</other_hours>\n            <punches>\n                <elapsed_time_punch>\n                    <sequence_number>0</sequence_number>\n                    <time_reporting_code_hours>00:00</time_reporting_code_hours>\n                    <editable>true</editable>\n                    <trc>\n                        <trc_id>4SICK</trc_id>\n                        <trc_description>Sick Leave</trc_description>\n                    </trc>\n                    <work_order>\n                        <work_order_id></work_order_id>\n                        <work_order_description>Sick Leave</work_order_description>\n                    </work_order>\n                </elapsed_time_punch>\n                <elapsed_time_punch>\n                    <sequence_number>0</sequence_number>\n                    <time_reporting_code_hours>00:00</time_reporting_code_hours>\n                    <editable>true</editable>\n                    <trc>\n                        <trc_id>4VAC</trc_id>\n                        <trc_description>Vacation Leave</trc_description>\n                    </trc>\n                    <work_order>\n                        <work_order_id></work_order_id>\n                        <work_order_description>Vacation Leave</work_order_description>\n                    </work_order>\n                </elapsed_time_punch>\n            </punches>\n        </elapsed_time_date>\n    </elapsed_time_dates>\n</elapsed_time_summary>",
+                            "application/json": {
+                                "sick_leave_balance_hours": "00:00",
+                                "elapsed_time_dates": [
+                                    {
+                                        "other_hours": "00:00",
+                                        "punch_date": "2020-02-08",
+                                        "punches": [
+                                            {
+                                                "sequence_number": 0,
+                                                "trc": {
+                                                    "trc_id": "4SICK",
+                                                    "trc_description": "Sick Leave"
+                                                },
+                                                "time_reporting_code_hours": "00:00",
+                                                "work_order": {
+                                                    "work_order_description": "Sick Leave",
+                                                    "work_order_id": ""
+                                                },
+                                                "editable": true
+                                            },
+                                            {
+                                                "sequence_number": 0,
+                                                "trc": {
+                                                    "trc_id": "4VAC",
+                                                    "trc_description": "Vacation Leave"
+                                                },
+                                                "time_reporting_code_hours": "00:00",
+                                                "work_order": {
+                                                    "work_order_description": "Vacation Leave",
+                                                    "work_order_id": ""
+                                                },
+                                                "editable": true
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "vacation_leave_balance_hours": "00:00"
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/responses/GET_400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/GET_404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/{byu_id},{employee_record},{punch_date}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Summary of elapsed time for given date",
+                "x-throttling-tier": "Unlimited",
+                "description": "Information about non-reported time for a given date.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/employee_record"
+                    },
+                    {
+                        "$ref": "#/parameters/punch_date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/elapsed_time_summary"
+                        },
+                        "description": "Summary of elapsed time for given date.",
+                        "examples": {
+                            "application/xml": "<?xml version=\"1.0\"?>\n<elapsed_time_summary>\n    <sick_leave_balance_hours>00:00</sick_leave_balance_hours>\n    <vacation_leave_balance_hours>00:00</vacation_leave_balance_hours>\n    <elapsed_time_dates>\n        <elapsed_time_date>\n            <punch_date>2020-02-08</punch_date>\n            <other_hours>00:00</other_hours>\n            <punches>\n                <elapsed_time_punch>\n                    <sequence_number>0</sequence_number>\n                    <time_reporting_code_hours>00:00</time_reporting_code_hours>\n                    <editable>true</editable>\n                    <trc>\n                        <trc_id>4SICK</trc_id>\n                        <trc_description>Sick Leave</trc_description>\n                    </trc>\n                    <work_order>\n                        <work_order_id></work_order_id>\n                        <work_order_description>Sick Leave</work_order_description>\n                    </work_order>\n                </elapsed_time_punch>\n                <elapsed_time_punch>\n                    <sequence_number>0</sequence_number>\n                    <time_reporting_code_hours>00:00</time_reporting_code_hours>\n                    <editable>true</editable>\n                    <trc>\n                        <trc_id>4VAC</trc_id>\n                        <trc_description>Vacation Leave</trc_description>\n                    </trc>\n                    <work_order>\n                        <work_order_id></work_order_id>\n                        <work_order_description>Vacation Leave</work_order_description>\n                    </work_order>\n                </elapsed_time_punch>\n            </punches>\n        </elapsed_time_date>\n    </elapsed_time_dates>\n</elapsed_time_summary>",
+                            "application/json": {
+                                "sick_leave_balance_hours": "00:00",
+                                "elapsed_time_dates": [
+                                    {
+                                        "other_hours": "00:00",
+                                        "punch_date": "2020-02-08",
+                                        "punches": [
+                                            {
+                                                "sequence_number": 0,
+                                                "trc": {
+                                                    "trc_id": "4SICK",
+                                                    "trc_description": "Sick Leave"
+                                                },
+                                                "time_reporting_code_hours": "00:00",
+                                                "work_order": {
+                                                    "work_order_description": "Sick Leave",
+                                                    "work_order_id": ""
+                                                },
+                                                "editable": true
+                                            },
+                                            {
+                                                "sequence_number": 0,
+                                                "trc": {
+                                                    "trc_id": "4VAC",
+                                                    "trc_description": "Vacation Leave"
+                                                },
+                                                "time_reporting_code_hours": "00:00",
+                                                "work_order": {
+                                                    "work_order_description": "Vacation Leave",
+                                                    "work_order_id": ""
+                                                },
+                                                "editable": true
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "vacation_leave_balance_hours": "00:00"
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/responses/GET_400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/GET_404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/{byu_id},{employee_record},{punch_date},{sequence_number}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete elapsed time",
+                "x-throttling-tier": "Unlimited",
+                "description": "Delete Elapsed Time for an Employee",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/employee_record"
+                    },
+                    {
+                        "$ref": "#/parameters/punch_date"
+                    },
+                    {
+                        "$ref": "#/parameters/sequence_number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/DELETE_response"
+                        },
+                        "description": "summary of elapsed time",
+                        "examples": {
+                            "application/json": {
+                                "sequence_number": 1,
+                                "status": {
+                                    "message": "Punch Deleted",
+                                    "code": "200"
+                                },
+                                "byu_id": "598802730",
+                                "employee_record": "0",
+                                "punch_date": "2020-02-10"
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/DELETE_response"
+                        },
+                        "description": "Response to a failed DELETE",
+                        "examples": {
+                            "application/xml": "<?xml version=\"1.0\"?>\n<response>\n    <byu_id>598802730</byu_id>\n    <employee_record>0</employee_record>\n    <punch_date>2020-01-01</punch_date>\n    <sequence_number>0</sequence_number>\n    <status>\n        <code>400</code>\n        <message>The Punch Date 2020-01-01 is prior to the beginning of the prior period</message>\n    </status>\n</response>",
+                            "application/json": {
+                                "sequence_number": 0,
+                                "status": {
+                                    "message": "There was no record found that matched the selection criteria",
+                                    "code": "400"
+                                },
+                                "byu_id": "598802730",
+                                "employee_record": "0",
+                                "punch_date": "2020-02-10"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/{byu_id}": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "create or update an elapsed time punch",
+                "x-throttling-tier": "Unlimited",
+                "description": "create or update an elapsed time punch",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/elapsed_time_entry"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/elapsed_time_summary"
+                        },
+                        "description": "summary of elapsed time",
+                        "examples": {
+                            "application/xml": "<?xml version=\"1.0\"?>\n<elapsed_time_summary>\n    <sick_leave_balance_hours>489:58</sick_leave_balance_hours>\n    <vacation_leave_balance_hours>163:25</vacation_leave_balance_hours>\n    <elapsed_time_dates>\n        <elapsed_time_date>\n            <punch_date>2020-03-02</punch_date>\n            <other_hours>01:00</other_hours>\n            <punches>\n                <elapsed_time_punch>\n                    <editable>true</editable>\n                    <sequence_number>5</sequence_number>\n                    <time_reporting_code_hours>01:00</time_reporting_code_hours>\n                    <trc>\n                        <trc_id>4SICK</trc_id>\n                        <trc_description>Sick Leave</trc_description>\n                    </trc>\n                    <work_order>\n                        <work_order_id></work_order_id>\n                        <work_order_description>Sick Leave</work_order_description>\n                    </work_order>\n                </elapsed_time_punch>\n                <elapsed_time_punch>\n                    <sequence_number>0</sequence_number>\n                    <time_reporting_code_hours>00:00</time_reporting_code_hours>\n                    <editable>true</editable>\n                    <trc>\n                        <trc_id>4VAC</trc_id>\n                        <trc_description>Vacation Leave</trc_description>\n                    </trc>\n                    <work_order>\n                        <work_order_id></work_order_id>\n                        <work_order_description>Vacation Leave</work_order_description>\n                    </work_order>\n                </elapsed_time_punch>\n            </punches>\n        </elapsed_time_date>\n    </elapsed_time_dates>\n</elapsed_time_summary>",
+                            "application/json": {
+                                "sick_leave_balance_hours": "488:58",
+                                "elapsed_time_dates": [
+                                    {
+                                        "other_hours": "01:00",
+                                        "punch_date": "2020-02-28",
+                                        "punches": [
+                                            {
+                                                "sequence_number": 5,
+                                                "trc": {
+                                                    "trc_id": "4SICK",
+                                                    "trc_description": "Sick Leave"
+                                                },
+                                                "time_reporting_code_hours": "01:00",
+                                                "work_order": {
+                                                    "work_order_description": "Sick Leave",
+                                                    "work_order_id": ""
+                                                },
+                                                "editable": true
+                                            },
+                                            {
+                                                "sequence_number": 0,
+                                                "trc": {
+                                                    "trc_id": "4VAC",
+                                                    "trc_description": "Vacation Leave"
+                                                },
+                                                "time_reporting_code_hours": "00:00",
+                                                "work_order": {
+                                                    "work_order_description": "Vacation Leave",
+                                                    "work_order_id": ""
+                                                },
+                                                "editable": true
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "vacation_leave_balance_hours": "163:25"
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/POST_error_response"
+                        },
+                        "description": "Invalid Request - unable to interpret request",
+                        "examples": {
+                            "application/xml": "<?xml version=\"1.0\"?>\n<status>\n    <return_code>400</return_code>\n    <message>Employee is not a valid punch time employee</message>\n</status>",
+                            "application/json": {
+                                "message": "Error - No BYU_ID Found to Process",
+                                "return_code": 400
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "trc_id": {
+            "description": "A string of up to 5 characters to identify the time reporting code",
+            "enum": [
+                "4REG",
+                "4RPP",
+                "4OCP"
+            ],
+            "example": "4REG",
+            "type": "string"
+        },
+        "elapsed_time_summary": {
+            "xml": {
+                "name": "elapsed_time_summary"
+            },
+            "properties": {
+                "sick_leave_balance_hours": {
+                    "$ref": "#/definitions/sick_leave_balance_hours"
+                },
+                "elapsed_time_dates": {
+                    "$ref": "#/definitions/elapsed_time_dates"
+                },
+                "vacation_leave_balance_hours": {
+                    "$ref": "#/definitions/vacation_leave_balance_hours"
+                }
+            },
+            "type": "object"
+        },
+        "DELETE_status": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/status"
+                },
+                {
+                    "properties": {
+                        "code": {
+                            "$ref": "#/definitions/return_code"
+                        }
+                    },
+                    "required": [
+                        "code"
+                    ]
+                }
+            ]
+        },
+        "status": {
+            "description": "Response returned from the system",
+            "xml": {
+                "name": "status"
+            },
+            "properties": {
+                "message": {
+                    "$ref": "#/definitions/message"
+                }
+            },
+            "required": [
+                "message"
+            ],
+            "type": "object"
+        },
+        "elapsed_time_date": {
+            "xml": {
+                "name": "elapsed_time_date"
+            },
+            "properties": {
+                "other_hours": {
+                    "$ref": "#/definitions/other_hours"
+                },
+                "punch_date": {
+                    "$ref": "#/definitions/punch_date"
+                },
+                "punches": {
+                    "$ref": "#/definitions/punches"
+                }
+            },
+            "type": "object"
+        },
+        "time_reporting_code_hours": {
+            "description": "Hours recorded for each Time Reporting Code (e.g. hours worked).",
+            "example": "02:00",
+            "type": "string"
+        },
+        "elapsed_time_dates": {
+            "items": {
+                "$ref": "#/definitions/elapsed_time_date"
+            },
+            "xml": {
+                "name": "elapsed_time_dates"
+            },
+            "type": "array"
+        },
+        "GET_error_response": {
+            "xml": {
+                "name": "error"
+            },
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/status"
+                }
+            },
+            "required": [
+                "status"
+            ],
+            "type": "object"
+        },
+        "time_collection_source": {
+            "description": "Punch Source",
+            "enum": [
+                "MBL",
+                "WEB",
+                "CPI"
+            ],
+            "example": "CPI",
+            "type": "string"
+        },
+        "editable": {
+            "description": "Whether the Punch is editable or not.",
+            "example": false,
+            "type": "boolean"
+        },
+        "elapsed_time_entry": {
+            "example": {
+                "elapsed_time_entry": {
+                    "trc_id": "4SICK",
+                    "sequence_number": "1",
+                    "time_reporting_code_hours": "1",
+                    "employee_record": "0",
+                    "punch_date": "2020-03-01",
+                    "time_collection_source": "ITB-1100-PI3TC"
+                }
+            },
+            "properties": {
+                "elapsed": {
+                    "properties": {
+                        "trc_id": {
+                            "$ref": "#/definitions/trc_id"
+                        },
+                        "sequence_number": {
+                            "$ref": "#/definitions/sequence_number"
+                        },
+                        "time_reporting_code_hours": {
+                            "$ref": "#/definitions/time_reporting_code_hours"
+                        },
+                        "employee_record": {
+                            "$ref": "#/definitions/employee_record"
+                        },
+                        "punch_date": {
+                            "$ref": "#/definitions/punch_date"
+                        },
+                        "time_collection_source": {
+                            "$ref": "#/definitions/time_collection_source"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "DELETE_response": {
+            "xml": {
+                "name": "response"
+            },
+            "properties": {
+                "sequence_number": {
+                    "$ref": "#/definitions/sequence_number"
+                },
+                "status": {
+                    "$ref": "#/definitions/DELETE_status"
+                },
+                "employee_record": {
+                    "$ref": "#/definitions/employee_record"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "punch_date": {
+                    "$ref": "#/definitions/punch_date"
+                }
+            },
+            "required": [
+                "status"
+            ],
+            "type": "object"
+        },
+        "sequence_number": {
+            "maxLength": 15,
+            "description": "The unique number id of a punch in the system",
+            "example": 0,
+            "type": "integer"
+        },
+        "message": {
+            "maxLength": 100,
+            "description": "A user-friendly message indicating why the API call was unsuccessful.",
+            "example": "The byu_id or employee_record is missing or invalid.",
+            "type": "string"
+        },
+        "sick_leave_balance_hours": {
+            "description": "The number of hours for which a given employee has available for use toward sick leave.",
+            "example": "149:2",
+            "type": "string"
+        },
+        "elapsed_time_punch": {
+            "xml": {
+                "name": "elapsed_time_punch"
+            },
+            "properties": {
+                "trc_id": {
+                    "$ref": "#/definitions/trc_id"
+                },
+                "sequence_number": {
+                    "$ref": "#/definitions/sequence_number"
+                },
+                "status": {
+                    "$ref": "#/definitions/status"
+                },
+                "hours_worked": {
+                    "$ref": "#/definitions/hours_worked"
+                },
+                "editable": {
+                    "$ref": "#/definitions/editable"
+                }
+            },
+            "type": "object"
+        },
+        "POST_error_response": {
+            "allOf": [
+                {
+                    "description": "Response from the System from a failed POST",
+                    "xml": {
+                        "name": "status"
+                    },
+                    "properties": {
+                        "return_code": {
+                            "$ref": "#/definitions/return_code"
+                        }
+                    },
+                    "required": [
+                        "return_code"
+                    ]
+                },
+                {
+                    "$ref": "#/definitions/status"
+                }
+            ]
+        },
+        "other_hours": {
+            "pattern": "[0-5][0-9]:[0-5][0-9]",
+            "description": "Aggregate of other time recorded for the day (sick, vacation, on-call, etc.). If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        },
+        "employee_record": {
+            "maxLength": 3,
+            "description": "The number that corresponds to a particular job for an employee when they work multiple jobs concurrently on campus.",
+            "example": "0",
+            "type": "string"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "example": "123456789",
+            "type": "string"
+        },
+        "hours_worked": {
+            "description": "The number of hours worked.",
+            "example": 15,
+            "format": "double",
+            "type": "number"
+        },
+        "return_code": {
+            "description": "The HTTP status code associated with the response.",
+            "example": "200",
+            "type": "string"
+        },
+        "punch_date": {
+            "pattern": "YYYY-MM-DD",
+            "description": "The date that a given punch was recorded on",
+            "example": "2019-04-20"
+        },
+        "vacation_leave_balance_hours": {
+            "description": "The number of hours a given employee has available to use for vacation leave.",
+            "example": "50:46",
+            "type": "string"
+        },
+        "punches": {
+            "items": {
+                "$ref": "#/definitions/elapsed_time_punch"
+            },
+            "xml": {
+                "name": "punches"
+            },
+            "type": "array"
+        }
+    },
+    "parameters": {
+        "sequence_number": {
+            "maxLength": 15,
+            "description": "Sequence Number",
+            "name": "sequence_number",
+            "type": "integer",
+            "required": true,
+            "in": "path"
+        },
+        "employee_record": {
+            "maxLength": 3,
+            "description": "Employee Record Number",
+            "name": "employee_record",
+            "type": "integer",
+            "required": true,
+            "in": "path"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "name": "byu_id",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        },
+        "punch_date": {
+            "pattern": "YYYY-MM-DD",
+            "description": "The date that a given punch was recorded on.",
+            "name": "punch_date",
+            "format": "date",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        },
+        "elapsed_time_entry": {
+            "schema": {
+                "$ref": "#/definitions/elapsed_time_entry"
+            },
+            "description": "Elapsed Punch Information",
+            "name": "elapsed_time_entry",
+            "required": true,
+            "in": "body"
+        }
+    },
+    "responses": {
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "403": {
+            "description": "Access denied to protected data"
+        },
+        "500": {
+            "description": "Internal Server Error - Error occurred that was not the fault of the user"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "GET_404": {
+            "schema": {
+                "$ref": "#/definitions/GET_error_response"
+            },
+            "description": "Employee Not Found"
+        },
+        "default": {
+            "description": "Unexpected error"
+        },
+        "GET_400": {
+            "schema": {
+                "$ref": "#/definitions/GET_error_response"
+            },
+            "description": "Invalid Request - unable to interpret request"
+        }
+    },
+    "info": {
+        "title": "Y-Time Elapsed Time Punch",
+        "description": "Adds ability to add, edit, or delete information with regards to elapsed time.",
+        "version": "v1"
+    }
+}

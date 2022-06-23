@@ -1,0 +1,287 @@
+{
+    "basePath": "/brian-wheelhou-favorite-color/dev/v1",
+    "x-mock_json": {
+        "person": {
+            "favorite_color": "Blue",
+            "name": "Cosmo Cougar",
+            "byu_id": "012345678",
+            "date_created": "2019-01-04T21:08:56.242Z"
+        }
+    },
+    "paths": {
+        "/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Creates a person in the databse with a favorite color",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "BYU ID",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The person's favorite color",
+                        "name": "favorite_color",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/person"
+                        },
+                        "description": "Successful response"
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Error in request"
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Error in server"
+                    }
+                },
+                "operationId": "addPerson"
+            },
+            "x-controller": "favoritecolor"
+        },
+        "/{byu_id}?": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies a favorite color",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "BYU ID",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The person's favorite color",
+                        "name": "favorite_color",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/person"
+                        },
+                        "description": "Successful response"
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Error in request"
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Error in server"
+                    }
+                },
+                "operationId": "modifyPerson"
+            },
+            "x-controller": "favoritecolor"
+        },
+        "/{byu_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Modifies a favorite color",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "BYU ID",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The person's favorite color",
+                        "name": "favorite_color",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/person"
+                        },
+                        "description": "Successful response"
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Error in request"
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Error in server"
+                    }
+                },
+                "operationId": "modifyPerson"
+            },
+            "x-controller": "favoritecolor",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns the favorite color of the person",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "BYU ID",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/person"
+                        },
+                        "description": "Successful response"
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Error in request"
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Error in server"
+                    }
+                },
+                "operationId": "getPerson"
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Deletes a person from the database",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "description": "BYU ID",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Error in request"
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Error in server"
+                    }
+                },
+                "operationId": "deletePerson"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "person": {
+            "example": {
+                "$ref": "#/x-mock_json/person"
+            },
+            "properties": {
+                "favorite_color": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "date_created": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "brian-wheelhouse-favorite-color",
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443"
+}

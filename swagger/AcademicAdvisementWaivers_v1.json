@@ -1,0 +1,883 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "AcademicAdvisementWaivers",
+        "description": "This service retrieves a student's program waivers, substitutions, and additional requirements from the AIM System.",
+        "version": "v1",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/domains/legacy/academic/advisement/waivers/v1",
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "paths": {
+        "/{person_id}": {
+            "get": {
+                "summary": "get a list of all waivers and their corresponding courses and year term dates",
+                "description": "get a list of all waivers and their corresponding courses and year term dates",
+                "operationId": "getStdWaivers",
+                "parameters": [
+                    {
+                        "name": "person_id",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "WaiversService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service request is OK and a response has been generated.",
+                        "schema": {
+                            "description": "A list of a student's waivers.",
+                            "type": "object",
+                            "properties": {
+                                "StdWaiverService": {
+                                    "type": "object",
+                                    "properties": {
+                                        "request": {
+                                            "type": "object",
+                                            "properties": {
+                                                "method": {
+                                                    "type": "string",
+                                                    "description": "REST method for request service."
+                                                },
+                                                "resource": {
+                                                    "type": "string"
+                                                },
+                                                "attributes": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "description": ""
+                                                },
+                                                "statusMessage": {
+                                                    "type": "string",
+                                                    "description": "Explanation of return status of request."
+                                                }
+                                            }
+                                        },
+                                        "response": {
+                                            "type": "object",
+                                            "properties": {
+                                                "programs": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "program_code": {
+                                                                "type": "string"
+                                                            },
+                                                            "program_type": {
+                                                                "type": "string"
+                                                            },
+                                                            "year_term": {
+                                                                "type": "string"
+                                                            },
+                                                            "description": {
+                                                                "type": "string"
+                                                            },
+                                                            "hierarchies": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "unit_type": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "unit_name": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "academic_unit_id": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "waivers": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "waiver_type": {
+                                                                "type": "string"
+                                                            },
+                                                            "waiver_level": {
+                                                                "type": "string"
+                                                            },
+                                                            "waiver_level_value": {
+                                                                "type": "string"
+                                                            },
+                                                            "curriculum_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "title_code": {
+                                                                "type": "string"
+                                                            },
+                                                            "dept_name": {
+                                                                "type": "string"
+                                                            },
+                                                            "catalog_number": {
+                                                                "type": "string"
+                                                            },
+                                                            "catalog_suffix": {
+                                                                "type": "string"
+                                                            },
+                                                            "sub_curriculum_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "sub_title_code": {
+                                                                "type": "string"
+                                                            },
+                                                            "sub_dept_name": {
+                                                                "type": "string"
+                                                            },
+                                                            "sub_catalog_number": {
+                                                                "type": "string"
+                                                            },
+                                                            "sub_catalog_suffix": {
+                                                                "type": "string"
+                                                            },
+                                                            "year_term": {
+                                                                "type": "string"
+                                                            },
+                                                            "section_number": {
+                                                                "type": "string"
+                                                            },
+                                                            "num_hours": {
+                                                                "type": "string"
+                                                            },
+                                                            "num_classes": {
+                                                                "type": "string"
+                                                            },
+                                                            "note": {
+                                                                "type": "string"
+                                                            },
+                                                            "date_time_updated": {
+                                                                "type": "string"
+                                                            },
+                                                            "updated_by_name": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "other_requirements": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "program_code": {
+                                                                "type": "string"
+                                                            },
+                                                            "program_description": {
+                                                                "type": "string"
+                                                            },
+                                                            "req_type": {
+                                                                "type": "string"
+                                                            },
+                                                            "req_level": {
+                                                                "type": "string"
+                                                            },
+                                                            "description": {
+                                                                "type": "string"
+                                                            },
+                                                            "date_completed": {
+                                                                "type": "string"
+                                                            },
+                                                            "updated_date": {
+                                                                "type": "string"
+                                                            },
+                                                            "updated_by": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "StdWaiverService": {
+                                    "request": {
+                                        "method": "GET",
+                                        "resource": "/json/123456789/",
+                                        "attributes": "",
+                                        "status": 200,
+                                        "statusMessage": "Service request is OK and a response has been generated."
+                                    },
+                                    "response": {
+                                        "programs": [
+                                            {
+                                                "program_code": "111120",
+                                                "program_type": "GE",
+                                                "year_term": "Fall 2011",
+                                                "description": "University Core 2004-Prese",
+                                                "hierarchies": [
+                                                    {
+                                                        "unit_type": "COLLEGE",
+                                                        "unit_name": "Undergraduate Education",
+                                                        "academic_unit_id": "1449"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "program_code": "693220",
+                                                "program_type": "MAJOR",
+                                                "year_term": "Winter 2017",
+                                                "description": "Computer Scien",
+                                                "hierarchies": [
+                                                    {
+                                                        "unit_type": "DEPARTMENT",
+                                                        "unit_name": "Computer Science",
+                                                        "academic_unit_id": "1323"
+                                                    },
+                                                    {
+                                                        "unit_type": "COLLEGE",
+                                                        "unit_name": "Physical & Math Sciences",
+                                                        "academic_unit_id": "1017"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "waivers": [
+                                            {
+                                                "waiver_type": "TWV",
+                                                "waiver_level": "U",
+                                                "waiver_level_value": "",
+                                                "curriculum_id": "11099",
+                                                "title_code": "000",
+                                                "dept_name": "G E",
+                                                "catalog_number": "106",
+                                                "catalog_suffix": "",
+                                                "sub_curriculum_id": "",
+                                                "sub_title_code": "",
+                                                "sub_dept_name": "",
+                                                "sub_catalog_number": "",
+                                                "sub_catalog_suffix": "",
+                                                "year_term": "",
+                                                "section_number": "",
+                                                "num_hours": "0.00",
+                                                "num_classes": "1",
+                                                "note": "",
+                                                "date_time_updated": "01 Apr 2010 04:01:21",
+                                                "updated_by_name": "BATCH"
+                                            }
+                                        ],
+                                        "other_requirements": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Failure to authenticate.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "The target resource can not be found for the provided resource identifiers.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "The service method is not supported by the service.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "409": {
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "description": "service definition",
+                "operationId": "getServiceDocumentation",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "StdWaiver": {
+            "description": "A list of a student's waivers.",
+            "type": "object",
+            "properties": {
+                "StdWaiverService": {
+                    "type": "object",
+                    "properties": {
+                        "request": {
+                            "type": "object",
+                            "properties": {
+                                "method": {
+                                    "type": "string",
+                                    "description": "REST method for request service."
+                                },
+                                "resource": {
+                                    "type": "string"
+                                },
+                                "attributes": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "number",
+                                    "description": ""
+                                },
+                                "statusMessage": {
+                                    "type": "string",
+                                    "description": "Explanation of return status of request."
+                                }
+                            }
+                        },
+                        "response": {
+                            "type": "object",
+                            "properties": {
+                                "programs": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "program_code": {
+                                                "type": "string"
+                                            },
+                                            "program_type": {
+                                                "type": "string"
+                                            },
+                                            "year_term": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "hierarchies": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "unit_type": {
+                                                            "type": "string"
+                                                        },
+                                                        "unit_name": {
+                                                            "type": "string"
+                                                        },
+                                                        "academic_unit_id": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "waivers": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "waiver_type": {
+                                                "type": "string"
+                                            },
+                                            "waiver_level": {
+                                                "type": "string"
+                                            },
+                                            "waiver_level_value": {
+                                                "type": "string"
+                                            },
+                                            "curriculum_id": {
+                                                "type": "string"
+                                            },
+                                            "title_code": {
+                                                "type": "string"
+                                            },
+                                            "dept_name": {
+                                                "type": "string"
+                                            },
+                                            "catalog_number": {
+                                                "type": "string"
+                                            },
+                                            "catalog_suffix": {
+                                                "type": "string"
+                                            },
+                                            "sub_curriculum_id": {
+                                                "type": "string"
+                                            },
+                                            "sub_title_code": {
+                                                "type": "string"
+                                            },
+                                            "sub_dept_name": {
+                                                "type": "string"
+                                            },
+                                            "sub_catalog_number": {
+                                                "type": "string"
+                                            },
+                                            "sub_catalog_suffix": {
+                                                "type": "string"
+                                            },
+                                            "year_term": {
+                                                "type": "string"
+                                            },
+                                            "section_number": {
+                                                "type": "string"
+                                            },
+                                            "num_hours": {
+                                                "type": "string"
+                                            },
+                                            "num_classes": {
+                                                "type": "string"
+                                            },
+                                            "note": {
+                                                "type": "string"
+                                            },
+                                            "date_time_updated": {
+                                                "type": "string"
+                                            },
+                                            "updated_by_name": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "other_requirements": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "program_code": {
+                                                "type": "string"
+                                            },
+                                            "program_description": {
+                                                "type": "string"
+                                            },
+                                            "req_type": {
+                                                "type": "string"
+                                            },
+                                            "req_level": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "date_completed": {
+                                                "type": "string"
+                                            },
+                                            "updated_date": {
+                                                "type": "string"
+                                            },
+                                            "updated_by": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "StdWaiverRequest": {
+            "type": "object",
+            "properties": {
+                "method": {
+                    "type": "string",
+                    "description": "REST method for request service."
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "number",
+                    "description": ""
+                },
+                "statusMessage": {
+                    "type": "string",
+                    "description": "Explanation of return status of request."
+                }
+            }
+        },
+        "StdWaiverResponse": {
+            "type": "object",
+            "properties": {
+                "programs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "program_code": {
+                                "type": "string"
+                            },
+                            "program_type": {
+                                "type": "string"
+                            },
+                            "year_term": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "hierarchies": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "unit_type": {
+                                            "type": "string"
+                                        },
+                                        "unit_name": {
+                                            "type": "string"
+                                        },
+                                        "academic_unit_id": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "waivers": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "waiver_type": {
+                                "type": "string"
+                            },
+                            "waiver_level": {
+                                "type": "string"
+                            },
+                            "waiver_level_value": {
+                                "type": "string"
+                            },
+                            "curriculum_id": {
+                                "type": "string"
+                            },
+                            "title_code": {
+                                "type": "string"
+                            },
+                            "dept_name": {
+                                "type": "string"
+                            },
+                            "catalog_number": {
+                                "type": "string"
+                            },
+                            "catalog_suffix": {
+                                "type": "string"
+                            },
+                            "sub_curriculum_id": {
+                                "type": "string"
+                            },
+                            "sub_title_code": {
+                                "type": "string"
+                            },
+                            "sub_dept_name": {
+                                "type": "string"
+                            },
+                            "sub_catalog_number": {
+                                "type": "string"
+                            },
+                            "sub_catalog_suffix": {
+                                "type": "string"
+                            },
+                            "year_term": {
+                                "type": "string"
+                            },
+                            "section_number": {
+                                "type": "string"
+                            },
+                            "num_hours": {
+                                "type": "string"
+                            },
+                            "num_classes": {
+                                "type": "string"
+                            },
+                            "note": {
+                                "type": "string"
+                            },
+                            "date_time_updated": {
+                                "type": "string"
+                            },
+                            "updated_by_name": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "other_requirements": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "program_code": {
+                                "type": "string"
+                            },
+                            "program_description": {
+                                "type": "string"
+                            },
+                            "req_type": {
+                                "type": "string"
+                            },
+                            "req_level": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "date_completed": {
+                                "type": "string"
+                            },
+                            "updated_date": {
+                                "type": "string"
+                            },
+                            "updated_by": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "program_code": {
+            "type": "string"
+        },
+        "program_type": {
+            "type": "string"
+        },
+        "year_term": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "hierarchies": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "unit_type": {
+                        "type": "string"
+                    },
+                    "unit_name": {
+                        "type": "string"
+                    },
+                    "academic_unit_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "unit_type": {
+            "type": "string"
+        },
+        "unit_name": {
+            "type": "string"
+        },
+        "academic_unit_id": {
+            "type": "string"
+        },
+        "waiver_type": {
+            "type": "string"
+        },
+        "waiver_level": {
+            "type": "string"
+        },
+        "waiver_level_value": {
+            "type": "string"
+        },
+        "curriculum_id": {
+            "type": "string"
+        },
+        "title_code": {
+            "type": "string"
+        },
+        "dept_name": {
+            "type": "string"
+        },
+        "catalog_number": {
+            "type": "string"
+        },
+        "catalog_suffix": {
+            "type": "string"
+        },
+        "sub_curriculum_id": {
+            "type": "string"
+        },
+        "sub_title_code": {
+            "type": "string"
+        },
+        "sub_dept_name": {
+            "type": "string"
+        },
+        "sub_catalog_number": {
+            "type": "string"
+        },
+        "sub_catalog_suffix": {
+            "type": "string"
+        },
+        "section_number": {
+            "type": "string"
+        },
+        "num_hours": {
+            "type": "string"
+        },
+        "num_classes": {
+            "type": "string"
+        },
+        "note": {
+            "type": "string"
+        },
+        "date_time_updated": {
+            "type": "string"
+        },
+        "updated_by_name": {
+            "type": "string"
+        },
+        "program_description": {
+            "type": "string"
+        },
+        "req_type": {
+            "type": "string"
+        },
+        "req_level": {
+            "type": "string"
+        },
+        "date_completed": {
+            "type": "string"
+        },
+        "updated_date": {
+            "type": "string"
+        },
+        "updated_by": {
+            "type": "string"
+        }
+    },
+    "x-mock_json": {
+        "StdWaiver": {
+            "StdWaiverService": {
+                "request": {
+                    "method": "GET",
+                    "resource": "/json/123456789/",
+                    "attributes": "",
+                    "status": 200,
+                    "statusMessage": "Service request is OK and a response has been generated."
+                },
+                "response": {
+                    "programs": [
+                        {
+                            "program_code": "111120",
+                            "program_type": "GE",
+                            "year_term": "Fall 2011",
+                            "description": "University Core 2004-Prese",
+                            "hierarchies": [
+                                {
+                                    "unit_type": "COLLEGE",
+                                    "unit_name": "Undergraduate Education",
+                                    "academic_unit_id": "1449"
+                                }
+                            ]
+                        },
+                        {
+                            "program_code": "693220",
+                            "program_type": "MAJOR",
+                            "year_term": "Winter 2017",
+                            "description": "Computer Scien",
+                            "hierarchies": [
+                                {
+                                    "unit_type": "DEPARTMENT",
+                                    "unit_name": "Computer Science",
+                                    "academic_unit_id": "1323"
+                                },
+                                {
+                                    "unit_type": "COLLEGE",
+                                    "unit_name": "Physical & Math Sciences",
+                                    "academic_unit_id": "1017"
+                                }
+                            ]
+                        }
+                    ],
+                    "waivers": [
+                        {
+                            "waiver_type": "TWV",
+                            "waiver_level": "U",
+                            "waiver_level_value": "",
+                            "curriculum_id": "11099",
+                            "title_code": "000",
+                            "dept_name": "G E",
+                            "catalog_number": "106",
+                            "catalog_suffix": "",
+                            "sub_curriculum_id": "",
+                            "sub_title_code": "",
+                            "sub_dept_name": "",
+                            "sub_catalog_number": "",
+                            "sub_catalog_suffix": "",
+                            "year_term": "",
+                            "section_number": "",
+                            "num_hours": "0.00",
+                            "num_classes": "1",
+                            "note": "",
+                            "date_time_updated": "01 Apr 2010 04:01:21",
+                            "updated_by_name": "BATCH"
+                        }
+                    ],
+                    "other_requirements": []
+                }
+            }
+        }
+    }
+}

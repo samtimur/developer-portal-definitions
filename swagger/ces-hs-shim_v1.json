@@ -1,0 +1,283 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "ces-hs-shim",
+        "description": "High Schools Shim",
+        "version": "v1",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/domain/admissions/high_schools/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/high_schools": {
+            "get": {
+                "summary": "Get high schools",
+                "parameters": [
+                    {
+                        "name": "updated_after",
+                        "in": "query",
+                        "description": "Updated after date (ex: '2021-01-01')",
+                        "required": false,
+                        "type": "string",
+                        "format": "date",
+                        "x-contains-special-characters": true
+                    }
+                ],
+                "tags": [
+                    "High Schools"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieve a collection of high schools",
+                        "examples": {
+                            "application/json": {
+                                "links": {},
+                                "metadata": {
+                                    "collection_size": 1,
+                                    "validation_response": {
+                                        "code": 200,
+                                        "message": "Successful"
+                                    }
+                                },
+                                "values": [
+                                    {
+                                        "links": {},
+                                        "metadata": {
+                                            "validation_response": {
+                                                "code": 200,
+                                                "message": "Successful"
+                                            }
+                                        },
+                                        "hs_code": "030796",
+                                        "hs_name": "GPS CLOBAL ACADEMY",
+                                        "city": "GILBERT",
+                                        "state": "AZ",
+                                        "country_code": "USA",
+                                        "active_status": "A"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "metadata"
+                            ],
+                            "properties": {
+                                "metadata": {
+                                    "type": "object",
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "properties": {
+                                        "validation_response": {
+                                            "type": "object",
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "properties": {
+                                                "code": {
+                                                    "type": "number"
+                                                },
+                                                "message": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "validation_information": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required to access data",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "metadata"
+                            ],
+                            "properties": {
+                                "metadata": {
+                                    "type": "object",
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "properties": {
+                                        "validation_response": {
+                                            "type": "object",
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "properties": {
+                                                "code": {
+                                                    "type": "number"
+                                                },
+                                                "message": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "validation_information": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access denied to protected data",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "metadata"
+                            ],
+                            "properties": {
+                                "metadata": {
+                                    "type": "object",
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "properties": {
+                                        "validation_response": {
+                                            "type": "object",
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "properties": {
+                                                "code": {
+                                                    "type": "number"
+                                                },
+                                                "message": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "validation_information": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "metadata"
+                            ],
+                            "properties": {
+                                "metadata": {
+                                    "type": "object",
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "properties": {
+                                        "validation_response": {
+                                            "type": "object",
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "properties": {
+                                                "code": {
+                                                    "type": "number"
+                                                },
+                                                "message": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "validation_information": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/high_schools?": {
+            "get": {
+                "summary": "Get high schools",
+                "parameters": [
+                    {
+                        "name": "updated_after",
+                        "in": "query",
+                        "description": "Updated after date (ex: '2021-01-01')",
+                        "required": false,
+                        "type": "string",
+                        "format": "date",
+                        "x-contains-special-characters": true
+                    }
+                ],
+                "tags": [
+                    " "
+                ],
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/high_schools/?": {
+            "get": {
+                "summary": "Get high schools",
+                "parameters": [
+                    {
+                        "name": "updated_after",
+                        "in": "query",
+                        "description": "Updated after date (ex: '2021-01-01')",
+                        "required": false,
+                        "type": "string",
+                        "format": "date",
+                        "x-contains-special-characters": true
+                    }
+                ],
+                "tags": [
+                    " "
+                ],
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,973 @@
+{
+    "basePath": "/domains/legacy/academic/controls/controldatesws/v1",
+    "x-mock_json": {
+        "ControlDatesWSService": {
+            "response": {
+                "date_list": [
+                    {
+                        "end_date": "19000322 23:59:59",
+                        "description": "day after prev finals to last day of finals",
+                        "year_term_desc": "Winter 1900",
+                        "year_term": "19001",
+                        "start_date": "19000101 00:00:00",
+                        "date_type": "CURRENT_YYT"
+                    }
+                ],
+                "request_count": 476
+            },
+            "request": {
+                "status": 200,
+                "resource": "/json/all/current_yyt",
+                "method": "GET",
+                "attributes": "",
+                "statusMessage": "Service request is OK and a response has been generated."
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/registration": {
+            "get": {
+                "summary": "Get the current_yyt control date to expose which year terms are currently open for registration",
+                "tags": [
+                    "ControlDatesService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the current_yyt control date to expose which year terms are currently open for registration",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "date_list": {
+                                            "items": {
+                                                "properties": {
+                                                    "end_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term_desc": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "start_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_type": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "request_count": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Get the current_yyt control date to expose which year terms are currently open for registration",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "date_list": [
+                                        {
+                                            "end_date": "19000322 23:59:59",
+                                            "description": "day after prev finals to last day of finals",
+                                            "year_term_desc": "Winter 1900",
+                                            "year_term": "19001",
+                                            "start_date": "19000101 00:00:00",
+                                            "date_type": "CURRENT_YYT"
+                                        }
+                                    ],
+                                    "request_count": 476
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/json/all/current_yyt",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetRegistrationYearTerms"
+            }
+        },
+        "/all/{date_type}": {
+            "get": {
+                "summary": "Get all instances of a control date",
+                "tags": [
+                    "ControlDatesService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get all instances of a control date",
+                "parameters": [
+                    {
+                        "description": "The type of date",
+                        "name": "date_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "date_list": {
+                                            "items": {
+                                                "properties": {
+                                                    "end_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term_desc": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "start_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_type": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "request_count": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Provides a full list for a given control date",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "date_list": [
+                                        {
+                                            "end_date": "19000322 23:59:59",
+                                            "description": "day after prev finals to last day of finals",
+                                            "year_term_desc": "Winter 1900",
+                                            "year_term": "19001",
+                                            "start_date": "19000101 00:00:00",
+                                            "date_type": "CURRENT_YYT"
+                                        }
+                                    ],
+                                    "request_count": 476
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/json/all/current_yyt",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetControlDateInstances"
+            }
+        },
+        "/yearterm/{year_term}/{+date_type}": {
+            "get": {
+                "summary": "Get control dates for a given year term",
+                "tags": [
+                    "ControlDatesService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get control dates for a given year term",
+                "parameters": [
+                    {
+                        "description": "Year and term desired",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The type of date, can have up to 10 separated by commas",
+                        "name": "+date_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "date_list": {
+                                            "items": {
+                                                "properties": {
+                                                    "end_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term_desc": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "start_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_type": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "request_count": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "List of date types that are/were active as of a certain date.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "date_list": [
+                                        {
+                                            "end_date": "19000322 23:59:59",
+                                            "description": "day after prev finals to last day of finals",
+                                            "year_term_desc": "Winter 1900",
+                                            "year_term": "19001",
+                                            "start_date": "19000101 00:00:00",
+                                            "date_type": "CURRENT_YYT"
+                                        }
+                                    ],
+                                    "request_count": 476
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/json/all/current_yyt",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetForGivenYearTerm"
+            }
+        },
+        "/asofdate/{as_of_date}/{+date_type}": {
+            "get": {
+                "summary": "Get control dates for a given date",
+                "tags": [
+                    "ControlDatesService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get control dates for a given date",
+                "parameters": [
+                    {
+                        "description": "Determines a given date",
+                        "name": "as_of_date",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The type of date, can have up to 10 separated by commas",
+                        "name": "+date_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "date_list": {
+                                            "items": {
+                                                "properties": {
+                                                    "end_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term_desc": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "start_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_type": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "request_count": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "List of date types for a given year term.",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "date_list": [
+                                        {
+                                            "end_date": "19000322 23:59:59",
+                                            "description": "day after prev finals to last day of finals",
+                                            "year_term_desc": "Winter 1900",
+                                            "year_term": "19001",
+                                            "start_date": "19000101 00:00:00",
+                                            "date_type": "CURRENT_YYT"
+                                        }
+                                    ],
+                                    "request_count": 476
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/json/all/current_yyt",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetForGivenDate"
+            }
+        },
+        "/range/{year_term_start},{year_term_end}/{date_type}": {
+            "get": {
+                "summary": "Get range of instances of a control date",
+                "tags": [
+                    "ControlDatesService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get range of instances of a control date",
+                "parameters": [
+                    {
+                        "description": "The start of the time period",
+                        "name": "year_term_start",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The end of the time period",
+                        "name": "year_term_end",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "The type of date",
+                        "name": "date_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "properties": {
+                                        "date_list": {
+                                            "items": {
+                                                "properties": {
+                                                    "end_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term_desc": {
+                                                        "type": "string"
+                                                    },
+                                                    "year_term": {
+                                                        "type": "string"
+                                                    },
+                                                    "start_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_type": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "request_count": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "request": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "number"
+                                        },
+                                        "resource": {
+                                            "type": "string"
+                                        },
+                                        "method": {
+                                            "type": "string"
+                                        },
+                                        "attributes": {
+                                            "type": "string"
+                                        },
+                                        "statusMessage": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Range list for a control date",
+                        "examples": {
+                            "application/json": {
+                                "response": {
+                                    "date_list": [
+                                        {
+                                            "end_date": "19000322 23:59:59",
+                                            "description": "day after prev finals to last day of finals",
+                                            "year_term_desc": "Winter 1900",
+                                            "year_term": "19001",
+                                            "start_date": "19000101 00:00:00",
+                                            "date_type": "CURRENT_YYT"
+                                        }
+                                    ],
+                                    "request_count": 476
+                                },
+                                "request": {
+                                    "status": 200,
+                                    "resource": "/json/all/current_yyt",
+                                    "method": "GET",
+                                    "attributes": "",
+                                    "statusMessage": "Service request is OK and a response has been generated."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Failure to authenticate"
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "GetRange"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "response": {
+            "properties": {
+                "date_list": {
+                    "items": {
+                        "properties": {
+                            "end_date": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "year_term_desc": {
+                                "type": "string"
+                            },
+                            "year_term": {
+                                "type": "string"
+                            },
+                            "start_date": {
+                                "type": "string"
+                            },
+                            "date_type": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "request_count": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "end_date": {
+            "type": "string"
+        },
+        "ControlDatesWSService": {
+            "properties": {
+                "response": {
+                    "properties": {
+                        "date_list": {
+                            "items": {
+                                "properties": {
+                                    "end_date": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "year_term_desc": {
+                                        "type": "string"
+                                    },
+                                    "year_term": {
+                                        "type": "string"
+                                    },
+                                    "start_date": {
+                                        "type": "string"
+                                    },
+                                    "date_type": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "request_count": {
+                            "type": "number"
+                        }
+                    },
+                    "type": "object"
+                },
+                "request": {
+                    "properties": {
+                        "status": {
+                            "type": "number"
+                        },
+                        "resource": {
+                            "type": "string"
+                        },
+                        "method": {
+                            "type": "string"
+                        },
+                        "attributes": {
+                            "type": "string"
+                        },
+                        "statusMessage": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "date_list": {
+            "items": {
+                "properties": {
+                    "end_date": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "year_term_desc": {
+                        "type": "string"
+                    },
+                    "year_term": {
+                        "type": "string"
+                    },
+                    "start_date": {
+                        "type": "string"
+                    },
+                    "date_type": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "description": {
+            "type": "string"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "year_term_desc": {
+            "type": "string"
+        },
+        "request_count": {
+            "type": "number"
+        },
+        "year_term": {
+            "type": "string"
+        },
+        "start_date": {
+            "type": "string"
+        },
+        "date_type": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicControlsControlDatesWS",
+        "description": "This service provides information about controldates. Controls dates are used to manage events in the system and mark boundaries for different types of activities.",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

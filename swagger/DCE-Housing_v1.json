@@ -1,0 +1,52 @@
+{
+    "paths": {
+        "/getHousingInfoForSection/section/{section}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns all enrollments in housing or food options for the given section, indicating roommate preferences and group assignments.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Optional date can be provided to show changes since that time.",
+                "parameters": [
+                    {
+                        "description": "Orion product ID of section",
+                        "name": "section",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Date after which to show changes. Default: 2000-01-01 00:00:00",
+                        "name": "from",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/getCurrentPrograms": {
+            "get": {
+                "summary": "Returns current or future program sections with housing or food options.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "DCE-Housing",
+        "description": "Provides program and participant housing preferences.",
+        "version": "v1.0"
+    },
+    "basePath": "/domains/DCE/Housing/v1.0",
+    "host": "api.byu.edu:443"
+}

@@ -1,0 +1,99 @@
+{
+    "basePath": "/domains/erp/sa/MyFinancialCenter/v1",
+    "paths": {
+        "/completeChecklist/{byu_id}/{chklist_cd}/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "chklist_cd",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "name": "body",
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Sucessfully updates checklist"
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Error with description returned"
+                    }
+                }
+            }
+        },
+        "/removeServiceIndicator/{byu_id}/{srvc_ind_cd}/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "srvc_ind_cd",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "name": "body",
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Sucessfully removes Service Indicator"
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "Error": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Error with description returned"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "MyFinancialCenter",
+        "description": "Either Removes Service Indicator Codes or updates checklist ittem in PeopleSoft for a given BYU ID and Checklist Item and Service Code.",
+        "contact": {
+            "email": "sft_ft@byu.edu"
+        },
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443"
+}

@@ -1,0 +1,3191 @@
+{
+    "basePath": "/domains/group_resources/v1",
+    "paths": {
+        "/?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    " "
+                ],
+                "summary": "Retrieves a collection of group resources",
+                "x-throttling-tier": "Unlimited",
+                "x-operation": "getGroupResources",
+                "parameters": [
+                    {
+                        "description": "The search context to use.",
+                        "name": "search_context",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The text to search for in the specified context.",
+                        "name": "search_text",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/{resource_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Changes a specific group resource",
+                "x-throttling-tier": "Unlimited",
+                "x-operation": "putGroupResource",
+                "parameters": [
+                    {
+                        "maxLength": 15,
+                        "pattern": "^(?=.*?[0-9a-zA-Z])([0-9a-zA-Z]+[ _-])*?[0-9a-zA-Z]+$",
+                        "minLength": 1,
+                        "description": "The ID of the group resource",
+                        "name": "resource_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "example": {
+                                "is_visible": true,
+                                "resource_category": "Work",
+                                "resource_name": "A 30 char name",
+                                "resource_description": "Detailed information about this resource. No more than 4000 characters long.",
+                                "is_global_resource": false,
+                                "url": "https://fakeresource.edu"
+                            },
+                            "properties": {
+                                "is_visible": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "resource_category": {
+                                    "enum": [
+                                        "Communication",
+                                        "Miscellaneous",
+                                        "School",
+                                        "Stage",
+                                        "Work"
+                                    ],
+                                    "type": "string"
+                                },
+                                "resource_name": {
+                                    "maxLength": 30,
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "resource_description": {
+                                    "x-nullable": true,
+                                    "default": null,
+                                    "maxLength": 4000,
+                                    "type": "string"
+                                },
+                                "is_global_resource": {
+                                    "default": false,
+                                    "type": "boolean"
+                                },
+                                "url": {
+                                    "maxLength": 150,
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "resource_name",
+                                "resource_category"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "The JSON body for adding or updating a group resource",
+                        "name": "modify_resource_body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "is_visible": {
+                                    "example": {
+                                        "value": true,
+                                        "api_type": "modifiable"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-variable": "is_visible",
+                                            "type": "boolean"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "resource_category": {
+                                    "example": {
+                                        "value": "Work",
+                                        "api_type": "modifiable"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-variable": "resource_category",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "resource_id": {
+                                    "example": {
+                                        "value": "abc",
+                                        "api_type": "read-only",
+                                        "key": true
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-variable": "resource_id",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        },
+                                        "key": {
+                                            "default": true,
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "updated_datetime": {
+                                    "example": {
+                                        "value": "2018-11-07T10:45:00.000Z",
+                                        "api_type": "system"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-nullable": true,
+                                            "x-variable": "updated_datetime",
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "system",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "updated_by_byu_id": {
+                                    "example": {
+                                        "description": "Cosmo Cougar",
+                                        "value": "012345678",
+                                        "api_type": "system"
+                                    },
+                                    "properties": {
+                                        "description": {
+                                            "x-nullable": true,
+                                            "x-variable": "updated_by_name",
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "x-nullable": true,
+                                            "x-variable": "updated_by_byu_id",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "system",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "description",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "resource_name": {
+                                    "example": {
+                                        "value": "Sample Resource",
+                                        "api_type": "modifiable"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-variable": "resource_name",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "created_datetime": {
+                                    "example": {
+                                        "value": "2018-11-07T10:45:00.000Z",
+                                        "api_type": "system"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-nullable": true,
+                                            "x-variable": "created_datetime",
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "system",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "resource_description": {
+                                    "example": {
+                                        "value": "This group is for the Group Resources API sample JSON",
+                                        "api_type": "modifiable"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-nullable": true,
+                                            "x-variable": "resource_description",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "links": {
+                                    "properties": {
+                                        "group_resources__info": {
+                                            "x-variable": "group_resource__info",
+                                            "properties": {
+                                                "method": {
+                                                    "enum": [
+                                                        "GET",
+                                                        "PUT",
+                                                        "DELETE"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "rel": {
+                                                    "type": "string"
+                                                },
+                                                "href": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "rel",
+                                                "href",
+                                                "method"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "group_resources__delete": {
+                                            "x-variable": "group_resource__delete",
+                                            "properties": {
+                                                "method": {
+                                                    "enum": [
+                                                        "GET",
+                                                        "PUT",
+                                                        "DELETE"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "rel": {
+                                                    "type": "string"
+                                                },
+                                                "href": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "rel",
+                                                "href",
+                                                "method"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "group_resources__modify": {
+                                            "x-variable": "group_resource__modify",
+                                            "properties": {
+                                                "method": {
+                                                    "enum": [
+                                                        "GET",
+                                                        "PUT",
+                                                        "DELETE"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "rel": {
+                                                    "type": "string"
+                                                },
+                                                "href": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "rel",
+                                                "href",
+                                                "method"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "created_by_byu_id": {
+                                    "example": {
+                                        "description": "Cosmo Cougar",
+                                        "value": "012345678",
+                                        "api_type": "system"
+                                    },
+                                    "properties": {
+                                        "description": {
+                                            "x-nullable": true,
+                                            "x-variable": "updated_by_name",
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "x-nullable": true,
+                                            "x-variable": "created_by_byu_id",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "system",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "description",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "is_global_resource": {
+                                    "example": {
+                                        "value": true,
+                                        "api_type": "modifiable"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-variable": "is_global_resource",
+                                            "type": "boolean"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "url": {
+                                    "example": {
+                                        "value": "https://fakeurl.edu",
+                                        "api_type": "modifiable"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-nullable": true,
+                                            "x-variable": "url",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "is_visible": {
+                                    "value": true,
+                                    "api_type": "modifiable"
+                                },
+                                "resource_id": {
+                                    "value": "abc",
+                                    "api_type": "read-only",
+                                    "key": true
+                                },
+                                "resource_category": {
+                                    "value": "Work",
+                                    "api_type": "modifiable"
+                                },
+                                "updated_datetime": {
+                                    "value": "2018-11-07T10:45:00.000Z",
+                                    "api_type": "system"
+                                },
+                                "updated_by_byu_id": {
+                                    "description": "Cosmo Cougar",
+                                    "value": "012345678",
+                                    "api_type": "system"
+                                },
+                                "resource_name": {
+                                    "value": "Sample Resource",
+                                    "api_type": "modifiable"
+                                },
+                                "resource_description": {
+                                    "value": "This group is for the Group Resources API sample JSON",
+                                    "api_type": "modifiable"
+                                },
+                                "created_datetime": {
+                                    "value": "2018-11-07T10:45:00.000Z",
+                                    "api_type": "system"
+                                },
+                                "links": {
+                                    "group_resources__info": {
+                                        "method": "GET",
+                                        "rel": "self",
+                                        "href": "https://api.byu.edu/domains/group_resources/v1/{resource_id}"
+                                    },
+                                    "group_resources__delete": {
+                                        "method": "DELETE",
+                                        "rel": "group_resources__delete",
+                                        "href": "https://api.byu.edu/domains/group_resources/v1/{resource_id}"
+                                    },
+                                    "group_resources__modify": {
+                                        "method": "PUT",
+                                        "rel": "group_resources__modify",
+                                        "href": "https://api.byu.edu/domains/group_resources/v1/{resource_id}"
+                                    }
+                                },
+                                "created_by_byu_id": {
+                                    "description": "Cosmo Cougar",
+                                    "value": "012345678",
+                                    "api_type": "system"
+                                },
+                                "is_global_resource": {
+                                    "value": true,
+                                    "api_type": "modifiable"
+                                },
+                                "url": {
+                                    "value": "https://fakeurl.edu",
+                                    "api_type": "modifiable"
+                                },
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "OK",
+                                        "code": 200
+                                    },
+                                    "cache": {
+                                        "date_time": "2018-11-03T14:41:00.000Z"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Bad Request",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Bad Request",
+                                        "code": 400
+                                    },
+                                    "validation_information": [
+                                        "Tell you more information if available"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Unauthorized",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Unauthorized",
+                                        "code": 401
+                                    },
+                                    "validation_information": [
+                                        "Tell you more information if available"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Forbidden",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Forbidden",
+                                        "code": 403
+                                    },
+                                    "validation_information": [
+                                        "Tell you what rights your missing"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Conflict",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Conflict",
+                                        "code": 409
+                                    },
+                                    "validation_information": [
+                                        "Tell you what to fix before resubmit"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Internal Server Error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    },
+                                    "validation_information": [
+                                        "Tell you more information if available"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unknown Error"
+                    }
+                },
+                "operationId": "putGroupResource"
+            },
+            "x-controller": "group_resources",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Retrieves a specific group resource",
+                "x-throttling-tier": "Unlimited",
+                "x-operation": "getGroupResource",
+                "parameters": [
+                    {
+                        "maxLength": 15,
+                        "pattern": "^(?=.*?[0-9a-zA-Z])([0-9a-zA-Z]+[ _-])*?[0-9a-zA-Z]+$",
+                        "minLength": 1,
+                        "description": "The ID of the group resource",
+                        "name": "resource_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "is_visible": {
+                                    "example": {
+                                        "value": true,
+                                        "api_type": "modifiable"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-variable": "is_visible",
+                                            "type": "boolean"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "resource_category": {
+                                    "example": {
+                                        "value": "Work",
+                                        "api_type": "modifiable"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-variable": "resource_category",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "resource_id": {
+                                    "example": {
+                                        "value": "abc",
+                                        "api_type": "read-only",
+                                        "key": true
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-variable": "resource_id",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        },
+                                        "key": {
+                                            "default": true,
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "updated_datetime": {
+                                    "example": {
+                                        "value": "2018-11-07T10:45:00.000Z",
+                                        "api_type": "system"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-nullable": true,
+                                            "x-variable": "updated_datetime",
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "system",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "updated_by_byu_id": {
+                                    "example": {
+                                        "description": "Cosmo Cougar",
+                                        "value": "012345678",
+                                        "api_type": "system"
+                                    },
+                                    "properties": {
+                                        "description": {
+                                            "x-nullable": true,
+                                            "x-variable": "updated_by_name",
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "x-nullable": true,
+                                            "x-variable": "updated_by_byu_id",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "system",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "description",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "resource_name": {
+                                    "example": {
+                                        "value": "Sample Resource",
+                                        "api_type": "modifiable"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-variable": "resource_name",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "created_datetime": {
+                                    "example": {
+                                        "value": "2018-11-07T10:45:00.000Z",
+                                        "api_type": "system"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-nullable": true,
+                                            "x-variable": "created_datetime",
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "system",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "resource_description": {
+                                    "example": {
+                                        "value": "This group is for the Group Resources API sample JSON",
+                                        "api_type": "modifiable"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-nullable": true,
+                                            "x-variable": "resource_description",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "links": {
+                                    "properties": {
+                                        "group_resources__info": {
+                                            "x-variable": "group_resource__info",
+                                            "properties": {
+                                                "method": {
+                                                    "enum": [
+                                                        "GET",
+                                                        "PUT",
+                                                        "DELETE"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "rel": {
+                                                    "type": "string"
+                                                },
+                                                "href": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "rel",
+                                                "href",
+                                                "method"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "group_resources__delete": {
+                                            "x-variable": "group_resource__delete",
+                                            "properties": {
+                                                "method": {
+                                                    "enum": [
+                                                        "GET",
+                                                        "PUT",
+                                                        "DELETE"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "rel": {
+                                                    "type": "string"
+                                                },
+                                                "href": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "rel",
+                                                "href",
+                                                "method"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "group_resources__modify": {
+                                            "x-variable": "group_resource__modify",
+                                            "properties": {
+                                                "method": {
+                                                    "enum": [
+                                                        "GET",
+                                                        "PUT",
+                                                        "DELETE"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "rel": {
+                                                    "type": "string"
+                                                },
+                                                "href": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "rel",
+                                                "href",
+                                                "method"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "created_by_byu_id": {
+                                    "example": {
+                                        "description": "Cosmo Cougar",
+                                        "value": "012345678",
+                                        "api_type": "system"
+                                    },
+                                    "properties": {
+                                        "description": {
+                                            "x-nullable": true,
+                                            "x-variable": "updated_by_name",
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "x-nullable": true,
+                                            "x-variable": "created_by_byu_id",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "system",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "description",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "is_global_resource": {
+                                    "example": {
+                                        "value": true,
+                                        "api_type": "modifiable"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-variable": "is_global_resource",
+                                            "type": "boolean"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "url": {
+                                    "example": {
+                                        "value": "https://fakeurl.edu",
+                                        "api_type": "modifiable"
+                                    },
+                                    "properties": {
+                                        "value": {
+                                            "x-nullable": true,
+                                            "x-variable": "url",
+                                            "type": "string"
+                                        },
+                                        "api_type": {
+                                            "default": "read-only",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value",
+                                        "api_type"
+                                    ],
+                                    "type": "object"
+                                },
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "is_visible": {
+                                    "value": true,
+                                    "api_type": "modifiable"
+                                },
+                                "resource_id": {
+                                    "value": "abc",
+                                    "api_type": "read-only",
+                                    "key": true
+                                },
+                                "resource_category": {
+                                    "value": "Work",
+                                    "api_type": "modifiable"
+                                },
+                                "updated_datetime": {
+                                    "value": "2018-11-07T10:45:00.000Z",
+                                    "api_type": "system"
+                                },
+                                "updated_by_byu_id": {
+                                    "description": "Cosmo Cougar",
+                                    "value": "012345678",
+                                    "api_type": "system"
+                                },
+                                "resource_name": {
+                                    "value": "Sample Resource",
+                                    "api_type": "modifiable"
+                                },
+                                "resource_description": {
+                                    "value": "This group is for the Group Resources API sample JSON",
+                                    "api_type": "modifiable"
+                                },
+                                "created_datetime": {
+                                    "value": "2018-11-07T10:45:00.000Z",
+                                    "api_type": "system"
+                                },
+                                "links": {
+                                    "group_resources__info": {
+                                        "method": "GET",
+                                        "rel": "self",
+                                        "href": "https://api.byu.edu/domains/group_resources/v1/{resource_id}"
+                                    },
+                                    "group_resources__delete": {
+                                        "method": "DELETE",
+                                        "rel": "group_resources__delete",
+                                        "href": "https://api.byu.edu/domains/group_resources/v1/{resource_id}"
+                                    },
+                                    "group_resources__modify": {
+                                        "method": "PUT",
+                                        "rel": "group_resources__modify",
+                                        "href": "https://api.byu.edu/domains/group_resources/v1/{resource_id}"
+                                    }
+                                },
+                                "created_by_byu_id": {
+                                    "description": "Cosmo Cougar",
+                                    "value": "012345678",
+                                    "api_type": "system"
+                                },
+                                "is_global_resource": {
+                                    "value": true,
+                                    "api_type": "modifiable"
+                                },
+                                "url": {
+                                    "value": "https://fakeurl.edu",
+                                    "api_type": "modifiable"
+                                },
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "OK",
+                                        "code": 200
+                                    },
+                                    "cache": {
+                                        "date_time": "2018-11-03T14:41:00.000Z"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Bad Request",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Bad Request",
+                                        "code": 400
+                                    },
+                                    "validation_information": [
+                                        "Tell you more information if available"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Unauthorized",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Unauthorized",
+                                        "code": 401
+                                    },
+                                    "validation_information": [
+                                        "Tell you more information if available"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Forbidden",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Forbidden",
+                                        "code": 403
+                                    },
+                                    "validation_information": [
+                                        "Tell you what rights your missing"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Not Found",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Not Found",
+                                        "code": 404
+                                    },
+                                    "validation_information": [
+                                        "More information if any"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Internal Server Error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    },
+                                    "validation_information": [
+                                        "Tell you more information if available"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unknown Error"
+                    }
+                },
+                "operationId": "getGroupResource"
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Deletes a specific group resource",
+                "x-throttling-tier": "Unlimited",
+                "x-operation": "deleteGroupResource",
+                "parameters": [
+                    {
+                        "maxLength": 15,
+                        "pattern": "^(?=.*?[0-9a-zA-Z])([0-9a-zA-Z]+[ _-])*?[0-9a-zA-Z]+$",
+                        "minLength": 1,
+                        "description": "The ID of the group resource",
+                        "name": "resource_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Bad Request",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Bad Request",
+                                        "code": 400
+                                    },
+                                    "validation_information": [
+                                        "Tell you more information if available"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Unauthorized",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Unauthorized",
+                                        "code": 401
+                                    },
+                                    "validation_information": [
+                                        "Tell you more information if available"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Forbidden",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Forbidden",
+                                        "code": 403
+                                    },
+                                    "validation_information": [
+                                        "Tell you what rights your missing"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Internal Server Error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    },
+                                    "validation_information": [
+                                        "Tell you more information if available"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unknown Error"
+                    }
+                },
+                "operationId": "deleteGroupResource"
+            }
+        },
+        "/*": {
+            "x-controller": "group_resources",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Retrieves a collection of group resources",
+                "x-throttling-tier": "Unlimited",
+                "x-operation": "getGroupResources",
+                "parameters": [
+                    {
+                        "description": "The search context to use.",
+                        "name": "search_context",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The text to search for in the specified context.",
+                        "name": "search_text",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "values": {
+                                    "items": {
+                                        "properties": {
+                                            "is_visible": {
+                                                "example": {
+                                                    "value": true,
+                                                    "api_type": "modifiable"
+                                                },
+                                                "properties": {
+                                                    "value": {
+                                                        "x-variable": "is_visible",
+                                                        "type": "boolean"
+                                                    },
+                                                    "api_type": {
+                                                        "default": "read-only",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "value",
+                                                    "api_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "resource_category": {
+                                                "example": {
+                                                    "value": "Work",
+                                                    "api_type": "modifiable"
+                                                },
+                                                "properties": {
+                                                    "value": {
+                                                        "x-variable": "resource_category",
+                                                        "type": "string"
+                                                    },
+                                                    "api_type": {
+                                                        "default": "read-only",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "value",
+                                                    "api_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "resource_id": {
+                                                "example": {
+                                                    "value": "abc",
+                                                    "api_type": "read-only",
+                                                    "key": true
+                                                },
+                                                "properties": {
+                                                    "value": {
+                                                        "x-variable": "resource_id",
+                                                        "type": "string"
+                                                    },
+                                                    "api_type": {
+                                                        "default": "read-only",
+                                                        "type": "string"
+                                                    },
+                                                    "key": {
+                                                        "default": true,
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "value",
+                                                    "api_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "updated_datetime": {
+                                                "example": {
+                                                    "value": "2018-11-07T10:45:00.000Z",
+                                                    "api_type": "system"
+                                                },
+                                                "properties": {
+                                                    "value": {
+                                                        "x-nullable": true,
+                                                        "x-variable": "updated_datetime",
+                                                        "format": "date-time",
+                                                        "type": "string"
+                                                    },
+                                                    "api_type": {
+                                                        "default": "system",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "updated_by_byu_id": {
+                                                "example": {
+                                                    "description": "Cosmo Cougar",
+                                                    "value": "012345678",
+                                                    "api_type": "system"
+                                                },
+                                                "properties": {
+                                                    "description": {
+                                                        "x-nullable": true,
+                                                        "x-variable": "updated_by_name",
+                                                        "type": "string"
+                                                    },
+                                                    "value": {
+                                                        "x-nullable": true,
+                                                        "x-variable": "updated_by_byu_id",
+                                                        "type": "string"
+                                                    },
+                                                    "api_type": {
+                                                        "default": "system",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "value",
+                                                    "description",
+                                                    "api_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "resource_name": {
+                                                "example": {
+                                                    "value": "Sample Resource",
+                                                    "api_type": "modifiable"
+                                                },
+                                                "properties": {
+                                                    "value": {
+                                                        "x-variable": "resource_name",
+                                                        "type": "string"
+                                                    },
+                                                    "api_type": {
+                                                        "default": "read-only",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "value",
+                                                    "api_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "created_datetime": {
+                                                "example": {
+                                                    "value": "2018-11-07T10:45:00.000Z",
+                                                    "api_type": "system"
+                                                },
+                                                "properties": {
+                                                    "value": {
+                                                        "x-nullable": true,
+                                                        "x-variable": "created_datetime",
+                                                        "format": "date-time",
+                                                        "type": "string"
+                                                    },
+                                                    "api_type": {
+                                                        "default": "system",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "resource_description": {
+                                                "example": {
+                                                    "value": "This group is for the Group Resources API sample JSON",
+                                                    "api_type": "modifiable"
+                                                },
+                                                "properties": {
+                                                    "value": {
+                                                        "x-nullable": true,
+                                                        "x-variable": "resource_description",
+                                                        "type": "string"
+                                                    },
+                                                    "api_type": {
+                                                        "default": "read-only",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "value",
+                                                    "api_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "links": {
+                                                "properties": {
+                                                    "group_resources__info": {
+                                                        "x-variable": "group_resource__info",
+                                                        "properties": {
+                                                            "method": {
+                                                                "enum": [
+                                                                    "GET",
+                                                                    "PUT",
+                                                                    "DELETE"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "rel": {
+                                                                "type": "string"
+                                                            },
+                                                            "href": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "rel",
+                                                            "href",
+                                                            "method"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    "group_resources__delete": {
+                                                        "x-variable": "group_resource__delete",
+                                                        "properties": {
+                                                            "method": {
+                                                                "enum": [
+                                                                    "GET",
+                                                                    "PUT",
+                                                                    "DELETE"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "rel": {
+                                                                "type": "string"
+                                                            },
+                                                            "href": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "rel",
+                                                            "href",
+                                                            "method"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    "group_resources__modify": {
+                                                        "x-variable": "group_resource__modify",
+                                                        "properties": {
+                                                            "method": {
+                                                                "enum": [
+                                                                    "GET",
+                                                                    "PUT",
+                                                                    "DELETE"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "rel": {
+                                                                "type": "string"
+                                                            },
+                                                            "href": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "rel",
+                                                            "href",
+                                                            "method"
+                                                        ],
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "created_by_byu_id": {
+                                                "example": {
+                                                    "description": "Cosmo Cougar",
+                                                    "value": "012345678",
+                                                    "api_type": "system"
+                                                },
+                                                "properties": {
+                                                    "description": {
+                                                        "x-nullable": true,
+                                                        "x-variable": "updated_by_name",
+                                                        "type": "string"
+                                                    },
+                                                    "value": {
+                                                        "x-nullable": true,
+                                                        "x-variable": "created_by_byu_id",
+                                                        "type": "string"
+                                                    },
+                                                    "api_type": {
+                                                        "default": "system",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "value",
+                                                    "description",
+                                                    "api_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "is_global_resource": {
+                                                "example": {
+                                                    "value": true,
+                                                    "api_type": "modifiable"
+                                                },
+                                                "properties": {
+                                                    "value": {
+                                                        "x-variable": "is_global_resource",
+                                                        "type": "boolean"
+                                                    },
+                                                    "api_type": {
+                                                        "default": "read-only",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "value",
+                                                    "api_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "url": {
+                                                "example": {
+                                                    "value": "https://fakeurl.edu",
+                                                    "api_type": "modifiable"
+                                                },
+                                                "properties": {
+                                                    "value": {
+                                                        "x-nullable": true,
+                                                        "x-variable": "url",
+                                                        "type": "string"
+                                                    },
+                                                    "api_type": {
+                                                        "default": "read-only",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "value",
+                                                    "api_type"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "metadata": {
+                                                "additionalProperties": true,
+                                                "properties": {
+                                                    "validation_response": {
+                                                        "properties": {
+                                                            "message": {
+                                                                "default": "OK",
+                                                                "x-variable": "validation_response_message",
+                                                                "type": "string"
+                                                            },
+                                                            "code": {
+                                                                "default": 200,
+                                                                "x-variable": "validation_response_code",
+                                                                "type": "integer"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "code",
+                                                            "message"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    "validation_information": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "x-variable": "validation_information",
+                                                        "type": "array"
+                                                    },
+                                                    "cache": {
+                                                        "properties": {
+                                                            "date_time": {
+                                                                "x-variable": "cache_date_time",
+                                                                "format": "date-time",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "date_time"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    "restricted": {
+                                                        "x-variable": "restricted",
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "validation_response"
+                                                ],
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "links": {
+                                    "properties": {
+                                        "group_resources__add": {
+                                            "x-variable": "group_resources__add",
+                                            "properties": {
+                                                "method": {
+                                                    "enum": [
+                                                        "GET",
+                                                        "PUT",
+                                                        "DELETE"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "rel": {
+                                                    "type": "string"
+                                                },
+                                                "href": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "rel",
+                                                "href",
+                                                "method"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "group_resources__info": {
+                                            "x-variable": "group_resources__info",
+                                            "properties": {
+                                                "method": {
+                                                    "enum": [
+                                                        "GET",
+                                                        "PUT",
+                                                        "DELETE"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "rel": {
+                                                    "type": "string"
+                                                },
+                                                "href": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "rel",
+                                                "href",
+                                                "method"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "metadata": {
+                                    "allOf": [
+                                        {
+                                            "additionalProperties": true,
+                                            "properties": {
+                                                "validation_response": {
+                                                    "properties": {
+                                                        "message": {
+                                                            "default": "OK",
+                                                            "x-variable": "validation_response_message",
+                                                            "type": "string"
+                                                        },
+                                                        "code": {
+                                                            "default": 200,
+                                                            "x-variable": "validation_response_code",
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "code",
+                                                        "message"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "validation_information": {
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "x-variable": "validation_information",
+                                                    "type": "array"
+                                                },
+                                                "cache": {
+                                                    "properties": {
+                                                        "date_time": {
+                                                            "x-variable": "cache_date_time",
+                                                            "format": "date-time",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "date_time"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "restricted": {
+                                                    "x-variable": "restricted",
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "required": [
+                                                "validation_response"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        {
+                                            "additionalProperties": true,
+                                            "properties": {
+                                                "subset_start": {
+                                                    "description": "The offset (zero based) from the beginning of the collection of the first instance in this subset.",
+                                                    "x-variable": "subset_start",
+                                                    "type": "integer"
+                                                },
+                                                "collection_size": {
+                                                    "x-variable": "collection_size",
+                                                    "type": "integer"
+                                                },
+                                                "max_subset_size": {
+                                                    "description": "The largest number of resources this API can return in one subset.",
+                                                    "x-variable": "max_subset_size",
+                                                    "type": "integer"
+                                                },
+                                                "subset_size": {
+                                                    "description": "The number of instances in this subset.",
+                                                    "x-variable": "subset_size",
+                                                    "type": "integer"
+                                                },
+                                                "default_subset_size": {
+                                                    "description": "Unless overridden in query parameters, this endpoint will return this number of resources in each subset.",
+                                                    "x-variable": "default_subset_size",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "collection_size"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "values": [
+                                    {
+                                        "is_visible": {
+                                            "value": true,
+                                            "api_type": "modifiable"
+                                        },
+                                        "resource_id": {
+                                            "value": "abc",
+                                            "api_type": "read-only",
+                                            "key": true
+                                        },
+                                        "resource_category": {
+                                            "value": "Work",
+                                            "api_type": "modifiable"
+                                        },
+                                        "updated_datetime": {
+                                            "value": "2018-11-07T10:45:00.000Z",
+                                            "api_type": "system"
+                                        },
+                                        "updated_by_byu_id": {
+                                            "description": "Cosmo Cougar",
+                                            "value": "012345678",
+                                            "api_type": "system"
+                                        },
+                                        "resource_name": {
+                                            "value": "Sample Resource",
+                                            "api_type": "modifiable"
+                                        },
+                                        "resource_description": {
+                                            "value": "This group is for the Group Resources API sample JSON",
+                                            "api_type": "modifiable"
+                                        },
+                                        "created_datetime": {
+                                            "value": "2018-11-07T10:45:00.000Z",
+                                            "api_type": "system"
+                                        },
+                                        "links": {
+                                            "group_resources__info": {
+                                                "method": "GET",
+                                                "rel": "self",
+                                                "href": "https://api.byu.edu/domains/group_resources/v1/{resource_id}"
+                                            },
+                                            "group_resources__delete": {
+                                                "method": "DELETE",
+                                                "rel": "group_resources__delete",
+                                                "href": "https://api.byu.edu/domains/group_resources/v1/{resource_id}"
+                                            },
+                                            "group_resources__modify": {
+                                                "method": "PUT",
+                                                "rel": "group_resources__modify",
+                                                "href": "https://api.byu.edu/domains/group_resources/v1/{resource_id}"
+                                            }
+                                        },
+                                        "created_by_byu_id": {
+                                            "description": "Cosmo Cougar",
+                                            "value": "012345678",
+                                            "api_type": "system"
+                                        },
+                                        "is_global_resource": {
+                                            "value": true,
+                                            "api_type": "modifiable"
+                                        },
+                                        "url": {
+                                            "value": "https://fakeurl.edu",
+                                            "api_type": "modifiable"
+                                        },
+                                        "metadata": {
+                                            "validation_response": {
+                                                "message": "OK",
+                                                "code": 200
+                                            },
+                                            "cache": {
+                                                "date_time": "2018-11-03T14:41:00.000Z"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "links": {
+                                    "group_resources__info": {
+                                        "method": "GET",
+                                        "rel": "group_resources__info",
+                                        "href": "https://api.byu.edu/domains/group_resources/v1/"
+                                    }
+                                },
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "OK",
+                                        "code": 200
+                                    },
+                                    "validation_information": [
+                                        "Public Information Only"
+                                    ],
+                                    "cache": {
+                                        "date_time": "2018-11-03T14:41:00.000Z"
+                                    },
+                                    "collection_size": 10
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Bad Request",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Bad Request",
+                                        "code": 400
+                                    },
+                                    "validation_information": [
+                                        "Tell you more information if available"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Unauthorized",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Unauthorized",
+                                        "code": 401
+                                    },
+                                    "validation_information": [
+                                        "Tell you more information if available"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Forbidden",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Forbidden",
+                                        "code": 403
+                                    },
+                                    "validation_information": [
+                                        "Tell you what rights your missing"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Conflict",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Conflict",
+                                        "code": 409
+                                    },
+                                    "validation_information": [
+                                        "Tell you what to fix before resubmit"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "schema": {
+                            "properties": {
+                                "metadata": {
+                                    "additionalProperties": true,
+                                    "properties": {
+                                        "validation_response": {
+                                            "properties": {
+                                                "message": {
+                                                    "default": "OK",
+                                                    "x-variable": "validation_response_message",
+                                                    "type": "string"
+                                                },
+                                                "code": {
+                                                    "default": 200,
+                                                    "x-variable": "validation_response_code",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "validation_information": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "x-variable": "validation_information",
+                                            "type": "array"
+                                        },
+                                        "cache": {
+                                            "properties": {
+                                                "date_time": {
+                                                    "x-variable": "cache_date_time",
+                                                    "format": "date-time",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "date_time"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "restricted": {
+                                            "x-variable": "restricted",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "validation_response"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Internal Server Error",
+                        "examples": {
+                            "application/json": {
+                                "metadata": {
+                                    "validation_response": {
+                                        "message": "Internal Server Error",
+                                        "code": 500
+                                    },
+                                    "validation_information": [
+                                        "Tell you more information if available"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unknown Error"
+                    }
+                },
+                "operationId": "getGroupResources"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "Resources API",
+        "description": "The domain level University API implementation for the group resources.",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://raw.githubusercontent.com/byu-oit/domains-gro-resources-v1/master/LICENSE?token=ADDOWI3MGY545BRTHB44JVC5NVYI2"
+        },
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Help Desk",
+            "url": "https://it.byu.edu/byu/sc_help.do?sysparm_document_key=kb_knowledge,c2ab77855445ddc0377bf9d39097291f"
+        },
+        "version": "v1"
+    }
+}

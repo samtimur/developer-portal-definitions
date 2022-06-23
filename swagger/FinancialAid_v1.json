@@ -1,0 +1,172 @@
+{
+    "basePath": "/domains/erp/sa/FinancialAid/v1",
+    "x-mock_json": {
+        "response": {
+            "EFC": 17904
+        },
+        "error_response": {
+            "status": {
+                "aid_year": "2019",
+                "byu_id": "555266100",
+                "Error": "byu_id and aid_year must be specified. No EFC information exists for BYU-ID and aid year that were specified."
+            }
+        }
+    },
+    "paths": {
+        "/expectedFamilyContribution/{byu_id}/{aid_year}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Expected Family Contribution"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Get Expected Family Contribution for a student and aid year.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/aid_year"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/EFCresponse"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/willClassChangeAffectFA/{byu_id}/{year_term}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Student has Financial Aid or Scholarship for this Year_Term"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Get Financial Aid or Scholarship flag for this Year_Term.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/year_term"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/FAresponse"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error_response"
+                        },
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "swagger": "2.0",
+    "definitions": {
+        "FAresponse": {
+            "properties": {
+                "Sch": {
+                    "type": "string"
+                },
+                "FA": {
+                    "type": "string"
+                }
+            }
+        },
+        "EFCresponse": {
+            "properties": {
+                "EFC": {
+                    "$ref": "#/definitions/EFC"
+                }
+            }
+        },
+        "EFC": {
+            "description": "Expected Family Contribution Toward Student's Financial Aid",
+            "type": "number"
+        },
+        "error_response": {
+            "properties": {
+                "status": {
+                    "properties": {
+                        "error": {
+                            "description": "The reason the request failed.",
+                            "type": "string"
+                        },
+                        "aid_year": {
+                            "description": "The string passed in as the aid_year parameter.",
+                            "type": "string"
+                        },
+                        "byu_id": {
+                            "description": "The string passed in as the byu_id parameter.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "error"
+                    ]
+                }
+            }
+        }
+    },
+    "parameters": {
+        "aid_year": {
+            "default": "2019",
+            "description": "A 4-digit year",
+            "name": "aid_year",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        },
+        "byu_id": {
+            "default": "123456789",
+            "pattern": "^[0-9]{9}$",
+            "description": "A 9 digit employee ID",
+            "name": "byu_id",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        },
+        "year_term": {
+            "default": "20191",
+            "description": "A 5-digit Semester",
+            "name": "year_term",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        }
+    },
+    "info": {
+        "title": "FinancialAid",
+        "description": "BYU Financial Aid web service APIs.",
+        "contact": {
+            "email": "sfa_ft@byu.edu",
+            "name": "OIT Student Financial Applications",
+            "url": "http://www.example.com/support"
+        },
+        "version": "v1"
+    }
+}

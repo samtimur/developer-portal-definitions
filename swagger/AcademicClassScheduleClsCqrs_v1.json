@@ -1,0 +1,165 @@
+{
+    "basePath": "/domains/legacy/academic/class_schedule/cls_cqrs/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{year_term}/{teaching_area_or_curriculum_id}/{course_number_or_title_code}/{section_number}": {
+            "put": {
+                "summary": "Rebuilds the CQRS entry for the specific class",
+                "tags": [
+                    "ClsCqrsService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Rebuilds the CQRS entry for the specific class",
+                "parameters": [
+                    {
+                        "description": "5 digit year/term (YYYYT)",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "5 character teaching area or 5 digit curriculum id",
+                        "name": "teaching_area_or_curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "3 digit catalog number or 3 digit title code",
+                        "name": "course_number_or_title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "3 digit section number",
+                        "name": "section_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ClsCqrsServiceSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ClsCqrsServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "UpdateClsCqrs"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "errors": {
+            "items": {
+                "$ref": "#/definitions/error_data"
+            },
+            "type": "array"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ClsCqrsServiceSuccess": {
+            "properties": {
+                "ClsCqrsService": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ClsCqrsServiceError": {
+            "properties": {
+                "ClsCqrsService": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "errors": {
+                            "$ref": "#/definitions/errors"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "AcademicClassScheduleClsCqrs",
+        "description": "This service rebuilds the CQRS entry for a given class.",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/ClsCrqs_v1.0"
+    }
+}

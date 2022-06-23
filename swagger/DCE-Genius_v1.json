@@ -1,0 +1,179 @@
+{
+    "paths": {
+        "/ReportEnrollmentCompletion": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "push enrollment completion into Orion",
+                "x-throttling-tier": "Unlimited",
+                "x-mediation-script": "mc.setProperty('CONTENT_TYPE', 'application/json');\n\nvar course = mc.getProperty('uri.var.course');\nvar student = mc.getProperty('uri.var.student');\nvar enrollment = mc.getProperty('uri.var.enrollment');\nvar grade = mc.getProperty('uri.var.grade');\nvar completionDate = mc.getProperty('uri.var.completionDate');\n\nif (course == \"\" || student == \"\") throw(\"required data not provided\");\n\nmc.setPayloadJSON('{ \"context\" : 12345678 }');\n",
+                "parameters": [
+                    {
+                        "description": "Orion person (local/reference/login) ID for student",
+                        "name": "student",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Students first name",
+                        "name": "firstName",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Students middle name",
+                        "name": "middleName",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Students last name",
+                        "name": "lastName",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Students date of birth",
+                        "name": "birthdate",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "First line of students address",
+                        "name": "address1",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Second line of students address",
+                        "name": "address2",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "City of students address",
+                        "name": "city",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "State of students address",
+                        "name": "state",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Postal code of students address",
+                        "name": "postalCode",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Country of students address",
+                        "name": "country",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Students phone number",
+                        "name": "phone",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "department-catalog-section",
+                        "name": "courseCode",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Course department",
+                        "name": "department",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Course catalog identifier",
+                        "name": "catalog",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "section",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Course section number"
+                    },
+                    {
+                        "description": "Course/Section title",
+                        "name": "title",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "ID for enrollment in source system",
+                        "name": "enrollment",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Final Course Grade (Letter)",
+                        "name": "grade",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Number of credits earned, up to two decimal places",
+                        "name": "credits",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Date enrollment was started (YYYY-MM-DD)",
+                        "name": "enrollDate",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Date enrollment was graded (YYYY-MM-DD)",
+                        "name": "completionDate",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "DCE-Genius",
+        "description": "methods for the DCE SIS and Genius SIS integration",
+        "version": "1.0"
+    },
+    "basePath": "/domains/DCE/genius/1.0",
+    "host": "api.byu.edu:443"
+}

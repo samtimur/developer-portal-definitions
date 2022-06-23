@@ -1,0 +1,2574 @@
+{
+    "tags": [
+        {
+            "description": "Operations to retrieve events of the Event Hub archive in the University API Tutorial",
+            "name": "archives"
+        }
+    ],
+    "basePath": "/domains/eventhub/1.0.0",
+    "x-mock_json": {
+        "example": {
+            "webhooks": {
+                "entity_name": "Smith",
+                "security_option": "None",
+                "push_option": "Push Message",
+                "entity_id": "000000000",
+                "content_type": "string",
+                "endpoint": "string"
+            },
+            "subscriptions": {
+                "subscription": [
+                    {
+                        "eca_identity_id": "00000000",
+                        "event_type": "#",
+                        "entity": "PRO",
+                        "domain": "edu.byu",
+                        "eca_identity_name": " "
+                    }
+                ]
+            },
+            "archives": {},
+            "events": {
+                "event": [
+                    {
+                        "event_header": {
+                            "event_dt": "2018-06-26T18:05:45.00Z",
+                            "event_type": "Person Changed",
+                            "entity": "PRO",
+                            "domain": "edu.byu",
+                            "event_id": "0510be65-235c-461b-9ef9-d1ad2ae11f64"
+                        },
+                        "event_body": {
+                            "created_by_id": "",
+                            "person_id": "763217592",
+                            "home_town": "Provo",
+                            "date_time_updated": "2018-06-26 12:05:44",
+                            "home_country_code": "USA",
+                            "surname": "Ithaca",
+                            "date_time_created": "",
+                            "preferred_first_name": "Cinderella",
+                            "rest_of_name": "Cinderella",
+                            "home_state_code": "UT",
+                            "net_id": "icinder",
+                            "suffix": " ",
+                            "sort_name": "Ithaca, Cinderella",
+                            "organization": "",
+                            "updated_by_id": "00000000",
+                            "prefix": " ",
+                            "byu_id": "378837838",
+                            "deceased": "N",
+                            "secure_url": "https://api.byu.edu/domains/legacy/identity/person/PRO/personsummary/v1/763217592"
+                        },
+                        "filters": ""
+                    }
+                ]
+            },
+            "event_types": {
+                "event_type_definition": [
+                    {
+                        "filter_names": "",
+                        "description": "New Hires",
+                        "event_type": "New Hires",
+                        "entity": "HR Personal Action",
+                        "domain": "edu.byu"
+                    }
+                ]
+            },
+            "domains": {
+                "domains": {
+                    "description": "Brigham young University",
+                    "domain": "edu.byu"
+                }
+            },
+            "summaries": {
+                "summary_array": [
+                    {
+                        "count": "",
+                        "event_type": "",
+                        "entity": "",
+                        "event_date": "",
+                        "domain": ""
+                    }
+                ]
+            },
+            "entities": {
+                "entity_definition": [
+                    {
+                        "entity_ega": "565233072",
+                        "description": "Class Schedule Events",
+                        "entity": "AIM-EH-CLS-SCHED",
+                        "domain": "edu.byu"
+                    },
+                    {
+                        "entity_ega": "743242772",
+                        "description": "Class Add/Drop Events",
+                        "entity": "AIM-EH-REGISTRATION",
+                        "domain": "edu.byu"
+                    }
+                ]
+            }
+        }
+    },
+    "paths": {
+        "/event-types/{domain}/{entity}/{event_type}": {
+            "put": {
+                "summary": "Modify an event type",
+                "tags": [
+                    "event-types"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "domain",
+                        "name": "domain",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "entity",
+                        "name": "entity",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "event_type",
+                        "name": "event_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "properties": {
+                                "event_type_definition": {
+                                    "properties": {
+                                        "filter_names": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "event_type": {
+                                            "type": "string"
+                                        },
+                                        "entity": {
+                                            "type": "string"
+                                        },
+                                        "domain": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "event_type_definition"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event type successfully modified"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to modify an event type"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to modify an event type"
+                    },
+                    "409": {
+                        "description": "Body of the request contains conflicting, malformed, or invalid data"
+                    }
+                },
+                "operationId": "modifyEventType"
+            },
+            "delete": {
+                "summary": "Delete an event type",
+                "tags": [
+                    "event-types"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "domain",
+                        "name": "domain",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "entity",
+                        "name": "entity",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "event_type",
+                        "name": "event_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Event type successfully removed"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to delete an event type"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to delete an event type"
+                    },
+                    "404": {
+                        "description": "Event type not found"
+                    }
+                },
+                "operationId": "deleteEventType"
+            }
+        },
+        "/events/{eventID}": {
+            "put": {
+                "summary": "Acknowledge an event",
+                "tags": [
+                    "events"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "eventID",
+                        "name": "eventID",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event Item Retrieved"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "description": "No events found - invalid event_id"
+                    }
+                },
+                "operationId": "acknowledgeEvent1"
+            },
+            "delete": {
+                "summary": "Acknowledge an event",
+                "tags": [
+                    "events"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "eventID",
+                        "name": "eventID",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Entity successfully removed"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to delete an entity"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to delete an entity"
+                    },
+                    "404": {
+                        "description": "Entity not found"
+                    }
+                },
+                "operationId": "acknowledgeEvent"
+            }
+        },
+        "/entities": {
+            "post": {
+                "summary": "Defines a new Entity.",
+                "tags": [
+                    "entities"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "entity_definition": {
+                                    "items": {
+                                        "properties": {
+                                            "entity_ega": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "entity": {
+                                                "type": "string"
+                                            },
+                                            "domain": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "entity_definition"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Entity Added"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to add an entity"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to add an entity"
+                    },
+                    "409": {
+                        "description": "Body of the request contains conflicting, malformed, or invalid data"
+                    }
+                },
+                "operationId": "createEntity"
+            },
+            "get": {
+                "summary": "Lists the set of entities visible on the Administrative Portal.",
+                "tags": [
+                    "entities"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "entity",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "entity_definition": {
+                                    "items": {
+                                        "properties": {
+                                            "entity_ega": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "entity": {
+                                                "type": "string"
+                                            },
+                                            "domain": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "entity_definition"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "entities Retrieved",
+                        "examples": {
+                            "application/json": {
+                                "entity_definition": [
+                                    {
+                                        "entity_ega": "565233072",
+                                        "description": "Class Schedule Events",
+                                        "entity": "AIM-EH-CLS-SCHED",
+                                        "domain": "edu.byu"
+                                    },
+                                    {
+                                        "entity_ega": "743242772",
+                                        "description": "Class Add/Drop Events",
+                                        "entity": "AIM-EH-REGISTRATION",
+                                        "domain": "edu.byu"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No results found"
+                    }
+                },
+                "operationId": "getEntities"
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/archives": {
+            "get": {
+                "summary": "Retrieve Events from the Event Archive. Most events are available for 45 days.",
+                "tags": [
+                    "archives"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "Limits the list where the domain attribute matches the string expression.  The string may include wild characters ('*').  Since domains contain an embedded dot (\".\"), the period must be explicitly expressed in the search string.  For example, 'edu.byu' will limit the search to a specific domain, 'edu.*' will limit the search to all 'edu' domains, and '*.byu*' will limit the search to any domain that starts with 'byu' in the first part of the domain.",
+                        "name": "domain",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Limits the list where the entity attribute matches the string expression.  The string may include wild characters ('*').",
+                        "name": "entity",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Defines a date-time range for the search. The expected parameter should be of the format '(start_dt, end_dt)'. The dates should be standard ISO format expressed in zulu time. Maximum time span is one day.",
+                        "name": "event_dt",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "",
+                        "name": "event_type",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 1,
+                        "description": "Specifies how far to skip into a large set",
+                        "name": "page_start",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 50,
+                        "description": "Specifies how many items to return from a large set",
+                        "name": "page_size",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Events Retrieved",
+                        "examples": {
+                            "application/json": {}
+                        }
+                    },
+                    "204": {
+                        "description": "No results found with search criteria"
+                    },
+                    "400": {
+                        "description": "Unknown parameter in search criteria"
+                    }
+                },
+                "operationId": "getArchives"
+            }
+        },
+        "/webhooks": {
+            "put": {
+                "summary": "Modify a webhook",
+                "tags": [
+                    "webhooks"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "webhooks": {
+                                    "properties": {
+                                        "entity_name": {
+                                            "type": "string"
+                                        },
+                                        "identity_id": {
+                                            "type": "string"
+                                        },
+                                        "security_option": {
+                                            "type": "string"
+                                        },
+                                        "identity_name": {
+                                            "type": "string"
+                                        },
+                                        "push_option": {
+                                            "type": "string"
+                                        },
+                                        "entity_id": {
+                                            "type": "string"
+                                        },
+                                        "content_type": {
+                                            "type": "string"
+                                        },
+                                        "endpoint": {
+                                            "type": "string"
+                                        },
+                                        "security_key": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "entity_id",
+                                        "entity_name",
+                                        "endpoint",
+                                        "push_option",
+                                        "security_option",
+                                        "content_type"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "webhooks"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event Item Retrieved"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "description": "Webhook not found"
+                    }
+                },
+                "operationId": "modifyWebhook"
+            },
+            "post": {
+                "summary": "Register webhook",
+                "tags": [
+                    "webhooks"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "webhooks": {
+                                    "properties": {
+                                        "entity_name": {
+                                            "type": "string"
+                                        },
+                                        "identity_id": {
+                                            "type": "string"
+                                        },
+                                        "security_option": {
+                                            "type": "string"
+                                        },
+                                        "identity_name": {
+                                            "type": "string"
+                                        },
+                                        "push_option": {
+                                            "type": "string"
+                                        },
+                                        "entity_id": {
+                                            "type": "string"
+                                        },
+                                        "content_type": {
+                                            "type": "string"
+                                        },
+                                        "endpoint": {
+                                            "type": "string"
+                                        },
+                                        "security_key": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "entity_id",
+                                        "entity_name",
+                                        "endpoint",
+                                        "push_option",
+                                        "security_option",
+                                        "content_type"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "webhooks"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Event raised"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to add a webhook"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to add a webhook"
+                    },
+                    "409": {
+                        "description": "Body of the request contains conflicting, malformed, or invalid data"
+                    }
+                },
+                "operationId": "registerWebhook"
+            },
+            "get": {
+                "summary": "Retrieve a collection of webhooks",
+                "tags": [
+                    "webhooks"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "identity_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "name": "identity_name",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "endpoint",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "push_option",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "entity_name": {
+                                    "type": "string"
+                                },
+                                "identity_id": {
+                                    "type": "string"
+                                },
+                                "security_option": {
+                                    "type": "string"
+                                },
+                                "identity_name": {
+                                    "type": "string"
+                                },
+                                "push_option": {
+                                    "type": "string"
+                                },
+                                "entity_id": {
+                                    "type": "string"
+                                },
+                                "content_type": {
+                                    "type": "string"
+                                },
+                                "endpoint": {
+                                    "type": "string"
+                                },
+                                "security_key": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "entity_id",
+                                "entity_name",
+                                "endpoint",
+                                "push_option",
+                                "security_option",
+                                "content_type"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Collection Retrieved",
+                        "examples": {
+                            "application/json": {
+                                "entity_name": "Smith",
+                                "security_option": "None",
+                                "push_option": "Push Message",
+                                "entity_id": "000000000",
+                                "content_type": "string",
+                                "endpoint": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "description": "No Cars satisfy the query parameters - the collection is empty"
+                    },
+                    "409": {
+                        "description": "Query parameters conflict or are malformed"
+                    }
+                },
+                "operationId": "getWebhooks"
+            },
+            "delete": {
+                "summary": "Delete a webhook",
+                "tags": [
+                    "webhooks"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "responses": {
+                    "204": {
+                        "description": "Webhook successfully removed"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to delete an subscription"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to delete an subscription"
+                    },
+                    "404": {
+                        "description": "Webhook not found"
+                    }
+                },
+                "operationId": "deleteWebhook"
+            }
+        },
+        "/summaries": {
+            "get": {
+                "summary": "Lists the set of summaries visible on the Administrative Portal.",
+                "tags": [
+                    "summaries"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "entity",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "event_date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "event_type",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 1,
+                        "description": "Specifies how far to skip into a large set",
+                        "name": "page_start",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "default": 10,
+                        "description": "Specifies how many items to return from a large set",
+                        "name": "page_size",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "summaries Retrieved",
+                        "examples": {
+                            "application/json": {
+                                "summary_array": [
+                                    {
+                                        "count": "",
+                                        "event_type": "",
+                                        "entity": "",
+                                        "event_date": "",
+                                        "domain": ""
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No results found"
+                    }
+                },
+                "operationId": "getSummaries"
+            }
+        },
+        "/domains/{domain}": {
+            "delete": {
+                "summary": "Delete a Domain",
+                "tags": [
+                    "domains"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "domain",
+                        "name": "domain",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Domain successfully removed"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to delete a domain"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to delete a domain"
+                    }
+                },
+                "operationId": "deleteDomain"
+            }
+        },
+        "/events": {
+            "put": {
+                "summary": "Acknowledge an event",
+                "tags": [
+                    "events"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Event Item Retrieved"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "description": "No events found - invalid event_id"
+                    }
+                },
+                "operationId": "acknowledgeEvent1b"
+            },
+            "post": {
+                "summary": "Create a new event",
+                "tags": [
+                    "events"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "event_header": {
+                                    "properties": {
+                                        "source_dt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "event_dt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "event_type": {
+                                            "type": "string"
+                                        },
+                                        "entity": {
+                                            "type": "string"
+                                        },
+                                        "domain": {
+                                            "type": "string"
+                                        },
+                                        "event_id": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "domain",
+                                        "entity",
+                                        "event_type",
+                                        "source_dt",
+                                        "event_dt"
+                                    ],
+                                    "type": "object"
+                                },
+                                "event_body": {
+                                    "type": "object"
+                                },
+                                "filters": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Event raised"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to add an event"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to add an event"
+                    },
+                    "409": {
+                        "description": "Body of the request contains conflicting, malformed, or invalid data"
+                    }
+                },
+                "operationId": "createEvent"
+            },
+            "get": {
+                "summary": "Retrieve a collection of events",
+                "tags": [
+                    "events"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "default": 1,
+                        "description": "Defines how many events to return. Defaults to 1.",
+                        "name": "count",
+                        "type": "integer",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Collection Retrieved",
+                        "examples": {
+                            "application/json": {
+                                "event": [
+                                    {
+                                        "event_header": {
+                                            "event_dt": "2018-06-26T18:05:45.00Z",
+                                            "event_type": "Person Changed",
+                                            "entity": "PRO",
+                                            "domain": "edu.byu",
+                                            "event_id": "0510be65-235c-461b-9ef9-d1ad2ae11f64"
+                                        },
+                                        "event_body": {
+                                            "created_by_id": "",
+                                            "person_id": "763217592",
+                                            "home_town": "Provo",
+                                            "date_time_updated": "2018-06-26 12:05:44",
+                                            "home_country_code": "USA",
+                                            "surname": "Ithaca",
+                                            "date_time_created": "",
+                                            "preferred_first_name": "Cinderella",
+                                            "rest_of_name": "Cinderella",
+                                            "home_state_code": "UT",
+                                            "net_id": "icinder",
+                                            "suffix": " ",
+                                            "sort_name": "Ithaca, Cinderella",
+                                            "organization": "",
+                                            "updated_by_id": "00000000",
+                                            "prefix": " ",
+                                            "byu_id": "378837838",
+                                            "deceased": "N",
+                                            "secure_url": "https://api.byu.edu/domains/legacy/identity/person/PRO/personsummary/v1/763217592"
+                                        },
+                                        "filters": ""
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to access data"
+                    },
+                    "403": {
+                        "description": "Access denied to protected data"
+                    },
+                    "404": {
+                        "description": "No Cars satisfy the query parameters - the collection is empty"
+                    },
+                    "409": {
+                        "description": "Query parameters conflict or are malformed"
+                    }
+                },
+                "operationId": "getEvents"
+            },
+            "delete": {
+                "summary": "Acknowledge an event",
+                "tags": [
+                    "events"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "responses": {
+                    "204": {
+                        "description": "Entity successfully removed"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to delete an entity"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to delete an entity"
+                    },
+                    "404": {
+                        "description": "Entity not found"
+                    }
+                },
+                "operationId": "acknowledgeEventb"
+            }
+        },
+        "/domains": {
+            "post": {
+                "summary": "Defines a new Domain.  We are using Internet accepted domains.  Event Types are grouped in Domains and then Entities. This makes the new Domain visible on the Administrative Portal.  The Administrative Portal is used by developers to manage their subscriptions.",
+                "tags": [
+                    "domains"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "schema": {
+                            "description": "domain_definition_create",
+                            "properties": {
+                                "domain_definition": {
+                                    "description": "domain",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "domain": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "domain",
+                                        "description"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "domain_definition"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Domain Added"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to add a domain"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to add a domain"
+                    },
+                    "409": {
+                        "description": "Body of the request contains conflicting, malformed, or invalid data"
+                    }
+                },
+                "operationId": "createDomain"
+            },
+            "get": {
+                "summary": "Lists the set of Domains visible on the Administrative Portal.",
+                "tags": [
+                    "domains"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "description": "domains",
+                            "properties": {
+                                "domains": {
+                                    "description": "domain",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "domain": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "domain",
+                                        "description"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "domains"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Domains Retrieved",
+                        "examples": {
+                            "application/json": {
+                                "domains": {
+                                    "description": "Brigham young University",
+                                    "domain": "edu.byu"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No results found"
+                    }
+                },
+                "operationId": "getDomains"
+            }
+        },
+        "/entities/{domain}/{entity}": {
+            "delete": {
+                "summary": "Delete a entity",
+                "tags": [
+                    "entities"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "domain",
+                        "name": "domain",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "entity",
+                        "name": "entity",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Entity successfully removed"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to delete an entity"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to delete an entity"
+                    },
+                    "404": {
+                        "description": "Entity not found"
+                    }
+                },
+                "operationId": "deleteEntity"
+            }
+        },
+        "/event-types": {
+            "post": {
+                "summary": "Defines a new event type.",
+                "tags": [
+                    "event-types"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "event_type_definition": {
+                                    "properties": {
+                                        "filter_names": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "event_type": {
+                                            "type": "string"
+                                        },
+                                        "entity": {
+                                            "type": "string"
+                                        },
+                                        "domain": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "event_type_definition"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Event type Added"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to add a event type"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to add a event type"
+                    },
+                    "409": {
+                        "description": "Body of the request contains conflicting, malformed, or invalid data"
+                    }
+                },
+                "operationId": "createEventType"
+            },
+            "get": {
+                "summary": "Lists the set of event-types visible on the Administrative Portal.",
+                "tags": [
+                    "event-types"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "entity",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "event-type",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "event_type_definition": {
+                                    "items": {
+                                        "properties": {
+                                            "filter_names": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "event_type": {
+                                                "type": "string"
+                                            },
+                                            "entity": {
+                                                "type": "string"
+                                            },
+                                            "domain": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "event_type_definition"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "event-types Retrieved",
+                        "examples": {
+                            "application/json": {
+                                "event_type_definition": [
+                                    {
+                                        "filter_names": "",
+                                        "description": "New Hires",
+                                        "event_type": "New Hires",
+                                        "entity": "HR Personal Action",
+                                        "domain": "edu.byu"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No results found"
+                    },
+                    "400": {
+                        "description": "Unknown parameter in search criteria"
+                    }
+                },
+                "operationId": "getEventTypes"
+            }
+        },
+        "/statistics": {
+            "get": {
+                "summary": "Lists the event count for a queue.",
+                "tags": [
+                    "statistics"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "entity",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "identity_id": {
+                                    "type": "string"
+                                },
+                                "event_count": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "entity_id"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Queue Statistics",
+                        "examples": {
+                            "application/json": {
+                                "entity_id": "000000000",
+                                "event_count": 75
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No results found"
+                    }
+                },
+                "operationId": "getStatistics"
+            }
+        },
+        "/subscriptions/{domain}/{entity}/{event_type}": {
+            "delete": {
+                "summary": "Delete a subscription",
+                "tags": [
+                    "subscriptions"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "domain",
+                        "name": "domain",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "entity",
+                        "name": "entity",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "event_type",
+                        "name": "event_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Entity successfully removed"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to delete an subscription"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to delete an subscription"
+                    },
+                    "404": {
+                        "description": "Entity not found"
+                    }
+                },
+                "operationId": "deleteSubscription"
+            }
+        },
+        "/subscriptions": {
+            "post": {
+                "summary": "Defines a new subscription.",
+                "tags": [
+                    "subscriptions"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "subscription": {
+                                    "properties": {
+                                        "event_type": {
+                                            "type": "string"
+                                        },
+                                        "entity": {
+                                            "type": "string"
+                                        },
+                                        "domain": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "required": [
+                                "subscription"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Subscription Added"
+                    },
+                    "400": {
+                        "description": "Invalid Request - unable to interpret request"
+                    },
+                    "401": {
+                        "description": "Authentication required to add an entity"
+                    },
+                    "403": {
+                        "description": "Access denied - not authorized to add an entity"
+                    },
+                    "409": {
+                        "description": "Body of the request contains conflicting, malformed, or invalid data"
+                    }
+                },
+                "operationId": "createSubscription"
+            },
+            "get": {
+                "summary": "Lists the set of subscriptions visible on the Administrative Portal.",
+                "tags": [
+                    "subscriptions"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get list of subscribed events",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "subscription": {
+                                    "items": {
+                                        "properties": {
+                                            "eca_identity_id": {
+                                                "type": "string"
+                                            },
+                                            "event_type": {
+                                                "type": "string"
+                                            },
+                                            "entity": {
+                                                "type": "string"
+                                            },
+                                            "domain": {
+                                                "type": "string"
+                                            },
+                                            "eca_identity_name": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "eca_identity_id",
+                                            "eca_identity_name",
+                                            "domain",
+                                            "entity",
+                                            "event_type"
+                                        ]
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "subscription"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "subscriptions Retrieved",
+                        "examples": {
+                            "application/json": {
+                                "subscription": [
+                                    {
+                                        "eca_identity_id": "00000000",
+                                        "event_type": "#",
+                                        "entity": "PRO",
+                                        "domain": "edu.byu",
+                                        "eca_identity_name": " "
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No results found"
+                    }
+                },
+                "operationId": "getSubscriptions"
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "swagger": "2.0",
+    "definitions": {
+        "summary": {
+            "properties": {
+                "count": {
+                    "type": "string"
+                },
+                "event_type": {
+                    "type": "string"
+                },
+                "entity": {
+                    "type": "string"
+                },
+                "event_date": {
+                    "type": "string"
+                },
+                "domain": {
+                    "format": "uri",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "event_date",
+                "domain",
+                "entity",
+                "event_type",
+                "count"
+            ],
+            "type": "object"
+        },
+        "entity_ega": {
+            "type": "string"
+        },
+        "entity_definition": {
+            "items": {
+                "properties": {
+                    "entity_ega": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "entity": {
+                        "type": "string"
+                    },
+                    "domain": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "identity_id": {
+            "type": "string"
+        },
+        "entity": {
+            "type": "string"
+        },
+        "event_type": {
+            "type": "string"
+        },
+        "domains": {
+            "description": "domains",
+            "properties": {
+                "domains": {
+                    "description": "domain",
+                    "properties": {
+                        "description": {
+                            "type": "string"
+                        },
+                        "domain": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "domain",
+                        "description"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "domains"
+            ],
+            "type": "object"
+        },
+        "eca_identity_name": {
+            "type": "string"
+        },
+        "event_header_array": {
+            "items": {
+                "properties": {
+                    "source_dt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "event_dt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "event_type": {
+                        "type": "string"
+                    },
+                    "entity": {
+                        "type": "string"
+                    },
+                    "domain": {
+                        "type": "string"
+                    },
+                    "event_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "domain",
+                    "entity",
+                    "event_type",
+                    "source_dt",
+                    "event_dt"
+                ],
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "eca_identity_id": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "event_types": {
+            "properties": {
+                "event_type_definition": {
+                    "items": {
+                        "properties": {
+                            "filter_names": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "event_type": {
+                                "type": "string"
+                            },
+                            "entity": {
+                                "type": "string"
+                            },
+                            "domain": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "event_type_definition"
+            ],
+            "type": "object"
+        },
+        "event": {
+            "items": {
+                "properties": {
+                    "event_header": {
+                        "properties": {
+                            "source_dt": {
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            "event_dt": {
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            "event_type": {
+                                "type": "string"
+                            },
+                            "entity": {
+                                "type": "string"
+                            },
+                            "domain": {
+                                "type": "string"
+                            },
+                            "event_id": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "domain",
+                            "entity",
+                            "event_type",
+                            "source_dt",
+                            "event_dt"
+                        ],
+                        "type": "object"
+                    },
+                    "event_body": {
+                        "type": "object"
+                    },
+                    "filters": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "webhook_create": {
+            "properties": {
+                "webhooks": {
+                    "properties": {
+                        "entity_name": {
+                            "type": "string"
+                        },
+                        "identity_id": {
+                            "type": "string"
+                        },
+                        "security_option": {
+                            "type": "string"
+                        },
+                        "identity_name": {
+                            "type": "string"
+                        },
+                        "push_option": {
+                            "type": "string"
+                        },
+                        "entity_id": {
+                            "type": "string"
+                        },
+                        "content_type": {
+                            "type": "string"
+                        },
+                        "endpoint": {
+                            "type": "string"
+                        },
+                        "security_key": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "entity_id",
+                        "entity_name",
+                        "endpoint",
+                        "push_option",
+                        "security_option",
+                        "content_type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "webhooks"
+            ],
+            "type": "object"
+        },
+        "event_items": {
+            "properties": {
+                "event_header": {
+                    "properties": {
+                        "source_dt": {
+                            "format": "date-time",
+                            "type": "string"
+                        },
+                        "event_dt": {
+                            "format": "date-time",
+                            "type": "string"
+                        },
+                        "event_type": {
+                            "type": "string"
+                        },
+                        "entity": {
+                            "type": "string"
+                        },
+                        "domain": {
+                            "type": "string"
+                        },
+                        "event_id": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "domain",
+                        "entity",
+                        "event_type",
+                        "source_dt",
+                        "event_dt"
+                    ],
+                    "type": "object"
+                },
+                "event_body": {
+                    "type": "object"
+                },
+                "filters": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "content_type": {
+            "type": "string"
+        },
+        "subscription_items": {
+            "properties": {
+                "eca_identity_id": {
+                    "type": "string"
+                },
+                "event_type": {
+                    "type": "string"
+                },
+                "entity": {
+                    "type": "string"
+                },
+                "domain": {
+                    "type": "string"
+                },
+                "eca_identity_name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "eca_identity_id",
+                "eca_identity_name",
+                "domain",
+                "entity",
+                "event_type"
+            ]
+        },
+        "event_header": {
+            "properties": {
+                "source_dt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "event_dt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "event_type": {
+                    "type": "string"
+                },
+                "entity": {
+                    "type": "string"
+                },
+                "domain": {
+                    "type": "string"
+                },
+                "event_id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "domain",
+                "entity",
+                "event_type",
+                "source_dt",
+                "event_dt"
+            ],
+            "type": "object"
+        },
+        "event_body": {
+            "type": "object"
+        },
+        "source_dt": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "subscriptions": {
+            "properties": {
+                "subscription": {
+                    "items": {
+                        "properties": {
+                            "eca_identity_id": {
+                                "type": "string"
+                            },
+                            "event_type": {
+                                "type": "string"
+                            },
+                            "entity": {
+                                "type": "string"
+                            },
+                            "domain": {
+                                "type": "string"
+                            },
+                            "eca_identity_name": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "eca_identity_id",
+                            "eca_identity_name",
+                            "domain",
+                            "entity",
+                            "event_type"
+                        ]
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "subscription"
+            ],
+            "type": "object"
+        },
+        "identity_name": {
+            "type": "string"
+        },
+        "entities": {
+            "properties": {
+                "entity_definition": {
+                    "items": {
+                        "properties": {
+                            "entity_ega": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "entity": {
+                                "type": "string"
+                            },
+                            "domain": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "entity_definition"
+            ],
+            "type": "object"
+        },
+        "endpoint": {
+            "type": "string"
+        },
+        "event_type_definition": {
+            "items": {
+                "properties": {
+                    "filter_names": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "event_type": {
+                        "type": "string"
+                    },
+                    "entity": {
+                        "type": "string"
+                    },
+                    "domain": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "filter_name": {
+            "items": [
+                {
+                    "type": "string"
+                }
+            ],
+            "type": "array"
+        },
+        "filters": {
+            "type": "string"
+        },
+        "filter": {
+            "properties": {
+                "filter_name": {
+                    "type": "string"
+                },
+                "filter_value": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "subscription_create_items": {
+            "properties": {
+                "event_type": {
+                    "type": "string"
+                },
+                "entity": {
+                    "type": "string"
+                },
+                "domain": {
+                    "type": "string"
+                }
+            }
+        },
+        "events": {
+            "type": "object"
+        },
+        "archives": {
+            "type": "object"
+        },
+        "event_id": {
+            "type": "string"
+        },
+        "entity_id": {
+            "type": "string"
+        },
+        "event_type_definition_create": {
+            "properties": {
+                "event_type_definition": {
+                    "properties": {
+                        "filter_names": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "event_type": {
+                            "type": "string"
+                        },
+                        "entity": {
+                            "type": "string"
+                        },
+                        "domain": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "event_type_definition"
+            ],
+            "type": "object"
+        },
+        "subscription": {
+            "items": {
+                "properties": {
+                    "eca_identity_id": {
+                        "type": "string"
+                    },
+                    "event_type": {
+                        "type": "string"
+                    },
+                    "entity": {
+                        "type": "string"
+                    },
+                    "domain": {
+                        "type": "string"
+                    },
+                    "eca_identity_name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "eca_identity_id",
+                    "eca_identity_name",
+                    "domain",
+                    "entity",
+                    "event_type"
+                ]
+            },
+            "type": "array"
+        },
+        "domain": {
+            "type": "string"
+        },
+        "summaries": {
+            "type": "object"
+        },
+        "domain_definition": {
+            "description": "domain",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "domain": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "domain",
+                "description"
+            ],
+            "type": "object"
+        },
+        "options": {
+            "items": {
+                "type": "string"
+            },
+            "description": "Array of options",
+            "type": "array"
+        },
+        "event_type_item": {
+            "properties": {
+                "filter_names": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "event_type": {
+                    "type": "string"
+                },
+                "entity": {
+                    "type": "string"
+                },
+                "domain": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "entity_definition_item": {
+            "properties": {
+                "entity_definition": {
+                    "items": {
+                        "properties": {
+                            "entity_ega": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "entity": {
+                                "type": "string"
+                            },
+                            "domain": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "entity_definition"
+            ],
+            "type": "object"
+        },
+        "error": {
+            "description": "Additional explanation for error conditions",
+            "properties": {
+                "explanation": {
+                    "description": "Detailed explanation of the error",
+                    "type": "string"
+                },
+                "error_data": {
+                    "description": "When appropriate, the data value that caused the error",
+                    "type": "string"
+                },
+                "return_code": {
+                    "description": "The HTTP Status code",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "return_code",
+                "explanation",
+                "error_data"
+            ]
+        },
+        "domain_definition_create": {
+            "description": "domain_definition_create",
+            "properties": {
+                "domain_definition": {
+                    "description": "domain",
+                    "properties": {
+                        "description": {
+                            "type": "string"
+                        },
+                        "domain": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "domain",
+                        "description"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "domain_definition"
+            ],
+            "type": "object"
+        },
+        "history": {
+            "properties": {
+                "event_header": {
+                    "items": {
+                        "properties": {
+                            "source_dt": {
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            "event_dt": {
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            "event_type": {
+                                "type": "string"
+                            },
+                            "entity": {
+                                "type": "string"
+                            },
+                            "domain": {
+                                "type": "string"
+                            },
+                            "event_id": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "domain",
+                            "entity",
+                            "event_type",
+                            "source_dt",
+                            "event_dt"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "entity_name": {
+            "type": "string"
+        },
+        "webhooks": {
+            "properties": {
+                "entity_name": {
+                    "type": "string"
+                },
+                "identity_id": {
+                    "type": "string"
+                },
+                "security_option": {
+                    "type": "string"
+                },
+                "identity_name": {
+                    "type": "string"
+                },
+                "push_option": {
+                    "type": "string"
+                },
+                "entity_id": {
+                    "type": "string"
+                },
+                "content_type": {
+                    "type": "string"
+                },
+                "endpoint": {
+                    "type": "string"
+                },
+                "security_key": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "entity_id",
+                "entity_name",
+                "endpoint",
+                "push_option",
+                "security_option",
+                "content_type"
+            ],
+            "type": "object"
+        },
+        "entities_item": {
+            "properties": {
+                "entity_ega": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "entity": {
+                    "type": "string"
+                },
+                "domain": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "summary_array": {
+            "items": {
+                "properties": {
+                    "count": {
+                        "type": "string"
+                    },
+                    "event_type": {
+                        "type": "string"
+                    },
+                    "entity": {
+                        "type": "string"
+                    },
+                    "event_date": {
+                        "type": "string"
+                    },
+                    "domain": {
+                        "format": "uri",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "event_date",
+                    "domain",
+                    "entity",
+                    "event_type",
+                    "count"
+                ],
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "filter_names": {
+            "type": "string"
+        },
+        "event_dt": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "subscription_create": {
+            "properties": {
+                "subscription": {
+                    "properties": {
+                        "event_type": {
+                            "type": "string"
+                        },
+                        "entity": {
+                            "type": "string"
+                        },
+                        "domain": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "subscription"
+            ],
+            "type": "object"
+        },
+        "security_option": {
+            "type": "string"
+        },
+        "push_option": {
+            "type": "string"
+        },
+        "security_key": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "BYUEventHub",
+        "description": "Main Event Hub API",
+        "version": "v2"
+    }
+}

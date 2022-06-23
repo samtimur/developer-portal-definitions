@@ -1,0 +1,1627 @@
+{
+  "basePath": "/domains/students/v1",
+  "host": "api.byu.edu:443",
+  "paths": {
+    "/?": {
+      "get": {
+        "x-auth-type": "Application & Application User",
+        "summary": "students",
+        "tags": [
+          " "
+        ],
+        "x-throttling-tier": "Unlimited",
+        "description": "Get basic information for a collection of students",
+        "parameters": [
+          {
+            "items": {
+              "maxLength": 9,
+              "type": "string"
+            },
+            "description": "List of BYU Identifiers (Ex: '111111111,222222222')",
+            "name": "byu_ids",
+            "required": false,
+            "type": "array",
+            "in": "query"
+          },
+          {
+            "items": {
+              "maxLength": 9,
+              "type": "string"
+            },
+            "description": "List of Net IDs (Ex: 'netid1,netid2')",
+            "name": "net_ids",
+            "required": false,
+            "type": "array",
+            "in": "query"
+          },
+          {
+            "items": {
+              "maxLength": 9,
+              "type": "string"
+            },
+            "description": "List of Person IDs (Ex: '111111111,222222222')",
+            "name": "person_ids",
+            "required": false,
+            "type": "array",
+            "in": "query"
+          },
+          {
+            "description": "The FERPA restricted status",
+            "name": "restricted",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "required": false,
+            "type": "string",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/*": {
+      "x-controller": "students",
+      "get": {
+        "x-auth-type": "Application & Application User",
+        "summary": "students",
+        "tags": [
+          "Students"
+        ],
+        "x-throttling-tier": "Unlimited",
+        "description": "Get basic information for a collection of students",
+        "parameters": [
+          {
+            "items": {
+              "maxLength": 9,
+              "type": "string"
+            },
+            "description": "List of BYU Identifiers (Ex: '111111111,222222222')",
+            "name": "byu_ids",
+            "required": false,
+            "type": "array",
+            "in": "query"
+          },
+          {
+            "items": {
+              "maxLength": 9,
+              "type": "string"
+            },
+            "description": "List of Net IDs (Ex: 'netid1,netid2')",
+            "name": "net_ids",
+            "required": false,
+            "type": "array",
+            "in": "query"
+          },
+          {
+            "items": {
+              "maxLength": 9,
+              "type": "string"
+            },
+            "description": "List of Person IDs (Ex: '111111111,222222222')",
+            "name": "person_ids",
+            "required": false,
+            "type": "array",
+            "in": "query"
+          },
+          {
+            "description": "The FERPA restricted status",
+            "name": "restricted",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "required": false,
+            "type": "string",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "properties": {
+                      "person_id": {
+                        "properties": {
+                          "description": {
+                            "maxLength": 50,
+                            "type": "string"
+                          },
+                          "value": {
+                            "maxLength": 9,
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "read-only",
+                            "enum": [
+                              "read-only"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "value": "111111111",
+                          "api_type": "read-only"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "byu_id": {
+                        "properties": {
+                          "description": {
+                            "maxLength": 50,
+                            "type": "string"
+                          },
+                          "value": {
+                            "maxLength": 9,
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "read-only",
+                            "enum": [
+                              "read-only"
+                            ],
+                            "type": "string"
+                          },
+                          "key": {
+                            "default": true,
+                            "type": "boolean"
+                          }
+                        },
+                        "example": {
+                          "description": "Joseph Smith",
+                          "value": "123456789",
+                          "api_type": "read-only",
+                          "key": true
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type",
+                          "key"
+                        ]
+                      },
+                      "links": {
+                        "properties": {
+                          "basic__info": {
+                            "properties": {
+                              "method": {
+                                "default": "GET",
+                                "description": "Use this HTTP method to perform the specified action",
+                                "enum": [
+                                  "GET",
+                                  "PUT",
+                                  "POST",
+                                  "DELETE",
+                                  "OPTIONS"
+                                ],
+                                "type": "string"
+                              },
+                              "rel": {
+                                "default": "self",
+                                "description": "The name of the link property or 'self' if the href value is the same as what is invoked to get the current object.",
+                                "type": "string"
+                              },
+                              "href": {
+                                "default": "https://api.byu.edu/byuapi/students/v2/",
+                                "description": "Use this URL to perform the specified action",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object",
+                            "required": [
+                              "rel",
+                              "href",
+                              "method"
+                            ]
+                          }
+                        },
+                        "type": "object",
+                        "required": [
+                          "basic__info"
+                        ]
+                      },
+                      "net_id": {
+                        "properties": {
+                          "description": {
+                            "maxLength": 50,
+                            "type": "string"
+                          },
+                          "value": {
+                            "x-nullable": true,
+                            "pattern": "^[a-z][a-z0-9]{0,8}$",
+                            "type": "string"
+                          },
+                          "api_type": {
+                            "default": "read-only",
+                            "enum": [
+                              "read-only"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "value": "fakenetid",
+                          "api_type": "read-only"
+                        },
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "api_type"
+                        ]
+                      },
+                      "metadata": {
+                        "additionalProperties": true,
+                        "properties": {
+                          "validation_response": {
+                            "properties": {
+                              "message": {
+                                "default": "Success",
+                                "type": "string"
+                              },
+                              "code": {
+                                "default": 200,
+                                "maxLength": 3,
+                                "minLength": 3,
+                                "type": "integer"
+                              }
+                            },
+                            "type": "object",
+                            "required": [
+                              "code",
+                              "message"
+                            ]
+                          },
+                          "validation_information": {
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "cache": {
+                            "description": "Present if data is cached",
+                            "properties": {
+                              "date_time": {
+                                "format": "date-time",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "restricted": {
+                            "default": false,
+                            "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object",
+                        "required": [
+                          "validation_response"
+                        ]
+                      }
+                    },
+                    "example": {
+                      "person_id": {
+                        "value": "987654321",
+                        "api_type": "read-only"
+                      },
+                      "byu_id": {
+                        "description": "LastName, FirstName",
+                        "value": "123456789",
+                        "api_type": "read-only",
+                        "key": true
+                      },
+                      "links": {
+                        "basic__info": {
+                          "method": "GET",
+                          "rel": "self",
+                          "href": "https://api.byu.edu/byuapi/students/v2/123456789"
+                        }
+                      },
+                      "net_id": {
+                        "value": "fakenetid",
+                        "api_type": "read-only"
+                      },
+                      "metadata": {
+                        "validation_response": {
+                          "message": "Success",
+                          "code": 200
+                        },
+                        "restricted": false
+                      }
+                    },
+                    "type": "object",
+                    "required": [
+                      "links",
+                      "metadata",
+                      "byu_id",
+                      "net_id",
+                      "person_id"
+                    ]
+                  },
+                  "type": "array"
+                },
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata",
+                "values"
+              ]
+            },
+            "description": "The students"
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  }
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Invalid Request - unable to interpret request",
+            "examples": {
+              "application/json": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Invalid Request - unable to interpret request",
+                    "code": 400
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  }
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Authentication required to access data",
+            "examples": {
+              "application/json": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Authentication required to access data",
+                    "code": 401
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  }
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Access denied to protected data",
+            "examples": {
+              "application/json": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Access denied to protected data",
+                    "code": 403
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  }
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "The resource does not exist",
+            "examples": {
+              "application/json": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "The resource does not exist",
+                    "code": 404
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  }
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Query parameters conflict or are malformed",
+            "examples": {
+              "application/json": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Query parameters conflict or are malformed",
+                    "code": 409
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  }
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Unexpected error",
+            "examples": {
+              "application/json": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Internal Server Error",
+                    "code": 500
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getStudents"
+      }
+    },
+    "/{byu_id}": {
+      "x-controller": "students",
+      "get": {
+        "x-auth-type": "Application & Application User",
+        "summary": "student",
+        "tags": [
+          "Students"
+        ],
+        "x-throttling-tier": "Unlimited",
+        "description": "Get basic information for an individual student",
+        "parameters": [
+          {
+            "maxLength": 9,
+            "description": "BYU Identifier (Ex: '111111111')",
+            "name": "byu_id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "person_id": {
+                  "properties": {
+                    "description": {
+                      "maxLength": 50,
+                      "type": "string"
+                    },
+                    "value": {
+                      "maxLength": 9,
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "read-only",
+                      "enum": [
+                        "read-only"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "value": "111111111",
+                    "api_type": "read-only"
+                  },
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "api_type"
+                  ]
+                },
+                "byu_id": {
+                  "properties": {
+                    "description": {
+                      "maxLength": 50,
+                      "type": "string"
+                    },
+                    "value": {
+                      "maxLength": 9,
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "read-only",
+                      "enum": [
+                        "read-only"
+                      ],
+                      "type": "string"
+                    },
+                    "key": {
+                      "default": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "example": {
+                    "description": "Joseph Smith",
+                    "value": "123456789",
+                    "api_type": "read-only",
+                    "key": true
+                  },
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "api_type",
+                    "key"
+                  ]
+                },
+                "links": {
+                  "properties": {
+                    "basic__info": {
+                      "properties": {
+                        "method": {
+                          "default": "GET",
+                          "description": "Use this HTTP method to perform the specified action",
+                          "enum": [
+                            "GET",
+                            "PUT",
+                            "POST",
+                            "DELETE",
+                            "OPTIONS"
+                          ],
+                          "type": "string"
+                        },
+                        "rel": {
+                          "default": "self",
+                          "description": "The name of the link property or 'self' if the href value is the same as what is invoked to get the current object.",
+                          "type": "string"
+                        },
+                        "href": {
+                          "default": "https://api.byu.edu/byuapi/students/v2/",
+                          "description": "Use this URL to perform the specified action",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "rel",
+                        "href",
+                        "method"
+                      ]
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "basic__info"
+                  ]
+                },
+                "net_id": {
+                  "properties": {
+                    "description": {
+                      "maxLength": 50,
+                      "type": "string"
+                    },
+                    "value": {
+                      "x-nullable": true,
+                      "pattern": "^[a-z][a-z0-9]{0,8}$",
+                      "type": "string"
+                    },
+                    "api_type": {
+                      "default": "read-only",
+                      "enum": [
+                        "read-only"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "value": "fakenetid",
+                    "api_type": "read-only"
+                  },
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "api_type"
+                  ]
+                },
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "person_id": {
+                  "value": "987654321",
+                  "api_type": "read-only"
+                },
+                "byu_id": {
+                  "description": "LastName, FirstName",
+                  "value": "123456789",
+                  "api_type": "read-only",
+                  "key": true
+                },
+                "links": {
+                  "basic__info": {
+                    "method": "GET",
+                    "rel": "self",
+                    "href": "https://api.byu.edu/byuapi/students/v2/123456789"
+                  }
+                },
+                "net_id": {
+                  "value": "fakenetid",
+                  "api_type": "read-only"
+                },
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  },
+                  "restricted": false
+                }
+              },
+              "type": "object",
+              "required": [
+                "links",
+                "metadata",
+                "byu_id",
+                "net_id",
+                "person_id"
+              ]
+            },
+            "description": "The student"
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  }
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Invalid Request - unable to interpret request",
+            "examples": {
+              "application/json": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Invalid Request - unable to interpret request",
+                    "code": 400
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  }
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Authentication required to access data",
+            "examples": {
+              "application/json": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Authentication required to access data",
+                    "code": 401
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  }
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Access denied to protected data",
+            "examples": {
+              "application/json": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Access denied to protected data",
+                    "code": 403
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  }
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "The resource does not exist",
+            "examples": {
+              "application/json": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "The resource does not exist",
+                    "code": 404
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  }
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Query parameters conflict or are malformed",
+            "examples": {
+              "application/json": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Query parameters conflict or are malformed",
+                    "code": 409
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "properties": {
+                "metadata": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "validation_response": {
+                      "properties": {
+                        "message": {
+                          "default": "Success",
+                          "type": "string"
+                        },
+                        "code": {
+                          "default": 200,
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    },
+                    "validation_information": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "cache": {
+                      "description": "Present if data is cached",
+                      "properties": {
+                        "date_time": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "restricted": {
+                      "default": false,
+                      "description": "Indicates if the data pertains to a restricted person - present for any data pertaining to an individual",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object",
+                  "required": [
+                    "validation_response"
+                  ]
+                }
+              },
+              "example": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Success",
+                    "code": 200
+                  }
+                }
+              },
+              "type": "object",
+              "required": [
+                "metadata"
+              ]
+            },
+            "description": "Unexpected error",
+            "examples": {
+              "application/json": {
+                "metadata": {
+                  "validation_response": {
+                    "message": "Internal Server Error",
+                    "code": 500
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getStudent"
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "swagger": "2.0",
+  "consumes": [
+    "application/json"
+  ],
+  "info": {
+    "title": "Students",
+    "description": "Students Domain Service (Supports /byuapi/students/v2 - Consumers probably want that.)",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "contact": {
+      "email": "it@byu.edu",
+      "name": "OIT Service Desk Support",
+      "url": "https://it.byu.edu"
+    },
+    "version": "v1"
+  }
+}

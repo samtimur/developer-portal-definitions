@@ -1,0 +1,215 @@
+{
+    "basePath": "/domains/canvas/year_term_usages/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{year_term}": {
+            "get": {
+                "summary": "year_term_usage",
+                "x-controller": "year_term_usages",
+                "description": "Returns the canvas usage summary for all published classes for a specific year term.",
+                "parameters": [
+                    {
+                        "description": "Year Term of Class",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/year_term_usage"
+                        },
+                        "description": "The canvas usage summary for all published classes for a specific year term."
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "409": {
+                        "$ref": "#/responses/409"
+                    }
+                },
+                "operationId": "year_term",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/*": {
+            "get": {
+                "summary": "year_term_usages",
+                "x-controller": "year_term_usages",
+                "description": "Returns the canvas usage summary for all published classes in all year terms.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/all_terms_usages"
+                        },
+                        "description": "The canvas usage summary for all published classes in all year terms."
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "409": {
+                        "$ref": "#/responses/409"
+                    }
+                },
+                "operationId": "all",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "year_term_usage": {
+            "properties": {
+                "total_classes": {
+                    "description": "The total number of canvas classes for the year term.",
+                    "type": "number"
+                },
+                "total_section_credit_hours": {
+                    "description": "The total number of enrolled credit hours for the year term.",
+                    "type": "number"
+                },
+                "total_published_section_credit_hours": {
+                    "description": "The total number of enrolled credit hours for published classes, for the year term.",
+                    "type": "number"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "total_published_classes": {
+                    "description": "The total number of published canvas classes for the year term.",
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "all_terms_usages": {
+            "items": {
+                "$ref": "#/definitions/year_term_usage"
+            },
+            "type": "array"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "responses": {
+        "400": {
+            "schema": {
+                "type": "string"
+            },
+            "description": "Invalid Request - unable to interpret request",
+            "examples": {
+                "application/json": {
+                    "metadata": {
+                        "validation_response": {
+                            "message": "Invalid Request - unable to interpret request",
+                            "code": 400
+                        }
+                    }
+                }
+            }
+        },
+        "401": {
+            "schema": {
+                "type": "string"
+            },
+            "description": "Authentication required to access data",
+            "examples": {
+                "application/json": {
+                    "metadata": {
+                        "validation_response": {
+                            "message": "Authentication required to access data",
+                            "code": 401
+                        }
+                    }
+                }
+            }
+        },
+        "403": {
+            "schema": {
+                "type": "string"
+            },
+            "description": "Access denied to protected data",
+            "examples": {
+                "application/json": {
+                    "metadata": {
+                        "validation_response": {
+                            "message": "Access denied to protected data",
+                            "code": 403
+                        }
+                    }
+                }
+            }
+        },
+        "404": {
+            "schema": {
+                "type": "string"
+            },
+            "description": "The resource does not exist",
+            "examples": {
+                "application/json": {
+                    "metadata": {
+                        "validation_response": {
+                            "message": "The resource does not exist",
+                            "code": 404
+                        }
+                    }
+                }
+            }
+        },
+        "409": {
+            "schema": {
+                "type": "string"
+            },
+            "description": "Query parameters conflict or are malformed",
+            "examples": {
+                "application/json": {
+                    "metadata": {
+                        "validation_response": {
+                            "message": "Query parameters conflict or are malformed",
+                            "code": 409
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "CanvasYearTermUsages",
+        "description": "Canvas Year Term Usages Domain Service",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

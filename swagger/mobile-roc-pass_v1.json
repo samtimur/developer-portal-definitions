@@ -1,0 +1,133 @@
+{
+    "basePath": "/domains/mobile/roc-pass/v1",
+    "paths": {
+        "/{byu_id}/jwt": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a jwt (Android) associated with the given BYU ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Student's BYU ID",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "jwt for Android s2gp button"
+                    }
+                }
+            }
+        },
+        "/{byu_id}/pkpass": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get the PassKit pass (iOS) associated with the given BYU ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Student's BYU ID",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "format": "byte",
+                            "type": "string"
+                        },
+                        "description": "data for pkpass"
+                    }
+                }
+            }
+        },
+        "/{byu_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get the ROC pass associated with the given BYU ID",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Student's BYU ID",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ROCPass"
+                        },
+                        "description": "ROC pass"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "ROCPass": {
+            "properties": {
+                "passTypeIdentifier": {
+                    "type": "string"
+                },
+                "expirationDate": {
+                    "type": "string"
+                },
+                "season": {
+                    "type": "string"
+                },
+                "qr_info": {
+                    "type": "string"
+                },
+                "stripImageAndroidUrl": {
+                    "type": "string"
+                },
+                "purchaseUrl": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "logoUrl": {
+                    "type": "string"
+                },
+                "validStartDate": {
+                    "type": "string"
+                },
+                "purchaseText": {
+                    "type": "string"
+                },
+                "stripImageUrl": {
+                    "type": "string"
+                },
+                "expirationDateDisplay": {
+                    "type": "string"
+                },
+                "logoAndroidUrl": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "mobile-roc-pass",
+        "description": "Provides self-service access to one's ROC Pass information.",
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443"
+}

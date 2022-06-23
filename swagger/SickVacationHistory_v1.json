@@ -1,0 +1,133 @@
+{
+    "basePath": "/domains/erp/hr/sick_vacation_history/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/employees/{byu_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "start_dt",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "end_dt",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "historical_leave_data": {
+            "properties": {
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "name_lnf": {
+                    "$ref": "#/definitions/name_lnf"
+                },
+                "leave_data": {
+                    "$ref": "#/definitions/leave_data"
+                }
+            },
+            "type": "object"
+        },
+        "vacation_leave_hours": {
+            "description": "The number of hours an employee reported as used for vacation for a given time period",
+            "type": "integer"
+        },
+        "sick_leave_hours": {
+            "description": "The number of hours an employee reported as used for illness for a given time period",
+            "type": "integer"
+        },
+        "covid_vacation_leave_hours": {
+            "description": "The number of hours an employee reported as used for vacation due to COVID-19 for a given time period",
+            "type": "integer"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "type": "string"
+        },
+        "effective_date": {
+            "description": "The date the associated data is available and active.",
+            "format": "date",
+            "type": "string"
+        },
+        "leave_entry": {
+            "properties": {
+                "vacation_leave_hours": {
+                    "$ref": "#/definitions/vacation_leave_hours"
+                },
+                "sick_leave_hours": {
+                    "$ref": "#/definitions/sick_leave_hours"
+                },
+                "covid_vacation_leave_hours": {
+                    "$ref": "#/definitions/covid_vacation_leave_hours"
+                },
+                "effective_date": {
+                    "$ref": "#/definitions/effective_date"
+                },
+                "covid_sick_leave_hours": {
+                    "$ref": "#/definitions/covid_sick_leave_hours"
+                }
+            },
+            "type": "object"
+        },
+        "covid_sick_leave_hours": {
+            "description": "The number of hours an employee reported as used for illness due to COVID-19 for a given time period",
+            "type": "integer"
+        },
+        "leave_data": {
+            "items": {
+                "$ref": "#/definitions/leave_entry"
+            },
+            "type": "array"
+        },
+        "name_lnf": {
+            "maxLength": 50,
+            "description": "The employee's name",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "500": {
+            "description": "Internal Server Error - Error occurred that wasn't the user's fault"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "SickVacationHistory",
+        "description": "Self-service web service to view historical sick and vacation data",
+        "version": "v1"
+    }
+}

@@ -1,0 +1,622 @@
+{
+    "basePath": "/domains/legacy/academic/registration/enrolled_classes/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{id_type}/{id_value}/{year_term}": {
+            "get": {
+                "summary": "Get enrolled classes for a student for a given semester",
+                "tags": [
+                    "EnrolledClasses"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get enrolled classes for a student for a given semester",
+                "parameters": [
+                    {
+                        "description": "Determines the type of id - personid, byuid, netid",
+                        "name": "id_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Holds the value of the id according to the id_type",
+                        "name": "id_value",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Determines a specific year and term",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/EnrolledClassesSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/EnrolledClassesError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetEnrolledClasses"
+            }
+        },
+        "/{id_type}/{id_value}": {
+            "get": {
+                "summary": "Get enrolled classes for a student for all active registerable semesters",
+                "tags": [
+                    "EnrolledClasses"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get enrolled classes for a student for all active registerable semesters",
+                "parameters": [
+                    {
+                        "description": "Determines the type of id - personid, byuid, netid",
+                        "name": "id_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Holds the value of the id according to the id_type",
+                        "name": "id_value",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/EnrolledClassesSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/EnrolledClassesError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetEnrolledClasses"
+            }
+        },
+        "/{id_type}/{id_value}/{year_term}/{curriculum_id}/{title_code}/{section_number}": {
+            "get": {
+                "summary": "Get an enrolled class for a student for a given semester",
+                "tags": [
+                    "EnrolledClasses"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get an enrolled class for a student for a given semester",
+                "parameters": [
+                    {
+                        "description": "Determines the type of id - personid, byuid, netid",
+                        "name": "id_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Holds the value of the id according to the id_type",
+                        "name": "id_value",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Determines a specific year and term",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Determines a specific year and term",
+                        "name": "curriculum_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Determines a specific year and term",
+                        "name": "title_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Determines a specific year and term",
+                        "name": "section_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/EnrolledClassesSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/EnrolledClassesError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetEnrolledClasses"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "class_list_row": {
+            "properties": {
+                "envelope_id": {
+                    "$ref": "#/definitions/envelope_id"
+                },
+                "section_type": {
+                    "$ref": "#/definitions/section_type"
+                },
+                "date_time_updated": {
+                    "$ref": "#/definitions/date_time_updated"
+                },
+                "year_term_desc": {
+                    "$ref": "#/definitions/year_term_desc"
+                },
+                "honors_section": {
+                    "$ref": "#/definitions/honors_section"
+                },
+                "can_drop": {
+                    "type": "string"
+                },
+                "reg_end_date": {
+                    "$ref": "#/definitions/reg_end_date"
+                },
+                "teaching_area": {
+                    "$ref": "#/definitions/teaching_area"
+                },
+                "end_date": {
+                    "$ref": "#/definitions/end_date"
+                },
+                "course_title": {
+                    "$ref": "#/definitions/course_title"
+                },
+                "block_code": {
+                    "$ref": "#/definitions/block_code"
+                },
+                "date_added": {
+                    "$ref": "#/definitions/date_added"
+                },
+                "can_withdraw": {
+                    "type": "string"
+                },
+                "title_code": {
+                    "$ref": "#/definitions/title_code"
+                },
+                "w_drop_date": {
+                    "$ref": "#/definitions/w_drop_date"
+                },
+                "curriculum_id": {
+                    "$ref": "#/definitions/curriculum_id"
+                },
+                "date_graded": {
+                    "$ref": "#/definitions/date_graded"
+                },
+                "grade": {
+                    "$ref": "#/definitions/grade"
+                },
+                "year_term_desc_ext": {
+                    "$ref": "#/definitions/year_term_desc_ext"
+                },
+                "instructors": {
+                    "$ref": "#/definitions/instructors"
+                },
+                "fixed_or_variable": {
+                    "$ref": "#/definitions/fixed_or_variable"
+                },
+                "reg_method": {
+                    "$ref": "#/definitions/reg_method"
+                },
+                "graded_by_name": {
+                    "$ref": "#/definitions/graded_by_name"
+                },
+                "section_number": {
+                    "$ref": "#/definitions/section_number"
+                },
+                "course_number": {
+                    "$ref": "#/definitions/course_number"
+                },
+                "course_suffix": {
+                    "$ref": "#/definitions/course_suffix"
+                },
+                "audit": {
+                    "$ref": "#/definitions/audit"
+                },
+                "added_by_name": {
+                    "$ref": "#/definitions/added_by_name"
+                },
+                "envelope_type": {
+                    "$ref": "#/definitions/envelope_type"
+                },
+                "year_term": {
+                    "$ref": "#/definitions/year_term"
+                },
+                "class_repeated": {
+                    "$ref": "#/definitions/class_repeated"
+                },
+                "graded_by_id": {
+                    "$ref": "#/definitions/graded_by_id"
+                },
+                "credit_hours": {
+                    "$ref": "#/definitions/credit_hours"
+                },
+                "fee": {
+                    "$ref": "#/definitions/fee"
+                },
+                "added_by_id": {
+                    "$ref": "#/definitions/added_by_id"
+                },
+                "schedule": {
+                    "$ref": "#/definitions/schedule"
+                },
+                "updated_by_id": {
+                    "$ref": "#/definitions/updated_by_id"
+                },
+                "lab_quiz_section": {
+                    "$ref": "#/definitions/lab_quiz_section"
+                },
+                "permission_code_add": {
+                    "$ref": "#/definitions/permission_code_add"
+                },
+                "min_credit_hours": {
+                    "$ref": "#/definitions/min_credit_hours"
+                },
+                "reg_start_date": {
+                    "$ref": "#/definitions/reg_start_date"
+                },
+                "start_date": {
+                    "$ref": "#/definitions/start_date"
+                },
+                "updated_by_name": {
+                    "$ref": "#/definitions/updated_by_name"
+                }
+            },
+            "type": "object"
+        },
+        "errors": {
+            "items": {
+                "$ref": "#/definitions/error_data"
+            },
+            "type": "array"
+        },
+        "title_code": {
+            "type": "string"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "w_drop_date": {
+            "type": "string"
+        },
+        "instructor_row": {
+            "properties": {
+                "person_id": {
+                    "$ref": "#/definitions/person_id"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "instructor_type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "date_graded": {
+            "type": "string"
+        },
+        "byu_id": {
+            "description": "9 digit number",
+            "type": "string"
+        },
+        "EnrolledClassesError": {
+            "properties": {
+                "EnrolledClassesService": {
+                    "properties": {
+                        "response": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "errors": {
+                            "$ref": "#/definitions/errors"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "instructors": {
+            "items": {
+                "$ref": "#/definitions/instructor_row"
+            },
+            "type": "array"
+        },
+        "fixed_or_variable": {
+            "type": "string"
+        },
+        "reg_method": {
+            "type": "string"
+        },
+        "section_number": {
+            "type": "string"
+        },
+        "course_suffix": {
+            "type": "string"
+        },
+        "year_term": {
+            "type": "string"
+        },
+        "class_repeated": {
+            "type": "string"
+        },
+        "credit_hours": {
+            "type": "string"
+        },
+        "added_by_id": {
+            "type": "string"
+        },
+        "fee": {
+            "type": "string"
+        },
+        "updated_by_id": {
+            "type": "string"
+        },
+        "student_name": {
+            "type": "string"
+        },
+        "permission_code_add": {
+            "type": "string"
+        },
+        "reg_start_date": {
+            "type": "string"
+        },
+        "envelope_id": {
+            "type": "string"
+        },
+        "section_type": {
+            "type": "string"
+        },
+        "date_time_updated": {
+            "type": "string"
+        },
+        "StudentSchedule": {
+            "properties": {
+                "school": {
+                    "$ref": "#/definitions/school"
+                },
+                "person_id": {
+                    "$ref": "#/definitions/person_id"
+                },
+                "student_name": {
+                    "$ref": "#/definitions/student_name"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "class_list": {
+                    "$ref": "#/definitions/class_list"
+                }
+            },
+            "type": "object"
+        },
+        "year_term_desc": {
+            "type": "string"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "honors_section": {
+            "type": "string"
+        },
+        "reg_end_date": {
+            "type": "string"
+        },
+        "teaching_area": {
+            "type": "string"
+        },
+        "end_date": {
+            "type": "string"
+        },
+        "date_added": {
+            "type": "string"
+        },
+        "block_code": {
+            "type": "string"
+        },
+        "course_title": {
+            "type": "string"
+        },
+        "curriculum_id": {
+            "type": "string"
+        },
+        "grade": {
+            "type": "string"
+        },
+        "year_term_desc_ext": {
+            "type": "string"
+        },
+        "schedule_row": {
+            "properties": {
+                "days_taught": {
+                    "type": "string"
+                },
+                "building": {
+                    "type": "string"
+                },
+                "begin_time": {
+                    "type": "string"
+                },
+                "thu": {
+                    "type": "string"
+                },
+                "sat": {
+                    "type": "string"
+                },
+                "end_time": {
+                    "type": "string"
+                },
+                "wed": {
+                    "type": "string"
+                },
+                "mon": {
+                    "type": "string"
+                },
+                "tue": {
+                    "type": "string"
+                },
+                "sun": {
+                    "type": "string"
+                },
+                "room": {
+                    "type": "number"
+                },
+                "fri": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "graded_by_name": {
+            "type": "string"
+        },
+        "person_id": {
+            "type": "string"
+        },
+        "course_number": {
+            "type": "string"
+        },
+        "added_by_name": {
+            "type": "string"
+        },
+        "audit": {
+            "type": "string"
+        },
+        "envelope_type": {
+            "type": "string"
+        },
+        "graded_by_id": {
+            "type": "string"
+        },
+        "class_list": {
+            "items": {
+                "$ref": "#/definitions/class_list_row"
+            },
+            "type": "array"
+        },
+        "schedule": {
+            "items": {
+                "$ref": "#/definitions/schedule_row"
+            },
+            "type": "array"
+        },
+        "school": {
+            "type": "string"
+        },
+        "lab_quiz_section": {
+            "type": "string"
+        },
+        "min_credit_hours": {
+            "type": "string"
+        },
+        "start_date": {
+            "type": "string"
+        },
+        "EnrolledClassesSuccess": {
+            "properties": {
+                "EnrolledClassesService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/StudentSchedule"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "updated_by_name": {
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "AcademicRegistrationEnrolledClasses",
+        "description": "This service provides information about enrollments for a given semester for a student. This includes the student's meeting times, places and instructors for each section.",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/Enrollment_v1.0"
+    }
+}

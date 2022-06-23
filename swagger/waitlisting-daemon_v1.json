@@ -1,0 +1,82 @@
+{
+    "basePath": "/waitlisting-daemon/1.0.0",
+    "paths": {
+        "/updateCourse": {
+            "x-controller": "updateCourse",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Updates the waitlist for a specified course currently open for enrollment",
+                "parameters": [
+                    {
+                        "description": "Year and Term of the course to update the waitlist for. (i.e. Fall2020)",
+                        "name": "yearTerm",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "BYU Curriculum ID of the course to update the waitlist for.",
+                        "name": "curriculumId",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Title code of the course to update the waitlist for.",
+                        "name": "titleCode",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "three-digit section code for the course to update the waitlist for.",
+                        "name": "section",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucessfully updated waitlist."
+                    },
+                    "400": {
+                        "description": "There was an error in the request. Double check the format of the request query parameters and try again."
+                    },
+                    "404": {
+                        "description": "The specified resource does not exist."
+                    },
+                    "500": {
+                        "description": "There was an error updating the waitlist of the specified class."
+                    }
+                },
+                "operationId": "updateCourse"
+            }
+        },
+        "/updateAll": {
+            "x-controller": "updateAll",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Updates the waitlist of every course currently open for enrollment.",
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated the waitlist for each course"
+                    },
+                    "500": {
+                        "description": "There was an internal error while updating course waitlists."
+                    }
+                },
+                "operationId": "updateAll"
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "waitlisting-daemon",
+        "description": "A Daemon automatically triggered every 15 minutes to update all waitlists across campus. Can also be triggered to update an individual course.",
+        "version": "1.0.0"
+    },
+    "host": "api.byu.edu:443"
+}

@@ -1,0 +1,103 @@
+{
+    "paths": {
+        "/printers": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "gets a list of all printers on campus",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ListOfPrinters"
+                        },
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/buildings": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "gets a list of buildings that have printers",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ListOfBuildings"
+                        },
+                        "description": "Success"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "ListOfPrinters": {
+            "items": {
+                "$ref": "#/definitions/Printer"
+            },
+            "type": "array"
+        },
+        "ListOfBuildings": {
+            "items": {
+                "$ref": "#/definitions/Building"
+            },
+            "type": "array"
+        },
+        "Building": {
+            "properties": {
+                "building_name": {
+                    "type": "string"
+                },
+                "building_code": {
+                    "type": "string"
+                }
+            }
+        },
+        "Printer": {
+            "properties": {
+                "building_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "restrictions": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "boolean"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "blackWhite": {
+                    "type": "boolean"
+                },
+                "owner": {
+                    "type": "string"
+                },
+                "longitude": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "string"
+                },
+                "buildingCode": {
+                    "type": "string"
+                },
+                "duplex": {
+                    "type": "boolean"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "MobilePrintersWebService",
+        "description": "A web service to get info about printers on campus for the mobile app",
+        "version": "v2"
+    },
+    "basePath": "/domains/mobile/printers/v2",
+    "host": "api.byu.edu:443"
+}

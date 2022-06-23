@@ -1,0 +1,161 @@
+{
+    "basePath": "/domains/erp/hr/w2/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{byu_id}": {
+            "get": {
+                "description": "Specify the byu_id to get the tax years and companies where W2 data is available. Add the tax_year and company parameters to get the base64 encoded W2 PDF.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/tax_year"
+                    },
+                    {
+                        "$ref": "#/parameters/company"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/w2s"
+                        },
+                        "description": "Service request is OK and the data is in the response body."
+                    },
+                    "204": {
+                        "description": "Service request is OK and no data is available."
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml",
+        "application/pdf"
+    ],
+    "swagger": "2.0",
+    "parameters": {
+        "tax_year": {
+            "description": "4 digit year",
+            "name": "tax_year",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "company": {
+            "description": "3 character company code",
+            "name": "company",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "BYU ID",
+            "name": "byu_id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        }
+    },
+    "definitions": {
+        "tax_year": {
+            "pattern": "^[0-9]{4}$",
+            "type": "string"
+        },
+        "company": {
+            "pattern": "^[A-Z]{3}$",
+            "type": "string"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "type": "string"
+        },
+        "w2s_error": {
+            "properties": {
+                "status": {
+                    "properties": {
+                        "message": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "w2s": {
+            "items": {
+                "$ref": "#/definitions/w2"
+            },
+            "type": "array"
+        },
+        "w2": {
+            "properties": {
+                "tax_year": {
+                    "$ref": "#/definitions/tax_year"
+                },
+                "company": {
+                    "$ref": "#/definitions/company"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                }
+            }
+        }
+    },
+    "responses": {
+        "400": {
+            "schema": {
+                "$ref": "#/definitions/w2s_error"
+            },
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "403": {
+            "schema": {
+                "$ref": "#/definitions/w2s_error"
+            },
+            "description": "Access denied to protected data"
+        },
+        "500": {
+            "description": "Internal Server Error"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "W2",
+        "description": "Employee W2 Tax Data.",
+        "version": "v1"
+    }
+}

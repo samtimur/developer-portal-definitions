@@ -1,0 +1,267 @@
+{
+    "basePath": "/domains/erp/hr/locations/v1",
+    "paths": {
+        "/{ytime_location_code}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a Y-Time location based on the location code",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a Y-Time location from HR based on its location code",
+                "parameters": [
+                    {
+                        "maxLength": 10,
+                        "description": "The location code for the Y-Time location",
+                        "name": "ytime_location_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/location"
+                        },
+                        "description": "Y-Time Location Found",
+                        "examples": {
+                            "application/json": {
+                                "ytime_location_code": "AEDH",
+                                "updated_datetime": "2017-09-24T13:45:42.000000-06:00",
+                                "ytime_location_abbreviation": "ASPEN GROVE (EMERALD DINING HA",
+                                "status": "A",
+                                "ytime_location": "ASPEN GROVE (EMERALD DINING HALL)",
+                                "longitude": -111.601847,
+                                "latitude": 40.404425,
+                                "location_source": "FAC",
+                                "updated_by_name": "ironman"
+                            }
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all Y-Time locations",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get all Y-Time locations",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/locations"
+                        },
+                        "description": "Successfully returned Y-Time locations",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "ytime_location_code": "10M",
+                                    "updated_datetime": "2016-09-24T02:45:56.000000-06:00",
+                                    "ytime_location_abbreviation": "(10M) RICH (BENJAMIN E) BLDG (",
+                                    "status": "A",
+                                    "ytime_location": "(10M) RICH (BENJAMIN E) BLDG (TEACHING)",
+                                    "longitude": -111.645679,
+                                    "latitude": 40.259636,
+                                    "location_source": "FAC",
+                                    "updated_by_name": "barry"
+                                },
+                                {
+                                    "ytime_location_code": "1151 WSC",
+                                    "updated_datetime": "2017-10-01T08:45:42.000000-06:00",
+                                    "ytime_location_abbreviation": "OUTDOORS UNLIMITED",
+                                    "status": "I",
+                                    "ytime_location": "",
+                                    "longitude": -111.657565,
+                                    "latitude": 40.262896,
+                                    "location_source": "HR",
+                                    "updated_by_name": "iris"
+                                },
+                                {
+                                    "ytime_location_code": "11M",
+                                    "updated_datetime": "2017-05-25T10:45:42.000000-06:00",
+                                    "ytime_location_abbreviation": "(11M) BALLARD (MELVIN J) BLDG",
+                                    "status": "A",
+                                    "ytime_location": "(11M) BALLARD (MELVIN J) BLDG (SPECIAL T",
+                                    "longitude": -111.645298,
+                                    "latitude": 40.259162,
+                                    "location_source": "FAC",
+                                    "updated_by_name": "joe"
+                                }
+                            ]
+                        }
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "error": {
+            "type": "string"
+        },
+        "ytime_location_abbreviation": {
+            "maxLength": 30,
+            "type": "string"
+        },
+        "location": {
+            "properties": {
+                "ytime_location_code": {
+                    "$ref": "#/definitions/ytime_location_code"
+                },
+                "updated_datetime": {
+                    "$ref": "#/definitions/datetime"
+                },
+                "ytime_location_abbreviation": {
+                    "$ref": "#/definitions/ytime_location_abbreviation"
+                },
+                "status": {
+                    "$ref": "#/definitions/location_status"
+                },
+                "ytime_location": {
+                    "$ref": "#/definitions/ytime_location"
+                },
+                "longitude": {
+                    "$ref": "#/definitions/longitude"
+                },
+                "location_source": {
+                    "$ref": "#/definitions/location_source"
+                },
+                "latitude": {
+                    "$ref": "#/definitions/latitude"
+                },
+                "updated_by_name": {
+                    "$ref": "#/definitions/updated_by_name"
+                }
+            }
+        },
+        "error_response": {
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/error"
+                }
+            }
+        },
+        "ytime_location_code": {
+            "maxLength": 10,
+            "type": "string"
+        },
+        "locations": {
+            "items": {
+                "$ref": "#/definitions/location"
+            },
+            "type": "array"
+        },
+        "ytime_location": {
+            "maxLength": 100,
+            "type": "string"
+        },
+        "longitude": {
+            "pattern": "^-?((([1]?[0-7][0-9]|[1-9]?[0-9])\\.{1}\\d{1,7}$)|[1]?[1-8][0]\\.{1}0{1,7})$",
+            "description": "Longitude",
+            "type": "string"
+        },
+        "location_source": {
+            "enum": [
+                "HR",
+                "FAC"
+            ],
+            "type": "string"
+        },
+        "latitude": {
+            "pattern": "^-?(\\d\\.\\d{1,7}|[1-8]\\d\\.\\d{1,7}|90\\.0{1,7})$",
+            "description": "Latitude",
+            "type": "string"
+        },
+        "datetime": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "location_status": {
+            "enum": [
+                "A",
+                "I"
+            ],
+            "type": "string"
+        },
+        "updated_by_name": {
+            "type": "string"
+        }
+    },
+    "responses": {
+        "403": {
+            "description": "Forbidden"
+        },
+        "404": {
+            "schema": {
+                "$ref": "#/definitions/error_response"
+            },
+            "description": "Form not Found",
+            "examples": {
+                "application/json": {
+                    "error_message": "Data for Location 'AAA' does not exist."
+                }
+            }
+        },
+        "500": {
+            "schema": {
+                "$ref": "#/definitions/error_response"
+            },
+            "description": "Internal Server Error - Error occurred that wasn't the user's fault"
+        },
+        "504": {
+            "schema": {
+                "$ref": "#/definitions/error_response"
+            },
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "schema": {
+                "$ref": "#/definitions/error_response"
+            },
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "Y-Time-Locations",
+        "description": "API for getting information about Y-Time locations",
+        "version": "v1"
+    }
+}

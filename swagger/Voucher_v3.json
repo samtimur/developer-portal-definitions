@@ -1,0 +1,340 @@
+{
+    "basePath": "/domains/erp/fs/get_voucher/v3",
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get Voucher",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get Voucher",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/voucher_id"
+                    },
+                    {
+                        "$ref": "#/parameters/vendor_id"
+                    },
+                    {
+                        "$ref": "#/parameters/invoice_id"
+                    },
+                    {
+                        "$ref": "#/parameters/start_date"
+                    },
+                    {
+                        "$ref": "#/parameters/end_date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/200_Response"
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/400_Response"
+                        },
+                        "description": "Invalid path/parameters"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "400_Response": {
+            "properties": {
+                "errors": {
+                    "$ref": "#/definitions/errors"
+                }
+            },
+            "type": "object"
+        },
+        "payment_info": {
+            "properties": {
+                "payment_date": {
+                    "$ref": "#/definitions/payment_date"
+                },
+                "voucher_payment_terms_code": {
+                    "$ref": "#/definitions/voucher_payment_terms_code"
+                },
+                "purchase_order_id": {
+                    "$ref": "#/definitions/purchase_order_id"
+                },
+                "payment_reference_id": {
+                    "$ref": "#/definitions/payment_reference_id"
+                },
+                "voucher_payment_terms": {
+                    "$ref": "#/definitions/voucher_payment_terms"
+                },
+                "voucher_payment_scheduled_date": {
+                    "$ref": "#/definitions/voucher_payment_scheduled_date"
+                }
+            },
+            "type": "object"
+        },
+        "voucher_line_unit_amount": {
+            "type": "string"
+        },
+        "purchase_order_id": {
+            "type": "string"
+        },
+        "account_field": {
+            "type": "string"
+        },
+        "line": {
+            "properties": {
+                "voucher_line_number": {
+                    "$ref": "#/definitions/voucher_line_number"
+                },
+                "voucher_line_unit_amount": {
+                    "$ref": "#/definitions/voucher_line_unit_amount"
+                },
+                "voucher_line_unit_of_measure": {
+                    "$ref": "#/definitions/voucher_line_unit_of_measure"
+                },
+                "voucher_line_total_amount": {
+                    "$ref": "#/definitions/voucher_line_total_amount"
+                },
+                "distribution": {
+                    "items": {
+                        "properties": {
+                            "distribution": {
+                                "$ref": "#/definitions/distribution"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "voucher_line_quantity": {
+                    "$ref": "#/definitions/voucher_line_quantity"
+                }
+            },
+            "type": "object"
+        },
+        "invoice_date": {
+            "type": "string"
+        },
+        "errors": {
+            "items": {
+                "properties": {
+                    "error_message": {
+                        "$ref": "#/definitions/error_message"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "voucher_total_amount": {
+            "type": "number"
+        },
+        "error_message": {
+            "type": "string"
+        },
+        "200_Response": {
+            "properties": {
+                "get_voucher": {
+                    "$ref": "#/definitions/get_voucher"
+                }
+            },
+            "type": "object"
+        },
+        "voucher_line_total_amount": {
+            "type": "number"
+        },
+        "voucher_payment_terms": {
+            "type": "string"
+        },
+        "voucher_distribution_number": {
+            "type": "number"
+        },
+        "get_voucher": {
+            "properties": {
+                "voucher": {
+                    "items": {
+                        "properties": {
+                            "voucher": {
+                                "$ref": "#/definitions/voucher"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "payment_date": {
+            "type": "string"
+        },
+        "supplier_id": {
+            "type": "string"
+        },
+        "voucher_id": {
+            "type": "string"
+        },
+        "supplier_name": {
+            "type": "string"
+        },
+        "payment_reference_id": {
+            "type": "string"
+        },
+        "class_field": {
+            "type": "string"
+        },
+        "distribution": {
+            "properties": {
+                "voucher_distribution_line_amount": {
+                    "$ref": "#/definitions/voucher_distribution_line_amount"
+                },
+                "account_field": {
+                    "$ref": "#/definitions/account_field"
+                },
+                "voucher_distribution_number": {
+                    "$ref": "#/definitions/voucher_distribution_number"
+                },
+                "class_field": {
+                    "$ref": "#/definitions/class_field"
+                },
+                "operating_unit": {
+                    "$ref": "#/definitions/operating_unit"
+                }
+            },
+            "type": "object"
+        },
+        "voucher_line_number": {
+            "type": "number"
+        },
+        "voucher_distribution_line_amount": {
+            "type": "number"
+        },
+        "voucher_origin": {
+            "type": "string"
+        },
+        "voucher_payment_terms_code": {
+            "type": "string"
+        },
+        "voucher_line_unit_of_measure": {
+            "type": "string"
+        },
+        "entered_date": {
+            "type": "string"
+        },
+        "invoice_id": {
+            "type": "string"
+        },
+        "voucher_payment_scheduled_date": {
+            "type": "string"
+        },
+        "voucher": {
+            "properties": {
+                "payment_info": {
+                    "$ref": "#/definitions/payment_info"
+                },
+                "supplier_id": {
+                    "$ref": "#/definitions/supplier_id"
+                },
+                "voucher_origin": {
+                    "$ref": "#/definitions/voucher_origin"
+                },
+                "voucher_id": {
+                    "$ref": "#/definitions/voucher_id"
+                },
+                "voucher_total_amount": {
+                    "$ref": "#/definitions/voucher_total_amount"
+                },
+                "supplier_name": {
+                    "$ref": "#/definitions/supplier_name"
+                },
+                "line": {
+                    "items": {
+                        "properties": {
+                            "line": {
+                                "$ref": "#/definitions/line"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "entered_date": {
+                    "$ref": "#/definitions/entered_date"
+                },
+                "invoice_date": {
+                    "$ref": "#/definitions/invoice_date"
+                },
+                "invoice_id": {
+                    "$ref": "#/definitions/invoice_id"
+                }
+            },
+            "type": "object"
+        },
+        "voucher_line_quantity": {
+            "type": "number"
+        },
+        "operating_unit": {
+            "type": "string"
+        }
+    },
+    "parameters": {
+        "end_date": {
+            "description": "Date SQL stops looking for vouchers. Default is today's date. Format: YYYY-MM-DD",
+            "name": "end_date",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "voucher_id": {
+            "description": "An Eight character alpha numeric unique identifier for a specific University liability.",
+            "name": "voucher_id",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "invoice_id": {
+            "description": "The unique identifier assigned by the vendor for a specific invoice.",
+            "name": "invoice_id",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "vendor_id": {
+            "description": "The system assigned unique number identifying a unique supplier of goods or services.",
+            "name": "vendor_id",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        },
+        "start_date": {
+            "description": "Date SQL uses to begin searching for vouchers. Format: YYYY-MM-DD",
+            "name": "start_date",
+            "type": "string",
+            "required": false,
+            "in": "query"
+        }
+    },
+    "responses": {
+        "500": {
+            "description": "Internal Server Error"
+        }
+    },
+    "info": {
+        "title": "voucher",
+        "description": "This API Looks up a voucher by voucher_id, invoice_id, or vendor_id or a combination of all 3. Results can be restricted by a start and end date.",
+        "version": "v3"
+    }
+}

@@ -1,0 +1,64 @@
+{
+    "paths": {
+        "/*": {
+            "get": {
+                "summary": "Return list of travel restrictions",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Only accepted parameter is json",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/countries"
+                        },
+                        "description": "Returns a list of countries"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "countries": {
+            "items": {
+                "$ref": "#/definitions/country"
+            },
+            "type": "array"
+        },
+        "country": {
+            "properties": {
+                "country_alert": {
+                    "description": "Active alerts for country",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "Country Name",
+                    "type": "string"
+                },
+                "restrictions": {
+                    "description": "Access restrictions for countries",
+                    "type": "string"
+                },
+                "code": {
+                    "description": "2 character ISO code for country",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "TravelRestrictions",
+        "description": "List of Current Travel Restrictions",
+        "version": "v1"
+    },
+    "basePath": "/domains/travelrestrictions/v1",
+    "host": "api.byu.edu:443"
+}

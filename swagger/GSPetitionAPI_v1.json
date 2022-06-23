@@ -1,0 +1,479 @@
+{
+    "paths": {
+        "/petition/workflow/{workflow}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all petitions with a certain workflow status",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all petitions with a given work flow status.  Can filter on type and unitId.  Returns paginated data.",
+                "parameters": [
+                    {
+                        "name": "workflow",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "typeOf",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "unitId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Required for pagination, if left out only first page will return",
+                        "name": "lastEvaluatedKey",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/petition/unitId/{unitId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all petitions with associated unit id",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all petitions with a given academic unit ID.  Can filter on workflow status.  Returns paginated data.",
+                "parameters": [
+                    {
+                        "name": "unitId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "workflowStatus",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Required for pagination, if left out only first page will return",
+                        "name": "lastEvaluatedKey",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/petition/personId/{personId}?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all petitions for the specified person",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "personId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "dateTime",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/petition/*": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Add a new petition (or update an existing one)",
+                "x-throttling-tier": "Unlimited",
+                "description": "{\n\tpersonId\n\tdateTime\n\tacademicUnitId: required\n\tprogramCode: optional,\n\tprogramId: optional,\n\ttypeOf: string,\n\tclassification: string,\n\tdetails: richtext string\n\tattachments: <attachments in s3 bucket \n\t  bucket created in upload of\n          first attachement>\n\tapproval: {\n\t\tid: <string> (signatureId)\n\t\tsignatures: {\n\t\t\t<rules>\n\t\t}\n\t}\n\tdecision: {}\n\tworkflowStatus: string\n}",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "type": "application/json",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    ""
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Initialize a petition",
+                "x-throttling-tier": "Unlimited",
+                "description": "This is to initialize a petition.  Returns a dateTime to be used when making PUT request to create a new petition. Not required",
+                "parameters": [],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all petitions",
+                "x-throttling-tier": "Unlimited",
+                "description": "Optionally add filters in the query string.  Returns data paginated",
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/petition/document/{fileId}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Add a new document (or update an existing one)",
+                "x-throttling-tier": "Unlimited",
+                "description": "{\n     'contents' : <filebody>\n}",
+                "parameters": [
+                    {
+                        "name": "fileId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "type": "application/json",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "summary": "Download a document",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "fileId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/petition/type/{typeOf}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all petitions of a certain type",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all petitions of the specified type. Can filter on workflow status and unit Id. Returns paginated data.",
+                "parameters": [
+                    {
+                        "name": "typeOf",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "workflowStatus",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "unitId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Required for pagination, if left out only first page will return",
+                        "name": "lastEvaluatedKey",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/petition/{personId}/{dateTime}": {
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Remove specified petition with given personId and dateTime",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "personId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "dateTime",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/petition/?": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Add a new petition (or update an existing one)",
+                "x-throttling-tier": "Unlimited",
+                "description": "{\n\tpersonId\n\tdateTime\n\tacademicUnitId: required\n\tprogramCode: optional,\n\tprogramId: optional,\n\ttypeOf: string,\n\tclassification: string,\n\tdetails: richtext string\n\tattachments: <attachments in s3 bucket \n\t  bucket created in upload of\n          first attachement>\n\tapproval: {\n\t\tid: <string> (signatureId)\n\t\tsignatures: {\n\t\t\t<rules>\n\t\t}\n\t}\n\tdecision: {}\n\tworkflowStatus: string\n}",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "type": "application/json",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    ""
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Initialize a petition",
+                "x-throttling-tier": "Unlimited",
+                "description": "This is to initialize a petition.  Returns a dateTime to be used when making PUT request to create a new petition. Not required",
+                "parameters": [],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all petitions",
+                "x-throttling-tier": "Unlimited",
+                "description": "Optionally add filters in the query string.  Returns data paginated",
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/petition/unitId/{unitId}?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all petitions with associated unit id",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all petitions with a given academic unit ID.  Can filter on workflow status.  Returns paginated data.",
+                "parameters": [
+                    {
+                        "name": "unitId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "workflowStatus",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Required for pagination, if left out only first page will return",
+                        "name": "lastEvaluatedKey",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/petition/workflow/{workflow}?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all petitions with a certain workflow status",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all petitions with a given work flow status.  Can filter on type and unitId.  Returns paginated data.",
+                "parameters": [
+                    {
+                        "name": "workflow",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "typeOf",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "unitId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Required for pagination, if left out only first page will return",
+                        "name": "lastEvaluatedKey",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/petition/personId/{personId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all petitions for the specified person",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "personId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "dateTime",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/petition/type/{typeOf}?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all petitions of a certain type",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns all petitions of the specified type. Can filter on workflow status and unit Id. Returns paginated data.",
+                "parameters": [
+                    {
+                        "name": "typeOf",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "workflowStatus",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "name": "unitId",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Required for pagination, if left out only first page will return",
+                        "name": "lastEvaluatedKey",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/*": {
+            "get": {
+                "responses": {
+                    "200": {}
+                }
+            },
+            "post": {
+                "responses": {
+                    "200": {}
+                },
+                "parameters": [
+                    {
+                        "name": "Payload",
+                        "description": "Request Body",
+                        "required": false,
+                        "in": "body",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ]
+            },
+            "put": {
+                "responses": {
+                    "200": {}
+                },
+                "parameters": [
+                    {
+                        "name": "Payload",
+                        "description": "Request Body",
+                        "required": false,
+                        "in": "body",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ]
+            },
+            "delete": {
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "GSPetitionAPI",
+        "description": "Download a document",
+        "version": "v1.0"
+    },
+    "basePath": "/GSPetition/v1.0",
+    "host": "api.byu.edu:443"
+}

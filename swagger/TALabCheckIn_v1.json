@@ -1,0 +1,109 @@
+{
+    "paths": {
+        "/eaLabTrack.php": {
+            "post": {
+                "summary": "Post an action on a lab",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/action"
+                        },
+                        "description": "Request Body",
+                        "name": "Attendance",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/eaLabList.php": {
+            "get": {
+                "summary": "Get all labs",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/labarray"
+                        },
+                        "description": "Labs"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "labarray": {
+            "properties": {
+                "lab_list": {
+                    "items": {
+                        "$ref": "#/definitions/lab"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "action": {
+            "properties": {
+                "time": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "device_type": {
+                    "type": "string"
+                },
+                "lab_id": {
+                    "type": "integer"
+                },
+                "action": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "device_id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "time",
+                "lab_id",
+                "action",
+                "byu_id"
+            ]
+        },
+        "lab": {
+            "properties": {
+                "lab_name": {
+                    "type": "string"
+                },
+                "lab_id": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "lab_id",
+                "lab_name"
+            ]
+        }
+    },
+    "info": {
+        "title": "TALabCheckIn",
+        "description": "This API allows users to track their usage of lab rooms on campus. Used by the BYU Mobile App and Raspberry Pis",
+        "version": "v1"
+    },
+    "basePath": "/domains/ta-lab-check-in/v1",
+    "host": "api.byu.edu:443"
+}

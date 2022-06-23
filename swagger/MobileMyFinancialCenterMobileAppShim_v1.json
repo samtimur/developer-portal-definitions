@@ -1,0 +1,250 @@
+{
+    "paths": {
+        "/payment_types": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all payment types registered to user",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/paymentType"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of all payment types registered to user"
+                    }
+                }
+            }
+        },
+        "/unpaid_charges": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all unpaid charges for the authenticated user",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/charge"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of unpaid charges"
+                    }
+                }
+            }
+        },
+        "/payments/{invoiceId}": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Complete a payment using the specified payment type",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The id of the invoice to complete",
+                        "name": "invoiceId",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/account"
+                        },
+                        "description": "The account being used to make the payment",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/payments": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Start a payment invoice and get agreement information for the invoice",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/chargesWrapper"
+                        },
+                        "description": "The list of charges to pay for as well as a flag designating if the payment is going to be made with a credit card",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/paymentResponse"
+                        },
+                        "description": "The response from starting the payment including the invoice id, credit card fee and the terms and conditions for finalizing the payment"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get all historic payments for the authenticated user",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/payment"
+                            },
+                            "type": "array"
+                        },
+                        "description": "List of historic payments"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "charge": {
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "due_date": {
+                    "type": "string"
+                },
+                "line_item_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "payment": {
+            "properties": {
+                "total_amount": {
+                    "type": "number"
+                },
+                "payment_date": {
+                    "type": "string"
+                },
+                "paid_charges": {
+                    "items": {
+                        "$ref": "#/definitions/charge"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "payment_date",
+                "total_amount",
+                "paid_charges"
+            ]
+        },
+        "chargesWrapper": {
+            "properties": {
+                "charges": {
+                    "items": {
+                        "$ref": "#/definitions/charge"
+                    },
+                    "type": "array"
+                },
+                "is_credit_card": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "is_credit_card",
+                "charges"
+            ]
+        },
+        "paymentType": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "munged_account_num": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "financial_institution": {
+                    "type": "string"
+                },
+                "is_credit_card": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "paymentResponse": {
+            "properties": {
+                "terms_and_conditions": {
+                    "type": "string"
+                },
+                "credit_card_fee": {
+                    "type": "number"
+                },
+                "invoice_id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "invoice_id",
+                "credit_card_fee",
+                "terms_and_conditions"
+            ]
+        },
+        "account": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "is_credit_card": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "id",
+                "is_credit_card"
+            ]
+        }
+    },
+    "info": {
+        "title": "MobileMyFinancialCenterMobileAppShim",
+        "description": "This service is used as a shim between the BYU Mobile App and My Financial Center/Payment Manager.",
+        "version": "v1"
+    },
+    "basePath": "/domains/mobile/mfcmobile/v1",
+    "host": "api.byu.edu:443"
+}

@@ -1,0 +1,167 @@
+{
+    "paths": {
+        "/{id}": {
+            "put": {
+                "summary": "Update current location of the user for given SafeWalk Session",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "SafeWalk Session ID",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/location"
+                        },
+                        "description": "Object containing the user's location",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "delete": {
+                "summary": "End a SafeWalk Session",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "SafeWalk Session ID",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/{id}/emergency": {
+            "post": {
+                "summary": "Report an Emergency during a SafeWalk Session",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "SafeWalk Session ID",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/location"
+                        },
+                        "description": "Object containing the user's location",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "summary": "Create a new SafeWalk Session",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/locationAndPhone"
+                        },
+                        "description": "Object containing the user's location and phone number for the SafeWalk Session",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        },
+                        "description": "Object containing the ID for the SafeWalk Session"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "id": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "location": {
+            "properties": {
+                "longitude": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "longitude",
+                "latitude"
+            ]
+        },
+        "locationAndPhone": {
+            "properties": {
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "longitude": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "phoneNumber",
+                "longitude",
+                "latitude"
+            ]
+        }
+    },
+    "info": {
+        "title": "SafeWalk",
+        "description": "This is used by the mobile app for the SafeWalk feature, which allows the police to monitor students' walks to and from campus when the student requests a SafeWalk session.",
+        "version": "v1"
+    },
+    "basePath": "/domains/safewalk/v1",
+    "host": "api.byu.edu:443"
+}

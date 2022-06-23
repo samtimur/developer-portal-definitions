@@ -1,0 +1,99 @@
+{
+    "paths": {
+        "/run_ps_query/{OwnerType}/{QueryName}/{OutResultType}/{OutResultFormat}?": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Query owner type, public or private in either uppercase or lowercase.",
+                        "name": "OwnerType",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Query name.",
+                        "name": "QueryName",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Valid values are WEBROWSET (XML),XMLP (BI Publisher XML),EXCEL (XLS) or HTML. Note: For connected queries, the output type must be XMLP.",
+                        "name": "OutResultType",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Valid values are FILE or NONFILE. Note: For connected queries, the output format must be FILE. The FILE option gives a link to a file, where the NONFILE gives back XML ",
+                        "name": "OutResultFormat",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Indicate whether this is a connected query. Valid values are Y or N in either upper or lower case.",
+                        "name": "isconnectedquery",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "The maximum number of rows to be fetched.",
+                        "name": "maxrows",
+                        "type": "integer",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "This field is used only for Connected Query. Enter the name of the query containing the prompt.",
+                        "name": "prompt_psqueryname",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Unique prompt name defined in the query. This value is case-sensitive.",
+                        "name": "prompt_uniquepromptname",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Field value for the prompt. This value is case-sensitive.",
+                        "name": "prompt_fieldvalue",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "List of field names to be returned. This value is case sensitive and must be the unique field name.",
+                        "name": "filterfields",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Enter true for JSON response type; enter false for standard XML response. If no value is provided, the default is standard XML response.",
+                        "name": "json_resp",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "PSQuery",
+        "version": "v1"
+    },
+    "basePath": "/domains/erp/sa/psquery/v1",
+    "host": "api.byu.edu:443"
+}

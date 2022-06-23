@@ -1,0 +1,140 @@
+{
+    "basePath": "/domains/erp/hr/tl_rptd_time_by_dept/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns a bi-weekly range of reported time data based on the start date for all employees that the person has access to or just one employee",
+                "parameters": [
+                    {
+                        "maxLength": 10,
+                        "minLength": 10,
+                        "description": "Start Date",
+                        "name": "start_dt",
+                        "type": "string",
+                        "required": true,
+                        "allowEmptyValue": false,
+                        "in": "query"
+                    },
+                    {
+                        "maxLength": 9,
+                        "minLength": 0,
+                        "description": "Employee ID",
+                        "name": "emplid",
+                        "type": "string",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/employee"
+                            },
+                            "type": "array"
+                        },
+                        "description": "employee response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        },
+                        "description": "failed status"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "employee": {
+            "properties": {
+                "punch_begin_date": {
+                    "type": "string"
+                },
+                "time_reporting_code": {
+                    "type": "string"
+                },
+                "job_title": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "punch_end_date": {
+                    "type": "string"
+                },
+                "employee_record": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "hours_worked": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "net_id": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "punch_begin_date",
+                "time_reporting_code",
+                "job_title",
+                "name",
+                "punch_end_date",
+                "employee_record",
+                "byu_id",
+                "hours_worked",
+                "date",
+                "net_id"
+            ]
+        },
+        "errorModel": {
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "error_message": {
+                    "type": "string"
+                },
+                "error_message_number": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "status",
+                "error_message_number",
+                "error_message"
+            ]
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "info": {
+        "title": "tl_rptd_time_by_dept",
+        "description": "This API returns reported time data. The data is returned based on the persons security and limits the data to a bi-weekly period commencing with the start date.",
+        "contact": {
+            "email": "luke@byu.edu",
+            "name": "Application Development - CHF team",
+            "url": "<a href=\\\"https://www.byu.edu\">Click Here<\\a>"
+        },
+        "version": "v1"
+    }
+}

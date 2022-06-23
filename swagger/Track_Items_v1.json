@@ -1,0 +1,211 @@
+{
+    "basePath": "/domains/erp/fs/track_items/v1",
+    "x-mock_json": {
+        "items": {
+            "items_404": {
+                "validation_response": [
+                    "A Journal with that ID (123456) has not been submitted."
+                ],
+                "process_response": {
+                    "message": "Not Found",
+                    "code": 404
+                }
+            },
+            "values": [
+                {
+                    "Items": {
+                        "item": {
+                            "amount": "XYZ",
+                            "cas": "12345678",
+                            "category": "CH01",
+                            "rfid": "rfid0123456789",
+                            "status": "A",
+                            "location": "Building R000",
+                            "owner": "userid",
+                            "type": "KG",
+                            "last_seen": "01011990"
+                        }
+                    }
+                }
+            ],
+            "items_200": {
+                "validation_response": [
+                    "Process status"
+                ],
+                "process_response": {
+                    "message": "Success",
+                    "code": 200
+                }
+            },
+            "items_400": {
+                "validation_response": [
+                    "Journal with Id (0123456789) has multiple entries. Please submit again with a date."
+                ],
+                "process_response": {
+                    "message": "Multiple Journals with ID",
+                    "code": 400
+                }
+            }
+        }
+    },
+    "paths": {
+        "/{building}": {
+            "get": {
+                "summary": "Returns items currently located in specified building",
+                "tags": [
+                    "items"
+                ],
+                "description": "Returns items currently located in specified building",
+                "parameters": [
+                    {
+                        "description": "Returns items currently located in specified building",
+                        "name": "building",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/items_200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/items_400"
+                    },
+                    "404": {
+                        "$ref": "#/responses/items_404"
+                    }
+                }
+            }
+        },
+        "/*": {
+            "get": {
+                "summary": "Returns all available buildings with items",
+                "tags": [
+                    "buildings"
+                ],
+                "description": "returns the names of the buildings that contain items",
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/items_200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/items_400"
+                    },
+                    "404": {
+                        "$ref": "#/responses/items_404"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "swagger": "2.0",
+    "definitions": {
+        "items": {
+            "properties": {
+                "Items": {
+                    "items": {
+                        "properties": {
+                            "amount": {
+                                "type": "number"
+                            },
+                            "cas": {
+                                "type": "string"
+                            },
+                            "category": {
+                                "type": "string"
+                            },
+                            "rfid": {
+                                "type": "string"
+                            },
+                            "status": {
+                                "type": "string"
+                            },
+                            "location": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "owner": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string"
+                            },
+                            "last_seen": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "Validation Response": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "Items",
+                "Validation Response"
+            ],
+            "type": "object"
+        }
+    },
+    "responses": {
+        "items_404": {
+            "schema": {
+                "properties": {
+                    "validation_response": {
+                        "items": {
+                            "example": "A journal with that ID (0123456789) and date(01011990) not found.",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "Journals not found"
+        },
+        "items_200": {
+            "schema": {
+                "properties": {
+                    "validation_response": {
+                        "items": {
+                            "example": "Invalid date. Please format date as yyyy-mm-dd",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "Incorrect date format"
+        },
+        "items_400": {
+            "schema": {
+                "properties": {
+                    "validation_response": {
+                        "items": {
+                            "example": "Invalid date. Please format date as yyyy-mm-dd",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "description": "Incorrect date format"
+        }
+    },
+    "info": {
+        "title": "Track Item",
+        "description": "Get and Post Items for Track Item",
+        "version": "v1"
+    }
+}

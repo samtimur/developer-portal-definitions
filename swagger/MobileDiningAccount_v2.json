@@ -1,0 +1,125 @@
+{
+    "paths": {
+        "/status": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-lambda-function": "lambda",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns the meal plan information for user or for proxied user",
+                "x-lambda-function": "lambda",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The person ID of the person that you would like to proxy as. This will only work if you are in the admin group.",
+                        "name": "actor",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/mealPlan"
+                        },
+                        "description": "The meal plan for the authenticated user."
+                    },
+                    "401": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Unable to authenticate."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "No meal plan for the authenticated user."
+                    },
+                    "500": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "Any generic error that happens during the processing of the request."
+                    }
+                }
+            }
+        }
+    },
+    "x-lambda-functions": {
+        "lambda": {
+            "warmup": {
+                "http-paths": [
+                    "/status"
+                ],
+                "schedule": "rate(5 minutes)"
+            },
+            "runtime": "java8",
+            "path_to_code": "target/lambda.jar",
+            "timeout": 40,
+            "memory": 1024,
+            "handler": "edu.byu.diningaccount.Handler::handleRequest"
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "mealPlan": {
+            "properties": {
+                "balance": {
+                    "type": "string"
+                },
+                "recommended_balance": {
+                    "type": "string"
+                },
+                "differerence_balance": {
+                    "type": "string"
+                },
+                "average_daily_spending": {
+                    "type": "string"
+                },
+                "recommended_daily_spending": {
+                    "type": "string"
+                },
+                "bar_percent": {
+                    "format": "float",
+                    "type": "number"
+                },
+                "plan_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "error": {
+            "properties": {
+                "readable_message": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "MobileDiningAccount",
+        "version": "2.0"
+    },
+    "basePath": "/domains/mobile/dining/2.0",
+    "host": "api.byu.edu:443"
+}

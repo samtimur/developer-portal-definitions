@@ -1,0 +1,722 @@
+{
+    "basePath": "/domains/housing/mealplans/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/petitions/{id}": {
+            "get": {
+                "tags": [
+                    "petitions"
+                ],
+                "summary": "Get the petition with specified id number",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "ID of requested petition",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Petition"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "petitions"
+                ],
+                "summary": "Delete the petition with specified id number",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "ID of requested petition",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Petition"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/account": {
+            "post": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Adds a new meal plan to a student's account",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/PurchaseOrder"
+                        },
+                        "description": "Account object being created",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/PurchaseOrder"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "addAccount",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/ferpa/{netid}": {
+            "get": {
+                "tags": [
+                    "ferpa"
+                ],
+                "summary": "Gets FERPA information if already in the database",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "net ID of requested user",
+                        "name": "netid",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Ferpa"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getFerpa",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "ferpa"
+                ],
+                "summary": "Deletes FERPA information for chosen user",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "net ID of requested user",
+                        "name": "netid",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Ferpa"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/messages": {
+            "post": {
+                "tags": [
+                    "messages"
+                ],
+                "summary": "Create a new message",
+                "description": "",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        },
+                        "description": "Message object being created",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "messages"
+                ],
+                "summary": "Get a list of petitions opened by the user",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "net ID of requested user",
+                        "name": "netid",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Message"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/messages/{id}": {
+            "get": {
+                "tags": [
+                    "messages"
+                ],
+                "summary": "Get the message with specified id number",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "ID of requested message",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "delete": {
+                "tags": [
+                    "messages"
+                ],
+                "summary": "Delete the specified message",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "ID of requested message",
+                        "name": "id",
+                        "format": "int64",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/petitions": {
+            "post": {
+                "tags": [
+                    "petitions"
+                ],
+                "summary": "Create a new petition assigned to a user",
+                "description": "",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Petition"
+                        },
+                        "description": "Petition object being created",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "tags": [
+                    "petitions"
+                ],
+                "summary": "Get a list of petitions opened by the user",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "net ID of requested user",
+                        "name": "netid",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Petition"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/mealplan": {
+            "get": {
+                "tags": [
+                    "mealplan"
+                ],
+                "summary": "Get list of all meal plans",
+                "description": "All valid meal plans are listed",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/MealPlan"
+                            },
+                            "type": "array"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getAllMealplans",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/ferpa/*": {
+            "post": {
+                "tags": [
+                    "ferpa"
+                ],
+                "summary": "Adds new FERPA information to the database",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Ferpa"
+                        },
+                        "description": "Ferpa object being created",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Ferpa"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "addFerpa",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "put": {
+                "tags": [
+                    "ferpa"
+                ],
+                "summary": "Updates FERPA information if previously entered",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Ferpa"
+                        },
+                        "description": "Ferpa object being updated",
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Ferpa"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "updateFerpa",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/mealplan/{id}/{startdate}": {
+            "get": {
+                "tags": [
+                    "mealplan"
+                ],
+                "summary": "Get details for a specific meal plan",
+                "description": "Returns meal plan with given id",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "ID of meal plan requested",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "startdate of meal plan requested",
+                        "name": "startdate",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "enddate of meal plan requested",
+                        "name": "enddate",
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/MealPlan"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getPlanPrice",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        },
+        "/account/{netid}": {
+            "get": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Get meal plans for user account",
+                "description": "Returns meal plan information for chosen user account",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "net ID of requested user",
+                        "name": "netid",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Account"
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "getAccount",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "Ferpa": {
+            "properties": {
+                "phone": {
+                    "type": "string"
+                },
+                "person1": {
+                    "$ref": "#/definitions/AccessPerson"
+                },
+                "person2": {
+                    "$ref": "#/definitions/AccessPerson"
+                },
+                "answer": {
+                    "type": "string"
+                },
+                "netid": {
+                    "example": "netid",
+                    "type": "string"
+                },
+                "security": {
+                    "type": "string"
+                },
+                "identifier": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Message": {
+            "properties": {
+                "body": {
+                    "type": "string"
+                },
+                "userid": {
+                    "example": "netid",
+                    "type": "string"
+                },
+                "messageid": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "date": {
+                    "example": "06/17/2019",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Account": {
+            "properties": {
+                "id": {
+                    "example": "netid",
+                    "type": "string"
+                },
+                "currentHousing": {
+                    "type": "string"
+                },
+                "allPlans": {
+                    "items": {
+                        "$ref": "#/definitions/MealPlan"
+                    },
+                    "type": "array"
+                },
+                "currentBalance": {
+                    "format": "float",
+                    "type": "number"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name"
+            ]
+        },
+        "Petition": {
+            "properties": {
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "explanation": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "MealPlan": {
+            "properties": {
+                "id": {
+                    "example": "int64",
+                    "type": "integer"
+                },
+                "allowOC": {
+                    "type": "boolean"
+                },
+                "startDate": {
+                    "example": "08/25/2018",
+                    "type": "string"
+                },
+                "rate": {
+                    "format": "float",
+                    "type": "number"
+                },
+                "onCampus": {
+                    "type": "boolean"
+                },
+                "allowHR": {
+                    "type": "boolean"
+                },
+                "nineteenPlus": {
+                    "type": "boolean"
+                },
+                "allowFL": {
+                    "type": "boolean"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "terms": {
+                    "type": "string"
+                },
+                "payments": {
+                    "items": {
+                        "$ref": "#/definitions/Payment"
+                    },
+                    "type": "array"
+                },
+                "allowWT": {
+                    "type": "boolean"
+                },
+                "endDate": {
+                    "example": "04/20/2019",
+                    "type": "string"
+                },
+                "allowHL": {
+                    "type": "boolean"
+                },
+                "allowWP": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name"
+            ]
+        },
+        "AccessPerson": {
+            "properties": {
+                "id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "accessResIssue": {
+                    "type": "boolean"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "accessPersonal": {
+                    "type": "boolean"
+                },
+                "accessMealPlan": {
+                    "type": "boolean"
+                },
+                "accessFinancial": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "Payment": {
+            "properties": {
+                "amount": {
+                    "format": "float",
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "due_date": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "none"
+            ]
+        },
+        "PurchaseOrder": {
+            "properties": {
+                "startDate": {
+                    "type": "string"
+                },
+                "netid": {
+                    "example": "netid",
+                    "type": "string"
+                },
+                "mealplanid": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "securityDefinitions": {
+        "api_key": {
+            "name": "api_key",
+            "type": "apiKey",
+            "in": "header"
+        }
+    },
+    "info": {
+        "title": "Housing API to Dining",
+        "description": "This is the housing api to dining services.",
+        "termsOfService": "",
+        "contact": {
+            "email": "housing@byu.edu"
+        },
+        "version": "v1"
+    }
+}

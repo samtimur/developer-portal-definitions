@@ -1,0 +1,675 @@
+{
+    "basePath": "/domains/legacy/academic/class_schedule/non_academic_events/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{year_term}/{schedule_id}": {
+            "get": {
+                "summary": "Get a set of non academic events",
+                "tags": [
+                    "AdmByuDecisionsService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a set of non academic events",
+                "parameters": [
+                    {
+                        "description": "year term for event",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "schedule id of the event",
+                        "name": "schedule_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/NonAcademicEventsSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/NonAcademicEventsServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetNonAcademicEvents"
+            },
+            "delete": {
+                "summary": "Delete a set of non academic events",
+                "tags": [
+                    "AdmByuDecisionsService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Delete a set of non academic events",
+                "parameters": [
+                    {
+                        "description": "year term for event",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "schedule id of the event",
+                        "name": "schedule_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/NonAcademicEventsUpdateSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/NonAcademicEventsServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "DeleteNonAcademicEvents"
+            }
+        },
+        "/{year_term}/{schedule_id}/{sequence_number}": {
+            "get": {
+                "summary": "Get a specific non academic event",
+                "tags": [
+                    "AdmByuDecisionsService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get a specific non academic event",
+                "parameters": [
+                    {
+                        "description": "year term for event",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "schedule id of the event",
+                        "name": "schedule_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "sequence number of the event",
+                        "name": "sequence_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/NonAcademicEventsSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/NonAcademicEventsServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "GetNonAcademicEvent"
+            },
+            "delete": {
+                "summary": "Delete a specific non academic event",
+                "tags": [
+                    "AdmByuDecisionsService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Delete a specific non academic event",
+                "parameters": [
+                    {
+                        "description": "year term for event",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "schedule id of the event",
+                        "name": "schedule_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "sequence number of the event",
+                        "name": "sequence_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/NonAcademicEventsUpdateSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/NonAcademicEventsServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "DeleteNonAcademicEvent"
+            }
+        },
+        "/{year_term}/{schedule_id}/{sequence_number}?": {
+            "post": {
+                "summary": "Create or update a child event record for a non academic event. You can also create or update the parent record at the same time by including those query parms",
+                "tags": [
+                    "AdmByuDecisionsService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Create or update a child event record for a non academic event. You can also create or update the parent record at the same time by including those query parms. For the actual event record you should include the following: building, room, at least 1 day, begin and end times and a status. The rest can be excluded if not needed.",
+                "parameters": [
+                    {
+                        "description": "year term for event",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "schedule id of the event",
+                        "name": "schedule_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "sequence number of the event",
+                        "name": "sequence_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Who is the sponsor of this event (parent record query parm)",
+                        "name": "sponsor",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What is the purpose of this event (parent record query parm)",
+                        "name": "purpose",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What is the contact info for the sponsor of this event (parent record query parm)",
+                        "name": "contact_info",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Are there any notes for this event (parent record query parm)",
+                        "name": "note",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What building is this event happening in",
+                        "name": "building",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What room is this event happening in",
+                        "name": "room",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Does the event happen on Monday (valid values are Y or M). you can exclude this query parm if the event does not happen on this day",
+                        "name": "mon",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Does the event happen on Tuesday (valid values are Y or T). you can exclude this query parm if the event does not happen on this day",
+                        "name": "tue",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Does the event happen on Wednesday (valid values are Y or W). you can exclude this query parm if the event does not happen on this day",
+                        "name": "wed",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Does the event happen on Thursday (valid values are Y or R). you can exclude this query parm if the event does not happen on this day",
+                        "name": "thu",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Does the event happen on Friday (valid values are Y or F). you can exclude this query parm if the event does not happen on this day",
+                        "name": "fri",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Does the event happen on Saturday (valid values are Y or S). you can exclude this query parm if the event does not happen on this day",
+                        "name": "sat",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Does the event happen on Sunday (valid values are Y or U). you can exclude this query parm if the event does not happen on this day",
+                        "name": "sun",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What date does this event start (format is YYYYMMDD). If both start date and end date are omitted, then the default will be the term or semester start and end dates. If only one is entered then the other will default to the same date.",
+                        "name": "start_date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What date does this event start (format is YYYYMMDD). If both start date and end date are omitted, then the default will be the term or semester start and end dates. If only one is entered then the other will default to the same date.",
+                        "name": "end_date",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What time does this event start (format is hhmm in military time). include leading zeros. examples: 0900 for 9am; 1400 for 2 pm",
+                        "name": "begin_time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What time does this event end (format is hhmm in military time). include leading zeros. examples: 0900 for 9am; 1400 for 2 pm",
+                        "name": "end_time",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What is the status of this event (C=Confirmed, A=Has a Conflict, T=Taught Together, N=Not Confirmed)",
+                        "name": "status",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "If there is a conflicting event, is that conflict allowed",
+                        "name": "allow_conflict",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/NonAcademicEventsUpdateSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/NonAcademicEventsServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "BuildNonAcademicEvent"
+            }
+        },
+        "/{year_term}/{schedule_id}?": {
+            "post": {
+                "summary": "Create or update a parent record for the non academic event",
+                "tags": [
+                    "AdmByuDecisionsService"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Create or update a parent record for the non academic event",
+                "parameters": [
+                    {
+                        "description": "year term for event",
+                        "name": "year_term",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "schedule id of the event",
+                        "name": "schedule_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Who is the sponsor of this event",
+                        "name": "sponsor",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What is the purpose of this event",
+                        "name": "purpose",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "What is the contact info for the sponsor of this event",
+                        "name": "contact_info",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Are there any notes for this event",
+                        "name": "note",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/NonAcademicEventsUpdateSuccess"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/NonAcademicEventsServiceError"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    }
+                },
+                "operationId": "BuildNonAcademicEventParent"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "event_info_data": {
+            "properties": {
+                "begin_time": {
+                    "type": "string"
+                },
+                "event_reason": {
+                    "type": "string"
+                },
+                "set_up_id": {
+                    "type": "string"
+                },
+                "event_type": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "event_id": {
+                    "type": "string"
+                },
+                "sun": {
+                    "type": "string"
+                },
+                "fri": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "thu": {
+                    "type": "string"
+                },
+                "institution": {
+                    "type": "string"
+                },
+                "building": {
+                    "type": "string"
+                },
+                "allow_conflict": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "wed": {
+                    "type": "string"
+                },
+                "mon": {
+                    "type": "string"
+                },
+                "sequence_number": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "days": {
+                    "type": "string"
+                },
+                "end_time": {
+                    "type": "string"
+                },
+                "sat": {
+                    "type": "string"
+                },
+                "set_up_description": {
+                    "type": "string"
+                },
+                "start_date": {
+                    "type": "string"
+                },
+                "tue": {
+                    "type": "string"
+                },
+                "updated_by_name": {
+                    "type": "string"
+                },
+                "room": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "NonAcademicEventsSuccess": {
+            "properties": {
+                "NonAcademicEventsService": {
+                    "properties": {
+                        "response": {
+                            "$ref": "#/definitions/NonAcademicEventsResults"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "errors": {
+            "items": {
+                "$ref": "#/definitions/error_data"
+            },
+            "type": "array"
+        },
+        "NonAcademicEventsServiceError": {
+            "properties": {
+                "NonAcademicEventsService": {
+                    "properties": {
+                        "response": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "errors": {
+                            "$ref": "#/definitions/errors"
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "number"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "error_data": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "httpStatusCode": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "NonAcademicEventsUpdateSuccess": {
+            "properties": {
+                "NonAcademicEventsService": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "result": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "request": {
+                            "$ref": "#/definitions/request"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "NonAcademicEventsResults": {
+            "properties": {
+                "schedule_id": {
+                    "type": "string"
+                },
+                "event_info": {
+                    "items": {
+                        "$ref": "#/definitions/event_info_data"
+                    },
+                    "type": "array"
+                },
+                "credit_institution": {
+                    "type": "string"
+                },
+                "updated_by_id": {
+                    "type": "string"
+                },
+                "date_time_updated": {
+                    "type": "string"
+                },
+                "year_term": {
+                    "type": "string"
+                },
+                "purpose": {
+                    "type": "string"
+                },
+                "sponsor": {
+                    "type": "string"
+                },
+                "contact_info": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "updated_by_name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "AcademicClassScheduleNonAcademicEvents",
+        "description": "This service builds non academic events back into AIM.",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/NonAcademicEvents_v1"
+    }
+}

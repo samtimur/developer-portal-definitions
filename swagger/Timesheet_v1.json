@@ -1,0 +1,414 @@
+{
+    "basePath": "/domains/erp/hr/timesheet/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{byu_id},{punch_date}": {
+            "get": {
+                "summary": "Timesheet for date",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the timesheet for pay period in which the date falls for the byu id and date",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/punch_date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/timesheet"
+                        },
+                        "description": "The employee's timesheet for the period around the given punch date"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/{byu_id}": {
+            "get": {
+                "summary": "Timesheet",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get the timesheet information for given byu id",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/timesheet"
+                        },
+                        "description": "The employee's current timesheet"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "parameters": {
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "name": "byu_id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "punch_date": {
+            "pattern": "YYYY-MM-DD",
+            "description": "The date that a given punch was recorded on",
+            "name": "punch_date",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        }
+    },
+    "definitions": {
+        "trc_id": {
+            "description": "A string of up to 5 characters to identify the time reporting code",
+            "enum": [
+                "4REG",
+                "4RPP",
+                "4OCP"
+            ],
+            "example": "4REG",
+            "type": "string"
+        },
+        "jobs": {
+            "items": {
+                "$ref": "#/definitions/job"
+            },
+            "description": "Collection of jobs",
+            "type": "array"
+        },
+        "job_code_description": {
+            "maxLength": 30,
+            "description": "Department specified description of a specific job.",
+            "example": "Project Assistant",
+            "type": "string"
+        },
+        "person_name": {
+            "description": "Name of person formatted with last name first",
+            "example": "Doe,John",
+            "type": "string"
+        },
+        "valid_account": {
+            "description": "Indicates if the account associated with the job is active (true) or not (false).  If false, a corresponding message property will be available to display to end users.",
+            "example": true,
+            "type": "boolean"
+        },
+        "punch_type": {
+            "description": "Character defining whether an employee is clocking in or out",
+            "enum": [
+                "I",
+                "O",
+                "T"
+            ],
+            "example": "I",
+            "type": "string"
+        },
+        "trc_description": {
+            "maxLength": 30,
+            "description": "Description of a TRC",
+            "example": "Regular Hours",
+            "type": "string"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "example": "123456789",
+            "type": "string"
+        },
+        "employee_record": {
+            "maxLength": 3,
+            "description": "The number that corresponds to a particular job for an employee when they work multiple jobs concurrently on campus.",
+            "example": 0,
+            "type": "integer"
+        },
+        "period_total": {
+            "description": "Aggregate of time worked across all jobs for the period. If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        },
+        "period_subtotal": {
+            "description": "Aggregate of time worked for the period. If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        },
+        "trc": {
+            "description": "Time Reporting Codes",
+            "properties": {
+                "trc_id": {
+                    "$ref": "#/definitions/trc_id"
+                },
+                "trc_description": {
+                    "$ref": "#/definitions/trc_description"
+                }
+            },
+            "type": "object"
+        },
+        "status": {
+            "description": "The response given from the system",
+            "properties": {
+                "message": {
+                    "$ref": "#/definitions/message"
+                },
+                "code": {
+                    "$ref": "#/definitions/code"
+                }
+            },
+            "type": "string"
+        },
+        "physical_facilities": {
+            "description": "Indicates if the job is in the physical facilities department (true) or not (false).",
+            "example": true,
+            "type": "boolean"
+        },
+        "international": {
+            "description": "Indicates that the employee is a non-resident alien (true) or not (false).",
+            "example": false,
+            "type": "boolean"
+        },
+        "job": {
+            "description": "Time reporting information about a job",
+            "properties": {
+                "job_code_description": {
+                    "$ref": "#/definitions/job_code_description"
+                },
+                "physical_facilities": {
+                    "$ref": "#/definitions/physical_facilities"
+                },
+                "valid_account": {
+                    "$ref": "#/definitions/valid_account"
+                },
+                "punch_type": {
+                    "$ref": "#/definitions/punch_type"
+                },
+                "trcs": {
+                    "$ref": "#/definitions/trcs"
+                },
+                "has_work_order_exception": {
+                    "$ref": "#/definitions/has_work_order_exception"
+                },
+                "full_part_time": {
+                    "$ref": "#/definitions/full_part_time"
+                },
+                "message": {
+                    "$ref": "#/definitions/message"
+                },
+                "has_punch_exception": {
+                    "$ref": "#/definitions/has_punch_exception"
+                },
+                "employee_record": {
+                    "$ref": "#/definitions/employee_record"
+                },
+                "clock_in": {
+                    "$ref": "#/definitions/clock_in"
+                },
+                "operating_unit": {
+                    "$ref": "#/definitions/operating_unit"
+                },
+                "weekly_subtotal": {
+                    "$ref": "#/definitions/weekly_subtotal"
+                },
+                "period_subtotal": {
+                    "$ref": "#/definitions/period_subtotal"
+                }
+            },
+            "type": "object",
+            "required": [
+                "weekly_subtotal",
+                "period_subtotal",
+                "employee_record",
+                "job_code_description",
+                "valid_account",
+                "clock_in",
+                "physical_facilities",
+                "full_part_time",
+                "operating_unit"
+            ]
+        },
+        "trcs": {
+            "items": {
+                "$ref": "#/definitions/trc"
+            },
+            "description": "Collection of TRCs",
+            "type": "array"
+        },
+        "code": {
+            "description": "The HTTP status code associated with the response.",
+            "example": "200",
+            "type": "string"
+        },
+        "error_response": {
+            "description": "Information pertaining to the reason an error was reached",
+            "properties": {
+                "timesheet": {
+                    "$ref": "#/definitions/status"
+                }
+            },
+            "type": "object"
+        },
+        "has_work_order_exception": {
+            "description": "Indicates if an exception on a work order exists",
+            "example": false,
+            "type": "boolean"
+        },
+        "full_part_time": {
+            "description": "Specifies if the employee is part-time (P) or full-time (F).",
+            "enum": [
+                "P",
+                "F"
+            ],
+            "example": "P",
+            "type": "string"
+        },
+        "message": {
+            "maxLength": 100,
+            "description": "A user-friendly message indicating why the employee is not able to clock in/out of a particular job.",
+            "example": "Unable to add job",
+            "type": "string"
+        },
+        "punched_hours": {
+            "description": "Aggregate of time worked for the day based on In and Out punches. If the employee has any uncorrected exceptions it will display --:--",
+            "example": "01:30",
+            "type": "string"
+        },
+        "international_message": {
+            "description": "Message to be returned when an international error has been flagged.",
+            "example": "Approaching 20 hour limit for work week.",
+            "type": "string"
+        },
+        "has_punch_exception": {
+            "description": "Indicates if an exception on a punch exists",
+            "example": false,
+            "type": "boolean"
+        },
+        "clock_in": {
+            "description": "Specifies if an employee is currently clocked in (true) or not (false).",
+            "example": true,
+            "type": "boolean"
+        },
+        "timesheet": {
+            "properties": {
+                "jobs": {
+                    "$ref": "#/definitions/jobs"
+                },
+                "punched_hours": {
+                    "$ref": "#/definitions/punched_hours"
+                },
+                "international_message": {
+                    "$ref": "#/definitions/international_message"
+                },
+                "person_name": {
+                    "$ref": "#/definitions/person_name"
+                },
+                "status": {
+                    "$ref": "#/definitions/status"
+                },
+                "international": {
+                    "$ref": "#/definitions/international"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "period_total": {
+                    "$ref": "#/definitions/period_total"
+                },
+                "weekly_total": {
+                    "$ref": "#/definitions/weekly_total"
+                }
+            }
+        },
+        "weekly_total": {
+            "description": "Aggregate of time worked across all jobs for the week. If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        },
+        "operating_unit": {
+            "maxLength": 8,
+            "description": "An eight digit alphanumeric field that defines a financial reporting entity.",
+            "example": "11440032",
+            "type": "string"
+        },
+        "weekly_subtotal": {
+            "description": "Aggregate of time worked for the week. If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "400": {
+            "schema": {
+                "$ref": "#/definitions/error_response"
+            },
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "403": {
+            "description": "Access denied to protected data"
+        },
+        "500": {
+            "description": "Internal Server Error - Error occurred that was not the fault of the user"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "Timesheet",
+        "description": "Returns the current timesheet status for the specified employee.",
+        "version": "v2"
+    }
+}

@@ -1,0 +1,443 @@
+{
+    "basePath": "/domains/legacy/academic/advisement/academicprogramsws/v1",
+    "x-mock_json": {
+        "AcademicProgramsWSService": {
+            "AcademicProgramsWSService": {
+                "response": {
+                    "program_type": "Minor",
+                    "program_code": "735401",
+                    "program_name": "Psychology",
+                    "effective_year_term": "20075",
+                    "unit_list": [
+                        {
+                            "unit_id": "1018",
+                            "unit_type": "College",
+                            "unit_name": "Family, Home, and Social Sciences, College of"
+                        },
+                        {
+                            "unit_id": "1379",
+                            "unit_type": "Department",
+                            "unit_name": "Psychology, Department of"
+                        }
+                    ],
+                    "major_program_id": "",
+                    "degree": "MIN",
+                    "program_diploma_name": "",
+                    "degree_level": "2",
+                    "effective_date": "04 Sep 2007",
+                    "program_id": "31875",
+                    "expired_year_term": "29995",
+                    "expired_date": "31 Dec 2999"
+                },
+                "request": {
+                    "status": 200,
+                    "resource": "/31875",
+                    "method": "GET",
+                    "attributes": "",
+                    "statusMessage": "Service request is OK and a response has been generated."
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{program_id_or_program_code}": {
+            "get": {
+                "summary": "GET",
+                "description": "Shows everything belonging to the Academic Program",
+                "parameters": [
+                    {
+                        "description": "5 digit number Program ID, or 6 digit number Program Code",
+                        "name": "program_id_or_program_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "AcademicProgramsWSService": {
+                                    "properties": {
+                                        "response": {
+                                            "properties": {
+                                                "program_type": {
+                                                    "type": "string"
+                                                },
+                                                "program_code": {
+                                                    "pattern": "^[0-9]{6}$",
+                                                    "type": "string"
+                                                },
+                                                "program_name": {
+                                                    "type": "string"
+                                                },
+                                                "effective_year_term": {
+                                                    "type": "string"
+                                                },
+                                                "unit_list": {
+                                                    "items": {
+                                                        "properties": {
+                                                            "unit_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "unit_type": {
+                                                                "type": "string"
+                                                            },
+                                                            "unit_name": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "major_program_id": {
+                                                    "type": "string"
+                                                },
+                                                "degree": {
+                                                    "type": "string"
+                                                },
+                                                "program_diploma_name": {
+                                                    "type": "string"
+                                                },
+                                                "degree_level": {
+                                                    "type": "string"
+                                                },
+                                                "effective_date": {
+                                                    "type": "string"
+                                                },
+                                                "program_id": {
+                                                    "pattern": "^[0-9]{5}$",
+                                                    "type": "string"
+                                                },
+                                                "expired_year_term": {
+                                                    "type": "string"
+                                                },
+                                                "expired_date": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "request": {
+                                            "properties": {
+                                                "status": {
+                                                    "type": "integer"
+                                                },
+                                                "resource": {
+                                                    "type": "string"
+                                                },
+                                                "method": {
+                                                    "type": "string"
+                                                },
+                                                "attributes": {
+                                                    "type": "string"
+                                                },
+                                                "statusMessage": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "AcademicProgramsWSService": {
+                                    "response": {
+                                        "program_type": "Minor",
+                                        "program_code": "735401",
+                                        "program_name": "Psychology",
+                                        "effective_year_term": "20075",
+                                        "unit_list": [
+                                            {
+                                                "unit_id": "1018",
+                                                "unit_type": "College",
+                                                "unit_name": "Family, Home, and Social Sciences, College of"
+                                            },
+                                            {
+                                                "unit_id": "1379",
+                                                "unit_type": "Department",
+                                                "unit_name": "Psychology, Department of"
+                                            }
+                                        ],
+                                        "major_program_id": "",
+                                        "degree": "MIN",
+                                        "program_diploma_name": "",
+                                        "degree_level": "2",
+                                        "effective_date": "04 Sep 2007",
+                                        "program_id": "31875",
+                                        "expired_year_term": "29995",
+                                        "expired_date": "31 Dec 2999"
+                                    },
+                                    "request": {
+                                        "status": 200,
+                                        "resource": "/31875",
+                                        "method": "GET",
+                                        "attributes": "",
+                                        "statusMessage": "Service request is OK and a response has been generated."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bad request - unable to interpret body of the message."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getAcademicPrograms",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "response": {
+            "properties": {
+                "program_type": {
+                    "type": "string"
+                },
+                "program_code": {
+                    "pattern": "^[0-9]{6}$",
+                    "type": "string"
+                },
+                "program_name": {
+                    "type": "string"
+                },
+                "effective_year_term": {
+                    "type": "string"
+                },
+                "unit_list": {
+                    "items": {
+                        "properties": {
+                            "unit_id": {
+                                "type": "string"
+                            },
+                            "unit_type": {
+                                "type": "string"
+                            },
+                            "unit_name": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "major_program_id": {
+                    "type": "string"
+                },
+                "degree": {
+                    "type": "string"
+                },
+                "program_diploma_name": {
+                    "type": "string"
+                },
+                "degree_level": {
+                    "type": "string"
+                },
+                "effective_date": {
+                    "type": "string"
+                },
+                "program_id": {
+                    "pattern": "^[0-9]{5}$",
+                    "type": "string"
+                },
+                "expired_year_term": {
+                    "type": "string"
+                },
+                "expired_date": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "request": {
+            "properties": {
+                "status": {
+                    "type": "integer"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "attributes": {
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "AcademicProgramsWSService": {
+            "properties": {
+                "AcademicProgramsWSService": {
+                    "properties": {
+                        "response": {
+                            "properties": {
+                                "program_type": {
+                                    "type": "string"
+                                },
+                                "program_code": {
+                                    "pattern": "^[0-9]{6}$",
+                                    "type": "string"
+                                },
+                                "program_name": {
+                                    "type": "string"
+                                },
+                                "effective_year_term": {
+                                    "type": "string"
+                                },
+                                "unit_list": {
+                                    "items": {
+                                        "properties": {
+                                            "unit_id": {
+                                                "type": "string"
+                                            },
+                                            "unit_type": {
+                                                "type": "string"
+                                            },
+                                            "unit_name": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "major_program_id": {
+                                    "type": "string"
+                                },
+                                "degree": {
+                                    "type": "string"
+                                },
+                                "program_diploma_name": {
+                                    "type": "string"
+                                },
+                                "degree_level": {
+                                    "type": "string"
+                                },
+                                "effective_date": {
+                                    "type": "string"
+                                },
+                                "program_id": {
+                                    "pattern": "^[0-9]{5}$",
+                                    "type": "string"
+                                },
+                                "expired_year_term": {
+                                    "type": "string"
+                                },
+                                "expired_date": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "request": {
+                            "properties": {
+                                "status": {
+                                    "type": "integer"
+                                },
+                                "resource": {
+                                    "type": "string"
+                                },
+                                "method": {
+                                    "type": "string"
+                                },
+                                "attributes": {
+                                    "type": "string"
+                                },
+                                "statusMessage": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "unit_item": {
+            "properties": {
+                "unit_id": {
+                    "type": "string"
+                },
+                "unit_type": {
+                    "type": "string"
+                },
+                "unit_name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "AcademicAdvisementAcademicProgramsWS",
+        "description": "This service accesses resources in the Academic Programs portion of the AIM System.",
+        "contact": {
+            "email": "it@byu.edu",
+            "name": "OIT Service Desk Support",
+            "url": "https://it.byu.edu"
+        },
+        "version": "v1"
+    }
+}

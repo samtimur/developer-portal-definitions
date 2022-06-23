@@ -1,0 +1,688 @@
+{
+    "basePath": "/domains/erp/fs/department/v2",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{department_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Return a list of all the roles for the department and who is assigned to each role",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Defines the department to return the list of roles for",
+                        "name": "department_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "Defines the number of department levels to return. If left blank, it will default to returning 1 level for the specified department_id. If a number is specified, it will return that number of department levels. If '*' is used, it will return ALL department levels for the specified department_id.",
+                        "name": "number_of_levels",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "budget_account_flag": {
+                                    "type": "string"
+                                },
+                                "chart_field_effective_date": {
+                                    "type": "string"
+                                },
+                                "department_id": {
+                                    "type": "string"
+                                },
+                                "roles": {
+                                    "properties": {
+                                        "manager": {
+                                            "properties": {
+                                                "department_manager_name": {
+                                                    "type": "string"
+                                                },
+                                                "department_manager_byu_id": {
+                                                    "type": "string"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "net_id": {
+                                                    "type": "string"
+                                                },
+                                                "email_address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "liaison": {
+                                            "properties": {
+                                                "liaison_byu_id": {
+                                                    "type": "string"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "liaison_name": {
+                                                    "type": "string"
+                                                },
+                                                "net_id": {
+                                                    "type": "string"
+                                                },
+                                                "email_address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "dean": {
+                                            "properties": {
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "dean_or_director_name": {
+                                                    "type": "string"
+                                                },
+                                                "dean_or_director_byu_id": {
+                                                    "type": "string"
+                                                },
+                                                "net_id": {
+                                                    "type": "string"
+                                                },
+                                                "email_address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "controller": {
+                                            "properties": {
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "controller_name": {
+                                                    "type": "string"
+                                                },
+                                                "controller_byu_id": {
+                                                    "type": "string"
+                                                },
+                                                "net_id": {
+                                                    "type": "string"
+                                                },
+                                                "email_address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "vp": {
+                                            "properties": {
+                                                "vice_president_name": {
+                                                    "type": "string"
+                                                },
+                                                "vice_president_byu_id": {
+                                                    "type": "string"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "net_id": {
+                                                    "type": "string"
+                                                },
+                                                "email_address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "contact": {
+                                            "properties": {
+                                                "department_contact_name": {
+                                                    "type": "string"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "net_id": {
+                                                    "type": "string"
+                                                },
+                                                "department_contact_byu_id": {
+                                                    "type": "string"
+                                                },
+                                                "email_address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "department_name": {
+                                    "type": "string"
+                                },
+                                "division_id": {
+                                    "type": "string"
+                                },
+                                "division_name": {
+                                    "type": "string"
+                                },
+                                "sync_to_hr_flag": {
+                                    "type": "string"
+                                },
+                                "operating_unit": {
+                                    "type": "string"
+                                },
+                                "parent_department_id": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns all BYU departments with corresponding information",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "budget_account_flag": {
+                                    "type": "string"
+                                },
+                                "chart_field_effective_date": {
+                                    "type": "string"
+                                },
+                                "department_id": {
+                                    "type": "string"
+                                },
+                                "roles": {
+                                    "properties": {
+                                        "manager": {
+                                            "properties": {
+                                                "department_manager_name": {
+                                                    "type": "string"
+                                                },
+                                                "department_manager_byu_id": {
+                                                    "type": "string"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "net_id": {
+                                                    "type": "string"
+                                                },
+                                                "email_address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "liaison": {
+                                            "properties": {
+                                                "liaison_byu_id": {
+                                                    "type": "string"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "liaison_name": {
+                                                    "type": "string"
+                                                },
+                                                "net_id": {
+                                                    "type": "string"
+                                                },
+                                                "email_address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "dean": {
+                                            "properties": {
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "dean_or_director_name": {
+                                                    "type": "string"
+                                                },
+                                                "dean_or_director_byu_id": {
+                                                    "type": "string"
+                                                },
+                                                "net_id": {
+                                                    "type": "string"
+                                                },
+                                                "email_address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "controller": {
+                                            "properties": {
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "controller_name": {
+                                                    "type": "string"
+                                                },
+                                                "controller_byu_id": {
+                                                    "type": "string"
+                                                },
+                                                "net_id": {
+                                                    "type": "string"
+                                                },
+                                                "email_address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "vp": {
+                                            "properties": {
+                                                "vice_president_name": {
+                                                    "type": "string"
+                                                },
+                                                "vice_president_byu_id": {
+                                                    "type": "string"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "net_id": {
+                                                    "type": "string"
+                                                },
+                                                "email_address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "contact": {
+                                            "properties": {
+                                                "department_contact_name": {
+                                                    "type": "string"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string"
+                                                },
+                                                "net_id": {
+                                                    "type": "string"
+                                                },
+                                                "department_contact_byu_id": {
+                                                    "type": "string"
+                                                },
+                                                "email_address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "department_name": {
+                                    "type": "string"
+                                },
+                                "division_id": {
+                                    "type": "string"
+                                },
+                                "division_name": {
+                                    "type": "string"
+                                },
+                                "sync_to_hr_flag": {
+                                    "type": "string"
+                                },
+                                "operating_unit": {
+                                    "type": "string"
+                                },
+                                "parent_department_id": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/roles": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Either role or byu_id is required. If a role is provided, then it returns a list of all employees in the specified role for all departments. If a byu_id is provided, then it returns all the roles by department for the specified byu_id.",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Returns a list of all employees in the specified role for all departments.",
+                        "name": "role",
+                        "enum": [
+                            "dean",
+                            "vp",
+                            "liaison",
+                            "manager",
+                            "contact",
+                            "controller"
+                        ],
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Defines which byu_id will be used to return the corresponding roles associated with that id",
+                        "name": "byu_id",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "manager": {
+                                    "properties": {
+                                        "departments": {
+                                            "items": {
+                                                "properties": {
+                                                    "role_information": {
+                                                        "properties": {
+                                                            "phone_number": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "byu_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "net_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "email_address": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "department_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "division_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "division_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "operating_unit": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "liaison": {
+                                    "properties": {
+                                        "departments": {
+                                            "items": {
+                                                "properties": {
+                                                    "role_information": {
+                                                        "properties": {
+                                                            "phone_number": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "byu_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "net_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "email_address": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "department_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "division_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "division_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "operating_unit": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "dean": {
+                                    "properties": {
+                                        "departments": {
+                                            "items": {
+                                                "properties": {
+                                                    "role_information": {
+                                                        "properties": {
+                                                            "phone_number": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "byu_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "net_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "email_address": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "department_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "division_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "division_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "operating_unit": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "controller": {
+                                    "properties": {
+                                        "departments": {
+                                            "items": {
+                                                "properties": {
+                                                    "role_information": {
+                                                        "properties": {
+                                                            "phone_number": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "byu_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "net_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "email_address": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "department_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "division_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "division_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "operating_unit": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "vp": {
+                                    "properties": {
+                                        "departments": {
+                                            "items": {
+                                                "properties": {
+                                                    "role_information": {
+                                                        "properties": {
+                                                            "phone_number": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "byu_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "net_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "email_address": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "department_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "division_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "division_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "operating_unit": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "contact": {
+                                    "properties": {
+                                        "departments": {
+                                            "items": {
+                                                "properties": {
+                                                    "role_information": {
+                                                        "properties": {
+                                                            "phone_number": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "byu_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "net_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "email_address": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "department_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "division_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "division_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "operating_unit": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "success"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "Departments",
+        "version": "v2"
+    }
+}

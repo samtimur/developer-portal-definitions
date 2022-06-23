@@ -1,0 +1,109 @@
+{
+    "basePath": "/domains/erp/sa/is_on_campus/v1",
+    "paths": {
+        "/{internet_address}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "Internet Address",
+                        "name": "internet_address",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        },
+                        "description": "Service request is OK and a response has been generated.",
+                        "examples": {
+                            "application/json": {
+                                "internet_address_check": {
+                                    "on_campus_address": "Y",
+                                    "internet_address": "128.187.3.3"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error.",
+                        "examples": {
+                            "application/json": {
+                                "internet_address_check": {
+                                    "error": "invalid internet address",
+                                    "internet_address": "128.187.3."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "response": {
+            "items": {
+                "$ref": "#/definitions/internet_address_check"
+            },
+            "type": "array"
+        },
+        "on_campus_address": {
+            "enum": [
+                "N",
+                "Y"
+            ],
+            "type": "string"
+        },
+        "internet_address_check": {
+            "properties": {
+                "on_campus_address": {
+                    "$ref": "#/definitions/on_campus_address"
+                },
+                "error": {
+                    "$ref": "#/definitions/error"
+                },
+                "internet_address": {
+                    "$ref": "#/definitions/internet_address"
+                }
+            },
+            "required": [
+                "internet_address"
+            ]
+        },
+        "error": {
+            "enum": [
+                "invalid internet address"
+            ],
+            "type": "string"
+        },
+        "internet_address": {
+            "properties": {
+                "value": {
+                    "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "IS_ON_CAMPUS",
+        "description": "Returns a value of 'Y' if the internet address supplied is a BYU On Campus Address.",
+        "version": "v1"
+    }
+}

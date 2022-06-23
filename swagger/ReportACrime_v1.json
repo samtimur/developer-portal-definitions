@@ -1,0 +1,72 @@
+{
+    "paths": {
+        "/report": {
+            "post": {
+                "summary": "Send a crime report optionally attaching images and videos",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "byuId",
+                        "required": true,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "latitude",
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "longitude",
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "streamingUrl",
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "phoneNumber",
+                        "required": true,
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "message",
+                        "type": "string",
+                        "in": "formData"
+                    },
+                    {
+                        "items": {
+                            "format": "binary",
+                            "type": "string"
+                        },
+                        "description": "This can take in any number of files",
+                        "name": "files",
+                        "type": "array",
+                        "in": "formData"
+                    }
+                ],
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "ReportACrime",
+        "description": "This API is maintained by TechUSO (contractor of the BYU Police) and is used by the mobile app for the Report a Crime feature.",
+        "version": "v1"
+    },
+    "basePath": "/domains/report-a-crime/v1",
+    "host": "api.byu.edu:443"
+}

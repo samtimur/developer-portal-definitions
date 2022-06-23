@@ -1,0 +1,197 @@
+{
+    "paths": {
+        "/registrations/year/{year}/unit/{unit_no}": {
+            "x-controller": "registrations",
+            "get": {
+                "tags": [
+                    "registrations"
+                ],
+                "summary": "List all participants and staff confirmed in BYU DCE system for the given year and church unit",
+                "x-auth-type": "Application & Application User",
+                "x-mediation-script": "mc.setProperty('CONTENT_TYPE', 'application/json');\nvar year = mc.getProperty('uri.var.year');\nvar unit_no = mc.getProperty('uri.var.unit_no');\n\nif (year == 2019 && unit_no == 1) mc.setPayloadJSON('{ \"registrations\" : [ ' +\n\t\t'{ \"id\": 2468013545678901, \"session\": 10091777, \"type\": \"Enrollment\", \"attended\": true }, ' +\n\t\t'{ \"id\": 2468013545678902, \"session\": 10091742, \"type\": \"Enrollment\", \"attended\": true }, ' +\n\t\t'{ \"id\": 2468013545678903, \"session\": 10092201, \"type\": \"Enrollment\", \"attended\": false }, ' +\n\t\t'{ \"id\": 2468013545678904, \"session\": 10092245, \"type\": \"Enrollment\", \"attended\": false }, ' +\n\t\t'{ \"Id\": 2468013545678905, \"session\": 10092252, \"type\": \"Speaker\" }, ' +\n\t\t'{ \"id\": 2468013545678906, \"session\": 10092252, \"type\": \"Counselor\" }, ' +\n\t\t'{ \"id\": 2468013545678907, \"session\": 10092252, \"type\": \"Session Director\" } ' +\n    '], ' +\n    '\"sessions\": { ' +\n        '\"10091777\": { \"title\": \"EFY UT Provo 01A\", \"info_url\": \"https://efy.byu.edu/efy_session/10091777\", \"start\": \"2019-05-26\", \"end\": \"2019-06-01\" }, ' +\n\t\t'\"10091742\": { \"title\": \"EFY UT Provo 03B\", \"info_url\": \"https://efy.byu.edu/efy_session/10091742\", \"start\": \"2019-06-09\", \"end\": \"2019-06-15\" }, ' +\n\t\t'\"10092201\": { \"title\": \"EFY UT Provo 08B\", \"info_url\": \"https://efy.byu.edu/efy_session/10092201\", \"start\": \"2019-07-14\", \"end\": \"2019-07-20\" }, ' +\n\t\t'\"10092245\": { \"title\": \"EFY UT Provo 10C\", \"info_url\": \"https://efy.byu.edu/efy_session/10092245\", \"start\": \"2019-07-28\", \"end\": \"2019-08-03\" }, ' +\n\t\t'\"10092252\": { \"title\": \"EFY UT Provo 11A\", \"info_url\": \"https://efy.byu.edu/efy_session/10092252\", \"start\": \"2019-08-04\", \"end\": \"2019-08-10\" } ' +\n    '}, \"staff\": [10092252], \"participate\": [10091777,10091742,10092201,10092245] }');\nelse mc.setPayloadJSON('{ \"registrations\" : [], \"sessions\": {}, \"staff\": [], \"participate\": [] }');\n\n",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{4}$",
+                        "description": "Program year to retrieve",
+                        "name": "year",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Church unit number to retrieve",
+                        "name": "unit_no",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "limit to Participant or Staff registrations",
+                        "name": "type",
+                        "enum": [
+                            "participant",
+                            "staff"
+                        ],
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/registrations/year/{year}/week/{week_of_year}": {
+            "x-controller": "registrations",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "registrations"
+                ],
+                "summary": "List all FSY enrollments in the BYU DCE System for the given week and year",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{4}$",
+                        "description": "The program year to retrieve",
+                        "name": "year",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "pattern": "^[0-9]{2}$",
+                        "description": "The week in the year (week starting Sun) to retrieve",
+                        "name": "week_of_year",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/stakes": {
+            "x-controller": "units",
+            "get": {
+                "tags": [
+                    "units"
+                ],
+                "summary": "List all stakes and weather they are assigned to even or odd years (deprecated)",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/registrations/year/{year}/id/{church_account_id}": {
+            "x-controller": "registrations",
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "registrations"
+                ],
+                "summary": "Remove enrollments in the BYU DCE System for the given person and year",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{4}$",
+                        "description": "The program year from which to remove registrations",
+                        "name": "year",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The Church Account ID of the person to withdraw",
+                        "name": "church_account_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "optionally restrict withdrawals to those associated with the given unit",
+                        "name": "unit",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "fsy_participant",
+                                "fsy_counselor",
+                                "fsy_teacher",
+                                "fsy_session_director",
+                                "fsy_session_director_spouse"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "Optionally restrict withdrawals to those with the given types",
+                        "name": "types",
+                        "type": "array",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/units/year/{year}": {
+            "x-controller": "units",
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "units"
+                ],
+                "summary": "Get distinct list of units with registrations in the BYU DCE System for the given year",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{4}$",
+                        "description": "The program year to retrieve",
+                        "name": "year",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "items": {
+                            "enum": [
+                                "fsy_participant",
+                                "fsy_counselor",
+                                "fsy_teacher",
+                                "fsy_session_director",
+                                "fsy_session_director_spouse"
+                            ],
+                            "type": "string"
+                        },
+                        "description": "optionally restict registration types to consider",
+                        "name": "types",
+                        "type": "array",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "DCE-FSY",
+        "description": "Services for Church FSY management",
+        "version": "v1.0"
+    },
+    "basePath": "/domains/DCE/FSY/v1.0",
+    "host": "api.byu.edu:443"
+}

@@ -1,0 +1,2505 @@
+{
+    "basePath": "/domains/erp/fs/suppliers/v1",
+    "paths": {
+        "/{vendor_id}/flag/{vendor_flag}": {
+            "put": {
+                "summary": "Updates a vendor with a flag being OIT or BYUSTORE",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "This API is for vendors that are created in NetSuite and need to be updated in Peoplesoft",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "10 number identifier",
+                        "name": "vendor_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "OIT or BYUSTORE",
+                        "name": "vendor_flag",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/{vendor_id}/locations/{location_code}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns information for a specific vendor and their specific location.",
+                "tags": [
+                    "supplier"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Only one vendor should be returned and a specific location",
+                "parameters": [
+                    {
+                        "pattern": "[0-10]{10}",
+                        "description": "Returns a specific vendor that matches the vendor_id",
+                        "name": "vendor_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Default location is 000001. BYU_STORE is 02",
+                        "name": "location_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "withholding_code": {
+                                    "description": "Type of TIN",
+                                    "type": "string"
+                                },
+                                "locations": {
+                                    "items": {
+                                        "properties": {
+                                            "payment_method_code": {
+                                                "description": "How do they do payments with a certain department",
+                                                "type": "string"
+                                            },
+                                            "supplier_withholding_flag": {
+                                                "description": "Determine if the vendor withholding its 1099",
+                                                "type": "string"
+                                            },
+                                            "supplier_default_location_code": {
+                                                "description": "How a vendor does business with different departments",
+                                                "type": "string"
+                                            },
+                                            "addresses": {
+                                                "items": {
+                                                    "properties": {
+                                                        "address_order": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_invoice": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_shipping": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_return": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_remit": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "supplier_category": {
+                                    "description": "Type of vendor",
+                                    "type": "string"
+                                },
+                                "supplier_name": {
+                                    "description": "The name of the supplier",
+                                    "type": "string"
+                                },
+                                "supplier_default_location_code": {
+                                    "description": "default location",
+                                    "type": "string"
+                                },
+                                "withholdings": {
+                                    "items": {
+                                        "properties": {
+                                            "default_jurisdiction": {
+                                                "description": "Tax Identification for each location",
+                                                "type": "string"
+                                            },
+                                            "default_class": {
+                                                "description": "default is '7'",
+                                                "type": "string"
+                                            },
+                                            "supplier_category": {
+                                                "description": "Exempt or not applicable",
+                                                "type": "string"
+                                            },
+                                            "entity": {
+                                                "description": "Should be IRS",
+                                                "type": "string"
+                                            },
+                                            "withholding_condition": {
+                                                "description": "Yes or No value",
+                                                "type": "string"
+                                            },
+                                            "jurisdiction": {
+                                                "description": "FED",
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "description": "Normally 1099",
+                                                "type": "string"
+                                            },
+                                            "withhold": {
+                                                "description": "Y or N",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "object"
+                                },
+                                "supplier_tax_identification_number_flag": {
+                                    "description": "Tax Identification",
+                                    "type": "string"
+                                },
+                                "supplier_remittance_address": {
+                                    "description": "remit location",
+                                    "type": "string"
+                                },
+                                "supplier_id": {
+                                    "description": "The id of the vendor",
+                                    "type": "string"
+                                },
+                                "contacts": {
+                                    "items": {
+                                        "properties": {
+                                            "supplier_contact_email_address": {
+                                                "description": "Email address",
+                                                "type": "string"
+                                            },
+                                            "supplier_contact_address": {
+                                                "description": "Contact Url",
+                                                "type": "string"
+                                            },
+                                            "supplier_contact_name": {
+                                                "description": "Contact Name",
+                                                "type": "string"
+                                            },
+                                            "supplier_contact_title": {
+                                                "description": "Contact Title",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "supplier_name",
+                                "supplier_tax_identification_number_flag",
+                                "supplier_id"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "supplier": {
+                                    "location": {
+                                        "withholding": "N",
+                                        "location": "0001",
+                                        "addresses": {
+                                            "zip": "55555",
+                                            "email": "example@gmail.com",
+                                            "state": "UT",
+                                            "address1": "Institute of Tech",
+                                            "address2": "110 S State corner",
+                                            "address3": "2000 Hope Ridge",
+                                            "type": "Either Remit, Return or Invoice",
+                                            "city": "Provo",
+                                            "country": "United States"
+                                        },
+                                        "payment_method_code": "50"
+                                    },
+                                    "supplier_category": "XYZ",
+                                    "supplier_default_location_code": 1,
+                                    "supplier name": "THE BEST UNIVERSITY",
+                                    "supplier_remittance_address": 1,
+                                    "supplier_tax_identification_number_flag": "123456789",
+                                    "withholdings": {
+                                        "default_jurisdiction": "Y",
+                                        "default_class": "07",
+                                        "supplier_category": "NONE",
+                                        "entity": "IRS",
+                                        "withholding_condition": "N",
+                                        "jurisdiction": "FED",
+                                        "type": "1099",
+                                        "withhold": "Y"
+                                    },
+                                    "contacts": {
+                                        "sequence_number": "2",
+                                        "supplier_contact_email_address": "talk@gmail.com",
+                                        "supplier_contact_address": "www.example.com",
+                                        "supplier_contact_name": "dwight",
+                                        "supplier_contact_title": "manager"
+                                    },
+                                    "supplier id": "0123456789"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "description": "Vendor ID must be 10 digits",
+                            "type": "string"
+                        },
+                        "description": "Bad Request",
+                        "examples": {
+                            "application/json": {
+                                "validation_response": {
+                                    "message": "Bad Request",
+                                    "code": 400
+                                },
+                                "validation_information": [
+                                    "Supplier ID must be 10 digits"
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "schema": {
+                            "description": "Vendor does not exist",
+                            "type": "string"
+                        },
+                        "description": "Vendor Not Found",
+                        "examples": {
+                            "application/json": {
+                                "validation_response": {
+                                    "message": "Not Found",
+                                    "code": 404
+                                },
+                                "validation_information": [
+                                    "Supplier with Id (0123456789) not found."
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/{vendor_id}/locations": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns information for a specific vendor and any of their locations.",
+                "tags": [
+                    "supplier"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Only one vendor should be returned but any number of locations",
+                "parameters": [
+                    {
+                        "pattern": "[0-10]{10}",
+                        "description": "Returns a specific vendor that matches the vendor_id",
+                        "name": "vendor_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "withholding_code": {
+                                    "description": "Type of TIN",
+                                    "type": "string"
+                                },
+                                "locations": {
+                                    "items": {
+                                        "properties": {
+                                            "payment_method_code": {
+                                                "description": "How do they do payments with a certain department",
+                                                "type": "string"
+                                            },
+                                            "supplier_withholding_flag": {
+                                                "description": "Determine if the vendor withholding its 1099",
+                                                "type": "string"
+                                            },
+                                            "supplier_default_location_code": {
+                                                "description": "How a vendor does business with different departments",
+                                                "type": "string"
+                                            },
+                                            "addresses": {
+                                                "items": {
+                                                    "properties": {
+                                                        "address_order": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_invoice": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_shipping": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_return": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_remit": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "supplier_category": {
+                                    "description": "Type of vendor",
+                                    "type": "string"
+                                },
+                                "supplier_name": {
+                                    "description": "The name of the supplier",
+                                    "type": "string"
+                                },
+                                "supplier_default_location_code": {
+                                    "description": "default location",
+                                    "type": "string"
+                                },
+                                "withholdings": {
+                                    "items": {
+                                        "properties": {
+                                            "default_jurisdiction": {
+                                                "description": "Tax Identification for each location",
+                                                "type": "string"
+                                            },
+                                            "default_class": {
+                                                "description": "default is '7'",
+                                                "type": "string"
+                                            },
+                                            "supplier_category": {
+                                                "description": "Exempt or not applicable",
+                                                "type": "string"
+                                            },
+                                            "entity": {
+                                                "description": "Should be IRS",
+                                                "type": "string"
+                                            },
+                                            "withholding_condition": {
+                                                "description": "Yes or No value",
+                                                "type": "string"
+                                            },
+                                            "jurisdiction": {
+                                                "description": "FED",
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "description": "Normally 1099",
+                                                "type": "string"
+                                            },
+                                            "withhold": {
+                                                "description": "Y or N",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "object"
+                                },
+                                "supplier_tax_identification_number_flag": {
+                                    "description": "Tax Identification",
+                                    "type": "string"
+                                },
+                                "supplier_remittance_address": {
+                                    "description": "remit location",
+                                    "type": "string"
+                                },
+                                "supplier_id": {
+                                    "description": "The id of the vendor",
+                                    "type": "string"
+                                },
+                                "contacts": {
+                                    "items": {
+                                        "properties": {
+                                            "supplier_contact_email_address": {
+                                                "description": "Email address",
+                                                "type": "string"
+                                            },
+                                            "supplier_contact_address": {
+                                                "description": "Contact Url",
+                                                "type": "string"
+                                            },
+                                            "supplier_contact_name": {
+                                                "description": "Contact Name",
+                                                "type": "string"
+                                            },
+                                            "supplier_contact_title": {
+                                                "description": "Contact Title",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "supplier_name",
+                                "supplier_tax_identification_number_flag",
+                                "supplier_id"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "supplier": {
+                                    "location": {
+                                        "withholding": "N",
+                                        "location": "0001",
+                                        "addresses": {
+                                            "zip": "55555",
+                                            "email": "example@gmail.com",
+                                            "state": "UT",
+                                            "address1": "Institute of Tech",
+                                            "address2": "110 S State corner",
+                                            "address3": "2000 Hope Ridge",
+                                            "type": "Either Remit, Return or Invoice",
+                                            "city": "Provo",
+                                            "country": "United States"
+                                        },
+                                        "payment_method_code": "50"
+                                    },
+                                    "supplier_category": "XYZ",
+                                    "supplier_default_location_code": 1,
+                                    "supplier name": "THE BEST UNIVERSITY",
+                                    "supplier_remittance_address": 1,
+                                    "supplier_tax_identification_number_flag": "123456789",
+                                    "withholdings": {
+                                        "default_jurisdiction": "Y",
+                                        "default_class": "07",
+                                        "supplier_category": "NONE",
+                                        "entity": "IRS",
+                                        "withholding_condition": "N",
+                                        "jurisdiction": "FED",
+                                        "type": "1099",
+                                        "withhold": "Y"
+                                    },
+                                    "contacts": {
+                                        "sequence_number": "2",
+                                        "supplier_contact_email_address": "talk@gmail.com",
+                                        "supplier_contact_address": "www.example.com",
+                                        "supplier_contact_name": "dwight",
+                                        "supplier_contact_title": "manager"
+                                    },
+                                    "supplier id": "0123456789"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "description": "Vendor ID must be 10 digits",
+                            "type": "string"
+                        },
+                        "description": "Bad Request",
+                        "examples": {
+                            "application/json": {
+                                "validation_response": {
+                                    "message": "Bad Request",
+                                    "code": 400
+                                },
+                                "validation_information": [
+                                    "Supplier ID must be 10 digits"
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "schema": {
+                            "description": "Vendor does not exist",
+                            "type": "string"
+                        },
+                        "description": "Vendor Not Found",
+                        "examples": {
+                            "application/json": {
+                                "validation_response": {
+                                    "message": "Not Found",
+                                    "code": 404
+                                },
+                                "validation_information": [
+                                    "Supplier with Id (0123456789) not found."
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/{vendor_id}/locations/{location_code}/addresses/{address_type}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns information for a specific vendor and their specific location.",
+                "tags": [
+                    "supplier"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Only one vendor should be returned and a specific location",
+                "parameters": [
+                    {
+                        "pattern": "[0-10]{10}",
+                        "description": "Returns a specific vendor that matches the vendor_id",
+                        "name": "vendor_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Default location is 000001. BYU_STORE is 02",
+                        "name": "location_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "description": "Defines which address to refer to",
+                        "name": "address_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "withholding_code": {
+                                    "description": "Type of TIN",
+                                    "type": "string"
+                                },
+                                "locations": {
+                                    "items": {
+                                        "properties": {
+                                            "payment_method_code": {
+                                                "description": "How do they do payments with a certain department",
+                                                "type": "string"
+                                            },
+                                            "supplier_withholding_flag": {
+                                                "description": "Determine if the vendor withholding its 1099",
+                                                "type": "string"
+                                            },
+                                            "supplier_default_location_code": {
+                                                "description": "How a vendor does business with different departments",
+                                                "type": "string"
+                                            },
+                                            "addresses": {
+                                                "items": {
+                                                    "properties": {
+                                                        "address_order": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_invoice": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_shipping": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_return": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_remit": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "supplier_category": {
+                                    "description": "Type of vendor",
+                                    "type": "string"
+                                },
+                                "supplier_name": {
+                                    "description": "The name of the supplier",
+                                    "type": "string"
+                                },
+                                "supplier_default_location_code": {
+                                    "description": "default location",
+                                    "type": "string"
+                                },
+                                "withholdings": {
+                                    "items": {
+                                        "properties": {
+                                            "default_jurisdiction": {
+                                                "description": "Tax Identification for each location",
+                                                "type": "string"
+                                            },
+                                            "default_class": {
+                                                "description": "default is '7'",
+                                                "type": "string"
+                                            },
+                                            "supplier_category": {
+                                                "description": "Exempt or not applicable",
+                                                "type": "string"
+                                            },
+                                            "entity": {
+                                                "description": "Should be IRS",
+                                                "type": "string"
+                                            },
+                                            "withholding_condition": {
+                                                "description": "Yes or No value",
+                                                "type": "string"
+                                            },
+                                            "jurisdiction": {
+                                                "description": "FED",
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "description": "Normally 1099",
+                                                "type": "string"
+                                            },
+                                            "withhold": {
+                                                "description": "Y or N",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "object"
+                                },
+                                "supplier_tax_identification_number_flag": {
+                                    "description": "Tax Identification",
+                                    "type": "string"
+                                },
+                                "supplier_remittance_address": {
+                                    "description": "remit location",
+                                    "type": "string"
+                                },
+                                "supplier_id": {
+                                    "description": "The id of the vendor",
+                                    "type": "string"
+                                },
+                                "contacts": {
+                                    "items": {
+                                        "properties": {
+                                            "supplier_contact_email_address": {
+                                                "description": "Email address",
+                                                "type": "string"
+                                            },
+                                            "supplier_contact_address": {
+                                                "description": "Contact Url",
+                                                "type": "string"
+                                            },
+                                            "supplier_contact_name": {
+                                                "description": "Contact Name",
+                                                "type": "string"
+                                            },
+                                            "supplier_contact_title": {
+                                                "description": "Contact Title",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "supplier_name",
+                                "supplier_tax_identification_number_flag",
+                                "supplier_id"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "supplier": {
+                                    "location": {
+                                        "withholding": "N",
+                                        "location": "0001",
+                                        "addresses": {
+                                            "zip": "55555",
+                                            "email": "example@gmail.com",
+                                            "state": "UT",
+                                            "address1": "Institute of Tech",
+                                            "address2": "110 S State corner",
+                                            "address3": "2000 Hope Ridge",
+                                            "type": "Either Remit, Return or Invoice",
+                                            "city": "Provo",
+                                            "country": "United States"
+                                        },
+                                        "payment_method_code": "50"
+                                    },
+                                    "supplier_category": "XYZ",
+                                    "supplier_default_location_code": 1,
+                                    "supplier name": "THE BEST UNIVERSITY",
+                                    "supplier_remittance_address": 1,
+                                    "supplier_tax_identification_number_flag": "123456789",
+                                    "withholdings": {
+                                        "default_jurisdiction": "Y",
+                                        "default_class": "07",
+                                        "supplier_category": "NONE",
+                                        "entity": "IRS",
+                                        "withholding_condition": "N",
+                                        "jurisdiction": "FED",
+                                        "type": "1099",
+                                        "withhold": "Y"
+                                    },
+                                    "contacts": {
+                                        "sequence_number": "2",
+                                        "supplier_contact_email_address": "talk@gmail.com",
+                                        "supplier_contact_address": "www.example.com",
+                                        "supplier_contact_name": "dwight",
+                                        "supplier_contact_title": "manager"
+                                    },
+                                    "supplier id": "0123456789"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "description": "Vendor ID must be 10 digits",
+                            "type": "string"
+                        },
+                        "description": "Bad Request",
+                        "examples": {
+                            "application/json": {
+                                "validation_response": {
+                                    "message": "Bad Request",
+                                    "code": 400
+                                },
+                                "validation_information": [
+                                    "Supplier ID must be 10 digits"
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "schema": {
+                            "description": "Vendor does not exist",
+                            "type": "string"
+                        },
+                        "description": "Vendor Not Found",
+                        "examples": {
+                            "application/json": {
+                                "validation_response": {
+                                    "message": "Not Found",
+                                    "code": 404
+                                },
+                                "validation_information": [
+                                    "Supplier with Id (0123456789) not found."
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/{vendor_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns information for a specific vendor and their locations.",
+                "tags": [
+                    "supplier"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Each vendor could have multiple locations, but only one vendor should be returned",
+                "parameters": [
+                    {
+                        "pattern": "[0-10]{10}",
+                        "description": "Returns a specific vendor that matches the vendor_id",
+                        "name": "vendor_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "withholding_code": {
+                                    "description": "Type of TIN",
+                                    "type": "string"
+                                },
+                                "locations": {
+                                    "items": {
+                                        "properties": {
+                                            "payment_method_code": {
+                                                "description": "How do they do payments with a certain department",
+                                                "type": "string"
+                                            },
+                                            "supplier_withholding_flag": {
+                                                "description": "Determine if the vendor withholding its 1099",
+                                                "type": "string"
+                                            },
+                                            "supplier_default_location_code": {
+                                                "description": "How a vendor does business with different departments",
+                                                "type": "string"
+                                            },
+                                            "addresses": {
+                                                "items": {
+                                                    "properties": {
+                                                        "address_order": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_invoice": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_shipping": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_return": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "address_remit": {
+                                                            "properties": {
+                                                                "addr1": {
+                                                                    "description": "First address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "postal": {
+                                                                    "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr2": {
+                                                                    "description": "Second address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "email": {
+                                                                    "description": "Email address",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr3": {
+                                                                    "description": "Third address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "addr4": {
+                                                                    "description": "Fourth address field",
+                                                                    "type": "string"
+                                                                },
+                                                                "state": {
+                                                                    "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "country": {
+                                                                    "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                },
+                                                                "city": {
+                                                                    "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "supplier_category": {
+                                    "description": "Type of vendor",
+                                    "type": "string"
+                                },
+                                "supplier_name": {
+                                    "description": "The name of the supplier",
+                                    "type": "string"
+                                },
+                                "supplier_default_location_code": {
+                                    "description": "default location",
+                                    "type": "string"
+                                },
+                                "withholdings": {
+                                    "items": {
+                                        "properties": {
+                                            "default_jurisdiction": {
+                                                "description": "Tax Identification for each location",
+                                                "type": "string"
+                                            },
+                                            "default_class": {
+                                                "description": "default is '7'",
+                                                "type": "string"
+                                            },
+                                            "supplier_category": {
+                                                "description": "Exempt or not applicable",
+                                                "type": "string"
+                                            },
+                                            "entity": {
+                                                "description": "Should be IRS",
+                                                "type": "string"
+                                            },
+                                            "withholding_condition": {
+                                                "description": "Yes or No value",
+                                                "type": "string"
+                                            },
+                                            "jurisdiction": {
+                                                "description": "FED",
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "description": "Normally 1099",
+                                                "type": "string"
+                                            },
+                                            "withhold": {
+                                                "description": "Y or N",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "object"
+                                },
+                                "supplier_tax_identification_number_flag": {
+                                    "description": "Tax Identification",
+                                    "type": "string"
+                                },
+                                "supplier_remittance_address": {
+                                    "description": "remit location",
+                                    "type": "string"
+                                },
+                                "supplier_id": {
+                                    "description": "The id of the vendor",
+                                    "type": "string"
+                                },
+                                "contacts": {
+                                    "items": {
+                                        "properties": {
+                                            "supplier_contact_email_address": {
+                                                "description": "Email address",
+                                                "type": "string"
+                                            },
+                                            "supplier_contact_address": {
+                                                "description": "Contact Url",
+                                                "type": "string"
+                                            },
+                                            "supplier_contact_name": {
+                                                "description": "Contact Name",
+                                                "type": "string"
+                                            },
+                                            "supplier_contact_title": {
+                                                "description": "Contact Title",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "supplier_name",
+                                "supplier_tax_identification_number_flag",
+                                "supplier_id"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "supplier": {
+                                    "location": {
+                                        "withholding": "N",
+                                        "location": "0001",
+                                        "addresses": {
+                                            "zip": "55555",
+                                            "email": "example@gmail.com",
+                                            "state": "UT",
+                                            "address1": "Institute of Tech",
+                                            "address2": "110 S State corner",
+                                            "address3": "2000 Hope Ridge",
+                                            "type": "Either Remit, Return or Invoice",
+                                            "city": "Provo",
+                                            "country": "United States"
+                                        },
+                                        "payment_method_code": "50"
+                                    },
+                                    "supplier_category": "XYZ",
+                                    "supplier_default_location_code": 1,
+                                    "supplier name": "THE BEST UNIVERSITY",
+                                    "supplier_remittance_address": 1,
+                                    "supplier_tax_identification_number_flag": "123456789",
+                                    "withholdings": {
+                                        "default_jurisdiction": "Y",
+                                        "default_class": "07",
+                                        "supplier_category": "NONE",
+                                        "entity": "IRS",
+                                        "withholding_condition": "N",
+                                        "jurisdiction": "FED",
+                                        "type": "1099",
+                                        "withhold": "Y"
+                                    },
+                                    "contacts": {
+                                        "sequence_number": "2",
+                                        "supplier_contact_email_address": "talk@gmail.com",
+                                        "supplier_contact_address": "www.example.com",
+                                        "supplier_contact_name": "dwight",
+                                        "supplier_contact_title": "manager"
+                                    },
+                                    "supplier id": "0123456789"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "description": "Vendor ID must be 10 digits",
+                            "type": "string"
+                        },
+                        "description": "Bad Request",
+                        "examples": {
+                            "application/json": {
+                                "validation_response": {
+                                    "message": "Bad Request",
+                                    "code": 400
+                                },
+                                "validation_information": [
+                                    "Supplier ID must be 10 digits"
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "schema": {
+                            "description": "Vendor does not exist",
+                            "type": "string"
+                        },
+                        "description": "Vendor Not Found",
+                        "examples": {
+                            "application/json": {
+                                "validation_response": {
+                                    "message": "Not Found",
+                                    "code": 404
+                                },
+                                "validation_information": [
+                                    "Supplier with Id (0123456789) not found."
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Insert a supplier into peoplesoft",
+                "tags": [
+                    "supplier"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "Insert a vendor into people soft",
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "origin": {
+                                    "type": "string"
+                                },
+                                "supplier": {
+                                    "properties": {
+                                        "short_supplier_name": {
+                                            "type": "string"
+                                        },
+                                        "locations": {
+                                            "items": {
+                                                "properties": {
+                                                    "ship_seq_num": {
+                                                        "type": "number"
+                                                    },
+                                                    "remit_seq_num": {
+                                                        "type": "number"
+                                                    },
+                                                    "order_seq_num": {
+                                                        "type": "number"
+                                                    },
+                                                    "return_seq_num": {
+                                                        "type": "number"
+                                                    },
+                                                    "invoice_seq_num": {
+                                                        "type": "number"
+                                                    },
+                                                    "withholdings": {
+                                                        "properties": {
+                                                            "tin_type": {
+                                                                "type": "string"
+                                                            },
+                                                            "supplier_category": {
+                                                                "type": "string"
+                                                            },
+                                                            "entity": {
+                                                                "type": "string"
+                                                            },
+                                                            "default_jurisdiction_flag": {
+                                                                "type": "string"
+                                                            },
+                                                            "jurisdiction": {
+                                                                "type": "string"
+                                                            },
+                                                            "tin": {
+                                                                "type": "string"
+                                                            },
+                                                            "type": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "supplier_category": {
+                                            "type": "string"
+                                        },
+                                        "supplier_name": {
+                                            "type": "string"
+                                        },
+                                        "addresses": {
+                                            "items": {
+                                                "properties": {
+                                                    "address_line_4": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_description": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone_numbers": {
+                                                        "items": {
+                                                            "properties": {
+                                                                "phone": {
+                                                                    "type": "string"
+                                                                },
+                                                                "phone_type": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "address_line_1": {
+                                                        "type": "string"
+                                                    },
+                                                    "postal": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_3": {
+                                                        "type": "string"
+                                                    },
+                                                    "supplier_contact_email_address": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_line_2": {
+                                                        "type": "string"
+                                                    },
+                                                    "state": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_seq_num": {
+                                                        "type": "string"
+                                                    },
+                                                    "country": {
+                                                        "type": "string"
+                                                    },
+                                                    "city": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "open_for_ordering": {
+                                            "type": "string"
+                                        },
+                                        "withholding_applicable": {
+                                            "type": "string"
+                                        },
+                                        "contacts": {
+                                            "items": {
+                                                "properties": {
+                                                    "details": {
+                                                        "items": {
+                                                            "properties": {
+                                                                "phone_numbers": {
+                                                                    "items": {
+                                                                        "properties": {
+                                                                            "phone": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "phone_type": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "type": "object"
+                                                                    },
+                                                                    "type": "array"
+                                                                },
+                                                                "contact_email": {
+                                                                    "type": "string"
+                                                                },
+                                                                "supplier_contact_address": {
+                                                                    "type": "string"
+                                                                },
+                                                                "contact_type": {
+                                                                    "type": "string"
+                                                                },
+                                                                "supplier_contact_name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "supplier_contact_title": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "contact_descr": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "short_supplier_name",
+                                        "supplier_name"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "origin"
+                            ],
+                            "type": "object"
+                        },
+                        "description": "The supplier to create.",
+                        "name": "supplier",
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "Validation_Response": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns information for vendors and their locations that match the query string",
+                "tags": [
+                    "supplier"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "If the user is not specific with the vendor name this could return multiple vendors with multiple locations attached to each vendor.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Returns any vendor with a partial match on the query string",
+                        "name": "supplier_name",
+                        "type": "string",
+                        "required": false,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Returns any vendor with a partial match on the query string",
+                        "name": "tin",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Returns any vendor with a partial match on the query string",
+                        "name": "vendor_id",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "properties": {
+                                    "withholding_code": {
+                                        "description": "Type of TIN",
+                                        "type": "string"
+                                    },
+                                    "locations": {
+                                        "items": {
+                                            "properties": {
+                                                "payment_method_code": {
+                                                    "description": "How do they do payments with a certain department",
+                                                    "type": "string"
+                                                },
+                                                "supplier_withholding_flag": {
+                                                    "description": "Determine if the vendor withholding its 1099",
+                                                    "type": "string"
+                                                },
+                                                "supplier_default_location_code": {
+                                                    "description": "How a vendor does business with different departments",
+                                                    "type": "string"
+                                                },
+                                                "addresses": {
+                                                    "items": {
+                                                        "properties": {
+                                                            "address_order": {
+                                                                "properties": {
+                                                                    "addr1": {
+                                                                        "description": "First address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "postal": {
+                                                                        "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr2": {
+                                                                        "description": "Second address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "email": {
+                                                                        "description": "Email address",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr3": {
+                                                                        "description": "Third address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr4": {
+                                                                        "description": "Fourth address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "state": {
+                                                                        "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "country": {
+                                                                        "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "city": {
+                                                                        "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "address_invoice": {
+                                                                "properties": {
+                                                                    "addr1": {
+                                                                        "description": "First address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "postal": {
+                                                                        "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr2": {
+                                                                        "description": "Second address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "email": {
+                                                                        "description": "Email address",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr3": {
+                                                                        "description": "Third address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr4": {
+                                                                        "description": "Fourth address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "state": {
+                                                                        "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "country": {
+                                                                        "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "city": {
+                                                                        "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "address_shipping": {
+                                                                "properties": {
+                                                                    "addr1": {
+                                                                        "description": "First address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "postal": {
+                                                                        "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr2": {
+                                                                        "description": "Second address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "email": {
+                                                                        "description": "Email address",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr3": {
+                                                                        "description": "Third address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr4": {
+                                                                        "description": "Fourth address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "state": {
+                                                                        "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "country": {
+                                                                        "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "city": {
+                                                                        "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "address_return": {
+                                                                "properties": {
+                                                                    "addr1": {
+                                                                        "description": "First address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "postal": {
+                                                                        "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr2": {
+                                                                        "description": "Second address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "email": {
+                                                                        "description": "Email address",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr3": {
+                                                                        "description": "Third address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr4": {
+                                                                        "description": "Fourth address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "state": {
+                                                                        "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "country": {
+                                                                        "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "city": {
+                                                                        "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "address_remit": {
+                                                                "properties": {
+                                                                    "addr1": {
+                                                                        "description": "First address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "postal": {
+                                                                        "description": "Postal for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr2": {
+                                                                        "description": "Second address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "email": {
+                                                                        "description": "Email address",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr3": {
+                                                                        "description": "Third address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "addr4": {
+                                                                        "description": "Fourth address field",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "state": {
+                                                                        "description": "State for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "country": {
+                                                                        "description": "Country remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "city": {
+                                                                        "description": "City for remit, invoice, shipping, ordering or return addresses",
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "supplier_category": {
+                                        "description": "Type of vendor",
+                                        "type": "string"
+                                    },
+                                    "supplier_name": {
+                                        "description": "The name of the supplier",
+                                        "type": "string"
+                                    },
+                                    "supplier_default_location_code": {
+                                        "description": "default location",
+                                        "type": "string"
+                                    },
+                                    "withholdings": {
+                                        "items": {
+                                            "properties": {
+                                                "default_jurisdiction": {
+                                                    "description": "Tax Identification for each location",
+                                                    "type": "string"
+                                                },
+                                                "default_class": {
+                                                    "description": "default is '7'",
+                                                    "type": "string"
+                                                },
+                                                "supplier_category": {
+                                                    "description": "Exempt or not applicable",
+                                                    "type": "string"
+                                                },
+                                                "entity": {
+                                                    "description": "Should be IRS",
+                                                    "type": "string"
+                                                },
+                                                "withholding_condition": {
+                                                    "description": "Yes or No value",
+                                                    "type": "string"
+                                                },
+                                                "jurisdiction": {
+                                                    "description": "FED",
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "description": "Normally 1099",
+                                                    "type": "string"
+                                                },
+                                                "withhold": {
+                                                    "description": "Y or N",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "object"
+                                    },
+                                    "supplier_tax_identification_number_flag": {
+                                        "description": "Tax Identification",
+                                        "type": "string"
+                                    },
+                                    "supplier_remittance_address": {
+                                        "description": "remit location",
+                                        "type": "string"
+                                    },
+                                    "supplier_id": {
+                                        "description": "The id of the vendor",
+                                        "type": "string"
+                                    },
+                                    "contacts": {
+                                        "items": {
+                                            "properties": {
+                                                "supplier_contact_email_address": {
+                                                    "description": "Email address",
+                                                    "type": "string"
+                                                },
+                                                "supplier_contact_address": {
+                                                    "description": "Contact Url",
+                                                    "type": "string"
+                                                },
+                                                "supplier_contact_name": {
+                                                    "description": "Contact Name",
+                                                    "type": "string"
+                                                },
+                                                "supplier_contact_title": {
+                                                    "description": "Contact Title",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "required": [
+                                    "supplier_name",
+                                    "supplier_tax_identification_number_flag",
+                                    "supplier_id"
+                                ],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "supplier": {
+                                    "location": {
+                                        "withholding": "N",
+                                        "location": "0001",
+                                        "addresses": {
+                                            "zip": "55555",
+                                            "email": "example@gmail.com",
+                                            "state": "UT",
+                                            "address1": "Institute of Tech",
+                                            "address2": "110 S State corner",
+                                            "address3": "2000 Hope Ridge",
+                                            "type": "Either Remit, Return or Invoice",
+                                            "city": "Provo",
+                                            "country": "United States"
+                                        },
+                                        "payment_method_code": "50"
+                                    },
+                                    "supplier_category": "XYZ",
+                                    "supplier_default_location_code": 1,
+                                    "supplier name": "THE BEST UNIVERSITY",
+                                    "supplier_remittance_address": 1,
+                                    "supplier_tax_identification_number_flag": "123456789",
+                                    "withholdings": {
+                                        "default_jurisdiction": "Y",
+                                        "default_class": "07",
+                                        "supplier_category": "NONE",
+                                        "entity": "IRS",
+                                        "withholding_condition": "N",
+                                        "jurisdiction": "FED",
+                                        "type": "1099",
+                                        "withhold": "Y"
+                                    },
+                                    "contacts": {
+                                        "sequence_number": "2",
+                                        "supplier_contact_email_address": "talk@gmail.com",
+                                        "supplier_contact_address": "www.example.com",
+                                        "supplier_contact_name": "dwight",
+                                        "supplier_contact_title": "manager"
+                                    },
+                                    "supplier id": "0123456789"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "description": "Supplier name must not be empty!",
+                            "type": "string"
+                        },
+                        "description": "Error",
+                        "examples": {
+                            "application/json": {
+                                "validation_response": {
+                                    "message": "Bad Request",
+                                    "code": 400
+                                },
+                                "validation_information": [
+                                    "Location must have a value"
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "schema": {
+                            "description": "Request will return too many vendors, please be more specific",
+                            "type": "string"
+                        },
+                        "description": "Will return to many vendors, please be more specific",
+                        "examples": {
+                            "application/json": {
+                                "validation_response": {
+                                    "message": "Bad Request",
+                                    "code": 404
+                                },
+                                "validation_information": [
+                                    "Supplier does not exist with specific location"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "swagger": "2.0",
+    "info": {
+        "title": "Suppliers",
+        "description": "Returns information about suppliers.",
+        "version": "v1"
+    }
+}

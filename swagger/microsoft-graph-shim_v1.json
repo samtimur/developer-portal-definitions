@@ -1,0 +1,526 @@
+{
+    "basePath": "/domains/microsoft-graph-shim/v1",
+    "paths": {
+        "/users/{userId}/sharedProxy/{+sharedId}/*": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/internal/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Internal API",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Valid"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ParameterError"
+                        },
+                        "description": "Bad parameter"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Internal API",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Valid"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ParameterError"
+                        },
+                        "description": "Bad parameter"
+                    }
+                }
+            }
+        },
+        "/internal/auth-flow-info": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Validate link token",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "name": "client",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Okay"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/ParameterError"
+                        },
+                        "description": "Bad parameter"
+                    }
+                }
+            }
+        },
+        "/users/{userId}/proxy/*": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Proxy a PUT or PATCH request to MS Graph.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Proxies PUT or PATCH requests to Microsoft Graph. In order to call this for a user, the client must already have obtained an Authorization Link (see `/authorization-link`) and the user must have connected their BYU account to their MS Office 365 account. If the user has not completed the authorization process, a `407` status code will be returned with a response body which includes a link to which the user can navigate in order to complete the process.\nIf the '$proxy_patch' query parameter is set to 'true', the request to MS Graph will be an HTTP PATCH request.\nSee https://developer.microsoft.com/en-us/graph/docs/concepts/overview for information on requests and responses. Note that all HATEOAS links embedded in the response will be modified to point at this proxy endpoint.\n",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    },
+                    {
+                        "name": "$proxy_patch",
+                        "type": "boolean",
+                        "required": false,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "OK"
+                    },
+                    "407": {
+                        "schema": {
+                            "$ref": "#/definitions/UserNeedsAuthorizationError"
+                        },
+                        "description": "User needs authorization"
+                    }
+                }
+            },
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Proxy a POST request to MS Graph.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Proxies POST requests to Microsoft Graph. In order to call this for a user, the client must already have obtained an Authorization Link (see `/authorization-link`) and the user must have connected their BYU account to their MS Office 365 account. If the user has not completed the authorization process, a `407` status code will be returned with a response body which includes a link to which the user can navigate in order to complete the process.\nSee https://developer.microsoft.com/en-us/graph/docs/concepts/overview for information on requests and responses. Note that all HATEOAS links embedded in the response will be modified to point at this proxy endpoint.\n",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "OK"
+                    },
+                    "407": {
+                        "schema": {
+                            "$ref": "#/definitions/UserNeedsAuthorizationError"
+                        },
+                        "description": "User needs authorization"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Proxy a GET request to MS Graph.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Proxies GET requests to Microsoft Graph. In order to call this for a user, the client must already have obtained an Authorization Link (see `/authorization-link`) and the user must have connected their BYU account to their MS Office 365 account. If the user has not completed the authorization process, a `407` status code will be returned with a response body which includes a link to which the user can navigate in order to complete the process.\nSee https://developer.microsoft.com/en-us/graph/docs/concepts/overview for information on requests and responses. Note that all HATEOAS links embedded in the response will be modified to point at this proxy endpoint.\n",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "OK"
+                    },
+                    "407": {
+                        "schema": {
+                            "$ref": "#/definitions/UserNeedsAuthorizationError"
+                        },
+                        "description": "User needs authorization"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Proxy a DELETE request to MS Graph.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Proxies DELETE requests to Microsoft Graph. In order to call this for a user, the client must already have obtained an Authorization Link (see `/authorization-link`) and the user must have connected their BYU account to their MS Office 365 account. If the user has not completed the authorization process, a `407` status code will be returned with a response body which includes a link to which the user can navigate in order to complete the process.\nSee https://developer.microsoft.com/en-us/graph/docs/concepts/overview for information on requests and responses. Note that all HATEOAS links embedded in the response will be modified to point at this proxy endpoint.\n",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "OK"
+                    },
+                    "407": {
+                        "schema": {
+                            "$ref": "#/definitions/UserNeedsAuthorizationError"
+                        },
+                        "description": "User needs authorization"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "userId",
+                    "type": "string",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        },
+        "/authorization-link": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get a link to authorize a user to use the shim",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/AuthorizeLinkRequest"
+                        },
+                        "name": "body",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/AuthorizeLinkResponse"
+                        },
+                        "description": "Status 200"
+                    }
+                }
+            }
+        },
+        "/clients/{clientId}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/ClientInfo"
+                        },
+                        "description": "OK"
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/NotFoundError"
+                        },
+                        "description": "Missing"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "clientId",
+                    "type": "string",
+                    "required": true,
+                    "in": "path"
+                }
+            ]
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "ParameterError": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Error"
+                },
+                {
+                    "properties": {
+                        "details": {
+                            "properties": {
+                                "missing": {
+                                    "type": "boolean"
+                                },
+                                "invalid": {
+                                    "type": "boolean"
+                                },
+                                "name": {
+                                    "description": "name of missing or invalid parameter",
+                                    "type": "string"
+                                },
+                                "problem": {
+                                    "description": "details of why a parameter is invalid",
+                                    "type": "string"
+                                },
+                                "paramType": {
+                                    "description": "the type of missing or invalid parameter",
+                                    "enum": [
+                                        "query",
+                                        "body"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "UserNeedsAuthorizationError": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Error"
+                },
+                {
+                    "properties": {
+                        "details": {
+                            "properties": {
+                                "expires_at": {
+                                    "description": "Expiration date/time of the authorization link",
+                                    "format": "dateTime",
+                                    "type": "string"
+                                },
+                                "token": {
+                                    "description": "The raw authorization token from the authorization link.",
+                                    "type": "string"
+                                },
+                                "authorization_link": {
+                                    "description": "Link to which the user should be redirected to be authorized with MS Graph",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "ClientInfo": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "NotFoundError": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Error"
+                },
+                {
+                    "properties": {
+                        "details": {
+                            "properties": {
+                                "id": {
+                                    "description": "the ID of the missing object",
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "description": "the type of missing object",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "AuthorizeLinkRequest": {
+            "properties": {
+                "person_id": {
+                    "type": "string"
+                },
+                "byu_id": {
+                    "type": "string"
+                },
+                "expires_in_seconds": {
+                    "type": "integer"
+                },
+                "net_id": {
+                    "type": "string"
+                },
+                "finished_url": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "AuthorizeLinkResponse": {
+            "properties": {
+                "expires_at": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "authorization_link": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Error": {
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "object"
+                }
+            },
+            "required": [
+                "message"
+            ],
+            "type": "object"
+        }
+    },
+    "security": [
+        {
+            "application": []
+        }
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "application": {
+            "scopes": {},
+            "flow": "application",
+            "type": "oauth2",
+            "tokenUrl": "https://api.byu.edu/token"
+        }
+    },
+    "info": {
+        "title": "microsoft-graph-shim",
+        "description": "Brings BYU Authentication and API patterns to the Microsoft Graph API.",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "contact": {},
+        "version": "v1"
+    }
+}

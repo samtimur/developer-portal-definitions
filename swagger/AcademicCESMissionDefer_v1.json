@@ -1,0 +1,346 @@
+{
+    "basePath": "/domains/legacy/academic/ces/missiondefer/v1",
+    "paths": {
+        "/documentation": {
+            "get": {
+                "summary": "service definition",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "service definition",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Success"
+                    }
+                },
+                "operationId": "getServiceDocumentation"
+            }
+        },
+        "/save": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Insert Missionary Information",
+                "parameters": [
+                    {
+                        "description": "string ->",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "string ->",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "string ->",
+                        "name": "mission",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "string ->",
+                        "name": "mission_code",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "string ->",
+                        "name": "mission_ent_mm",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "string ->",
+                        "name": "mission_ent_year",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "string ->",
+                        "name": "mission_rls_mm",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "string ->",
+                        "name": "mission_rls_year",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/byuadmit": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "byu admit",
+                "x-throttling-tier": "Unlimited",
+                "description": "handle byu admits",
+                "parameters": [
+                    {
+                        "description": "9 digit person id",
+                        "name": "person_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "applicant type - FRESHMAN, TRANSFER, or FORMER",
+                        "name": "app_type",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "6 digit program code",
+                        "name": "program_code",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "5 digit year/term",
+                        "name": "year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Registration Eligibility - 2 characters - DC, SO, SL, etc.",
+                        "name": "reg_eligibility",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "Set need HS transcript flag - Y or N",
+                        "name": "need_hs_xscript",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Set international flags - Y or N",
+                        "name": "international",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    },
+                    {
+                        "description": "must be A (Admit) or D (Deny)",
+                        "name": "decision",
+                        "type": "string",
+                        "required": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/{person_id}": {
+            "get": {
+                "tags": [
+                    "MissionDefermentService"
+                ],
+                "summary": "Lookup person ID",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Lookup person ID",
+                "parameters": [
+                    {
+                        "description": "string -> ",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service request is OK and a response has been generated."
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response."
+                    },
+                    "403": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user does not have access to the resource."
+                    },
+                    "404": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The target resource can not be found for the provided resource identifiers."
+                    },
+                    "405": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The service method is not supported by the service."
+                    },
+                    "409": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A conflict has occurred. The response structure may contain information about the conflict."
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error."
+                    }
+                },
+                "operationId": "getPersonID"
+            }
+        },
+        "/{person_id}/{version}": {
+            "get": {
+                "summary": "Lookup mission deferment eligiblity - for use with the new admissions application",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Lookup mission deferment eligiblity - for use with the new admissions application",
+                "parameters": [
+                    {
+                        "description": "9 digit person id",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "must be '2' (without the quotes)",
+                        "name": "version",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/save2": {
+            "put": {
+                "summary": "Simplified save for use with the new admissions application",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Simplified save for use with the new admissions application",
+                "parameters": [
+                    {
+                        "description": "save version - must be 2 or it will use the old save",
+                        "name": "version",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "9 digit person id",
+                        "name": "person_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "2 digit month for when entering the MTC",
+                        "name": "mission_ent_mm",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "4 digit year for when entering the MTC",
+                        "name": "mission_ent_year",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "2 digit month for when entering the MTC",
+                        "name": "mission_rls_mm",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "4 digit year for when entering the MTC",
+                        "name": "mission_rls_year",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "5 digit Semester/Term when admitted",
+                        "name": "admit_year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Y/N flag to indicate if international rules should apply",
+                        "name": "international",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "5 digit Semester/Term when planning to return",
+                        "name": "return_year_term",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {},
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "https://byuoit.atlassian.net/wiki/display/WSO2/Mission+Defer_v1.0"
+    },
+    "info": {
+        "title": "AcademicCESMissionDefer",
+        "description": "This service accesses the mission deferment information of a given student.",
+        "version": "v1"
+    }
+}

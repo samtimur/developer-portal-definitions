@@ -1,0 +1,89 @@
+{
+    "basePath": "/domains/erp/sa/MyFinancialCenterBanks/v1",
+    "paths": {
+        "/banks/{routing_number}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns information about a bank based on the routing number provided in the URL.",
+                "parameters": [
+                    {
+                        "name": "routing_number",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BankModel"
+                        },
+                        "description": "Information about a bank in My Financial Center."
+                    },
+                    "404": {
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        },
+                        "description": "The requested routing number was not found."
+                    }
+                }
+            }
+        },
+        "/banks": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns an array of routing numbers and bank names from My Financial Center.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/BankArrayModel"
+                        },
+                        "description": "An array of banks stored in My Financial Center"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "BankModel": {
+            "properties": {
+                "routing_number": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "BankArrayModel": {
+            "properties": {
+                "banks": {
+                    "items": {
+                        "$ref": "#/definitions/BankModel"
+                    },
+                    "type": "array"
+                }
+            }
+        },
+        "ErrorModel": {
+            "properties": {
+                "error_message": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "MyFinancialCenterBanks",
+        "description": "Returns bank names and routing numbers that are stored in the Campus Solutions PeopleSoft system.",
+        "contact": {
+            "email": "sft_ft@byu.edu",
+            "name": "OIT Student Financial Applications"
+        },
+        "version": "v1"
+    },
+    "host": "api.byu.edu:443"
+}

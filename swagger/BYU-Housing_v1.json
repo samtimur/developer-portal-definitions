@@ -1,0 +1,94 @@
+{
+    "basePath": "/rest/prsanimallistings/v1",
+    "tags": [
+        {
+            "description": "",
+            "name": "animallisting"
+        }
+    ],
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/animallisting/{animalid}": {
+            "get": {
+                "tags": [
+                    "animallisting"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "name": "animalid",
+                        "required": true,
+                        "type": "integer",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/AnimalListing",
+                            "xml": {
+                                "name": "AnimalListings"
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "AnimalListing": {
+            "title": "AnimalListing",
+            "xml": {
+                "name": "AnimalListing"
+            },
+            "properties": {
+                "Notes": {
+                    "type": "string"
+                },
+                "EndDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "AnimalType": {
+                    "enum": [
+                        "Dog",
+                        "Cat",
+                        "Rodent",
+                        "Bird",
+                        "Snake",
+                        "Fish",
+                        "Rabbit"
+                    ],
+                    "type": "string"
+                },
+                "StartDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "AnimalID": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "Purpose": {
+                    "enum": [
+                        "ESA",
+                        "Service",
+                        "Unauthorized"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "PRS AnimalListings",
+        "version": "1.0.0"
+    }
+}

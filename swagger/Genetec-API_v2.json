@@ -1,0 +1,859 @@
+{
+    "basePath": "/genetec/v2.0",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{byu_id}/credentials/{format_id}/{card_id}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Credentials",
+                "tags": [
+                    "Credentials"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "pattern": "^[0-9]{11}$",
+                        "name": "card_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "format_id",
+                        "enum": [
+                            "ID_CARD",
+                            "SEOS_CARD",
+                            "MORPHO",
+                            "TEMP_CARD"
+                        ],
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/credential"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Credentials",
+                "tags": [
+                    "Credentials"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "pattern": "^[0-9]{11}$",
+                        "name": "card_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "format_id",
+                        "enum": [
+                            "ID_CARD",
+                            "SEOS_CARD",
+                            "MORPHO",
+                            "TEMP_CARD"
+                        ],
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            }
+        },
+        "/events": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Events",
+                "tags": [
+                    "Events"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User or Credential cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            }
+        },
+        "/{byu_id}/credentials": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Credentials",
+                "tags": [
+                    "Credentials"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/credential"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Credentials",
+                "tags": [
+                    "Credentials"
+                ],
+                "x-throttling-tier": "Unlimited",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "example": {
+                                    "activation_date": "2020-08-01T00:00:00",
+                                    "card_number": "456726123",
+                                    "status": "Active",
+                                    "expiration_date": "2024-08-01T00:00:00",
+                                    "issue_code": "01",
+                                    "format": "ID_CARD"
+                                },
+                                "properties": {
+                                    "activation_date": {
+                                        "type": "string"
+                                    },
+                                    "card_number": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "expiration_date": {
+                                        "type": "string"
+                                    },
+                                    "issue_code": {
+                                        "type": "string"
+                                    },
+                                    "format": {
+                                        "enum": [
+                                            "ID_CARD",
+                                            "SEOS_CARD",
+                                            "MORPHO",
+                                            "TEMP_CARD"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            }
+        },
+        "/{byu_id}/person": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Person",
+                "tags": [
+                    "Person"
+                ],
+                "x-scope": "",
+                "x-throttling-tier": "Unlimited",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/person"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            },
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Person",
+                "tags": [
+                    "Person"
+                ],
+                "x-scope": "",
+                "x-throttling-tier": "Unlimited",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/person"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            },
+            "get": {
+                "summary": "Person",
+                "tags": [
+                    "Person"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "person": {
+                                    "example": {
+                                        "guid": "e5b3e5627e284f998d1e02a1f89827a6",
+                                        "first_name": "Cosmo",
+                                        "last_name": "Cougar",
+                                        "byu_id": "015605605",
+                                        "net_id": "cosmobyu"
+                                    },
+                                    "properties": {
+                                        "guid": {
+                                            "type": "string"
+                                        },
+                                        "first_name": {
+                                            "type": "string"
+                                        },
+                                        "last_name": {
+                                            "type": "string"
+                                        },
+                                        "byu_id": {
+                                            "type": "string"
+                                        },
+                                        "net_id": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "credentials": {
+                                    "items": {
+                                        "example": {
+                                            "activation_date": "2020-08-01T00:00:00",
+                                            "card_number": "456726123",
+                                            "status": "Active",
+                                            "expiration_date": "2024-08-01T00:00:00",
+                                            "issue_code": "01",
+                                            "format": "ID_CARD"
+                                        },
+                                        "properties": {
+                                            "activation_date": {
+                                                "type": "string"
+                                            },
+                                            "card_number": {
+                                                "type": "string"
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "expiration_date": {
+                                                "type": "string"
+                                            },
+                                            "issue_code": {
+                                                "type": "string"
+                                            },
+                                            "format": {
+                                                "enum": [
+                                                    "ID_CARD",
+                                                    "SEOS_CARD",
+                                                    "MORPHO",
+                                                    "TEMP_CARD"
+                                                ],
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "access_rules": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "example": [
+                                        "Perimeter Rule",
+                                        "Door 1",
+                                        "Interior Door"
+                                    ],
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Person",
+                "tags": [
+                    "Person"
+                ],
+                "x-scope": "",
+                "x-throttling-tier": "Unlimited",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            }
+        },
+        "/{byu_id}/access-rules/{rule}": {
+            "put": {
+                "summary": "Access Rules",
+                "tags": [
+                    "Access Rules"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "x-scope": "",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "rule",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User or Access Rule cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Access Rules",
+                "tags": [
+                    "Access Rules"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "x-scope": "",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    },
+                    {
+                        "name": "rule",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User or Access Rule cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            }
+        },
+        "/{byu_id}/cardholder-groups/{group}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Cardholder Groups"
+                ],
+                "summary": "Cardholder Groups",
+                "x-scope": "",
+                "x-throttling-tier": "Unlimited",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "group",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User or Group cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "Cardholder Groups"
+                ],
+                "summary": "Cardholder Groups",
+                "x-scope": "",
+                "x-throttling-tier": "Unlimited",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "name": "byu_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "name": "group",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User or Group cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            }
+        },
+        "/{byu_id}/access-rules": {
+            "get": {
+                "summary": "Access Rules",
+                "tags": [
+                    "Access Rules"
+                ],
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "All requests must include the following header:\n\nx-genetec-authentication:auth_code\n\nauth_code is a base64 string of your genetec username and password separated by a colon.\n\nusername:password",
+                "parameters": [
+                    {
+                        "pattern": "^[0-9]{9}$",
+                        "name": "byu_id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "example": [
+                                "Perimeter Rule",
+                                "Door 1",
+                                "Interior Door"
+                            ],
+                            "type": "array"
+                        },
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "User cannot perform this task."
+                    },
+                    "403": {
+                        "description": "User cannot call this resource."
+                    },
+                    "404": {
+                        "description": "User cannot be found."
+                    },
+                    "500": {
+                        "description": "Server Error."
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "person": {
+            "properties": {
+                "person": {
+                    "example": {
+                        "picture": "BASE64 STRING",
+                        "first_name": "Cosmo",
+                        "status": "Active",
+                        "email": "Cosmo@byucougars.com",
+                        "department": "Athletics",
+                        "classification": "ADM/FT/ACT",
+                        "date_of_birth": "1953-10-15",
+                        "last_name": "Cougar",
+                        "gender": "M",
+                        "byu_id": "015605605",
+                        "net_id": "cosmobyu",
+                        "reports_to": "Cosmo Cougar"
+                    },
+                    "properties": {
+                        "picture": {
+                            "description": "Base64",
+                            "type": "string"
+                        },
+                        "first_name": {
+                            "type": "string"
+                        },
+                        "status": {
+                            "type": "string"
+                        },
+                        "email": {
+                            "type": "string"
+                        },
+                        "department": {
+                            "type": "string"
+                        },
+                        "classification": {
+                            "type": "string"
+                        },
+                        "date_of_birth": {
+                            "type": "string"
+                        },
+                        "last_name": {
+                            "type": "string"
+                        },
+                        "gender": {
+                            "enum": [
+                                "M",
+                                "F",
+                                ""
+                            ],
+                            "type": "string"
+                        },
+                        "byu_id": {
+                            "type": "string"
+                        },
+                        "net_id": {
+                            "type": "string"
+                        },
+                        "reports_to": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "byu_id",
+                        "first_name",
+                        "last_name"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "credential": {
+            "properties": {
+                "credential": {
+                    "example": {
+                        "activation_date": "2020-08-01T00:00:00",
+                        "status": "Active",
+                        "expiration_date": "2024-08-01T00:00:00",
+                        "format": "ID_CARD",
+                        "card_id": "45672612306"
+                    },
+                    "properties": {
+                        "activation_date": {
+                            "type": "string"
+                        },
+                        "status": {
+                            "type": "string"
+                        },
+                        "expiration_date": {
+                            "type": "string"
+                        },
+                        "format": {
+                            "enum": [
+                                "ID_CARD",
+                                "SEOS_CARD",
+                                "MORPHO",
+                                "TEMP_CARD"
+                            ],
+                            "type": "string"
+                        },
+                        "card_id": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "Genetec-API",
+        "version": "v2.0"
+    }
+}

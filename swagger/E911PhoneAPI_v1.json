@@ -1,0 +1,124 @@
+{
+    "paths": {
+        "/history": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "tags": [
+                    "History"
+                ],
+                "summary": "Get list of historical E911 call detail records",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "filters results with caller number like value.",
+                        "name": "caller_number",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "filters results with calls equal to and after value",
+                        "name": "start_date",
+                        "format": "date-time",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "filters results with calls equal to and before value",
+                        "name": "end_date",
+                        "format": "date-time",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "filters results with display name like value.",
+                        "name": "display_name",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "filters results with location like value.",
+                        "name": "location",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "filters results with called number like value.",
+                        "name": "called_number",
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "offsets results to start at value",
+                        "name": "offset",
+                        "type": "integer",
+                        "in": "query"
+                    },
+                    {
+                        "description": "limits number of result to value",
+                        "name": "size",
+                        "type": "integer",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/E911CallDetailRecord"
+                            },
+                            "type": "array"
+                        },
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "operationId": "getHistory"
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "E911CallDetailRecord": {
+            "properties": {
+                "ipAddr": {
+                    "description": "IP address of phone",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "Location of phone",
+                    "type": "string"
+                },
+                "callingPartyNumber": {
+                    "description": "Caller's number",
+                    "type": "string"
+                },
+                "calledPartyNumber": {
+                    "description": "Called number",
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "Display name of caller",
+                    "type": "string"
+                },
+                "dateTimeOrigin": {
+                    "description": "Date and time the call was made",
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "title": "E911PhoneAPI",
+        "description": "Campus phone history web service",
+        "version": "v1"
+    },
+    "basePath": "/e911phone/v1",
+    "host": "api.byu.edu:443"
+}

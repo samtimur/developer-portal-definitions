@@ -1,0 +1,698 @@
+{
+    "basePath": "/exchange-api/v2.1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/disable-notification/{accountId}": {
+            "delete": {
+                "summary": "Disable missed call notifications for the given Unified Messaging account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/get-mailbox/{+accountId}": {
+            "get": {
+                "summary": "Get a user's mailbox information.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The user's Net ID or the generic account ID or an smtp address.",
+                        "name": "+accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/get-mailbox/{accountId}": {
+            "get": {
+                "summary": "Get a user's mailbox information.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The user's Net ID or the generic account ID or an smtp address.",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/um-disable/{accountId}": {
+            "delete": {
+                "summary": "Disables Unified Messaging for the given account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/set-primary-smtp/{accountId}": {
+            "put": {
+                "summary": "Sets the primary SMTP address for the given account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The account ID/user name",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/smtp"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/create-distribution-group": {
+            "post": {
+                "summary": "Creates a new distribution group with given parameters.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/distribution"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/unlock-mailbox/{accountId}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Unlocks a mailbox (restores access & smtp addresses)",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/enable-notification/{accountId}": {
+            "put": {
+                "summary": "Enable missed call notifications for the given Unified Messaging account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/lock-mailbox/{accountId}": {
+            "delete": {
+                "summary": "Locks down a mailbox (removes access & smtp addresses).",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The user's netid or generic account id.",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/reset-generic-password/{accountId}": {
+            "put": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Resets the password for the given generic account.",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/password"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/*": {
+            "get": {
+                "summary": "Always returns true.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/set-alternate-extension/{accountId}": {
+            "put": {
+                "summary": "Adds an alternate voicemail extension to the given Unified Messaging account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/extension"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/search-by-extension/{extension}": {
+            "get": {
+                "summary": "Finds the Unified Messaging account with the given extension.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "the 5-digit extension",
+                        "name": "extension",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/create-voicemail-account": {
+            "post": {
+                "summary": "Creates a voicemail-only account with the given display name and extension.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/voicemail"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/remove-alternate-extension/{accountId}/{extension}": {
+            "delete": {
+                "summary": "Removes the given alternate voicemail extension from the given Unified Messaging account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "description": "The username for the account",
+                        "name": "extension",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/refresh-umlog": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Refreshes the log used by /search-by-extension",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/disable-voicemail-account/{accountId}": {
+            "delete": {
+                "summary": "Disables the given voicemail-only account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/unlock-ad-account/{accountId}": {
+            "put": {
+                "summary": "Unlocks the Active Directory user account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/set-pin/{accountId}": {
+            "put": {
+                "summary": "Resets the PIN for the given Unified Messaging account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/pin"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/set-dial-zero/{accountId}": {
+            "put": {
+                "summary": "Sets the Dial Zero (operator) number for the given Unified Messaging account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/dialZero"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/um-enable/{accountId}": {
+            "put": {
+                "summary": "Enables Unified Messaging for the given account and extension.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/extension"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/remove-dial-zero/{accountId}": {
+            "delete": {
+                "summary": "Removes the dial zero (operator) number from the given Unified Messaging account.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "The username for the account",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/get-mailboxes/{identifier}": {
+            "get": {
+                "summary": "Gets a list of mailboxes for users matching the identifier.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Could be Net ID, name, or email address.",
+                        "name": "identifier",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "extension": {
+            "properties": {
+                "extension": {
+                    "description": "fun",
+                    "type": "string"
+                }
+            }
+        },
+        "smtp": {
+            "properties": {
+                "smtp": {
+                    "type": "string"
+                }
+            }
+        },
+        "pin": {
+            "properties": {
+                "pin": {
+                    "type": "string"
+                }
+            }
+        },
+        "voicemail": {
+            "properties": {
+                "extension": {
+                    "type": "string"
+                },
+                "displayName": {
+                    "type": "string"
+                }
+            }
+        },
+        "dialZero": {
+            "properties": {
+                "dialZeroNumber": {
+                    "type": "string"
+                }
+            }
+        },
+        "password": {
+            "properties": {
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "distribution": {
+            "properties": {
+                "smtp": {
+                    "type": "string"
+                },
+                "groupName": {
+                    "type": "string"
+                },
+                "manager": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "ExchangeAPI",
+        "description": "Exchange Management API",
+        "version": "v2.1"
+    }
+}

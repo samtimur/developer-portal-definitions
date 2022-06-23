@@ -1,0 +1,752 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "MyMapProgramsPlans",
+        "description": "ProgramsPlansService",
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "External **documentation** link",
+        "url": "http://hilt-dev.byu.edu/mymap/apidocs/"
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/domains/legacy/mymap/programs/plans/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/student/{personId}/programs/{programId}/plans/{groupNumber}": {
+            "post": {
+                "summary": "Plan a course for a requirement by person ID, program ID, and group number",
+                "description": "Plan a course for a requirement by person ID, program ID, and group number",
+                "operationId": "planACourseForARequirement",
+                "parameters": [
+                    {
+                        "name": "personId",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "programId",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "groupNumber",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "postPlanInformation",
+                        "description": "Plan a course for retirement",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/postPlanInformation"
+                        }
+                    }
+                ],
+                "tags": [
+                    "ProgramsPlansService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The saved plan information",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "204": {
+                        "description": "Empty response body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "The service method is not supported by the service.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "415": {
+                        "description": "Called with the wrong or missing a content-type HTTP header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/student/{personId}/programs/{programId}/plans/{groupNumber}/planHere": {
+            "post": {
+                "summary": "Plan a course at a given place by person ID, program ID, and group number",
+                "description": "Plan a course at a given place by person ID, program ID, and group number",
+                "operationId": "planACourseAtAGivenPlace",
+                "parameters": [
+                    {
+                        "name": "personId",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "programId",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "groupNumber",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "ProgramsPlansService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A copy of the saved plan information",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "204": {
+                        "description": "Empty response body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "The service method is not supported by the service.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "415": {
+                        "description": "Called with the wrong or missing a content-type HTTP header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/student/{personId}/programs/{programId}/plans/{groupNumber}/{sequenceNumber}": {
+            "get": {
+                "summary": "Fetch a saved plan by specified person ID, program ID, group number, and sequence number",
+                "description": "Fetch a saved plan by specified person ID, program ID, group number, and sequence number",
+                "operationId": "fetchNote",
+                "parameters": [
+                    {
+                        "name": "personId",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "programId",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "groupNumber",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "ProgramsPlansService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns plan information",
+                        "schema": {
+                            "$ref": "#/definitions/planInformation"
+                        }
+                    },
+                    "204": {
+                        "description": "Empty response body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "The service method is not supported by the service.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "415": {
+                        "description": "Called with the wrong or missing a content-type HTTP header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Remove a plan by specified person ID, program ID, group number, and sequence number",
+                "description": "Remove a plan by specified person ID, program ID, group number, and sequence number",
+                "operationId": "deletePlan",
+                "parameters": [
+                    {
+                        "name": "personId",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "programId",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "groupNumber",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "ProgramsPlansService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service request is OK and a response has been generated.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "204": {
+                        "description": "Empty response body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "The service method is not supported by the service.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "415": {
+                        "description": "Called with the wrong or missing a content-type HTTP header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/student/{personId}/programs/{programId}/plans/{groupNumber}/{sequenceNumber}/organize/{yearTerm}": {
+            "put": {
+                "summary": "Organize a plan by specified person ID, program ID, group number, sequence number, and year term",
+                "description": "Organize a plan by specified person ID, program ID, group number, sequence number, and year term",
+                "operationId": "organizePlan",
+                "parameters": [
+                    {
+                        "name": "personId",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "programId",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "groupNumber",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "sequenceNumber",
+                        "description": "string -> ",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "yearTerm",
+                        "description": "string -> year term to take the class, or 'none' to unorganize it",
+                        "type": "string",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "ProgramsPlansService"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service request is OK and a response has been generated.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "204": {
+                        "description": "Empty response body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "There appears to be a syntax error in the composition of the service request. The response structure may contain information about the error. If the base URI or service request URI is invalid, any response will come as an HTTP response.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have access to the resource.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "The service method is not supported by the service.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "415": {
+                        "description": "Called with the wrong or missing a content-type HTTP header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "An error occurred generating the response to the service request. This is strictly a server error and not an application error.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "postPlanInformation": {
+            "type": "object",
+            "properties": {
+                "hours": {
+                    "$ref": "#/definitions/hours"
+                },
+                "titleCode": {
+                    "$ref": "#/definitions/titleCode"
+                },
+                "yearTerm": {
+                    "$ref": "#/definitions/yearTerm"
+                },
+                "retake": {
+                    "$ref": "#/definitions/retake"
+                },
+                "curriculumId": {
+                    "$ref": "#/definitions/curriculumId"
+                },
+                "intendedSource": {
+                    "$ref": "#/definitions/intendedSource"
+                }
+            }
+        },
+        "hours": {
+            "type": "number"
+        },
+        "titleCode": {
+            "type": "string"
+        },
+        "yearTerm": {
+            "type": "string"
+        },
+        "retake": {
+            "type": "boolean"
+        },
+        "curriculumId": {
+            "type": "string"
+        },
+        "intendedSource": {
+            "type": "string",
+            "enum": [
+                "CLASS",
+                "EXAM",
+                "NON_EQUIVALENT_SUBSTITUTION",
+                "NONE",
+                "PETITION",
+                "POST_BACC",
+                "SENIOR",
+                "SUBSTITUTION",
+                "TRANSFER",
+                "TEST_WAIVER",
+                "WAIVER",
+                "PLAN"
+            ]
+        },
+        "planInformation": {
+            "type": "object",
+            "properties": {
+                "personId": {
+                    "$ref": "#/definitions/personId"
+                },
+                "programId": {
+                    "$ref": "#/definitions/programId"
+                },
+                "titleCode": {
+                    "$ref": "#/definitions/titleCode"
+                },
+                "planInfo": {
+                    "$ref": "#/definitions/planInfo"
+                },
+                "links": {
+                    "$ref": "#/definitions/links"
+                },
+                "requirementType": {
+                    "$ref": "#/definitions/requirementType"
+                },
+                "creditHours": {
+                    "$ref": "#/definitions/creditHours"
+                },
+                "curriculumId": {
+                    "$ref": "#/definitions/curriculumId"
+                },
+                "plannedYearTerm": {
+                    "$ref": "#/definitions/plannedYearTerm"
+                },
+                "intendedSource": {
+                    "$ref": "#/definitions/intendedSource"
+                },
+                "sequenceNumber": {
+                    "$ref": "#/definitions/sequenceNumber"
+                },
+                "catalogNumber": {
+                    "$ref": "#/definitions/catalogNumber"
+                },
+                "useYearTerm": {
+                    "$ref": "#/definitions/useYearTerm"
+                },
+                "groupNumber": {
+                    "$ref": "#/definitions/groupNumber"
+                },
+                "catalogSuffix": {
+                    "$ref": "#/definitions/catalogSuffix"
+                },
+                "departmentName": {
+                    "$ref": "#/definitions/departmentName"
+                }
+            }
+        },
+        "personId": {
+            "type": "string"
+        },
+        "programId": {
+            "type": "string"
+        },
+        "planInfo": {
+            "type": "object",
+            "properties": {
+                "prerequisites": {
+                    "$ref": "#/definitions/prerequisites"
+                },
+                "plannable": {
+                    "$ref": "#/definitions/plannable"
+                },
+                "whenTaught": {
+                    "$ref": "#/definitions/whenTaught"
+                },
+                "prerequisiteStatus": {
+                    "$ref": "#/definitions/prerequisiteStatus"
+                }
+            }
+        },
+        "prerequisites": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/prerequisite"
+            }
+        },
+        "prerequisite": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/status"
+                },
+                "titleCode": {
+                    "$ref": "#/definitions/titleCode"
+                },
+                "met": {
+                    "$ref": "#/definitions/met"
+                },
+                "curriculumId": {
+                    "$ref": "#/definitions/curriculumId"
+                },
+                "courseTitle": {
+                    "$ref": "#/definitions/courseTitle"
+                },
+                "metYearTerm": {
+                    "$ref": "#/definitions/metYearTerm"
+                }
+            }
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "TAKEN",
+                "CURRENT",
+                "REGISTERED",
+                "PLANNED",
+                "NOT_MET"
+            ]
+        },
+        "met": {
+            "type": "boolean"
+        },
+        "courseTitle": {
+            "type": "string"
+        },
+        "metYearTerm": {
+            "type": "string"
+        },
+        "plannable": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "whenTaught": {
+            "type": "object",
+            "properties": {
+                "semester": {
+                    "$ref": "#/definitions/semester"
+                }
+            }
+        },
+        "semester": {
+            "type": "object",
+            "properties": {
+                "frequency": {
+                    "$ref": "#/definitions/frequency"
+                },
+                "onDemand": {
+                    "$ref": "#/definitions/onDemand"
+                }
+            }
+        },
+        "frequency": {
+            "type": "string",
+            "enum": [
+                "Odd",
+                "Even",
+                "All",
+                "None"
+            ]
+        },
+        "onDemand": {
+            "type": "boolean"
+        },
+        "prerequisiteStatus": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/status"
+                },
+                "met": {
+                    "$ref": "#/definitions/met"
+                }
+            }
+        },
+        "links": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/link"
+            }
+        },
+        "link": {
+            "type": "object",
+            "properties": {
+                "method": {
+                    "$ref": "#/definitions/method"
+                },
+                "type": {
+                    "$ref": "#/definitions/type"
+                },
+                "uri": {
+                    "$ref": "#/definitions/uri"
+                },
+                "rel": {
+                    "$ref": "#/definitions/rel"
+                },
+                "template": {
+                    "$ref": "#/definitions/template"
+                },
+                "title": {
+                    "$ref": "#/definitions/title"
+                }
+            }
+        },
+        "method": {
+            "type": "string",
+            "enum": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE"
+            ]
+        },
+        "type": {
+            "type": "string"
+        },
+        "uri": {
+            "type": "string",
+            "description": "java net URI"
+        },
+        "rel": {
+            "type": "string"
+        },
+        "template": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "requirementType": {
+            "type": "string"
+        },
+        "creditHours": {
+            "type": "number"
+        },
+        "plannedYearTerm": {
+            "type": "string"
+        },
+        "sequenceNumber": {
+            "type": "number"
+        },
+        "catalogNumber": {
+            "type": "string"
+        },
+        "useYearTerm": {
+            "type": "boolean"
+        },
+        "groupNumber": {
+            "type": "number"
+        },
+        "catalogSuffix": {
+            "type": "string"
+        },
+        "departmentName": {
+            "type": "string"
+        }
+    }
+}

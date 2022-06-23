@@ -1,0 +1,120 @@
+{
+    "paths": {
+        "/*": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "returns Sum of Cost of Attendance and Grant in Aid amounts for the specified aid year.",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "maxLength": 4,
+                        "minLength": 1,
+                        "description": "Aid Year",
+                        "name": "aidyear",
+                        "type": "string",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/coagiaresponse"
+                            },
+                            "type": "array"
+                        },
+                        "description": "COA GIA response"
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        },
+                        "description": "failed status"
+                    }
+                }
+            },
+            "options": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "definitions": {
+        "errorModel": {
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "error_message": {
+                    "type": "string"
+                },
+                "error_message_number": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "status",
+                "error_message_number",
+                "error_message"
+            ]
+        },
+        "coagiaresponse": {
+            "properties": {
+                "academic_career": {
+                    "type": "string"
+                },
+                "grant_in_aid_amount": {
+                    "type": "string"
+                },
+                "aid_year": {
+                    "type": "string"
+                },
+                "aid_type": {
+                    "type": "string"
+                },
+                "cost_of_attendance_amountx": {
+                    "type": "string"
+                },
+                "is_lds": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "aid_year",
+                "is_lds",
+                "academic_career",
+                "aid_type",
+                "cost_of_attendance_amountx",
+                "grant_in_aid_amount"
+            ]
+        }
+    },
+    "info": {
+        "title": "Scholarship_COA_GIA_Totals",
+        "description": "This web service returns the Sum of Cost of Attendance and Grant in Aid amounts for the specified aid year.",
+        "contact": {
+            "email": "fgs@byu.edu",
+            "name": "Application Development - Student Financial Applications team",
+            "url": "<a href=\\\"https://www.byu.edu\">Click Here<\\a>"
+        },
+        "version": "v1"
+    },
+    "externalDocs": {
+        "description": "Example Documentation\":\"",
+        "url": "https://www.byu.edu"
+    },
+    "basePath": "/domains/erp/sa/Y_SLR_COA_GIA_TOTALS/v1",
+    "host": "api.byu.edu:443"
+}

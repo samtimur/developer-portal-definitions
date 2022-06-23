@@ -1,0 +1,364 @@
+{
+    "basePath": "/domains/erp/hr/workers_comp/v1",
+    "paths": {
+        "/{byu_id}/{date_of_injury}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns relevant job information for the given employee at the given date.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/date_of_injury"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/employee"
+                        },
+                        "description": "Service request is OK and the average pay is in the response body."
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/xml",
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "jobs": {
+            "items": {
+                "$ref": "#/definitions/job"
+            },
+            "type": "array"
+        },
+        "ssn": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The 9-digit government-issues Social Security Number (SSN) or Individual Tax Payer Identification Number (ITIN); a required identifier for tax-related and other government services.",
+            "example": "123456789",
+            "type": "string"
+        },
+        "surname": {
+            "maxLength": 30,
+            "description": "The surname, family name, or last name of a person.",
+            "example": "Smith",
+            "type": "string"
+        },
+        "hr_employee_category": {
+            "maxLength": 2,
+            "description": "Defines the employee category for HR purposes. The most common employee categories are Full-time, Part-time, and On Call. Very similar to Employee Status.",
+            "example": "C1",
+            "type": "string"
+        },
+        "hr_status": {
+            "maxLength": 1,
+            "description": "Designates whether a person is currently an employee or a BYU affiliated employee (e.g., LDS Philanthropies, ROTC, etc.). The two values are Active and Inactive.",
+            "enum": [
+                "A",
+                "D",
+                "L",
+                "P",
+                "R",
+                "T",
+                "W"
+            ],
+            "example": "A",
+            "type": "string"
+        },
+        "full_or_part-time": {
+            "description": "Whether the employee is classified as a full-time employee or part-time employee.",
+            "enum": [
+                "F",
+                "P",
+                "Q"
+            ],
+            "example": "F",
+            "type": "string"
+        },
+        "first_name": {
+            "maxLength": 30,
+            "description": "The first given name of a person.",
+            "example": "John",
+            "type": "string"
+        },
+        "employee_status": {
+            "maxLength": 2,
+            "description": "Defines the expected amount of time a person is employed per pay period. The most common employee statuses are Full-time, Part-time, and On Call.",
+            "example": "C1",
+            "type": "string"
+        },
+        "pay_frequency": {
+            "maxLength": 1,
+            "description": "The frequency at which someone is paid. The most common are bi-weekly and monthly.",
+            "enum": [
+                "B",
+                "M"
+            ],
+            "example": "B",
+            "type": "string"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee.",
+            "example": "123456789",
+            "type": "string"
+        },
+        "department_name": {
+            "maxLength": 30,
+            "description": "A campus department. Operating Units are assigned to a Department. Departments are organized in a hierarchical reporting structure within the University.",
+            "example": "Research Technology Group",
+            "type": "string"
+        },
+        "employee": {
+            "properties": {
+                "original_hire_date": {
+                    "$ref": "#/definitions/original_hire_date"
+                },
+                "first_name": {
+                    "$ref": "#/definitions/first_name"
+                },
+                "jobs": {
+                    "$ref": "#/definitions/jobs"
+                },
+                "middle_name": {
+                    "$ref": "#/definitions/middle_name"
+                },
+                "ssn": {
+                    "$ref": "#/definitions/ssn"
+                },
+                "date_of_birth": {
+                    "$ref": "#/definitions/date_of_birth"
+                },
+                "surname": {
+                    "$ref": "#/definitions/surname"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "workers_comp": {
+                    "$ref": "#/definitions/workers_comp"
+                },
+                "net_id": {
+                    "$ref": "#/definitions/net_id"
+                }
+            }
+        },
+        "employee_classification": {
+            "maxLength": 1,
+            "description": "Employee Classification describes the type of job for which an employee is hired. Some examples of Employee Classifications include Faculty, Administrative, F/T Staff, 3/4 time (TP STF), 1/2 time and Student.",
+            "example": "B",
+            "type": "string"
+        },
+        "date_of_injury": {
+            "description": "The combined day, month, and year of a person's injury, in yyyy-mm-dd format.",
+            "example": "2000-02-18",
+            "format": "date",
+            "type": "string"
+        },
+        "original_hire_date": {
+            "description": "The earliest date that an employee started employment at BYU as either a part-time or full-time employee",
+            "example": "2020-08-31",
+            "format": "date",
+            "type": "string"
+        },
+        "hire_date": {
+            "description": "The date an employee started their most recent employment at BYU.",
+            "example": "2020-08-31",
+            "format": "date",
+            "type": "string"
+        },
+        "last_hire_date": {
+            "description": "The Seniority Hire date that is used for benefits calculations.",
+            "example": "2020-08-31",
+            "format": "date",
+            "type": "string"
+        },
+        "middle_name": {
+            "maxLength": 30,
+            "description": "The given middle name of the person",
+            "example": "Jacob",
+            "type": "string"
+        },
+        "date_of_birth": {
+            "description": "The combined day, month, and year of a person's birth, in yyyy-mm-dd format.",
+            "example": "2000-02-18",
+            "format": "date",
+            "type": "string"
+        },
+        "termination_date": {
+            "description": "The date on which an employee officially stops working for BYU.",
+            "example": "2020-08-31",
+            "format": "date",
+            "type": "string"
+        },
+        "job": {
+            "properties": {
+                "hire_date": {
+                    "$ref": "#/definitions/hire_date"
+                },
+                "last_hire_date": {
+                    "$ref": "#/definitions/last_hire_date"
+                },
+                "termination_date": {
+                    "$ref": "#/definitions/termination_date"
+                },
+                "hr_status": {
+                    "$ref": "#/definitions/hr_status"
+                },
+                "hr_employee_category": {
+                    "$ref": "#/definitions/hr_employee_category"
+                },
+                "full_or_part-time": {
+                    "$ref": "#/definitions/full_or_part-time"
+                },
+                "employee_status": {
+                    "$ref": "#/definitions/employee_status"
+                },
+                "pay_frequency": {
+                    "$ref": "#/definitions/pay_frequency"
+                },
+                "job_code": {
+                    "$ref": "#/definitions/job_code"
+                },
+                "employee_standing": {
+                    "$ref": "#/definitions/employee_standing"
+                },
+                "compensation_rate": {
+                    "$ref": "#/definitions/compensation_rate"
+                },
+                "division_id": {
+                    "$ref": "#/definitions/division_id"
+                },
+                "department_name": {
+                    "$ref": "#/definitions/department_name"
+                },
+                "hr_empl_class_code": {
+                    "$ref": "#/definitions/hr_empl_class_code"
+                },
+                "employee_classification": {
+                    "$ref": "#/definitions/employee_classification"
+                }
+            }
+        },
+        "average_pay": {
+            "description": "The average pay for the given period. Average pay is defined as being the average of the previous 14 weeks of pay from a given date.",
+            "example": 14.21,
+            "type": "number"
+        },
+        "net_id": {
+            "maxLength": 8,
+            "description": "A unique identifier used for enterprise sign-in. Usually five to eight characters, beginning with a letter. May be self-selected or system-generated. Net IDs are known for being more human-readable than the other unique identifiers used at BYU.",
+            "example": "dduck",
+            "type": "string"
+        },
+        "job_code": {
+            "maxLength": 6,
+            "description": "A six digit code used internally by Human Resources. Each unique job code may be assigned to multiple positions.",
+            "example": "123456",
+            "type": "string"
+        },
+        "employee_standing": {
+            "maxLength": 3,
+            "description": "Defines the current expected work activity of an employee for general campus purposes. The most common employee standings are Active, Terminated, and Retired.",
+            "example": "ACT",
+            "type": "string"
+        },
+        "compensation_rate": {
+            "description": "Compensation Rate refers to the sum of all base pay salary components entered in the Pay Components section in Job Data. The amount displayed is set to the Compensation Rate Frequency.",
+            "example": "24",
+            "type": "number"
+        },
+        "workers_comp": {
+            "properties": {
+                "average_pay": {
+                    "$ref": "#/definitions/average_pay"
+                },
+                "date_of_injury": {
+                    "$ref": "#/definitions/date_of_injury"
+                }
+            }
+        },
+        "division_id": {
+            "maxLength": 4,
+            "description": "The Department ID that is at level four in the organization hierarchy.",
+            "example": "0047",
+            "type": "string"
+        },
+        "hr_empl_class_code": {
+            "maxLength": 2,
+            "description": "A one or two digit code that represents the HR Empl Class. Examples include: O = Staff (Full-Time), H = Faculty F/T (Regular), 19 = Faculty Adjunct (Retired).",
+            "example": "O",
+            "type": "string"
+        }
+    },
+    "parameters": {
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "name": "byu_id",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        },
+        "date_of_injury": {
+            "description": "The date of injury to consider.",
+            "name": "date_of_injury",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        }
+    },
+    "x-infohub-authorization-by-fieldset": true,
+    "responses": {
+        "400": {
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "403": {
+            "description": "Access denied to protected data"
+        },
+        "500": {
+            "description": "Internal Server Error"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "Workers_Comp",
+        "description": "Web service for providing worker's compensation information.",
+        "version": "v1"
+    }
+}

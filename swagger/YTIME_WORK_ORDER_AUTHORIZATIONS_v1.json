@@ -1,0 +1,301 @@
+{
+    "basePath": "/domains/erp/hr/work_order_authorizations/v1",
+    "paths": {
+        "/{work_order_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Get information for given work order id.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get information for given work order id.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/work_order_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/work_order_authorization"
+                        },
+                        "description": "Successfully returned work order authorization information."
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            },
+            "delete": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Delete work order authorization",
+                "x-throttling-tier": "Unlimited",
+                "description": "Delete work order and all associated departments",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/work_order_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        },
+                        "description": "Successfully deleted work order authorization"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/*": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Create new work order authorization",
+                "x-throttling-tier": "Unlimited",
+                "description": "Create new work order authorization",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/work_order_authorization_body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/work_order_authorizations"
+                        },
+                        "description": "adds or updates single or multiple work order authorizations"
+                    },
+                    "207": {
+                        "schema": {
+                            "$ref": "#/definitions/work_order_authorizations"
+                        },
+                        "description": "partial information was saved"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            },
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Returns information for all work order authorizations.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns information for all work order authorizations.",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/work_order_authorizations"
+                        },
+                        "description": "Work order authorizations are in the response body"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "message": {
+            "description": "The response message from the system",
+            "example": "Work Order Authorization Not Found",
+            "type": "string"
+        },
+        "response": {
+            "description": "The response body for a delete operation",
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/status"
+                },
+                "work_order_id": {
+                    "$ref": "#/definitions/work_order_id"
+                }
+            },
+            "type": "object"
+        },
+        "status": {
+            "description": "The response given from the system",
+            "properties": {
+                "message": {
+                    "$ref": "#/definitions/message"
+                },
+                "code": {
+                    "$ref": "#/definitions/code"
+                }
+            },
+            "type": "object"
+        },
+        "work_order_authorizations": {
+            "items": {
+                "$ref": "#/definitions/work_order_authorization"
+            },
+            "description": "collection of work order authorizations",
+            "type": "array"
+        },
+        "department_id": {
+            "description": "A code that represents a department id",
+            "example": "123456",
+            "type": "string"
+        },
+        "work_order_authorization": {
+            "description": "The information about which departments go with which work orders",
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/status"
+                },
+                "department_id": {
+                    "$ref": "#/definitions/department_id"
+                },
+                "work_order_id": {
+                    "$ref": "#/definitions/work_order_id"
+                }
+            },
+            "required": [
+                "work_order_id",
+                "department_id"
+            ],
+            "type": "object"
+        },
+        "work_order_id": {
+            "description": "A string up to 15 characters that represents an individual work order",
+            "example": "ABC123",
+            "type": "string"
+        },
+        "work_order_authorization_body": {
+            "items": {
+                "$ref": "#/definitions/work_order_authorization"
+            },
+            "description": "the body required to create a new work order auth",
+            "type": "array"
+        },
+        "code": {
+            "description": "HTML response status code",
+            "example": 200,
+            "type": "integer"
+        }
+    },
+    "parameters": {
+        "work_order_id": {
+            "description": "A string up to 15 characters that represents an individual work order",
+            "name": "work_order_id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "work_order_authorization_body": {
+            "schema": {
+                "$ref": "#/definitions/work_order_authorization_body"
+            },
+            "description": "work order authorization body",
+            "name": "work_order_authorization_body",
+            "required": true,
+            "in": "body"
+        }
+    },
+    "responses": {
+        "400": {
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "403": {
+            "description": "Access denied to protected data"
+        },
+        "404": {
+            "description": "The requested resource does not exist"
+        },
+        "500": {
+            "description": "Internal Server Error"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "YTIME_WORK_ORDER_AUTHORIZATIONS",
+        "description": "Web services to manage work order authorizations.",
+        "version": "v1"
+    }
+}

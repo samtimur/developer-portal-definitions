@@ -1,0 +1,513 @@
+{
+    "basePath": "/domains/erp/hr/work_order_entry/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/{byu_id},{employee_record}": {
+            "get": {
+                "summary": "Work Order Entry information for Employee",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns information for all work order entries for given employee and employee record.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/employee_record"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/timesheet"
+                        },
+                        "description": "Work order entries are in the response body"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "incorrect information submitted"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/{byu_id},{employee_record},{punch_date}": {
+            "get": {
+                "summary": "Work Order Entry information for Employee",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Returns information for all work order entries for given employee and employee record, can be for given date",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/employee_record"
+                    },
+                    {
+                        "$ref": "#/parameters/punch_date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/timesheet"
+                        },
+                        "description": "Work order entries are in the response body"
+                    },
+                    "400": {
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        },
+                        "description": "error response"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/{byu_id},{employee_record},{punch_date},{sequence_number}": {
+            "delete": {
+                "summary": "Remove work order entry from date",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Remove work order entry from date given date and sequence number",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "$ref": "#/parameters/employee_record"
+                    },
+                    {
+                        "$ref": "#/parameters/punch_date"
+                    },
+                    {
+                        "$ref": "#/parameters/sequence_number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        },
+                        "description": "Work order entry successfully removed"
+                    }
+                }
+            }
+        },
+        "/{byu_id}": {
+            "post": {
+                "summary": "Add or update information for work order entry",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Add or update information for work order entry",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    },
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/punch_body"
+                        },
+                        "description": "Punch Information",
+                        "name": "punch",
+                        "required": true,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/punch"
+                        },
+                        "description": "Return information for punch and work order entry"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    },
+                    "504": {
+                        "$ref": "#/responses/504"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "parameters": {
+        "sequence_number": {
+            "maxLength": 15,
+            "description": "Sequence Number",
+            "name": "sequence_number",
+            "required": true,
+            "type": "integer",
+            "in": "path"
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "name": "byu_id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+        },
+        "employee_record": {
+            "maxLength": 3,
+            "description": "Employee Record Number",
+            "name": "employee_record",
+            "type": "integer",
+            "required": true,
+            "in": "path"
+        },
+        "punch_date": {
+            "description": "The date that a given punch was recorded on",
+            "name": "punch_date",
+            "format": "string",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        }
+    },
+    "definitions": {
+        "trc_id": {
+            "description": "A string of up to 5 characters to identify the time reporting code",
+            "enum": [
+                "4REG",
+                "4RPP",
+                "4OCP"
+            ],
+            "example": "4REG",
+            "type": "string"
+        },
+        "workorders": {
+            "items": {
+                "$ref": "#/definitions/workorder"
+            },
+            "description": "Collection of work orders",
+            "type": "array"
+        },
+        "physical_facilities_hours": {
+            "description": "Need to look up this description",
+            "example": "00:00",
+            "type": "string"
+        },
+        "work_order": {
+            "description": "The information that creates a work order",
+            "properties": {
+                "sequence_number": {
+                    "$ref": "#/definitions/sequence_number"
+                },
+                "trc_id": {
+                    "$ref": "#/definitions/trc_id"
+                },
+                "hours": {
+                    "$ref": "#/definitions/hours"
+                },
+                "work_order_id": {
+                    "$ref": "#/definitions/work_order_id"
+                },
+                "employee_record": {
+                    "$ref": "#/definitions/employee_record"
+                },
+                "punch_date": {
+                    "$ref": "#/definitions/punch_date"
+                },
+                "time_collection_source": {
+                    "$ref": "#/definitions/time_collection_source"
+                }
+            },
+            "type": "object",
+            "required": [
+                "employee_record",
+                "punch_date",
+                "sequence_number",
+                "time_collection_source",
+                "work_order_id",
+                "trc_id",
+                "hours"
+            ]
+        },
+        "has_exception": {
+            "description": "Indicates that the employee has exception(s) on the indicated date (true) or not (false)",
+            "example": false,
+            "type": "boolean"
+        },
+        "date": {
+            "description": "Information pertaining to a date with associated work order information",
+            "properties": {
+                "punched_hours": {
+                    "$ref": "#/definitions/punched_hours"
+                },
+                "workorders": {
+                    "$ref": "#/definitions/workorders"
+                },
+                "other_hours": {
+                    "$ref": "#/definitions/other_hours"
+                },
+                "physical_facilities_hours": {
+                    "$ref": "#/definitions/physical_facilities_hours"
+                },
+                "punch_date": {
+                    "$ref": "#/definitions/punch_date"
+                },
+                "has_exception": {
+                    "$ref": "#/definitions/has_exception"
+                }
+            },
+            "type": "object"
+        },
+        "time_collection_source": {
+            "description": "Punch Source",
+            "enum": [
+                "MBL",
+                "WEB",
+                "CPI"
+            ],
+            "example": "CPI",
+            "type": "string"
+        },
+        "work_order_description": {
+            "description": "The description of a work order",
+            "example": "2007 GMC PICKUP TRUCK C20",
+            "type": "string"
+        },
+        "response": {
+            "description": "response from submission",
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/status"
+                },
+                "work_order_id": {
+                    "$ref": "#/definitions/work_order_id"
+                }
+            },
+            "type": "object"
+        },
+        "dates": {
+            "items": {
+                "$ref": "#/definitions/date"
+            },
+            "description": "Collection of dates and their associated information",
+            "type": "array"
+        },
+        "employee_record": {
+            "maxLength": 3,
+            "description": "The number that corresponds to a particular job for an employee when they work multiple jobs concurrently on campus.",
+            "example": 0,
+            "type": "integer"
+        },
+        "punch": {
+            "description": "Object holding date information with associated work orders",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/dates"
+                },
+                {
+                    "$ref": "#/definitions/status"
+                }
+            ]
+        },
+        "error": {
+            "description": "response from error",
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/status"
+                }
+            },
+            "type": "object"
+        },
+        "status": {
+            "description": "Information about the result of call",
+            "properties": {
+                "message": {
+                    "$ref": "#/definitions/message"
+                },
+                "code": {
+                    "$ref": "#/definitions/code"
+                }
+            },
+            "type": "object"
+        },
+        "hours": {
+            "description": "Need to look this up",
+            "example": "00:00",
+            "type": "string"
+        },
+        "code": {
+            "description": "Need to define this",
+            "example": "200",
+            "type": "string"
+        },
+        "editable": {
+            "description": "Need to look this up",
+            "example": false,
+            "type": "boolean"
+        },
+        "message": {
+            "maxLength": 100,
+            "description": "A user-friendly message indicating why the employee is not able to clock in/out of a particular job.",
+            "example": "Unable to access job",
+            "type": "string"
+        },
+        "sequence_number": {
+            "maxLength": 15,
+            "description": "The unique number id of a punch in the system",
+            "example": 5,
+            "type": "integer"
+        },
+        "punched_hours": {
+            "description": "Aggregate of time worked for the day based on In and Out punches. If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        },
+        "workorder": {
+            "description": "Information pertaining to a work order",
+            "properties": {
+                "sequence_number": {
+                    "$ref": "#/definitions/sequence_number"
+                },
+                "work_order_description": {
+                    "$ref": "#/definitions/work_order_description"
+                },
+                "trc_id": {
+                    "$ref": "#/definitions/trc_id"
+                },
+                "work_order_id": {
+                    "$ref": "#/definitions/work_order_id"
+                },
+                "hours_worked": {
+                    "$ref": "#/definitions/hours_worked"
+                },
+                "editable": {
+                    "$ref": "#/definitions/editable"
+                }
+            },
+            "type": "object"
+        },
+        "punch_body": {
+            "description": "Information needed to sumbit a work order punch",
+            "properties": {
+                "work_order": {
+                    "$ref": "#/definitions/work_order"
+                }
+            },
+            "type": "object"
+        },
+        "work_order_id": {
+            "description": "A string up to 15 characters that represents an individual work order",
+            "example": "ABC123",
+            "type": "string"
+        },
+        "other_hours": {
+            "description": "Aggregate of other time recorded for the day (sick, vacation, on-call, etc.). If the employee has any uncorrected exceptions it will display --:--",
+            "example": "00:00",
+            "type": "string"
+        },
+        "hours_worked": {
+            "description": "The number of hours worked.",
+            "format": "double",
+            "example": 15,
+            "type": "number"
+        },
+        "timesheet": {
+            "description": "Object holding date information with associated work orders",
+            "properties": {
+                "dates": {
+                    "$ref": "#/definitions/dates"
+                }
+            },
+            "type": "object"
+        },
+        "punch_date": {
+            "pattern": "date pattern",
+            "description": "Need to look up this description",
+            "example": "DD/MM/YY",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "400": {
+            "description": "Invalid Request - unable to interpret request"
+        },
+        "401": {
+            "description": "Authentication required to access data"
+        },
+        "403": {
+            "description": "Access denied to protected data"
+        },
+        "404": {
+            "description": "The requested resource does not exist"
+        },
+        "500": {
+            "description": "Internal Server Error"
+        },
+        "504": {
+            "description": "Gateway Timeout"
+        },
+        "default": {
+            "description": "Unexpected error"
+        }
+    },
+    "info": {
+        "title": "YTIME_WORK_ORDER_ENTRIES",
+        "description": "Web services to manage work order entries in relation to employees.",
+        "version": "v1"
+    }
+}

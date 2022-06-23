@@ -1,0 +1,133 @@
+{
+    "basePath": "/domains/erp/hr/retirees/v1",
+    "paths": {
+        "/{byu_id}": {
+            "get": {
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Get Employee Retirement Date",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/byu_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    }
+                }
+            }
+        }
+    },
+    "host": "api.byu.edu:443",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "400_Response": {
+            "properties": {
+                "reason": {
+                    "$ref": "#/definitions/reason"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                }
+            }
+        },
+        "reason": {
+            "description": "Error corresponding to 400 return code",
+            "type": "string"
+        },
+        "retirement_date": {
+            "pattern": "YYYY-MM-DD",
+            "description": "Date Employee Retired",
+            "example": "2020-01-01",
+            "type": "string"
+        },
+        "200_Response": {
+            "properties": {
+                "retirement_date": {
+                    "$ref": "#/definitions/retirement_date"
+                },
+                "byu_id": {
+                    "$ref": "#/definitions/byu_id"
+                },
+                "sort_name": {
+                    "$ref": "#/definitions/sort_name"
+                }
+            }
+        },
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "example": "123456789",
+            "type": "string"
+        },
+        "sort_name": {
+            "description": "Name of Employee",
+            "example": "Doe, John",
+            "type": "string"
+        }
+    },
+    "parameters": {
+        "byu_id": {
+            "pattern": "^[0-9]{9}$",
+            "description": "The nine-digit computer-generated ID assigned to each employee",
+            "name": "byu_id",
+            "type": "string",
+            "required": true,
+            "in": "path"
+        }
+    },
+    "responses": {
+        "200": {
+            "schema": {
+                "$ref": "#/definitions/200_Response"
+            },
+            "description": "Success"
+        },
+        "400": {
+            "schema": {
+                "$ref": "#/definitions/400_Response"
+            },
+            "description": "Invalid Path Parameter"
+        },
+        "401": {
+            "description": "Not Authenticated"
+        },
+        "403": {
+            "description": "Not Authorized"
+        },
+        "404": {
+            "description": "Retiree Not Found"
+        },
+        "500": {
+            "description": "Internal Server Error"
+        }
+    },
+    "info": {
+        "title": "Retirees",
+        "description": "Checks whether or not a retired employee is full time",
+        "version": "v1"
+    }
+}

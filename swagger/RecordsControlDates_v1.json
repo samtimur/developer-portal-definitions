@@ -1,0 +1,101 @@
+{
+    "paths": {
+        "/yearTerm": {
+            "get": {
+                "summary": "Get the year and term as of now for the CURRENT_YYT date type.  Optionally provide and as of date and or the date type desired.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Date string that conforms to php transformation for DateTime(asOf), i.e. Today, 10 years ago, 20161015.",
+                        "name": "asOf",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "String that should be a valid date type for the asOf period of interest.",
+                        "name": "dateType",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/dateTypes": {
+            "get": {
+                "summary": "Get the set of date types available as of now.  Optionally provide and as of date to get the set that was available at the date specified.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Date string that conforms to php transformation for DateTime(asOf), i.e. Today, 10 years ago, 20161015.",
+                        "name": "asOf",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/*": {
+            "put": {
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "object"
+                        },
+                        "description": "Request Body",
+                        "name": "Payload",
+                        "required": false,
+                        "in": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            },
+            "get": {
+                "summary": "Get the control date as of the current year and term of the CURRENT_YYT date type.  Optionally provide the year and term and or the date type desired.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Year and term",
+                        "name": "yearTerm",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "String that should be a valid date type for the yearTerm of interest.",
+                        "name": "dateType",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "RecordsControlDates",
+        "description": "Control dates define a time period associated with a given date type and year and term.",
+        "version": "v1"
+    },
+    "basePath": "/records/controlDates/v1",
+    "host": "api.byu.edu:443"
+}

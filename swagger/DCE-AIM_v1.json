@@ -1,0 +1,91 @@
+{
+    "paths": {
+        "/Enroll": {
+            "post": {
+                "x-auth-type": "Application & Application User",
+                "summary": "Creates an enrollment.",
+                "x-throttling-tier": "Unlimited",
+                "description": "Ensures enrollment of a student in a course. Returns the context_id of the new/existing enrollment.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Orion product ID of the course to enroll the student in.",
+                        "name": "product_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "PRO person ID of student to enroll in course. String of 9 digits.",
+                        "name": "student_id",
+                        "required": true,
+                        "type": "string",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Number of credit hours to be selected for the enrollment",
+                        "name": "credit_hours",
+                        "required": false,
+                        "type": "string",
+                        "in": "query"
+                    }
+                ],
+                "consumes": [
+                    ""
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/getEnrollments/id/{id}": {
+            "get": {
+                "summary": "List student enrollments",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "description": "Gets a list of all current Independent Study University enrollments for the provided student with assignment details. Excludes BYU Online courses.",
+                "parameters": [
+                    {
+                        "description": "PRO person ID, a string of 9 digits.",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/withdraw": {
+            "delete": {
+                "summary": "Withdraws a student from a course.",
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "parameters": [
+                    {
+                        "description": "Orion context ID of the enrollment to withdraw.",
+                        "name": "context_id",
+                        "required": true,
+                        "type": "numeric",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "info": {
+        "title": "DCE-AIM",
+        "description": "Functions for OITs AIM to pass/get enrollmmets to/from DCE Orion",
+        "version": "v1.0"
+    },
+    "basePath": "/domains/DCE/AIM/v1.0",
+    "host": "api.byu.edu:443"
+}

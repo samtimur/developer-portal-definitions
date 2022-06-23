@@ -1,0 +1,120 @@
+{
+    "basePath": "/domains/erp/fs/cas_registry_number/v1",
+    "host": "api.byu.edu:443",
+    "paths": {
+        "/*": {
+            "get": {
+                "description": "",
+                "parameters": [
+                    {
+                        "maxLength": 60,
+                        "description": "CAS Registry Number",
+                        "minLength": 1,
+                        "name": "cas_id",
+                        "required": false,
+                        "type": "string",
+                        "in": "query",
+                        "allowEmptyValue": true
+                    },
+                    {
+                        "maxLength": 200,
+                        "description": "Description",
+                        "minLength": 1,
+                        "name": "description",
+                        "required": false,
+                        "type": "string",
+                        "in": "query",
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/cas_registry_numbers"
+                        },
+                        "description": "The default response type is JSON.  Add an Accept header with value=application/xml to return an XML response.",
+                        "examples": {
+                            "application/json": {
+                                "cas_registry_numbers": {
+                                    "cas_information": [
+                                        {
+                                            "cas_registry_number": "100-47-0",
+                                            "item_description": "BENZONITRILE"
+                                        },
+                                        {
+                                            "cas_registry_number": "100-44-7",
+                                            "item_description": "BENZYL CHLORIDE"
+                                        },
+                                        {
+                                            "cas_registry_number": "100-28-7",
+                                            "item_description": "p-NITROPHENYL ISOCYANATE"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited"
+            }
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "definitions": {
+        "cas_registry_numbers": {
+            "items": {
+                "$ref": "#/definitions/cas_information"
+            },
+            "type": "array"
+        },
+        "error": {
+            "enum": [
+                "400"
+            ],
+            "type": "string"
+        },
+        "description": {
+            "maxLength": 100,
+            "type": "string"
+        },
+        "cas_registry_number": {
+            "maxLength": 20,
+            "type": "string"
+        },
+        "cas_information": {
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/error"
+                },
+                "description": {
+                    "$ref": "#/definitions/description"
+                },
+                "cas_registry_number": {
+                    "$ref": "#/definitions/cas_registry_number"
+                },
+                "item_description": {
+                    "$ref": "#/definitions/item_description"
+                }
+            },
+            "required": [
+                "description"
+            ]
+        },
+        "item_description": {
+            "maxLength": 100,
+            "type": "string"
+        }
+    },
+    "info": {
+        "title": "CAS_REGISTRY_NUMBER",
+        "description": "This API returns CAS Registry Number information.",
+        "version": "v1"
+    }
+}
