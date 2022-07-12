@@ -1,0 +1,36 @@
+name: Run API Documentation Generator Script
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - swagger/**
+
+jobs:  
+  run_script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Developer Portal Definitions Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node_version: 16
+
+      - name: Run Script
+        run: node index.js
+      
+      - name: Print out csv file
+        run: cat apis.csv
+      
+      - name: Setup Git Config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      
+      - name: Commit csv file
+        run: |
+          git add .
+          git commit -m "API List Updated"
+          git push
