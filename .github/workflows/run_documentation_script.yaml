@@ -23,7 +23,7 @@ jobs:
       
       - name: Generate Release Tag
         id: date
-        run: echo "::set-output name=timestamp::${{date +'%Y-%m-%d_%H-%M-%S'}}"
+        run: echo "::set-output name=timestamp::$(date +'%Y-%m-%d_%H-%M-%S')"
       
       - name: Release new CSV
         id: release_csv
@@ -35,7 +35,7 @@ jobs:
        
       - name: Output csv release url
         shell: bash
-        run: echo "${{fromJSON(steps.release_csv.outputs.assets)[0].browser_download_url}}"
+        run: echo "${{fromJSON(steps.release_csv.outputs.assets)}}"
       
       # - name: Microsoft Teams Notification
       #   uses: byu-oit/github-action-teams@add_release_url
