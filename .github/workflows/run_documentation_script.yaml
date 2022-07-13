@@ -29,11 +29,17 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
       
+      - name: Generate Release Tag
+        id: date
+        run: echo "::set-output name=timestamp::$(date +'%Y-%m-%d_%H-%M-%S')"
+      
       - name: Release new CSV
         id: release_csv
         uses: softprops/action-gh-release@v1
         with:
-          files: apis.csv
+          files: |
+            apis.csv
+          tag_name: ${{ steps.date.outputs.timestamp }}
 
       - name: Output CSV URL
         run: |
