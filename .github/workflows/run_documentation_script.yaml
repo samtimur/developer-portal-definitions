@@ -2,9 +2,9 @@ name: Run API Documentation Generator Script
 on:
   push:
     branches:
-      - main
-    paths:
-      - swagger/**
+      - release_csv
+    # paths:
+    #   - swagger/**
 
 jobs:  
   run_script:
@@ -32,4 +32,9 @@ jobs:
           files: |
             apis.csv
           tag_name: ${{ steps.date.outputs.timestamp }}
+      
+      - name: Microsoft Teams Notification
+        uses: byu-oit/github-action-teams@add_release_url
+        with:
+          MS_TEAMS_WEBHOOK_URL: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
           
