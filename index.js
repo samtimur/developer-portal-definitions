@@ -13,17 +13,18 @@ function buildCsvRow(fileString) {
 
     // Build CSV Row
     const headline = `${swaggerJson['info']['title']} ${swaggerJson['info']['version']}`
+    // Build article URL by taking out the .json and any whitespaces
+    const url = headline.replace(".json", "").replace(" ", "")
     const subHeadline = ""
     const slug = headline.replace(' ', '')
     const author = ""
-    const body = `<redoc spec-url="https://raw.githubusercontent.com/byu-oit/developer-portal-definitions/main/swagger/${fileString}"></redoc><script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>`
+    const body = `<h2>https://api.byu.edu/byuapi/${url}/</h2><redoc spec-url="https://raw.githubusercontent.com/byu-oit/developer-portal-definitions/main/swagger/${fileString}"></redoc><script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>`
     const seoTitle = ""
     const seoDescription = ""
     const seoKeywords = ""
     const tags = ""
 
-    // Build article URL by taking out the .json and any whitespaces
-    const url = headline.replace(".json", "").replace(" ", "")
+
 
     // Get today's date to build last updated property
     var today = new Date();
