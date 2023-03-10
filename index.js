@@ -18,7 +18,7 @@ function buildCsvRow(fileString) {
     const subHeadline = ""
     const slug = headline.replace(' ', '')
     const author = ""
-    const body = `<h2>https://api.byu.edu/byuapi/${url}/</h2><redoc spec-url="https://raw.githubusercontent.com/byu-oit/developer-portal-definitions/main/swagger/${fileString}"></redoc><script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>`
+    const body = `<h2>https://${swaggerJson['host']}${swaggerJson['basePath']}</h2><redoc spec-url="https://raw.githubusercontent.com/byu-oit/developer-portal-definitions/main/swagger/${fileString}"></redoc><script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>`
     const seoTitle = ""
     const seoDescription = ""
     const seoKeywords = ""
